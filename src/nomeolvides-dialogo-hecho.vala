@@ -115,8 +115,8 @@ public class Nomeolvides.DialogoHecho : Dialog
 		Value direccion;
 		
 		this.combo_fuentes.get_active_iter( out iter );
-		this.lista_fuentes.get_value (iter, 1, out archivo);
-		this.lista_fuentes.get_value (iter, 2, out direccion);
+		this.lista_fuentes.get_value (iter, 1, out direccion);
+		this.lista_fuentes.get_value (iter, 2, out archivo );
 
 		return (string) direccion + (string) archivo ;
 	}
