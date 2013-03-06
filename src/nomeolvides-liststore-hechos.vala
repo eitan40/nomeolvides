@@ -24,8 +24,10 @@ using Nomeolvides;
 public class Nomeolvides.ListStoreHechos : ListStore {
 	private ArrayList<string> hechos_cache;
 	private TreeIter iterador;
+	public string anio { get; private set; }
 	
-	public ListStoreHechos () {
+	public ListStoreHechos ( string anio) {
+		this.anio = anio;
 		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
 		this.hechos_cache = new ArrayList<string> ();
 		this.set_column_types(tipos);
