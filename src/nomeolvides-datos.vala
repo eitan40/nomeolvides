@@ -25,10 +25,14 @@ using Nomeolvides;
 public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_anios;
 	private ArrayList<string> cache_hechos_anios;
+	public HechosFuentes fuentes;
 
 	public Datos () {
+		this.archivo_configuracion ();
 		this.cache_hechos_anios = new ArrayList<string> ();
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
+		this.fuentes = new HechosFuentes ( );
+		this.cargar_fuentes_predefinidas ( this.fuentes );
 	}
 
 	public void agregar_hecho (Hecho nuevo) {
@@ -38,7 +42,7 @@ public class Nomeolvides.Datos : GLib.Object {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 		}
-		this.mostrar_anio ( nuevo.fecha.get_year().to_string() );		
+		//this.mostrar_anio ( nuevo.fecha.get_year().to_string() );		
 	}
 
 	public void eliminar_hecho ( Hecho a_eliminar ) {
@@ -110,5 +114,126 @@ public class Nomeolvides.Datos : GLib.Object {
 		}		
 		
 		return retorno;
+	}
+
+	public void cargar_fuentes_predefinidas ( ) {		
+		int indice;
+		ArrayList<string> locales = fuentes.lista_de_archivos ( FuentesTipo.LOCAL );
+		ArrayList<string> http = fuentes.lista_de_archivos ( FuentesTipo.HTTP );
+		
+		for (indice = 0; indice < locales.size; indice++ ) {
+			this.open_file (locales[indice], FuentesTipo.LOCAL );
+		}
+		for (indice = 0; indice < http.size; indice++ ) {
+			this.open_file (http[indice], FuentesTipo.HTTP );
+		}
+	}
+
+	public void actualizar_fuentes_predefinidas () {
+		this.borrar_datos ();
+
+		this.cargar_fuentes_predefinidas ();
+	}
+
+	public void archivo_configuracion () {
+		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
+
+		if (!directorio_configuracion.query_exists ()) {
+
+			try {
+				directorio_configuracion.make_directory ();
+			}  catch (Error e) {
+				error (e.message);
+			}
+			
+		}
+	}
+
+	public void save_file () {
+		int i,y;
+		ArrayList<Hecho> lista;
+		string archivo;
+		string a_guardar = "";
+		ArrayList<string> lista_archivos = this.fuentes.lista_de_archivos ( FuentesTipo.LOCAL);
+		lista = this.hechos_view.lista_de_hechos ();
+	
+		for (i=0; i < lista_archivos.size; i++) {
+			archivo = lista_archivos[i];
+			for (y=0; y < lista.size; y++) {
+				if (lista[y].archivo_fuente == archivo) {
+					a_guardar +=lista[y].a_json() + "\n";
+					lista.remove_at(y);
+					y--;
+				}
+			}
+			try {
+				FileUtils.set_contents (archivo, a_guardar);
+			} catch (Error e) {
+				error (e.message);
+			}
+
+			a_guardar = "";
+		}	
+	}
+
+	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
+		File archivo = null;
+		uint8[] contenido;
+		string todo = "";
+		string[] lineas;
+		Hecho nuevoHecho;
+		int i;	
+
+		if (tipo == FuentesTipo.LOCAL) {
+			try {
+				archivo = File.new_for_path ( nombre_archivo );
+			}  catch (Error e) {
+				error (e.message);
+			}
+		}
+		
+		if (tipo == FuentesTipo.HTTP) {
+			try {
+				archivo = File.new_for_uri ( nombre_archivo );
+				
+			}  catch (Error e) {
+				error (e.message);
+			}
+		}
+		
+		try {
+			archivo.load_contents(null ,out contenido, null);
+		}  catch (Error e) {
+			error (e.message);
+		}
+		
+		todo = (string) contenido;
+		lineas = todo.split_set ("\n");
+
+		for (i=0; i < (lineas.length - 1); i++) {
+        	nuevoHecho = new Hecho.json(lineas[i], nombre_archivo);
+			if ( nuevoHecho.nombre != "null" ) {
+				this.agregar_hecho(nuevoHecho);
+			}
+		}
+		
+		this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+	}
+
+	public void save_as_file ( string archivo ) {
+		int i;
+		ArrayList<Hecho> lista;
+		string a_guardar = "";
+
+		lista = this.hechos_view.lista_de_hechos ();
+		for (i=0; i < lista.size; i++) {
+			a_guardar +=lista[i].a_json() + "\n"; 
+		}
+
+		try {
+			FileUtils.set_contents (archivo, a_guardar);
+		}  catch (Error e) {
+			error (e.message);
+		}
 	}
 }
