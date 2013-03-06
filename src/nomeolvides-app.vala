@@ -25,7 +25,7 @@ public class Nomeolvides.App : Gtk.Application
 {
 	public static App app;
 	public Nomeolvides.Window window;
-	public HechosFuentes fuentes;
+	public Datos datos;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
@@ -35,8 +35,7 @@ public class Nomeolvides.App : Gtk.Application
 		{ "config-db-dialog", config_db_dialog }
 	};
 
-	private void create_window ()
-	{
+	private void create_window () {
 		this.window = new Nomeolvides.Window(this);
 
 		this.create_app_menu ( );
@@ -44,11 +43,8 @@ public class Nomeolvides.App : Gtk.Application
 		window.show_visible();
 	}
 
-	public override void activate ()
-	{
+	public override void activate () {
 		create_window();
-		this.fuentes = new HechosFuentes ( );
-		this.window.cargar_fuentes_predefinidas ( this.fuentes );
 		app.window.show();
 	}
 
@@ -62,6 +58,84 @@ public class Nomeolvides.App : Gtk.Application
 		
 		this.set_app_menu ( application_menu );		
 		this.add_action_entries (actions_app_menu, this);
+	}
+
+	private void connect_signals () {
+		this.window.toolbar.open_button.clicked.connect ( this.open_file_dialog );
+		this.window.toolbar.save_button.clicked.connect ( this.datos.save_file );
+		this.window.toolbar.add_button.clicked.connect ( this.add_hecho_dialog );
+		this.window.toolbar.edit_button.clicked.connect ( this.edit_hecho_dialog );
+		this.window.toolbar.delete_button.clicked.connect ( this.delete_hecho_dialog );
+		this.window.toolbar.send_button.clicked.connect ( this.send_hecho );
+
+		this.anios_view.cursor_changed.connect ( this.elegir_anio );
+	}
+
+	public void open_file_dialog ()
+	{
+		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
+		abrir_archivo.set_transient_for ( this as Window );
+
+		if (abrir_archivo.run () == ResponseType.ACCEPT) {
+            this.open_file ( abrir_archivo.get_filename (), FuentesTipo.LOCAL );
+		}
+
+		abrir_archivo.close ();
+	}
+
+	public void add_hecho_dialog ()
+	{
+		var add_dialog = new AddHechoDialog( this, this.fuentes);
+		
+		add_dialog.show();
+
+		if (add_dialog.run() == ResponseType.APPLY)
+		{
+			this.hechos_view.agregar_hecho(add_dialog.respuesta);
+			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
+			this.toolbar.save_button.set_visible_horizontal (true);
+			add_dialog.destroy();
+		}		
+	}
+	
+	private void elegir_anio () {
+		string anio = this.anios_view.get_anio ();
+		
+		if ( anio != "0") { //acá uso el número mágico del año 0 que no existe para evitar pedir algo null
+			this.hechos_view.mostrar_anio ( anio );
+		}
+	}
+
+	public void edit_hecho_dialog () {
+		Hecho hecho_anterior = this.hechos_view.get_hecho_cursor();
+		
+		var edit_dialog = new EditHechoDialog(this, this.fuentes );
+		edit_dialog.set_datos (hecho_anterior);
+		edit_dialog.show_all ();
+
+		if (edit_dialog.run() == ResponseType.APPLY)
+		{
+			this.hechos_view.eliminar_hecho ( hecho_anterior );
+			this.hechos_view.agregar_hecho ( edit_dialog.respuesta );			
+			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
+			this.toolbar.save_button.set_visible_horizontal (true);
+			edit_dialog.destroy();
+		}
+	}
+
+	public void delete_hecho_dialog () {
+		Hecho hecho_a_borrar = this.hechos_view.get_hecho_cursor ();
+		
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this );
+
+		if (delete_dialog.run() == ResponseType.APPLY)
+		{
+			this.hechos_view.eliminar_hecho ( hecho_a_borrar );
+			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
+			this.toolbar.save_button.set_visible_horizontal (true);
+		}
+		
+		delete_dialog.destroy ();
 	}
 
 	private void create_about_dialog () {
@@ -88,36 +162,59 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void config_db_dialog () {
 		
-		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.temp() );
+		var fuente_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
 		fuente_dialogo.show_all ();
 		if ( fuente_dialogo.run () == ResponseType.OK ) {
 			if (fuente_dialogo.cambios == true) {
-				this.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
-				this.window.actualizar_fuentes_predefinidas ( this.fuentes );
+				this.datos.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
+				this.datos.actualizar_fuentes_predefinidas ();
+				this.window.anios_view.borrar_datos ();
 			}
 		}
 		fuente_dialogo.destroy ();
 	}
 
-	private void exportar () {
-		this.window.save_as_file_dialog ();
-	}
-
-	public App ()
-	{
-		app = this;
-
-		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-
-		if (!directorio_configuracion.query_exists ()) {
+	public void send_hecho () {
+		Hecho hecho = this.hechos_view.get_hecho_cursor ();
+		if( hecho != null) {
+			string asunto = "Envío un hecho para contribuir con la base de datos oficial";
+			string cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
+			string direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
+			string archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
 
 			try {
-				directorio_configuracion.make_directory ();
+				FileUtils.set_contents (archivo, hecho.a_json ());
 			}  catch (Error e) {
 				error (e.message);
 			}
+			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
+  
+			try {
+				Process.spawn_command_line_async( commando );
+			} catch(SpawnError err) {
+				stdout.printf(err.message+"\n");
+			}
+		}
+	}
+
+	public void save_as_file_dialog () {
+		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
+		guardar_archivo.set_transient_for ( this as Window );
+
+		if (guardar_archivo.run () == ResponseType.ACCEPT) {
 			
+            this.save_as_file ( guardar_archivo.get_filename () );
 		}
 		
+		guardar_archivo.close ();
+	}
+
+	private void exportar () {
+		this.save_as_file_dialog ();
+	}
+
+	public App () {
+		app = this;
+		this.datos = new Datos ();
 	}
 }
