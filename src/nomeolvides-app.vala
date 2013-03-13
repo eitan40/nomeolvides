@@ -39,6 +39,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window = new Nomeolvides.Window(this);
 
 		this.create_app_menu ( );
+		this.connect_signals ();
 
 		window.show_visible();
 	}
