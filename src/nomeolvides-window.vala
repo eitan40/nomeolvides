@@ -23,14 +23,13 @@ using Nomeolvides;
 
 public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
-	public Box main_box { get; private set; }
-	public Box list_view_box { get; private set; }	
-	private MainToolbar toolbar;
-	private ViewHechos hechos_view;
-	private ViewAnios anios_view;
-	private VistaHecho vista_hecho;
-	private ScrolledWindow scroll_vista_hecho;
-	private HechosFuentes fuentes;
+	private Box main_box;
+	private Box list_view_box;	
+	public MainToolbar toolbar { get; private set; }
+	public ViewHechos hechos_view { get; private set; }
+	public ViewAnios anios_view { get; private set; }
+	public VistaHecho vista_hecho { get; private set; }
+	public ScrolledWindow scroll_vista_hecho;
 	
 	public Window ( Gtk.Application app )
 	{   
@@ -77,7 +76,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 
 	public void elegir_hecho () {
-		if(this.hechos_view.get_hecho_cursor () != null) {
+		Hecho hecho = new Hecho.vacio();
+		
+		if(this.hechos_view.get_hecho_cursor ( out hecho ) != null) {
 			this.toolbar.set_buttons_visible ( true );
 		} else {
 			this.toolbar.set_buttons_visible ( false );		
@@ -87,7 +88,9 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 	}
 
 	public void mostrar_hecho () {
-		Hecho hecho_a_mostrar = this.hechos_view.get_hecho_cursor();
+		Hecho hecho_a_mostrar; 
+
+		this.hechos_view.get_hecho_cursor( out hecho_a_mostrar );
 
 		if (this.scroll_vista_hecho.visible == true ) {
 			this.scroll_vista_hecho.set_visible (false);

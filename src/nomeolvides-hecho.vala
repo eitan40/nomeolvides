@@ -39,6 +39,10 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.fuente = fuente;
 	}
 
+	public Hecho.vacio () {
+
+	}
+
 	public Hecho.json (string json, string archivo_fuente ) {
 		
 		if (json.contains ("{\"Hecho\":{")) {
