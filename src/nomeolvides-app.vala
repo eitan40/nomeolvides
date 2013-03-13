@@ -68,71 +68,73 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.toolbar.delete_button.clicked.connect ( this.delete_hecho_dialog );
 		this.window.toolbar.send_button.clicked.connect ( this.send_hecho );
 
-		this.anios_view.cursor_changed.connect ( this.elegir_anio );
+		this.window.anios_view.cursor_changed.connect ( this.elegir_anio );
 	}
 
-	public void open_file_dialog ()
-	{
+	public void open_file_dialog () {
 		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
 		abrir_archivo.set_transient_for ( this as Window );
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
-            this.open_file ( abrir_archivo.get_filename (), FuentesTipo.LOCAL );
+            this.datos.open_file ( abrir_archivo.get_filename (), FuentesTipo.LOCAL );
 		}
 
 		abrir_archivo.close ();
 	}
 
-	public void add_hecho_dialog ()
-	{
-		var add_dialog = new AddHechoDialog( this, this.fuentes);
+	public void add_hecho_dialog () {
+		var add_dialog = new AddHechoDialog( this.window as Window, this.datos.fuentes);
 		
 		add_dialog.show();
 
-		if (add_dialog.run() == ResponseType.APPLY)
+		if ( add_dialog.run() == ResponseType.APPLY )
 		{
-			this.hechos_view.agregar_hecho(add_dialog.respuesta);
-			this.anios_view.agregar_varios (this.hechos_view.lista_de_anios());
-			this.toolbar.save_button.set_visible_horizontal (true);
+			this.datos.agregar_hecho(add_dialog.respuesta);
+			this.window.anios_view.agregar_varios (this.datos.lista_de_anios ());
+			this.window.toolbar.save_button.set_visible_horizontal ( true );
 			add_dialog.destroy();
 		}		
 	}
 	
 	private void elegir_anio () {
-		string anio = this.anios_view.get_anio ();
+		string anio = this.window.anios_view.get_anio ();
 		
 		if ( anio != "0") { //acá uso el número mágico del año 0 que no existe para evitar pedir algo null
-			this.hechos_view.mostrar_anio ( anio );
+			this.window.hechos_view.mostrar_anio ( this.datos.get_liststore ( anio ) );
 		}
 	}
 
 	public void edit_hecho_dialog () {
-		Hecho hecho_anterior = this.hechos_view.get_hecho_cursor();
+		TreePath path;
+		Hecho hecho; 
+
+		path = this.window.hechos_view.get_hecho_cursor( out hecho );
 		
-		var edit_dialog = new EditHechoDialog(this, this.fuentes );
-		edit_dialog.set_datos (hecho_anterior);
+		var edit_dialog = new EditHechoDialog( this.window, this.datos.fuentes );
+		edit_dialog.set_datos ( hecho );
 		edit_dialog.show_all ();
 
-		if (edit_dialog.run() == ResponseType.APPLY)
-		{
-			this.hechos_view.eliminar_hecho ( hecho_anterior );
-			this.hechos_view.agregar_hecho ( edit_dialog.respuesta );			
-			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
-			this.toolbar.save_button.set_visible_horizontal (true);
+		if ( edit_dialog.run() == ResponseType.APPLY ) {
+			this.datos.eliminar_hecho ( hecho, path );
+			this.datos.agregar_hecho ( edit_dialog.respuesta );			
+			this.window.anios_view.agregar_varios ( this.datos.lista_de_anios() );
+			this.window.toolbar.save_button.set_visible_horizontal (true);
 			edit_dialog.destroy();
 		}
 	}
 
 	public void delete_hecho_dialog () {
-		Hecho hecho_a_borrar = this.hechos_view.get_hecho_cursor ();
+		TreePath path;
 		
-		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this );
+		Hecho hecho_a_borrar;
+		path = this.window.hechos_view.get_hecho_cursor ( out hecho_a_borrar );
+		
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as Window);
 
-		if (delete_dialog.run() == ResponseType.APPLY)
-		{
-			this.hechos_view.eliminar_hecho ( hecho_a_borrar );
-			this.anios_view.agregar_varios ( this.hechos_view.lista_de_anios() );
-			this.toolbar.save_button.set_visible_horizontal (true);
+		if (delete_dialog.run() == ResponseType.APPLY) {
+			this.datos.eliminar_hecho ( hecho_a_borrar, path );
+			this.window.anios_view.agregar_varios ( this.datos.lista_de_anios() );
+			this.window.toolbar.save_button.set_visible_horizontal (true);
 		}
 		
 		delete_dialog.destroy ();
@@ -175,7 +177,10 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void send_hecho () {
-		Hecho hecho = this.hechos_view.get_hecho_cursor ();
+		Hecho hecho;
+
+		this.window.hechos_view.get_hecho_cursor ( out hecho );
+
 		if( hecho != null) {
 			string asunto = "Envío un hecho para contribuir con la base de datos oficial";
 			string cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
@@ -201,9 +206,8 @@ public class Nomeolvides.App : Gtk.Application
 		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
 		guardar_archivo.set_transient_for ( this as Window );
 
-		if (guardar_archivo.run () == ResponseType.ACCEPT) {
-			
-            this.save_as_file ( guardar_archivo.get_filename () );
+		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
+            this.datos.save_as_file ( guardar_archivo.get_filename () );
 		}
 		
 		guardar_archivo.close ();

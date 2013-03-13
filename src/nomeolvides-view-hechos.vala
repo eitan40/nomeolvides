@@ -40,19 +40,20 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			cambia_anio_signal ();
 	}
 
-	public Hecho get_hecho_cursor () {
+	public TreePath get_hecho_cursor ( out Hecho hecho ) {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value hecho;
+		Value hecho_value;
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.anio.get_iter(out iterador, path);
-			this.anio.get_value (iterador, 3, out hecho);
-			return (Hecho) hecho;
+			this.anio.get_value (iterador, 3, out hecho_value);
+			hecho = (Hecho) hecho_value;
+			return path;
 		} else { 
-			return (Hecho) null;
+			return (TreePath) null;
 		}		
 	}
 
