@@ -23,13 +23,11 @@ using Nomeolvides;
 
 public class Nomeolvides.Window : Gtk.ApplicationWindow
 {
-	private Box main_box;
-	private Box list_view_box;	
+
+	private Box main_box { get; private set; }
 	public MainToolbar toolbar { get; private set; }
-	public ViewHechos hechos_view { get; private set; }
-	public ViewAnios anios_view { get; private set; }
-	public VistaHecho vista_hecho { get; private set; }
-	public ScrolledWindow scroll_vista_hecho;
+	public Anios_hechos_vista anios_hechos { get; private set; }
+	public HechosFuentes fuentes;
 	
 	public Window ( Gtk.Application app )
 	{   
@@ -41,40 +39,20 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 		this.set_size_request (500,350);
 		this.hide_titlebar_when_maximized = true;
 
-		main_box = new Box (Orientation.VERTICAL,0);
-		list_view_box = new Box (Orientation.HORIZONTAL,0);
-		this.scroll_vista_hecho = new ScrolledWindow (null,null);
-		this.scroll_vista_hecho.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
-		this.scroll_vista_hecho.set_size_request (300,-1);
+		this.main_box = new Box (Orientation.VERTICAL,0);
+
+		this.anios_hechos = new Anios_hechos_vista ();
 		
 		this.add (main_box);
 		
 		this.toolbar = new MainToolbar ();
-
-		this.anios_view = new ViewAnios ();
-		this.hechos_view = new ViewHechos ();
-		this.vista_hecho = new VistaHecho ();
-		
-		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
-		this.hechos_view.row_activated.connect ( mostrar_hecho );
-		this.hechos_view.row_activated.connect ( mostrar_hecho );
-
-		Separator separador = new Separator(Orientation.VERTICAL);
-
-		this.scroll_vista_hecho.add_with_viewport (this.vista_hecho);
-		
-		list_view_box.pack_start (anios_view, false, false, 0);
-		list_view_box.pack_start (new Separator(Orientation.VERTICAL), false, false, 2);
-		list_view_box.pack_start (this.hechos_view, true, true, 0);
-		list_view_box.pack_start (separador, false, false, 2);
-		list_view_box.pack_start (scroll_vista_hecho, false, false, 0);
-
+	
 		this.main_box.pack_start (toolbar, false, false, 0);
-		this.main_box.pack_start (list_view_box, true, true, 0);
+		this.main_box.pack_start (anios_hechos, true, true, 0);
 	}
 
 
-
+/*
 	public void elegir_hecho () {
 		Hecho hecho = new Hecho.vacio();
 		
@@ -109,5 +87,6 @@ public class Nomeolvides.Window : Gtk.ApplicationWindow
 
 	public void label_anio () {
 		this.toolbar.set_anio( this.hechos_view.anio_actual );
-	}
+	}*/
+	
 }

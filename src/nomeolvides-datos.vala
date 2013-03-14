@@ -42,10 +42,11 @@ public class Nomeolvides.Datos : GLib.Object {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
 		}
-		//this.mostrar_anio ( nuevo.fecha.get_year().to_string() );		
 	}
 
+
 	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
+		/*
 		TreeIter iterador;
 		int anio = en_liststore (a_eliminar.fecha.get_year().to_string());
 
@@ -54,7 +55,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 		if (this.hechos_anios[anio].length () == 0) {
 			this.eliminar_liststore (anio);
-		}		
+		}*/		
 	}
 
 	private void agregar_liststore (string nuevo_anio) {
@@ -146,7 +147,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_file () {
-		int i,y;
+/*		int i,y;
 		ArrayList<Hecho> lista;
 		string archivo;
 		string a_guardar = "";
@@ -169,7 +170,7 @@ public class Nomeolvides.Datos : GLib.Object {
 			}
 
 			a_guardar = "";
-		}	
+		}*/	
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
@@ -215,7 +216,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_as_file ( string archivo ) {
-		int i;
+/*		int i;
 		ArrayList<Hecho> lista;
 		string a_guardar = "";
 
@@ -228,7 +229,7 @@ public class Nomeolvides.Datos : GLib.Object {
 			FileUtils.set_contents (archivo, a_guardar);
 		}  catch (Error e) {
 			error (e.message);
-		}
+		} */
 	}
 
 	public ListStoreHechos get_liststore ( string anio ) {
