@@ -41,7 +41,8 @@ public class Nomeolvides.App : Gtk.Application
 		this.create_app_menu ( );
 		this.connect_signals ();
 
-		window.show_visible();
+		this.window.show_all ();
+		this.window.anios_hechos.hide_scroll_vista ();
 	}
 
 	public override void activate () {
@@ -69,7 +70,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.toolbar.delete_button.clicked.connect ( this.delete_hecho_dialog );
 		this.window.toolbar.send_button.clicked.connect ( this.send_hecho );
 
-		this.window.anios_view.cursor_changed.connect ( this.elegir_anio );
+		this.window.anios_hechos.anios_cursor_changed.connect ( this.elegir_anio );
 	}
 
 	public void open_file_dialog () {
@@ -85,7 +86,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void add_hecho_dialog () {
 		var add_dialog = new AddHechoDialog( this.window as Window, this.datos.fuentes);
-		
+		/*
 		add_dialog.show();
 
 		if ( add_dialog.run() == ResponseType.APPLY )
@@ -94,18 +95,19 @@ public class Nomeolvides.App : Gtk.Application
 			this.window.anios_view.agregar_varios (this.datos.lista_de_anios ());
 			this.window.toolbar.save_button.set_visible_horizontal ( true );
 			add_dialog.destroy();
-		}		
+		}*/		
 	}
 	
 	private void elegir_anio () {
-		string anio = this.window.anios_view.get_anio ();
+		string anio = "";//this.anios_view.get_anio ();
 		
 		if ( anio != "0") { //acá uso el número mágico del año 0 que no existe para evitar pedir algo null
-			this.window.hechos_view.mostrar_anio ( this.datos.get_liststore ( anio ) );
+			//this.hechos_view.mostrar_anio ( anio );
 		}
 	}
 
 	public void edit_hecho_dialog () {
+/*
 		TreePath path;
 		Hecho hecho; 
 
@@ -121,14 +123,16 @@ public class Nomeolvides.App : Gtk.Application
 			this.window.anios_view.agregar_varios ( this.datos.lista_de_anios() );
 			this.window.toolbar.save_button.set_visible_horizontal (true);
 			edit_dialog.destroy();
-		}
+		}*/
 	}
 
 	public void delete_hecho_dialog () {
+/*
 		TreePath path;
 		
 		Hecho hecho_a_borrar;
 		path = this.window.hechos_view.get_hecho_cursor ( out hecho_a_borrar );
+
 		
 		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as Window);
 
@@ -139,7 +143,7 @@ public class Nomeolvides.App : Gtk.Application
 		}
 		
 		delete_dialog.destroy ();
-	}
+*/	}
 
 	private void create_about_dialog () {
 		string[] authors = {
@@ -171,13 +175,14 @@ public class Nomeolvides.App : Gtk.Application
 			if (fuente_dialogo.cambios == true) {
 				this.datos.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
 				this.datos.actualizar_fuentes_predefinidas ();
-				this.window.anios_view.borrar_datos ();
+				//this.window.anios_view.borrar_datos ();
 			}
 		}
 		fuente_dialogo.destroy ();
 	}
 
 	public void send_hecho () {
+		/*
 		Hecho hecho;
 
 		this.window.hechos_view.get_hecho_cursor ( out hecho );
@@ -200,15 +205,17 @@ public class Nomeolvides.App : Gtk.Application
 			} catch(SpawnError err) {
 				stdout.printf(err.message+"\n");
 			}
-		}
+		}*/
 	}
 
 	public void save_as_file_dialog () {
 		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
 		guardar_archivo.set_transient_for ( this as Window );
 
+
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
             this.datos.save_as_file ( guardar_archivo.get_filename () );
+
 		}
 		
 		guardar_archivo.close ();
