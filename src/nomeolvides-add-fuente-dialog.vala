@@ -40,9 +40,9 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 		this.response.connect(on_response);
 		
-		var nombre_fuente_label = new Label.with_mnemonic ("Nombre de la Fuente: ");
-		var nombre_archivo_label = new Label.with_mnemonic ("Nombre del Archivo: ");
-		var direccion_label = new Label.with_mnemonic ("Dirección del Archivo: ");
+		var nombre_fuente_label = new Label.with_mnemonic ("Nombre de la base de datos: ");
+		var nombre_archivo_label = new Label.with_mnemonic ("Archivo: ");
+//		var direccion_label = new Label.with_mnemonic ("Dirección del Archivo: ");
 	//	var tipo_fuente_label = new Label.with_mnemonic ("Tipo de Fuente: ");
 		
 		this.nombre_fuente_entry = new Entry ();
@@ -63,9 +63,9 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 	    grid.attach (this.nombre_fuente_entry, 1, 0, 1, 1);
 		grid.attach (nombre_archivo_label, 0, 1, 1, 1);
 		grid.attach (this.nombre_archivo_entry, 1, 1, 1, 1);
-		grid.attach (direccion_label, 0 , 2 , 1 ,1);
+/*		grid.attach (direccion_label, 0 , 2 , 1 ,1);
 		grid.attach (this.direccion_entry, 1 , 2 , 1 ,1);
-		grid.attach (this.elegir_archivo, 2, 2, 1, 1);
+	*/	grid.attach (this.elegir_archivo, 2, 1, 1, 1);
 /*		grid.attach (tipo_fuente_label, 0, 3, 1, 1);
 		grid.attach (this.combo_tipos_fuentes, 1 , 3 , 1 ,1);*/
 		
@@ -91,11 +91,12 @@ public class Nomeolvides.AddFuenteDialog : Dialog
     }
 
 	private void crear_respuesta() {
+		string archivo = this.nombre_archivo_entry.get_text ();
 		if(this.nombre_fuente_entry.get_text_length () > 0)
 		{
-			this.respuesta  = new Fuente (this.nombre_fuente_entry.get_text (), 
-			            				  this.nombre_archivo_entry.get_text(),
-										  this.direccion_entry.get_text (),
+			this.respuesta  = new Fuente (this.nombre_fuente_entry.get_text (),
+			                              archivo.slice(archivo.last_index_of_char ('/') +1, archivo.char_count ()),
+										  archivo.slice(0,archivo.last_index_of_char ('/') +1),			                              
 			                              FuentesTipo.LOCAL);
 		}
 	}
@@ -134,10 +135,8 @@ public class Nomeolvides.AddFuenteDialog : Dialog
 
 		if (elegir_archivo.run () == ResponseType.ACCEPT) {
     		path_provisorio = elegir_archivo.get_filename ();
-			this.direccion_entry.set_text (path_provisorio.slice(0,path_provisorio.last_index_of_char ('/') +1));
-			this.nombre_archivo_entry.set_text (path_provisorio.slice(path_provisorio.last_index_of_char ('/') +1, path_provisorio.char_count ()));
+			this.nombre_archivo_entry.set_text ( path_provisorio );
 		}
-
 		elegir_archivo.destroy ();
 	}
 }

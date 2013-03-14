@@ -103,21 +103,39 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.save_as_file_dialog ();
 	}
 
-	public App ()
-	{
-		app = this;
-
+	private void set_config () {
 		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-
+		var directorio_db_local = File.new_for_path(GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/");
+		var archivo_db_local =   File.new_for_path(directorio_db_local.get_path () + "/db_default.json");
+			
 		if (!directorio_configuracion.query_exists ()) {
-
 			try {
 				directorio_configuracion.make_directory ();
 			}  catch (Error e) {
 				error (e.message);
-			}
-			
+			}			
 		}
 		
+		if (!directorio_db_local.query_exists ()) {
+			try {
+				directorio_db_local.make_directory ();
+			}  catch (Error e) {
+				error (e.message);
+			}			
+		}
+
+		if (!archivo_db_local.query_exists ()) {
+			try {				
+				archivo_db_local.create (FileCreateFlags.NONE);
+			}  catch (Error e) {
+				error (e.message);
+			}			
+		}
+	}
+
+	public App ()
+	{
+		app = this;
+		this.set_config ();
 	}
 }
