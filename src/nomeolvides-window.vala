@@ -25,7 +25,7 @@ public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
 {
 
 	private Box main_box { get; private set; }
-	public MainToolbar toolbar { get; private set; }
+	private MainToolbar toolbar { get; private set; }
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	public HechosFuentes fuentes;
 	
@@ -49,8 +49,49 @@ public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
 	
 		this.main_box.pack_start (toolbar, false, false, 0);
 		this.main_box.pack_start (anios_hechos, true, true, 0);
+
+		this.conectar_seniales ();
 	}
 
+
+	private void conectar_seniales () {
+		this.toolbar.open_button.clicked.connect ( this.toolbar_open_button_clicked_signal );
+		this.toolbar.save_button.clicked.connect ( this.toolbar_save_button_clicked_signal );
+		this.toolbar.add_button.clicked.connect ( this.toolbar_add_button_clicked_signal );
+		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
+		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
+		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
+
+		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
+	}
+
+	private void toolbar_open_button_clicked_signal () {
+		toolbar_open_button_clicked ();
+	}
+
+	private void toolbar_save_button_clicked_signal () {
+		toolbar_save_button_clicked ();
+	}
+
+	private void toolbar_add_button_clicked_signal () {
+		toolbar_add_button_clicked ();
+	}
+
+	private void toolbar_edit_button_clicked_signal () {
+		toolbar_edit_button_clicked ();
+	}
+
+	private void toolbar_delete_button_clicked_signal () {
+		toolbar_delete_button_clicked ();
+	}
+
+	private void toolbar_send_button_clicked_signal () {
+		toolbar_send_button_clicked ();
+	}
+
+	private void anios_hechos_anios_cursor_changed_signal () {
+		anios_hechos_anios_cursor_changed ();
+	}
 
 /*
 	public void elegir_hecho () {
@@ -88,5 +129,11 @@ public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
 	public void label_anio () {
 		this.toolbar.set_anio( this.hechos_view.anio_actual );
 	}*/
-	
+	public signal void toolbar_open_button_clicked ();
+	public signal void toolbar_save_button_clicked ();
+	public signal void toolbar_add_button_clicked ();
+	public signal void toolbar_edit_button_clicked ();
+	public signal void toolbar_delete_button_clicked ();
+	public signal void toolbar_send_button_clicked ();
+	public signal void anios_hechos_anios_cursor_changed ();
 }
