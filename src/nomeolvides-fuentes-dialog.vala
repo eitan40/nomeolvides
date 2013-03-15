@@ -28,7 +28,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
 		
-	public FuentesDialog (Ventana_principal ventana, ListStoreFuentes liststore_fuente) {
+	public FuentesDialog (VentanaPrincipal ventana, ListStoreFuentes liststore_fuente) {
 		this.set_title ("Bases de Datos predeterminadas de hechos históricos");
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );

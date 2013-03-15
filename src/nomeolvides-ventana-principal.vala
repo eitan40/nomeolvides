@@ -21,7 +21,7 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
+public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 {
 
 	private Box main_box { get; private set; }
@@ -29,7 +29,7 @@ public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	public HechosFuentes fuentes;
 	
-	public Ventana_principal ( Gtk.Application app )
+	public VentanaPrincipal ( Gtk.Application app )
 	{   
 		Object (application: app);
 		this.set_application (app);
