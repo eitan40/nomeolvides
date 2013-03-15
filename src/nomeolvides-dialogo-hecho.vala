@@ -31,7 +31,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry fuente_entry;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogoHecho (Ventana_principal ventana, ListStoreFuentes fuentes_liststore )
+	public DialogoHecho (VentanaPrincipal ventana, ListStoreFuentes fuentes_liststore )
 	{
 		this.resizable = true;
 		this.modal = true;

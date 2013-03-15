@@ -25,7 +25,7 @@ using Gee;
 public class Nomeolvides.App : Gtk.Application 
 {
 	public static App app;
-	public Ventana_principal window;
+	public VentanaPrincipal window;
 	public Datos datos;
 	public GLib.Menu application_menu;
 	private ArrayList<string> lista_anios;
@@ -38,7 +38,7 @@ public class Nomeolvides.App : Gtk.Application
 	};
 
 	private void create_window () {
-		this.window = new Ventana_principal (this);
+		this.window = new VentanaPrincipal (this);
 
 		this.create_app_menu ( );
 		this.connect_signals ();
@@ -81,7 +81,7 @@ public class Nomeolvides.App : Gtk.Application
 
 
 	public void add_hecho_dialog () {
-		var add_dialog = new AddHechoDialog( this.window as Ventana_principal, this.datos.fuentes);
+		var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
 		
 		add_dialog.show();
 		/*
