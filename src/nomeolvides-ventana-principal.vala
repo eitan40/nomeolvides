@@ -93,6 +93,10 @@ public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
 		this.anios_hechos_anios_cursor_changed ();
 	}
 
+	public void cargar_anios_view ( ArrayList<string> ventana_principal_anios ) {
+		this.anios_hechos.cargar_lista_anios ( ventana_principal_anios );
+	}
+
 /*
 	public void elegir_hecho () {
 		Hecho hecho = new Hecho.vacio();
