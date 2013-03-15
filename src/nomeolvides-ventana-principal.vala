@@ -66,31 +66,31 @@ public class Nomeolvides.Ventana_principal : Gtk.ApplicationWindow
 	}
 
 	private void toolbar_open_button_clicked_signal () {
-		toolbar_open_button_clicked ();
+		this.toolbar_open_button_clicked ();
 	}
 
 	private void toolbar_save_button_clicked_signal () {
-		toolbar_save_button_clicked ();
+		this.toolbar_save_button_clicked ();
 	}
 
 	private void toolbar_add_button_clicked_signal () {
-		toolbar_add_button_clicked ();
+		this.toolbar_add_button_clicked ();
 	}
 
 	private void toolbar_edit_button_clicked_signal () {
-		toolbar_edit_button_clicked ();
+		this.toolbar_edit_button_clicked ();
 	}
 
 	private void toolbar_delete_button_clicked_signal () {
-		toolbar_delete_button_clicked ();
+		this.toolbar_delete_button_clicked ();
 	}
 
 	private void toolbar_send_button_clicked_signal () {
-		toolbar_send_button_clicked ();
+		this.toolbar_send_button_clicked ();
 	}
 
 	private void anios_hechos_anios_cursor_changed_signal () {
-		anios_hechos_anios_cursor_changed ();
+		this.anios_hechos_anios_cursor_changed ();
 	}
 
 /*
