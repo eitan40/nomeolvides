@@ -24,7 +24,7 @@ using Nomeolvides;
 public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	private ArrayList<string> archivos_fuente;
 	
-	public EditHechoDialog ( Nomeolvides.Window ventana, HechosFuentes fuentes ) {
+	public EditHechoDialog ( Ventana_principal ventana, HechosFuentes fuentes ) {
 		base (ventana, fuentes.fuentes_liststore);
 		this.set_title ("Editar Hecho Histórico");				
 

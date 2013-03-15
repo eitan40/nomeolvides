@@ -24,7 +24,7 @@ using Nomeolvides;
 public class Nomeolvides.App : Gtk.Application 
 {
 	public static App app;
-	public Nomeolvides.Window window;
+	public Ventana_principal window;
 	public Datos datos;
 	public GLib.Menu application_menu;
 
@@ -36,7 +36,7 @@ public class Nomeolvides.App : Gtk.Application
 	};
 
 	private void create_window () {
-		this.window = new Nomeolvides.Window(this);
+		this.window = new Ventana_principal (this);
 
 		this.create_app_menu ( );
 		this.connect_signals ();
@@ -85,7 +85,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void add_hecho_dialog () {
-		var add_dialog = new AddHechoDialog( this.window as Window, this.datos.fuentes);
+		var add_dialog = new AddHechoDialog( this.window as Ventana_principal, this.datos.fuentes);
 		/*
 		add_dialog.show();
 
