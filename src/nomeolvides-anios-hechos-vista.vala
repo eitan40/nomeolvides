@@ -19,6 +19,7 @@
 
 using Gtk;
 using Nomeolvides;
+using Gee;
 
 public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
@@ -26,6 +27,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private ViewAnios anios_view;
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_vista_hecho;
+	private ArrayList<string> lista_anios;
 
 	public Anios_hechos_vista () {
 
@@ -77,6 +79,12 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	public void hide_scroll_vista () {
 		this.scroll_vista_hecho.hide ();
+	}
+
+	public void cargar_lista_anios ( ArrayList<string> anios )
+	{
+		this.lista_anios = anios;
+		this.anios_view.agregar_varios ( anios );
 	}
 
 	public signal void hechos_cursor_changed ();

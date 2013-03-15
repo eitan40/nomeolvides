@@ -41,6 +41,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		} else {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
+			this.nuevo_anio ();
 		}
 	}
 
@@ -101,13 +102,13 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hechos;
     }
 
-	public string[] lista_de_anios ()
+	public ArrayList<string> lista_de_anios ()
 	{
-		string[] retorno = {};
+		ArrayList<string> retorno = new ArrayList<string> ();
 		int i;
 
 		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
-			retorno += this.cache_hechos_anios[i];
+			retorno.add ( this.cache_hechos_anios[i] );
 		}		
 		
 		return retorno;
@@ -236,4 +237,6 @@ public class Nomeolvides.Datos : GLib.Object {
 		
 		return this.hechos_anios[this.en_liststore ( anio )];
 	}
+
+	public signal void nuevo_anio ();
 }

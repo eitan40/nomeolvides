@@ -20,6 +20,7 @@
 using GLib;
 using Gtk;
 using Nomeolvides;
+using Gee;
 
 public class Nomeolvides.App : Gtk.Application 
 {
@@ -27,6 +28,7 @@ public class Nomeolvides.App : Gtk.Application
 	public Ventana_principal window;
 	public Datos datos;
 	public GLib.Menu application_menu;
+	private ArrayList<string> lista_anios;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", create_about_dialog },
@@ -43,6 +45,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		this.window.show_all ();
 		this.window.anios_hechos.hide_scroll_vista ();
+		this.cargar_lista_anios ();
 	}
 
 	public override void activate () {
@@ -71,6 +74,8 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
+
+		this.datos.nuevo_anio.connect ( this.cargar_lista_anios );
 	}
 
 
@@ -214,6 +219,10 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void exportar () {
 		this.save_as_file_dialog ();
+	}
+
+	public void cargar_lista_anios () {
+		this.window.cargar_anios_view ( this.datos.lista_de_anios () );
 	}
 
 	public App () {
