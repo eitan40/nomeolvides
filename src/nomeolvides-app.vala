@@ -63,32 +63,23 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void connect_signals () {
-		this.window.toolbar.open_button.clicked.connect ( this.open_file_dialog );
-		this.window.toolbar.save_button.clicked.connect ( this.datos.save_file );
-		this.window.toolbar.add_button.clicked.connect ( this.add_hecho_dialog );
-		this.window.toolbar.edit_button.clicked.connect ( this.edit_hecho_dialog );
-		this.window.toolbar.delete_button.clicked.connect ( this.delete_hecho_dialog );
-		this.window.toolbar.send_button.clicked.connect ( this.send_hecho );
+		//this.window.toolbar_open_button_clicked.connect ( this.open_file_dialog );
+		this.window.toolbar_save_button_clicked.connect ( this.datos.save_file );
+		this.window.toolbar_add_button_clicked.connect ( this.add_hecho_dialog );
+		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
+		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );
+		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
 
-		this.window.anios_hechos.anios_cursor_changed.connect ( this.elegir_anio );
+		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 	}
 
-	public void open_file_dialog () {
-		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
-		abrir_archivo.set_transient_for ( this as Window );
 
-		if (abrir_archivo.run () == ResponseType.ACCEPT) {
-            this.datos.open_file ( abrir_archivo.get_filename (), FuentesTipo.LOCAL );
-		}
-
-		abrir_archivo.close ();
-	}
 
 	public void add_hecho_dialog () {
 		var add_dialog = new AddHechoDialog( this.window as Ventana_principal, this.datos.fuentes);
-		/*
+		
 		add_dialog.show();
-
+		/*
 		if ( add_dialog.run() == ResponseType.APPLY )
 		{
 			this.datos.agregar_hecho(add_dialog.respuesta);
