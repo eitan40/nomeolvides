@@ -21,7 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.BorrarHechoDialogo : Dialog {
-	public BorrarHechoDialogo ( Hecho hecho_a_borrar, Nomeolvides.Window ventana ) {
+	public BorrarHechoDialogo ( Hecho hecho_a_borrar, Ventana_principal ventana ) {
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
 		Label pregunta = new Label.with_mnemonic ( "" );
