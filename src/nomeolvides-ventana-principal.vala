@@ -28,6 +28,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	private MainToolbar toolbar { get; private set; }
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	public HechosFuentes fuentes;
+	private string anio_actual;
 	
 	public VentanaPrincipal ( Gtk.Application app )
 	{   
@@ -39,6 +40,8 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.set_size_request (500,350);
 		this.hide_titlebar_when_maximized = true;
 
+		this.anio_actual = "0";
+		
 		this.main_box = new Box (Orientation.VERTICAL,0);
 
 		this.anios_hechos = new Anios_hechos_vista ();
@@ -90,12 +93,27 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 
 	private void anios_hechos_anios_cursor_changed_signal () {
+		this.anio_actual = this.anios_hechos.get_anio_actual ();
+		this.actualizar_anio_label ();
 		this.anios_hechos_anios_cursor_changed ();
 	}
 
 	public void cargar_anios_view ( ArrayList<string> ventana_principal_anios ) {
 		this.anios_hechos.cargar_lista_anios ( ventana_principal_anios );
 	}
+
+	public void cargar_hechos_view ( ListStoreHechos hechos ) {
+		this.anios_hechos.cargar_lista_hechos ( hechos );
+	}
+
+	private void actualizar_anio_label () {
+		this.toolbar.set_anio ( this.anio_actual );
+	}
+
+	public string get_anio_actual () {
+		return this.anio_actual;
+	}
+
 
 /*
 	public void elegir_hecho () {

@@ -55,8 +55,7 @@ public class Nomeolvides.ViewAnios : TreeView {
 			temp = nuevo.get ( i );
 			if (temp != null)
 			{
-				this.lista.append (out this.iter);
-				this.lista.set (this.iter,0,temp);
+				this.agregar ( temp );
 			}
 		}
 	}
