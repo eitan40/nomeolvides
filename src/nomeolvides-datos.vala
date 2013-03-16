@@ -86,17 +86,10 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public ArrayList<Hecho> lista_de_hechos () { 
         ArrayList<Hecho> hechos = new ArrayList<Hecho>();
-		Value hecho;
-		TreeIter iter;
 		int i;
 
-
-		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
-			this.hechos_anios[i].get_iter_first(out iter);
-			do {
-				this.hechos_anios[i].get_value(iter, 3, out hecho);
-				hechos.add ((Hecho) hecho);
-			}while (this.hechos_anios[i].iter_next(ref iter));
+		for (i=0; i < this.hechos_anios.size; i++ ) {
+			hechos.add_all (this.hechos_anios[i].lista_de_hechos ());
 		}
 		
 		return hechos;
@@ -216,20 +209,18 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_as_file ( string archivo ) {
-/*		int i;
-		ArrayList<Hecho> lista;
+		int i;
 		string a_guardar = "";
 
-		lista = this.lista_de_hechos ();
-		for (i=0; i < lista.size; i++) {
-			a_guardar +=lista[i].a_json() + "\n"; 
+		for (i=0; i < this.hechos_anios.size; i++) {
+			a_guardar += hechos_anios[i].a_json(); 
 		}
 
 		try {
 			FileUtils.set_contents (archivo, a_guardar);
 		}  catch (Error e) {
 			error (e.message);
-		} */
+		} 
 	}
 
 	public ListStoreHechos get_liststore ( string anio ) {
