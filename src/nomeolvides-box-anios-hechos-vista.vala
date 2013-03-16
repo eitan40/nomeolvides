@@ -87,6 +87,15 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.anios_view.agregar_varios ( anios );
 	}
 
+	public void cargar_lista_hechos ( ListStoreHechos hechos ) {
+		this.hechos_view.mostrar_anio ( hechos );
+	}
+
+	public string get_anio_actual () {
+		string anio = this.anios_view.get_anio ();
+		return anio;
+	}
+
 	public signal void hechos_cursor_changed ();
 	public signal void anios_cursor_changed ();
 }

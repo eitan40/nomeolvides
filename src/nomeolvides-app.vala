@@ -28,7 +28,6 @@ public class Nomeolvides.App : Gtk.Application
 	public VentanaPrincipal window;
 	public Datos datos;
 	public GLib.Menu application_menu;
-	private ArrayList<string> lista_anios;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", create_about_dialog },
@@ -95,11 +94,8 @@ public class Nomeolvides.App : Gtk.Application
 	}
 	
 	private void elegir_anio () {
-		string anio = "";//this.anios_view.get_anio ();
-		
-		if ( anio != "0") { //acá uso el número mágico del año 0 que no existe para evitar pedir algo null
-			//this.hechos_view.mostrar_anio ( anio );
-		}
+		string anio = this.window.get_anio_actual ();
+		this.window.cargar_hechos_view ( this.datos.get_liststore ( anio ) );
 	}
 
 	public void edit_hecho_dialog () {
