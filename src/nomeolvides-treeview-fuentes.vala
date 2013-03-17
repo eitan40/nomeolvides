@@ -23,8 +23,8 @@ using Nomeolvides;
 public class Nomeolvides.TreeViewFuentes : TreeView {
 	public TreeViewFuentes () {
 		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
-		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 1 );
-		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 2 );
+		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 1 );
+		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 2 );
 		this.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
 	}
 
