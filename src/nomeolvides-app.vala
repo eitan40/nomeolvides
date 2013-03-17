@@ -173,6 +173,36 @@ public class Nomeolvides.App : Gtk.Application
 		fuente_dialogo.destroy ();
 	}
 
+	private void set_config () {
+		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
+		var directorio_db_local = File.new_for_path(GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/");
+		var archivo_db_local =   File.new_for_path(directorio_db_local.get_path () + "/db_default.json");
+			
+		if (!directorio_configuracion.query_exists ()) {
+			try {
+				directorio_configuracion.make_directory (); 
+			}  catch (Error e) {
+				error (e.message);
+			}			
+		}
+		
+		if (!directorio_db_local.query_exists ()) {
+			try {
+				directorio_db_local.make_directory ();
+			}  catch (Error e) {
+				error (e.message);
+			}			
+		}
+
+		if (!archivo_db_local.query_exists ()) {
+			try {				
+				archivo_db_local.create (FileCreateFlags.NONE);
+			}  catch (Error e) {
+				error (e.message);
+			}			
+		}
+	}
+
 	public void send_hecho () {
 		/*
 		Hecho hecho;
@@ -185,10 +215,6 @@ public class Nomeolvides.App : Gtk.Application
 			string direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
 			string archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
 
-			try {
-				FileUtils.set_contents (archivo, hecho.a_json ());
-			}  catch (Error e) {
-				error (e.message);
 			}
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
@@ -203,7 +229,6 @@ public class Nomeolvides.App : Gtk.Application
 	public void save_as_file_dialog () {
 		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
 		guardar_archivo.set_transient_for ( this as Window );
-
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
             this.datos.save_as_file ( guardar_archivo.get_filename () );
