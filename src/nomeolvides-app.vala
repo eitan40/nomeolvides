@@ -42,8 +42,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.create_app_menu ( );
 		this.connect_signals ();
 
-		this.window.show_all ();
-		this.window.anios_hechos.hide_scroll_vista ();
+		this.window.show_visible ();
 		this.cargar_lista_anios ();
 	}
 
@@ -247,5 +246,6 @@ public class Nomeolvides.App : Gtk.Application
 	public App () {
 		app = this;
 		this.datos = new Datos ();
+		this.set_config ();
 	}
 }

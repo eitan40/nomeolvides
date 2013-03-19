@@ -41,8 +41,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		
 		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
-		this.hechos_view.row_activated.connect ( mostrar_hecho );
-	//	this.hechos_view.row_activated.connect ( mostrar_hecho );
+		this.hechos_view.row_activated.connect ( mostrar_vista );
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
@@ -58,27 +57,38 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	private void elegir_hecho () {
 		this.hechos_cursor_changed();
+		if (this.scroll_vista_hecho.visible == true ) {
+			this.mostrar_hecho ();
+		}
 	}
 	private void elegir_anio () {
 		this.anios_cursor_changed();
+	}
+
+	private void mostrar_vista () {
+		if (this.scroll_vista_hecho.visible == true ) {
+			this.scroll_vista_hecho.set_visible (false);
+		} else {
+			this.mostrar_hecho ();
+		}
 	}
 
 	private void mostrar_hecho () {
 		Hecho hecho_a_mostrar;
 		this.hechos_view.get_hecho_cursor( out hecho_a_mostrar );
 
-		if (this.scroll_vista_hecho.visible == true ) {
-			this.scroll_vista_hecho.set_visible (false);
-		} else {
-			if ( hecho_a_mostrar != null ) {
-				this.vista_hecho.set_datos_hecho ( hecho_a_mostrar );
-				this.scroll_vista_hecho.set_visible ( true );
-			}
+		if ( hecho_a_mostrar != null ) {
+			this.vista_hecho.set_datos_hecho ( hecho_a_mostrar );
+			this.scroll_vista_hecho.set_visible ( true );
 		}
 	}	
 
-	public void hide_scroll_vista () {
-		this.scroll_vista_hecho.hide ();
+	public void mostrar_scroll_vista ( bool mostrar ) {	
+		if ( mostrar == true ) {
+			this.scroll_vista_hecho.show_all ();
+		} else {	
+			this.scroll_vista_hecho.hide ();
+		}	
 	}
 
 	public void cargar_lista_anios ( ArrayList<string> anios )
@@ -94,6 +104,15 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	public string get_anio_actual () {
 		string anio = this.anios_view.get_anio ();
 		return anio;
+	}
+
+	public Hecho get_hecho_actual () {
+		Hecho hecho;
+		if(this.hechos_view.get_hecho_cursor ( out hecho ) != null){
+			return hecho;
+		}else {
+			return null as Hecho;
+		}		
 	}
 
 	public signal void hechos_cursor_changed ();

@@ -66,6 +66,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
+		this.anios_hechos.hechos_cursor_changed.connect ( this.elegir_hecho );
 	}
 
 	private void toolbar_open_button_clicked_signal () {
@@ -114,43 +115,21 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		return this.anio_actual;
 	}
 
-
-/*
-	public void elegir_hecho () {
-		Hecho hecho = new Hecho.vacio();
+	private void elegir_hecho () {
+		Hecho hecho = this.anios_hechos.get_hecho_actual ();
 		
-		if(this.hechos_view.get_hecho_cursor ( out hecho ) != null) {
+		if ( hecho != null ) { 
 			this.toolbar.set_buttons_visible ( true );
 		} else {
 			this.toolbar.set_buttons_visible ( false );		
 		}
-
-		this.scroll_vista_hecho.set_visible ( false );
 	}
-
-	public void mostrar_hecho () {
-		Hecho hecho_a_mostrar; 
-
-		this.hechos_view.get_hecho_cursor( out hecho_a_mostrar );
-
-		if (this.scroll_vista_hecho.visible == true ) {
-			this.scroll_vista_hecho.set_visible (false);
-		} else {
-			if ( hecho_a_mostrar != null ) {
-				this.vista_hecho.set_datos_hecho ( hecho_a_mostrar );
-				this.scroll_vista_hecho.set_visible ( true );
-			}
-		}
-	}	
 	
 	public void show_visible () {
 		this.show_all ();
-		this.scroll_vista_hecho.hide ();
+		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
-
-	public void label_anio () {
-		this.toolbar.set_anio( this.hechos_view.anio_actual );
-	}*/
+	
 	public signal void toolbar_open_button_clicked ();
 	public signal void toolbar_save_button_clicked ();
 	public signal void toolbar_add_button_clicked ();
