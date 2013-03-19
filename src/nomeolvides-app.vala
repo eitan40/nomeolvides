@@ -83,14 +83,12 @@ public class Nomeolvides.App : Gtk.Application
 		var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
 		
 		add_dialog.show();
-		/*
+		
 		if ( add_dialog.run() == ResponseType.APPLY )
 		{
 			this.datos.agregar_hecho(add_dialog.respuesta);
-			this.window.anios_view.agregar_varios (this.datos.lista_de_anios ());
-			this.window.toolbar.save_button.set_visible_horizontal ( true );
 			add_dialog.destroy();
-		}*/		
+		}		
 	}
 	
 	private void elegir_anio () {
