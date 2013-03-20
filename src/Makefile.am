@@ -48,7 +48,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-fuente-dialog.vala \
 	nomeolvides-datos.vala \
 	nomeolvides-ventana-principal.vala \
-	nomeolvides-box-anios-hechos-vista.vala
+	nomeolvides-box-anios-hechos-vista.vala \
+	nomeolvides-configuracion.vala
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \
