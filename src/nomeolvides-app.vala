@@ -27,10 +27,11 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
+	public Configuracion configuracion;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
-		{ "create-about-dialog", create_about_dialog },
+		{ "create-about-dialog", about_dialog },
 		{ "exportar", exportar },
 		{ "window-destroy", salir_app },
 		{ "config-db-dialog", config_db_dialog }
@@ -96,8 +97,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void edit_hecho_dialog () {
-/*
-		TreePath path;
+/*		TreePath path;
 		Hecho hecho; 
 
 		path = this.window.hechos_view.get_hecho_cursor( out hecho );
@@ -116,48 +116,29 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void delete_hecho_dialog () {
-/*
-		TreePath path;
-		
+/*		TreePath path;
 		Hecho hecho_a_borrar;
 		path = this.window.hechos_view.get_hecho_cursor ( out hecho_a_borrar );
-
-		
+	
 		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as Window);
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
 			this.window.anios_view.agregar_varios ( this.datos.lista_de_anios() );
 			this.window.toolbar.save_button.set_visible_horizontal (true);
-		}
-		
+		}	
 		delete_dialog.destroy ();
 */	}
 
-	private void create_about_dialog () {
-		string[] authors = {
-  			"Andres Fernandez <andres@softwareperonista.com.ar>",
-  			"Fernando Fernandez <fernando@softwareperonista.com.ar>"
-		};
-		Gtk.show_about_dialog (this.window,
-			   "authors", authors,
-			   "program-name", "Nomeolvides",
-			   "title", "Acerca de Nomeolvides",
-			   "comments", "Gestor de efemérides históricas",
-			   "copyright", "Copyright 2012 Fernando Fernandez y Andres Fernandez",
-			   "license-type", Gtk.License.GPL_3_0,
-			   "logo-icon-name", "nomeolvides",
-			   "version", Config.VERSION,
-			   "website", "https://github.com/softwareperonista/nomeolvides",
-			   "wrap-license", true);	
+	public void about_dialog () {
+		this.configuracion.create_about_dialog ( this.window );
 	}
 
 	private void salir_app () {
 		this.window.destroy ();
 	}
 
-	private void config_db_dialog () {
-		
+	private void config_db_dialog () {		
 		var fuente_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
 		fuente_dialogo.show_all ();
 		if ( fuente_dialogo.run () == ResponseType.OK ) {
@@ -169,38 +150,7 @@ public class Nomeolvides.App : Gtk.Application
 		fuente_dialogo.destroy ();
 	}
 
-	private void set_config () {
-		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-		var directorio_db_local = File.new_for_path(GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/");
-		var archivo_db_local =   File.new_for_path(directorio_db_local.get_path () + "/db_default.json");
-			
-		if (!directorio_configuracion.query_exists ()) {
-			try {
-				directorio_configuracion.make_directory (); 
-			}  catch (Error e) {
-				error (e.message);
-			}			
-		}
-		
-		if (!directorio_db_local.query_exists ()) {
-			try {
-				directorio_db_local.make_directory ();
-			}  catch (Error e) {
-				error (e.message);
-			}			
-		}
-
-		if (!archivo_db_local.query_exists ()) {
-			try {				
-				archivo_db_local.create (FileCreateFlags.NONE);
-			}  catch (Error e) {
-				error (e.message);
-			}			
-		}
-	}
-
-	public void send_hecho () {
-		
+	public void send_hecho () {		
 		Hecho hecho = this.window.get_hecho_actual ();
 		string asunto;
 		string cuerpo;
@@ -235,9 +185,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
             this.datos.save_as_file ( guardar_archivo.get_filename () );
-
 		}
-		
 		guardar_archivo.close ();
 	}
 
@@ -251,7 +199,8 @@ public class Nomeolvides.App : Gtk.Application
 
 	public App () {
 		app = this;
+		this.configuracion = new Configuracion ();
+		this.configuracion.set_config ();
 		this.datos = new Datos ();
-		this.set_config ();
 	}
 }
