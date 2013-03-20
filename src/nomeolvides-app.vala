@@ -164,7 +164,6 @@ public class Nomeolvides.App : Gtk.Application
 			if (fuente_dialogo.cambios == true) {
 				this.datos.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
 				this.datos.actualizar_fuentes_predefinidas ();
-				//this.window.anios_view.borrar_datos ();
 			}
 		}
 		fuente_dialogo.destroy ();
@@ -201,18 +200,25 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void send_hecho () {
-		/*
-		Hecho hecho;
-
-		this.window.hechos_view.get_hecho_cursor ( out hecho );
+		
+		Hecho hecho = this.window.get_hecho_actual ();
+		string asunto;
+		string cuerpo;
+		string direccion;
+		string archivo;		
 
 		if( hecho != null) {
-			string asunto = "Envío un hecho para contribuir con la base de datos oficial";
-			string cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
-			string direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
-			string archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
+			asunto = "Envío un hecho para contribuir con la base de datos oficial";
+			cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
+			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
+			archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
 
+			try {
+				FileUtils.set_contents (archivo, hecho.a_json ());
+			} catch (Error e) {
+				error (e.message);
 			}
+		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
 			try {
@@ -220,7 +226,7 @@ public class Nomeolvides.App : Gtk.Application
 			} catch(SpawnError err) {
 				stdout.printf(err.message+"\n");
 			}
-		}*/
+		}
 	}
 
 	public void save_as_file_dialog () {
