@@ -202,6 +202,5 @@ public class Nomeolvides.App : Gtk.Application
 		this.configuracion = new Configuracion ();
 		this.configuracion.set_config ();
 		this.datos = new Datos ();
-		this.set_config ();
 	}
 }

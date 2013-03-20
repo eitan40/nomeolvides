@@ -115,8 +115,12 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		return this.anio_actual;
 	}
 
+	public Hecho get_hecho_actual () {
+		return this.anios_hechos.get_hecho_actual ();
+	}
+
 	private void elegir_hecho () {
-		Hecho hecho = this.anios_hechos.get_hecho_actual ();
+		Hecho hecho = this.get_hecho_actual ();
 		
 		if ( hecho != null ) { 
 			this.toolbar.set_buttons_visible ( true );
