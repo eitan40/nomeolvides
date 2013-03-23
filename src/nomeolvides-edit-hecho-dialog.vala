@@ -40,6 +40,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.fecha.set_anio(hecho_a_editar.fecha.get_year());
 		this.fecha.set_mes(hecho_a_editar.fecha.get_month());
 		this.fecha.set_dia(hecho_a_editar.fecha.get_day_of_month());
+		this.fuente_entry.set_text ( hecho_a_editar.fuente );
 		set_fuente_de_hecho ( hecho_a_editar.archivo_fuente );
 	}
 	
