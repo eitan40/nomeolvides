@@ -22,17 +22,21 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.ListStoreFuentes : ListStore {
-	public ArrayList<string> archivos { get; private set; }
+	private ArrayList<string> archivos;
+	private ArrayList<string> archivos_cache;
+	private ArrayList<string> nombres_db;
 	private TreeIter iterador;
 	
 	public ListStoreFuentes () {
 		Type[] tipos= { typeof(string), typeof(string), typeof(string), typeof(string), typeof(Fuente) };
 		this.archivos = new ArrayList<string> ();
+		this.archivos_cache = new ArrayList<string> ();
+		this.nombres_db = new ArrayList<string> ();
 		this.set_column_types(tipos);
 	}
 
 	public void agregar_fuente ( Fuente fuente ) {		
-		if (fuente.verificar_fuente () ) {
+		if ( fuente.verificar_fuente () && this.db_no_duplicada (fuente) ) {
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
 		                         0,fuente.nombre_fuente,
@@ -41,6 +45,22 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 		                         3,fuente.tipo_fuente.to_string () ,
 		                         4,fuente );
 			this.archivos.add ( fuente.direccion_fuente + fuente.nombre_archivo );
+			this.archivos_cache.add (fuente.get_checksum());
+			this.nombres_db.add (fuente.nombre_fuente);
 		}	
+	}
+
+	public ArrayList<string> get_archivos () {
+		return this.archivos;
+	}
+
+	private bool db_no_duplicada ( Fuente fuente ) {
+		bool retorno = true;
+
+		if (this.archivos_cache.contains ( fuente.get_checksum() ) || this.nombres_db.contains (fuente.nombre_fuente) ) {
+			retorno = false;
+		}
+			
+		return retorno;
 	}
 }

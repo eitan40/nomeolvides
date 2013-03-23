@@ -24,6 +24,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 	public string nombre_fuente { get; private set; }
 	public string nombre_archivo { get; private set; }
 	public string direccion_fuente { get; private set; }
+	private string hash;
 	public FuentesTipo tipo_fuente { get; private set; }
 
 	public Fuente ( string nombre_fuente, string nombre_archivo, string direccion_fuente, FuentesTipo tipo_fuente ) {
@@ -31,6 +32,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 		this.nombre_archivo = nombre_archivo;
 		this.direccion_fuente = direccion_fuente;
 		this.tipo_fuente = tipo_fuente;
+		this.calcular_checksum ();
 	}
 
 	public Fuente.json ( string json ) {
@@ -45,6 +47,8 @@ public class Nomeolvides.Fuente : GLib.Object{
 			this.direccion_fuente = "null";
 			this.tipo_fuente = FuentesTipo.LOCAL;
 		}
+
+		this.calcular_checksum ();
 	}
 
 	public bool verificar_fuente () {
@@ -77,6 +81,14 @@ public class Nomeolvides.Fuente : GLib.Object{
 		inicio = json.index_of(":",json.index_of(campo)) + 2;
 		fin = json.index_of ("\"", inicio);
 		return json[inicio:fin];
+	}
+
+	public string get_checksum () {
+		return this.hash;
+	}
+
+	private void calcular_checksum () {
+		this.hash = Checksum.compute_for_string(ChecksumType.MD5, this.direccion_fuente + this.nombre_archivo);
 	}
 }
 

@@ -31,7 +31,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 
-		this.archivos_fuente = fuentes.fuentes_liststore.archivos;		
+		this.archivos_fuente = fuentes.fuentes_liststore.get_archivos ();		
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {
