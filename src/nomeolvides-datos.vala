@@ -43,28 +43,29 @@ public class Nomeolvides.Datos : GLib.Object {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
 			if ( en_liststore ( nuevo.fecha.get_year().to_string(), out indice ) ) {
 				this.hechos_anios[indice].agregar (nuevo);
-				this.nuevo_anio ();
+				this.cambio_anios ();
 			}
 		}
 	}
 
 
 	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
-		/*
 		TreeIter iterador;
-		int anio = en_liststore (a_eliminar.fecha.get_year().to_string());
+		int anio;
+		if ( en_liststore (a_eliminar.fecha.get_year().to_string(), out anio) ) {	
+			this.hechos_anios[anio].get_iter(out iterador, path);
+			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
 
-		this.hechos_anios[anio].get_iter(out iterador, path);
-		this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
-
-		if (this.hechos_anios[anio].length () == 0) {
-			this.eliminar_liststore (anio);
-		}*/		
+			if (this.hechos_anios[anio].length () == 0) {
+				this.eliminar_liststore (anio);
+				this.cambio_anios ();
+			}
+		}
 	}
 
-	private void agregar_liststore (string nuevo_anio) {
-		this.hechos_anios.add ( new ListStoreHechos( nuevo_anio) );
-		this.cache_hechos_anios.add (nuevo_anio);
+	private void agregar_liststore (string cambio_anios) {
+		this.hechos_anios.add ( new ListStoreHechos( cambio_anios) );
+		this.cache_hechos_anios.add (cambio_anios);
 	}
 
 	private void eliminar_liststore ( int a_eliminar ) {
@@ -246,5 +247,5 @@ public class Nomeolvides.Datos : GLib.Object {
 		return retorno;
 	}
 
-	public signal void nuevo_anio ();
+	public signal void cambio_anios ();
 }

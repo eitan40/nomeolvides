@@ -74,7 +74,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 
-		this.datos.nuevo_anio.connect ( this.cargar_lista_anios );
+		this.datos.cambio_anios.connect ( this.cargar_lista_anios );
 	}
 
 
@@ -116,19 +116,17 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void delete_hecho_dialog () {
-/*		TreePath path;
+		TreePath path;
 		Hecho hecho_a_borrar;
-		path = this.window.hechos_view.get_hecho_cursor ( out hecho_a_borrar );
+		path = this.window.get_hecho_actual ( out hecho_a_borrar );
 	
-		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as Window);
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
-			this.window.anios_view.agregar_varios ( this.datos.lista_de_anios() );
-			this.window.toolbar.save_button.set_visible_horizontal (true);
 		}	
 		delete_dialog.destroy ();
-*/	}
+	}
 
 	public void about_dialog () {
 		this.configuracion.create_about_dialog ( this.window );
@@ -151,11 +149,13 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void send_hecho () {		
-		Hecho hecho = this.window.get_hecho_actual ();
+		Hecho hecho; 
 		string asunto;
 		string cuerpo;
 		string direccion;
-		string archivo;		
+		string archivo;
+
+		this.window.get_hecho_actual ( out hecho );
 
 		if( hecho != null) {
 			asunto = "Envío un hecho para contribuir con la base de datos oficial";

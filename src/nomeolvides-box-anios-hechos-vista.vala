@@ -106,13 +106,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		return anio;
 	}
 
-	public Hecho get_hecho_actual () {
-		Hecho hecho;
-		if(this.hechos_view.get_hecho_cursor ( out hecho ) != null){
-			return hecho;
-		}else {
-			return null as Hecho;
-		}		
+	public TreePath get_hecho_actual ( out Hecho hecho ) {
+		return this.hechos_view.get_hecho_cursor (out hecho );
 	}
 
 	public signal void hechos_cursor_changed ();
