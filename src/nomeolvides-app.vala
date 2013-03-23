@@ -97,10 +97,10 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void edit_hecho_dialog () {
-/*		TreePath path;
+		TreePath path;
 		Hecho hecho; 
 
-		path = this.window.hechos_view.get_hecho_cursor( out hecho );
+		path = this.window.get_hecho_actual ( out hecho );
 		
 		var edit_dialog = new EditHechoDialog( this.window, this.datos.fuentes );
 		edit_dialog.set_datos ( hecho );
@@ -109,10 +109,8 @@ public class Nomeolvides.App : Gtk.Application
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
 			this.datos.eliminar_hecho ( hecho, path );
 			this.datos.agregar_hecho ( edit_dialog.respuesta );			
-			this.window.anios_view.agregar_varios ( this.datos.lista_de_anios() );
-			this.window.toolbar.save_button.set_visible_horizontal (true);
-			edit_dialog.destroy();
-		}*/
+		}
+		edit_dialog.destroy();
 	}
 
 	public void delete_hecho_dialog () {
