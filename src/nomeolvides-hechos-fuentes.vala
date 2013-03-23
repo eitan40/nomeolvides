@@ -71,9 +71,7 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		File archivo_config = File.new_for_path (this.directorio_configuracion + this.archivo);
 
 		var fuente_oficial = new Fuente ( "Base de datos oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", FuentesTipo.HTTP );
-		var fuente_default = new Fuente ( "Base de datos local" , "db_default.json", this.directorio_db_local , FuentesTipo.LOCAL );
 		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
-		this.fuentes_liststore.agregar_fuente ( fuente_default );
 		
 		if (archivo_config.query_exists () ) {
 			try {

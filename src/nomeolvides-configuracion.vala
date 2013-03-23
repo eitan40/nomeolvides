@@ -63,15 +63,24 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				directorio_db_local.make_directory ();
 			}  catch (Error e) {
 				error (e.message);
-			}			
-		}
+			}
 
-		if (!archivo_db_local.query_exists ()) {
-			try {				
-				archivo_db_local.create (FileCreateFlags.NONE);
-			}  catch (Error e) {
-				error (e.message);
-			}			
+			if (!archivo_db_local.query_exists ()) {
+				try {				
+					archivo_db_local.create (FileCreateFlags.NONE);
+					try {
+						var fuente_default = new Fuente ( "Base de datos local",
+						                                  "db_default.json",
+						                                  this.directorio_db_local.get_path (),
+						                                  FuentesTipo.LOCAL );
+						FileUtils.set_contents (archivo_db_local.get_parse_name (), fuente_default.a_json());
+					} catch (Error e) {
+						error (e.message);
+					}
+				}  catch (Error e) {
+					error (e.message);
+				}			
+			}
 		}
 	}
 }
