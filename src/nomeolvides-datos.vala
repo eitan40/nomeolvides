@@ -36,12 +36,15 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void agregar_hecho (Hecho nuevo) {
-		if ( this.cache_hechos_anios.contains ( nuevo.fecha.get_year().to_string() )) {
-			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
+		int indice;
+		if ( en_liststore ( nuevo.fecha.get_year().to_string(), out indice ) ) {
+			this.hechos_anios[indice].agregar ( nuevo );
 		} else {
 			agregar_liststore ( nuevo.fecha.get_year().to_string() );
-			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
-			this.nuevo_anio ();
+			if ( en_liststore ( nuevo.fecha.get_year().to_string(), out indice ) ) {
+				this.hechos_anios[indice].agregar (nuevo);
+				this.nuevo_anio ();
+			}
 		}
 	}
 
@@ -70,12 +73,16 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
 	}
 
-	private int en_liststore ( string anio ) {
+	private bool en_liststore ( string anio, out int indice ) {
 
-		int retorno;
+		bool retorno = false;
 
-		retorno = this.cache_hechos_anios.index_of( anio ); 
+		indice = this.cache_hechos_anios.index_of( anio ); 
 
+		if ( indice >= 0 ) {
+			retorno = true;
+		}
+		
 		return retorno;
 	}
 
@@ -224,8 +231,19 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreHechos get_liststore ( string anio ) {
+
+		ListStoreHechos retorno = null;
+		int indice;
 		
-		return this.hechos_anios[this.en_liststore ( anio )];
+		if ( this.en_liststore ( anio, out indice ) ) {
+			retorno = this.hechos_anios[indice];
+		}
+
+		if ( retorno == null ) {
+			retorno = new ListStoreHechos ("0");
+		}
+			
+		return retorno;
 	}
 
 	public signal void nuevo_anio ();
