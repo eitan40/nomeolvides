@@ -24,124 +24,37 @@ using Nomeolvides;
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 	public string anio_actual { get; private set; }
-	private ArrayList<ListStoreHechos> hechos_anios;
-	private ListStoreHechos anio_mostrado_ahora; 
-	private ArrayList<string> cache_hechos_anios;
+	private ListStoreHechos anio; 
 
 	public ViewHechos () {
-		this.cache_hechos_anios = new ArrayList<string> ();
-		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText (), "text", 0);
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
 	}
 
-	public void agregar_hecho (Hecho nuevo) {
-		if ( this.cache_hechos_anios.contains ( nuevo.fecha.get_year().to_string() )) {
-			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
-		} else {
-			agregar_liststore ( nuevo.fecha.get_year().to_string() );
-			this.hechos_anios[en_liststore (nuevo.fecha.get_year().to_string())].agregar (nuevo);
-		}
-		this.mostrar_anio ( nuevo.fecha.get_year().to_string() );		
-	}
-
-	public void mostrar_anio ( string anio ) {
-		if ( this.cache_hechos_anios.contains ( anio ) ){
-			this.anio_mostrado_ahora = this.hechos_anios[en_liststore (anio)];
-			this.set_model( this.anio_mostrado_ahora );
-			this.anio_mostrado_ahora.set_sort_column_id(3, SortType.ASCENDING);
-			this.anio_mostrado_ahora.set_sort_func(3, ordenar_hechos);
-			this.anio_actual = anio;
+	public void mostrar_anio ( ListStoreHechos anio ) {
+			this.anio = anio;
+			this.set_model( this.anio );
+			this.anio.set_sort_column_id(3, SortType.ASCENDING);
+			this.anio.set_sort_func(3, ordenar_hechos);
+			this.anio_actual = anio.anio;
 			cambia_anio_signal ();
-		}
 	}
 
-	public void eliminar_hecho ( Hecho a_eliminar ) {
+	public TreePath get_hecho_cursor ( out Hecho hecho ) {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		int anio = en_liststore (a_eliminar.fecha.get_year().to_string());
-
-		
-		this.get_cursor(out path, out columna);
-		this.anio_mostrado_ahora.get_iter(out iterador, path);
-		this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
-
-		if (this.hechos_anios[anio].length () == 0) {
-			this.eliminar_liststore (anio);
-		}		
-	}
-	
-	private void agregar_liststore (string nuevo_anio) {
-		this.hechos_anios.add ( new ListStoreHechos() );
-		this.cache_hechos_anios.add (nuevo_anio);
-	}
-
-	private void eliminar_liststore (int a_eliminar) {
-		
-		this.hechos_anios.remove (this.hechos_anios[a_eliminar]);
-		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
-	}
-
-	private int en_liststore (string anio) {
-
-		int retorno;
-
-		retorno = this.cache_hechos_anios.index_of( anio ); 
-
-		return retorno;
-	}
-
-	public void borrar_datos () {
-		this.hechos_anios.clear ();
-		this.cache_hechos_anios.clear ();
-	}
-
-	public Hecho get_hecho_cursor () {
-		TreePath path;
-		TreeViewColumn columna;
-		TreeIter iterador;
-		Value hecho;
+		Value hecho_value;
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
-			this.anio_mostrado_ahora.get_iter(out iterador, path);
-			this.anio_mostrado_ahora.get_value (iterador, 3, out hecho);
-			return (Hecho) hecho;
+			this.anio.get_iter(out iterador, path);
+			this.anio.get_value (iterador, 3, out hecho_value);
+			hecho = (Hecho) hecho_value;
+			return path;
 		} else { 
-			return (Hecho) null;
+			return (TreePath) null;
 		}		
-	}
-
-    public ArrayList<Hecho> lista_de_hechos () { 
-        ArrayList<Hecho> hechos = new ArrayList<Hecho>();
-		Value hecho;
-		TreeIter iter;
-		int i;
-
-
-		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
-			this.hechos_anios[i].get_iter_first(out iter);
-			do {
-				this.hechos_anios[i].get_value(iter, 3, out hecho);
-				hechos.add ((Hecho) hecho);
-			}while (this.hechos_anios[i].iter_next(ref iter));
-		}
-		
-		return hechos;
-    }
-
-
-	public string[] lista_de_anios ()
-	{
-		string[] retorno = {};
-		int i;
-
-		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
-			retorno += this.cache_hechos_anios[i];
-		}		
-		
-		return retorno;
 	}
 
 	private int comparar_hechos (Hecho hecho1, Hecho hecho2) {
@@ -190,11 +103,11 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		GLib.Value val1;
 		GLib.Value val2;
 
-		this.anio_mostrado_ahora.get_value(iter1, 3, out val1);
-        this.anio_mostrado_ahora.get_value(iter2, 3, out val2);
+		this.anio.get_value(iter1, 3, out val1);
+        this.anio.get_value(iter2, 3, out val2);
 
 		return this.comparar_hechos((Hecho) val1, (Hecho) val2);
 	}
 
 	public signal void cambia_anio_signal ();
-}
+}			

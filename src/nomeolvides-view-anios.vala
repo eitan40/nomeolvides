@@ -19,6 +19,7 @@
 
 using Gtk;
 using Nomeolvides;
+using Gee;
 
 public class Nomeolvides.ViewAnios : TreeView {
 
@@ -42,18 +43,19 @@ public class Nomeolvides.ViewAnios : TreeView {
 		this.lista.set(this.iter,0,nuevo);
 	}
 
-	public void agregar_varios (string[] nuevo)
+	public void agregar_varios (ArrayList<string> nuevo)
 	{
 		int i;
+		string temp;
 		
 		this.lista.clear ();
 			
-		for (i=0; i < nuevo.length; i++)
+		for (i=0; i < nuevo.size; i++)
 		{
-			if (nuevo[i] != null)
+			temp = nuevo.get ( i );
+			if (temp != null)
 			{
-				this.lista.append (out this.iter);
-				this.lista.set (this.iter,0,nuevo[i]);
+				this.agregar ( temp );
 			}
 		}
 	}

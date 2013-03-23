@@ -24,8 +24,10 @@ using Nomeolvides;
 public class Nomeolvides.ListStoreHechos : ListStore {
 	private ArrayList<string> hechos_cache;
 	private TreeIter iterador;
+	public string anio { get; private set; }
 	
-	public ListStoreHechos () {
+	public ListStoreHechos ( string anio) {
+		this.anio = anio;
 		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
 		this.hechos_cache = new ArrayList<string> ();
 		this.set_column_types(tipos);
@@ -64,6 +66,32 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 
 	public int length () {
 		return this.hechos_cache.size;
+	}
+
+	public ArrayList<Hecho> lista_de_hechos () {
+		ArrayList<Hecho> hechos = new ArrayList<Hecho>();
+		Value hecho;
+		TreeIter iter;
+
+		this.get_iter_first(out iter);
+		do {
+			this.get_value(iter, 3, out hecho);
+			hechos.add ((Hecho) hecho);
+		}while (this.iter_next(ref iter));
+		
+		return hechos;
+	}
+
+	public string a_json () {
+		int i;
+		string hechos_json = "";
+		ArrayList<Hecho> hechos = this.lista_de_hechos();
+		
+		for (i=0; i < hechos.size; i++) {
+			hechos_json += hechos[i].a_json() + "\n"; 
+		}
+
+		return hechos_json; 
 	}
 	
 }

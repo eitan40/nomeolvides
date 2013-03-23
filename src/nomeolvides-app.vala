@@ -20,35 +20,35 @@
 using GLib;
 using Gtk;
 using Nomeolvides;
+using Gee;
 
 public class Nomeolvides.App : Gtk.Application 
 {
 	public static App app;
-	public Nomeolvides.Window window;
-	public HechosFuentes fuentes;
+	public VentanaPrincipal window;
+	public Datos datos;
+	public Configuracion configuracion;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
-		{ "create-about-dialog", create_about_dialog },
+		{ "create-about-dialog", about_dialog },
 		{ "exportar", exportar },
 		{ "window-destroy", salir_app },
 		{ "config-db-dialog", config_db_dialog }
 	};
 
-	private void create_window ()
-	{
-		this.window = new Nomeolvides.Window(this);
+	private void create_window () {
+		this.window = new VentanaPrincipal (this);
 
 		this.create_app_menu ( );
+		this.connect_signals ();
 
-		window.show_visible();
+		this.window.show_visible ();
+		this.cargar_lista_anios ();
 	}
 
-	public override void activate ()
-	{
+	public override void activate () {
 		create_window();
-		this.fuentes = new HechosFuentes ( );
-		this.window.cargar_fuentes_predefinidas ( this.fuentes );
 		app.window.show();
 	}
 
@@ -64,78 +64,141 @@ public class Nomeolvides.App : Gtk.Application
 		this.add_action_entries (actions_app_menu, this);
 	}
 
-	private void create_about_dialog () {
-		string[] authors = {
-  			"Andres Fernandez <andres@softwareperonista.com.ar>",
-  			"Fernando Fernandez <fernando@softwareperonista.com.ar>"
-		};
-		Gtk.show_about_dialog (this.window,
-			   "authors", authors,
-			   "program-name", "Nomeolvides",
-			   "title", "Acerca de Nomeolvides",
-			   "comments", "Gestor de efemérides históricas",
-			   "copyright", "Copyright 2012 Fernando Fernandez y Andres Fernandez",
-			   "license-type", Gtk.License.GPL_3_0,
-			   "logo-icon-name", "nomeolvides",
-			   "version", Config.VERSION,
-			   "website", "https://github.com/softwareperonista/nomeolvides",
-			   "wrap-license", true);	
+	private void connect_signals () {
+		//this.window.toolbar_open_button_clicked.connect ( this.open_file_dialog );
+		this.window.toolbar_save_button_clicked.connect ( this.datos.save_file );
+		this.window.toolbar_add_button_clicked.connect ( this.add_hecho_dialog );
+		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
+		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );
+		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
+
+		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
+
+		this.datos.cambio_anios.connect ( this.cargar_lista_anios );
+	}
+
+
+
+	public void add_hecho_dialog () {
+		var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
+		
+		add_dialog.show();
+		
+		if ( add_dialog.run() == ResponseType.APPLY )
+		{
+			this.datos.agregar_hecho(add_dialog.respuesta);
+			add_dialog.destroy();
+		}		
+	}
+	
+	private void elegir_anio () {
+		string anio = this.window.get_anio_actual ();
+		this.window.cargar_hechos_view ( this.datos.get_liststore ( anio ) );
+	}
+
+	public void edit_hecho_dialog () {
+		TreePath path;
+		Hecho hecho; 
+
+		path = this.window.get_hecho_actual ( out hecho );
+		
+		var edit_dialog = new EditHechoDialog( this.window, this.datos.fuentes );
+		edit_dialog.set_datos ( hecho );
+		edit_dialog.show_all ();
+
+		if ( edit_dialog.run() == ResponseType.APPLY ) {
+			this.datos.eliminar_hecho ( hecho, path );
+			this.datos.agregar_hecho ( edit_dialog.respuesta );			
+		}
+		edit_dialog.destroy();
+	}
+
+	public void delete_hecho_dialog () {
+		TreePath path;
+		Hecho hecho_a_borrar;
+		path = this.window.get_hecho_actual ( out hecho_a_borrar );
+	
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
+
+		if (delete_dialog.run() == ResponseType.APPLY) {
+			this.datos.eliminar_hecho ( hecho_a_borrar, path );
+		}	
+		delete_dialog.destroy ();
+	}
+
+	public void about_dialog () {
+		this.configuracion.create_about_dialog ( this.window );
 	}
 
 	private void salir_app () {
 		this.window.destroy ();
 	}
 
-	private void config_db_dialog () {
-		
-		var fuente_dialogo = new FuentesDialog ( this.window, this.fuentes.temp() );
+	private void config_db_dialog () {		
+		var fuente_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
 		fuente_dialogo.show_all ();
 		if ( fuente_dialogo.run () == ResponseType.OK ) {
 			if (fuente_dialogo.cambios == true) {
-				this.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
-				this.window.actualizar_fuentes_predefinidas ( this.fuentes );
+				this.datos.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
+				this.datos.actualizar_fuentes_predefinidas ();
 			}
 		}
 		fuente_dialogo.destroy ();
 	}
 
-	private void exportar () {
-		this.window.save_as_file_dialog ();
-	}
+	public void send_hecho () {		
+		Hecho hecho; 
+		string asunto;
+		string cuerpo;
+		string direccion;
+		string archivo;
 
-	private void set_config () {
-		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-		var directorio_db_local = File.new_for_path(GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/");
-		var archivo_db_local =   File.new_for_path(directorio_db_local.get_path () + "/db_default.json");
-			
-		if (!directorio_configuracion.query_exists ()) {
+		this.window.get_hecho_actual ( out hecho );
+
+		if( hecho != null) {
+			asunto = "Envío un hecho para contribuir con la base de datos oficial";
+			cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
+			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
+			archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
+
 			try {
-				directorio_configuracion.make_directory ();
-			}  catch (Error e) {
+				FileUtils.set_contents (archivo, hecho.a_json ());
+			} catch (Error e) {
 				error (e.message);
-			}			
-		}
+			}
 		
-		if (!directorio_db_local.query_exists ()) {
+			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
+  
 			try {
-				directorio_db_local.make_directory ();
-			}  catch (Error e) {
-				error (e.message);
-			}			
-		}
-
-		if (!archivo_db_local.query_exists ()) {
-			try {				
-				archivo_db_local.create (FileCreateFlags.NONE);
-			}  catch (Error e) {
-				error (e.message);
-			}			
+				Process.spawn_command_line_async( commando );
+			} catch(SpawnError err) {
+				stdout.printf(err.message+"\n");
+			}
 		}
 	}
 
-	public App ()
-	{
+	public void save_as_file_dialog () {
+		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
+		guardar_archivo.set_transient_for ( this as Window );
+
+		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
+            this.datos.save_as_file ( guardar_archivo.get_filename () );
+		}
+		guardar_archivo.close ();
+	}
+
+	private void exportar () {
+		this.save_as_file_dialog ();
+	}
+
+	public void cargar_lista_anios () {
+		this.window.cargar_anios_view ( this.datos.lista_de_anios () );
+	}
+
+	public App () {
 		app = this;
-		this.set_config ();
+		this.configuracion = new Configuracion ();
+		this.configuracion.set_config ();
+		this.datos = new Datos ();
 	}
 }

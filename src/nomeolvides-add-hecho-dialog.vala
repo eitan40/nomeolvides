@@ -23,7 +23,7 @@ using Nomeolvides;
 
 public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
 	
-	public AddHechoDialog ( Nomeolvides.Window ventana, HechosFuentes fuentes ) {
+	public AddHechoDialog ( VentanaPrincipal ventana, HechosFuentes fuentes ) {
 		base (ventana, fuentes.get_fuentes_locales ());
 
 		this.set_title ("Añadir un Hecho Histórico");
