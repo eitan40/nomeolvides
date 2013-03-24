@@ -27,6 +27,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private ViewAnios anios_view;
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_vista_hecho;
+	private ScrolledWindow scroll_hechos_view;
+	private ScrolledWindow scroll_anios_view;
 	private ArrayList<string> lista_anios;
 
 	public Anios_hechos_vista () {
@@ -36,7 +38,11 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.vista_hecho = new VistaHecho ();
 
 		this.scroll_vista_hecho = new ScrolledWindow (null,null);
+		this.scroll_hechos_view = new ScrolledWindow (null,null);
+		this.scroll_anios_view = new ScrolledWindow (null,null);
 		this.scroll_vista_hecho.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_hechos_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_anios_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		this.scroll_vista_hecho.set_size_request (300,-1);
 		
 		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
@@ -45,11 +51,13 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
-		this.scroll_vista_hecho.add_with_viewport (this.vista_hecho);
+		this.scroll_vista_hecho.add_with_viewport ( this.vista_hecho );
+		this.scroll_hechos_view.add ( this.hechos_view );
+		this.scroll_anios_view.add ( this.anios_view );
 		
-		this.pack_start (anios_view, false, false, 0);
+		this.pack_start (this.scroll_anios_view, false, false, 0);
 		this.pack_start (new Separator(Orientation.VERTICAL), false, false, 2);
-		this.pack_start (this.hechos_view, true, true, 0);
+		this.pack_start (this.scroll_hechos_view, true, true, 0);
 		this.pack_start (separador, false, false, 2);
 		this.pack_start (scroll_vista_hecho, false, false, 0);
 
