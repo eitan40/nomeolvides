@@ -27,7 +27,7 @@ public class Nomeolvides.ViewAnios : TreeView {
 	private TreeIter iter;
 	
 	public ViewAnios () {
-		this.lista = new ListStore(1,typeof(string));
+		this.lista = new ListStore(1,typeof(int));
 		this.set_model (this.lista);
 		var celda = new CellRendererText();
 		this.insert_column_with_attributes (-1,"Años", celda, "text",0);
@@ -37,30 +37,26 @@ public class Nomeolvides.ViewAnios : TreeView {
 
 	}
 
-	public void agregar (string nuevo)
+	public void agregar (int nuevo)
 	{
 		this.lista.append (out this.iter);
 		this.lista.set(this.iter,0,nuevo);
 	}
 
-	public void agregar_varios (ArrayList<string> nuevo)
+	public void agregar_varios (ArrayList<int> nuevo)
 	{
-		int i;
-		string temp;
+		int i, temp;
 		
 		this.lista.clear ();
 			
 		for (i=0; i < nuevo.size; i++)
 		{
-			temp = nuevo.get ( i );
-			if (temp != null)
-			{
-				this.agregar ( temp );
-			}
+			temp = nuevo[i];
+			this.agregar ( temp );
 		}
 	}
 
-	public string get_anio () {
+	public int get_anio () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
@@ -70,9 +66,9 @@ public class Nomeolvides.ViewAnios : TreeView {
 		if (path != null ) {
 			this.lista.get_iter(out iterador, path);
 			this.lista.get_value (iterador, 0, out valor);
-			return (string)valor;
+			return (int)valor;
 		} else { 
-			return "0"; //retorna el número mágico 0. No existe el año 0, por lo tanto, no hay año elegido.
+			return 0; //retorna el número mágico 0. No existe el año 0, por lo tanto, no hay año elegido.
 		}
 	}
 
@@ -90,8 +86,8 @@ public class Nomeolvides.ViewAnios : TreeView {
 		this.lista.get_value(iter1, 0, out val1);
         this.lista.get_value(iter2, 0, out val2);
 
-		anio1 = int.parse (val1.get_string());
-		anio2 = int.parse (val2.get_string());
+		anio1 = (int) val1;
+		anio2 = (int) val2;
 
 		if (anio1 < anio2) {
 			return -1;

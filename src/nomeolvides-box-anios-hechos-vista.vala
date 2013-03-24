@@ -29,7 +29,6 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private ScrolledWindow scroll_vista_hecho;
 	private ScrolledWindow scroll_hechos_view;
 	private ScrolledWindow scroll_anios_view;
-	private ArrayList<string> lista_anios;
 
 	public Anios_hechos_vista () {
 
@@ -99,9 +98,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		}	
 	}
 
-	public void cargar_lista_anios ( ArrayList<string> anios )
+	public void cargar_lista_anios ( ArrayList<int> anios )
 	{
-		this.lista_anios = anios;
 		this.anios_view.agregar_varios ( anios );
 	}
 
@@ -109,8 +107,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.hechos_view.mostrar_anio ( hechos );
 	}
 
-	public string get_anio_actual () {
-		string anio = this.anios_view.get_anio ();
+	public int get_anio_actual () {
+		int anio = this.anios_view.get_anio ();
 		return anio;
 	}
 

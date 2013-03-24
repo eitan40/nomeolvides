@@ -23,7 +23,7 @@ using Nomeolvides;
 
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
-	public string anio_actual { get; private set; }
+	public int anio_actual { get; private set; }
 	private ListStoreHechos anio; 
 
 	public ViewHechos () {

@@ -24,12 +24,12 @@ using Nomeolvides;
 
 public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_anios;
-	private ArrayList<string> cache_hechos_anios;
+	private ArrayList<int> cache_hechos_anios;
 	public HechosFuentes fuentes;
 
 	public Datos () {
 		this.archivo_configuracion ();
-		this.cache_hechos_anios = new ArrayList<string> ();
+		this.cache_hechos_anios = new ArrayList<int> ();
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.fuentes = new HechosFuentes ( );
 		this.cargar_fuentes_predefinidas ( );
@@ -37,11 +37,11 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void agregar_hecho (Hecho nuevo) {
 		int indice;
-		if ( en_liststore ( nuevo.fecha.get_year().to_string(), out indice ) ) {
+		if ( en_liststore ( nuevo.fecha.get_year(), out indice ) ) {
 			this.hechos_anios[indice].agregar ( nuevo );
 		} else {
-			agregar_liststore ( nuevo.fecha.get_year().to_string() );
-			if ( en_liststore ( nuevo.fecha.get_year().to_string(), out indice ) ) {
+			agregar_liststore ( nuevo.fecha.get_year() );
+			if ( en_liststore ( nuevo.fecha.get_year(), out indice ) ) {
 				this.hechos_anios[indice].agregar (nuevo);
 				this.cambio_anios ();
 			}
@@ -52,7 +52,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
 		TreeIter iterador;
 		int anio;
-		if ( en_liststore (a_eliminar.fecha.get_year().to_string(), out anio) ) {	
+		if ( en_liststore (a_eliminar.fecha.get_year(), out anio) ) {	
 			this.hechos_anios[anio].get_iter(out iterador, path);
 			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
 
@@ -63,8 +63,8 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 	}
 
-	private void agregar_liststore (string cambio_anios) {
-		this.hechos_anios.add ( new ListStoreHechos( cambio_anios) );
+	private void agregar_liststore (int cambio_anios) {
+		this.hechos_anios.add ( new ListStoreHechos(cambio_anios) );
 		this.cache_hechos_anios.add (cambio_anios);
 	}
 
@@ -74,7 +74,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
 	}
 
-	private bool en_liststore ( string anio, out int indice ) {
+	private bool en_liststore ( int anio, out int indice ) {
 
 		bool retorno = false;
 
@@ -103,9 +103,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hechos;
     }
 
-	public ArrayList<string> lista_de_anios ()
+	public ArrayList<int> lista_de_anios ()
 	{
-		ArrayList<string> retorno = new ArrayList<string> ();
+		ArrayList<int> retorno = new ArrayList<int> ();
 		int i;
 
 		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
@@ -231,7 +231,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		} 
 	}
 
-	public ListStoreHechos get_liststore ( string anio ) {
+	public ListStoreHechos get_liststore ( int anio ) {
 
 		ListStoreHechos retorno = null;
 		int indice;
@@ -241,7 +241,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 
 		if ( retorno == null ) {
-			retorno = new ListStoreHechos ("0");
+			retorno = new ListStoreHechos (0);
 		}
 			
 		return retorno;
