@@ -26,23 +26,19 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private ViewHechos hechos_view;
 	private ViewAnios anios_view;
 	private VistaHecho vista_hecho;
-	private ScrolledWindow scroll_vista_hecho;
 	private ScrolledWindow scroll_hechos_view;
 	private ScrolledWindow scroll_anios_view;
 
 	public Anios_hechos_vista () {
-
 		this.anios_view = new ViewAnios ();
 		this.hechos_view = new ViewHechos ();
 		this.vista_hecho = new VistaHecho ();
+		this.vista_hecho.set_size_request (300,-1);
 
-		this.scroll_vista_hecho = new ScrolledWindow (null,null);
 		this.scroll_hechos_view = new ScrolledWindow (null,null);
 		this.scroll_anios_view = new ScrolledWindow (null,null);
-		this.scroll_vista_hecho.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		this.scroll_hechos_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		this.scroll_anios_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
-		this.scroll_vista_hecho.set_size_request (300,-1);
 		
 		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
@@ -50,7 +46,6 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
-		this.scroll_vista_hecho.add_with_viewport ( this.vista_hecho );
 		this.scroll_hechos_view.add ( this.hechos_view );
 		this.scroll_anios_view.add ( this.anios_view );
 		
@@ -58,13 +53,12 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.pack_start (new Separator(Orientation.VERTICAL), false, false, 2);
 		this.pack_start (this.scroll_hechos_view, true, true, 0);
 		this.pack_start (separador, false, false, 2);
-		this.pack_start (scroll_vista_hecho, false, false, 0);
-
+		this.pack_start (this.vista_hecho, false, false, 0);
 	}
 
 	private void elegir_hecho () {
 		this.hechos_cursor_changed();
-		if (this.scroll_vista_hecho.visible == true ) {
+		if (this.vista_hecho.visible == true ) {
 			this.mostrar_hecho ();
 		}
 	}
@@ -73,8 +67,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void mostrar_vista () {
-		if (this.scroll_vista_hecho.visible == true ) {
-			this.scroll_vista_hecho.set_visible (false);
+		if (this.vista_hecho.visible == true ) {
+			this.vista_hecho.set_visible (false);
 		} else {
 			this.mostrar_hecho ();
 		}
@@ -86,15 +80,15 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 		if ( hecho_a_mostrar != null ) {
 			this.vista_hecho.set_datos_hecho ( hecho_a_mostrar );
-			this.scroll_vista_hecho.set_visible ( true );
+			this.vista_hecho.set_visible ( true );
 		}
 	}	
 
 	public void mostrar_scroll_vista ( bool mostrar ) {	
 		if ( mostrar == true ) {
-			this.scroll_vista_hecho.show_all ();
+			this.vista_hecho.show_all ();
 		} else {	
-			this.scroll_vista_hecho.hide ();
+			this.vista_hecho.hide ();
 		}	
 	}
 

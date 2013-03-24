@@ -30,6 +30,10 @@ public class Nomeolvides.VistaHecho : Box {
 		this.set_orientation ( Orientation.VERTICAL );
 		this.set_spacing ( 10 );
 		this.set_homogeneous ( false );
+
+		var box_descripcion = new Box (Orientation.VERTICAL, 1);
+		var scroll_descripcion = new ScrolledWindow ( null, null );
+		scroll_descripcion.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		
 		this.label_nombre = new Label.with_mnemonic ("");
 		this.label_fecha = new Label.with_mnemonic ("");
@@ -43,10 +47,13 @@ public class Nomeolvides.VistaHecho : Box {
 		
 		this.label_fecha.set_alignment ( 0, 0 );
 		this.label_fuente.set_alignment ( 0, 0 );
+		
+		box_descripcion.pack_start ( this.text_descripcion, false, true, 0 );
+		scroll_descripcion.add_with_viewport ( box_descripcion );
 
 		this.pack_start ( this.label_nombre, false, false, 0 );
 		this.pack_start ( this.label_fecha, false, false, 0 );
-		this.pack_start ( this.text_descripcion, false, false, 0 );
+		this.pack_start ( scroll_descripcion, true, true, 0 );
 		this.pack_start ( this.label_fuente, false, false, 0 );
 	}
 
