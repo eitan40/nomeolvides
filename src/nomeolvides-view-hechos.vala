@@ -29,13 +29,14 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	public ViewHechos () {
 		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText (), "text", 0);
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
+		this.model = new ListStoreHechos (0);
+		this.anio.set_sort_column_id(3, SortType.ASCENDING);
+		this.anio.set_sort_func(3, ordenar_hechos);
 	}
 
 	public void mostrar_anio ( ListStoreHechos anio ) {
 			this.anio = anio;
 			this.set_model( this.anio );
-			this.anio.set_sort_column_id(3, SortType.ASCENDING);
-			this.anio.set_sort_func(3, ordenar_hechos);
 			this.anio_actual = anio.anio;
 			cambia_anio_signal ();
 	}
