@@ -28,16 +28,20 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 	
 	public ListStoreHechos.string ( string anio) {
 		this.anio = int.parse ( anio );
-		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
-		this.hechos_cache = new ArrayList<string> ();
-		this.set_column_types(tipos);
+		this.constructor ();
 	}
 
 	public ListStoreHechos ( int anio) {
 		this.anio = anio;
+		this.constructor ();
+	}
+
+	private void constructor () {		
 		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
 		this.hechos_cache = new ArrayList<string> ();
 		this.set_column_types(tipos);
+		this.set_sort_column_id(3, SortType.ASCENDING);
+		this.set_sort_func(3, ordenar_hechos);	
 	}
 
 	public bool agregar (Hecho nuevo) {	
@@ -100,5 +104,58 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 
 		return hechos_json; 
 	}
+
+		private int comparar_hechos (Hecho hecho1, Hecho hecho2) {
+
+		int anio1, mes1, dia1;
+		int anio2, mes2, dia2;
+		
+		anio1 = hecho1.fecha.get_year();
+		anio2 = hecho2.fecha.get_year();
+		
+		mes1 = hecho1.fecha.get_month();
+		mes2 = hecho2.fecha.get_month();
+
+		dia1 = hecho1.fecha.get_day_of_month();
+		dia2 = hecho2.fecha.get_day_of_month();
+
+		if (anio1 < anio2) {
+			return -1;
+		} else {
+			if (anio1 > anio2) {
+				return 1;
+			} else {
+				if (mes1 < mes2) {
+					return -1;
+				} else {
+					if (mes1 > mes2) {
+						return 1;
+					} else {
+						if (dia1 < dia2) {
+							return -1;
+						} else {
+							if (dia1 > dia2) {
+								return 1;
+							} else {
+								return 0;
+							}
+						}
+					}
+				}			
+			}
+		}
+	}
+	
+	
+	private int ordenar_hechos (TreeModel model2, TreeIter iter1, TreeIter iter2) {
+		GLib.Value val1;
+		GLib.Value val2;
+
+		this.get_value(iter1, 3, out val1);
+        this.get_value(iter2, 3, out val2);
+
+		return this.comparar_hechos((Hecho) val1, (Hecho) val2);
+	}
+
 	
 }

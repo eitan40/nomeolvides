@@ -30,8 +30,6 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText (), "text", 0);
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
 		this.model = new ListStoreHechos (0);
-		this.anio.set_sort_column_id(3, SortType.ASCENDING);
-		this.anio.set_sort_func(3, ordenar_hechos);
 	}
 
 	public void mostrar_anio ( ListStoreHechos anio ) {
@@ -56,58 +54,6 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		} else { 
 			return (TreePath) null;
 		}		
-	}
-
-	private int comparar_hechos (Hecho hecho1, Hecho hecho2) {
-
-		int anio1, mes1, dia1;
-		int anio2, mes2, dia2;
-		
-		anio1 = hecho1.fecha.get_year();
-		anio2 = hecho2.fecha.get_year();
-		
-		mes1 = hecho1.fecha.get_month();
-		mes2 = hecho2.fecha.get_month();
-
-		dia1 = hecho1.fecha.get_day_of_month();
-		dia2 = hecho2.fecha.get_day_of_month();
-
-		if (anio1 < anio2) {
-			return -1;
-		} else {
-			if (anio1 > anio2) {
-				return 1;
-			} else {
-				if (mes1 < mes2) {
-					return -1;
-				} else {
-					if (mes1 > mes2) {
-						return 1;
-					} else {
-						if (dia1 < dia2) {
-							return -1;
-						} else {
-							if (dia1 > dia2) {
-								return 1;
-							} else {
-								return 0;
-							}
-						}
-					}
-				}			
-			}
-		}
-	}
-	
-	
-	private int ordenar_hechos (TreeModel model2, TreeIter iter1, TreeIter iter2) {
-		GLib.Value val1;
-		GLib.Value val2;
-
-		this.anio.get_value(iter1, 3, out val1);
-        this.anio.get_value(iter2, 3, out val2);
-
-		return this.comparar_hechos((Hecho) val1, (Hecho) val2);
 	}
 
 	public signal void cambia_anio_signal ();
