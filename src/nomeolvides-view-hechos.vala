@@ -44,6 +44,8 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		TreeViewColumn columna;
 		TreeIter iterador;
 		Value hecho_value;
+
+		hecho = null;
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
