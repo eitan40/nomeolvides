@@ -25,6 +25,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 {
 	protected Entry nombre_entry;
 	protected TextView descripcion_textview;
+	protected ScrolledWindow descripcion_scroll;
 	protected ListStoreFuentes lista_fuentes;
 	protected ComboBox combo_fuentes;
 	protected SelectorFecha fecha;
@@ -55,11 +56,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 		var descripcion_frame = new Frame( "Descripcion" );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
-	
+		this.descripcion_scroll = new ScrolledWindow ( null, null );
+		this.descripcion_scroll.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		this.descripcion_textview = new TextView ();
 		this.descripcion_textview.set_wrap_mode (WrapMode.WORD);
-
-		descripcion_frame.add (this.descripcion_textview);
+		
+		this.descripcion_scroll.add_with_viewport ( this.descripcion_textview );
+		descripcion_frame.add ( this.descripcion_scroll );
 
 		this.set_combo_box ();
 		
@@ -120,5 +123,4 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 		return (string) direccion + (string) archivo ;
 	}
-
 }
