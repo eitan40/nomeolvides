@@ -27,7 +27,6 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
-	public Configuracion configuracion;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
@@ -126,7 +125,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void about_dialog () {
-		this.configuracion.create_about_dialog ( this.window );
+		Configuracion.create_about_dialog ( this.window );
 	}
 
 	private void salir_app () {
@@ -196,8 +195,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public App () {
 		app = this;
-		this.configuracion = new Configuracion ();
-		this.configuracion.set_config ();
+		Configuracion.set_config ();
 		this.datos = new Datos ();
 	}
 }

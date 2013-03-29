@@ -54,6 +54,22 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 		return this.archivos;
 	}
 
+	public string a_json () {
+		string json = "";
+		Fuente fuente;
+		Value value_fuente;
+		TreeIter iter;
+
+		this.get_iter_first(out iter);
+		do {
+			this.get_value(iter, 4, out value_fuente);
+			fuente = value_fuente as Fuente;
+			json += fuente.a_json ()  + "\n";
+		}while (this.iter_next(ref iter));
+
+		return json;
+	}
+
 	private bool db_no_duplicada ( Fuente fuente ) {
 		bool retorno = true;
 

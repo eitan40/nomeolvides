@@ -47,6 +47,18 @@ public class Nomeolvides.Archivo : GLib.Object{
 		}
 	}
 
+	public static string leer_archivo ( string path ) {
+		string contenido_archivo = "";
+
+		try {
+			FileUtils.get_contents ( path, out contenido_archivo );
+		} catch ( Error e ) {
+			error ( e.message );
+		}
+
+		return contenido_archivo;
+	}
+
 	public static bool existe ( string path ) {
 		var archivo = File.new_for_path ( path );
 		var retorno = archivo.query_exists ();
