@@ -21,14 +21,16 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Configuracion : GLib.Object {
-	private File directorio_configuracion;
-	private File directorio_db_local;
-	private File archivo_db_local;
+	private string directorio_configuracion;
+	private string directorio_db_local;
+	private string archivo_db_local;
+	public  static string archivo_bases;
 	
 	public Configuracion () {
-		this.directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-		this.directorio_db_local = File.new_for_path(GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/");
-		this.archivo_db_local = File.new_for_path(directorio_db_local.get_path () + "/db_default.json");
+		this.directorio_configuracion = GLib.Environment.get_user_config_dir () + "/nomeolvides/";
+		this.archivo_bases = directorio_configuracion + "/db-predeterminadas.json";
+		this.directorio_db_local = GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/";
+		this.archivo_db_local = directorio_db_local + "/db_default.json";
 	}
 
 	public void create_about_dialog ( VentanaPrincipal window ) {
@@ -50,36 +52,23 @@ public class Nomeolvides.Configuracion : GLib.Object {
 	}
 	
 	public void set_config () {		
-		if (!directorio_configuracion.query_exists ()) {
-			try {
-				directorio_configuracion.make_directory (); 
-			}  catch (Error e) {
-				error (e.message);
-			}			
+		if ( !Archivo.existe ( directorio_configuracion ) ) {
+			Archivo.crear_directorio ( directorio_configuracion );
+			if (!Archivo.existe ( archivo_bases ) ) {
+				Archivo.crear_archivo ( archivo_bases );
+				var fuente_default = new Fuente ( "Base de datos local",
+						                          "db_default.json",
+						                           this.directorio_db_local,
+						                           FuentesTipo.LOCAL );
+				Archivo.escribir_archivo ( archivo_bases, fuente_default.a_json () );		
+			}
 		}
 		
-		if (!directorio_db_local.query_exists ()) {
-			try {
-				directorio_db_local.make_directory ();
-			}  catch (Error e) {
-				error (e.message);
-			}
+		if (!Archivo.existe ( directorio_db_local )) {
+			Archivo.crear_directorio ( directorio_db_local );
 
-			if (!archivo_db_local.query_exists ()) {
-				try {				
-					archivo_db_local.create (FileCreateFlags.NONE);
-					try {
-						var fuente_default = new Fuente ( "Base de datos local",
-						                                  "db_default.json",
-						                                  this.directorio_db_local.get_path (),
-						                                  FuentesTipo.LOCAL );
-						FileUtils.set_contents (archivo_db_local.get_parse_name (), fuente_default.a_json());
-					} catch (Error e) {
-						error (e.message);
-					}
-				}  catch (Error e) {
-					error (e.message);
-				}			
+			if (!Archivo.existe ( archivo_db_local) ) {
+				Archivo.crear_archivo ( archivo_db_local );
 			}
 		}
 	}
