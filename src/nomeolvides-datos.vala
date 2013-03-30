@@ -192,11 +192,11 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 		
 		if (tipo == FuentesTipo.HTTP) {
-			try {
+/*			try {
 				archivo = File.new_for_uri ( nombre_archivo );		
 			}  catch (Error e) {
 				error (e.message);
-			}
+			} */
 		}
 		
 		try {
