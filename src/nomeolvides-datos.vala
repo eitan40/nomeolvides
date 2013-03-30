@@ -134,7 +134,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_file () {
-/*		int i,y;
+		int i,y;
 		ArrayList<Hecho> lista;
 		string archivo;
 		string a_guardar = "";
@@ -150,14 +150,10 @@ public class Nomeolvides.Datos : GLib.Object {
 					y--;
 				}
 			}
-			try {
-				FileUtils.set_contents (archivo, a_guardar);
-			} catch (Error e) {
-				error (e.message);
-			}
 
+			Archivo.escribir ( archivo, a_guardar );			
 			a_guardar = "";
-		}*/	
+		}	
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
@@ -166,7 +162,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		Hecho nuevoHecho;
 		int i;	
 
-		todo = Archivo.leer_archivo ( nombre_archivo );
+		todo = Archivo.leer ( nombre_archivo );
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
@@ -185,11 +181,7 @@ public class Nomeolvides.Datos : GLib.Object {
 			a_guardar += hechos_anios[i].a_json(); 
 		}
 
-		try {
-			FileUtils.set_contents (archivo, a_guardar);
-		}  catch (Error e) {
-			error (e.message);
-		} 
+		Archivo.escribir ( archivo, a_guardar );
 	}
 
 	public ListStoreHechos get_liststore ( int anio ) {

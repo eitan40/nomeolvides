@@ -42,13 +42,15 @@ public class Nomeolvides.Configuracion : GLib.Object {
 	public static void set_config () {		
 		if ( !Archivo.existe ( Configuracion.directorio_configuracion () ) ) {
 			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
+
 			if (!Archivo.existe ( Configuracion.archivo_bases () ) ) {
-				Archivo.crear_archivo ( Configuracion.archivo_bases () );
+				Archivo.crear ( Configuracion.archivo_bases () );
+
 				var fuente_default = new Fuente ( "Base de datos local",
 						                          "db_default.json",
 						                           Configuracion.directorio_db_local (),
 						                           FuentesTipo.LOCAL );
-				Archivo.escribir_archivo ( Configuracion.archivo_bases (), fuente_default.a_json () );
+				Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
 			}
 		}
 		
@@ -56,17 +58,17 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			Archivo.crear_directorio ( Configuracion.directorio_db_local () );
 
 			if (!Archivo.existe ( Configuracion.archivo_db_local () ) ) {
-				Archivo.crear_archivo ( Configuracion.archivo_db_local () );
+				Archivo.crear ( Configuracion.archivo_db_local () );
 			}
 		}
 	}
 
 	public static void guardar_fuentes ( string fuentes ) {
-		Archivo.escribir_archivo ( Configuracion.archivo_bases (), fuentes );
+		Archivo.escribir ( Configuracion.archivo_bases (), fuentes );
 	}
 
 	public static string cargar_fuentes () {
-		return Archivo.leer_archivo ( Configuracion.archivo_bases () );
+		return Archivo.leer ( Configuracion.archivo_bases () );
 	}
 
 	private static string archivo_bases () {

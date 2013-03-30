@@ -21,7 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Archivo : GLib.Object{ 
-	public static void crear_archivo ( string path, string datos = "" ) {
+	public static void crear ( string path, string datos = "" ) {
 		var archivo = File.new_for_path ( path );
 		try {
 			archivo.create (FileCreateFlags.NONE);
@@ -39,7 +39,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 		}
 	}
 
-	public static void escribir_archivo ( string path, string datos ) {
+	public static void escribir ( string path, string datos ) {
 		try {
 			FileUtils.set_contents ( path, datos );
 		} catch ( Error e ) {
@@ -47,7 +47,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 		}
 	}
 
-	public static string leer_archivo ( string direccion ) {
+	public static string leer ( string direccion ) {
 		string contenido_archivo = "";
 
 		if ( Archivo.es_path ( direccion ) ) {
@@ -89,7 +89,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 		File archivo = null;
 
 		try {
-			archivo = File.new_for_uri ( uri );		
+			archivo = File.new_for_uri ( uri );	
 		}  catch (Error e) {
 			error (e.message);
 		}
