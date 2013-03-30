@@ -47,13 +47,13 @@ public class Nomeolvides.Archivo : GLib.Object{
 		}
 	}
 
-	public static string leer_archivo ( string path ) {
+	public static string leer_archivo ( string direccion ) {
 		string contenido_archivo = "";
 
-		try {
-			FileUtils.get_contents ( path, out contenido_archivo );
-		} catch ( Error e ) {
-			error ( e.message );
+		if ( Archivo.es_path ( direccion ) ) {
+			Archivo.leer_archivo_path ( direccion, out contenido_archivo );
+		} else {
+			Archivo.leer_archivo_uri ( direccion, out contenido_archivo );
 		}
 
 		return contenido_archivo;
@@ -64,5 +64,42 @@ public class Nomeolvides.Archivo : GLib.Object{
 		var retorno = archivo.query_exists ();
 
 		return retorno;
+	}
+
+	private static bool es_path ( string direccion ) {
+		bool retorno = true;
+		
+		if ( direccion.has_prefix ("http") ) {
+			retorno = false;
+		}
+
+		return retorno;
+	}
+
+	private static void leer_archivo_path ( string path, out string contenido_archivo ) {
+		try {
+			FileUtils.get_contents ( path, out contenido_archivo );
+		} catch ( Error e ) {
+			error ( e.message );
+		}
+	}
+
+	private static void leer_archivo_uri ( string uri, out string contenido_archivo ) {
+		uint8[] contenido;
+		File archivo = null;
+
+		try {
+			archivo = File.new_for_uri ( uri );		
+		}  catch (Error e) {
+			error (e.message);
+		}
+
+		try {
+			archivo.load_contents(null ,out contenido, null);
+		}  catch (Error e) {
+			error (e.message);
+		}
+
+		contenido_archivo = (string) contenido;
 	}
 }

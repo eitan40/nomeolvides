@@ -28,7 +28,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	public HechosFuentes fuentes;
 
 	public Datos () {
-		this.archivo_configuracion ();
 		this.cache_hechos_anios = new ArrayList<int> ();
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.fuentes = new HechosFuentes ( );
@@ -134,20 +133,6 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cargar_fuentes_predefinidas ();
 	}
 
-	public void archivo_configuracion () {
-		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-
-		if (!directorio_configuracion.query_exists ()) {
-
-			try {
-				directorio_configuracion.make_directory ();
-			}  catch (Error e) {
-				error (e.message);
-			}
-			
-		}
-	}
-
 	public void save_file () {
 /*		int i,y;
 		ArrayList<Hecho> lista;
@@ -176,36 +161,12 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
-		File archivo = null;
-		uint8[] contenido;
-		string todo = "";
+		string todo;
 		string[] lineas;
 		Hecho nuevoHecho;
 		int i;	
 
-		if (tipo == FuentesTipo.LOCAL) {
-			try {
-				archivo = File.new_for_path ( nombre_archivo );
-			}  catch (Error e) {
-				error (e.message);
-			}
-		}
-		
-		if (tipo == FuentesTipo.HTTP) {
-			try {
-				archivo = File.new_for_uri ( nombre_archivo );		
-			}  catch (Error e) {
-				error (e.message);
-			}
-		}
-		
-		try {
-			archivo.load_contents(null ,out contenido, null);
-		}  catch (Error e) {
-			error (e.message);
-		}
-		
-		todo = (string) contenido;
+		todo = Archivo.leer_archivo ( nombre_archivo );
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
