@@ -36,11 +36,10 @@ public class Nomeolvides.DescripcionHecho : Box {
 
 	public void agregar_texto ( string texto ) {
 
-		int i = 1;
 		Label nuevo;
-		string parrafo;
 		string[] separado = {};
 
+		this.eliminar_label ();
 		this.parrafos.clear (); 
 
 		separado = texto.split("/n");
@@ -59,12 +58,17 @@ public class Nomeolvides.DescripcionHecho : Box {
 
 	private void mostrar () {
 
-		int i;
-
 		foreach ( Label parrafo in this.parrafos ) {
 			this.pack_start (parrafo);
 		}
 		this.show_all ();
+	}
+
+	private void eliminar_label () {
+
+		foreach ( Label parrafo in this.parrafos ) {
+			parrafo.destroy();
+		}
 	}
 
 }
