@@ -163,6 +163,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		int i;	
 
 		todo = Archivo.leer ( nombre_archivo );
+
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {

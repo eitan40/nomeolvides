@@ -23,7 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.VistaHecho : Box {
 	private Label label_nombre;
 	private Label label_fecha;
-	private TextView text_descripcion;
+	private DescripcionHecho descripcion;
 	private Label label_fuente;
 	
 	public VistaHecho () {
@@ -31,25 +31,22 @@ public class Nomeolvides.VistaHecho : Box {
 		this.set_spacing ( 10 );
 		this.set_homogeneous ( false );
 
-		var box_descripcion = new Box (Orientation.VERTICAL, 1);
 		var scroll_descripcion = new ScrolledWindow ( null, null );
 		scroll_descripcion.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		
 		this.label_nombre = new Label.with_mnemonic ("");
 		this.label_fecha = new Label.with_mnemonic ("");
-		this.text_descripcion = new TextView ();
+		this.descripcion = new DescripcionHecho ();
 		this.label_fuente = new Label.with_mnemonic ("");
 
 		this.label_nombre.set_width_chars ( 30 );
 		this.label_fecha.set_width_chars ( 30 );
-		this.text_descripcion.set_wrap_mode (WrapMode.WORD);
 		this.label_fuente.set_width_chars ( 30 );
 		
 		this.label_fecha.set_alignment ( 0, 0 );
 		this.label_fuente.set_alignment ( 0, 0 );
 		
-		box_descripcion.pack_start ( this.text_descripcion, false, true, 0 );
-		scroll_descripcion.add_with_viewport ( box_descripcion );
+		scroll_descripcion.add_with_viewport ( this.descripcion );
 
 		this.pack_start ( this.label_nombre, false, false, 0 );
 		this.pack_start ( this.label_fecha, false, false, 0 );
@@ -63,7 +60,7 @@ public class Nomeolvides.VistaHecho : Box {
 		if ( a_mostrar != null ) {
 			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">"+ a_mostrar.nombre +"</span>");
 			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () +"</span>");
-			this.text_descripcion.buffer.text = a_mostrar.descripcion;
+			this.descripcion.agregar_texto ( a_mostrar.descripcion );
 			if (a_mostrar.fuente != "") {
 				this.label_fuente.set_markup ("Fuente: <span font_style=\"italic\">"+ a_mostrar.fuente +"</span>");
 				this.label_fuente.visible = true;
