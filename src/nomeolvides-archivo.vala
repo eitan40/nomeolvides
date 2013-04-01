@@ -28,6 +28,10 @@ public class Nomeolvides.Archivo : GLib.Object{
 		} catch (Error e) {
 			error (e.message);
 		}
+
+		if ( datos != "" ) {
+			Archivo.escribir ( path, datos ); 
+		}
 	}
 
 	public static void crear_directorio ( string path ) {

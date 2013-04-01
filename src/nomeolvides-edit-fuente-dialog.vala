@@ -26,8 +26,6 @@ public class Nomeolvides.EditFuenteDialog : Dialog
 	private Entry nombre_fuente_entry;
 	private Entry nombre_archivo_entry;
 	private Entry direccion_entry;
-//	private ListStore lista_tipos_fuentes;
-//	private ComboBox combo_tipos_fuentes;
 	private Button elegir_archivo;
 	public Fuente respuesta { get; protected set; }
 	
@@ -43,19 +41,12 @@ public class Nomeolvides.EditFuenteDialog : Dialog
 		var nombre_fuente_label = new Label.with_mnemonic ("Nombre de la Base de Datos: ");
 		var nombre_archivo_label = new Label.with_mnemonic ("Nombre del Archivo: ");
 		var direccion_label = new Label.with_mnemonic ("Dirección del Archivo: ");
-	//	var tipo_fuente_label = new Label.with_mnemonic ("Tipo de Fuente: ");
 		
 		this.nombre_fuente_entry = new Entry ();
 		this.nombre_archivo_entry = new Entry ();
 		this.direccion_entry = new Entry ();
-//		this.lista_tipos_fuentes = new ListStore (2,typeof(string),typeof(FuentesTipo));		
-//		this.combo_tipos_fuentes = new ComboBox ();
 		this.elegir_archivo = new Button.from_stock (Stock.FILE);
 		this.elegir_archivo.clicked.connect ( elegir_fuente );
-
-//		this.set_liststore_tipos_fuente ();
-//		this.set_combo_box ();
-
 
 		var grid = new Grid ();
 		
@@ -65,10 +56,7 @@ public class Nomeolvides.EditFuenteDialog : Dialog
 		grid.attach (this.nombre_archivo_entry, 1, 1, 1, 1);
 		grid.attach (direccion_label, 0 , 2 , 1 ,1);
 		grid.attach (this.direccion_entry, 1 , 2 , 1 ,1);
-		grid.attach (this.elegir_archivo, 2, 2, 1, 1);
-/*		grid.attach (tipo_fuente_label, 0, 3, 1, 1);
-		grid.attach (this.combo_tipos_fuentes, 1 , 3 , 1 ,1);*/
-		
+		grid.attach (this.elegir_archivo, 2, 2, 1, 1);	
 		
 		var contenido = this.get_content_area() as Box;
 
@@ -99,32 +87,6 @@ public class Nomeolvides.EditFuenteDialog : Dialog
 			                              FuentesTipo.LOCAL);
 		}
 	}
-
-	/*private void set_combo_box () {
-		CellRendererText renderer = new CellRendererText ();
-		this.combo_tipos_fuentes.pack_start (renderer, true);
-		this.combo_tipos_fuentes.add_attribute (renderer, "text", 0);
-		this.combo_tipos_fuentes.active = 0;
-		this.combo_tipos_fuentes.set_model ( this.lista_tipos_fuentes );
-	}*/
-
-	/*private FuentesTipo get_tipo_elegido () {		
-		TreeIter iter;
-		Value tipo_fuente;
-		
-		this.combo_tipos_fuentes.get_active_iter( out iter );
-		this.lista_tipos_fuentes.get_value (iter, 1, out tipo_fuente);
-
-		return (FuentesTipo) tipo_fuente;
-	}*/
-
-/*	private void set_liststore_tipos_fuente () {
-		TreeIter iter;		
-
-		this.lista_tipos_fuentes.append ( out iter );
-		this.lista_tipos_fuentes.set ( iter, 0, "Archivo Local" );
-		this.lista_tipos_fuentes.set ( iter, 1, FuentesTipo.LOCAL );
-	}*/
 
 	private void elegir_fuente () {
 		OpenFileDialog elegir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
