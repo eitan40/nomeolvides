@@ -4,7 +4,7 @@
 SUBDIRS = src 
 PREFIX=/usr
 
-nomeolvidesdocdir = ${PREFIX}/doc/nomeolvides
+nomeolvidesdocdir = $(docdir)
 nomeolvidesdoc_DATA = \
 	README\
 	COPYING\
@@ -25,8 +25,8 @@ uninstall-local:
 AM_VALAFLAGS = --pkg \
 	gee-1.0 
 
-nomeolvidesdesktofiledir = ${PREFIX}/share/applications
+nomeolvidesdesktofiledir = $(datadir)/applications
 nomeolvidesdesktofile_DATA = data/nomeolvides.desktop
 
-nomeolvidesicondir = ${PREFIX}/share/pixmaps/
+nomeolvidesicondir = $(datadir)/pixmaps/
 nomeolvidesicon_DATA = data/nomeolvides.svg
