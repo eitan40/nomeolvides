@@ -35,8 +35,10 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 		this.set_column_types(tipos);
 	}
 
-	public void agregar_fuente ( Fuente fuente ) {		
+	public void agregar_fuente ( Fuente fuente ) {
+		print ( "Se intenta agrrgar la fuente: " + fuente.nombre_fuente + "\n");
 		if ( fuente.verificar_fuente () && this.db_no_duplicada (fuente) ) {
+			print ( "Paso la verificiacion la fuente: " + fuente.nombre_fuente + "\n");
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
 		                         0,fuente.nombre_fuente,
@@ -79,4 +81,10 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 			
 		return retorno;
 	}
+
+	public void borrar_fuente ( TreeIter iter, Fuente a_eliminar ) {
+		this.nombres_db.remove ( a_eliminar.nombre_fuente );
+		this.archivos_cache.remove ( a_eliminar.get_checksum() );
+		this.remove ( iter );
+	} 
 }

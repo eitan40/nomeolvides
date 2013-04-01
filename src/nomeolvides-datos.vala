@@ -127,9 +127,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 	}
 
-	public void actualizar_fuentes_predefinidas () {
+	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {
 		this.borrar_datos ();
-
+		this.fuentes.actualizar_fuentes_liststore ( fuentes );
 		this.cargar_fuentes_predefinidas ();
 	}
 

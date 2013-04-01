@@ -33,6 +33,8 @@ public class Nomeolvides.Fuente : GLib.Object{
 		this.direccion_fuente = direccion_fuente;
 		this.tipo_fuente = tipo_fuente;
 		this.calcular_checksum ();
+
+		print ("Creada fuente: " + this.nombre_fuente +"\n" );
 	}
 
 	public Fuente.json ( string json ) {

@@ -136,9 +136,8 @@ public class Nomeolvides.App : Gtk.Application
 		var fuente_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
 		fuente_dialogo.show_all ();
 		if ( fuente_dialogo.run () == ResponseType.OK ) {
-			if (fuente_dialogo.cambios == true) {
-				this.datos.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
-				this.datos.actualizar_fuentes_predefinidas ();
+			if (fuente_dialogo.cambios == true) {				
+				this.datos.actualizar_fuentes_predefinidas ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes );
 			}
 		}
 		fuente_dialogo.destroy ();
