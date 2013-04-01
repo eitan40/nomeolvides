@@ -36,9 +36,7 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 	}
 
 	public void agregar_fuente ( Fuente fuente ) {
-		print ( "Se intenta agrrgar la fuente: " + fuente.nombre_fuente + "\n");
 		if ( fuente.verificar_fuente () && this.db_no_duplicada (fuente) ) {
-			print ( "Paso la verificiacion la fuente: " + fuente.nombre_fuente + "\n");
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
 		                         0,fuente.nombre_fuente,
