@@ -23,7 +23,6 @@ using Nomeolvides;
 public class Nomeolvides.VistaHecho : Box {
 	private Label label_nombre;
 	private Label label_fecha;
-//	private TextView text_descripcion; 
 	private DescripcionHecho descripcion;
 	private Label label_fuente;
 	
@@ -42,7 +41,6 @@ public class Nomeolvides.VistaHecho : Box {
 
 		this.label_nombre.set_width_chars ( 30 );
 		this.label_fecha.set_width_chars ( 30 );
-//		this.text_descripcion.set_wrap_mode (WrapMode.WORD);
 		this.label_fuente.set_width_chars ( 30 );
 		
 		this.label_fecha.set_alignment ( 0, 0 );

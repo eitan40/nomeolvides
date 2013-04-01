@@ -30,6 +30,7 @@ public class Nomeolvides.DescripcionHecho : Box {
 
 		this.parrafos = new ArrayList<Label> ();
 		this.set_orientation ( Orientation.VERTICAL );
+		this.set_valign ( Align.START );
 		
 	}
 
@@ -38,20 +39,17 @@ public class Nomeolvides.DescripcionHecho : Box {
 		Label nuevo;
 		string[] separado = {};
 
-		this.eliminar_label ();
+		this.eliminar_labels ();
 		this.parrafos.clear (); 
 
-		separado = texto.split("/n");
+		separado = texto.split("\n");
 
 		foreach ( string s in separado ) {
-			
-			nuevo = new Label.with_mnemonic ("");
-			nuevo.set_line_wrap ( true );
-			nuevo.set_width_chars ( 30 );
-			nuevo.set_max_width_chars ( 30 );
-			nuevo.set_markup ("<span>"+ s +"</span>");
-			
-			this.parrafos.add (nuevo);
+
+			if ( s != "" ) {
+				nuevo = this.crear_label ( s );
+				this.parrafos.add (nuevo);
+			}
 		}
 		
 		this.mostrar();
@@ -66,11 +64,25 @@ public class Nomeolvides.DescripcionHecho : Box {
 		this.show_all ();
 	}
 
-	private void eliminar_label () {
+	private void eliminar_labels () {
 
 		foreach ( Label parrafo in this.parrafos ) {
 			parrafo.destroy();
 		}
+	}
+
+	private Label crear_label ( string texto ) {
+
+		Label label = new Label.with_mnemonic ("");
+		label.set_line_wrap ( true );
+		label.set_justify ( Justification.LEFT );
+		label.set_halign ( Align.START );
+		label.set_margin_left ( 10 );
+		label.set_margin_bottom ( 15 );
+		label.set_max_width_chars ( 30 );
+		label.set_markup ("<span>"+ texto +"</span>");
+
+		return label;
 	}
 
 }
