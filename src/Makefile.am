@@ -50,7 +50,10 @@ nomeolvides_SOURCES = \
 	nomeolvides-ventana-principal.vala \
 	nomeolvides-box-anios-hechos-vista.vala \
 	nomeolvides-configuracion.vala \
-	nomeolvides-box-descripcion-hecho.vala
+	nomeolvides-box-descripcion-hecho.vala \
+	nomeolvides-archivo.vala \
+	nomeolvides-dialog-fuente.vala
+
 
 nomeolvides_VALAFLAGS = \
 	--pkg gee-1.0 \

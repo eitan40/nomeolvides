@@ -27,7 +27,6 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
-	public Configuracion configuracion;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
@@ -126,7 +125,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void about_dialog () {
-		this.configuracion.create_about_dialog ( this.window );
+		Configuracion.create_about_dialog ( this.window );
 	}
 
 	private void salir_app () {
@@ -137,9 +136,8 @@ public class Nomeolvides.App : Gtk.Application
 		var fuente_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
 		fuente_dialogo.show_all ();
 		if ( fuente_dialogo.run () == ResponseType.OK ) {
-			if (fuente_dialogo.cambios == true) {
-				this.datos.fuentes.actualizar_fuentes_liststore ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes);
-				this.datos.actualizar_fuentes_predefinidas ();
+			if (fuente_dialogo.cambios == true) {				
+				this.datos.actualizar_fuentes_predefinidas ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes );
 			}
 		}
 		fuente_dialogo.destroy ();
@@ -160,11 +158,7 @@ public class Nomeolvides.App : Gtk.Application
 			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
 			archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
 
-			try {
-				FileUtils.set_contents (archivo, hecho.a_json ());
-			} catch (Error e) {
-				error (e.message);
-			}
+			Archivo.crear (archivo, hecho.a_json () );
 		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
@@ -196,8 +190,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public App () {
 		app = this;
-		this.configuracion = new Configuracion ();
-		this.configuracion.set_config ();
+		Configuracion.set_config ();
 		this.datos = new Datos ();
 	}
 }

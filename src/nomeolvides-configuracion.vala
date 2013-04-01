@@ -21,17 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Configuracion : GLib.Object {
-	private File directorio_configuracion;
-	private File directorio_db_local;
-	private File archivo_db_local;
-	
-	public Configuracion () {
-		this.directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-		this.directorio_db_local = File.new_for_path(GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/");
-		this.archivo_db_local = File.new_for_path(directorio_db_local.get_path () + "/db_default.json");
-	}
-
-	public void create_about_dialog ( VentanaPrincipal window ) {
+	public static void create_about_dialog ( VentanaPrincipal window ) {
 		string[] authors = {
   			"Andres Fernandez <andres@softwareperonista.com.ar>",
   			"Fernando Fernandez <fernando@softwareperonista.com.ar>"
@@ -49,38 +39,51 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			   "wrap-license", true);	
 	}
 	
-	public void set_config () {		
-		if (!directorio_configuracion.query_exists ()) {
-			try {
-				directorio_configuracion.make_directory (); 
-			}  catch (Error e) {
-				error (e.message);
-			}			
+	public static void set_config () {		
+		if ( !Archivo.existe ( Configuracion.directorio_configuracion () ) ) {
+			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
+
+			if (!Archivo.existe ( Configuracion.archivo_bases () ) ) {
+				Archivo.crear ( Configuracion.archivo_bases () );
+
+				var fuente_default = new Fuente ( "Base de datos local",
+						                          "db_default.json",
+						                           Configuracion.directorio_db_local (),
+						                           FuentesTipo.LOCAL );
+				Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
+			}
 		}
 		
-		if (!directorio_db_local.query_exists ()) {
-			try {
-				directorio_db_local.make_directory ();
-			}  catch (Error e) {
-				error (e.message);
-			}
+		if (!Archivo.existe ( Configuracion.directorio_db_local () )) {
+			Archivo.crear_directorio ( Configuracion.directorio_db_local () );
 
-			if (!archivo_db_local.query_exists ()) {
-				try {				
-					archivo_db_local.create (FileCreateFlags.NONE);
-					try {
-						var fuente_default = new Fuente ( "Base de datos local",
-						                                  "db_default.json",
-						                                  this.directorio_db_local.get_path (),
-						                                  FuentesTipo.LOCAL );
-						FileUtils.set_contents (archivo_db_local.get_parse_name (), fuente_default.a_json());
-					} catch (Error e) {
-						error (e.message);
-					}
-				}  catch (Error e) {
-					error (e.message);
-				}			
+			if (!Archivo.existe ( Configuracion.archivo_db_local () ) ) {
+				Archivo.crear ( Configuracion.archivo_db_local () );
 			}
 		}
+	}
+
+	public static void guardar_fuentes ( string fuentes ) {
+		Archivo.escribir ( Configuracion.archivo_bases (), fuentes );
+	}
+
+	public static string cargar_fuentes () {
+		return Archivo.leer ( Configuracion.archivo_bases () );
+	}
+
+	private static string archivo_bases () {
+		return Configuracion.directorio_configuracion () + "/db-predeterminadas.json";
+	}
+
+	private static string directorio_configuracion () {
+		return GLib.Environment.get_user_config_dir () + "/nomeolvides/";
+	}
+
+	private static string directorio_db_local () {
+		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/";
+	}
+
+	private static string archivo_db_local () {
+		return Configuracion.directorio_db_local () + "/db_default.json";
 	}
 }
