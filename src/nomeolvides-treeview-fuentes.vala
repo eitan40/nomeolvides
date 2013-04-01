@@ -52,6 +52,6 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 		this.get_cursor (out path, out columna);
 		this.get_model().get_iter(out iterador, path);
 		var liststore = this.get_model() as ListStoreFuentes;
-		liststore.remove ( iterador );
+		liststore.borrar_fuente ( iterador, a_eliminar );
 	}
 }

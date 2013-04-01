@@ -22,17 +22,10 @@ using Nomeolvides;
 using Gee;
 
 public class Nomeolvides.HechosFuentes : GLib.Object {
-	private string directorio_configuracion;
-	private string directorio_db_local;
-	private string archivo;
 	public ListStoreFuentes fuentes_liststore { get; private set; }
 		
 	public HechosFuentes () {
-		this.fuentes_liststore = new ListStoreFuentes ();
-		this.directorio_configuracion = GLib.Environment.get_user_config_dir () + "/nomeolvides/";
-		this.directorio_db_local = GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/";
-		this.archivo = "db-predeterminadas.json";
-		
+		this.fuentes_liststore = new ListStoreFuentes ();		
 		this.cargar_fuentes ();
 	}
 
@@ -42,25 +35,9 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 	}
 
 	private void guardar_fuentes () {
-		TreeIter iter;
-		Value value_fuente;
-		Fuente fuente;
-		string guardar = "";
-
-		this.fuentes_liststore.get_iter_first(out iter);
-		do {
-			this.fuentes_liststore.get_value(iter, 4, out value_fuente);
-			fuente = value_fuente as Fuente;
-			if (fuente.tipo_fuente == FuentesTipo.LOCAL) {
-				guardar += fuente.a_json () + "\n";
-			}
-		}while (this.fuentes_liststore.iter_next(ref iter));
+		string guardar = this.fuentes_liststore.a_json ();
 		
-		try {
-			FileUtils.set_contents (this.directorio_configuracion + this.archivo, guardar);
-		}  catch (Error e) {
-			error (e.message);
-		}
+		Configuracion.guardar_fuentes ( guardar );
 	}
 
 	private void cargar_fuentes () {
@@ -68,26 +45,19 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		string[] lineas;
 		Fuente nueva_fuente;
 		int i;	
-		File archivo_config = File.new_for_path (this.directorio_configuracion + this.archivo);
 
 		var fuente_oficial = new Fuente ( "Base de datos oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", FuentesTipo.HTTP );
 		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
+
+		todo = Configuracion.cargar_fuentes ();
 		
-		if (archivo_config.query_exists () ) {
-			try {
-				FileUtils.get_contents (directorio_configuracion + archivo, out todo);
-			}  catch (Error e) {
-				error (e.message);
+		lineas = todo.split_set ("\n");
+		for (i=0; i < lineas.length; i++) {
+        	nueva_fuente = new Fuente.json(lineas[i]);
+			if ( nueva_fuente.nombre_fuente != "null" ) {
+				this.fuentes_liststore.agregar_fuente ( nueva_fuente );
 			}
-		
-			lineas = todo.split_set ("\n");
-			for (i=0; i < (lineas.length - 1); i++) {
-        		nueva_fuente = new Fuente.json(lineas[i]);
-				if ( nueva_fuente.nombre_fuente != "null" ) {
-					this.fuentes_liststore.agregar_fuente ( nueva_fuente );
-				}
-			}
-		}	
+		}
 	}
 
 	public ListStoreFuentes temp () {
@@ -126,7 +96,7 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		return temp;
 	}
 	
-	public ArrayList<string> lista_de_archivos (FuentesTipo tipo) {
+	public ArrayList<string> lista_de_archivos (FuentesTipo tipo) { 
 		TreeIter iter;
 		Value value_fuente;
 		Fuente fuente;

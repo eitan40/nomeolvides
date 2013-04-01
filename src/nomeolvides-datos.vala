@@ -28,7 +28,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	public HechosFuentes fuentes;
 
 	public Datos () {
-		this.archivo_configuracion ();
 		this.cache_hechos_anios = new ArrayList<int> ();
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.fuentes = new HechosFuentes ( );
@@ -128,28 +127,14 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 	}
 
-	public void actualizar_fuentes_predefinidas () {
+	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {
 		this.borrar_datos ();
-
+		this.fuentes.actualizar_fuentes_liststore ( fuentes );
 		this.cargar_fuentes_predefinidas ();
 	}
 
-	public void archivo_configuracion () {
-		var directorio_configuracion = File.new_for_path(GLib.Environment.get_user_config_dir () + "/nomeolvides/");
-
-		if (!directorio_configuracion.query_exists ()) {
-
-			try {
-				directorio_configuracion.make_directory ();
-			}  catch (Error e) {
-				error (e.message);
-			}
-			
-		}
-	}
-
 	public void save_file () {
-/*		int i,y;
+		int i,y;
 		ArrayList<Hecho> lista;
 		string archivo;
 		string a_guardar = "";
@@ -165,47 +150,19 @@ public class Nomeolvides.Datos : GLib.Object {
 					y--;
 				}
 			}
-			try {
-				FileUtils.set_contents (archivo, a_guardar);
-			} catch (Error e) {
-				error (e.message);
-			}
 
+			Archivo.escribir ( archivo, a_guardar );			
 			a_guardar = "";
-		}*/	
+		}	
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
-		File archivo = null;
-		uint8[] contenido;
-		string todo = "";
+		string todo;
 		string[] lineas;
 		Hecho nuevoHecho;
 		int i;	
 
-		if (tipo == FuentesTipo.LOCAL) {
-			try {
-				archivo = File.new_for_path ( nombre_archivo );
-			}  catch (Error e) {
-				error (e.message);
-			}
-		}
-		
-		if (tipo == FuentesTipo.HTTP) {
-			try {
-				archivo = File.new_for_uri ( nombre_archivo );		
-			}  catch (Error e) {
-				error (e.message);
-			}
-		}
-		
-		try {
-			archivo.load_contents(null ,out contenido, null);
-		}  catch (Error e) {
-			error (e.message);
-		}
-		
-		todo = (string) contenido;
+		todo = Archivo.leer ( nombre_archivo );
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
@@ -224,11 +181,7 @@ public class Nomeolvides.Datos : GLib.Object {
 			a_guardar += hechos_anios[i].a_json(); 
 		}
 
-		try {
-			FileUtils.set_contents (archivo, a_guardar);
-		}  catch (Error e) {
-			error (e.message);
-		} 
+		Archivo.escribir ( archivo, a_guardar );
 	}
 
 	public ListStoreHechos get_liststore ( int anio ) {
