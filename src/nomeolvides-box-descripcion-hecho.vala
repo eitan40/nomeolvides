@@ -44,12 +44,13 @@ public class Nomeolvides.DescripcionHecho : Box {
 		separado = texto.split("/n");
 
 		foreach ( string s in separado ) {
-			stdout.printf ("%s", s);
+			
 			nuevo = new Label.with_mnemonic ("");
 			nuevo.set_line_wrap ( true );
 			nuevo.set_width_chars ( 30 );
 			nuevo.set_max_width_chars ( 30 );
 			nuevo.set_markup ("<span>"+ s +"</span>");
+			
 			this.parrafos.add (nuevo);
 		}
 		
