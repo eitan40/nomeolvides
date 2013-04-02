@@ -42,7 +42,8 @@ public class Nomeolvides.VistaHecho : Box {
 		this.label_nombre.set_width_chars ( 30 );
 		this.label_fecha.set_width_chars ( 30 );
 		this.label_fuente.set_width_chars ( 30 );
-		
+
+		this.label_nombre.set_line_wrap ( true );
 		this.label_fecha.set_alignment ( 0, 0 );
 		this.label_fuente.set_alignment ( 0, 0 );
 		
