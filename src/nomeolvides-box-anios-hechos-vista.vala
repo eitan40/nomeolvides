@@ -28,6 +28,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_hechos_view;
 	private ScrolledWindow scroll_anios_view;
+	private int anio_actual;
 
 	public Anios_hechos_vista () {
 		this.anios_view = new ViewAnios ();
@@ -46,6 +47,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
+		this.anio_actual = 0;
+
 		this.scroll_hechos_view.add ( this.hechos_view );
 		this.scroll_anios_view.add ( this.anios_view );
 		
@@ -63,7 +66,11 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		}
 	}
 	private void elegir_anio () {
-		this.anios_cursor_changed();
+		if ( this.anio_actual != this.anios_view.get_anio () ) {
+			this.anio_actual = this.anios_view.get_anio ();
+			this.anios_cursor_changed();
+			this.mostrar_scroll_vista ( false );
+		}
 	}
 
 	private void mostrar_vista () {
@@ -102,8 +109,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	public int get_anio_actual () {
-		int anio = this.anios_view.get_anio ();
-		return anio;
+		return this.anio_actual;
 	}
 
 	public TreePath get_hecho_actual ( out Hecho hecho ) {
