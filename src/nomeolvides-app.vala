@@ -85,8 +85,9 @@ public class Nomeolvides.App : Gtk.Application
 		if ( add_dialog.run() == ResponseType.APPLY )
 		{
 			this.datos.agregar_hecho(add_dialog.respuesta);
-			add_dialog.destroy();
+			this.datos.save_file();
 		}		
+		add_dialog.destroy();
 	}
 	
 	private void elegir_anio () {
@@ -106,7 +107,8 @@ public class Nomeolvides.App : Gtk.Application
 
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
 			this.datos.eliminar_hecho ( hecho, path );
-			this.datos.agregar_hecho ( edit_dialog.respuesta );			
+			this.datos.agregar_hecho ( edit_dialog.respuesta );
+			this.datos.save_file();
 		}
 		edit_dialog.destroy();
 	}
@@ -120,6 +122,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
+			this.datos.save_file();
 		}	
 		delete_dialog.destroy ();
 	}
