@@ -45,6 +45,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.cambio_anios ();
 			}
 		}
+		this.save_file();
 	}
 
 
@@ -59,6 +60,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_liststore (anio);
 				this.cambio_anios ();
 			}
+			this.save_file();
 		}
 	}
 
