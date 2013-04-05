@@ -42,16 +42,16 @@ public class Nomeolvides.Configuracion : GLib.Object {
 	public static void set_config () {		
 		if ( !Archivo.existe ( Configuracion.directorio_configuracion () ) ) {
 			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
+		}
+		
+		if (!Archivo.existe ( Configuracion.archivo_bases () ) ) {
+			Archivo.crear ( Configuracion.archivo_bases () );
 
-			if (!Archivo.existe ( Configuracion.archivo_bases () ) ) {
-				Archivo.crear ( Configuracion.archivo_bases () );
-
-				var fuente_default = new Fuente ( "Base de datos local",
-						                          "db_default.json",
-						                           Configuracion.directorio_db_local (),
-						                           FuentesTipo.LOCAL );
-				Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
-			}
+			var fuente_default = new Fuente ( "Base de datos local",
+					                          "db_default.json",
+					                           Configuracion.directorio_db_local (),
+					                           FuentesTipo.LOCAL );
+			Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
 		}
 		
 		if (!Archivo.existe ( Configuracion.directorio_db_local () )) {
