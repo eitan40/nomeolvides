@@ -20,26 +20,20 @@ bin_PROGRAMS = nomeolvides
 
 nomeolvides_SOURCES = \
 	config.vapi \
-	nomeolvides-main-toolbar.vala \
 	nomeolvides-text-view-hecho.vala \
 	nomeolvides-hecho.vala \
 	nomeolvides-main.vala \
 	nomeolvides-panel.vala \
 	nomeolvides-lista-hechos.vala \
 	nomeolvides-liststore-hechos.vala \
-	nomeolvides-dialogo-hecho.vala \
-	nomeolvides-openfile-dialog.vala \
-	nomeolvides-borrar-hecho-dialogo.vala \
 	nomeolvides-hechos-fuentes.vala \
 	nomeolvides-fuente.vala \
 	nomeolvides-liststore-fuentes.vala \
 	nomeolvides-treeview-fuentes.vala \
-	nomeolvides-fuentes-dialog.vala \
 	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
 	nomeolvides-edit-hecho-dialog.vala \
 	nomeolvides-add-fuente-dialog.vala \
-	nomeolvides-borrar-fuente-dialogo.vala \
 	nomeolvides-edit-fuente-dialog.vala \
 	nomeolvides-datos.vala \
 	nomeolvides-box-anios-hechos-vista.vala \
@@ -52,7 +46,13 @@ nomeolvides_SOURCES = \
 	nomeolvides-box-vista-hecho.vala \
 	nomeolvides-box-selector-fecha.vala \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
-	nomeolvides-application-window-ventana-principal.vala
+	nomeolvides-application-window-ventana-principal.vala \
+	nomeolvides-dialog-borrar-fuente-dialogo.vala \
+	nomeolvides-dialog-borrar-hecho-dialogo.vala \
+	nomeolvides-dialog-dialogo-hecho.vala \
+	nomeolvides-dialog-fuentes-dialog.vala \
+	nomeolvides-tooblar-main-toolbar.vala \
+	nomeolvides-file-chooser-dialog-open-file-dialog.vala
 
 
 nomeolvides_VALAFLAGS = \
