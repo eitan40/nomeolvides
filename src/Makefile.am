@@ -26,13 +26,9 @@ nomeolvides_SOURCES = \
 	nomeolvides-main.vala \
 	nomeolvides-panel.vala \
 	nomeolvides-lista-hechos.vala \
-	nomeolvides-view-hechos.vala \
 	nomeolvides-liststore-hechos.vala \
 	nomeolvides-dialogo-hecho.vala \
-	nomeolvides-view-anios.vala \
 	nomeolvides-openfile-dialog.vala \
-	nomeolvides-vista-hecho.vala \
-	nomeolvides-savefile-dialog.vala \
 	nomeolvides-borrar-hecho-dialogo.vala \
 	nomeolvides-hechos-fuentes.vala \
 	nomeolvides-fuente.vala \
@@ -43,16 +39,20 @@ nomeolvides_SOURCES = \
 	nomeolvides-app.vala \
 	nomeolvides-edit-hecho-dialog.vala \
 	nomeolvides-add-fuente-dialog.vala \
-	nomeolvides-selector-fecha.vala \
 	nomeolvides-borrar-fuente-dialogo.vala \
 	nomeolvides-edit-fuente-dialog.vala \
 	nomeolvides-datos.vala \
-	nomeolvides-ventana-principal.vala \
 	nomeolvides-box-anios-hechos-vista.vala \
 	nomeolvides-configuracion.vala \
 	nomeolvides-box-descripcion-hecho.vala \
 	nomeolvides-archivo.vala \
-	nomeolvides-dialog-fuente.vala
+	nomeolvides-dialog-fuente.vala \
+	nomeolvides-treeview-view-anios.vala \
+	nomeolvides-treeview-view-hechos.vala \
+	nomeolvides-box-vista-hecho.vala \
+	nomeolvides-box-selector-fecha.vala \
+	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
+	nomeolvides-application-window-ventana-principal.vala
 
 
 nomeolvides_VALAFLAGS = \
@@ -72,5 +72,3 @@ uninstall-local:
 	-rm -r $(uidir)
 	-rm -r $(pkgdatadir)
 
-
-data_DATA =
