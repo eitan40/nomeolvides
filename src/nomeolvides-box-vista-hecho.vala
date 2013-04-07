@@ -30,6 +30,7 @@ public class Nomeolvides.VistaHecho : Box {
 		this.set_orientation ( Orientation.VERTICAL );
 		this.set_spacing ( 10 );
 		this.set_homogeneous ( false );
+		this.set_hexpand ( false );
 
 		var scroll_descripcion = new ScrolledWindow ( null, null );
 		scroll_descripcion.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);

@@ -79,7 +79,7 @@ public class Nomeolvides.DescripcionHecho : Box {
 		label.set_halign ( Align.START );
 		label.set_margin_left ( 10 );
 		label.set_margin_bottom ( 15 );
-		label.set_max_width_chars ( 30 );
+		label.set_max_width_chars ( 60 );
 		label.set_markup ("<span>"+ texto +"</span>");
 
 		return label;
