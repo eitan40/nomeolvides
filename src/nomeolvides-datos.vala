@@ -134,26 +134,25 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_file () {
-		int i,y;
-		ArrayList<Hecho> lista;
-		string archivo;
-		string a_guardar = "";
+		int i;
 		ArrayList<string> lista_archivos = this.fuentes.lista_de_archivos ( FuentesTipo.LOCAL);
-		lista = this.lista_de_hechos ();
 	
 		for (i=0; i < lista_archivos.size; i++) {
-			archivo = lista_archivos[i];
-			for (y=0; y < lista.size; y++) {
-				if (lista[y].archivo_fuente == archivo) {
-					a_guardar +=lista[y].a_json() + "\n";
-					lista.remove_at(y);
-					y--;
-				}
-			}
+			guardar_un_archivo ( lista_archivos[i] );
+		}
+	
+	}
 
-			Archivo.escribir ( archivo, a_guardar );			
-			a_guardar = "";
-		}	
+	public void guardar_un_archivo ( string archivo ) {
+		string a_guardar = "";
+		ArrayList<Hecho> lista = this.lista_de_hechos ();
+		int i;
+		for (i=0; i < lista.size; i++) {
+			if (lista[i].archivo_fuente == archivo) {
+				a_guardar +=lista[i].a_json() + "\n";
+			}
+		}
+		Archivo.escribir ( archivo, a_guardar );			
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
