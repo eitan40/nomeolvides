@@ -27,6 +27,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public ToolButton edit_button { get; private set; }
 	public ToolButton delete_button { get; private set; }
 	public ToolButton send_button { get; private set; }
+	public ToolButton list_button { get; private set; }
 	public SeparatorToolItem separador { get; private set; }
 	public ToolItem anio_item { get; private set; }
 	public Label anio_label { get; private set; }
@@ -40,6 +41,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
 		this.send_button = new ToolButton.from_stock ( Stock.GO_UP );
+		this.list_button = new ToolButton (null, "Agregar a lista");
 		this.separador = new SeparatorToolItem ();
 		this.anio_item = new ToolItem ();
 
@@ -55,6 +57,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.is_important = true;
 		this.send_button.set_visible_horizontal ( false );
 		this.send_button.set_label ("Enviar");
+		this.list_button.is_important = true;
+		this.list_button.set_visible_horizontal ( false );
 		
 		this.separador.set_expand ( true );
 		this.separador.draw = false;
@@ -66,10 +70,9 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.add ( this.edit_button );
 		this.add ( this.delete_button );
 		this.add ( this.send_button );
+		this.add ( this.list_button );
 		this.add ( this.separador );
 		this.add ( this.anio_item );
-		
-
 	}
 
 	public void set_buttons_visible (bool cambiar) {

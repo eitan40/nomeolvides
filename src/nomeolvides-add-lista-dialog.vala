@@ -21,17 +21,17 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.EditFuenteDialog : DialogFuente
-{
-	
-	public EditFuenteDialog ( )
+public class Nomeolvides.AddListaDialog : DialogLista
+{	
+	public AddListaDialog ( )
 	{
-		this.title = "Editar parámetros de la Base de Datos";
-		this.add_button (Stock.EDIT , ResponseType.APPLY);
+		this.title = "Agregar lista personalizada";
+		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
 
-	public void set_datos (Fuente fuente) {
-		this.nombre_fuente_entry.set_text ( fuente.nombre_fuente );
-		this.archivo_chooser.set_filename ( fuente.direccion_fuente + fuente.nombre_archivo );
-	}
+/*	override void crear_respuesta () {
+		if(this.nombre_entry.get_text_length () > 0) {
+			this.respuesta  = new Lista (this.nombre_entry.get_text (), 0);
+		}
+	}*/
 }

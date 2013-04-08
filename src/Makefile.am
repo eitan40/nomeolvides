@@ -52,7 +52,16 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-dialogo-hecho.vala \
 	nomeolvides-dialog-fuentes-dialog.vala \
 	nomeolvides-tooblar-main-toolbar.vala \
-	nomeolvides-file-chooser-dialog-open-file-dialog.vala
+	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
+	nomeolvides-dialog-listas-dialog.vala \
+	nomeolvides-treeview-listas.vala \
+	nomeolvides-liststore-listas.vala \
+	nomeolvides-lista.vala \
+	nomeolvides-dialog-borrar-lista-dialog.vala \
+	nomeolvides-add-lista-dialog.vala \
+	nomeolvides-dialog-lista.vala \
+	nomeolvides-edit-lista-dialog.vala \
+	nomeolvides-listas.vala
 
 
 nomeolvides_VALAFLAGS = \

@@ -26,11 +26,13 @@ public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_anios;
 	private ArrayList<int> cache_hechos_anios;
 	public HechosFuentes fuentes;
+	public Listas listas;
 
 	public Datos () {
 		this.cache_hechos_anios = new ArrayList<int> ();
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.fuentes = new HechosFuentes ( );
+		this.listas = new Listas ();
 		this.cargar_fuentes_predefinidas ( );
 	}
 
@@ -131,6 +133,12 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.borrar_datos ();
 		this.fuentes.actualizar_fuentes_liststore ( fuentes );
 		this.cargar_fuentes_predefinidas ();
+	}
+
+	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {
+	//	this.borrar_datos ();
+	//	this.fuentes.actualizar_fuentes_liststore ( fuentes );
+	//	this.cargar_fuentes_predefinidas ();
 	}
 
 	public void save_file () {

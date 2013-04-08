@@ -33,7 +33,8 @@ public class Nomeolvides.App : Gtk.Application
 		{ "create-about-dialog", about_dialog },
 		{ "exportar", exportar },
 		{ "window-destroy", salir_app },
-		{ "config-db-dialog", config_db_dialog }
+		{ "config-db-dialog", config_db_dialog },
+		{ "config-listas-dialog", config_listas_dialog }
 	};
 
 	private void create_window () {
@@ -55,6 +56,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.application_menu = new GLib.Menu ();
 		
 		this.application_menu.append ( "Configurar Bases de Datos", "app.config-db-dialog" );
+		this.application_menu.append ( "Configurar Listas Personalizadas", "app.config-listas-dialog" );
 		this.application_menu.append ( "Exportar", "app.exportar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
 		this.application_menu.append ( "Salir", "app.window-destroy" );
@@ -136,14 +138,25 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void config_db_dialog () {		
-		var fuente_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
-		fuente_dialogo.show_all ();
-		if ( fuente_dialogo.run () == ResponseType.OK ) {
-			if (fuente_dialogo.cambios == true) {				
-				this.datos.actualizar_fuentes_predefinidas ( fuente_dialogo.fuentes_view.get_model () as ListStoreFuentes );
+		var fuentes_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
+		fuentes_dialogo.show_all ();
+		if ( fuentes_dialogo.run () == ResponseType.OK ) {
+			if (fuentes_dialogo.cambios == true) {				
+				this.datos.actualizar_fuentes_predefinidas ( fuentes_dialogo.fuentes_view.get_model () as ListStoreFuentes );
 			}
 		}
-		fuente_dialogo.destroy ();
+		fuentes_dialogo.destroy ();
+	}
+
+	private void config_listas_dialog () {		
+		var listas_dialogo = new ListasDialog ( this.window, this.datos.listas.temp() );
+		listas_dialogo.show_all ();
+		if ( listas_dialogo.run () == ResponseType.OK ) {
+			if (listas_dialogo.cambios == true) {				
+				this.datos.actualizar_listas_personalizadas ( listas_dialogo.listas_view.get_model () as ListStoreListas );
+			}
+		}
+		listas_dialogo.destroy ();
 	}
 
 	public void send_hecho () {		
