@@ -70,7 +70,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 		return retorno;
 	}
 
-	private static bool es_path ( string direccion ) {
+	public static bool es_path ( string direccion ) {
 		bool retorno = true;
 		
 		if ( direccion.has_prefix ("http") ) {

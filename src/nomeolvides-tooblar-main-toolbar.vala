@@ -72,12 +72,25 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 	}
 
-	public void set_buttons_visible (bool cambiar) {
-		if(this.edit_button.get_visible_horizontal() != cambiar) {
-			this.edit_button.set_visible_horizontal (cambiar);
-			this.delete_button.set_visible_horizontal (cambiar);
-			this.send_button.set_visible_horizontal (cambiar);
+	public void set_buttons_visible ( Hecho hecho ) {
+
+		if ( Archivo.es_path ( hecho.archivo_fuente ) ) {
+			this.edit_button.set_visible_horizontal ( true );
+			this.delete_button.set_visible_horizontal ( true );
+		} else {
+			this.edit_button.set_visible_horizontal ( false );
+			this.delete_button.set_visible_horizontal ( false );
 		}
+		
+		this.send_button.set_visible_horizontal ( true );
+	}
+
+	public void set_buttons_invisible () {
+
+		this.send_button.set_visible_horizontal ( false );
+		this.edit_button.set_visible_horizontal ( false );
+		this.delete_button.set_visible_horizontal ( false );
+		
 	}
 
 	public void set_anio (string anio)

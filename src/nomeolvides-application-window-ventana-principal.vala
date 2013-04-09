@@ -120,9 +120,9 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.get_hecho_actual ( out hecho );
 		
 		if ( hecho != null ) { 
-			this.toolbar.set_buttons_visible ( true );
+			this.toolbar.set_buttons_visible ( hecho );
 		} else {
-			this.toolbar.set_buttons_visible ( false );		
+			this.toolbar.set_buttons_invisible ();		
 		}
 	}
 	
