@@ -25,9 +25,9 @@ public class Nomeolvides.Lista : GLib.Object{
 	public int cantidad_hechos { get; private set; }
 	public string hash { get; private set; }
 	
-	public Lista ( string nombre/*, int cantidad_hechos*/ ) {
+	public Lista ( string nombre ) {
 		this.nombre = nombre;
-		this.cantidad_hechos = 0/*cantidad_hechos*/;
+		this.cantidad_hechos = 0;
 		this.calcular_checksum ();
 	}
 
