@@ -34,7 +34,7 @@ public class Nomeolvides.Lista : GLib.Object{
 	public Lista.json ( string json ) {
 		if (json.contains ("{\"Lista\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.cantidad_hechos = int.parse (this.sacarDatoJson (json, "cantida_hechos"));
+			this.cantidad_hechos = 0;
 		} else {
 			this.nombre = "null";
 			this.cantidad_hechos = 0;
@@ -44,9 +44,8 @@ public class Nomeolvides.Lista : GLib.Object{
 
 	public string a_json () {
 		string retorno = "{\"Lista\":{";
-
-		retorno += "\"nombre\":\"" + this.nombre + "\",";
-		retorno += "\"cantidad_hechos\":\"" + this.cantidad_hechos.to_string ()+ "\"";
+		
+		retorno += "\"nombre\":\"" + this.nombre + "\"";
 		retorno +="}}";	
 		
 		return retorno;
@@ -64,6 +63,7 @@ public class Nomeolvides.Lista : GLib.Object{
 	}
 
 	private void calcular_checksum () {
-		this.hash = Checksum.compute_for_string(ChecksumType.MD5, this.a_json() );
+		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
+		this.hash = this.hash.slice ( 0, 12);
 	}
 }

@@ -29,7 +29,7 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	public ViewHechos () {
 		this.insert_column_with_attributes (-1, "Nombre", new CellRendererText (), "text", 0);
 		this.insert_column_with_attributes (-1, "Fecha", new CellRendererText (), "text", 2);
-		this.model = new ListStoreHechos (0);
+		this.model = new ListStoreHechos.anio_int (0);
 	}
 
 	public void mostrar_anio ( ListStoreHechos anio ) {

@@ -24,6 +24,8 @@ using Nomeolvides;
 
 public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_anios;
+	private ArrayList<ListStoreHechos> hechos_listas;
+	private ArrayList<string> cache_hechos_listas;
 	private ArrayList<int> cache_hechos_anios;
 	public HechosFuentes fuentes;
 	public Listas listas;
@@ -31,9 +33,12 @@ public class Nomeolvides.Datos : GLib.Object {
 	public Datos () {
 		this.cache_hechos_anios = new ArrayList<int> ();
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
+		this.cache_hechos_listas = new ArrayList<string> ();
+		this.hechos_listas = new ArrayList<ListStoreHechos> ();
 		this.fuentes = new HechosFuentes ( );
 		this.listas = new Listas ();
 		this.cargar_fuentes_predefinidas ( );
+		this.cargar_datos_listas ();
 	}
 
 	public void agregar_hecho (Hecho nuevo) {
@@ -49,6 +54,35 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 	}
 
+	private void inicializar_liststore_listas () {
+		int i;
+		ArrayList<string> hash_listas = this.listas.get_listas_hash ();
+
+		for ( i=0; i < hash_listas.size; i++ ) {
+			this.hechos_listas.add ( new ListStoreHechos () );
+			print ("Tamaño del arraylist de liststorehechos: " + this.hechos_listas.size.to_string () + "\n");
+			this.cache_hechos_listas.add ( hash_listas[i] );
+		}
+	}
+
+	private void cargar_datos_listas () {
+		int i,j;
+		string datos = Archivo.leer ( "/home/arik/Programacion/vala/nomeolvides/listas" );
+		ArrayList<Hecho> hechos = this.lista_de_hechos ();
+		var lineas = datos.split_set ("\n");
+
+		this.inicializar_liststore_listas ();
+			
+		for (i=0; i < (lineas.length - 1); i++) {
+			var linea = lineas[i].split (",");
+			for(j=0; j < hechos.size; j++ ) {
+				if ( hechos[j].hash == linea[1] ) {
+					var indice_lista = this.cache_hechos_listas.index_of (linea[0]);
+					this.hechos_listas[indice_lista].agregar (hechos[j]);
+				}
+			}	
+		}
+	}
 
 	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
 		TreeIter iterador;
@@ -65,7 +99,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	private void agregar_liststore (int cambio_anios) {
-		this.hechos_anios.add ( new ListStoreHechos(cambio_anios) );
+		this.hechos_anios.add ( new ListStoreHechos.anio_int (cambio_anios) );
 		this.cache_hechos_anios.add (cambio_anios);
 	}
 
@@ -203,7 +237,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		}
 
 		if ( retorno == null ) {
-			retorno = new ListStoreHechos (0);
+			retorno = new ListStoreHechos.anio_int (0);
 		}
 			
 		return retorno;

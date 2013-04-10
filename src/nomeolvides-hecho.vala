@@ -34,7 +34,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.nombre = nombre;
 		this.descripcion = this.ponerSaltoDeLinea ( descripcion );
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
-		hash = Checksum.compute_for_string (ChecksumType.MD5, this.a_json ());
+		this.calcular_checksum ();
 		this.archivo_fuente = archivo_fuente;
 		this.fuente = fuente;
 	}
@@ -58,9 +58,13 @@ public class Nomeolvides.Hecho : GLib.Object {
 			this.descripcion = "null";
 			this.fecha = new DateTime.utc (2013,2,20,0,0,0);
 		}	
-		hash = Checksum.compute_for_string(ChecksumType.MD5, this.a_json ());
+		this.calcular_checksum ();
 
 		this.archivo_fuente = archivo_fuente;
+	}
+
+	private void calcular_checksum () {
+		this.hash = Checksum.compute_for_string(ChecksumType.MD5, this.a_json ());
 	}
 
 	private void saltoDeLinea () {

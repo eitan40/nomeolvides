@@ -71,5 +71,21 @@ public class Nomeolvides.ListStoreListas : ListStore {
 	public void borrar_lista ( TreeIter iter, Lista a_eliminar ) {
 		this.remove ( iter );
 		this.listas_cache.remove ( a_eliminar.get_checksum() );
-	} 
+	}
+
+	public ArrayList<string> get_listas_hash () {
+		ArrayList<string> listas_hash = new ArrayList<string> ();
+		Lista lista;
+		Value value_lista;
+		TreeIter iter;
+
+		this.get_iter_first(out iter);
+		do {
+			this.get_value(iter, 2, out value_lista);
+			lista = value_lista as Lista;
+			listas_hash.add (lista.get_checksum ());
+		}while (this.iter_next(ref iter));
+
+		return listas_hash;
+	}	
 }

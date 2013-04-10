@@ -26,13 +26,17 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 	private TreeIter iterador;
 	public int anio { get; private set; }
 	
-	public ListStoreHechos.string ( string anio) {
+	public ListStoreHechos.anio_string ( string anio) {
 		this.anio = int.parse ( anio );
 		this.constructor ();
 	}
 
-	public ListStoreHechos ( int anio) {
+	public ListStoreHechos.anio_int ( int anio) {
 		this.anio = anio;
+		this.constructor ();
+	}
+
+	public ListStoreHechos () {
 		this.constructor ();
 	}
 
