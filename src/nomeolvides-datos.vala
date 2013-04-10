@@ -35,9 +35,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.cache_hechos_listas = new ArrayList<string> ();
 		this.hechos_listas = new ArrayList<ListStoreHechos> ();
-		this.fuentes = new HechosFuentes ( );
+		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
-		this.cargar_fuentes_predefinidas ( );
+		this.cargar_fuentes_predefinidas ();
 		this.cargar_datos_listas ();
 	}
 
@@ -60,14 +60,16 @@ public class Nomeolvides.Datos : GLib.Object {
 
 		for ( i=0; i < hash_listas.size; i++ ) {
 			this.hechos_listas.add ( new ListStoreHechos () );
-			print ("Tamaño del arraylist de liststorehechos: " + this.hechos_listas.size.to_string () + "\n");
+			print ("Lista hash : " + hash_listas[i] + "\n");
 			this.cache_hechos_listas.add ( hash_listas[i] );
 		}
+		print ("Tamaño del arraylist de liststorehechos: " + this.hechos_listas.size.to_string () + "\n");
+
 	}
 
 	private void cargar_datos_listas () {
 		int i,j;
-		string datos = Archivo.leer ( "/home/arik/Programacion/vala/nomeolvides/listas" );
+		string datos = Archivo.leer ( "./listas" );
 		ArrayList<Hecho> hechos = this.lista_de_hechos ();
 		var lineas = datos.split_set ("\n");
 
@@ -122,8 +124,13 @@ public class Nomeolvides.Datos : GLib.Object {
 		return retorno;
 	}
 
-	public void borrar_datos () {
+	public void borrar_datos_hechos () {
 		this.hechos_anios.clear ();
+		this.cache_hechos_anios.clear ();
+	}
+
+	public void borrar_datos_listas () {
+		this.hechos_listas.clear ();
 		this.cache_hechos_anios.clear ();
 	}
 
@@ -164,15 +171,15 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {
-		this.borrar_datos ();
+		this.borrar_datos_hechos ();
 		this.fuentes.actualizar_fuentes_liststore ( fuentes );
 		this.cargar_fuentes_predefinidas ();
 	}
 
 	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {
-	//	this.borrar_datos ();
-	//	this.fuentes.actualizar_fuentes_liststore ( fuentes );
-	//	this.cargar_fuentes_predefinidas ();
+		this.borrar_datos_listas ();
+		this.listas.actualizar_listas_liststore ( listas );
+		this.cargar_datos_listas ();
 	}
 
 	public void save_file () {

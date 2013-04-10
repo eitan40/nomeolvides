@@ -33,7 +33,7 @@ public class Nomeolvides.EditListaDialog : DialogLista
 
 	protected override void crear_respuesta () {
 		if(this.nombre_entry.get_text_length () > 0) {
-			this.respuesta  = new Lista (this.nombre_entry.get_text (), this.cantidad_hechos);
+			this.respuesta  = new Lista (this.nombre_entry.get_text ());
 		}
 	}
 

@@ -62,11 +62,8 @@ public class Nomeolvides.DialogLista : Gtk.Dialog {
     }
 
 	protected virtual void crear_respuesta () {
-		/*if(this.nombre_fuente_entry.get_text_length () > 0) {
-			this.respuesta  = new Fuente (this.nombre_fuente_entry.get_text (),
-			                              archivo.slice(archivo.last_index_of_char ('/') +1, archivo.char_count ()),
-										  archivo.slice(0,archivo.last_index_of_char ('/') +1),			                              
-			                              FuentesTipo.LOCAL);
-		}*/
+		if( nombre_entry.get_text_length () > 0 ) {
+			this.respuesta  = new Lista (this.nombre_entry.get_text ());
+		}
 	}
 }
