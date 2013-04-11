@@ -52,7 +52,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		
 		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
-		this.anios_view.cursor_changed.connect ( this.elegir_lista );
+		this.listas_view.cursor_changed.connect ( this.elegir_lista );
 		this.hechos_view.row_activated.connect ( mostrar_vista );
 
 		Separator separador = new Separator(Orientation.VERTICAL);
