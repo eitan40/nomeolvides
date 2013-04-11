@@ -45,6 +45,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		this.window.show_visible ();
 		this.cargar_lista_anios ();
+		this.cargar_listas ();
 	}
 
 	public override void activate () {
@@ -198,6 +199,10 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void exportar () {
 		this.save_as_file_dialog ();
+	}
+
+	public void cargar_listas () {
+		this.window.cargar_listas_view ( this.datos.lista_de_listas () );
 	}
 
 	public void cargar_lista_anios () {

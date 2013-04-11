@@ -29,6 +29,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	public HechosFuentes fuentes;
 	private int anio_actual;
+	private string lista_actual;
 	
 	public VentanaPrincipal ( Gtk.Application app )
 	{   
@@ -66,6 +67,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
+		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
 		this.anios_hechos.hechos_cursor_changed.connect ( this.elegir_hecho );
 	}
 
@@ -95,8 +97,18 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.anios_hechos_anios_cursor_changed ();
 	}
 
+	private void anios_hechos_listas_cursor_changed_signal () {
+		this.lista_actual= this.anios_hechos.get_lista_actual ();
+		this.actualizar_lista_label ();
+		this.anios_hechos_listas_cursor_changed ();
+	}
+
 	public void cargar_anios_view ( ArrayList<int> ventana_principal_anios ) {
 		this.anios_hechos.cargar_lista_anios ( ventana_principal_anios );
+	}
+
+	public void cargar_listas_view ( ListStoreListas listas ) {
+		this.anios_hechos.cargar_listas ( listas );
 	}
 
 	public void cargar_hechos_view ( ListStoreHechos hechos ) {
@@ -104,7 +116,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 
 	private void actualizar_anio_label () {
-		this.toolbar.set_anio ( this.anio_actual.to_string() );
+		this.toolbar.set_label_anio ( this.anio_actual.to_string() );
+	}
+
+	private void actualizar_lista_label () {
+		this.toolbar.set_label_lista ( this.lista_actual );
 	}
 
 	public int get_anio_actual () {
@@ -137,4 +153,5 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public signal void toolbar_delete_button_clicked ();
 	public signal void toolbar_send_button_clicked ();
 	public signal void anios_hechos_anios_cursor_changed ();
+	public signal void anios_hechos_listas_cursor_changed ();
 }

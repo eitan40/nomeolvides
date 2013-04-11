@@ -250,5 +250,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		return retorno;
 	}
 
+	public ListStoreListas lista_de_listas () {
+		return this.listas.temp ();
+	}
+
 	public signal void cambio_anios ();
 }

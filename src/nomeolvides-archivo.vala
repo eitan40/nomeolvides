@@ -84,7 +84,8 @@ public class Nomeolvides.Archivo : GLib.Object{
 		try {
 			FileUtils.get_contents ( path, out contenido_archivo );
 		} catch ( Error e ) {
-			error ( e.message );
+			print ("Error al abrir: " + path + "\n");
+			contenido_archivo = "";
 		}
 	}
 

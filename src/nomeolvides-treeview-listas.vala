@@ -26,6 +26,10 @@ public class Nomeolvides.TreeViewListas : TreeView {
 		this.insert_column_with_attributes ( -1, "Cantidad de hechos", new CellRendererText(), "text", 1 );
 	}
 
+	public TreeViewListas.ventana_principal () {
+		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
+	}
+
 	public Lista get_lista_cursor () {
 		TreePath path;
 		TreeViewColumn columna;
@@ -39,6 +43,22 @@ public class Nomeolvides.TreeViewListas : TreeView {
 			return (Lista) lista;
 		} else { 
 			return (Lista) null;
+		}		
+	}
+
+	public string get_lista () {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		Value lista;
+		
+		this.get_cursor(out path, out columna);
+		if (path != null ) {
+			this.get_model().get_iter(out iterador, path);
+			this.get_model().get_value (iterador, 0, out lista);
+			return (string) lista;
+		} else { 
+			return "";
 		}		
 	}
 

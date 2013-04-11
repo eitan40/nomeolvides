@@ -30,7 +30,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public ToolButton list_button { get; private set; }
 	public SeparatorToolItem separador { get; private set; }
 	public ToolItem anio_item { get; private set; }
-	public Label anio_label { get; private set; }
+	public Label label { get; private set; }
 	
 	public MainToolbar ()
 	{
@@ -45,7 +45,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.separador = new SeparatorToolItem ();
 		this.anio_item = new ToolItem ();
 
-		this.anio_label = new Label ("");
+		this.label = new Label ("");
 		
 		this.save_button.is_important = true;
 		this.save_button.set_visible_horizontal ( false );
@@ -63,7 +63,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.separador.set_expand ( true );
 		this.separador.draw = false;
 		
-		this.anio_item.add ( this.anio_label );
+		this.anio_item.add ( this.label );
 
 		this.add ( this.save_button );
 		this.add ( this.add_button );
@@ -75,7 +75,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.add ( this.anio_item );
 	}
 
-	public void set_buttons_visible (bool cambiar) {
+	public void set_buttons_visible ( bool cambiar ) {
 		if(this.edit_button.get_visible_horizontal() != cambiar) {
 			this.edit_button.set_visible_horizontal (cambiar);
 			this.delete_button.set_visible_horizontal (cambiar);
@@ -83,12 +83,21 @@ public class Nomeolvides.MainToolbar : Toolbar
 		}
 	}
 
-	public void set_anio (string anio)
+	public void set_label_anio ( string anio )
 	{
 		if ( anio != "0") {
-			this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> Año: " + anio + "</span>" );
+			this.label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> Año: " + anio + "</span>" );
 		} else {
-			this.anio_label.set_text ( "" );
+			this.label.set_text ( "" );
+		}
+	}
+
+	public void set_label_lista ( string lista )
+	{
+		if ( lista != "") {
+			this.label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\">" + lista + "</span>" );
+		} else {
+			this.label.set_text ( "" );
 		}
 	}
 }
