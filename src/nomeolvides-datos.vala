@@ -69,7 +69,8 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	private void cargar_datos_listas () {
 		int i,j;
-		string datos = Archivo.leer ( "./listas" );
+		string datos = Configuracion.cargar_listas_hechos ();
+		string linea_lista_hash, linea_hecho_hash;
 		ArrayList<Hecho> hechos = this.lista_de_hechos ();
 		var lineas = datos.split_set ("\n");
 
@@ -77,9 +78,12 @@ public class Nomeolvides.Datos : GLib.Object {
 			
 		for (i=0; i < (lineas.length - 1); i++) {
 			var linea = lineas[i].split (",");
+			linea_lista_hash = linea[0];
+			linea_hecho_hash = linea[1];
 			for(j=0; j < hechos.size; j++ ) {
-				if ( hechos[j].hash == linea[1] ) {
-					var indice_lista = this.cache_hechos_listas.index_of (linea[0]);
+				if ( hechos[j].hash == linea_hecho_hash ) {
+					var indice_lista = this.cache_hechos_listas.index_of (linea_lista_hash);
+					print ( "hecho (" + hechos[j].nombre + ") a lista\n");
 					this.hechos_listas[indice_lista].agregar (hechos[j]);
 				}
 			}	
