@@ -98,7 +98,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 
 	private void anios_hechos_listas_cursor_changed_signal () {
-		this.lista_actual= this.anios_hechos.get_lista_actual ();
+		this.lista_actual = this.anios_hechos.get_lista_actual ();
 		this.actualizar_lista_label ();
 		this.anios_hechos_listas_cursor_changed ();
 	}
@@ -125,6 +125,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	public int get_anio_actual () {
 		return this.anio_actual;
+	}
+
+	public string get_lista_actual () {
+		return this.lista_actual;
 	}
 
 	public TreePath get_hecho_actual ( out Hecho hecho ) {

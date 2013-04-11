@@ -74,7 +74,8 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
-
+		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
+		
 		this.datos.cambio_anios.connect ( this.cargar_lista_anios );
 	}
 
@@ -95,7 +96,12 @@ public class Nomeolvides.App : Gtk.Application
 	
 	private void elegir_anio () {
 		int anio = this.window.get_anio_actual ();
-		this.window.cargar_hechos_view ( this.datos.get_liststore ( anio ) );
+		this.window.cargar_hechos_view ( this.datos.get_liststore_anio ( anio ) );
+	}
+
+	private void elegir_lista () {
+		string lista = this.window.get_lista_actual ();
+		this.window.cargar_hechos_view ( this.datos.get_liststore_lista ( lista ) );
 	}
 
 	public void edit_hecho_dialog () {

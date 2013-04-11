@@ -77,4 +77,8 @@ public class Nomeolvides.Listas : GLib.Object {
 	public ArrayList<string> get_listas_hash () {
 		return this.listas_liststore.get_listas_hash ();	
 	}
+
+	public string get_nombre_hash ( string nombre_lista ) {
+		return this.listas_liststore.get_lista_hash_nombre ( nombre_lista );
+	}
 }

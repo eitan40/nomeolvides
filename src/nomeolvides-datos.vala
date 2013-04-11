@@ -43,11 +43,11 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void agregar_hecho (Hecho nuevo) {
 		int indice;
-		if ( en_liststore ( nuevo.fecha.get_year(), out indice ) ) {
+		if ( en_liststore_anio ( nuevo.fecha.get_year(), out indice ) ) {
 			this.hechos_anios[indice].agregar ( nuevo );
 		} else {
 			agregar_liststore ( nuevo.fecha.get_year() );
-			if ( en_liststore ( nuevo.fecha.get_year(), out indice ) ) {
+			if ( en_liststore_anio ( nuevo.fecha.get_year(), out indice ) ) {
 				this.hechos_anios[indice].agregar (nuevo);
 				this.cambio_anios ();
 			}
@@ -93,7 +93,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
 		TreeIter iterador;
 		int anio;
-		if ( en_liststore (a_eliminar.fecha.get_year(), out anio) ) {	
+		if ( en_liststore_anio (a_eliminar.fecha.get_year(), out anio) ) {	
 			this.hechos_anios[anio].get_iter(out iterador, path);
 			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
 
@@ -115,11 +115,24 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
 	}
 
-	private bool en_liststore ( int anio, out int indice ) {
+	private bool en_liststore_anio ( int anio, out int indice ) {
 
 		bool retorno = false;
 
 		indice = this.cache_hechos_anios.index_of( anio ); 
+
+		if ( indice >= 0 ) {
+			retorno = true;
+		}
+		
+		return retorno;
+	}
+
+	private bool en_liststore_lista ( string hash, out int indice ) {
+
+		bool retorno = false;
+
+		indice = this.cache_hechos_listas.index_of( hash ); 
 
 		if ( indice >= 0 ) {
 			retorno = true;
@@ -238,13 +251,32 @@ public class Nomeolvides.Datos : GLib.Object {
 		Archivo.escribir ( archivo, a_guardar );
 	}
 
-	public ListStoreHechos get_liststore ( int anio ) {
+	public ListStoreHechos get_liststore_anio ( int anio ) {
 
 		ListStoreHechos retorno = null;
 		int indice;
 		
-		if ( this.en_liststore ( anio, out indice ) ) {
+		if ( this.en_liststore_anio ( anio, out indice ) ) {
 			retorno = this.hechos_anios[indice];
+		}
+
+		if ( retorno == null ) {
+			retorno = new ListStoreHechos.anio_int (0);
+		}
+			
+		return retorno;
+	}
+
+	public ListStoreHechos get_liststore_lista ( string lista ) {
+
+		ListStoreHechos retorno = null;
+		int indice;
+		string hash;
+		
+		hash = this.listas.get_nombre_hash ( lista );
+		
+		if ( this.en_liststore_lista ( hash, out indice ) ) {
+			retorno = this.hechos_listas[indice];
 		}
 
 		if ( retorno == null ) {
