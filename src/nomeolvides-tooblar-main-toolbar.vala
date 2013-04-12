@@ -22,7 +22,6 @@ using Nomeolvides;
 
 public class Nomeolvides.MainToolbar : Toolbar
 {
-	public ToolButton save_button { get; private set; }
 	public ToolButton add_button { get; private set; }
 	public ToolButton edit_button { get; private set; }
 	public ToolButton delete_button { get; private set; }
@@ -34,9 +33,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 	
 	public MainToolbar ()
 	{
-		this.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
-
-		this.save_button = new ToolButton.from_stock ( Stock.SAVE );
+		this.get_style_context().add_class (STYLE_CLASS_TOOLBAR);
+		
 		this.add_button = new ToolButton.from_stock ( Stock.ADD );
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
@@ -47,8 +45,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 		this.label = new Label ("");
 		
-		this.save_button.is_important = true;
-		this.save_button.set_visible_horizontal ( false );
 		this.add_button.is_important = true;		
 		this.edit_button.is_important = true;
 		this.edit_button.set_visible_horizontal ( false );
@@ -65,7 +61,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 		
 		this.anio_item.add ( this.label );
 
-		this.add ( this.save_button );
 		this.add ( this.add_button );
 		this.add ( this.edit_button );
 		this.add ( this.delete_button );
@@ -75,12 +70,25 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.add ( this.anio_item );
 	}
 
-	public void set_buttons_visible ( bool cambiar ) {
-		if(this.edit_button.get_visible_horizontal() != cambiar) {
-			this.edit_button.set_visible_horizontal (cambiar);
-			this.delete_button.set_visible_horizontal (cambiar);
-			this.send_button.set_visible_horizontal (cambiar);
+	public void set_buttons_visible ( Hecho hecho ) {
+
+		if ( Archivo.es_path ( hecho.archivo_fuente ) ) {
+			this.edit_button.set_visible_horizontal ( true );
+			this.delete_button.set_visible_horizontal ( true );
+		} else {
+			this.edit_button.set_visible_horizontal ( false );
+			this.delete_button.set_visible_horizontal ( false );
 		}
+		
+		this.send_button.set_visible_horizontal ( true );
+	}
+
+	public void set_buttons_invisible () {
+
+		this.send_button.set_visible_horizontal ( false );
+		this.edit_button.set_visible_horizontal ( false );
+		this.delete_button.set_visible_horizontal ( false );
+		
 	}
 
 	public void set_label_anio ( string anio )

@@ -67,7 +67,6 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void connect_signals () {
-		this.window.toolbar_save_button_clicked.connect ( this.datos.save_file );
 		this.window.toolbar_add_button_clicked.connect ( this.add_hecho_dialog );
 		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
 		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );
@@ -89,7 +88,7 @@ public class Nomeolvides.App : Gtk.Application
 		if ( add_dialog.run() == ResponseType.APPLY )
 		{
 			this.datos.agregar_hecho(add_dialog.respuesta);
-			this.datos.save_file();
+			this.datos.guardar_un_archivo ( add_dialog.respuesta.archivo_fuente);
 		}		
 		add_dialog.destroy();
 	}
@@ -117,7 +116,7 @@ public class Nomeolvides.App : Gtk.Application
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
 			this.datos.eliminar_hecho ( hecho, path );
 			this.datos.agregar_hecho ( edit_dialog.respuesta );
-			this.datos.save_file();
+			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente);
 		}
 		edit_dialog.destroy();
 	}
@@ -131,7 +130,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
-			this.datos.save_file();
+			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
 		}	
 		delete_dialog.destroy ();
 	}

@@ -60,7 +60,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	private void conectar_seniales () {
 
-		this.toolbar.save_button.clicked.connect ( this.toolbar_save_button_clicked_signal );
 		this.toolbar.add_button.clicked.connect ( this.toolbar_add_button_clicked_signal );
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
@@ -69,10 +68,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
 		this.anios_hechos.hechos_cursor_changed.connect ( this.elegir_hecho );
-	}
-
-	private void toolbar_save_button_clicked_signal () {
-		this.toolbar_save_button_clicked ();
 	}
 
 	private void toolbar_add_button_clicked_signal () {
@@ -140,9 +135,9 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.get_hecho_actual ( out hecho );
 		
 		if ( hecho != null ) { 
-			this.toolbar.set_buttons_visible ( true );
+			this.toolbar.set_buttons_visible ( hecho );
 		} else {
-			this.toolbar.set_buttons_visible ( false );		
+			this.toolbar.set_buttons_invisible ();		
 		}
 	}
 	
@@ -151,7 +146,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
 	
-	public signal void toolbar_save_button_clicked ();
 	public signal void toolbar_add_button_clicked ();
 	public signal void toolbar_edit_button_clicked ();
 	public signal void toolbar_delete_button_clicked ();
