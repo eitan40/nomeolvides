@@ -54,6 +54,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
 		this.listas_view.cursor_changed.connect ( this.elegir_lista );
 		this.hechos_view.row_activated.connect ( mostrar_vista );
+		this.anios_listas.switch_page.connect ( cambiar_pestania );
 
 		Separator separador = new Separator(Orientation.VERTICAL);
 
@@ -94,6 +95,14 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 			this.anio_actual = 0; //ningún anio
 			this.listas_cursor_changed ();
 			this.mostrar_scroll_vista ( false );
+		}
+	}
+
+	private void cambiar_pestania () {
+		if ( this.anio_actual != 0 ) {
+			this.elegir_lista ();
+		} else {
+			this.elegir_anio ();
 		}
 	}
 
@@ -150,4 +159,5 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	public signal void hechos_cursor_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();
+	public signal void notebook_changed_current_page ();
 }
