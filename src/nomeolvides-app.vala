@@ -64,7 +64,6 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void connect_signals () {
-		this.window.toolbar_save_button_clicked.connect ( this.datos.save_file );
 		this.window.toolbar_add_button_clicked.connect ( this.add_hecho_dialog );
 		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
 		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );

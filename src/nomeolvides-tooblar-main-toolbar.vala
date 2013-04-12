@@ -22,7 +22,6 @@ using Nomeolvides;
 
 public class Nomeolvides.MainToolbar : Toolbar
 {
-	public ToolButton save_button { get; private set; }
 	public ToolButton add_button { get; private set; }
 	public ToolButton edit_button { get; private set; }
 	public ToolButton delete_button { get; private set; }
@@ -35,7 +34,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 	{
 		this.get_style_context().add_class (STYLE_CLASS_TOOLBAR);
 		
-		this.save_button = new ToolButton.from_stock ( Stock.SAVE );
 		this.add_button = new ToolButton.from_stock ( Stock.ADD );
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
@@ -45,8 +43,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 		this.anio_label = new Label ("");
 		
-		this.save_button.is_important = true;
-		this.save_button.set_visible_horizontal ( false );
 		this.add_button.is_important = true;		
 		this.edit_button.is_important = true;
 		this.edit_button.set_visible_horizontal ( false );
@@ -61,7 +57,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 		
 		this.anio_item.add ( this.anio_label );
 
-		this.add ( this.save_button );
 		this.add ( this.add_button );
 		this.add ( this.edit_button );
 		this.add ( this.delete_button );
