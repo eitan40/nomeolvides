@@ -98,8 +98,25 @@ public class Nomeolvides.Datos : GLib.Object {
 			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
 
 			if (this.hechos_anios[anio].length () == 0) {
-				this.eliminar_liststore (anio);
+				this.eliminar_liststore_anio (anio);
 				this.cambio_anios ();
+			}
+		}
+	}
+
+	public void eliminar_hecho_lista ( Hecho a_eliminar, TreePath path ) {
+		TreeIter iterador;
+		int indice;
+
+		foreach ( string hash in this.cache_hechos_listas ) {
+			if ( this.en_liststore_lista ( hash, out indice ) ) {
+				this.hechos_listas[indice].get_iter(out iterador, path);
+				this.hechos_listas[indice].eliminar ( iterador, a_eliminar );				
+
+				if (this.hechos_listas[indice].length () == 0) {
+					this.eliminar_liststore_lista (indice);
+					this.cambio_listas ();
+				}
 			}
 		}
 	}
@@ -109,10 +126,16 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cache_hechos_anios.add (cambio_anios);
 	}
 
-	private void eliminar_liststore ( int a_eliminar ) {
+	private void eliminar_liststore_anio ( int a_eliminar ) {
 		
 		this.hechos_anios.remove (this.hechos_anios[a_eliminar]);
 		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
+	}
+
+	private void eliminar_liststore_lista ( int a_eliminar ) {
+		
+		this.hechos_listas.remove (this.hechos_listas[a_eliminar]);
+		this.cache_hechos_listas.remove(this.cache_hechos_listas[a_eliminar]);
 	}
 
 	private bool en_liststore_anio ( int anio, out int indice ) {
@@ -221,6 +244,23 @@ public class Nomeolvides.Datos : GLib.Object {
 		Archivo.escribir ( archivo, a_guardar );			
 	}
 
+	public void guardar_listas_hechos () {
+		string hash, a_guardar = "";
+		int i,j;
+		ArrayList<Hecho> lista;
+		
+		for (i=0; i < this.cache_hechos_listas.size; i++) {
+			lista = this.hechos_listas[i].lista_de_hechos ();
+			hash = this.cache_hechos_listas[i];
+			for (j=0; j < lista.size; j++) {
+
+				a_guardar += hash + "," + lista[j].hash + "\n";
+			}
+		}
+		print ( "a guardar:\n" + a_guardar + "\n");
+		this.listas.guardar_listas_hechos ( a_guardar );
+	}
+
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
 		string todo;
 		string[] lineas;
@@ -290,4 +330,5 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public signal void cambio_anios ();
+	public signal void cambio_listas ();
 }

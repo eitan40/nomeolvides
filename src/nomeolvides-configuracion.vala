@@ -91,6 +91,10 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		return Archivo.leer ( Configuracion.archivo_listas_hechos () );
 	}
 
+	public static void guardar_listas_hechos ( string listas_hechos ) {
+		Archivo.escribir ( Configuracion.archivo_listas_hechos (), listas_hechos );
+	}
+
 	private static string archivo_bases () {
 		return Configuracion.directorio_configuracion () + "/db-predeterminadas.json";
 	}

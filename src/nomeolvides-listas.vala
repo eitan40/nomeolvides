@@ -81,4 +81,9 @@ public class Nomeolvides.Listas : GLib.Object {
 	public string get_nombre_hash ( string nombre_lista ) {
 		return this.listas_liststore.get_lista_hash_nombre ( nombre_lista );
 	}
+
+	public void guardar_listas_hechos ( string listas_hechos ) {
+		
+		Configuracion.guardar_listas_hechos ( listas_hechos );
+	}
 }
