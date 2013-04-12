@@ -33,8 +33,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 	
 	public MainToolbar ()
 	{
-		this.get_style_context().add_class (STYLE_CLASS_PRIMARY_TOOLBAR);
-
+		this.get_style_context().add_class (STYLE_CLASS_TOOLBAR);
+		
 		this.save_button = new ToolButton.from_stock ( Stock.SAVE );
 		this.add_button = new ToolButton.from_stock ( Stock.ADD );
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
