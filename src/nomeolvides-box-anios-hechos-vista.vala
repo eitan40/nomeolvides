@@ -159,5 +159,4 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	public signal void hechos_cursor_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();
-	public signal void notebook_changed_current_page ();
 }
