@@ -75,12 +75,12 @@ public class Nomeolvides.MainToolbar : Toolbar
 		if ( Archivo.es_path ( hecho.archivo_fuente ) ) {
 			this.edit_button.set_visible_horizontal ( true );
 			this.delete_button.set_visible_horizontal ( true );
+			this.send_button.set_visible_horizontal ( true );
 		} else {
 			this.edit_button.set_visible_horizontal ( false );
 			this.delete_button.set_visible_horizontal ( false );
+			this.send_button.set_visible_horizontal ( false );
 		}
-		
-		this.send_button.set_visible_horizontal ( true );
 	}
 
 	public void set_buttons_invisible () {
@@ -88,7 +88,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.set_visible_horizontal ( false );
 		this.edit_button.set_visible_horizontal ( false );
 		this.delete_button.set_visible_horizontal ( false );
-		
 	}
 
 	public void set_label_anio ( string anio )
