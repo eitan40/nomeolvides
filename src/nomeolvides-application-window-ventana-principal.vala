@@ -64,6 +64,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
+		this.toolbar.undo_button.clicked.connect ( this.toolbar_undo_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
@@ -84,6 +85,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	private void toolbar_send_button_clicked_signal () {
 		this.toolbar_send_button_clicked ();
+	}
+
+	private void toolbar_undo_button_clicked_signal () {
+		this.toolbar_undo_button_clicked ();
 	}
 
 	private void anios_hechos_anios_cursor_changed_signal () {
@@ -150,6 +155,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public signal void toolbar_edit_button_clicked ();
 	public signal void toolbar_delete_button_clicked ();
 	public signal void toolbar_send_button_clicked ();
+	public signal void toolbar_undo_button_clicked ();
 	public signal void anios_hechos_anios_cursor_changed ();
-	public signal void anios_hechos_listas_cursor_changed ();
+	public signal void anios_hechos_listas_cursor_changed ();	
 }

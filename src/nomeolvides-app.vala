@@ -71,6 +71,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
 		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );
 		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
+		this.window.toolbar_undo_button_clicked.connect ( this.undo_hecho );
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
@@ -193,6 +194,10 @@ public class Nomeolvides.App : Gtk.Application
 				stdout.printf(err.message+"\n");
 			}
 		}
+	}
+
+	public void undo_hecho () {
+		this.datos.deshacer_cambios ();
 	}
 
 	public void save_as_file_dialog () {

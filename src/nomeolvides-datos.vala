@@ -27,6 +27,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_listas;
 	private ArrayList<string> cache_hechos_listas;
 	private ArrayList<int> cache_hechos_anios;
+	private Deshacer deshacer;
 	public HechosFuentes fuentes;
 	public Listas listas;
 
@@ -35,6 +36,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.cache_hechos_listas = new ArrayList<string> ();
 		this.hechos_listas = new ArrayList<ListStoreHechos> ();
+		this.deshacer = new Deshacer ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
 		this.cargar_fuentes_predefinidas ();
@@ -96,6 +98,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		if ( en_liststore_anio (a_eliminar.fecha.get_year(), out anio) ) {	
 			this.hechos_anios[anio].get_iter(out iterador, path);
 			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
+			this.deshacer.guardar ( a_eliminar );
 
 			if (this.hechos_anios[anio].length () == 0) {
 				this.eliminar_liststore_anio (anio);
@@ -119,6 +122,12 @@ public class Nomeolvides.Datos : GLib.Object {
 				}
 			}
 		}
+	}
+
+	public void deshacer_cambios () {
+		Hecho hecho = this.deshacer.deshacer ();
+		this.agregar_hecho ( hecho );
+		this.guardar_un_archivo ( hecho.archivo_fuente);
 	}
 
 	private void agregar_liststore (int cambio_anios) {
