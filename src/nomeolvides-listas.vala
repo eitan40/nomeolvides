@@ -51,6 +51,7 @@ public class Nomeolvides.Listas : GLib.Object {
 		lineas = todo.split_set ("\n");
 		for (i=0; i < lineas.length; i++) {
         	nueva_lista = new Lista.json(lineas[i]);
+			print ( "Nueva lista nombre (linea " + i.to_string () + "): " + nueva_lista.nombre + "\n" );
 			if ( nueva_lista.nombre != "null" ) {
 				this.listas_liststore.agregar_lista ( nueva_lista );
 			}
