@@ -21,25 +21,14 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.Deshacer : Object {
-	private ArrayQueue<DeshacerItem> lista_deshacer;
+public class Nomeolvides.DeshacerItem : Object {
 
-	public Deshacer () {
-		this.lista_deshacer = new ArrayQueue<DeshacerItem> ();
-	}
+	public Hecho borrado { get; private set; }
+	public Hecho editado { get; private set; }
+	public DeshacerTipo tipo { get; private set; }
 
-	public void borrar ( Hecho borrar, DeshacerTipo tipo) {		
-		this.lista_deshacer.offer_head ( new DeshacerItem ( borrar, tipo) );
-	}
-
-	public void deshacer ( out Hecho borrado, out DeshacerTipo tipo ) {
-		DeshacerItem item = this.lista_deshacer.poll_head ();
-		borrado = item.borrado;
-		tipo = item.tipo;
-	}
-}
-
-public enum Nomeolvides.DeshacerTipo {
-	BORRAR,
-	EDITAR;
+	public DeshacerItem ( Hecho borrado, DeshacerTipo tipo ) {
+		this.tipo = tipo;
+		this.borrado = borrado;		
+	}	
 }

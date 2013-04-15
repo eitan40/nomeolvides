@@ -107,8 +107,8 @@ public enum Nomeolvides.FuentesTipo {
 
 			default:
                 return "";
-		}
 	}
+}
 
 	public static FuentesTipo convertir (string cadena)
 	{

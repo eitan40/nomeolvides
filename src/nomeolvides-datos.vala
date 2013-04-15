@@ -98,7 +98,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		if ( en_liststore_anio (a_eliminar.fecha.get_year(), out anio) ) {	
 			this.hechos_anios[anio].get_iter(out iterador, path);
 			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
-			this.deshacer.guardar ( a_eliminar );
+			this.deshacer.borrar ( a_eliminar, DeshacerTipo.BORRAR );
 
 			if (this.hechos_anios[anio].length () == 0) {
 				this.eliminar_liststore_anio (anio);
@@ -125,9 +125,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void deshacer_cambios () {
-		Hecho hecho = this.deshacer.deshacer ();
-		this.agregar_hecho ( hecho );
-		this.guardar_un_archivo ( hecho.archivo_fuente);
+		Hecho borrado;
+		Hecho editado;
+		DeshacerTipo tipo;
+		this.deshacer.deshacer ( out borrado, out tipo );
+		if ( tipo == DeshacerTipo.BORRAR ) {
+			this.agregar_hecho ( borrado );
+			this.guardar_un_archivo ( borrado.archivo_fuente);
+		}
 	}
 
 	private void agregar_liststore (int cambio_anios) {
