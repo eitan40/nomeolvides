@@ -27,7 +27,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_listas;
 	private ArrayList<string> cache_hechos_listas;
 	private ArrayList<int> cache_hechos_anios;
-	private Deshacer deshacer;
+	public Deshacer deshacer;
 	public HechosFuentes fuentes;
 	public Listas listas;
 
@@ -97,8 +97,6 @@ public class Nomeolvides.Datos : GLib.Object {
 		if ( en_liststore_anio (a_eliminar.fecha.get_year(), out anio) ) {	
 			this.hechos_anios[anio].get_iter(out iterador, path);
 			this.hechos_anios[anio].eliminar ( iterador, a_eliminar );
-			this.deshacer.borrar ( a_eliminar, DeshacerTipo.BORRAR );
-
 			if (this.hechos_anios[anio].length () == 0) {
 				this.eliminar_liststore_anio (anio);
 				this.cambio_anios ();
@@ -124,14 +122,13 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void deshacer_cambios () {
-		Hecho borrado;
-		Hecho editado;
-		DeshacerTipo tipo;
-		this.deshacer.deshacer ( out borrado, out tipo );
-		if ( tipo == DeshacerTipo.BORRAR ) {
-			this.agregar_hecho ( borrado );
-			this.guardar_un_archivo ( borrado.archivo_fuente);
+		DeshacerItem item;
+		item = this.deshacer.deshacer ();
+		if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
+			this.eliminar_hecho ( item.get_editado(), item.get_path () );
 		}
+		this.agregar_hecho ( item.get_borrado() );
+		this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
 	}
 
 	private void agregar_liststore (int cambio_anios) {

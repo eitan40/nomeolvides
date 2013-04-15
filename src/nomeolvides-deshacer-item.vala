@@ -23,12 +23,34 @@ using Nomeolvides;
 
 public class Nomeolvides.DeshacerItem : Object {
 
-	public Hecho borrado { get; private set; }
-	public Hecho editado { get; private set; }
-	public DeshacerTipo tipo { get; private set; }
+	private Hecho borrado;
+	private Hecho editado;
+	private DeshacerTipo tipo;
+	private TreePath path;
 
 	public DeshacerItem ( Hecho borrado, DeshacerTipo tipo ) {
 		this.tipo = tipo;
 		this.borrado = borrado;		
-	}	
+	}
+
+	public void set_editado ( Hecho editado, TreePath path ) {
+		this.editado = editado;
+		this.path = path;
+	}
+
+	public Hecho get_borrado () {
+		return this.borrado;
+	}
+
+	public Hecho get_editado () {
+		return this.editado;
+	}
+
+	public DeshacerTipo get_tipo () {
+		return this.tipo;
+	}
+	
+	public TreePath get_path () {
+		return this.path;
+	}
 }

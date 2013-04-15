@@ -115,6 +115,8 @@ public class Nomeolvides.App : Gtk.Application
 		edit_dialog.show_all ();
 
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
+			this.datos.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
+			this.datos.deshacer.guardar_editado ( hecho, path );
 			this.datos.eliminar_hecho ( hecho, path );
 			this.datos.agregar_hecho ( edit_dialog.respuesta );
 			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente);
@@ -131,6 +133,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
+			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
 			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
 			this.datos.eliminar_hecho_lista ( hecho_a_borrar, path);
 			this.datos.guardar_listas_hechos ();

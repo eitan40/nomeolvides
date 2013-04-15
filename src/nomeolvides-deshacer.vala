@@ -28,14 +28,17 @@ public class Nomeolvides.Deshacer : Object {
 		this.lista_deshacer = new ArrayQueue<DeshacerItem> ();
 	}
 
-	public void borrar ( Hecho borrar, DeshacerTipo tipo) {		
+	public void guardar_borrado ( Hecho borrar, DeshacerTipo tipo ) {		
 		this.lista_deshacer.offer_head ( new DeshacerItem ( borrar, tipo) );
 	}
 
-	public void deshacer ( out Hecho borrado, out DeshacerTipo tipo ) {
+	public void guardar_editado ( Hecho editado, TreePath path ) {
+		this.lista_deshacer.peek_head ().set_editado ( editado, path );
+	}
+
+	public DeshacerItem deshacer () {
 		DeshacerItem item = this.lista_deshacer.poll_head ();
-		borrado = item.borrado;
-		tipo = item.tipo;
+		return item;
 	}
 }
 
