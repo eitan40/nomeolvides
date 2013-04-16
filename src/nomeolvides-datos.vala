@@ -177,27 +177,11 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ArrayList<Hecho> lista_de_hechos () { 
-        ArrayList<Hecho> hechos = new ArrayList<Hecho>();
-		int i;
-
-		for (i=0; i < this.hechos_anios.size; i++ ) {
-			hechos.add_all (this.hechos_anios[i].lista_de_hechos ());
-		}
-		
-		return hechos;
+		return this.hechos.lista_de_hechos ();
     }
 
 	public ArrayList<int> lista_de_anios ()
 	{
-		/*ArrayList<int> retorno = new ArrayList<int> ();
-		int i;
-
-		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
-			retorno.add ( this.cache_hechos_anios[i] );
-		}		
-		
-		return retorno;*/
-
 		return this.hechos.get_anios ();
 	}
 
@@ -295,19 +279,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
-
-		/*ListStoreHechos retorno = null;
-		int indice;
-		
-		if ( this.en_liststore_anio ( anio, out indice ) ) {
-			retorno = this.hechos_anios[indice];
-		}
-
-		if ( retorno == null ) {
-			retorno = new ListStoreHechos.anio_int (0);
-		}
-			
-		return retorno;*/
 		return this.hechos.get_anio ( anio );
 	}
 
