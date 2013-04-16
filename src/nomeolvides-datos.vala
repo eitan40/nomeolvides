@@ -27,6 +27,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	private ArrayList<ListStoreHechos> hechos_listas;
 	private ArrayList<string> cache_hechos_listas;
 	private ArrayList<int> cache_hechos_anios;
+	private Hechos hechos;
 	public HechosFuentes fuentes;
 	public Listas listas;
 
@@ -35,6 +36,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos_anios = new ArrayList<ListStoreHechos> ();
 		this.cache_hechos_listas = new ArrayList<string> ();
 		this.hechos_listas = new ArrayList<ListStoreHechos> ();
+		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
 		this.cargar_fuentes_predefinidas ();
@@ -42,7 +44,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void agregar_hecho (Hecho nuevo) {
-		int indice;
+		/*int indice;
 		if ( en_liststore_anio ( nuevo.fecha.get_year(), out indice ) ) {
 			this.hechos_anios[indice].agregar ( nuevo );
 		} else {
@@ -51,7 +53,8 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.hechos_anios[indice].agregar (nuevo);
 				this.cambio_anios ();
 			}
-		}
+		}*/
+		this.hechos.agregar_hecho_anio ( nuevo.fecha.get_year (), nuevo );
 	}
 
 	private void inicializar_liststore_listas () {
@@ -186,14 +189,16 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public ArrayList<int> lista_de_anios ()
 	{
-		ArrayList<int> retorno = new ArrayList<int> ();
+		/*ArrayList<int> retorno = new ArrayList<int> ();
 		int i;
 
 		for (i=0; i < this.cache_hechos_anios.size; i++ ) {
 			retorno.add ( this.cache_hechos_anios[i] );
 		}		
 		
-		return retorno;
+		return retorno;*/
+
+		return this.hechos.get_anios ();
 	}
 
 	public void cargar_fuentes_predefinidas ( ) {		
@@ -291,7 +296,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
 
-		ListStoreHechos retorno = null;
+		/*ListStoreHechos retorno = null;
 		int indice;
 		
 		if ( this.en_liststore_anio ( anio, out indice ) ) {
@@ -302,7 +307,8 @@ public class Nomeolvides.Datos : GLib.Object {
 			retorno = new ListStoreHechos.anio_int (0);
 		}
 			
-		return retorno;
+		return retorno;*/
+		return this.hechos.get_anio ( anio );
 	}
 
 	public ListStoreHechos get_liststore_lista ( string lista ) {

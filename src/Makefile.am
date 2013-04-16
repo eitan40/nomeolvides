@@ -61,7 +61,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-add-lista-dialog.vala \
 	nomeolvides-dialog-lista.vala \
 	nomeolvides-edit-lista-dialog.vala \
-	nomeolvides-listas.vala
+	nomeolvides-listas.vala \
+	nomeolvides-hechos.vala
 
 
 nomeolvides_VALAFLAGS = \
