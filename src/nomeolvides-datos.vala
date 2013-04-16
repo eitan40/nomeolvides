@@ -147,14 +147,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ArrayList<Hecho> lista_de_hechos () { 
-        ArrayList<Hecho> hechos = new ArrayList<Hecho>();
-		int i;
-
-		for (i=0; i < this.hechos_anios.size; i++ ) {
-			hechos.add_all (this.hechos_anios[i].lista_de_hechos ());
-		}
-		
-		return hechos;
+		return this.hechos.lista_de_hechos ();
     }
 
 	public ArrayList<int> lista_de_anios ()
