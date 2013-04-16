@@ -22,40 +22,85 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.Hechos : Object {
-	private TreeMap<string,ArrayList<Hecho>> hechos_anios;
+	private TreeMap<int,ArrayList<Hecho>> hechos_anios;
 	private TreeMap<string,ArrayList<Hecho>> hechos_listas;
+	private ArrayList<int> cache_hechos_anios;
 	private ArrayList<string> cache_hechos_listas;
-	private ArrayList<string> cache_hechos_anios;
 
 	public Hechos () {
-		this.cache_hechos_anios = new ArrayList<string> ();
-		this.hechos_anios = new TreeMap<string,ArrayList<Hecho>> ();
+		this.cache_hechos_anios = new ArrayList<int> ();
+		this.hechos_anios = new TreeMap<int,ArrayList<Hecho>> ();
 		this.cache_hechos_listas = new ArrayList<string> ();
 		this.hechos_listas = new TreeMap<string,ArrayList<Hecho>> ();
 	}
 
 	public void agregar_hecho_anio ( int anio, Hecho hecho ) {
-		if (!(this.hechos_anios.has_key (anio.to_string () )) ) {
-			this.hechos_anios.set ( anio.to_string (), new ArrayList<Hecho> () );
-			this.cache_hechos_anios.add (anio.to_string ());
+		if (!(this.hechos_anios.has_key ( anio )) ) {
+			this.hechos_anios.set ( anio, new ArrayList<Hecho> () );
+			this.cache_hechos_anios.add ( anio );
 		}
-
-		this.hechos_anios.get ( anio.to_string () ).add (hecho);
+		this.hechos_anios.get ( anio ).add ( hecho );
 	}
 
-	public void borrar_hecho_anio ( int anio, Hecho hecho ) {
-		if (this.hechos_anios.has_key (anio.to_string () ) ) {
-			this.hechos_anios.get ( anio.to_string () ).remove (hecho);
-		}		
+	public void agregar_hecho_lista ( string lista, string hash_hecho ) {
+		var recorrer_anios = this.hechos_anios.map_iterator ();
+		recorrer_anios.next();
+
+		do {
+			var anio = recorrer_anios.get_value ();
+			foreach ( Hecho h in anio ) {
+				if (!(this.hechos_listas.has_key (lista) )) {
+					this.hechos_listas.set ( lista, new ArrayList<Hecho> () );
+					this.cache_hechos_listas.add (lista);
+				}
+				this.hechos_listas.get ( lista ).add ( h );
+			}
+			recorrer_anios.next ();
+		} while ( recorrer_anios.has_next () );
+	}
+
+	public void borrar_hecho ( int anio, Hecho hecho ) {
+		if (this.hechos_anios.has_key (anio ) ) {
+			this.hechos_anios.get ( anio ).remove (hecho);
+		}
+		this.borrar_hecho_listas ( hecho );
+	}
+
+	public void borrar_hecho_listas ( Hecho hecho ) {
+		var recorrer_listas = this.hechos_listas.map_iterator ();
+		recorrer_listas.next ();
+
+		do {
+			var lista = recorrer_listas.get_value ();
+			if ( lista.contains (hecho) ) {
+				lista.remove ( hecho );
+			}
+			recorrer_listas.next ();
+		} while ( recorrer_listas.has_next () );
 	}
 
 	public ListStoreHechos get_anio ( int anio ) {
-		var hechos = this.hechos_anios.get ( anio.to_string () );
+		var hechos = this.hechos_anios.get ( anio );
 		var liststore = new ListStoreHechos ();
-			
-		foreach ( Hecho h in hechos ) {
-			liststore.agregar ( h );
+		
+		if (hechos != null ) {	
+			foreach ( Hecho h in hechos ) {
+				liststore.agregar ( h );
+			}
 		}
+			
+		return liststore;
+	}
+
+	public ListStoreHechos get_lista ( string lista ) {
+		var hechos = this.hechos_listas.get ( lista );
+		var liststore = new ListStoreHechos ();
+
+		if (hechos != null ) {
+			foreach ( Hecho h in hechos ) {
+				liststore.agregar ( h );
+			}
+		}	
 
 		return liststore;
 	}
@@ -63,10 +108,20 @@ public class Nomeolvides.Hechos : Object {
 	public ArrayList<int> get_anios () {
 		var anios = new ArrayList<int> ();
 			
-		foreach ( string s in this.cache_hechos_anios ) {
-			anios.add ( int.parse (s) );
+		foreach ( int anio in this.cache_hechos_anios ) {
+			anios.add ( anio );
 		}
 
 		return anios;
+	}
+
+	public ArrayList<string> get_listas () {
+		var listas = new ArrayList<string> ();
+			
+		foreach ( string s in this.cache_hechos_listas ) {
+			listas.add ( s );
+		}
+
+		return listas;
 	}
 }
