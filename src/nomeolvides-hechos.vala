@@ -109,8 +109,8 @@ public class Nomeolvides.Hechos : Object {
 		var todo = new ArrayList<Hecho> ();
 		ArrayList<Hecho> anio;
 
-		foreach ( string s in this.cache_hechos_anios ) {
-			anio = this.hechos_anios.get ( s );
+		foreach ( int i in this.cache_hechos_anios ) {
+			anio = this.hechos_anios.get ( i );
 			foreach ( Hecho h in anio ) {
 				todo.add ( h );
 			}
