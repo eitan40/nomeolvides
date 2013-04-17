@@ -63,7 +63,10 @@ public class Nomeolvides.Hechos : Object {
 		if (this.hechos_anios.has_key (anio ) ) {
 			this.hechos_anios.get ( anio ).remove (hecho);
 		}
-		this.borrar_hecho_listas ( hecho );
+
+		if (!(this.hechos_listas.is_empty) ){
+			this.borrar_hecho_listas ( hecho );
+		}	
 	}
 
 	public void borrar_hecho_listas ( Hecho hecho ) {
