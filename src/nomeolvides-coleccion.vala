@@ -37,19 +37,21 @@ public class Nomeolvides.Coleccion : GLib.Object {
 	}
 
 	public void borrar ( Hecho hecho ) {
-		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.first ();
+		if ( !this.hechos.is_empty ) {
+			var recorrer_keys = this.hechos.map_iterator ();
+			recorrer_keys.first ();
 
-		do {
-			var key = recorrer_keys.get_value ();
-			if ( key.contains (hecho) ) {
-				key.remove ( hecho );
-				if ( key.size == 0 ) {
-					recorrer_keys.unset ();
-					this.coleccion_cambio_keys ();
+			do {
+				var key = recorrer_keys.get_value ();
+				if ( key.contains (hecho) ) {
+					key.remove ( hecho );
+					if ( key.size == 0 ) {
+						recorrer_keys.unset ();
+						this.coleccion_cambio_keys ();
+					}
 				}
-			}
-		} while ( recorrer_keys.next () );
+			} while ( recorrer_keys.next () );
+		}
 	}
 
 	public ListStoreHechos get_liststore ( string key ) {
