@@ -64,14 +64,13 @@ public class Nomeolvides.Listas : GLib.Object {
 		ListStoreListas temp = new ListStoreListas ();
 		TreeIter iterador;
 		
-		this.listas_liststore.get_iter_first ( out iterador );
-		
-		do {
-			this.listas_liststore.get_value (iterador, 2, out lista_value);
-			lista = lista_value as Lista;
-			temp.agregar_lista ( lista );
-		}while ( this.listas_liststore.iter_next ( ref iterador) );
-		        
+		if ( this.listas_liststore.get_iter_first ( out iterador ) ) {		
+			do {
+				this.listas_liststore.get_value (iterador, 2, out lista_value);
+				lista = lista_value as Lista;
+				temp.agregar_lista ( lista );
+			}while ( this.listas_liststore.iter_next ( ref iterador) );
+		}        
 		return temp;
 	}
 

@@ -32,14 +32,16 @@ public class Nomeolvides.ListStoreListas : ListStore {
 	}
 
 	public void agregar_lista ( Lista lista ) {
-		if ( this.lista_no_duplicada (lista) ) {
-			this.append ( out this.iterador );
-			this.set ( this.iterador,
-		               0,lista.nombre,
-		               1,lista.cantidad_hechos,
-		               2,lista );
-			this.listas_cache.add ( lista.get_checksum() );
-		}	
+		if (lista != null ) {
+			if ( this.lista_no_duplicada (lista) ) {
+				this.append ( out this.iterador );
+				this.set ( this.iterador,
+							0,lista.nombre,
+							1,lista.cantidad_hechos,
+		    				2,lista );
+				this.listas_cache.add ( lista.get_checksum() );
+			}
+		}
 	}
 
 	public string a_json () {
@@ -48,13 +50,13 @@ public class Nomeolvides.ListStoreListas : ListStore {
 		Value value_lista;
 		TreeIter iter;
 
-		this.get_iter_first(out iter);
-		do {
-			this.get_value(iter, 2, out value_lista);
-			lista = value_lista as Lista;
-			json += lista.a_json ()  + "\n";
-		}while (this.iter_next(ref iter));
-
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 2, out value_lista);
+				lista = value_lista as Lista;
+				json += lista.a_json ()  + "\n";
+			}while (this.iter_next(ref iter));
+		}
 		return json;
 	}
 
@@ -96,15 +98,15 @@ public class Nomeolvides.ListStoreListas : ListStore {
 		Value value_lista;
 		TreeIter iter;
 
-		this.get_iter_first(out iter);
-		do {
-			this.get_value(iter, 2, out value_lista);
-			lista = value_lista as Lista;
-			if ( lista.nombre == nombre ) {
-				lista_hash = lista.get_checksum ();
-			}
-		}while (this.iter_next(ref iter));
-
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 2, out value_lista);
+				lista = value_lista as Lista;
+				if ( lista.nombre == nombre ) {
+					lista_hash = lista.get_checksum ();
+				}
+			}while (this.iter_next(ref iter));
+		}
 		return lista_hash;
 	}	
 }

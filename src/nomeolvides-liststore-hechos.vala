@@ -88,12 +88,12 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		Value hecho;
 		TreeIter iter;
 
-		this.get_iter_first(out iter);
-		do {
-			this.get_value(iter, 3, out hecho);
-			hechos.add ((Hecho) hecho);
-		}while (this.iter_next(ref iter));
-		
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 3, out hecho);
+				hechos.add ((Hecho) hecho);
+			}while (this.iter_next(ref iter));
+		}	
 		return hechos;
 	}
 
