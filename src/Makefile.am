@@ -63,7 +63,9 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-lista-dialog.vala \
 	nomeolvides-listas.vala \
 	nomeolvides-deshacer.vala \
-	nomeolvides-deshacer-item.vala
+	nomeolvides-deshacer-item.vala \
+	nomeolvides-hechos.vala \
+	nomeolvides-coleccion.vala
 
 
 nomeolvides_VALAFLAGS = \

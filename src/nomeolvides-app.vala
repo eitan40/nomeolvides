@@ -76,7 +76,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
 		
-		this.datos.cambio_anios.connect ( this.cargar_lista_anios );
+		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
 	}
 
 
@@ -135,7 +135,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
 			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
 			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
-			this.datos.eliminar_hecho_lista ( hecho_a_borrar, path);
+		//	this.datos.eliminar_hecho_lista ( hecho_a_borrar, path);
 			this.datos.guardar_listas_hechos ();
 			
 		}	
