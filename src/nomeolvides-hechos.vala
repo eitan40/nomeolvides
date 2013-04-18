@@ -82,6 +82,14 @@ public class Nomeolvides.Hechos : Object {
 		return this.hechos_listas.lista_key ();
 	}
 
+	public ArrayList<string> get_hash_listas_hechos () {
+		return this.hechos_listas.lista_key_value ();
+	}
+
+	public ArrayList<string> get_listas_hechos () {
+		return this.hechos_listas.lista_key ();
+	}
+
 	public void signal_cambio_anios () {
 		this.hechos_cambio_anios ();
 	}

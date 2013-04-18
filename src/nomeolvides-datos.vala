@@ -120,19 +120,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void guardar_listas_hechos () {
-		/*string hash, a_guardar = "";
-		int i,j;
-		ArrayList<Hecho> lista;
-		
-		for (i=0; i < this.cache_hechos_listas.size; i++) {
-			lista = this.hechos_listas[i].lista_de_hechos ();
-			hash = this.cache_hechos_listas[i];
-			for (j=0; j < lista.size; j++) {
+		string a_guardar = "";
+		var hash = this.hechos.get_hash_listas_hechos ();
 
-				a_guardar += hash + "," + lista[j].hash + "\n";
-			}
+		foreach ( string s in hash ) {
+			a_guardar += s + "\n";
 		}
-		this.listas.guardar_listas_hechos ( a_guardar );*/
+
+		this.listas.guardar_listas_hechos ( a_guardar );
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
