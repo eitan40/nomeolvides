@@ -36,7 +36,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cargar_datos_listas ();
 
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
-		this.hechos.hechos_cambio_listas.connect ( this.signal_cambio_listas );
+		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
 	}
 
@@ -174,7 +174,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreListas lista_de_listas () {
-		return this.listas.temp ();
+		return this.listas.list_store_de_listas ();
 	}
 
 	public void signal_cambio_anios () {

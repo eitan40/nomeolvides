@@ -76,6 +76,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
 		
 		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
+		this.datos.datos_cambio_listas.connect ( this.cargar_listas );
 		this.datos.datos_cambio_hechos.connect ( this.cargar_lista_hechos );
 	}
 
@@ -159,7 +160,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void config_listas_dialog () {		
-		var listas_dialogo = new ListasDialog ( this.window, this.datos.listas.temp() );
+		var listas_dialogo = new ListasDialog ( this.window, this.datos.lista_de_listas () );
 		listas_dialogo.show_all ();
 		if ( listas_dialogo.run () == ResponseType.OK ) {
 			if (listas_dialogo.cambios == true) {				
