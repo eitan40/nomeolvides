@@ -23,19 +23,12 @@ using GLib;
 using Nomeolvides;
 
 public class Nomeolvides.Datos : GLib.Object {
-/*	private ArrayList<ListStoreHechos> hechos_anios;
-	private ArrayList<ListStoreHechos> hechos_listas;
-	private ArrayList<string> cache_hechos_listas;
-	private ArrayList<int> cache_hechos_anios;*/
+
 	private Hechos hechos;
 	public HechosFuentes fuentes;
 	public Listas listas;
 
 	public Datos () {
-	/*	this.cache_hechos_anios = new ArrayList<int> ();
-		this.hechos_anios = new ArrayList<ListStoreHechos> ();
-		this.cache_hechos_listas = new ArrayList<string> ();
-		this.hechos_listas = new ArrayList<ListStoreHechos> ();*/
 		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
@@ -50,15 +43,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	public void agregar_hecho (Hecho nuevo) {	
 		this.hechos.agregar_hecho_anio ( nuevo.fecha.get_year (), nuevo );
 	}
-
-/*	private void inicializar_liststore_listas () {
-		int i;
-		ArrayList<string> hash_listas = this.listas.get_listas_hash ();
-		for ( i=0; i < hash_listas.size; i++ ) {
-				this.hechos_listas.add ( new ListStoreHechos () );
-				this.cache_hechos_listas.add ( hash_listas[i] );
-		}
-	}*/
 
 	private void cargar_datos_listas () {
 		int i,j;
@@ -80,75 +64,6 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.borrar_hecho (a_eliminar.fecha.get_year (), a_eliminar );
 	}
 
-	/*public void eliminar_hecho_lista ( Hecho a_eliminar, TreePath path ) {
-		TreeIter iterador;
-		int indice;
-
-		foreach ( string hash in this.cache_hechos_listas ) {
-			if ( this.en_liststore_lista ( hash, out indice ) ) {
-				this.hechos_listas[indice].get_iter(out iterador, path);
-				this.hechos_listas[indice].eliminar ( iterador, a_eliminar );				
-
-				if (this.hechos_listas[indice].length () == 0) {
-					this.eliminar_liststore_lista (indice);
-					this.cambio_listas ();
-				}
-			}
-		}
-	}*/
-
-	/*private void agregar_liststore (int cambio_anios) {
-		this.hechos_anios.add ( new ListStoreHechos.anio_int (cambio_anios) );
-		this.cache_hechos_anios.add (cambio_anios);
-	}*/
-
-	/*private void eliminar_liststore_anio ( int a_eliminar ) {
-		
-		this.hechos_anios.remove (this.hechos_anios[a_eliminar]);
-		this.cache_hechos_anios.remove(this.cache_hechos_anios[a_eliminar]);
-	}*/
-
-	/*private void eliminar_liststore_lista ( int a_eliminar ) {
-		
-		this.hechos_listas.remove (this.hechos_listas[a_eliminar]);
-		this.cache_hechos_listas.remove(this.cache_hechos_listas[a_eliminar]);
-	}*/
-
-	/*private bool en_liststore_anio ( int anio, out int indice ) {
-
-		bool retorno = false;
-
-		indice = this.cache_hechos_anios.index_of( anio ); 
-		
-		if ( indice >= 0 ) {
-			retorno = true;
-		}
-		
-		return retorno;
-	}*/
-
-	/*private bool en_liststore_lista ( string hash, out int indice ) {
-
-		bool retorno = false;
-
-		indice = this.cache_hechos_listas.index_of( hash ); 
-
-		if ( indice >= 0 ) {
-			retorno = true;
-		}
-		
-		return retorno;
-	}*/
-
-	/*public void borrar_datos_hechos () {
-		this.hechos_anios.clear ();
-		this.cache_hechos_anios.clear ();
-	}*/
-
-	/*public void borrar_datos_listas () {
-		this.hechos_listas.clear ();
-		this.cache_hechos_anios.clear ();
-	}*/
 
 	public ArrayList<Hecho> lista_de_hechos () { 
 		return this.hechos.lista_de_hechos ();
@@ -173,13 +88,11 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {
-		//this.borrar_datos_hechos ();
 		this.fuentes.actualizar_fuentes_liststore ( fuentes );
 		this.cargar_fuentes_predefinidas ();
 	}
 
 	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {
-		//this.borrar_datos_listas ();
 		this.listas.actualizar_listas_liststore ( listas );
 		this.cargar_datos_listas ();
 	}
@@ -241,14 +154,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_as_file ( string archivo ) {
-		/*int i;
 		string a_guardar = "";
-
-		for (i=0; i < this.hechos_anios.size; i++) {
-			a_guardar += hechos_anios[i].a_json(); 
+		var array = this.hechos.lista_de_hechos ();
+		
+		foreach (Hecho h in array ) {
+			a_guardar += h.a_json(); 
 		}
 
-		Archivo.escribir ( archivo, a_guardar );*/
+		Archivo.escribir ( archivo, a_guardar );
 	}
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
