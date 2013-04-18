@@ -31,6 +31,8 @@ public class Nomeolvides.Hechos : Object {
 
 		this.hechos_anios.coleccion_cambio_keys.connect ( this.signal_cambio_anios );
 		this.hechos_listas.coleccion_cambio_keys.connect ( this.signal_cambio_listas );
+		this.hechos_anios.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos );
+		this.hechos_listas.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos );
 	}
 
 	public void agregar_hecho_anio ( int anio, Hecho hecho ) {
@@ -88,6 +90,11 @@ public class Nomeolvides.Hechos : Object {
 		this.hechos_cambio_listas ();
 	}
 
+	public void signal_cambio_hechos () {
+		this.hechos_cambio_hechos ();
+	}
+
 	public signal void hechos_cambio_anios ();
 	public signal void hechos_cambio_listas ();
+	public signal void hechos_cambio_hechos ();
 }
