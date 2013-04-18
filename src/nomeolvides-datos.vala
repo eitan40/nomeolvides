@@ -41,6 +41,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.listas = new Listas ();
 		this.cargar_fuentes_predefinidas ();
 		this.cargar_datos_listas ();
+
+		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
+		this.hechos.hechos_cambio_listas.connect ( this.signal_cambio_listas );
 	}
 
 	public void agregar_hecho (Hecho nuevo) {	
@@ -260,6 +263,14 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.listas.temp ();
 	}
 
-	public signal void cambio_anios ();
-	public signal void cambio_listas ();
+	public void signal_cambio_anios () {
+		this.datos_cambio_anios ();
+	}
+
+	public void signal_cambio_listas () {
+		this.datos_cambio_listas ();
+	}
+
+	public signal void datos_cambio_anios ();
+	public signal void datos_cambio_listas ();
 }

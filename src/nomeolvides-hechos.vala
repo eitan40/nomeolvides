@@ -28,6 +28,9 @@ public class Nomeolvides.Hechos : Object {
 	public Hechos () {
 		this.hechos_anios = new Coleccion ();
 		this.hechos_listas = new Coleccion ();
+
+		this.hechos_anios.coleccion_cambio_keys.connect ( this.signal_cambio_anios );
+		this.hechos_listas.coleccion_cambio_keys.connect ( this.signal_cambio_listas );
 	}
 
 	public void agregar_hecho_anio ( int anio, Hecho hecho ) {
@@ -76,4 +79,15 @@ public class Nomeolvides.Hechos : Object {
 	public ArrayList<string> get_listas () {
 		return this.hechos_listas.lista_key ();
 	}
+
+	public void signal_cambio_anios () {
+		this.hechos_cambio_anios ();
+	}
+
+	public void signal_cambio_listas () {
+		this.hechos_cambio_listas ();
+	}
+
+	public signal void hechos_cambio_anios ();
+	public signal void hechos_cambio_listas ();
 }

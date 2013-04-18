@@ -75,7 +75,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
 		
-		this.datos.cambio_anios.connect ( this.cargar_lista_anios );
+		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
 	}
 
 
