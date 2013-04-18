@@ -32,8 +32,8 @@ public class Nomeolvides.Deshacer : Object {
 		this.lista_deshacer.offer_head ( new DeshacerItem ( borrar, tipo) );
 	}
 
-	public void guardar_editado ( Hecho editado, TreePath path ) {
-		this.lista_deshacer.peek_head ().set_editado ( editado, path );
+	public void guardar_editado ( Hecho editado ) {
+		this.lista_deshacer.peek_head ().set_editado ( editado );
 	}
 
 	public DeshacerItem deshacer () {

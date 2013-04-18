@@ -47,7 +47,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	private void cargar_datos_listas () {
-		int i,j;
+		int i;
 		string datos = Configuracion.cargar_listas_hechos ();
 		string linea_lista_hash, linea_hecho_hash;
 
@@ -62,7 +62,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	}
 
-	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
+	public void eliminar_hecho ( Hecho a_eliminar ) {
 		this.hechos.borrar_hecho (a_eliminar.fecha.get_year (), a_eliminar );
 
 	}
@@ -71,7 +71,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		DeshacerItem item;
 		item = this.deshacer.deshacer ();
 		if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
-			this.eliminar_hecho ( item.get_editado(), item.get_path () );
+			this.eliminar_hecho ( item.get_editado() );
 		}
 		this.agregar_hecho ( item.get_borrado() );
 		this.guardar_un_archivo ( item.get_borrado().archivo_fuente);

@@ -79,8 +79,6 @@ public class Nomeolvides.App : Gtk.Application
 		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
 	}
 
-
-
 	public void add_hecho_dialog () {
 		var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
 		
@@ -105,10 +103,9 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void edit_hecho_dialog () {
-		TreePath path;
 		Hecho hecho; 
 
-		path = this.window.get_hecho_actual ( out hecho );
+		this.window.get_hecho_actual ( out hecho );
 		
 		var edit_dialog = new EditHechoDialog( this.window, this.datos.fuentes );
 		edit_dialog.set_datos ( hecho );
@@ -116,8 +113,8 @@ public class Nomeolvides.App : Gtk.Application
 
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
 			this.datos.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
-			this.datos.deshacer.guardar_editado ( hecho, path );
-			this.datos.eliminar_hecho ( hecho, path );
+			this.datos.deshacer.guardar_editado ( edit_dialog.respuesta );
+			this.datos.eliminar_hecho ( hecho );
 			this.datos.agregar_hecho ( edit_dialog.respuesta );
 			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente);
 		}
@@ -125,17 +122,15 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void delete_hecho_dialog () {
-		TreePath path;
 		Hecho hecho_a_borrar;
-		path = this.window.get_hecho_actual ( out hecho_a_borrar );
+		this.window.get_hecho_actual ( out hecho_a_borrar );
 	
 		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
-			this.datos.eliminar_hecho ( hecho_a_borrar, path );
+			this.datos.eliminar_hecho ( hecho_a_borrar );
 			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
 			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
-		//	this.datos.eliminar_hecho_lista ( hecho_a_borrar, path);
 			this.datos.guardar_listas_hechos ();
 			
 		}	

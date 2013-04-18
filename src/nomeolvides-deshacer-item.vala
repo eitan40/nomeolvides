@@ -26,16 +26,15 @@ public class Nomeolvides.DeshacerItem : Object {
 	private Hecho borrado;
 	private Hecho editado;
 	private DeshacerTipo tipo;
-	private TreePath path;
 
 	public DeshacerItem ( Hecho borrado, DeshacerTipo tipo ) {
 		this.tipo = tipo;
 		this.borrado = borrado;		
 	}
 
-	public void set_editado ( Hecho editado, TreePath path ) {
+	public void set_editado ( Hecho editado ) {
 		this.editado = editado;
-		this.path = path;
+		print ("Se guardó el nuevo hecho de una edición: " + this.editado.nombre + ".\n");
 	}
 
 	public Hecho get_borrado () {
@@ -48,9 +47,5 @@ public class Nomeolvides.DeshacerItem : Object {
 
 	public DeshacerTipo get_tipo () {
 		return this.tipo;
-	}
-	
-	public TreePath get_path () {
-		return this.path;
 	}
 }
