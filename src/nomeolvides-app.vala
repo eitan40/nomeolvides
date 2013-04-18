@@ -77,6 +77,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
 		
 		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
+		this.datos.datos_cambio_hechos.connect ( this.cargar_lista_hechos );
 	}
 
 	public void add_hecho_dialog () {
@@ -218,6 +219,16 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void cargar_lista_anios () {
 		this.window.cargar_anios_view ( this.datos.lista_de_anios () );
+	}
+
+	public void cargar_lista_hechos () {
+		var pestania = this.window.get_pestania ();
+
+		if ( pestania == "Años") {
+			this.elegir_anio ();
+		} else {
+			this.elegir_lista ();
+		}
 	}
 
 	public App () {

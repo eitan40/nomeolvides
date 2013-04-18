@@ -40,6 +40,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
 		this.hechos.hechos_cambio_listas.connect ( this.signal_cambio_listas );
+		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
 	}
 
 	public void agregar_hecho (Hecho nuevo) {	
@@ -197,6 +198,11 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.datos_cambio_listas ();
 	}
 
+	public void signal_cambio_hechos () {
+		this.datos_cambio_hechos ();
+	}
+
 	public signal void datos_cambio_anios ();
 	public signal void datos_cambio_listas ();
+	public signal void datos_cambio_hechos ();
 }

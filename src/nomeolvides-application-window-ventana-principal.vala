@@ -150,6 +150,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.show_all ();
 		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
+
+	public string get_pestania () {
+		return this.anios_hechos.get_nombre_pestania ();
+	}
 	
 	public signal void toolbar_add_button_clicked ();
 	public signal void toolbar_edit_button_clicked ();

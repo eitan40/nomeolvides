@@ -34,6 +34,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 			this.coleccion_cambio_keys ();
 		}
 		this.hechos.get ( key ).add ( hecho );
+		this.coleccion_cambio_hechos ();
 	}
 
 	public void borrar ( Hecho hecho ) {
@@ -51,6 +52,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 					}
 				}
 			} while ( recorrer_keys.next () );
+			this.coleccion_cambio_hechos ();
 		}
 	}
 
@@ -114,5 +116,5 @@ public class Nomeolvides.Coleccion : GLib.Object {
 	}
 
 	public signal void coleccion_cambio_keys ();
+	public signal void coleccion_cambio_hechos ();
 }
-
