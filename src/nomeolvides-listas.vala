@@ -31,6 +31,7 @@ public class Nomeolvides.Listas : GLib.Object {
 
 	public void actualizar_listas_liststore ( ListStoreListas nueva_listas_liststore) {
 		this.listas_liststore = nueva_listas_liststore;
+		this.listas_cambio_listas ();
 		this.guardar_listas ();
 	}
 
@@ -51,27 +52,26 @@ public class Nomeolvides.Listas : GLib.Object {
 		lineas = todo.split_set ("\n");
 		for (i=0; i < lineas.length; i++) {
         	nueva_lista = new Lista.json(lineas[i]);
-			print ( "Nueva lista nombre (linea " + i.to_string () + "): " + nueva_lista.nombre + "\n" );
 			if ( nueva_lista.nombre != "null" ) {
 				this.listas_liststore.agregar_lista ( nueva_lista );
+				this.listas_cambio_listas ();
 			}
 		}
 	}
 
-	public ListStoreListas temp () {
+	public ListStoreListas list_store_de_listas () {
 		GLib.Value lista_value;
 		Lista lista;
 		ListStoreListas temp = new ListStoreListas ();
 		TreeIter iterador;
 		
-		this.listas_liststore.get_iter_first ( out iterador );
-		
-		do {
-			this.listas_liststore.get_value (iterador, 2, out lista_value);
-			lista = lista_value as Lista;
-			temp.agregar_lista ( lista );
-		}while ( this.listas_liststore.iter_next ( ref iterador) );
-		        
+		if ( this.listas_liststore.get_iter_first ( out iterador ) ) {		
+			do {
+				this.listas_liststore.get_value (iterador, 2, out lista_value);
+				lista = lista_value as Lista;
+				temp.agregar_lista ( lista );
+			}while ( this.listas_liststore.iter_next ( ref iterador) );
+		}        
 		return temp;
 	}
 
@@ -87,4 +87,6 @@ public class Nomeolvides.Listas : GLib.Object {
 		
 		Configuracion.guardar_listas_hechos ( listas_hechos );
 	}
+
+	public signal void listas_cambio_listas ();
 }

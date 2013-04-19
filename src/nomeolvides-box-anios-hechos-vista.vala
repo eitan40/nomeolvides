@@ -156,6 +156,11 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		return this.hechos_view.get_hecho_cursor (out hecho );
 	}
 
+	public string get_nombre_pestania () {
+		return this.anios_listas.get_tab_label_text ( this.anios_listas.get_nth_page
+		                                               ( this.anios_listas.get_current_page () ) );
+	}
+
 	public signal void hechos_cursor_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();

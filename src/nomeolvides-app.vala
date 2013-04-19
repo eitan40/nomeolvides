@@ -75,7 +75,9 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
 		
-		this.datos.cambio_anios.connect ( this.cargar_lista_anios );
+		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
+		this.datos.datos_cambio_listas.connect ( this.cargar_listas );
+		this.datos.datos_cambio_hechos.connect ( this.cargar_lista_hechos );
 	}
 
 
@@ -131,7 +133,7 @@ public class Nomeolvides.App : Gtk.Application
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			this.datos.eliminar_hecho ( hecho_a_borrar, path );
 			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
-			this.datos.eliminar_hecho_lista ( hecho_a_borrar, path);
+		//	this.datos.eliminar_hecho_lista ( hecho_a_borrar, path);
 			this.datos.guardar_listas_hechos ();
 			
 		}	
@@ -158,7 +160,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void config_listas_dialog () {		
-		var listas_dialogo = new ListasDialog ( this.window, this.datos.listas.temp() );
+		var listas_dialogo = new ListasDialog ( this.window, this.datos.lista_de_listas () );
 		listas_dialogo.show_all ();
 		if ( listas_dialogo.run () == ResponseType.OK ) {
 			if (listas_dialogo.cambios == true) {				
@@ -215,6 +217,16 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void cargar_lista_anios () {
 		this.window.cargar_anios_view ( this.datos.lista_de_anios () );
+	}
+
+	public void cargar_lista_hechos () {
+		var pestania = this.window.get_pestania ();
+
+		if ( pestania == "Años") {
+			this.elegir_anio ();
+		} else {
+			this.elegir_lista ();
+		}
 	}
 
 	public App () {
