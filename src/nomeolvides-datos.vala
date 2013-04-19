@@ -65,17 +65,20 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void eliminar_hecho ( Hecho a_eliminar ) {
 		this.hechos.borrar_hecho (a_eliminar.fecha.get_year (), a_eliminar );
-
+		this.datos_hechos_deshacer ();
 	}
 
 	public void deshacer_cambios () {
 		DeshacerItem item;
-		item = this.deshacer.deshacer ();
-		if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
-			this.eliminar_hecho ( item.get_editado() );
+
+		bool hay_hechos_deshacer = this.deshacer.deshacer ( out item ); 
+		if ( hay_hechos_deshacer ){
+			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
+				this.eliminar_hecho ( item.get_editado() );
+			}
+			this.agregar_hecho ( item.get_borrado() );
+			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
 		}
-		this.agregar_hecho ( item.get_borrado() );
-		this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
 	}
 
 	public ArrayList<Hecho> lista_de_hechos () { 
@@ -205,4 +208,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	public signal void datos_cambio_anios ();
 	public signal void datos_cambio_listas ();
 	public signal void datos_cambio_hechos ();
+	public signal void datos_hechos_deshacer ();
+	public signal void datos_no_hechos_deshacer ();
 }

@@ -78,6 +78,8 @@ public class Nomeolvides.App : Gtk.Application
 		
 		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
 		this.datos.datos_cambio_hechos.connect ( this.cargar_lista_hechos );
+		this.datos.datos_hechos_deshacer.connect ( this.window.activar_boton_deshacer );
+		this.datos.datos_no_hechos_deshacer.connect ( this.window.desactivar_boton_deshacer  );
 	}
 
 	public void add_hecho_dialog () {
@@ -132,8 +134,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.eliminar_hecho ( hecho_a_borrar );
 			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
 			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
-			this.datos.guardar_listas_hechos ();
-			
+			this.datos.guardar_listas_hechos ();	
 		}	
 		delete_dialog.destroy ();
 	}

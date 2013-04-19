@@ -36,9 +36,14 @@ public class Nomeolvides.Deshacer : Object {
 		this.lista_deshacer.peek_head ().set_editado ( editado );
 	}
 
-	public DeshacerItem deshacer () {
-		DeshacerItem item = this.lista_deshacer.poll_head ();
-		return item;
+	public bool deshacer ( out DeshacerItem item ) {
+		bool retorno = false;
+		
+		if ( !(this.lista_deshacer.is_empty) ) {
+			item = this.lista_deshacer.poll_head ();
+			retorno = true;
+		}	
+		return retorno;
 	}
 }
 

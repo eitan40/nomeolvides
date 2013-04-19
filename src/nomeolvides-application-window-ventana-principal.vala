@@ -154,6 +154,14 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public string get_pestania () {
 		return this.anios_hechos.get_nombre_pestania ();
 	}
+
+	public void activar_boton_deshacer () {
+		this.toolbar.activar_deshacer ();
+	}
+
+	public void desactivar_boton_deshacer () {
+		this.toolbar.desactivar_deshacer ();
+	}
 	
 	public signal void toolbar_add_button_clicked ();
 	public signal void toolbar_edit_button_clicked ();
