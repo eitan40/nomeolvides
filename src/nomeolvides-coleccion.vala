@@ -115,6 +115,21 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		return array;
 	}
 
+	public ArrayList<string> lista_key_value () {
+		var array = new ArrayList<string> ();
+		var recorrer_keys = this.hechos.map_iterator ();
+
+		recorrer_keys.first ();
+		do {
+			var key = recorrer_keys.get_key ();
+			var listado = recorrer_keys.get_value ();
+			foreach (Hecho h in listado) {
+				array.add ( key + "," + h.hash );
+			}
+		} while ( recorrer_keys.next () );
+		return array;
+	}
+
 	public signal void coleccion_cambio_keys ();
 	public signal void coleccion_cambio_hechos ();
 }

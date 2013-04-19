@@ -31,6 +31,7 @@ public class Nomeolvides.Listas : GLib.Object {
 
 	public void actualizar_listas_liststore ( ListStoreListas nueva_listas_liststore) {
 		this.listas_liststore = nueva_listas_liststore;
+		this.listas_cambio_listas ();
 		this.guardar_listas ();
 	}
 
@@ -53,11 +54,12 @@ public class Nomeolvides.Listas : GLib.Object {
         	nueva_lista = new Lista.json(lineas[i]);
 			if ( nueva_lista.nombre != "null" ) {
 				this.listas_liststore.agregar_lista ( nueva_lista );
+				this.listas_cambio_listas ();
 			}
 		}
 	}
 
-	public ListStoreListas temp () {
+	public ListStoreListas list_store_de_listas () {
 		GLib.Value lista_value;
 		Lista lista;
 		ListStoreListas temp = new ListStoreListas ();
@@ -85,4 +87,6 @@ public class Nomeolvides.Listas : GLib.Object {
 		
 		Configuracion.guardar_listas_hechos ( listas_hechos );
 	}
+
+	public signal void listas_cambio_listas ();
 }

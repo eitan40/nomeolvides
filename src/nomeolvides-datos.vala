@@ -32,6 +32,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public Datos () {
 
 		this.deshacer = new Deshacer ();
+
 		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
@@ -39,7 +40,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.cargar_datos_listas ();
 
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
-		this.hechos.hechos_cambio_listas.connect ( this.signal_cambio_listas );
+		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
 
 		this.deshacer.sin_items.connect ( this.signal_no_hechos_deshacer );
@@ -82,6 +83,7 @@ public class Nomeolvides.Datos : GLib.Object {
 			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
 		}
 	}
+
 
 	public ArrayList<Hecho> lista_de_hechos () { 
 		return this.hechos.lista_de_hechos ();
@@ -138,19 +140,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void guardar_listas_hechos () {
-		/*string hash, a_guardar = "";
-		int i,j;
-		ArrayList<Hecho> lista;
-		
-		for (i=0; i < this.cache_hechos_listas.size; i++) {
-			lista = this.hechos_listas[i].lista_de_hechos ();
-			hash = this.cache_hechos_listas[i];
-			for (j=0; j < lista.size; j++) {
+		string a_guardar = "";
+		var hash = this.hechos.get_hash_listas_hechos ();
 
-				a_guardar += hash + "," + lista[j].hash + "\n";
-			}
+		foreach ( string s in hash ) {
+			a_guardar += s + "\n";
 		}
-		this.listas.guardar_listas_hechos ( a_guardar );*/
+
+		this.listas.guardar_listas_hechos ( a_guardar );
 	}
 
 	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
@@ -172,14 +169,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_as_file ( string archivo ) {
-		/*int i;
 		string a_guardar = "";
-
-		for (i=0; i < this.hechos_anios.size; i++) {
-			a_guardar += hechos_anios[i].a_json(); 
+		var array = this.hechos.lista_de_hechos ();
+		
+		foreach (Hecho h in array ) {
+			a_guardar += h.a_json(); 
 		}
 
-		Archivo.escribir ( archivo, a_guardar );*/
+		Archivo.escribir ( archivo, a_guardar );
 	}
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
@@ -192,7 +189,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreListas lista_de_listas () {
-		return this.listas.temp ();
+		return this.listas.list_store_de_listas ();
 	}
 
 	public void signal_cambio_anios () {
