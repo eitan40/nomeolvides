@@ -40,7 +40,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 	public void borrar ( Hecho hecho ) {
 		if ( !this.hechos.is_empty ) {
 			var recorrer_keys = this.hechos.map_iterator ();
-			recorrer_keys.first ();
+			recorrer_keys.next ();
 
 			do {
 				var key = recorrer_keys.get_value ();
@@ -74,7 +74,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		hecho = null;
 
 		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.first ();
+		recorrer_keys.next ();
 
 		do {
 			var key = recorrer_keys.get_value ();
@@ -91,7 +91,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 	public ArrayList<Hecho> lista_de_hechos () {
 		var array = new ArrayList<Hecho> ();
 		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.first ();
+		recorrer_keys.next ();
 
 		do {
 			var key = recorrer_keys.get_value ();
@@ -106,7 +106,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 	public ArrayList<string> lista_key () {
 		var array = new ArrayList<string> ();
 		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.first ();
+		recorrer_keys.next ();
 
 		do {
 			var key = recorrer_keys.get_key ();

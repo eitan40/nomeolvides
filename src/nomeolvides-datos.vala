@@ -25,10 +25,14 @@ using Nomeolvides;
 public class Nomeolvides.Datos : GLib.Object {
 
 	private Hechos hechos;
+	public Deshacer deshacer;
 	public HechosFuentes fuentes;
 	public Listas listas;
 
 	public Datos () {
+
+		this.deshacer = new Deshacer ();
+
 		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
@@ -38,6 +42,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
 		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
+
+		this.deshacer.sin_items.connect ( this.signal_no_hechos_deshacer );
+		this.deshacer.con_items.connect ( this.signal_hechos_deshacer );
 	}
 
 	public void agregar_hecho (Hecho nuevo) {	
@@ -45,7 +52,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	private void cargar_datos_listas () {
-		int i,j;
+		int i;
 		string datos = Configuracion.cargar_listas_hechos ();
 		string linea_lista_hash, linea_hecho_hash;
 
@@ -60,8 +67,21 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	}
 
-	public void eliminar_hecho ( Hecho a_eliminar, TreePath path ) {
+	public void eliminar_hecho ( Hecho a_eliminar ) {
 		this.hechos.borrar_hecho (a_eliminar.fecha.get_year (), a_eliminar );
+	}
+
+	public void deshacer_cambios () {
+		DeshacerItem item;
+
+		bool hay_hechos_deshacer = this.deshacer.deshacer ( out item ); 
+		if ( hay_hechos_deshacer ){
+			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
+				this.eliminar_hecho ( item.get_editado() );
+			}
+			this.agregar_hecho ( item.get_borrado() );
+			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
+		}
 	}
 
 
@@ -184,7 +204,17 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.datos_cambio_hechos ();
 	}
 
+	public void signal_hechos_deshacer () {
+		this.datos_hechos_deshacer ();
+	}
+
+	public void signal_no_hechos_deshacer () {
+		this.datos_no_hechos_deshacer ();
+	}
+
 	public signal void datos_cambio_anios ();
 	public signal void datos_cambio_listas ();
 	public signal void datos_cambio_hechos ();
+	public signal void datos_hechos_deshacer ();
+	public signal void datos_no_hechos_deshacer ();
 }
