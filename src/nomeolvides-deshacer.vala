@@ -22,10 +22,10 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.Deshacer : Object {
-	private ArrayQueue<DeshacerItem> lista_deshacer;
+	private LinkedList<DeshacerItem> lista_deshacer;
 
 	public Deshacer () {
-		this.lista_deshacer = new ArrayQueue<DeshacerItem> ();
+		this.lista_deshacer = new LinkedList<DeshacerItem> ();
 	}
 
 	public void guardar_borrado ( Hecho borrar, DeshacerTipo tipo ) {		

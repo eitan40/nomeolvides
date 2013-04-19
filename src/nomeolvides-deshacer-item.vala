@@ -34,7 +34,6 @@ public class Nomeolvides.DeshacerItem : Object {
 
 	public void set_editado ( Hecho editado ) {
 		this.editado = editado;
-		print ("Se guardó el nuevo hecho de una edición: " + this.editado.nombre + ".\n");
 	}
 
 	public Hecho get_borrado () {
