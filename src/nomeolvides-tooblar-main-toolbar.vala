@@ -122,6 +122,6 @@ public class Nomeolvides.MainToolbar : Toolbar
 	}
 
 	public void desactivar_deshacer () {
-		this.undo_button.set_sensitive ( true );
+		this.undo_button.set_sensitive ( false );
 	}
 }

@@ -41,6 +41,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
 		this.hechos.hechos_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
+
+		this.deshacer.sin_items.connect ( this.signal_no_hechos_deshacer );
+		this.deshacer.con_items.connect ( this.signal_hechos_deshacer );
 	}
 
 	public void agregar_hecho (Hecho nuevo) {	
@@ -65,7 +68,6 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void eliminar_hecho ( Hecho a_eliminar ) {
 		this.hechos.borrar_hecho (a_eliminar.fecha.get_year (), a_eliminar );
-		this.datos_hechos_deshacer ();
 	}
 
 	public void deshacer_cambios () {
@@ -203,6 +205,14 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void signal_cambio_hechos () {
 		this.datos_cambio_hechos ();
+	}
+
+	public void signal_hechos_deshacer () {
+		this.datos_hechos_deshacer ();
+	}
+
+	public void signal_no_hechos_deshacer () {
+		this.datos_no_hechos_deshacer ();
 	}
 
 	public signal void datos_cambio_anios ();

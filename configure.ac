@@ -19,7 +19,7 @@ dnl Check for vala
 AM_PROG_VALAC([0.10.0])
 
 
-PKG_CHECK_MODULES(NOMEOLVIDES, gee-0.8
+PKG_CHECK_MODULES(NOMEOLVIDES, gee-1.0
 [gtk+-3.0 ])
 
 

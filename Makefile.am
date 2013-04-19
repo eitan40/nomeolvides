@@ -23,7 +23,7 @@ uninstall-local:
 
 
 AM_VALAFLAGS = --pkg \
-	gee-0.8 
+	gee-1.0 
 
 nomeolvidesdesktofiledir = $(datadir)/applications
 nomeolvidesdesktofile_DATA = data/nomeolvides.desktop

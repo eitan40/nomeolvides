@@ -30,21 +30,32 @@ public class Nomeolvides.Deshacer : Object {
 
 	public void guardar_borrado ( Hecho borrar, DeshacerTipo tipo ) {		
 		this.lista_deshacer.offer_head ( new DeshacerItem ( borrar, tipo) );
+		this.con_items ();
 	}
 
 	public void guardar_editado ( Hecho editado ) {
 		this.lista_deshacer.peek_head ().set_editado ( editado );
+		this.con_items ();
 	}
 
 	public bool deshacer ( out DeshacerItem item ) {
 		bool retorno = false;
+		item = null;
 		
 		if ( !(this.lista_deshacer.is_empty) ) {
 			item = this.lista_deshacer.poll_head ();
+			if ( this.lista_deshacer.is_empty) {
+				this.sin_items ();
+			}
 			retorno = true;
-		}	
+		} else {
+			this.sin_items ();
+		}
 		return retorno;
 	}
+
+	public signal void sin_items ();
+	public signal void con_items ();
 }
 
 public enum Nomeolvides.DeshacerTipo {
