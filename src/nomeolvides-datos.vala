@@ -42,6 +42,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
 		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
+		this.hechos.hechos_cambio_hechos_listas.connect ( this.signal_cambio_hechos_listas );
 
 		this.deshacer.sin_items.connect ( this.signal_no_hechos_deshacer );
 		this.deshacer.con_items.connect ( this.signal_hechos_deshacer );
@@ -202,6 +203,12 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void signal_cambio_hechos () {
 		this.datos_cambio_hechos ();
+	}
+
+	public void signal_cambio_hechos_listas () {
+		print ("Entró a la señal cambio_hechos_listas");
+		this.listas.set_cantidad_hechos_listas( this.hechos.get_listas_size () );
+		this.datos_cambio_hechos ();		
 	}
 
 	public void signal_hechos_deshacer () {

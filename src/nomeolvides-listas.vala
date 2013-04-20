@@ -22,21 +22,21 @@ using Nomeolvides;
 using Gee;
 
 public class Nomeolvides.Listas : GLib.Object {
-	public ListStoreListas listas_liststore { get; private set; }
+	public ArrayList<Lista> listas { get; private set; }
 		
 	public Listas () {
-		this.listas_liststore = new ListStoreListas ();		
+		this.listas = new ArrayList<Lista> ();		
 		this.cargar_listas ();
 	}
 
 	public void actualizar_listas_liststore ( ListStoreListas nueva_listas_liststore) {
-		this.listas_liststore = nueva_listas_liststore;
+		this.liststore_a_arraylist ( nueva_listas_liststore );
 		this.listas_cambio_listas ();
 		this.guardar_listas ();
 	}
 
 	private void guardar_listas () {
-		string guardar = this.listas_liststore.a_json ();
+		string guardar = this.list_store_de_listas ().a_json ();
 		
 		Configuracion.guardar_listas ( guardar );
 	}
@@ -53,39 +53,60 @@ public class Nomeolvides.Listas : GLib.Object {
 		for (i=0; i < lineas.length; i++) {
         	nueva_lista = new Lista.json(lineas[i]);
 			if ( nueva_lista.nombre != "null" ) {
-				this.listas_liststore.agregar_lista ( nueva_lista );
+				this.listas.add ( nueva_lista );
 				this.listas_cambio_listas ();
 			}
 		}
 	}
 
 	public ListStoreListas list_store_de_listas () {
-		GLib.Value lista_value;
-		Lista lista;
-		ListStoreListas temp = new ListStoreListas ();
+		ListStoreListas liststore = new ListStoreListas ();
 		TreeIter iterador;
 		
-		if ( this.listas_liststore.get_iter_first ( out iterador ) ) {		
+		foreach (Lista l in this.listas ) {		
+			liststore.agregar_lista ( l );			
+		}
+		
+		return liststore;
+	}		
+
+	private void liststore_a_arraylist ( ListStoreListas liststore ) {
+		GLib.Value lista_value;
+		Lista lista;
+		TreeIter iterador;
+		
+		if ( liststore.get_iter_first ( out iterador ) ) {
+			this.listas.clear ();
 			do {
-				this.listas_liststore.get_value (iterador, 2, out lista_value);
+				liststore.get_value (iterador, 2, out lista_value);
 				lista = lista_value as Lista;
-				temp.agregar_lista ( lista );
-			}while ( this.listas_liststore.iter_next ( ref iterador) );
+				this.listas.add ( lista );
+			}while ( liststore.iter_next ( ref iterador) );
 		}        
-		return temp;
 	}
 
 	public ArrayList<string> get_listas_hash () {
-		return this.listas_liststore.get_listas_hash ();	
+		return this.list_store_de_listas ().get_listas_hash ();	
 	}
 
 	public string get_nombre_hash ( string nombre_lista ) {
-		return this.listas_liststore.get_lista_hash_nombre ( nombre_lista );
+		return this.list_store_de_listas ().get_lista_hash_nombre ( nombre_lista );
 	}
 
-	public void guardar_listas_hechos ( string listas_hechos ) {
-		
+	public void guardar_listas_hechos ( string listas_hechos ) {	
 		Configuracion.guardar_listas_hechos ( listas_hechos );
+	}
+
+	public void set_cantidad_hechos_listas ( TreeMap<string,int> listas_tamanios ) {
+		var recorrer_listas = listas_tamanios.map_iterator ();
+		recorrer_listas.next ();
+
+		
+		do {
+			this.list_store_de_listas ().get_lista ( recorrer_listas.get_key () )
+				                        .set_cantidad ( recorrer_listas.get_value () );
+			print ( "Lista: " + recorrer_listas.get_key () + "cantidad: " + recorrer_listas.get_value ().to_string () + "\n");
+		} while ( recorrer_listas.next () );
 	}
 
 	public signal void listas_cambio_listas ();

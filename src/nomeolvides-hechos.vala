@@ -33,6 +33,7 @@ public class Nomeolvides.Hechos : Object {
 		this.hechos_listas.coleccion_cambio_keys.connect ( this.signal_cambio_listas );
 		this.hechos_anios.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos );
 		this.hechos_listas.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos );
+		this.hechos_listas.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos_listas );
 	}
 
 	public void agregar_hecho_anio ( int anio, Hecho hecho ) {
@@ -90,6 +91,19 @@ public class Nomeolvides.Hechos : Object {
 		return this.hechos_listas.lista_key ();
 	}
 
+	public TreeMap<string,int> get_listas_size () {
+		int i;
+		TreeMap<string,int> tamanio_listas = new TreeMap<string,int> ();
+		
+		var size = this.hechos_listas.get_lista_value_size ();
+		var listas = this.hechos_listas.lista_key ();
+		for ( i =0; i < listas.size; i++) {
+			tamanio_listas.set (listas[i], size[i]);
+		}
+
+		return tamanio_listas;
+	}
+
 	public void signal_cambio_anios () {
 		this.hechos_cambio_anios ();
 	}
@@ -102,7 +116,14 @@ public class Nomeolvides.Hechos : Object {
 		this.hechos_cambio_hechos ();
 	}
 
+	public void signal_cambio_hechos_listas () {
+		this.hechos_cambio_hechos_listas ();
+		this.hechos_cambio_hechos ();		
+		print ("Entró a la señal cambio_hechos_listas en hechos\n");
+	}
+
 	public signal void hechos_cambio_anios ();
 	public signal void hechos_cambio_listas ();
 	public signal void hechos_cambio_hechos ();
+	public signal void hechos_cambio_hechos_listas ();
 }
