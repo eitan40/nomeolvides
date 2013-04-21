@@ -36,9 +36,14 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
+
+		this.conectar_signals ();
+		
 		this.cargar_fuentes_predefinidas ();
 		this.cargar_datos_listas ();
+	}
 
+	private void conectar_signals () {
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
 		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
