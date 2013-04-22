@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(nomeolvides, 0.5.294, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
+AC_INIT(nomeolvides, 0.5.299, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -19,7 +19,7 @@ dnl Check for vala
 AM_PROG_VALAC([0.10.0])
 
 
-PKG_CHECK_MODULES(NOMEOLVIDES, gee-1.0
+PKG_CHECK_MODULES(NOMEOLVIDES, gee-0.8
 [gtk+-3.0 ])
 
 

@@ -126,7 +126,7 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		var array = new ArrayList<string> ();
 		var recorrer_keys = this.hechos.map_iterator ();
 
-		recorrer_keys.first ();
+		recorrer_keys.next ();
 		do {
 			var key = recorrer_keys.get_key ();
 			var listado = recorrer_keys.get_value ();
