@@ -31,6 +31,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 	public FuentesDialog (VentanaPrincipal ventana, ListStoreFuentes liststore_fuente) {
 		this.set_title ("Bases de Datos predeterminadas de hechos históricos");
 		this.set_modal ( true );
+		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
 		Toolbar toolbar = new Toolbar ();
@@ -63,10 +64,14 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		this.fuentes_view = new TreeViewFuentes ();
 		this.fuentes_view.set_model ( liststore_fuente );
 		this.fuentes_view.cursor_changed.connect ( elegir_fuente );
+
+		var scroll_fuentes_view = new ScrolledWindow (null,null);
+		scroll_fuentes_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		scroll_fuentes_view.add ( this.fuentes_view );
  
-		Gtk.Container contenido =  this.get_content_area () as Box;
+		Gtk.Box contenido =  this.get_content_area () as Box;
 		contenido.add ( toolbar );
-		contenido.add ( this.fuentes_view );
+		contenido.pack_start ( scroll_fuentes_view, true, true, 0 );
 	}
 
 	private void on_response (Dialog source, int response_id)
