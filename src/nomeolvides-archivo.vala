@@ -93,11 +93,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 		uint8[] contenido;
 		File archivo = null;
 
-		try {
-			archivo = File.new_for_uri ( uri );	
-		}  catch (Error e) {
-			error (e.message);
-		}
+		archivo = File.new_for_uri ( uri );
 
 		try {
 			archivo.load_contents(null ,out contenido, null);

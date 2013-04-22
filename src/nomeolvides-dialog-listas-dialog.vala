@@ -31,7 +31,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 	public ListasDialog (VentanaPrincipal ventana, ListStoreListas liststore_lista) {
 		this.set_title ("Lista personalizadas de hechos históricos");
 		this.set_modal ( true );
-		this.set_default_size (350, 100);
+		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
 		Toolbar toolbar = new Toolbar ();
@@ -64,10 +64,14 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		this.listas_view = new TreeViewListas ();
 		this.listas_view.set_model ( liststore_lista );
 		this.listas_view.cursor_changed.connect ( elegir_lista );
+
+		var scroll_listas_view = new ScrolledWindow (null,null);
+		scroll_listas_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		scroll_listas_view.add ( this.listas_view );
  
-		Gtk.Container contenido =  this.get_content_area () as Box;
+		Gtk.Box contenido =  this.get_content_area () as Box;
 		contenido.add ( toolbar );
-		contenido.add ( this.listas_view );
+		contenido.pack_start ( scroll_listas_view, true, true, 0);
 	}
 
 	private void on_response (Dialog source, int response_id)
