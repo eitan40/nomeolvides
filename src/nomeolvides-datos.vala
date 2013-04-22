@@ -36,12 +36,18 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
+
+		this.conectar_signals ();
+		
 		this.cargar_fuentes_predefinidas ();
 		this.cargar_datos_listas ();
+	}
 
+	private void conectar_signals () {
 		this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
 		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
+		this.hechos.hechos_cambio_hechos_listas.connect ( this.signal_cambio_hechos_listas );
 
 		this.deshacer.sin_items.connect ( this.signal_no_hechos_deshacer );
 		this.deshacer.con_items.connect ( this.signal_hechos_deshacer );
@@ -202,6 +208,11 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void signal_cambio_hechos () {
 		this.datos_cambio_hechos ();
+	}
+
+	public void signal_cambio_hechos_listas () {
+		this.listas.set_cantidad_hechos_listas( this.hechos.get_listas_size () );
+		this.datos_cambio_hechos ();		
 	}
 
 	public void signal_hechos_deshacer () {

@@ -29,12 +29,19 @@ public class Nomeolvides.Coleccion : GLib.Object {
 	}
 
 	public void agregar ( string key, Hecho hecho ) {
+		ArrayList<Hecho> arraylist;
+		
 		if (!(this.hechos.has_key ( key )) ) {
 			this.hechos.set ( key, new ArrayList<Hecho> () );
 			this.coleccion_cambio_keys ();
 		}
-		this.hechos.get ( key ).add ( hecho );
-		this.coleccion_cambio_hechos ();
+
+		arraylist = this.hechos.get ( key );
+			
+		if ( !arraylist.contains ( hecho ) ) {
+			arraylist.add ( hecho );
+			this.coleccion_cambio_hechos ();
+		}
 	}
 
 	public void borrar ( Hecho hecho ) {
@@ -126,6 +133,18 @@ public class Nomeolvides.Coleccion : GLib.Object {
 			foreach (Hecho h in listado) {
 				array.add ( key + "," + h.hash );
 			}
+		} while ( recorrer_keys.next () );
+		return array;
+	}
+
+	public ArrayList<int> get_lista_value_size () {
+		var array = new ArrayList<int> ();
+		var recorrer_keys = this.hechos.map_iterator ();
+		recorrer_keys.next ();
+
+		do {
+			var valor = recorrer_keys.get_value ();
+			array.add (valor.size);
 		} while ( recorrer_keys.next () );
 		return array;
 	}

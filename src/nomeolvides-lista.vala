@@ -34,11 +34,11 @@ public class Nomeolvides.Lista : GLib.Object{
 	public Lista.json ( string json ) {
 		if (json.contains ("{\"Lista\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.cantidad_hechos = 0;
 		} else {
 			this.nombre = "null";
-			this.cantidad_hechos = 0;
 		}
+
+		this.cantidad_hechos = 0;
 		this.calcular_checksum ();
 	}
 
@@ -65,5 +65,8 @@ public class Nomeolvides.Lista : GLib.Object{
 	private void calcular_checksum () {
 		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
 		this.hash = this.hash.slice ( 0, 12);
+	}
+	public void set_cantidad ( int cant_hechos ) {
+		this.cantidad_hechos = cant_hechos;
 	}
 }

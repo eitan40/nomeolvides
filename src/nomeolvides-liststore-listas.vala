@@ -108,5 +108,23 @@ public class Nomeolvides.ListStoreListas : ListStore {
 			}while (this.iter_next(ref iter));
 		}
 		return lista_hash;
+	}
+
+	public Lista get_lista ( string hash ) {
+		Lista lista = null;
+		Value value_lista;
+		TreeIter iter;
+
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 2, out value_lista);
+				lista = value_lista as Lista;
+				if ( lista.get_checksum () == hash ) {
+					return lista;
+				}
+			}while (this.iter_next(ref iter));
+		}
+
+		return lista;
 	}	
 }
