@@ -61,7 +61,6 @@ public class Nomeolvides.Listas : GLib.Object {
 
 	public ListStoreListas list_store_de_listas () {
 		ListStoreListas liststore = new ListStoreListas ();
-		TreeIter iterador;
 		
 		foreach (Lista l in this.listas ) {		
 			liststore.agregar_lista ( l );			
