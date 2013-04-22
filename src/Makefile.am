@@ -49,7 +49,7 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-fuente-dialog.vala
 
 nomeolvides_VALAFLAGS = \
-	--pkg gee-1.0 \
+	--pkg gee-0.8 \
 	--pkg gtk+-3.0 -g
 
 nomeolvides_LDFLAGS = \
