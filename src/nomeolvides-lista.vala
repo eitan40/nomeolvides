@@ -66,7 +66,6 @@ public class Nomeolvides.Lista : GLib.Object{
 		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
 		this.hash = this.hash.slice ( 0, 12);
 	}
-
 	public void set_cantidad ( int cant_hechos ) {
 		this.cantidad_hechos = cant_hechos;
 	}

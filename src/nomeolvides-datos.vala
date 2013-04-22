@@ -211,7 +211,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void signal_cambio_hechos_listas () {
-		print ("Entró a la señal cambio_hechos_listas");
 		this.listas.set_cantidad_hechos_listas( this.hechos.get_listas_size () );
 		this.datos_cambio_hechos ();		
 	}

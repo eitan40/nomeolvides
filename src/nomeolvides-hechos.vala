@@ -119,7 +119,6 @@ public class Nomeolvides.Hechos : Object {
 	public void signal_cambio_hechos_listas () {
 		this.hechos_cambio_hechos_listas ();
 		this.hechos_cambio_hechos ();		
-		print ("Entró a la señal cambio_hechos_listas en hechos\n");
 	}
 
 	public signal void hechos_cambio_anios ();

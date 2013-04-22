@@ -105,7 +105,6 @@ public class Nomeolvides.Listas : GLib.Object {
 		do {
 			this.list_store_de_listas ().get_lista ( recorrer_listas.get_key () )
 				                        .set_cantidad ( recorrer_listas.get_value () );
-			print ( "Lista: " + recorrer_listas.get_key () + "cantidad: " + recorrer_listas.get_value ().to_string () + "\n");
 		} while ( recorrer_listas.next () );
 	}
 
