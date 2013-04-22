@@ -179,7 +179,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		var array = this.hechos.lista_de_hechos ();
 		
 		foreach (Hecho h in array ) {
-			a_guardar += h.a_json(); 
+			a_guardar += h.a_json() + "\n"; 
 		}
 
 		Archivo.escribir ( archivo, a_guardar );
