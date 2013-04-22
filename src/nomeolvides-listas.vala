@@ -85,11 +85,25 @@ public class Nomeolvides.Listas : GLib.Object {
 	}
 
 	public ArrayList<string> get_listas_hash () {
-		return this.list_store_de_listas ().get_listas_hash ();	
+		ArrayList<string> listas_hash = new ArrayList<string> ();
+
+		foreach (Lista l in this.listas) {
+			listas_hash.add ( l.get_checksum () );
+		}
+		
+		return listas_hash;	
 	}
 
 	public string get_nombre_hash ( string nombre_lista ) {
-		return this.list_store_de_listas ().get_lista_hash_nombre ( nombre_lista );
+		string lista_hash = "";
+
+		foreach ( Lista l in this.listas ) {
+			if ( l.nombre == nombre_lista ) {
+				lista_hash =  l.get_checksum ();
+			}
+		}
+		
+		return lista_hash;
 	}
 
 	public void guardar_listas_hechos ( string listas_hechos ) {	
@@ -100,11 +114,26 @@ public class Nomeolvides.Listas : GLib.Object {
 		var recorrer_listas = listas_tamanios.map_iterator ();
 		recorrer_listas.next ();
 
+		Lista lista = null;
 		
 		do {
-			this.list_store_de_listas ().get_lista ( recorrer_listas.get_key () )
-				                        .set_cantidad ( recorrer_listas.get_value () );
+			lista = this.get_lista_hash ( recorrer_listas.get_key () );
+			if ( lista != null ) {
+				lista.set_cantidad ( recorrer_listas.get_value () );
+			}
 		} while ( recorrer_listas.next () );
+	}
+
+	private Lista get_lista_hash ( string hash ) {
+		Lista lista = null;
+
+		foreach ( Lista l in this.listas ) {
+			if ( l.get_checksum () == hash ) {
+				lista =  l;
+			}
+		}
+
+		return lista;
 	}
 
 	public signal void listas_cambio_listas ();
