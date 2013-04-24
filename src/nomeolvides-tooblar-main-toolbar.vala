@@ -24,6 +24,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 {
 	public ToolButton add_button { get; private set; }
 	public ToolButton undo_button { get; private set; }
+	public ToolButton redo_button { get; private set; }
 	public ToolButton edit_button { get; private set; }
 	public ToolButton delete_button { get; private set; }
 	public ToolButton send_button { get; private set; }
@@ -37,6 +38,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		
 		this.add_button = new ToolButton.from_stock ( Stock.ADD );
 		this.undo_button = new ToolButton.from_stock ( Stock.UNDO );
+		this.redo_button = new ToolButton.from_stock ( Stock.REDO );
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
 		this.send_button = new ToolButton.from_stock ( Stock.GO_UP );
@@ -48,6 +50,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.add_button.is_important = true;
 		this.undo_button.is_important = true;
 		this.undo_button.set_sensitive ( false );
+		this.redo_button.is_important = true;
+		this.redo_button.set_sensitive ( false );
 		this.edit_button.is_important = true;
 		this.edit_button.set_visible_horizontal ( false );
 		this.delete_button.is_important = true;
@@ -70,6 +74,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 		this.add ( this.add_button );
 		this.add ( this.undo_button );
+		this.add ( this.redo_button );
 		this.add ( separador );
 		this.add ( this.edit_button );
 		this.add ( this.delete_button );
@@ -123,5 +128,13 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 	public void desactivar_deshacer () {
 		this.undo_button.set_sensitive ( false );
+	}
+
+	public void activar_rehacer () {
+		this.redo_button.set_sensitive ( true );
+	}
+
+	public void desactivar_rehacer () {
+		this.redo_button.set_sensitive ( false );
 	}
 }

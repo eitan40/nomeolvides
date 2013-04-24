@@ -49,8 +49,10 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
 		this.hechos.hechos_cambio_hechos_listas.connect ( this.signal_cambio_hechos_listas );
 
-		this.deshacer.sin_items.connect ( this.signal_no_hechos_deshacer );
-		this.deshacer.con_items.connect ( this.signal_hechos_deshacer );
+		this.deshacer.deshacer_sin_items.connect ( this.signal_no_hechos_deshacer );
+		this.deshacer.deshacer_con_items.connect ( this.signal_hechos_deshacer );
+		this.deshacer.rehacer_sin_items.connect ( this.signal_no_hechos_rehacer );
+		this.deshacer.rehacer_con_items.connect ( this.signal_hechos_rehacer );
 	}
 
 	public void agregar_hecho (Hecho nuevo) {	
@@ -86,6 +88,22 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_editado() );
 			}
 			this.agregar_hecho ( item.get_borrado() );
+			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
+		}
+	}
+
+	public void rehacer_cambios () {
+		DeshacerItem item;
+
+		bool hay_hechos_rehacer = this.deshacer.rehacer ( out item ); 
+		if ( hay_hechos_rehacer ){
+			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
+				this.eliminar_hecho ( item.get_editado() );
+				this.agregar_hecho ( item.get_borrado() );
+			} else {
+				this.eliminar_hecho ( item.get_borrado() );
+			}
+			
 			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
 		}
 	}
@@ -223,9 +241,19 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.datos_no_hechos_deshacer ();
 	}
 
+	public void signal_hechos_rehacer () {
+		this.datos_hechos_rehacer ();
+	}
+
+	public void signal_no_hechos_rehacer () {
+		this.datos_no_hechos_rehacer ();
+	}
+
 	public signal void datos_cambio_anios ();
 	public signal void datos_cambio_listas ();
 	public signal void datos_cambio_hechos ();
 	public signal void datos_hechos_deshacer ();
 	public signal void datos_no_hechos_deshacer ();
+	public signal void datos_hechos_rehacer ();
+	public signal void datos_no_hechos_rehacer ();
 }
