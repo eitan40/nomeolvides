@@ -87,7 +87,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 	private string sacarDatoJson(string json, string campo) {
 		int inicio,fin;
-		inicio = json.index_of(":",json.index_of(campo)) + 2;
+		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
 		fin = json.index_of ("\"", inicio);
 		return json[inicio:fin];
 	}
