@@ -220,10 +220,10 @@ public class Nomeolvides.App : Gtk.Application
 		dialogo.set_hecho ( hecho );
 		dialogo.set_listas ( this.datos.lista_de_listas() );
 
-		if (dialogo.run () == ResponseType.ACCEPT) {		
-            //this.datos.save_as_file ( guardar_archivo.get_filename () );
+		if (dialogo.run () == ResponseType.APPLY) {
+            this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
+			dialogo.close ();
 		}
-		dialogo.close ();		
 	}
 
 	public void save_as_file_dialog () {

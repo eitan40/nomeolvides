@@ -59,6 +59,10 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.agregar_hecho_anio ( nuevo.fecha.get_year (), nuevo );
 	}
 
+	public void agregar_hecho_lista ( Hecho hecho, string lista ) {
+		this.hechos.agregar_hecho_lista ( this.listas.get_nombre_hash ( lista ), hecho.hash );
+	}
+
 	private void cargar_datos_listas () {
 		int i;
 		string datos = Configuracion.cargar_listas_hechos ();
