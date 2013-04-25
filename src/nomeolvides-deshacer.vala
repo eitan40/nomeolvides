@@ -47,7 +47,6 @@ public class Nomeolvides.Deshacer : Object {
 
 	public void guardar_editado ( Hecho editado ) {
 		this.lista_deshacer.peek_head ().set_editado ( editado );
-	//	this.con_items ();
 	}
 
 	public bool deshacer ( out DeshacerItem item ) {
@@ -88,6 +87,11 @@ public class Nomeolvides.Deshacer : Object {
 			this.rehacer_sin_items ();
 		}
 		return retorno;
+	}
+
+	public void borrar_rehacer () {
+		this.lista_rehacer.clear ();
+		this.rehacer_sin_items ();
 	}
 
 	public signal void deshacer_sin_items ();

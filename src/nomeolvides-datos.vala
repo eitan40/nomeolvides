@@ -203,6 +203,10 @@ public class Nomeolvides.Datos : GLib.Object {
 		Archivo.escribir ( archivo, a_guardar );
 	}
 
+	public void borrar_rehacer () {
+		this.deshacer.borrar_rehacer ();
+	}
+
 	public ListStoreHechos get_liststore_anio ( int anio ) {
 		return this.hechos.get_anio ( anio );
 	}
