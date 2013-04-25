@@ -65,7 +65,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-deshacer.vala \
 	nomeolvides-deshacer-item.vala \
 	nomeolvides-hechos.vala \
-	nomeolvides-coleccion.vala
+	nomeolvides-coleccion.vala \
+	nomeolvides-add-hecho-lista-dialog.vala
 
 
 nomeolvides_VALAFLAGS = \

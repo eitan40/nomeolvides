@@ -68,11 +68,12 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void connect_signals () {
 		this.window.toolbar_add_button_clicked.connect ( this.add_hecho_dialog );
+		this.window.toolbar_undo_button_clicked.connect ( this.undo_hecho );
+		this.window.toolbar_redo_button_clicked.connect ( this.redo_hecho );		
 		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
 		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );
 		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
-		this.window.toolbar_undo_button_clicked.connect ( this.undo_hecho );
-		this.window.toolbar_redo_button_clicked.connect ( this.redo_hecho );
+		this.window.toolbar_list_button_clicked.connect ( this.add_hecho_lista );
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
@@ -208,6 +209,21 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void redo_hecho () {
 		this.datos.rehacer_cambios ();
+	}
+
+	public void add_hecho_lista () {
+		AddHechoListaDialog dialogo = new AddHechoListaDialog ();
+		Hecho hecho;
+
+		this.window.get_hecho_actual ( out hecho );
+
+		dialogo.set_hecho ( hecho );
+		dialogo.set_listas ( this.datos.lista_de_listas() );
+
+		if (dialogo.run () == ResponseType.ACCEPT) {		
+            //this.datos.save_as_file ( guardar_archivo.get_filename () );
+		}
+		dialogo.close ();		
 	}
 
 	public void save_as_file_dialog () {

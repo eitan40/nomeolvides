@@ -42,7 +42,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
 		this.send_button = new ToolButton.from_stock ( Stock.GO_UP );
-		this.list_button = new ToolButton (null, "Agregar a lista");
+		this.list_button = new ToolButton.from_stock ( Stock.INDEX );
 		this.anio_item = new ToolItem ();
 
 		this.label = new Label ("");
@@ -60,7 +60,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.set_visible_horizontal ( false );
 		this.send_button.set_label ("Enviar");
 		this.list_button.is_important = true;
-		this.list_button.set_visible_horizontal ( false );		
+		this.list_button.set_visible_horizontal ( false );
+		this.list_button.set_label ("Lista");
 
 
 		var separador = new SeparatorToolItem ();
@@ -90,10 +91,12 @@ public class Nomeolvides.MainToolbar : Toolbar
 			this.edit_button.set_visible_horizontal ( true );
 			this.delete_button.set_visible_horizontal ( true );
 			this.send_button.set_visible_horizontal ( true );
+			this.list_button.set_visible_horizontal ( true );
 		} else {
 			this.edit_button.set_visible_horizontal ( false );
 			this.delete_button.set_visible_horizontal ( false );
 			this.send_button.set_visible_horizontal ( false );
+			this.list_button.set_visible_horizontal ( false );
 		}
 	}
 
@@ -102,6 +105,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.set_visible_horizontal ( false );
 		this.edit_button.set_visible_horizontal ( false );
 		this.delete_button.set_visible_horizontal ( false );
+		this.list_button.set_visible_horizontal ( false );
 	}
 
 	public void set_label_anio ( string anio )
