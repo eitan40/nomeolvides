@@ -61,7 +61,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.set_label ("Enviar");
 		this.list_button.is_important = true;
 		this.list_button.set_visible_horizontal ( false );
-		this.list_button.set_label ("Lista");
+		this.list_button_set_agregar ();
 
 
 		var separador = new SeparatorToolItem ();
@@ -139,5 +139,13 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 	public void desactivar_rehacer () {
 		this.redo_button.set_sensitive ( false );
+	}
+
+	public void list_button_set_agregar ( ) {
+		this.list_button.set_label ("Agregar a lista");
+	}
+
+	public void list_button_set_quitar ( ) {
+		this.list_button.set_label ("Quitar de lista");
 	}
 }

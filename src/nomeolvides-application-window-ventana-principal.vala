@@ -66,7 +66,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
-		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_clicked_signal );
+		//this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
@@ -97,19 +97,30 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar_send_button_clicked ();
 	}
 
-	private void toolbar_list_button_clicked_signal () {
+	private void toolbar_list_button_agregar_clicked_signal () {
 		this.toolbar_list_button_clicked ();
+	}
+
+	private void toolbar_list_button_quitar_clicked_signal () {
+		//this.toolbar_list_button_clicked ();
+		print ("Funcaaaa!");
 	}
 
 	private void anios_hechos_anios_cursor_changed_signal () {
 		this.anio_actual = this.anios_hechos.get_anio_actual ();
 		this.actualizar_anio_label ();
+		this.toolbar.list_button_set_agregar ();
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_agregar_clicked_signal );
 		this.anios_hechos_anios_cursor_changed ();
 	}
 
 	private void anios_hechos_listas_cursor_changed_signal () {
 		this.lista_actual = this.anios_hechos.get_lista_actual ();
 		this.actualizar_lista_label ();
+		this.toolbar.list_button_set_quitar ();
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
 		this.anios_hechos_listas_cursor_changed ();
 	}
 

@@ -82,7 +82,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		Value lista_elegida;
 		this.listas.get_active_iter( out iter );
 		this.liststore.get_value ( iter, 0, out lista_elegida );
-		this.lista = (string)lista_elegida;
+		this.lista = (string) lista_elegida;
 	}
 
 	public string get_lista () {
