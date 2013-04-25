@@ -71,7 +71,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
     		case ResponseType.APPLY:
         		this.crear_respuesta ();
 				break;
-    		case ResponseType.CLOSE:
+    		case ResponseType.CANCEL:
         		this.destroy();
         		break;
         }

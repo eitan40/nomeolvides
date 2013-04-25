@@ -111,6 +111,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.actualizar_anio_label ();
 		this.toolbar.list_button_set_agregar ();
 		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
 		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_agregar_clicked_signal );
 		this.anios_hechos_anios_cursor_changed ();
 	}
@@ -119,6 +120,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.lista_actual = this.anios_hechos.get_lista_actual ();
 		this.actualizar_lista_label ();
 		this.toolbar.list_button_set_quitar ();
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
 		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
 		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
 		this.anios_hechos_listas_cursor_changed ();
