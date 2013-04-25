@@ -98,12 +98,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 
 	private void toolbar_list_button_agregar_clicked_signal () {
-		this.toolbar_list_button_clicked ();
+		this.toolbar_list_agregar_button_clicked ();
 	}
 
 	private void toolbar_list_button_quitar_clicked_signal () {
-		//this.toolbar_list_button_clicked ();
-		print ("Funcaaaa!");
+		this.toolbar_list_quitar_button_clicked ();
 	}
 
 	private void anios_hechos_anios_cursor_changed_signal () {
@@ -200,7 +199,8 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public signal void toolbar_edit_button_clicked ();
 	public signal void toolbar_delete_button_clicked ();
 	public signal void toolbar_send_button_clicked ();
-	public signal void toolbar_list_button_clicked ();
+	public signal void toolbar_list_quitar_button_clicked ();
+	public signal void toolbar_list_agregar_button_clicked ();
 	public signal void anios_hechos_anios_cursor_changed ();
 	public signal void anios_hechos_listas_cursor_changed ();	
 }

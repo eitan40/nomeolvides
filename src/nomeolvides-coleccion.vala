@@ -63,6 +63,14 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		}
 	}
 
+	public void quitar ( Hecho hecho, string key ) {
+		
+		if (this.hechos.has_key ( key ) ) {
+			this.hechos.get ( key ).remove ( hecho );
+			this.coleccion_cambio_hechos ();
+		}
+	}
+
 	public ListStoreHechos get_liststore ( string key ) {
 		var key_hechos = this.hechos.get ( key );
 		var liststore = new ListStoreHechos ();

@@ -63,6 +63,10 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos.agregar_hecho_lista ( this.listas.get_nombre_hash ( lista ), hecho.hash );
 	}
 
+	public void quitar_hecho_lista ( Hecho hecho, string lista ) {
+		this.hechos.quitar_hecho_lista ( hecho, this.listas.get_nombre_hash ( lista ) );
+	}
+
 	private void cargar_datos_listas () {
 		int i;
 		string datos = Configuracion.cargar_listas_hechos ();
