@@ -213,7 +213,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void add_hecho_lista () {
-		AddHechoListaDialog dialogo = new AddHechoListaDialog ();
+		AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
 		Hecho hecho;
 
 		this.window.get_hecho_actual ( out hecho );

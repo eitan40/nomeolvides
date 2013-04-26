@@ -66,7 +66,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
-		//this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );

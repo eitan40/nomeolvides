@@ -29,30 +29,42 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	private string lista;
 	private Label label_hecho;
 	
-	public AddHechoListaDialog ( )
+	public AddHechoListaDialog ( VentanaPrincipal ventana )
 	{
 		this.title = "Agregar un hecho a una lista";
-		this.response.connect(on_response);
+		this.set_default_size (270,150);
+		this.set_size_request (250,125);
+		this.set_transient_for ( ventana as Window );
 		
-		this.add_button ( Stock.ADD , ResponseType.APPLY );
+		this.response.connect(on_response);
+
 		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
+		this.add_button ( Stock.ADD , ResponseType.APPLY );
 
 		this.listas = new ComboBox ();
 		
 		this.label_hecho = new Label ( null );
-		
-		var label_listas = new Label ( "" );
+
+		var label_pregunta = new Label ("Quiere agregar el hecho:");
+		var label_listas = new Label ( "a la lista " );
+
+		var box_principal = new Box (Orientation.VERTICAL, 0 );
+		box_principal.pack_start (label_pregunta, true, true, 0 );
+		box_principal.pack_start (this.label_hecho, true, true, 0 );
+		var box_listas = new Box ( Orientation.HORIZONTAL, 0);
+		box_listas.pack_start (label_listas, false, false, 0 );
+		box_listas.pack_start (this.listas, true, false, 0 );
+		box_principal.pack_start (box_listas, false, false, 0 );
 
 		var contenido = this.get_content_area () as Box;
-		contenido.pack_start (this.label_hecho, true, true, 0 );
-		contenido.pack_start (this.listas, true, false, 0 );
+		contenido.pack_start (box_principal, true, true, 0 );
 
 		this.show_all ();
 	}
 
 	public void set_hecho ( Hecho hecho ) {
 		this.hecho = hecho;
-		this.label_hecho.set_text ( "Agregar " + hecho.nombre );
+		this.label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hecho.nombre +"</span>");
 	}
 
 	public void set_listas ( ListStoreListas liststore) {
