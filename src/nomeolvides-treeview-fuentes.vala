@@ -26,7 +26,6 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 1 );
 		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 2 );
 		this.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
-		this.insert_column_with_attributes ( -1, "Visible", new CellRendererToggle(), "true", 4 );
 	}
 
 	public Fuente get_fuente_cursor () {
