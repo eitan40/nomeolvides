@@ -37,7 +37,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.set_application (app);
 		this.set_title ("Nomeolvides v" + Config.VERSION );
 		this.set_position (WindowPosition.CENTER);
-		this.set_default_size (900,600);
+		this.set_default_size (1100,600);
 		this.set_size_request (500,350);
 		this.hide_titlebar_when_maximized = true;
 
