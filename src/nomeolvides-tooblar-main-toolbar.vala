@@ -42,7 +42,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
 		this.send_button = new ToolButton.from_stock ( Stock.GO_UP );
-		this.list_button = new ToolButton (null, "Agregar a lista");
+		this.list_button = new ToolButton.from_stock ( Stock.INDEX );
 		this.anio_item = new ToolItem ();
 
 		this.label = new Label ("");
@@ -60,7 +60,8 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.set_visible_horizontal ( false );
 		this.send_button.set_label ("Enviar");
 		this.list_button.is_important = true;
-		this.list_button.set_visible_horizontal ( false );		
+		this.list_button.set_visible_horizontal ( false );
+		this.list_button_set_agregar ();
 
 
 		var separador = new SeparatorToolItem ();
@@ -86,6 +87,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 	public void set_buttons_visible ( Hecho hecho ) {
 
+		this.list_button.set_visible_horizontal ( true );
 		if ( Archivo.es_path ( hecho.archivo_fuente ) ) {
 			this.edit_button.set_visible_horizontal ( true );
 			this.delete_button.set_visible_horizontal ( true );
@@ -102,6 +104,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.send_button.set_visible_horizontal ( false );
 		this.edit_button.set_visible_horizontal ( false );
 		this.delete_button.set_visible_horizontal ( false );
+		this.list_button.set_visible_horizontal ( false );
 	}
 
 	public void set_label_anio ( string anio )
@@ -136,5 +139,13 @@ public class Nomeolvides.MainToolbar : Toolbar
 
 	public void desactivar_rehacer () {
 		this.redo_button.set_sensitive ( false );
+	}
+
+	public void list_button_set_agregar ( ) {
+		this.list_button.set_label ("Agregar a lista");
+	}
+
+	public void list_button_set_quitar ( ) {
+		this.list_button.set_label ("Quitar de lista");
 	}
 }

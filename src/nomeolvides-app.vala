@@ -68,11 +68,13 @@ public class Nomeolvides.App : Gtk.Application
 
 	private void connect_signals () {
 		this.window.toolbar_add_button_clicked.connect ( this.add_hecho_dialog );
+		this.window.toolbar_undo_button_clicked.connect ( this.undo_hecho );
+		this.window.toolbar_redo_button_clicked.connect ( this.redo_hecho );		
 		this.window.toolbar_edit_button_clicked.connect ( this.edit_hecho_dialog );
 		this.window.toolbar_delete_button_clicked.connect ( this.delete_hecho_dialog );
 		this.window.toolbar_send_button_clicked.connect ( this.send_hecho );
-		this.window.toolbar_undo_button_clicked.connect ( this.undo_hecho );
-		this.window.toolbar_redo_button_clicked.connect ( this.redo_hecho );
+		this.window.toolbar_list_agregar_button_clicked.connect ( this.add_hecho_lista );
+		this.window.toolbar_list_quitar_button_clicked.connect ( this.remove_hecho_lista );
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
@@ -124,7 +126,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.borrar_rehacer ();
 			this.datos.eliminar_hecho ( hecho );
 			this.datos.agregar_hecho ( edit_dialog.respuesta );
-			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente);
+			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente );
 		}
 		edit_dialog.destroy();
 	}
@@ -208,6 +210,38 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void redo_hecho () {
 		this.datos.rehacer_cambios ();
+	}
+
+	public void add_hecho_lista () {
+		AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
+		Hecho hecho;
+
+		this.window.get_hecho_actual ( out hecho );
+
+		dialogo.set_hecho ( hecho );
+		dialogo.set_listas ( this.datos.lista_de_listas() );
+
+		if (dialogo.run () == ResponseType.APPLY) {
+            this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
+			this.datos.guardar_listas_hechos ();
+		}
+		dialogo.close ();
+	}
+
+	public void remove_hecho_lista () {
+		Hecho hecho;
+		var dialogo = new BorrarHechoListaDialog ( this.window );
+
+		this.window.get_hecho_actual ( out hecho );
+		
+		dialogo.set_hecho ( hecho );
+		dialogo.set_lista ( this.window.get_lista_actual () );
+		
+		if (dialogo.run () == ResponseType.APPLY) {
+            this.datos.quitar_hecho_lista ( hecho, this.window.get_lista_actual () );
+			this.datos.guardar_listas_hechos ();
+		}
+		dialogo.close ();			
 	}
 
 	public void save_as_file_dialog () {

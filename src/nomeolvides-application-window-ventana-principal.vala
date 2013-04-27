@@ -37,7 +37,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.set_application (app);
 		this.set_title ("Nomeolvides v" + Config.VERSION );
 		this.set_position (WindowPosition.CENTER);
-		this.set_default_size (800,500);
+		this.set_default_size (1100,600);
 		this.set_size_request (500,350);
 		this.hide_titlebar_when_maximized = true;
 
@@ -61,11 +61,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	private void conectar_seniales () {
 
 		this.toolbar.add_button.clicked.connect ( this.toolbar_add_button_clicked_signal );
+		this.toolbar.undo_button.clicked.connect ( this.toolbar_undo_button_clicked_signal );
+		this.toolbar.redo_button.clicked.connect ( this.toolbar_redo_button_clicked_signal );
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
-		this.toolbar.undo_button.clicked.connect ( this.toolbar_undo_button_clicked_signal );
-		this.toolbar.redo_button.clicked.connect ( this.toolbar_redo_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
@@ -74,6 +74,14 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	private void toolbar_add_button_clicked_signal () {
 		this.toolbar_add_button_clicked ();
+	}
+
+	private void toolbar_undo_button_clicked_signal () {
+		this.toolbar_undo_button_clicked ();
+	}
+
+	private void toolbar_redo_button_clicked_signal () {
+		this.toolbar_redo_button_clicked ();
 	}
 
 	private void toolbar_edit_button_clicked_signal () {
@@ -88,23 +96,31 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar_send_button_clicked ();
 	}
 
-	private void toolbar_undo_button_clicked_signal () {
-		this.toolbar_undo_button_clicked ();
+	private void toolbar_list_button_agregar_clicked_signal () {
+		this.toolbar_list_agregar_button_clicked ();
 	}
 
-	private void toolbar_redo_button_clicked_signal () {
-		this.toolbar_redo_button_clicked ();
+	private void toolbar_list_button_quitar_clicked_signal () {
+		this.toolbar_list_quitar_button_clicked ();
 	}
 
 	private void anios_hechos_anios_cursor_changed_signal () {
 		this.anio_actual = this.anios_hechos.get_anio_actual ();
 		this.actualizar_anio_label ();
+		this.toolbar.list_button_set_agregar ();
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_agregar_clicked_signal );
 		this.anios_hechos_anios_cursor_changed ();
 	}
 
 	private void anios_hechos_listas_cursor_changed_signal () {
 		this.lista_actual = this.anios_hechos.get_lista_actual ();
 		this.actualizar_lista_label ();
+		this.toolbar.list_button_set_quitar ();
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
 		this.anios_hechos_listas_cursor_changed ();
 	}
 
@@ -177,11 +193,13 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 	
 	public signal void toolbar_add_button_clicked ();
+	public signal void toolbar_undo_button_clicked ();
+	public signal void toolbar_redo_button_clicked ();
 	public signal void toolbar_edit_button_clicked ();
 	public signal void toolbar_delete_button_clicked ();
 	public signal void toolbar_send_button_clicked ();
-	public signal void toolbar_undo_button_clicked ();
-	public signal void toolbar_redo_button_clicked ();
+	public signal void toolbar_list_quitar_button_clicked ();
+	public signal void toolbar_list_agregar_button_clicked ();
 	public signal void anios_hechos_anios_cursor_changed ();
 	public signal void anios_hechos_listas_cursor_changed ();	
 }
