@@ -24,7 +24,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 	public string nombre_fuente { get; private set; }
 	public string nombre_archivo { get; private set; }
 	public string direccion_fuente { get; private set; }
-	public bool visible {get; private set; }
+	public bool visible {get; set; }
 	private string hash;
 	public FuentesTipo tipo_fuente { get; private set; }
 

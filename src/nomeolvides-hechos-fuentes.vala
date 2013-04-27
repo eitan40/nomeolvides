@@ -66,14 +66,13 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		ListStoreFuentes temp = new ListStoreFuentes ();
 		TreeIter iterador;
 		
-		this.fuentes_liststore.get_iter_first ( out iterador );
-		
-		do {
-			this.fuentes_liststore.get_value (iterador, 5, out fuente_value);
-			fuente = fuente_value as Fuente;
-			temp.agregar_fuente( fuente );
-		}while ( this.fuentes_liststore.iter_next ( ref iterador) );
-		        
+		if ( this.fuentes_liststore.get_iter_first ( out iterador ) ) {
+			do {
+				this.fuentes_liststore.get_value (iterador, 5, out fuente_value);
+				fuente = fuente_value as Fuente;
+				temp.agregar_fuente( fuente );
+			}while ( this.fuentes_liststore.iter_next ( ref iterador) );
+		}
 		return temp;
 	}
 
@@ -83,16 +82,15 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		ListStoreFuentes temp = new ListStoreFuentes ();
 		TreeIter iterador;
 		
-		this.fuentes_liststore.get_iter_first ( out iterador );
-		
-		do {
-			this.fuentes_liststore.get_value (iterador, 4, out fuente_value);
-			fuente = fuente_value as Fuente;
-			if( fuente.tipo_fuente == FuentesTipo.LOCAL ) {
-				temp.agregar_fuente( fuente );
-			}	
-		}while ( this.fuentes_liststore.iter_next ( ref iterador) );
-		        
+		if (this.fuentes_liststore.get_iter_first ( out iterador ) ) {
+			do {
+				this.fuentes_liststore.get_value (iterador, 5, out fuente_value);
+				fuente = fuente_value as Fuente;
+				if( fuente.tipo_fuente == FuentesTipo.LOCAL ) {
+					temp.agregar_fuente( fuente );
+				}	
+			}while ( this.fuentes_liststore.iter_next ( ref iterador) );
+		}
 		return temp;
 	}
 	
@@ -102,14 +100,20 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		Fuente fuente;
 		ArrayList<string> retorno = new ArrayList<string> ();
 
-		this.fuentes_liststore.get_iter_first(out iter);
-		do {
-			this.fuentes_liststore.get_value(iter, 5, out value_fuente);
-			fuente = value_fuente as Fuente;
-			if (fuente.tipo_fuente == tipo) {
-				retorno.add ( fuente.direccion_fuente + fuente.nombre_archivo );
-			}
-		}while (this.fuentes_liststore.iter_next(ref iter));
+		if ( this.fuentes_liststore.get_iter_first(out iter) ) {
+			do {
+				this.fuentes_liststore.get_value(iter, 5, out value_fuente);
+				fuente = value_fuente as Fuente;
+				if (fuente.tipo_fuente == tipo) {
+					print ("Fuente: " + fuente.nombre_fuente +" visible: " + fuente.visible.to_string());
+					if ( fuente.visible == true ) {
+						print (". se lista");
+						retorno.add ( fuente.direccion_fuente + fuente.nombre_archivo );
+					}
+					print ("\n");
+				}
+			}while (this.fuentes_liststore.iter_next(ref iter));
+		}
 
 		return retorno;
 	}

@@ -104,6 +104,11 @@ public class Nomeolvides.Hechos : Object {
 		return tamanio_listas;
 	}
 
+	public void vaciar () {
+		this.hechos_anios.vaciar ();
+		this.hechos_listas.vaciar ();
+	}
+
 	public void signal_cambio_anios () {
 		this.hechos_cambio_anios ();
 	}

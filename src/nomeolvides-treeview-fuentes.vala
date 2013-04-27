@@ -65,6 +65,8 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 	}
 
 	private void signal_toggle (string path) {
+		Value fuente_value;
+		Fuente fuente;
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
 		TreeIter iter;
 
@@ -72,6 +74,11 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 
 		liststore.get_iter (out iter, tree_path);
 		liststore.set_value (iter, 4, !this.toggle_visible.active);
+
+		liststore.get_value (iter, 5, out fuente_value);
+		fuente = fuente_value as Fuente;
+		fuente.visible = !this.toggle_visible.active;
+
 		this.fuente_visible_toggle_change ();
 	}
 
