@@ -21,12 +21,20 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.TreeViewFuentes : TreeView {
+	private CellRendererToggle toggle_visible;
+	
 	public TreeViewFuentes () {
+		
 		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
 		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 1 );
 		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 2 );
 		this.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
-		this.insert_column_with_attributes ( -1, "Visible", new CellRendererToggle(), "true", 4 );
+
+		this.toggle_visible = new CellRendererToggle();
+
+		this.toggle_visible.toggled.connect ( signal_toggle );
+
+		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 4 );
 	}
 
 	public Fuente get_fuente_cursor () {
@@ -38,7 +46,7 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 4, out fuente);
+			this.get_model().get_value (iterador, 5, out fuente);
 			return (Fuente) fuente;
 		} else { 
 			return (Fuente) null;
@@ -54,5 +62,15 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 		this.get_model().get_iter(out iterador, path);
 		var liststore = this.get_model() as ListStoreFuentes;
 		liststore.borrar_fuente ( iterador, a_eliminar );
+	}
+
+	private void signal_toggle (string path) {
+		TreePath tree_path = new Gtk.TreePath.from_string (path);
+		TreeIter iter;
+
+		var liststore = this.get_model() as ListStoreFuentes;
+
+		liststore.get_iter (out iter, tree_path);
+		liststore.set_value (iter, 4, !this.toggle_visible.active);
 	}
 }

@@ -28,7 +28,7 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 	private TreeIter iterador;
 	
 	public ListStoreFuentes () {
-		Type[] tipos= { typeof(string), typeof(string), typeof(string), typeof(string), typeof(Fuente) };
+		Type[] tipos= { typeof(string), typeof(string), typeof(string), typeof(string), typeof(bool), typeof(Fuente) };
 		this.archivos = new ArrayList<string> ();
 		this.archivos_cache = new ArrayList<string> ();
 		this.nombres_db = new ArrayList<string> ();
@@ -42,8 +42,9 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 		                         0,fuente.nombre_fuente,
 		                         1,fuente.direccion_fuente,
 		                         2,fuente.nombre_archivo,
-		                         3,fuente.tipo_fuente.to_string () ,
-		                         4,fuente );
+		                         3,fuente.tipo_fuente.to_string (),
+		                         4,fuente.visible,
+			      				 5,fuente );
 			this.archivos.add ( fuente.direccion_fuente + fuente.nombre_archivo );
 			this.archivos_cache.add (fuente.get_checksum());
 			this.nombres_db.add (fuente.nombre_fuente);
@@ -62,7 +63,7 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 
 		this.get_iter_first(out iter);
 		do {
-			this.get_value(iter, 4, out value_fuente);
+			this.get_value(iter, 5, out value_fuente);
 			fuente = value_fuente as Fuente;
 			json += fuente.a_json ()  + "\n";
 		}while (this.iter_next(ref iter));
