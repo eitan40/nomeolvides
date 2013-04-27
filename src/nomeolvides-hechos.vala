@@ -56,6 +56,10 @@ public class Nomeolvides.Hechos : Object {
 		this.hechos_listas.borrar ( hecho );
 	}
 
+	public void quitar_hecho_lista ( Hecho hecho, string hash ) {
+		this.hechos_listas.quitar ( hecho, hash );
+	}
+
 	public ListStoreHechos get_anio ( int anio ) {
 		return this.hechos_anios.get_liststore ( anio.to_string () );
 	}

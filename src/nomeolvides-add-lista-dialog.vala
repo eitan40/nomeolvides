@@ -28,10 +28,4 @@ public class Nomeolvides.AddListaDialog : DialogLista
 		this.title = "Agregar lista personalizada";
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
-
-/*	override void crear_respuesta () {
-		if(this.nombre_entry.get_text_length () > 0) {
-			this.respuesta  = new Lista (this.nombre_entry.get_text (), 0);
-		}
-	}*/
 }
