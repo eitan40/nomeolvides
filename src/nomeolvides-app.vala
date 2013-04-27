@@ -230,11 +230,18 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void remove_hecho_lista () {
 		Hecho hecho;
-			
-		this.window.get_hecho_actual ( out hecho );	
-        this.datos.quitar_hecho_lista ( hecho, this.window.get_lista_actual () );
-		this.datos.guardar_listas_hechos ();
+		var dialogo = new BorrarHechoListaDialog ( this.window );
+
+		this.window.get_hecho_actual ( out hecho );
 		
+		dialogo.set_hecho ( hecho );
+		dialogo.set_lista ( this.window.get_lista_actual () );
+		
+		if (dialogo.run () == ResponseType.APPLY) {
+            this.datos.quitar_hecho_lista ( hecho, this.window.get_lista_actual () );
+			this.datos.guardar_listas_hechos ();
+		}
+		dialogo.close ();			
 	}
 
 	public void save_as_file_dialog () {
