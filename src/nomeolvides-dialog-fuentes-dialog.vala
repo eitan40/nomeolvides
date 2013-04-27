@@ -64,6 +64,7 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		this.fuentes_view = new TreeViewFuentes ();
 		this.fuentes_view.set_model ( liststore_fuente );
 		this.fuentes_view.cursor_changed.connect ( elegir_fuente );
+		this.fuentes_view.fuente_visible_toggle_change.connect ( signal_toggle_change );
 
 		var scroll_fuentes_view = new ScrolledWindow (null,null);
 		scroll_fuentes_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
@@ -142,5 +143,9 @@ public class Nomeolvides.FuentesDialog : Gtk.Dialog {
 		} else {
 			this.set_buttons_visible ( false );		
 		}
+	}
+
+	private void signal_toggle_change () {
+		this.cambios = true;
 	}
 }

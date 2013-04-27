@@ -72,5 +72,9 @@ public class Nomeolvides.TreeViewFuentes : TreeView {
 
 		liststore.get_iter (out iter, tree_path);
 		liststore.set_value (iter, 4, !this.toggle_visible.active);
+		this.fuente_visible_toggle_change ();
 	}
+
+	public signal void fuente_visible_toggle_change ();
+
 }
