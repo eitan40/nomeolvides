@@ -24,13 +24,15 @@ public class Nomeolvides.Fuente : GLib.Object{
 	public string nombre_fuente { get; private set; }
 	public string nombre_archivo { get; private set; }
 	public string direccion_fuente { get; private set; }
+	public bool visible {get; set; }
 	private string hash;
 	public FuentesTipo tipo_fuente { get; private set; }
 
-	public Fuente ( string nombre_fuente, string nombre_archivo, string direccion_fuente, FuentesTipo tipo_fuente ) {
+	public Fuente ( string nombre_fuente, string nombre_archivo, string direccion_fuente, bool visible, FuentesTipo tipo_fuente ) {
 		this.nombre_fuente = nombre_fuente;
 		this.nombre_archivo = nombre_archivo;
 		this.direccion_fuente = direccion_fuente;
+		this.visible = visible;
 		this.tipo_fuente = tipo_fuente;
 		this.calcular_checksum ();
 	}
@@ -40,11 +42,13 @@ public class Nomeolvides.Fuente : GLib.Object{
 			this.nombre_fuente = this.sacarDatoJson (json, "nombre");
 			this.nombre_archivo = this.sacarDatoJson (json, "archivo");
 			this.direccion_fuente = this.sacarDatoJson (json, "path");
+			this.visible = bool.parse ( this.sacarDatoJson (json, "visible") );
 			this.tipo_fuente = FuentesTipo.convertir ( this.sacarDatoJson ( json, "tipo" ) );
 		} else {
 			this.nombre_fuente = "null";
 			this.nombre_archivo = "null";
 			this.direccion_fuente = "null";
+			this.visible = false;
 			this.tipo_fuente = FuentesTipo.LOCAL;
 		}
 
@@ -69,6 +73,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 		retorno += "\"nombre\":\"" + this.nombre_fuente + "\",";
 		retorno += "\"archivo\":\"" + this.nombre_archivo + "\",";
 		retorno += "\"path\":\"" + this.direccion_fuente + "\",";
+		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
 		retorno += "\"tipo\":\"" + this.tipo_fuente.to_string () + "\"";
 
 		retorno +="}}";	

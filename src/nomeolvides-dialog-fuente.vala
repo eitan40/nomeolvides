@@ -75,7 +75,8 @@ public class Nomeolvides.DialogFuente : Gtk.Dialog {
 		{
 			this.respuesta  = new Fuente (this.nombre_fuente_entry.get_text (),
 			                              archivo.slice(archivo.last_index_of_char ('/') +1, archivo.char_count ()),
-										  archivo.slice(0,archivo.last_index_of_char ('/') +1),			                              
+										  archivo.slice(0,archivo.last_index_of_char ('/') +1),
+			                              true,
 			                              FuentesTipo.LOCAL);
 		}
 	}

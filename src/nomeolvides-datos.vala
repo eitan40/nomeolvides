@@ -130,6 +130,8 @@ public class Nomeolvides.Datos : GLib.Object {
 		int indice;
 		ArrayList<string> locales = fuentes.lista_de_archivos ( FuentesTipo.LOCAL );
 		ArrayList<string> http = fuentes.lista_de_archivos ( FuentesTipo.HTTP );
+
+		this.hechos.vaciar ();
 		
 		for (indice = 0; indice < locales.size; indice++ ) {
 			this.open_file (locales[indice], FuentesTipo.LOCAL );
@@ -142,6 +144,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {
 		this.fuentes.actualizar_fuentes_liststore ( fuentes );
 		this.cargar_fuentes_predefinidas ();
+		this.cargar_datos_listas ();
 	}
 
 	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {

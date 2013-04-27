@@ -92,11 +92,13 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		recorrer_keys.next ();
 
 		do {
-			var key = recorrer_keys.get_value ();
-			foreach (Hecho h in key) {
-				if ( h.hash == hash ) {
-					hecho = h;
-					return true;
+			if ( recorrer_keys.valid ) {
+				var key = recorrer_keys.get_value ();
+				foreach (Hecho h in key) {
+					if ( h.hash == hash ) {
+						hecho = h;
+						return true;
+					}
 				}
 			}
 		} while ( recorrer_keys.next () );
@@ -109,9 +111,11 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		recorrer_keys.next ();
 
 		do {
-			var key = recorrer_keys.get_value ();
-			foreach (Hecho h in key) {
-				array.add (h);
+			if ( recorrer_keys.valid ) {
+				var key = recorrer_keys.get_value ();
+				foreach (Hecho h in key) {
+					array.add (h);
+				}
 			}
 		} while ( recorrer_keys.next () );
 
@@ -124,8 +128,10 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		recorrer_keys.next ();
 
 		do {
-			var key = recorrer_keys.get_key ();
-			array.add (key);
+			if ( recorrer_keys.valid ) {
+				var key = recorrer_keys.get_key ();
+				array.add (key);
+			}
 		} while ( recorrer_keys.next () );
 		return array;
 	}
@@ -136,10 +142,12 @@ public class Nomeolvides.Coleccion : GLib.Object {
 
 		recorrer_keys.next ();
 		do {
-			var key = recorrer_keys.get_key ();
-			var listado = recorrer_keys.get_value ();
-			foreach (Hecho h in listado) {
-				array.add ( key + "," + h.hash );
+			if ( recorrer_keys.valid ) {
+				var key = recorrer_keys.get_key ();
+				var listado = recorrer_keys.get_value ();
+				foreach (Hecho h in listado) {
+					array.add ( key + "," + h.hash );
+				}
 			}
 		} while ( recorrer_keys.next () );
 		return array;
@@ -151,12 +159,20 @@ public class Nomeolvides.Coleccion : GLib.Object {
 		recorrer_keys.next ();
 
 		do {
-			var valor = recorrer_keys.get_value ();
-			array.add (valor.size);
+			if ( recorrer_keys.valid ) {
+				var valor = recorrer_keys.get_value ();
+				array.add (valor.size);
+			}
 		} while ( recorrer_keys.next () );
 		return array;
 	}
 
+	public void vaciar () {
+		this.hechos.clear ();
+		this.coleccion_cambio_keys ();
+		this.coleccion_cambio_hechos ();
+	}
+	
 	public signal void coleccion_cambio_keys ();
 	public signal void coleccion_cambio_hechos ();
 }

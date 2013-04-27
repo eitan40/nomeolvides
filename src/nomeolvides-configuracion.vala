@@ -50,6 +50,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			var fuente_default = new Fuente ( "Base de datos local",
 					                          "db_default.json",
 					                           Configuracion.directorio_db_local (),
+			                             	   true,
 					                           FuentesTipo.LOCAL );
 			Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
 		}
