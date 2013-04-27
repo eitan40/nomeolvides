@@ -105,12 +105,9 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 				this.fuentes_liststore.get_value(iter, 5, out value_fuente);
 				fuente = value_fuente as Fuente;
 				if (fuente.tipo_fuente == tipo) {
-					print ("Fuente: " + fuente.nombre_fuente +" visible: " + fuente.visible.to_string());
 					if ( fuente.visible == true ) {
-						print (". se lista");
 						retorno.add ( fuente.direccion_fuente + fuente.nombre_archivo );
 					}
-					print ("\n");
 				}
 			}while (this.fuentes_liststore.iter_next(ref iter));
 		}
