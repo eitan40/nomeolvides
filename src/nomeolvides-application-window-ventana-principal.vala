@@ -130,10 +130,12 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	public void cargar_listas_view ( ListStoreListas listas ) {
 		this.anios_hechos.cargar_listas ( listas );
+		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
 
 	public void cargar_hechos_view ( ListStoreHechos hechos ) {
 		this.anios_hechos.cargar_lista_hechos ( hechos );
+		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
 
 	private void actualizar_anio_label () {
