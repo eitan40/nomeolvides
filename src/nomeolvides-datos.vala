@@ -132,13 +132,13 @@ public class Nomeolvides.Datos : GLib.Object {
 		ArrayList<string> http = fuentes.lista_de_archivos ( FuentesTipo.HTTP );
 
 		this.hechos.vaciar ();
-		
-		for (indice = 0; indice < locales.size; indice++ ) {
-			this.open_file (locales[indice], FuentesTipo.LOCAL );
-		}
+
 		for (indice = 0; indice < http.size; indice++ ) {
 			this.open_file (http[indice], FuentesTipo.HTTP );
 		}
+		for (indice = 0; indice < locales.size; indice++ ) {
+			this.open_file (locales[indice], FuentesTipo.LOCAL );
+		}		
 	}
 
 	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {

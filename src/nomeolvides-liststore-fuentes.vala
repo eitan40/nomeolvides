@@ -66,7 +66,6 @@ public class Nomeolvides.ListStoreFuentes : ListStore {
 			this.get_value(iter, 5, out value_fuente);
 			fuente = value_fuente as Fuente;
 			json += fuente.a_json ()  + "\n";
-			print ("fuente " + json + "\n");
 		}while (this.iter_next(ref iter));
 
 		return json;
