@@ -19,9 +19,10 @@ Instalación
 # Para usuarios #
 
 ## Las dependencias ##
-* vala >= 0.20
-* autoconf
-* libtool
+
+* libgee (>= 0.8)
+* gtk3  (>= 3.4.1)
+* glib (>=2.0)
 
 
 ## En Ubuntu/Debian/Mint (que usen apt-get) ##
