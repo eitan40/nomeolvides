@@ -58,7 +58,7 @@ public class Nomeolvides.Fuente : GLib.Object{
 	public bool verificar_fuente () {
 		bool retorno = true;
 		if ( this.tipo_fuente == FuentesTipo.LOCAL ) {
-			if( !Archivo.existe (this.direccion_fuente + this.nombre_archivo) ) {
+			if( !Archivo.existe_path (this.direccion_fuente + this.nombre_archivo) ) {
 				retorno = false;
 				print ("No existe el archivo " + this.direccion_fuente + this.nombre_archivo);
 			}

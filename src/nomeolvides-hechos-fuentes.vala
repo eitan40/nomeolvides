@@ -25,12 +25,14 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 	public ListStoreFuentes fuentes_liststore { get; private set; }
 		
 	public HechosFuentes () {
-		this.fuentes_liststore = new ListStoreFuentes ();		
+		this.fuentes_liststore = new ListStoreFuentes ();
 		this.cargar_fuentes ();
+		this.verificar_bases_online ();
 	}
 
-	public void actualizar_fuentes_liststore ( ListStoreFuentes nueva_fuentes_liststore) {
+	public void actualizar_fuentes_liststore ( ListStoreFuentes nueva_fuentes_liststore) {		
 		this.fuentes_liststore = nueva_fuentes_liststore;
+		this.verificar_bases_online ();
 		this.guardar_fuentes ();
 	}
 
@@ -93,6 +95,24 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		}
 		return temp;
 	}
+
+	public ArrayList<Fuente> get_fuentes_online () {
+		GLib.Value fuente_value;
+		Fuente fuente;
+		ArrayList<Fuente> temp = new ArrayList<Fuente> ();
+		TreeIter iterador;
+		
+		if (this.fuentes_liststore.get_iter_first ( out iterador ) ) {
+			do {
+				this.fuentes_liststore.get_value (iterador, 5, out fuente_value);
+				fuente = fuente_value as Fuente;
+				if( fuente.tipo_fuente == FuentesTipo.HTTP ) {
+					temp.add ( fuente );
+				}	
+			}while ( this.fuentes_liststore.iter_next ( ref iterador) );
+		}
+		return temp;
+	}
 	
 	public ArrayList<string> lista_de_archivos (FuentesTipo tipo) { 
 		TreeIter iter;
@@ -113,5 +133,16 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		}
 
 		return retorno;
+	}
+
+	private void verificar_bases_online () {
+		ArrayList<Fuente> fuentes_online = this.get_fuentes_online ();
+
+		foreach ( Fuente f in fuentes_online ) {
+			if (!(Archivo.existe_uri (f.direccion_fuente + f.nombre_archivo) )) {
+				f.visible = false;
+				print ("Se desactivó la fuente " + f.nombre_fuente + " porque no actualmente no está disponible.\n" );
+			}
+		}
 	}
 }

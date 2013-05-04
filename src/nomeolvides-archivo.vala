@@ -63,10 +63,24 @@ public class Nomeolvides.Archivo : GLib.Object{
 		return contenido_archivo;
 	}
 
-	public static bool existe ( string path ) {
+	public static bool existe_path ( string path ) {
 		var archivo = File.new_for_path ( path );
 		var retorno = archivo.query_exists ();
 
+		return retorno;
+	}
+
+	public static bool existe_uri ( string uri ) {
+		var archivo = File.new_for_uri ( uri );
+		bool retorno; 
+
+		try {
+			archivo.query_info ("standard::icon", 0);
+			retorno = true;
+		}  catch (Error e) {
+			retorno = false;
+		}
+			
 		return retorno;
 	}
 
@@ -95,7 +109,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 
 		archivo = File.new_for_uri ( uri );
 
-		if (archivo.query_exists ()) {
+		if ( Archivo.existe_uri (uri) ) {
 			try {
 				archivo.load_contents(null ,out contenido, null);
 			}  catch (Error e) {

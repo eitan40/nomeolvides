@@ -40,11 +40,11 @@ public class Nomeolvides.Configuracion : GLib.Object {
 	}
 	
 	public static void set_config () {		
-		if ( !Archivo.existe ( Configuracion.directorio_configuracion () ) ) {
+		if ( !Archivo.existe_path ( Configuracion.directorio_configuracion () ) ) {
 			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
 		}
 		
-		if (!Archivo.existe ( Configuracion.archivo_bases () ) ) {
+		if (!Archivo.existe_path ( Configuracion.archivo_bases () ) ) {
 			Archivo.crear ( Configuracion.archivo_bases () );
 
 			var fuente_default = new Fuente ( "Base de datos local",
@@ -55,19 +55,19 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
 		}
 
-		if (!Archivo.existe ( Configuracion.archivo_listas () ) ) {
+		if (!Archivo.existe_path ( Configuracion.archivo_listas () ) ) {
 				Archivo.crear ( Configuracion.archivo_listas () );
 		}
 		
-		if (!Archivo.existe ( Configuracion.directorio_db_local () )) {
+		if (!Archivo.existe_path ( Configuracion.directorio_db_local () )) {
 			Archivo.crear_directorio ( Configuracion.directorio_db_local () );			
 		}
 		
-		if (!Archivo.existe ( Configuracion.archivo_db_local () ) ) {
+		if (!Archivo.existe_path ( Configuracion.archivo_db_local () ) ) {
 				Archivo.crear ( Configuracion.archivo_db_local () );
 		}
 
-		if (!Archivo.existe ( Configuracion.archivo_listas_hechos () ) ) {
+		if (!Archivo.existe_path ( Configuracion.archivo_listas_hechos () ) ) {
 				Archivo.crear ( Configuracion.archivo_listas_hechos () );
 		}
 	}
