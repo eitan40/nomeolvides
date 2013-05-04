@@ -56,7 +56,7 @@ Instalación
 * libglib (>=2.0)
 * git
 
-## En dependencias Ubuntu/Debian/Mint (que usen apt-get) ##
+## Instalar dependencias en Ubuntu/Debian/Mint (que usen apt-get) ##
 
 * Instalar el ppa de Vala
 
