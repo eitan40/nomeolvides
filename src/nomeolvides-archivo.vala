@@ -95,12 +95,15 @@ public class Nomeolvides.Archivo : GLib.Object{
 
 		archivo = File.new_for_uri ( uri );
 
-		try {
-			archivo.load_contents(null ,out contenido, null);
-		}  catch (Error e) {
-			error (e.message);
-		}
-
-		contenido_archivo = (string) contenido;
+		if (archivo.query_exists ()) {
+			try {
+				archivo.load_contents(null ,out contenido, null);
+			}  catch (Error e) {
+				print ("Error al abrir: " + uri + "\n");
+			}
+			contenido_archivo = (string) contenido;
+		} else {
+			contenido_archivo = "";
+		}	
 	}
 }

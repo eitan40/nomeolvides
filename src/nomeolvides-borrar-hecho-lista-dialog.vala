@@ -30,7 +30,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 	
 	public BorrarHechoListaDialog ( VentanaPrincipal ventana )
 	{
-		this.title = "Agregar un hecho a una lista";
+		this.title = "Quitar un hecho a una lista";
 		this.set_default_size (270,150);
 		this.set_size_request (250,125);
 		this.set_transient_for ( ventana as Window );
@@ -42,7 +42,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		
 		this.label_hecho = new Label ( null );
 
-		var label_pregunta = new Label ("Está seguro que desea borrar el hecho ");
+		var label_pregunta = new Label ("¿Está seguro que desea quitar el hecho ");
 		var label_listas = new Label ( "de la lista " );
 		this.label_lista = new Label ("");
 
@@ -66,7 +66,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 	}
 
 	public void set_lista ( string lista ) {
-		this.label_lista.set_markup ( "<span font_weight=\"heavy\">"+ lista +"</span>");
+		this.label_lista.set_markup ( "<span font_weight=\"heavy\">"+ lista +"</span>?");
 		this.lista = lista;
 	}
 
