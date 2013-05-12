@@ -113,6 +113,25 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		}
 		return temp;
 	}
+
+	public ListStoreFuentes get_fuentes_activas () {
+		GLib.Value fuente_value;
+		Fuente fuente;
+		ListStoreFuentes temp = this.get_fuentes_locales ();
+		ListStoreFuentes activas = new ListStoreFuentes ();
+		TreeIter iterador;
+		
+		if (temp.get_iter_first ( out iterador ) ) {
+			do {
+				temp.get_value (iterador, 5, out fuente_value);
+				fuente = fuente_value as Fuente;
+				if( fuente.visible == true ) {
+					activas.agregar_fuente( fuente );
+				}	
+			}while ( temp.iter_next ( ref iterador) );
+		}
+		return activas;
+	}
 	
 	public ArrayList<string> lista_de_archivos (FuentesTipo tipo) { 
 		TreeIter iter;

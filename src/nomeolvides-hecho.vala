@@ -138,7 +138,5 @@ public class Nomeolvides.Hecho : GLib.Object {
 		string retorno = inicial.replace ( saltoDeLinea, this.reemplazoSaltoDeLinea );
 		
 		return retorno;
-	}
-
-	
+	}	
 }

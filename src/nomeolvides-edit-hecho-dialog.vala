@@ -25,13 +25,13 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	private ArrayList<string> archivos_fuente;
 	
 	public EditHechoDialog ( VentanaPrincipal ventana, HechosFuentes fuentes ) {
-		base (ventana, fuentes.get_fuentes_locales ());
+		base (ventana, fuentes.get_fuentes_activas ());
 		this.set_title ("Editar Hecho Histórico");				
 
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 
-		this.archivos_fuente = fuentes.get_fuentes_locales ().get_archivos ();		
+		this.archivos_fuente = fuentes.get_fuentes_activas ().get_archivos ();		
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {
