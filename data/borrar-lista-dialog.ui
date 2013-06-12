@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.6 -->
-  <object class="GtkDialog" id="dialog-borrar-lista">
+  <object class="BorrarListaDialogo" parent="GtkDialog" id="dialog_borrar_lista">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Borrar Lista Personalizada</property>
     <property name="modal">True</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox-principal">
+      <object class="GtkBox" id="dialog_vbox_principal">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-acciones">
+          <object class="GtkButtonBox" id="dialog_acciones">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
@@ -54,11 +54,11 @@
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="grid-labels">
+          <object class="GtkGrid" id="grid_labels">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkLabel" id="label-pregunta">
+              <object class="GtkLabel" id="label_pregunta">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">label</property>
@@ -71,7 +71,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label-lista-nombre">
+              <object class="GtkLabel" id="label_lista_nombre">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">label</property>
@@ -84,7 +84,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label-lista-cantidad-hechos">
+              <object class="GtkLabel" id="label_lista_cantidad_hechos">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">label</property>

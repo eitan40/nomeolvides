@@ -20,30 +20,24 @@
 using Gtk;
 using Nomeolvides;
 
+[GtkTemplate (ui = "/org/gnome/softwareperonista/nomeolvides/borrar-lista-dialog.ui")]
 public class Nomeolvides.BorrarListaDialogo : Dialog {
+	
+	[GtkChild]
+	private Label label_pregunta;
+	
+	[GtkChild]
+	private Label label_lista_nombre;
+	
+	[GtkChild]
+	private Label label_lista_cantidad_hechos;
+	
 	public BorrarListaDialogo ( Lista lista_a_borrar ) {
-		this.set_modal ( true );
-		this.title = "Borrar Lista Personalizada";
-		Label pregunta = new Label.with_mnemonic ( "" );
-		Label lista_nombre = new Label.with_mnemonic ( "" );
-		Label lista_cantidad_hechos = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente lista personalizada?</big>" );
-		lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
-		lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ lista_a_borrar.cantidad_hechos.to_string() +"</span> hecho");
-		
-		Box box = new Box ( Orientation.VERTICAL, 0 );
+		this.label_pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente lista personalizada?</big>" );
+		this.label_lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
+		this.label_lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ lista_a_borrar.cantidad_hechos.to_string() +"</span> hecho");
 
-		box.pack_start ( pregunta, true, true, 15 );
-		box.pack_start ( lista_nombre, true, true, 0 );
-		box.pack_start ( lista_cantidad_hechos, true, true, 0 );
-		
-		var contenido = this.get_content_area() as Box;
-		contenido.pack_start(box, false, false, 0);
-		
-		this.add_button (Stock.CANCEL, ResponseType.REJECT);
-		this.add_button (Stock.APPLY, ResponseType.APPLY);
-
-		this.show_all ();
+		//this.show_all ();
 	}
 }

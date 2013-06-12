@@ -74,7 +74,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		Resource resources;
 
 		try {
-			resources = Resource.load ("data/nomeolvides.gresource");
+			resources = Resource.load ("src/nomeolvides.gresource");
 		} catch ( Error e ){
 			error (e.message);
 		}
