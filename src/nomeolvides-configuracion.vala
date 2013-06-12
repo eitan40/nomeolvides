@@ -70,6 +70,15 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		if (!Archivo.existe_path ( Configuracion.archivo_listas_hechos () ) ) {
 				Archivo.crear ( Configuracion.archivo_listas_hechos () );
 		}
+
+		Resource resources;
+
+		try {
+			resources = Resource.load ("data/nomeolvides.gresource");
+		} catch ( Error e ){
+			error (e.message);
+		}
+		resources._register ();
 	}
 
 	public static void guardar_fuentes ( string fuentes ) {
