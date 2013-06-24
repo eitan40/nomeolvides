@@ -43,7 +43,7 @@ La idea es que se permita agregar diferentes fuentes de datos, locales o en la n
 
 ```$ yaourt -S nomeolvides```
 
-#### Para desarrolladores ####
+### Para desarrolladores ###
 
 #### Las dependencias ####
 * debhelper (>= 8.0.0)
