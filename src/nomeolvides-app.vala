@@ -280,5 +280,8 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 		Configuracion.set_config ();
 		this.datos = new Datos ();
+
+		var db = new BaseDeDatos ();
+		db.open( "nomeolvides" );
 	}
 }
