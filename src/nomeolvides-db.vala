@@ -30,8 +30,6 @@ public class BaseDeDatos : Object {
 	
 	public bool open ( string nombreDb ) {
 		bool retorno = true;
-
-		print ("puto\n");
 		
 		this.rc = Database.open ( nombreDb, out this.db );
 
@@ -40,16 +38,12 @@ public class BaseDeDatos : Object {
 			retorno = false;
 		}
 
-		print ("puto1\n");
-
 		this.db.exec ("SELECT * FROM hechos", callback, null );
 
 		if ( this.rc != Sqlite.OK) {
 			stderr.printf ("No se pudo ejecutar la consulta: %d, %s", this.rc, this.db.errmsg () );
 			retorno = false;
 		}
-
-		print ("puto2\n");
 
 		return retorno;
 	}
