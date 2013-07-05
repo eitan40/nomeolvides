@@ -284,6 +284,6 @@ public class Nomeolvides.App : Gtk.Application
 		var db = new BaseDeDatos ();
 		var hecho = db.select ( "select * from hechos", "nomeolvidesdb" );
 
-		print ( hecho.a_json () );
+		this.datos.agregar_hecho ( hecho );
 	}
 }

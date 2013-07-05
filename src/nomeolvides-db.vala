@@ -70,7 +70,7 @@ public class BaseDeDatos : Object {
 				//	print (columnas[i] + "\n");
 				}
 
-				return new Hecho (columnas[0], columnas[3], 1945, 10, 17, nombre_db, columnas[2]);
+				return new Hecho (columnas[0], columnas[3], 1945, 10, 17, "Base de datos local", columnas[2]);
 			}
 		}
 
