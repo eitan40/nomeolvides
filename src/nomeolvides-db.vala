@@ -19,6 +19,7 @@
 
 using GLib;
 using Sqlite;
+using Nomeolvides;
 
 public class BaseDeDatos : Object {
 
@@ -28,30 +29,51 @@ public class BaseDeDatos : Object {
 	public BaseDeDatos ( ) {
 	}
 	
-	public bool open ( string nombreDb ) {
+	private bool open ( string nombre_db ) {
 		bool retorno = true;
 		
-		this.rc = Database.open ( nombreDb, out this.db );
+		this.rc = Database.open ( nombre_db, out this.db );
 
 		if ( this.rc != Sqlite.OK) {
-			stderr.printf ("No se oudo abrir la base de dato: %d, %s", this.rc, this.db.errmsg () );
+			stderr.printf ( "No se pudo abrir la base de dato: %d, %s\n", this.rc, this.db.errmsg () );
 			retorno = false;
 		}
+		
+		return retorno;
+	}
 
-		this.db.exec ("SELECT * FROM hechos", callback, null );
+	private bool query (string sql_query, out Statement stmt) {
+		bool retorno = true;
+		
+		this.rc = this.db.prepare_v2 ( sql_query, -1, out stmt, null );
 
-		if ( this.rc != Sqlite.OK) {
-			stderr.printf ("No se pudo ejecutar la consulta: %d, %s", this.rc, this.db.errmsg () );
+		if ( rc == 1 ) {
+			stderr.printf ( "No se pudo ejecutar la sentencia: %s - %d - %s", sql_query, this.rc, this.db.errmsg () );
 			retorno = false;
 		}
 
 		return retorno;
 	}
 
-	public static int callback (int n_columns, string[] values, string[] column_names) {
-
-		print ("Andó\n"); 
+	public Hecho select ( string sql_query, string nombre_db ) {
+		Statement stmt;
+		string[] columnas = {"","","",""};
 		
-		return 0;
+		if ( this.open ( nombre_db) ) {
+			if (this.query ( sql_query, out stmt) ) {
+				int cols = stmt.column_count ();
+
+				stmt.step ();
+				
+				for ( int i = 0; i < cols; i++ ) {
+					columnas[i] = stmt.column_text ( i );
+				//	print (columnas[i] + "\n");
+				}
+
+				return new Hecho (columnas[0], columnas[3], 1945, 10, 17, nombre_db, columnas[2]);
+			}
+		}
+
+		return (Hecho) null;
 	}
 }
