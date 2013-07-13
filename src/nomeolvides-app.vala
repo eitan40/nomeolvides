@@ -282,8 +282,11 @@ public class Nomeolvides.App : Gtk.Application
 		this.datos = new Datos ();
 
 		var db = new BaseDeDatos ();
-		var hecho = db.select ( "select * from hechos", "nomeolvidesdb" );
 
-		this.datos.agregar_hecho ( hecho );
+		ArrayList<Hecho> hechos = db.select_hechos ( );
+
+		for ( int i = 0; i < hechos.size; i++ ) {
+			this.datos.agregar_hecho ( hechos.get(i) );
+		}
 	}
 }

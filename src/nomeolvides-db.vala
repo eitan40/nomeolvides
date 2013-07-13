@@ -19,6 +19,7 @@
 
 using GLib;
 using Sqlite;
+using Gee;
 using Nomeolvides;
 
 public class BaseDeDatos : Object {
@@ -33,18 +34,16 @@ public class BaseDeDatos : Object {
 		bool retorno = true;
 		
 		this.rc = Database.open ( nombre_db, out this.db );
-
 		if ( this.rc != Sqlite.OK) {
 			stderr.printf ( "No se pudo abrir la base de dato: %d, %s\n", this.rc, this.db.errmsg () );
 			retorno = false;
 		}
-		
 		return retorno;
 	}
 
 	private bool query (string sql_query, out Statement stmt) {
 		bool retorno = true;
-		
+
 		this.rc = this.db.prepare_v2 ( sql_query, -1, out stmt, null );
 
 		if ( rc == 1 ) {
@@ -55,25 +54,48 @@ public class BaseDeDatos : Object {
 		return retorno;
 	}
 
-	public Hecho select ( string sql_query, string nombre_db ) {
+	public Statement select ( string nombre_db, string tabla, string columnas ) {
 		Statement stmt;
-		string[] columnas = {"","","",""};
 		
-		if ( this.open ( nombre_db) ) {
-			if (this.query ( sql_query, out stmt) ) {
-				int cols = stmt.column_count ();
+		this.open ( nombre_db);
+		this.query ( "SELECT " + columnas + " FROM " + tabla, out stmt);
 
-				stmt.step ();
-				
-				for ( int i = 0; i < cols; i++ ) {
-					columnas[i] = stmt.column_text ( i );
-				//	print (columnas[i] + "\n");
-				}
+		return stmt;
+	}
 
-				return new Hecho (columnas[0], columnas[3], 1945, 10, 17, "Base de datos local", columnas[2]);
+	public ArrayList<Hecho> select_hechos ( ) {
+		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+		string[] columnas = {"","","","","","",""};
+		
+		var stmt = this.select ( "nomeolvides.db", "hechos", "*"); 
+	
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+		
+		while ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					}
+
+					hechos.add(new Hecho (columnas[1], columnas[2],
+			    		          int.parse (columnas[3]),
+			        		      int.parse (columnas[4]),
+			            		  int.parse (columnas[5]),
+								  "Base de datos local", 
+								  columnas[6]));
+					break;
+				default:
+					print ("Error!!");
+					break;
 			}
+			
+			rc = stmt.step ();		
 		}
-
-		return (Hecho) null;
+		
+		return hechos;
 	}
 }
