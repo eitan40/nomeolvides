@@ -71,7 +71,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				Archivo.crear ( Configuracion.archivo_listas_hechos () );
 		}
 
-		Resource resources;
+	/*	Resource resources;
 
 		try {
 			resources = Resource.load ("src/nomeolvides.gresource");
@@ -79,7 +79,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			error (e.message);
 		}
 		resources._register ();
-	}
+*/	}
 
 	public static void guardar_fuentes ( string fuentes ) {
 		Archivo.escribir ( Configuracion.archivo_bases (), fuentes );

@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-[GtkTemplate (ui = "/org/gnome/softwareperonista/nomeolvides/borrar-lista-dialog.ui")]
+[GtkTemplate (ui = "/org/gnome/nomeolvides/borrar-lista-dialog.ui")]
 public class Nomeolvides.BorrarListaDialogo : Dialog {
 	
 	[GtkChild]
@@ -34,10 +34,10 @@ public class Nomeolvides.BorrarListaDialogo : Dialog {
 	
 	public BorrarListaDialogo ( Lista lista_a_borrar ) {
 
-		this.label_pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente lista personalizada?</big>" );
+		this.label_pregunta.set_markup ( "<big>¿Est seguro que desea borrar la siguiente lista personalizada?</big>" );
 		this.label_lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
 		this.label_lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ lista_a_borrar.cantidad_hechos.to_string() +"</span> hecho");
 
-		//this.show_all ();
+		this.show_all ();
 	}
 }
