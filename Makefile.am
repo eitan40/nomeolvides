@@ -23,7 +23,9 @@ uninstall-local:
 
 
 AM_VALAFLAGS = --pkg \
-	gee-0.8 
+	gee-0.8 \
+	--pkg \
+	sqlite3 
 
 nomeolvidesdesktofiledir = $(datadir)/applications
 nomeolvidesdesktofile_DATA = data/nomeolvides.desktop

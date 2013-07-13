@@ -67,12 +67,15 @@ nomeolvides_SOURCES = \
 	nomeolvides-hechos.vala \
 	nomeolvides-coleccion.vala \
 	nomeolvides-add-hecho-lista-dialog.vala \
-	nomeolvides-borrar-hecho-lista-dialog.vala
+	nomeolvides-borrar-hecho-lista-dialog.vala \
+	nomeolvides-db.vala
 
 
 nomeolvides_VALAFLAGS = \
+	--pkg sqlite3 \
 	--pkg gee-0.8 \
 	--pkg gtk+-3.0 -g
+	-g
 
 nomeolvides_LDFLAGS = \
 	-Wl,--export-dynamic

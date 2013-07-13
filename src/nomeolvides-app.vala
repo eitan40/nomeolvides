@@ -280,5 +280,10 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 		Configuracion.set_config ();
 		this.datos = new Datos ();
+
+		var db = new BaseDeDatos ();
+		var hecho = db.select ( "select * from hechos", "nomeolvidesdb" );
+
+		this.datos.agregar_hecho ( hecho );
 	}
 }

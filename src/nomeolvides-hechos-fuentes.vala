@@ -48,8 +48,8 @@ public class Nomeolvides.HechosFuentes : GLib.Object {
 		Fuente nueva_fuente;
 		int i;	
 
-		var fuente_oficial = new Fuente ( "Base de datos oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", true, FuentesTipo.HTTP );
-		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
+//		var fuente_oficial = new Fuente ( "Base de datos oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", true, FuentesTipo.HTTP );
+//		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
 
 		todo = Configuracion.cargar_fuentes ();
 		
