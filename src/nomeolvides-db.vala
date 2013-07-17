@@ -63,11 +63,27 @@ public class BaseDeDatos : Object {
 		return stmt;
 	}
 
+	public Statement insert ( string nombre_db, string tabla, string columnas, string valores ) {
+		Statement stmt;
+		
+		this.open ( nombre_db);
+		this.query ( "INSERT INTO \""+ tabla +"\" ("+ columnas +") VALUES ("+ valores +")", out stmt);
+		print ("Query: " + "INSERT INTO \""+ tabla +"\" ("+ columnas +") VALUES ("+ valores +")" + "\n");
+
+		return stmt;
+	}
+
+	public void insert_hecho ( Hecho hecho ) {
+		string columnas = "\"nombre\",\"descripcion\",\"anio\",\"mes\",\"dia\",\"fuente\"";
+
+		this.insert ("nomeolvides.db","hechos",columnas, hecho.to_string());
+	}
+
 	public ArrayList<Hecho> select_hechos ( ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string[] columnas = {"","","","","","",""};
 		
-		var stmt = this.select ( "nomeolvides.db", "hechos", "*"); 
+		var stmt = this.select ( "nomeolvides.db", "hechos", "nombre,descripcion,anio,mes,dia,fuente"); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -79,14 +95,16 @@ public class BaseDeDatos : Object {
 				case Sqlite.ROW:
 					for ( int j = 0; j < cols; j++ ) {
 						columnas[j] = stmt.column_text ( j );
-					}
+						print ("Dato:" + columnas[j] + "\n");
+					} 
 
-					hechos.add(new Hecho (columnas[1], columnas[2],
-			    		          int.parse (columnas[3]),
-			        		      int.parse (columnas[4]),
-			            		  int.parse (columnas[5]),
+					hechos.add(new Hecho (columnas[0],
+					              columnas[1],
+			    		          int.parse (columnas[2]),
+			        		      int.parse (columnas[3]),
+			            		  int.parse (columnas[4]),
 								  "Base de datos local", 
-								  columnas[6]));
+								  columnas[5]));
 					break;
 				default:
 					print ("Error!!");

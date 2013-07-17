@@ -70,6 +70,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 	private void saltoDeLinea () {
 		this.reemplazoSaltoDeLinea = "|";
 	}
+	
 	public string a_json () {
 		string retorno = "{\"Hecho\":{";
 
@@ -81,6 +82,19 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "\"fuente\":\"" + this.fuente + "\"";
 
 		retorno +="}}";	
+		
+		return retorno;
+	}
+
+	public string to_string () {
+		string retorno;
+
+		retorno  = "\"" + this.nombre + "\",";
+		retorno += "\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
+		retorno += "\"" + this.fecha.get_year().to_string () + "\",";
+		retorno += "\"" + this.fecha.get_month().to_string () + "\",";
+		retorno += "\"" + this.fecha.get_day_of_month().to_string () + "\",";
+		retorno += "\"" + this.fuente + "\"";
 		
 		return retorno;
 	}

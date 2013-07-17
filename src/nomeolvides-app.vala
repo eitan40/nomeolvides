@@ -27,6 +27,7 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
+	public BaseDeDatos db;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
@@ -96,7 +97,8 @@ public class Nomeolvides.App : Gtk.Application
 		if ( add_dialog.run() == ResponseType.APPLY )
 		{
 			this.datos.agregar_hecho(add_dialog.respuesta);
-			this.datos.guardar_un_archivo ( add_dialog.respuesta.archivo_fuente);
+			this.db = new BaseDeDatos ();
+			this.db.insert_hecho ( add_dialog.respuesta );
 		}		
 		add_dialog.destroy();
 	}
@@ -280,10 +282,9 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 		Configuracion.set_config ();
 		this.datos = new Datos ();
+		this.db = new BaseDeDatos ();
 
-		var db = new BaseDeDatos ();
-
-		ArrayList<Hecho> hechos = db.select_hechos ( );
+		ArrayList<Hecho> hechos = this.db.select_hechos ( );	 
 
 		for ( int i = 0; i < hechos.size; i++ ) {
 			this.datos.agregar_hecho ( hechos.get(i) );
