@@ -63,20 +63,21 @@ public class BaseDeDatos : Object {
 		return stmt;
 	}
 
-	public Statement insert ( string nombre_db, string tabla, string columnas, string valores ) {
-		Statement stmt;
+	public void insert ( string nombre_db, string tabla, string columnas, string valores ) {
 		
 		this.open ( nombre_db);
-		this.query ( "INSERT INTO \""+ tabla +"\" ("+ columnas +") VALUES ("+ valores +")", out stmt);
-		print ("Query: " + "INSERT INTO \""+ tabla +"\" ("+ columnas +") VALUES ("+ valores +")" + "\n");
 
-		return stmt;
+		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" ("+ columnas +") VALUES (" + valores + ")", null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
 		string columnas = "\"nombre\",\"descripcion\",\"anio\",\"mes\",\"dia\",\"fuente\"";
 
-		this.insert ("nomeolvides.db","hechos",columnas, hecho.to_string());
+		this.insert ("nomeolvides.db","hechos",columnas,hecho.to_string () );
 	}
 
 	public ArrayList<Hecho> select_hechos ( ) {
@@ -95,7 +96,6 @@ public class BaseDeDatos : Object {
 				case Sqlite.ROW:
 					for ( int j = 0; j < cols; j++ ) {
 						columnas[j] = stmt.column_text ( j );
-						print ("Dato:" + columnas[j] + "\n");
 					} 
 
 					hechos.add(new Hecho (columnas[0],
