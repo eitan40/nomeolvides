@@ -212,11 +212,19 @@ public class Nomeolvides.App : Gtk.Application
 		this.datos.rehacer_cambios ();
 	}
 
-	public void add_hecho_lista () {
-		AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
+	public void add_hecho_lista () {		
 		Hecho hecho;
+		TreeIter iter;
 
-		this.window.get_hecho_actual ( out hecho );
+		var liststore = this.datos.lista_de_listas();
+
+		
+		if ( !(liststore.get_iter_first ( out iter )) ) { //si no hay listas
+			this.config_listas_dialog ();
+		}
+
+		AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
+		this.window.get_hecho_actual ( out hecho );		
 
 		dialogo.set_hecho ( hecho );
 		dialogo.set_listas ( this.datos.lista_de_listas() );
