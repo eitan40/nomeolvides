@@ -81,7 +81,9 @@ public class Nomeolvides.Listas : GLib.Object {
 				lista = lista_value as Lista;
 				this.listas.add ( lista );
 			}while ( liststore.iter_next ( ref iterador) );
-		}        
+		} else {
+			this.listas.clear ();
+		}           
 	}
 
 	public ArrayList<string> get_listas_hash () {
