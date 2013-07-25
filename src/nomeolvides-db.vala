@@ -63,11 +63,11 @@ public class BaseDeDatos : Object {
 		return stmt;
 	}
 
-	public void insert ( string nombre_db, string tabla, string columnas, string valores ) {
+	public void insert ( string nombre_db, string tabla, string valores ) {
 		
 		this.open ( nombre_db);
 
-		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" ("+ columnas +") VALUES (" + valores + ")", null, null);
+		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
 
 		if (rc != Sqlite.OK) { 
             stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
@@ -75,16 +75,14 @@ public class BaseDeDatos : Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		string columnas = "\"nombre\",\"descripcion\",\"anio\",\"mes\",\"dia\",\"fuente\"";
-
-		this.insert ("nomeolvides.db","hechos",columnas,hecho.to_string () );
+		this.insert ("nomeolvides.db","hechos", hecho.to_string () );
 	}
 
 	public ArrayList<Hecho> select_hechos ( ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string[] columnas = {"","","","","","",""};
 		
-		var stmt = this.select ( "nomeolvides.db", "hechos", "nombre,descripcion,anio,mes,dia,fuente"); 
+		var stmt = this.select ( "nomeolvides.db", "hechos", "*"); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
