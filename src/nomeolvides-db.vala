@@ -44,6 +44,7 @@ public class BaseDeDatos : Object {
 	private bool query (string sql_query, out Statement stmt) {
 		bool retorno = true;
 
+		print ( "SQL: "+ sql_query + "\n");
 		this.rc = this.db.prepare_v2 ( sql_query, -1, out stmt, null );
 
 		if ( rc == 1 ) {
@@ -52,6 +53,26 @@ public class BaseDeDatos : Object {
 		}
 
 		return retorno;
+	}
+
+	public void insert ( string nombre_db, string tabla, string valores ) {
+		this.open ( nombre_db );
+
+		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
+	}
+
+	public void del ( string nombre_db, string tabla, string where ) {
+		this.open ( nombre_db );
+
+		var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
 	}
 
 	public Statement select ( string nombre_db, string tabla, string columnas ) {
@@ -63,26 +84,20 @@ public class BaseDeDatos : Object {
 		return stmt;
 	}
 
-	public void insert ( string nombre_db, string tabla, string valores ) {
-		
-		this.open ( nombre_db);
-
-		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
-
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
+	public void insert_hecho ( Hecho hecho ) {
+		this.insert ( "nomeolvides.db","hechos", hecho.to_string () );
 	}
 
-	public void insert_hecho ( Hecho hecho ) {
-		this.insert ("nomeolvides.db","hechos", hecho.to_string () );
+	public void delete_hecho ( Hecho hecho ) {
+		this.del ( "nomeolvides.db", "hechos", "WHERE rowid=\"" + hecho.id.to_string() +"\"" );
 	}
 
 	public ArrayList<Hecho> select_hechos ( ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string[] columnas = {"","","","","","",""};
+		Hecho hecho;
 		
-		var stmt = this.select ( "nomeolvides.db", "hechos", "*"); 
+		var stmt = this.select ( "nomeolvides.db", "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid"); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -96,13 +111,16 @@ public class BaseDeDatos : Object {
 						columnas[j] = stmt.column_text ( j );
 					} 
 
-					hechos.add(new Hecho (columnas[0],
+					hecho = new Hecho (columnas[0],
 					              columnas[1],
 			    		          int.parse (columnas[2]),
 			        		      int.parse (columnas[3]),
 			            		  int.parse (columnas[4]),
 								  "Base de datos local", 
-								  columnas[5]));
+								  columnas[5]);
+					hecho.id = int64.parse(columnas[6]);
+					print ("ID="+columnas[6].to_string()+"\n");
+					hechos.add( hecho );
 					break;
 				default:
 					print ("Error!!");
@@ -113,5 +131,9 @@ public class BaseDeDatos : Object {
 		}
 		
 		return hechos;
+	}
+
+	public int64 ultimo_hecho_id () {
+		return this.db.last_insert_rowid ();
 	}
 }

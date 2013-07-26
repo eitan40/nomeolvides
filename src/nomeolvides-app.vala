@@ -97,7 +97,6 @@ public class Nomeolvides.App : Gtk.Application
 		if ( add_dialog.run() == ResponseType.APPLY )
 		{
 			this.datos.agregar_hecho(add_dialog.respuesta);
-			this.db = new BaseDeDatos ();
 			this.db.insert_hecho ( add_dialog.respuesta );
 		}		
 		add_dialog.destroy();
@@ -143,7 +142,8 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.eliminar_hecho ( hecho_a_borrar );
 			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
 			this.datos.borrar_rehacer ();
-			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
+			print ("Hecho: "+ hecho_a_borrar.nombre + " - ID: " + hecho_a_borrar.id.to_string()+"\n" );
+			this.db.delete_hecho ( hecho_a_borrar );
 			this.datos.guardar_listas_hechos ();	
 		}	
 		delete_dialog.destroy ();
