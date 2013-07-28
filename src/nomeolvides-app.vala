@@ -127,7 +127,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.borrar_rehacer ();
 			this.datos.eliminar_hecho ( hecho );
 			this.datos.agregar_hecho ( edit_dialog.respuesta );
-			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente );
+			this.db.update_hecho ( edit_dialog.respuesta );	
 		}
 		edit_dialog.destroy();
 	}

@@ -23,6 +23,7 @@ using Nomeolvides;
 
 public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	private ArrayList<string> archivos_fuente;
+	private int64 hecho_id;
 	
 	public EditHechoDialog ( VentanaPrincipal ventana, HechosFuentes fuentes ) {
 		base (ventana, fuentes.get_fuentes_activas ());
@@ -42,6 +43,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.fecha.set_dia(hecho_a_editar.fecha.get_day_of_month());
 		this.fuente_entry.set_text ( hecho_a_editar.fuente );
 		set_fuente_de_hecho ( hecho_a_editar.archivo_fuente );
+		this.hecho_id = hecho_a_editar.id;
 	}
 	
 	private void on_response (Dialog source, int response_id)
@@ -60,6 +62,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	private void modificar ()
 	{
 		this.crear_respuesta ();
+		this.respuesta.id = this.hecho_id;
 	}
 
 	protected void set_fuente_de_hecho (string archivo_fuente ) {

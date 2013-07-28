@@ -75,6 +75,17 @@ public class BaseDeDatos : Object {
         }
 	}
 
+	public void update ( string nombre_db, string tabla, string valores, string where ) {
+		this.open ( nombre_db );
+
+		print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
+		var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
+	}
+
 	public Statement select ( string nombre_db, string tabla, string columnas ) {
 		Statement stmt;
 		
@@ -90,6 +101,28 @@ public class BaseDeDatos : Object {
 
 	public void delete_hecho ( Hecho hecho ) {
 		this.del ( "nomeolvides.db", "hechos", "WHERE rowid=\"" + hecho.id.to_string() +"\"" );
+	}
+
+	public void update_hecho ( Hecho hecho ) {
+		string valores = hecho.to_string ();
+		
+		string[] val = valores.split(",");
+
+		val[0] = "nombre="+ val[0] + ",";
+		val[1] = "descripcion="+ val[1] + ",";
+		val[2] = "anio="+ val[2] + ",";
+		val[3] = "mes="+ val[3] + ",";
+		val[4] = "anio="+ val[4] + ",";
+		val[5] = "fuente="+ val[5];
+
+		valores = "";
+		for ( int i = 0; i < 6; i++ ) {
+			valores += val[i];
+		}
+
+		print ("rowid en update: " + hecho.id.to_string() + "\n");
+		
+		this.update ("nomeolvides.db", "hechos", valores, " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
 	}
 
 	public ArrayList<Hecho> select_hechos ( ) {
@@ -119,7 +152,7 @@ public class BaseDeDatos : Object {
 								  "Base de datos local", 
 								  columnas[5]);
 					hecho.id = int64.parse(columnas[6]);
-					print ("ID="+columnas[6].to_string()+"\n");
+					print ("nombre="+ columnas[0] +" - ID="+columnas[6].to_string()+"\n");
 					hechos.add( hecho );
 					break;
 				default:
