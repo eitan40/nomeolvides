@@ -27,7 +27,7 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
-	public BaseDeDatos db;
+	public AccionesDB db;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
@@ -95,9 +95,10 @@ public class Nomeolvides.App : Gtk.Application
 		add_dialog.show();
 		
 		if ( add_dialog.run() == ResponseType.APPLY )
-		{
-			this.datos.agregar_hecho(add_dialog.respuesta);
+		{   
 			this.db.insert_hecho ( add_dialog.respuesta );
+			add_dialog.respuesta.id = this.db.ultimo_hecho_id ();
+			this.datos.agregar_hecho( add_dialog.respuesta );			
 		}		
 		add_dialog.destroy();
 	}
@@ -142,7 +143,6 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.eliminar_hecho ( hecho_a_borrar );
 			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
 			this.datos.borrar_rehacer ();
-			print ("Hecho: "+ hecho_a_borrar.nombre + " - ID: " + hecho_a_borrar.id.to_string()+"\n" );
 			this.db.delete_hecho ( hecho_a_borrar );
 			this.datos.guardar_listas_hechos ();	
 		}	
@@ -282,7 +282,7 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 		Configuracion.set_config ();
 		this.datos = new Datos ();
-		this.db = new BaseDeDatos ();
+		this.db = new AccionesDB ();
 
 		ArrayList<Hecho> hechos = this.db.select_hechos ( );	 
 

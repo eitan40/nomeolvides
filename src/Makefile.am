@@ -68,7 +68,9 @@ nomeolvides_SOURCES = \
 	nomeolvides-coleccion.vala \
 	nomeolvides-add-hecho-lista-dialog.vala \
 	nomeolvides-borrar-hecho-lista-dialog.vala \
-	nomeolvides-db.vala
+	nomeolvides-base-de-datos.vala \
+	nomeolvides-sqlite.vala \
+	nomeolvides-acciones-db.vala
 
 
 nomeolvides_VALAFLAGS = \
