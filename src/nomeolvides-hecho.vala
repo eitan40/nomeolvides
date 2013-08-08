@@ -100,6 +100,19 @@ public class Nomeolvides.Hecho : GLib.Object {
 		return retorno;
 	}
 
+	public string a_sql () {
+		string retorno;
+
+		retorno  = "nombre=\"" + this.nombre + "\",";
+		retorno += "descripcion=\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
+		retorno += "anio=\"" + this.fecha.get_year().to_string () + "\",";
+		retorno += "mes=\"" + this.fecha.get_month().to_string () + "\",";
+		retorno += "dia=\"" + this.fecha.get_day_of_month().to_string () + "\",";
+		retorno += "fuente=\"" + this.fuente + "\"";
+		
+		return retorno;
+	}
+
 	private string sacarDatoJson(string json, string campo) {
 		int inicio,fin;
 		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;

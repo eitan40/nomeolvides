@@ -37,21 +37,8 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public void update_hecho ( Hecho hecho ) {
-		string valores = hecho.to_string ();
-		
-		string[] val = valores.split(",");
+		string valores = hecho.a_sql ();
 
-		val[0] = "nombre="+ val[0] + ",";
-		val[1] = "descripcion="+ val[1] + ",";
-		val[2] = "anio="+ val[2] + ",";
-		val[3] = "mes="+ val[3] + ",";
-		val[4] = "dia="+ val[4] + ",";
-		val[5] = "fuente="+ val[5];
-
-		valores = "";
-		for ( int i = 0; i < 6; i++ ) {
-			valores += val[i];
-		}
 
 		this.dbms.update ("nomeolvides.db", "hechos", valores, " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
 	}
