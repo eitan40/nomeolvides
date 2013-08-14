@@ -22,7 +22,7 @@ using Gee;
 
 public class Nomeolvides.AccionesDB : Object {
 
-	private Sqlite3 dbms;
+	private BaseDeDatos dbms;
 
 	public AccionesDB () {
 		this.dbms = new Sqlite3 ();

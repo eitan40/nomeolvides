@@ -21,78 +21,13 @@ using GLib;
 using Sqlite;
 using Nomeolvides;
 
-public class Nomeolvides.BaseDeDatos : Object {
-
-	private Database db;
-	private int rc;
-
-	public BaseDeDatos ( ) {
-	}
+public interface Nomeolvides.BaseDeDatos : Object {
 	
-	private bool open ( string nombre_db ) {
-		bool retorno = true;
-		
-		this.rc = Database.open ( nombre_db, out this.db );
-		if ( this.rc != Sqlite.OK) {
-			stderr.printf ( "No se pudo abrir la base de dato: %d, %s\n", this.rc, this.db.errmsg () );
-			retorno = false;
-		}
-		return retorno;
-	}
-
-	private bool query (string sql_query, out Statement stmt) {
-		bool retorno = true;
-
-		this.rc = this.db.prepare_v2 ( sql_query, -1, out stmt, null );
-
-		if ( rc == 1 ) {
-			stderr.printf ( "No se pudo ejecutar la sentencia: %s - %d - %s", sql_query, this.rc, this.db.errmsg () );
-			retorno = false;
-		}
-
-		return retorno;
-	}
-
-	public void insert ( string nombre_db, string tabla, string valores ) {
-		this.open ( nombre_db );
-
-		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
-
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
-	}
-
-	public void del ( string nombre_db, string tabla, string where ) {
-		this.open ( nombre_db );
-
-		var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
-
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
-	}
-
-	public void update ( string nombre_db, string tabla, string valores, string where ) {
-		this.open ( nombre_db );
-
-		var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
-
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
-	}
-
-	public Statement select ( string nombre_db, string tabla, string columnas ) {
-		Statement stmt;
-		
-		this.open ( nombre_db);
-		this.query ( "SELECT " + columnas + " FROM " + tabla, out stmt);
-
-		return stmt;
-	}
-
-	public int64 ultimo_rowid () {
-		return this.db.last_insert_rowid ();
-	}
+	protected abstract bool open ( string nombre_db );
+	protected abstract bool query ( string sql_query, out Statement stmt );
+	public abstract void insert ( string nombre_db, string tabla, string valores );
+	public abstract void del ( string nombre_db, string tabla, string where );
+	public abstract void update ( string nombre_db, string tabla, string valores, string where ); 
+	public abstract Statement select ( string nombre_db, string tabla, string columnas );
+	public abstract int64 ultimo_rowid ();
 }

@@ -22,6 +22,77 @@ using Sqlite;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.Sqlite3:Nomeolvides.BaseDeDatos {
+public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
+	private Database db;
+	private  int rc;
 	
+	private bool open ( string nombre_db ) {
+		bool retorno = true;
+		
+		this.rc = Database.open ( nombre_db, out this.db );
+		if ( this.rc != Sqlite.OK) {
+			stderr.printf ( "No se pudo abrir la base de dato: %d, %s\n", this.rc, this.db.errmsg () );
+			retorno = false;
+		}
+		return retorno;
+	}
+
+	private bool query (string sql_query, out Statement stmt) {
+		bool retorno = true;
+
+		this.rc = this.db.prepare_v2 ( sql_query, -1, out stmt, null );
+
+		if ( rc == 1 ) {
+			stderr.printf ( "No se pudo ejecutar la sentencia: %s - %d - %s", sql_query, this.rc, this.db.errmsg () );
+			retorno = false;
+		}
+
+		return retorno;
+	}
+
+	public void insert ( string nombre_db, string tabla, string valores ) {
+		this.open ( nombre_db );
+
+		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
+	}
+
+	public void del ( string nombre_db, string tabla, string where ) {
+		this.open ( nombre_db );
+
+		var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
+	}
+
+	public void update ( string nombre_db, string tabla, string valores, string where ) {
+		this.open ( nombre_db );
+
+		print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
+		
+		var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
+	}
+
+	public Statement select ( string nombre_db, string tabla, string columnas ) {
+		Statement stmt;
+		
+		this.open ( nombre_db);
+		this.query ( "SELECT " + columnas + " FROM " + tabla, out stmt);
+
+		return stmt;
+	}
+
+	public int64 ultimo_rowid () {
+		return this.db.last_insert_rowid ();
+	}
+
 }
