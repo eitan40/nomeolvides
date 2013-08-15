@@ -243,6 +243,18 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hay;
 	}
 
+	public bool hay_db_locales_activas() {
+		TreeIter iter;
+		bool hay=false;
+
+		var liststore = this.fuentes.get_fuentes_activas();
+
+		if ( liststore.get_iter_first ( out iter ) ) { 
+			hay = true;
+		}
+		return hay;
+	}
+
 	public void signal_cambio_anios () {
 		this.datos_cambio_anios ();
 	}

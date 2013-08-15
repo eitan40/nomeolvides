@@ -89,16 +89,24 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void add_hecho_dialog () {
-		var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
+
+		if ( !(this.datos.hay_db_locales_activas ()) ) {
+				this.config_db_dialog ();
+		}
+
+		if ( this.datos.hay_db_locales_activas () ) {
+
+			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
 		
-		add_dialog.show();
+			add_dialog.show();
 		
-		if ( add_dialog.run() == ResponseType.APPLY )
-		{
-			this.datos.agregar_hecho(add_dialog.respuesta);
-			this.datos.guardar_un_archivo ( add_dialog.respuesta.archivo_fuente);
-		}		
-		add_dialog.destroy();
+			if ( add_dialog.run() == ResponseType.APPLY )
+			{
+				this.datos.agregar_hecho(add_dialog.respuesta);
+				this.datos.guardar_un_archivo ( add_dialog.respuesta.archivo_fuente);
+			}		
+			add_dialog.destroy();
+		}
 	}
 	
 	private void elegir_anio () {
