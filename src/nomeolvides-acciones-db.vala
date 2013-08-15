@@ -24,23 +24,58 @@ public class Nomeolvides.AccionesDB : Object {
 
 	private BaseDeDatos dbms;
 
-	public AccionesDB () {
-		this.dbms = new Sqlite3 ();
+	public AccionesDB ( string nombredb) {
+		this.dbms = new Sqlite3 ( nombredb );
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		this.dbms.insert ( "nomeolvides.db","hechos", hecho.to_string () );
+		this.dbms.insert ( "hechos", hecho.to_string () );
+	}
+
+	public void insert_lista ( Lista lista ) {
+		this.dbms.insert ( "lista", lista.nombre );
+	}
+
+	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
+		string valores = "lista=\"" + lista.id.to_string() + "\" hecho=\""
+			                        + lista.id.to_string() + "\"";
+		
+		this.dbms.insert ( "listashechos", valores );
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
-		this.dbms.del ( "nomeolvides.db", "hechos", "WHERE rowid=\"" + hecho.id.to_string() +"\"" );
+		this.dbms.del ( "hechos", "WHERE rowid=\"" + hecho.id.to_string() +"\"" );
+	}
+
+	public void delete_lista ( Lista lista ) {
+		this.dbms.del ( "listas", "WHERE rowid=\"" + lista.id.to_string() +"\"" );
+	}
+
+	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
+		this.dbms.del ( "listashechos", "WHERE lista=\"" + lista.id.to_string()
+		                                           + "\" AND hecho=\"" 
+		                                           + hecho.id.to_string() +"\"" );
 	}
 
 	public void update_hecho ( Hecho hecho ) {
 		string valores = hecho.a_sql ();
 
+		this.dbms.update ( "hechos", valores, " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
+	}
+ 
+	public void update_lista ( Lista lista ) {
+		string valores = lista.a_sql ();
 
-		this.dbms.update ("nomeolvides.db", "hechos", valores, " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
+		this.dbms.update ( "lista", valores, " WHERE rowid=\"" + lista.id.to_string() + "\"" );
+	}
+
+	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
+		string valores = "lista=\"" + lista.id.to_string() + "\" hecho=\""
+			                        + lista.id.to_string() + "\"";
+
+		this.dbms.update ( "listashechos", valores, "WHERE lista=\"" + lista.id.to_string()
+		                                           + "\" AND hecho=\"" 
+		                                           + hecho.id.to_string() +"\"" );
 	}
 
 	public ArrayList<Hecho> select_hechos ( ) {
@@ -48,7 +83,7 @@ public class Nomeolvides.AccionesDB : Object {
 		string[] columnas = {"","","","","","",""};
 		Hecho hecho;
 		
-		var stmt = this.dbms.select ( "nomeolvides.db", "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid"); 
+		var stmt = this.dbms.select ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid"); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();

@@ -282,7 +282,7 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 		Configuracion.set_config ();
 		this.datos = new Datos ();
-		this.db = new AccionesDB ();
+		this.db = new AccionesDB ( "nomeolvides.db" );
 
 		ArrayList<Hecho> hechos = this.db.select_hechos ( );	 
 

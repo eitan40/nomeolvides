@@ -20,7 +20,7 @@ using GLib;
 
 public class Nomeolvides.Hecho : GLib.Object {
 
-	public int64 id; //{ get; private set; } 
+	public int64 id;
 	public string nombre { get; private set; }
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }

@@ -21,6 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Lista : GLib.Object{
+	public int64 id;
 	public string nombre { get; private set; }
 	public int cantidad_hechos { get; private set; }
 	public string hash { get; private set; }
@@ -47,6 +48,14 @@ public class Nomeolvides.Lista : GLib.Object{
 		
 		retorno += "\"nombre\":\"" + this.nombre + "\"";
 		retorno +="}}";	
+		
+		return retorno;
+	}
+
+	public string a_sql () {
+		string retorno;
+
+		retorno  = "nombre=\"" + this.nombre + "\",";
 		
 		return retorno;
 	}

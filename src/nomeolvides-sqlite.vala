@@ -25,8 +25,13 @@ using Nomeolvides;
 public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	private Database db;
 	private  int rc;
+	private string nombre_db;
+
+	public Sqlite3 ( string nombredb ) {
+		this.nombre_db = nombredb;
+	}
 	
-	private bool open ( string nombre_db ) {
+	private bool open ( ) {
 		bool retorno = true;
 		
 		this.rc = Database.open ( nombre_db, out this.db );
@@ -50,8 +55,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	public void insert ( string nombre_db, string tabla, string valores ) {
-		this.open ( nombre_db );
+	public void insert ( string tabla, string valores ) {
+		this.open ( );
 
 		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
 
@@ -60,8 +65,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
         }
 	}
 
-	public void del ( string nombre_db, string tabla, string where ) {
-		this.open ( nombre_db );
+	public void del ( string tabla, string where ) {
+		this.open ( );
 
 		var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
 
@@ -70,8 +75,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
         }
 	}
 
-	public void update ( string nombre_db, string tabla, string valores, string where ) {
-		this.open ( nombre_db );
+	public void update ( string tabla, string valores, string where ) {
+		this.open ( );
 
 		print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
 		
@@ -82,10 +87,10 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
         }
 	}
 
-	public Statement select ( string nombre_db, string tabla, string columnas ) {
+	public Statement select ( string tabla, string columnas ) {
 		Statement stmt;
 		
-		this.open ( nombre_db);
+		this.open ( );
 		this.query ( "SELECT " + columnas + " FROM " + tabla, out stmt);
 
 		return stmt;

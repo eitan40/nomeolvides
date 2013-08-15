@@ -23,11 +23,11 @@ using Nomeolvides;
 
 public interface Nomeolvides.BaseDeDatos : Object {
 	
-	protected abstract bool open ( string nombre_db );
+	protected abstract bool open ( );
 	protected abstract bool query ( string sql_query, out Statement stmt );
-	public abstract void insert ( string nombre_db, string tabla, string valores );
-	public abstract void del ( string nombre_db, string tabla, string where );
-	public abstract void update ( string nombre_db, string tabla, string valores, string where ); 
-	public abstract Statement select ( string nombre_db, string tabla, string columnas );
+	public abstract void insert ( string tabla, string valores );
+	public abstract void del ( string tabla, string where );
+	public abstract void update ( string tabla, string valores, string where ); 
+	public abstract Statement select ( string tabla, string columnas );
 	public abstract int64 ultimo_rowid ();
 }
