@@ -214,16 +214,12 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void add_hecho_lista () {		
 		Hecho hecho;
-		TreeIter iter;
 
-		var liststore = this.datos.lista_de_listas();
-		
-		if ( !(liststore.get_iter_first ( out iter )) ) { //si no hay listas
+		if ( !( this.datos.hay_listas ()) ) {
 			this.config_listas_dialog ();
 		}
 
-		liststore = this.datos.lista_de_listas();
-		if ( liststore.get_iter_first ( out iter ) ) { //si hay listas
+		if ( this.datos.hay_listas () ) { //si hay listas
 			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
 			this.window.get_hecho_actual ( out hecho );		
 

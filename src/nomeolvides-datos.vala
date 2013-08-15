@@ -231,6 +231,18 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.listas.list_store_de_listas ();
 	}
 
+	public bool hay_listas() {
+		TreeIter iter;
+		bool hay=false;
+
+		var liststore = this.lista_de_listas();
+
+		if ( liststore.get_iter_first ( out iter ) ) { 
+			hay = true;
+		}
+		return hay;
+	}
+
 	public void signal_cambio_anios () {
 		this.datos_cambio_anios ();
 	}
