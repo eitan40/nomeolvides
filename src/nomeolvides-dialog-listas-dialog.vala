@@ -27,12 +27,15 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 	private ToolButton borrar_lista_button;
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
+	private AccionesDB db;
 		
 	public ListasDialog (VentanaPrincipal ventana, ListStoreListas liststore_lista) {
 		this.set_title ("Lista personalizadas de hechos históricos");
 		this.set_modal ( true );
 		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
+
+		this.db = new AccionesDB ("nomeolvides.db");
 
 		Toolbar toolbar = new Toolbar ();
 		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );

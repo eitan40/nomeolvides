@@ -28,6 +28,6 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract void insert ( string tabla, string valores );
 	public abstract void del ( string tabla, string where );
 	public abstract void update ( string tabla, string valores, string where ); 
-	public abstract Statement select ( string tabla, string columnas );
+	public abstract Statement select ( string tabla, string columnas, string where = "" );
 	public abstract int64 ultimo_rowid ();
 }

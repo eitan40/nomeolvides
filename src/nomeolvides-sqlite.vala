@@ -87,11 +87,11 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
         }
 	}
 
-	public Statement select ( string tabla, string columnas ) {
+	public Statement select ( string tabla, string columnas, string where = "" ) {
 		Statement stmt;
 		
 		this.open ( );
-		this.query ( "SELECT " + columnas + " FROM " + tabla, out stmt);
+		this.query ( "SELECT " + columnas + " FROM " + tabla + " " + where, out stmt);
 
 		return stmt;
 	}

@@ -29,7 +29,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	public HechosFuentes fuentes;
 	private int anio_actual;
-	private string lista_actual;
+	private Lista lista_actual;
 	
 	public VentanaPrincipal ( Gtk.Application app )
 	{   
@@ -143,14 +143,14 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 
 	private void actualizar_lista_label () {
-		this.toolbar.set_label_lista ( this.lista_actual );
+		this.toolbar.set_label_lista ( this.lista_actual.nombre );
 	}
 
 	public int get_anio_actual () {
 		return this.anio_actual;
 	}
 
-	public string get_lista_actual () {
+	public Lista get_lista_actual () {
 		return this.lista_actual;
 	}
 

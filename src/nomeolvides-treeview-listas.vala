@@ -46,7 +46,7 @@ public class Nomeolvides.TreeViewListas : TreeView {
 		}		
 	}
 
-	public string get_lista () {
+	public Lista get_lista () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
@@ -55,10 +55,10 @@ public class Nomeolvides.TreeViewListas : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 0, out lista);
-			return (string) lista;
+			this.get_model().get_value (iterador, 2, out lista);
+			return (Lista) lista;
 		} else { 
-			return "";
+			return (Lista)null;
 		}		
 	}
 

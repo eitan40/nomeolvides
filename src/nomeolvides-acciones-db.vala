@@ -78,12 +78,12 @@ public class Nomeolvides.AccionesDB : Object {
 		                                           + hecho.id.to_string() +"\"" );
 	}
 
-	public ArrayList<Hecho> select_hechos ( ) {
+	public ArrayList<Hecho> select_hechos ( string where = "" ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string[] columnas = {"","","","","","",""};
 		Hecho hecho;
 		
-		var stmt = this.dbms.select ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid"); 
+		var stmt = this.dbms.select ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid", where); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -116,6 +116,44 @@ public class Nomeolvides.AccionesDB : Object {
 		}
 		
 		return hechos;
+	}
+
+	public ArrayList<Lista> select_listas ( ) {
+		ArrayList<Lista> listas = new ArrayList<Lista> ();
+		string[] columnas = {"",""};
+		Lista lista;
+		
+		var stmt = this.dbms.select ( "listas", "nombre,rowid"); 
+	
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+		
+		while ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					} 
+
+					lista = new Lista (columnas[0]);
+					lista.id = int64.parse(columnas[1]);
+					listas.add( lista );
+					break;
+				default:
+					print ("Error!!");
+					break;
+			}
+			
+			rc = stmt.step ();		
+		}
+		
+		return listas;
+	}
+
+	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
+		return this.select_hechos ( "WHERE lista=" + lista.id.to_string() );
 	}
 
 	public int64 ultimo_hecho_id () {

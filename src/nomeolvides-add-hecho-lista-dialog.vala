@@ -26,7 +26,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	private ComboBox listas;
 	private ListStoreListas liststore;
 	private Hecho hecho;
-	private string lista;
+	private Lista lista;
 	private Label label_hecho;
 	
 	public AddHechoListaDialog ( VentanaPrincipal ventana )
@@ -93,11 +93,11 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		TreeIter iter;
 		Value lista_elegida;
 		this.listas.get_active_iter( out iter );
-		this.liststore.get_value ( iter, 0, out lista_elegida );
-		this.lista = (string) lista_elegida;
+		this.liststore.get_value ( iter, 2, out lista_elegida );
+		this.lista = (Lista) lista_elegida;
 	}
 
-	public string get_lista () {
+	public Lista get_lista () {
 		return this.lista;
 	}
 }

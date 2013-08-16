@@ -3,6 +3,4 @@ BEGIN TRANSACTION;
 CREATE TABLE hechos(nombre TEXT NOT NULL,descripcion TEXT,anio INTEGER NOT NULL,mes INTEGER NOT NULL,dia INTEGER NOT NULL,fuente TEXT);
 CREATE TABLE listas ( nombre TEXT NOT NULL );
 CREATE TABLE listashechos ( lista INTEGER NOT NULL, hecho INTEGER NOT NULL, FOREIGN KEY (lista) REFERENCES listas(rowid), FOREIGN KEY(hecho) REFERENCES hechos(rowid) );
-DELETE FROM sqlite_sequence;
-INSERT INTO "sqlite_sequence" VALUES('hechos',5);
 COMMIT;

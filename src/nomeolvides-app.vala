@@ -109,7 +109,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void elegir_lista () {
-		string lista = this.window.get_lista_actual ();
+		string lista = this.window.get_lista_actual ().nombre;
 		this.window.cargar_hechos_view ( this.datos.get_liststore_lista ( lista ) );
 	}
 
@@ -225,7 +225,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (dialogo.run () == ResponseType.APPLY) {
             this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
-			this.datos.guardar_listas_hechos ();
+			this.db.insert_hecho_lista ( hecho, dialogo.get_lista () );
 		}
 		dialogo.close ();
 	}
@@ -233,15 +233,16 @@ public class Nomeolvides.App : Gtk.Application
 	public void remove_hecho_lista () {
 		Hecho hecho;
 		var dialogo = new BorrarHechoListaDialog ( this.window );
-
+		var lista = this.window.get_lista_actual ();
+		
 		this.window.get_hecho_actual ( out hecho );
 		
 		dialogo.set_hecho ( hecho );
-		dialogo.set_lista ( this.window.get_lista_actual () );
+		dialogo.set_lista ( lista );
 		
 		if (dialogo.run () == ResponseType.APPLY) {
-            this.datos.quitar_hecho_lista ( hecho, this.window.get_lista_actual () );
-			this.datos.guardar_listas_hechos ();
+            this.datos.quitar_hecho_lista ( hecho, lista );
+			this.db.delete_hecho_lista ( hecho, lista );
 		}
 		dialogo.close ();			
 	}
