@@ -32,7 +32,11 @@ La idea es que se permita agregar diferentes fuentes de datos, locales o en la n
 
 * instalar el ppa de la aplicación
 
-```# add-apt-repository ppa:softwareperonista/nomeolvides```
+```# add-apt-repository ppa:softperonista/nomeolvides```
+
+* Actualizar los repositorios
+
+```# apt-get update```
 
 * instalar la aplicación. 
 

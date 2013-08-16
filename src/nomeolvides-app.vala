@@ -90,17 +90,25 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void add_hecho_dialog () {
-		var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
+
+		if ( !(this.datos.hay_db_locales_activas ()) ) {
+				this.config_db_dialog ();
+		}
+
+		if ( this.datos.hay_db_locales_activas () ) {
+
+			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
 		
-		add_dialog.show();
-		
-		if ( add_dialog.run() == ResponseType.APPLY )
-		{   
-			this.db.insert_hecho ( add_dialog.respuesta );
-			add_dialog.respuesta.id = this.db.ultimo_hecho_id ();
-			this.datos.agregar_hecho( add_dialog.respuesta );			
-		}		
-		add_dialog.destroy();
+			add_dialog.show();
+
+			if ( add_dialog.run() == ResponseType.APPLY )
+			{   
+				this.db.insert_hecho ( add_dialog.respuesta );
+				add_dialog.respuesta.id = this.db.ultimo_hecho_id ();
+				this.datos.agregar_hecho( add_dialog.respuesta );			
+			}		
+			add_dialog.destroy();
+		}
 	}
 	
 	private void elegir_anio () {
@@ -214,20 +222,23 @@ public class Nomeolvides.App : Gtk.Application
 		this.datos.rehacer_cambios ();
 	}
 
-	public void add_hecho_lista () {
-		AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
+	public void add_hecho_lista () {		
 		Hecho hecho;
 
-		this.window.get_hecho_actual ( out hecho );
-
-		dialogo.set_hecho ( hecho );
-		dialogo.set_listas ( this.datos.lista_de_listas() );
-
-		if (dialogo.run () == ResponseType.APPLY) {
-            this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
-			this.db.insert_hecho_lista ( hecho, dialogo.get_lista () );
+		if ( !( this.datos.hay_listas ()) ) {
+			this.config_listas_dialog ();
 		}
+
+		if ( this.datos.hay_listas () ) { //si hay listas
+			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
+			this.window.get_hecho_actual ( out hecho );		
+
+			if (dialogo.run () == ResponseType.APPLY) {
+       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
+				this.db.insert_hecho_lista ( hecho, dialogo.get_lista () );
+			}
 		dialogo.close ();
+		}
 	}
 
 	public void remove_hecho_lista () {
