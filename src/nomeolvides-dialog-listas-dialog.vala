@@ -99,6 +99,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		if (add_dialog.run() == ResponseType.APPLY) {
 			liststore = this.listas_view.get_model () as ListStoreListas;
 			liststore.agregar_lista (add_dialog.respuesta);
+			this.db.insert_lista ( add_dialog.respuesta );
 			this.cambios = true;
 		}
 		
@@ -116,6 +117,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 			liststore = this.listas_view.get_model () as ListStoreListas;
 			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
 			liststore.agregar_lista (edit_dialog.respuesta);
+			this.db.update_lista ( edit_dialog.respuesta );
 			this.cambios = true;
 		}	
 		edit_dialog.destroy ();
@@ -127,6 +129,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
 			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
+			this.db.delete_lista ( this.listas_view.get_lista_cursor () );
 		}
 		borrar_dialog.destroy ();
 

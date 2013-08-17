@@ -33,7 +33,7 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public void insert_lista ( Lista lista ) {
-		this.dbms.insert ( "lista", lista.nombre );
+		this.dbms.insert ( "listas", "\""+lista.nombre+"\"" );
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -66,7 +66,7 @@ public class Nomeolvides.AccionesDB : Object {
 	public void update_lista ( Lista lista ) {
 		string valores = lista.a_sql ();
 
-		this.dbms.update ( "lista", valores, " WHERE rowid=\"" + lista.id.to_string() + "\"" );
+		this.dbms.update ( "listas", valores, " WHERE rowid=\"" + lista.id.to_string() + "\"" );
 	}
 
 	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
