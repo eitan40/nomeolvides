@@ -55,7 +55,7 @@ public class Nomeolvides.Lista : GLib.Object{
 	public string a_sql () {
 		string retorno;
 
-		retorno  = "nombre=\"" + this.nombre + "\",";
+		retorno  = "nombre=\"" + this.nombre + "\"";
 		
 		return retorno;
 	}
