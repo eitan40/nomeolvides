@@ -117,8 +117,17 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void elegir_lista () {
-		string lista = this.window.get_lista_actual ().nombre;
-		this.window.cargar_hechos_view ( this.datos.get_liststore_lista ( lista ) );
+		Lista lista = this.window.get_lista_actual ();
+		
+		var lista_hechos = this.db.select_hechos_lista ( lista );
+		var liststore = new ListStoreHechos ();
+
+		if (lista_hechos != null ) {
+			foreach ( Hecho h in lista_hechos ) {
+				liststore.agregar ( h );
+			}
+		}
+		this.window.cargar_hechos_view ( liststore );
 	}
 
 	public void edit_hecho_dialog () {

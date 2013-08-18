@@ -125,9 +125,9 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
-		string where = "listashechos.hecho=hechos.rowid";
+		string where = " WHERE listashechos.hecho=hechos.rowid";
 		
-		var stmt = this.dbms.select ( "listashechos, hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid", where ); 
+		var stmt = this.dbms.select ( "hechos,listashechos", "nombre,descripcion,anio,mes,dia,fuente,hechos.rowid", where ); 
 	
 		hechos = this.parse_query_hechos ( stmt );
 		
