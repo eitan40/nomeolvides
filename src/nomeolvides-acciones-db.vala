@@ -19,6 +19,7 @@
 
 using GLib;
 using Gee;
+using Sqlite;
 
 public class Nomeolvides.AccionesDB : Object {
 
@@ -37,8 +38,8 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
-		string valores = "lista=\"" + lista.id.to_string() + "\" hecho=\""
-			                        + lista.id.to_string() + "\"";
+		string valores = "\"" + lista.id.to_string() + "\", \""
+			                        + hecho.id.to_string() + "\"";
 		
 		this.dbms.insert ( "listashechos", valores );
 	}
@@ -80,40 +81,10 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public ArrayList<Hecho> select_hechos ( string where = "" ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
-		string[] columnas = {"","","","","","",""};
-		Hecho hecho;
 		
 		var stmt = this.dbms.select ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid", where); 
 	
-		int cols = stmt.column_count ();
-		int rc = stmt.step ();
-		
-		while ( rc == Sqlite.ROW ) {
-			switch ( rc  ) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					for ( int j = 0; j < cols; j++ ) {
-						columnas[j] = stmt.column_text ( j );
-					} 
-
-					hecho = new Hecho (columnas[0],
-					              columnas[1],
-			    		          int.parse (columnas[2]),
-			        		      int.parse (columnas[3]),
-			            		  int.parse (columnas[4]),
-								  "Base de datos local", 
-								  columnas[5]);
-					hecho.id = int64.parse(columnas[6]);
-					hechos.add( hecho );
-					break;
-				default:
-					print ("Error!!");
-					break;
-			}
-			
-			rc = stmt.step ();		
-		}
+		hechos = this.parse_query_hechos ( stmt );
 		
 		return hechos;
 	}
@@ -153,10 +124,55 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
-		return this.select_hechos ( "WHERE lista=" + lista.id.to_string() );
+		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+		string where = "listashechos.hecho=hechos.rowid";
+		
+		var stmt = this.dbms.select ( "listashechos, hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid", where ); 
+	
+		hechos = this.parse_query_hechos ( stmt );
+		
+		return hechos;
 	}
 
 	public int64 ultimo_hecho_id () {
 		return this.dbms.ultimo_rowid ();
+	}
+
+	private ArrayList<Hecho> parse_query_hechos ( Statement stmt ) {
+		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+		string[] columnas = {"","","","","","",""};
+		Hecho hecho;
+	
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+		
+		while ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					} 
+
+					hecho = new Hecho (columnas[0],
+					              columnas[1],
+			    		          int.parse (columnas[2]),
+			        		      int.parse (columnas[3]),
+			            		  int.parse (columnas[4]),
+								  "Base de datos local", 
+								  columnas[5]);
+					hecho.id = int64.parse(columnas[6]);
+					hechos.add( hecho );
+					break;
+				default:
+					print ("Error!!");
+					break;
+			}
+			
+			rc = stmt.step ();		
+		}
+
+		return hechos;
 	}
 }
