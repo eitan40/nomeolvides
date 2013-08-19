@@ -28,6 +28,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public Deshacer deshacer;
 	public HechosFuentes fuentes;
 	public Listas listas;
+	private AccionesDB db;
 
 	public Datos () {
 
@@ -36,6 +37,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
 		this.listas = new Listas ();
+		this.db = new AccionesDB ( "nomeolvides.db" );
 
 		this.conectar_signals ();
 		
@@ -55,16 +57,16 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer.rehacer_con_items.connect ( this.signal_hechos_rehacer );
 	}
 
-	public void agregar_hecho (Hecho nuevo) {	
-		this.hechos.agregar_hecho_anio ( nuevo.fecha.get_year (), nuevo );
+	public void agregar_hecho (Hecho hecho) {
+		this.db.insert_hecho ( hecho );
 	}
 
 	public void agregar_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.hechos.agregar_hecho_lista ( this.listas.get_nombre_hash ( lista.nombre ), hecho.hash );
+		this.db.insert_hecho_lista ( hecho, lista );
 	}
 
 	public void quitar_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.hechos.quitar_hecho_lista ( hecho, this.listas.get_nombre_hash ( lista.nombre ) );
+		this.db.delete_hecho_lista ( hecho, lista );
 	}
 
 	private void cargar_datos_listas () {
@@ -83,8 +85,17 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	}
 
-	public void eliminar_hecho ( Hecho a_eliminar ) {
-		this.hechos.borrar_hecho (a_eliminar.fecha.get_year (), a_eliminar );
+	public void eliminar_hecho ( Hecho hecho ) {
+		this.datos.deshacer.guardar_borrado ( hecho, DeshacerTipo.BORRAR );
+		this.datos.borrar_rehacer ();
+		this.db.delete_hecho ( hecho );
+	}
+
+	public void edit_hecho ( Hecho hecho ) {
+			this.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
+			this.deshacer.guardar_editado ( edit_dialog.respuesta );
+			this.borrar_rehacer ();
+			this.db.update_hecho ( hecho );
 	}
 
 	public void deshacer_cambios () {
@@ -222,9 +233,17 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.hechos.get_anio ( anio );
 	}
 
-	public ListStoreHechos get_liststore_lista ( string lista ) {
-		var hash = this.listas.get_nombre_hash ( lista );
-		return this.hechos.get_lista ( hash );
+	public ListStoreHechos get_liststore_lista ( Lista lista ) {
+		var lista_hechos = this.db.select_hechos_lista ( lista );
+		var liststore = new ListStoreHechos ();
+
+		if (lista_hechos != null ) {
+			foreach ( Hecho h in lista_hechos ) {
+				liststore.agregar ( h );
+			}
+		}
+
+		return liststore;
 	}
 
 	public ListStoreListas lista_de_listas () {

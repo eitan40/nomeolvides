@@ -27,7 +27,6 @@ public class Nomeolvides.App : Gtk.Application
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
-	public AccionesDB db;
 	public GLib.Menu application_menu;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
@@ -102,9 +101,7 @@ public class Nomeolvides.App : Gtk.Application
 			add_dialog.show();
 
 			if ( add_dialog.run() == ResponseType.APPLY )
-			{   
-				this.db.insert_hecho ( add_dialog.respuesta );
-				add_dialog.respuesta.id = this.db.ultimo_hecho_id ();
+			{
 				this.datos.agregar_hecho( add_dialog.respuesta );			
 			}		
 			add_dialog.destroy();
@@ -119,15 +116,9 @@ public class Nomeolvides.App : Gtk.Application
 	private void elegir_lista () {
 		Lista lista = this.window.get_lista_actual ();
 		
-		var lista_hechos = this.db.select_hechos_lista ( lista );
-		var liststore = new ListStoreHechos ();
-
-		if (lista_hechos != null ) {
-			foreach ( Hecho h in lista_hechos ) {
-				liststore.agregar ( h );
-			}
-		}
-		this.window.cargar_hechos_view ( liststore );
+		var lista_hechos = this.datos.get_liststore_lista ( lista );
+		
+		this.window.cargar_hechos_view ( lista_hechos );
 	}
 
 	public void edit_hecho_dialog () {
@@ -140,12 +131,7 @@ public class Nomeolvides.App : Gtk.Application
 		edit_dialog.show_all ();
 
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
-			this.datos.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
-			this.datos.deshacer.guardar_editado ( edit_dialog.respuesta );
-			this.datos.borrar_rehacer ();
-			this.datos.eliminar_hecho ( hecho );
-			this.datos.agregar_hecho ( edit_dialog.respuesta );
-			this.db.update_hecho ( edit_dialog.respuesta );	
+			this.datos.edit_hecho ( hecho );
 		}
 		edit_dialog.destroy();
 	}
@@ -157,11 +143,7 @@ public class Nomeolvides.App : Gtk.Application
 		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
-			this.datos.eliminar_hecho ( hecho_a_borrar );
-			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
-			this.datos.borrar_rehacer ();
-			this.db.delete_hecho ( hecho_a_borrar );
-			this.datos.guardar_listas_hechos ();	
+			this.datos.eliminar_hecho ( hecho_a_borrar );			
 		}	
 		delete_dialog.destroy ();
 	}
@@ -247,7 +229,7 @@ public class Nomeolvides.App : Gtk.Application
 
 			if (dialogo.run () == ResponseType.APPLY) {
        			this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
-				this.db.insert_hecho_lista ( hecho, dialogo.get_lista () );
+			//	this.db.insert_hecho_lista ( hecho, dialogo.get_lista () );
 			}
 		dialogo.close ();
 		}
@@ -265,7 +247,7 @@ public class Nomeolvides.App : Gtk.Application
 		
 		if (dialogo.run () == ResponseType.APPLY) {
             this.datos.quitar_hecho_lista ( hecho, lista );
-			this.db.delete_hecho_lista ( hecho, lista );
+//			this.db.delete_hecho_lista ( hecho, lista );
 		}
 		dialogo.close ();			
 	}
@@ -306,12 +288,5 @@ public class Nomeolvides.App : Gtk.Application
 		app = this;
 		Configuracion.set_config ();
 		this.datos = new Datos ();
-		this.db = new AccionesDB ( "nomeolvides.db" );
-
-		ArrayList<Hecho> hechos = this.db.select_hechos ( );	 
-
-		for ( int i = 0; i < hechos.size; i++ ) {
-			this.datos.agregar_hecho ( hechos.get(i) );
-		}
 	}
 }
