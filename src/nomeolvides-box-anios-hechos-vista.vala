@@ -132,7 +132,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		}	
 	}
 
-	public void cargar_lista_anios ( ArrayList<int> anios ) {
+	public void cargar_lista_anios ( Array<int> anios ) {
 		this.anios_view.agregar_varios ( anios );
 	}
 

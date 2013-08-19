@@ -43,15 +43,15 @@ public class Nomeolvides.ViewAnios : TreeView {
 		this.lista.set(this.iter,0,nuevo);
 	}
 
-	public void agregar_varios (ArrayList<int> nuevo)
+	public void agregar_varios (Array<int> nuevo)
 	{
 		int i, temp;
 		
 		this.lista.clear ();
 			
-		for (i=0; i < nuevo.size; i++)
+		for (i=0; i < nuevo.length; i++)
 		{
-			temp = nuevo[i];
+			temp = nuevo.index(i);
 			this.agregar ( temp );
 		}
 	}

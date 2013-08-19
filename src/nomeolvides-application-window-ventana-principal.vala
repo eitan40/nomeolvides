@@ -124,7 +124,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.anios_hechos_listas_cursor_changed ();
 	}
 
-	public void cargar_anios_view ( ArrayList<int> ventana_principal_anios ) {
+	public void cargar_anios_view ( Array<int> ventana_principal_anios ) {
 		this.anios_hechos.cargar_lista_anios ( ventana_principal_anios );
 	}
 

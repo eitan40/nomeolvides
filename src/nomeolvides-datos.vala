@@ -121,9 +121,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.hechos.lista_de_hechos ();
     }
 
-	public ArrayList<int> lista_de_anios ()
+	public Array<int> lista_de_anios ()
 	{
-		return this.hechos.get_anios ();
+		return this.db.lista_de_anios ();
 	}
 
 	public void cargar_fuentes_predefinidas ( ) {		
