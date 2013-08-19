@@ -166,7 +166,7 @@ public class Nomeolvides.AccionesDB : Object {
 					hechos.add( hecho );
 					break;
 				default:
-					print ("Error!!");
+					print ("Error al parsear hechos!!");
 					break;
 			}
 			
@@ -174,5 +174,31 @@ public class Nomeolvides.AccionesDB : Object {
 		}
 
 		return hechos;
+	}
+
+	public Array<int> lista_de_anios () {
+		Array<int> anios = new Array<int>();
+
+		var stmt = this.dbms.select ( "hechos", "anio", ""); 
+
+		int rc = stmt.step ();
+		
+		while ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+
+					anios.append_val( int.parse (stmt.column_text (0)) );
+					
+					break;
+				default:
+					print ("Error al obtener la lista de años!!");
+					break;
+			}
+			
+			rc = stmt.step ();
+		}
+		return anios;
 	}
 }

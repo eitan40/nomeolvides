@@ -102,4 +102,12 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return this.db.last_insert_rowid ();
 	}
 
+	public Statement select_distinct ( string tabla, string columnas, string where = "" ) {
+		Statement stmt;
+		
+		this.open ( );
+		this.query ( "SELECT  DISTINC" + columnas + " FROM " + tabla + " " + where, out stmt);
+
+		return stmt;
+	}
 }
