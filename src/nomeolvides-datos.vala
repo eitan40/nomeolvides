@@ -86,14 +86,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void eliminar_hecho ( Hecho hecho ) {
-		this.datos.deshacer.guardar_borrado ( hecho, DeshacerTipo.BORRAR );
-		this.datos.borrar_rehacer ();
+		this.deshacer.guardar_borrado ( hecho, DeshacerTipo.BORRAR );
+		this.borrar_rehacer ();
 		this.db.delete_hecho ( hecho );
 	}
 
 	public void edit_hecho ( Hecho hecho ) {
 			this.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
-			this.deshacer.guardar_editado ( edit_dialog.respuesta );
+			this.deshacer.guardar_editado ( hecho );
 			this.borrar_rehacer ();
 			this.db.update_hecho ( hecho );
 	}
