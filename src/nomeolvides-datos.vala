@@ -230,20 +230,13 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
-		return this.hechos.get_anio ( anio );
+		var hechos = this.db.select_hechos ( "WHERE anio=\"" + anio.to_string () +"\"" );
+		return this.armar_liststore_hechos(hechos);
 	}
 
 	public ListStoreHechos get_liststore_lista ( Lista lista ) {
 		var lista_hechos = this.db.select_hechos_lista ( lista );
-		var liststore = new ListStoreHechos ();
-
-		if (lista_hechos != null ) {
-			foreach ( Hecho h in lista_hechos ) {
-				liststore.agregar ( h );
-			}
-		}
-
-		return liststore;
+		return this.armar_liststore_hechos(lista_hechos);
 	}
 
 	public ListStoreListas lista_de_listas () {
@@ -272,6 +265,16 @@ public class Nomeolvides.Datos : GLib.Object {
 			hay = true;
 		}
 		return hay;
+	}
+
+	private ListStoreHechos armar_liststore_hechos ( ArrayList<Hecho> hechos) {
+		var liststore = new ListStoreHechos ();
+
+		foreach ( Hecho h in hechos ) {
+			liststore.agregar ( h );
+		}
+
+		return liststore;
 	}
 
 	public void signal_cambio_anios () {
