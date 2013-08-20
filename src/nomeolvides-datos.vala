@@ -69,7 +69,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void quitar_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.db.delete_hecho_lista ( hecho, lista );
+		this.db.delete_hecho_lista ( hecho, lista );		
 		this.datos_cambio_hechos ();
 	}
 
@@ -93,6 +93,8 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer.guardar_borrado ( hecho, DeshacerTipo.BORRAR );
 		this.borrar_rehacer ();
 		this.db.delete_hecho ( hecho );
+		this.datos_cambio_anios ();
+		this.datos_cambio_hechos ();
 	}
 
 	public void edit_hecho ( Hecho hecho ) {
@@ -100,6 +102,8 @@ public class Nomeolvides.Datos : GLib.Object {
 			this.deshacer.guardar_editado ( hecho );
 			this.borrar_rehacer ();
 			this.db.update_hecho ( hecho );
+			this.datos_cambio_anios ();
+			this.datos_cambio_hechos ();
 	}
 
 	public void deshacer_cambios () {
