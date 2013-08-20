@@ -179,7 +179,7 @@ public class Nomeolvides.AccionesDB : Object {
 	public Array<int> lista_de_anios () {
 		Array<int> anios = new Array<int>();
 
-		var stmt = this.dbms.select ( "hechos", "anio", ""); 
+		var stmt = this.dbms.select_distinct ( "hechos", "anio", ""); 
 
 		int rc = stmt.step ();
 		

@@ -106,7 +106,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		Statement stmt;
 		
 		this.open ( );
-		this.query ( "SELECT  DISTINC" + columnas + " FROM " + tabla + " " + where, out stmt);
+		this.query ( "SELECT DISTINCT " + columnas + " FROM " + tabla + " " + where, out stmt);
 
 		return stmt;
 	}
