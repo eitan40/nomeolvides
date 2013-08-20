@@ -240,7 +240,9 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreListas lista_de_listas () {
-		return this.listas.list_store_de_listas ();
+		var listas = this.db.select_listas (); 
+		
+		return this.armar_liststore_listas ( listas );
 	}
 
 	public bool hay_listas() {
@@ -272,6 +274,16 @@ public class Nomeolvides.Datos : GLib.Object {
 
 		foreach ( Hecho h in hechos ) {
 			liststore.agregar ( h );
+		}
+
+		return liststore;
+	}
+
+	private ListStoreListas armar_liststore_listas ( ArrayList<Lista> listas) {
+		var liststore = new ListStoreListas ();
+
+		foreach ( Lista l in listas ) {
+			liststore.agregar_lista ( l );
 		}
 
 		return liststore;

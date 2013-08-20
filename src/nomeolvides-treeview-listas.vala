@@ -57,7 +57,8 @@ public class Nomeolvides.TreeViewListas : TreeView {
 			this.get_model().get_iter(out iterador, path);
 			this.get_model().get_value (iterador, 2, out lista);
 			return (Lista) lista;
-		} else { 
+		} else {
+			print ("entró al else porque path es null\n");
 			return (Lista)null;
 		}		
 	}

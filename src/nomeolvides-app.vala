@@ -229,7 +229,6 @@ public class Nomeolvides.App : Gtk.Application
 
 			if (dialogo.run () == ResponseType.APPLY) {
        			this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
-			//	this.db.insert_hecho_lista ( hecho, dialogo.get_lista () );
 			}
 		dialogo.close ();
 		}
@@ -247,7 +246,6 @@ public class Nomeolvides.App : Gtk.Application
 		
 		if (dialogo.run () == ResponseType.APPLY) {
             this.datos.quitar_hecho_lista ( hecho, lista );
-//			this.db.delete_hecho_lista ( hecho, lista );
 		}
 		dialogo.close ();			
 	}
