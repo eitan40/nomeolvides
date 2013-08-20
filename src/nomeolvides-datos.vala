@@ -59,14 +59,18 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void agregar_hecho (Hecho hecho) {
 		this.db.insert_hecho ( hecho );
+		this.datos_cambio_anios ();
+		this.datos_cambio_hechos ();
 	}
 
 	public void agregar_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.db.insert_hecho_lista ( hecho, lista );
+		this.datos_cambio_hechos ();
 	}
 
 	public void quitar_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.db.delete_hecho_lista ( hecho, lista );
+		this.datos_cambio_hechos ();
 	}
 
 	private void cargar_datos_listas () {
