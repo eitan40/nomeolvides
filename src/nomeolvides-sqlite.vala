@@ -68,6 +68,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	protected void del ( string tabla, string where ) {
 		this.open ( );
 
+		//print ("DELETE FROM " + tabla + " " + where + "\n");
+
 		var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
 
 		if (rc != Sqlite.OK) { 
@@ -78,7 +80,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	protected void update ( string tabla, string valores, string where ) {
 		this.open ( );
 
-		print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
+		//print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
 		
 		var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
 

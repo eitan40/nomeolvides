@@ -123,13 +123,13 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		edit_dialog.destroy ();
 	}
 
-	private void borrar_lista_dialog () {	
+	private void borrar_lista_dialog () {
 		var borrar_dialog = new BorrarListaDialogo ( this.listas_view.get_lista_cursor () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
-			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
 			this.db.delete_lista ( this.listas_view.get_lista_cursor () );
+			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
 		}
 		borrar_dialog.destroy ();
 
