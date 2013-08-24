@@ -27,7 +27,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	//private Hechos hechos;
 	public Deshacer deshacer;
 	public HechosFuentes fuentes;
-	public Listas listas;
+	//public Listas listas;
 	private AccionesDB db;
 
 	public Datos () {
@@ -36,7 +36,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 		//this.hechos = new Hechos ();
 		this.fuentes = new HechosFuentes ();
-		this.listas = new Listas ();
+		//this.listas = new Listas ();
 		this.db = new AccionesDB ( "nomeolvides.db" );
 
 		this.conectar_signals ();
@@ -47,7 +47,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	private void conectar_signals () {
 		//this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
-		this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
+		//this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
 		//this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
 		//this.hechos.hechos_cambio_hechos_listas.connect ( this.signal_cambio_hechos_listas );
 
@@ -167,8 +167,8 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {
-		this.listas.actualizar_listas_liststore ( listas );
-		this.cargar_datos_listas ();
+		//this.listas.actualizar_listas_liststore ( listas );
+		//this.cargar_datos_listas ();
 	}
 
 	public void save_file () {

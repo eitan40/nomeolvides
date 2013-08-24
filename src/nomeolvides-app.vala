@@ -172,7 +172,8 @@ public class Nomeolvides.App : Gtk.Application
 		listas_dialogo.show_all ();
 		if ( listas_dialogo.run () == ResponseType.OK ) {
 			if (listas_dialogo.cambios == true) {				
-				this.datos.actualizar_listas_personalizadas ( listas_dialogo.listas_view.get_model () as ListStoreListas );
+				//this.datos.actualizar_listas_personalizadas ( listas_dialogo.listas_view.get_model () as ListStoreListas );
+				this.cargar_listas ();
 			}
 		}
 		listas_dialogo.destroy ();
