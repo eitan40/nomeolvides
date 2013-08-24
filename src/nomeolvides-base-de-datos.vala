@@ -18,6 +18,7 @@
  */
 
 using GLib;
+using Gee;
 using Sqlite;
 using Nomeolvides;
 
@@ -25,10 +26,23 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	
 	protected abstract bool open ( );
 	protected abstract bool query ( string sql_query, out Statement stmt );
-	public abstract void insert ( string tabla, string valores );
-	public abstract void del ( string tabla, string where );
-	public abstract void update ( string tabla, string valores, string where ); 
-	public abstract Statement select ( string tabla, string columnas, string where = "" );
-	public abstract Statement select_distinct ( string tabla, string columnas, string where = "" );
-	public abstract int64 ultimo_rowid ();
+	protected abstract void insert ( string tabla, string valores );
+	protected abstract void del ( string tabla, string where );
+	protected abstract void update ( string tabla, string valores, string where ); 
+	protected abstract Statement select ( string tabla, string columnas, string where = "" );
+	protected abstract Statement select_distinct ( string tabla, string columnas, string where = "" );
+	protected abstract ArrayList<Hecho> parse_query_hechos ( Statement stmt );
+	public abstract void insert_hecho ( Hecho hecho );
+	public abstract void insert_lista ( Lista lista );
+	public abstract void insert_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract void delete_hecho ( Hecho hecho );
+	public abstract void delete_lista ( Lista lista );
+	public abstract void delete_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract void update_hecho ( Hecho hecho );
+	public abstract void update_lista ( Lista lista );
+	public abstract void update_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract ArrayList<Hecho> select_hechos ( string where = "" );
+	public abstract ArrayList<Lista> select_listas ( );
+	public abstract ArrayList<Hecho> select_hechos_lista ( Lista lista );
+	public abstract Array<int> lista_de_anios ();
 }

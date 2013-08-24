@@ -30,176 +30,55 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		this.dbms.insert ( "hechos", hecho.to_string () );
+		this.dbms.insert_hecho ( hecho );
 	}
 
 	public void insert_lista ( Lista lista ) {
-		this.dbms.insert ( "listas", "\""+lista.nombre+"\"" );
+		this.dbms.insert_lista ( lista );
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
-		string valores = "\"" + lista.id.to_string() + "\", \""
-			                        + hecho.id.to_string() + "\"";
-		
-		this.dbms.insert ( "listashechos", valores );
+		this.dbms.insert_hecho_lista ( hecho, lista );
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
-		this.dbms.del ( "hechos", "WHERE rowid=\"" + hecho.id.to_string() +"\"" );
+		this.dbms.delete_hecho ( hecho );
 	}
 
 	public void delete_lista ( Lista lista ) {
-		this.dbms.del ( "listas", "WHERE rowid=\"" + lista.id.to_string() +"\"" );
+		this.dbms.delete_lista ( lista );
 	}
 
 	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.dbms.del ( "listashechos", "WHERE lista=\"" + lista.id.to_string()
-		                                           + "\" AND hecho=\"" 
-		                                           + hecho.id.to_string() +"\"" );
+		this.dbms.delete_hecho_lista ( hecho, lista );
 	}
 
 	public void update_hecho ( Hecho hecho ) {
-		string valores = hecho.a_sql ();
-
-		this.dbms.update ( "hechos", valores, " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
+		this.dbms.update_hecho ( hecho );
 	}
  
 	public void update_lista ( Lista lista ) {
-		string valores = lista.a_sql ();
-
-		this.dbms.update ( "listas", valores, " WHERE rowid=\"" + lista.id.to_string() + "\"" );
+		this.dbms.update_lista ( lista );
 	}
 
 	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
-		string valores = "lista=\"" + lista.id.to_string() + "\" hecho=\""
-			                        + lista.id.to_string() + "\"";
-
-		this.dbms.update ( "listashechos", valores, "WHERE lista=\"" + lista.id.to_string()
-		                                           + "\" AND hecho=\"" 
-		                                           + hecho.id.to_string() +"\"" );
+		this.dbms.update_hecho_lista ( hecho, lista );
 	}
 
 	public ArrayList<Hecho> select_hechos ( string where = "" ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
-		
-		var stmt = this.dbms.select ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid", where); 
-	
-		hechos = this.parse_query_hechos ( stmt );
-		
-		return hechos;
+		return this.dbms.select_hechos ( where ); 
 	}
 
 	public ArrayList<Lista> select_listas ( ) {
-		ArrayList<Lista> listas = new ArrayList<Lista> ();
-		string[] columnas = {"",""};
-		Lista lista;
-		
-		var stmt = this.dbms.select ( "listas", "nombre,rowid"); 
-	
-		int cols = stmt.column_count ();
-		int rc = stmt.step ();
-		
-		while ( rc == Sqlite.ROW ) {
-			switch ( rc  ) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					for ( int j = 0; j < cols; j++ ) {
-						columnas[j] = stmt.column_text ( j );
-					} 
-
-					lista = new Lista (columnas[0]);
-					lista.id = int64.parse(columnas[1]);
-					listas.add( lista );
-					break;
-				default:
-					print ("Error!!");
-					break;
-			}
-			
-			rc = stmt.step ();		
-		}
-		
-		return listas;
+		return this.dbms.select_listas ( ); 
 	}
 
 	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
-		string where = " WHERE lista=\"" + lista.id.to_string () + "\" and listashechos.hecho=hechos.rowid";
-		
-		var stmt = this.dbms.select ( "hechos,listashechos", "nombre,descripcion,anio,mes,dia,fuente,hechos.rowid", where ); 
-	
-		hechos = this.parse_query_hechos ( stmt );
-		
-		return hechos;
-	}
-
-	public int64 ultimo_hecho_id () {
-		return this.dbms.ultimo_rowid ();
-	}
-
-	private ArrayList<Hecho> parse_query_hechos ( Statement stmt ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
-		string[] columnas = {"","","","","","",""};
-		Hecho hecho;
-	
-		int cols = stmt.column_count ();
-		int rc = stmt.step ();
-		
-		while ( rc == Sqlite.ROW ) {
-			switch ( rc  ) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-					for ( int j = 0; j < cols; j++ ) {
-						columnas[j] = stmt.column_text ( j );
-					} 
-
-					hecho = new Hecho (columnas[0],
-					              columnas[1],
-			    		          int.parse (columnas[2]),
-			        		      int.parse (columnas[3]),
-			            		  int.parse (columnas[4]),
-								  "Base de datos local", 
-								  columnas[5]);
-					hecho.id = int64.parse(columnas[6]);
-					hechos.add( hecho );
-					break;
-				default:
-					print ("Error al parsear hechos!!");
-					break;
-			}
-			
-			rc = stmt.step ();		
-		}
-
-		return hechos;
+		return this.dbms.select_hechos_lista ( lista ); 
 	}
 
 	public Array<int> lista_de_anios () {
-		Array<int> anios = new Array<int>();
+		return this.dbms.lista_de_anios ( ); 
 
-		var stmt = this.dbms.select_distinct ( "hechos", "anio", ""); 
-
-		int rc = stmt.step ();
-		
-		while ( rc == Sqlite.ROW ) {
-			switch ( rc  ) {
-				case Sqlite.DONE:
-					break;
-				case Sqlite.ROW:
-
-					anios.append_val( int.parse (stmt.column_text (0)) );
-					
-					break;
-				default:
-					print ("Error al obtener la lista de años!!");
-					break;
-			}
-			
-			rc = stmt.step ();
-		}
-		return anios;
 	}
-	
 }
