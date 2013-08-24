@@ -98,6 +98,15 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return stmt;
 	}
 
+	protected Statement select_distinct ( string tabla, string columnas, string where = "" ) {
+		Statement stmt;
+		
+		this.open ( );
+		this.query ( "SELECT DISTINCT " + columnas + " FROM " + tabla + " " + where, out stmt);
+
+		return stmt;
+	}
+
 	protected ArrayList<Hecho> parse_query_hechos ( Statement stmt ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string[] columnas = {"","","","","","",""};
@@ -134,15 +143,6 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		}
 
 		return hechos;
-	}
-
-	public Statement select_distinct ( string tabla, string columnas, string where = "" ) {
-		Statement stmt;
-		
-		this.open ( );
-		this.query ( "SELECT DISTINCT " + columnas + " FROM " + tabla + " " + where, out stmt);
-
-		return stmt;
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
