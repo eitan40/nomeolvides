@@ -116,12 +116,15 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	private void anios_hechos_listas_cursor_changed_signal () {
 		this.lista_actual = this.anios_hechos.get_lista_actual ();
+		if (this.lista_actual != null ) {
+			this.toolbar.list_button_set_quitar ();
+			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+			this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
+			this.anios_hechos_listas_cursor_changed ();
+		}
+
 		this.actualizar_lista_label ();
-		this.toolbar.list_button_set_quitar ();
-		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
-		this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
-		this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
-		this.anios_hechos_listas_cursor_changed ();
 	}
 
 	public void cargar_anios_view ( Array<int> ventana_principal_anios ) {
@@ -143,7 +146,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	}
 
 	private void actualizar_lista_label () {
-		this.toolbar.set_label_lista ( this.lista_actual.nombre );
+		if ( this.lista_actual != null ) {
+			this.toolbar.set_label_lista ( this.lista_actual.nombre );
+		} else {
+			this.toolbar.set_label_lista ( "" );
+		}	
 	}
 
 	public int get_anio_actual () {
