@@ -27,9 +27,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-lista-hechos.vala \
 	nomeolvides-liststore-hechos.vala \
 	nomeolvides-hechos-fuentes.vala \
-	nomeolvides-fuente.vala \
-	nomeolvides-liststore-fuentes.vala \
-	nomeolvides-treeview-fuentes.vala \
 	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
 	nomeolvides-edit-hecho-dialog.vala \
@@ -71,7 +68,9 @@ nomeolvides_SOURCES = \
 	nomeolvides-base-de-datos.vala \
 	nomeolvides-sqlite.vala \
 	nomeolvides-acciones-db.vala \
-	nomeolvides-mapa-hecho.vala
+	nomeolvides-mapa-hecho.vala \
+	nomeolvides-liststore-colecciones.vala \
+	nomeolvides-treeview-colecciones.vala
 
 
 nomeolvides_VALAFLAGS = \
