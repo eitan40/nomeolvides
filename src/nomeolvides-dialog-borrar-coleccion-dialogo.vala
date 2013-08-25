@@ -20,26 +20,26 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarFuenteDialogo : Dialog {
-	public BorrarFuenteDialogo ( Fuente fuente_a_borrar ) {
+public class Nomeolvides.BorrarColeccionDialogo : Dialog {
+	public BorrarColeccionDialogo ( Coleccion coleccion_a_borrar ) {
 		this.set_modal ( true );
-		this.title = "Borrar Base de Datos";
+		this.title = "Borrar Coleccion";
 		Label pregunta = new Label.with_mnemonic ( "" );
-		Label fuente_nombre = new Label.with_mnemonic ( "" );
-		Label fuente_archivo = new Label.with_mnemonic ( "" );
-		Label fuente_direccion = new Label.with_mnemonic ( "" );
+		Label coleccion_nombre = new Label.with_mnemonic ( "" );
+		Label coleccion_archivo = new Label.with_mnemonic ( "" );
+		Label coleccion_direccion = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente Base de Datos?</big>" );
-		fuente_nombre.set_markup ( "<span font_weight=\"heavy\">"+ fuente_a_borrar.nombre_fuente +"</span>");
-		fuente_archivo.set_markup ( "del archivo <span font_style=\"italic\">"+ fuente_a_borrar.nombre_archivo +"</span>");
-		fuente_direccion.set_markup ( "en <span font_style=\"italic\">"+ fuente_a_borrar.direccion_fuente +"</span>");
+		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente coleccion?</big>" );
+		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre_coleccion +"</span>");
+		coleccion_archivo.set_markup ( "del archivo <span font_style=\"italic\">"+ coleccion_a_borrar.nombre_archivo +"</span>");
+		coleccion_direccion.set_markup ( "en <span font_style=\"italic\">"+ coleccion_a_borrar.direccion_coleccion +"</span>");
 
 		Box box = new Box ( Orientation.VERTICAL, 0 );
 
 		box.pack_start ( pregunta, true, true, 15 );
-		box.pack_start ( fuente_nombre, true, true, 0 );
-		box.pack_start ( fuente_archivo, true, true, 0 );
-		box.pack_start ( fuente_direccion, true, true, 0 );
+		box.pack_start ( coleccion_nombre, true, true, 0 );
+		box.pack_start ( coleccion_archivo, true, true, 0 );
+		box.pack_start ( coleccion_direccion, true, true, 0 );
 		
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(box, false, false, 0);

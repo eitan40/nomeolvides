@@ -25,7 +25,7 @@ public class Nomeolvides.AddFuenteDialog : DialogFuente
 {	
 	public AddFuenteDialog ( )
 	{
-		this.title = "Agregar parámetos de una Base de Datos";
+		this.title = "Agregar parámetos de una coleccion";
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
 }
