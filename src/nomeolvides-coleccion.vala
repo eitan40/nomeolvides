@@ -21,61 +21,31 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Coleccion : GLib.Object{
-	public string nombre_coleccion { get; private set; }
-	public string nombre_archivo { get; private set; }
-	public string direccion_coleccion { get; private set; }
+	public string nombre { get; private set; }
 	public bool visible {get; set; }
-	private string hash;
-	public ColeccionTipo tipo_coleccion { get; private set; }
 
-	public Coleccion ( string nombre_coleccion, string nombre_archivo, string direccion_coleccion, bool visible, ColeccionTipo tipo_coleccion ) {
-		this.nombre_coleccion = nombre_coleccion;
-		this.nombre_archivo = nombre_archivo;
-		this.direccion_coleccion = direccion_coleccion;
+	public Coleccion ( string nombre, bool visible ) {
+		this.nombre = nombre;
 		this.visible = visible;
-		this.tipo_coleccion = tipo_coleccion;
-		this.calcular_checksum ();
 	}
 
 	public Coleccion.json ( string json ) {
 		if (json.contains ("{\"Fuente\":{")) {
-			this.nombre_coleccion = this.sacarDatoJson (json, "nombre");
-			this.nombre_archivo = this.sacarDatoJson (json, "archivo");
-			this.direccion_coleccion = this.sacarDatoJson (json, "path");
+			this.nombre = this.sacarDatoJson (json, "nombre");
 			this.visible = bool.parse ( this.sacarDatoJson (json, "visible") );
-			this.tipo_coleccion = ColeccionTipo.convertir ( this.sacarDatoJson ( json, "tipo" ) );
 		} else {
-			this.nombre_coleccion = "null";
-			this.nombre_archivo = "null";
-			this.direccion_coleccion = "null";
+			this.nombre = "null";
 			this.visible = false;
-			this.tipo_coleccion = ColeccionTipo.LOCAL;
 		}
 
 		this.calcular_checksum ();
-	}
-
-	public bool verificar_coleccion () {
-		bool retorno = true;
-		if ( this.tipo_coleccion == ColeccionTipo.LOCAL ) {
-			if( !Archivo.existe_path (this.direccion_coleccion + this.nombre_archivo) ) {
-				retorno = false;
-				print ("No existe el archivo " + this.direccion_coleccion + this.nombre_archivo);
-			}
-		}
-
-		return retorno;
 	}
 
 	public string a_json () {
 		string retorno = "{\"Fuente\":{";
 
 		retorno += "\"nombre\":\"" + this.nombre_coleccion + "\",";
-		retorno += "\"archivo\":\"" + this.nombre_archivo + "\",";
-		retorno += "\"path\":\"" + this.direccion_coleccion + "\",";
 		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
-		retorno += "\"tipo\":\"" + this.tipo_coleccion.to_string () + "\"";
-
 		retorno +="}}";	
 		
 		return retorno;
@@ -86,14 +56,6 @@ public class Nomeolvides.Coleccion : GLib.Object{
 		inicio = json.index_of(":",json.index_of(campo)) + 2;
 		fin = json.index_of ("\"", inicio);
 		return json[inicio:fin];
-	}
-
-	public string get_checksum () {
-		return this.hash;
-	}
-
-	private void calcular_checksum () {
-		this.hash = Checksum.compute_for_string(ChecksumType.MD5, this.direccion_coleccion + this.nombre_archivo);
 	}
 }
 

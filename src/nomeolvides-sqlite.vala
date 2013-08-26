@@ -145,15 +145,6 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return hechos;
 	}
 
-	protected Statement select_distinct ( string tabla, string columnas, string where = "" ) {
-		Statement stmt;
-		
-		this.open ( );
-		this.query ( "SELECT DISTINCT " + columnas + " FROM " + tabla + " " + where, out stmt);
-
-		return stmt;
-	}
-
 	public void insert_hecho ( Hecho hecho ) {
 		this.insert ( "hechos", hecho.to_string () );
 	}
@@ -170,7 +161,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_coleccion ( Coleccion coleccion ) {
-		this.insert ( "colecciones", "\""+ coleccion.nombre +"\""
+		this.insert ( "colecciones", "\""+ coleccion.nombre +"\"");
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
