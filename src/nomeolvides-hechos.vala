@@ -22,18 +22,18 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.Hechos : Object {
-	private Coleccion hechos_anios;
-	private Coleccion hechos_listas;
+	private MapaHecho hechos_anios;
+	private MapaHecho hechos_listas;
 	
 	public Hechos () {
-		this.hechos_anios = new Coleccion ();
-		this.hechos_listas = new Coleccion ();
+		this.hechos_anios = new MapaHecho ();
+		this.hechos_listas = new MapaHecho ();
 
-		this.hechos_anios.coleccion_cambio_keys.connect ( this.signal_cambio_anios );
-		this.hechos_listas.coleccion_cambio_keys.connect ( this.signal_cambio_listas );
-		this.hechos_anios.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos );
-		this.hechos_listas.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos );
-		this.hechos_listas.coleccion_cambio_hechos.connect ( this.signal_cambio_hechos_listas );
+		this.hechos_anios.mapa_cambio_keys.connect ( this.signal_cambio_anios );
+		this.hechos_listas.mapa_cambio_keys.connect ( this.signal_cambio_listas );
+		this.hechos_anios.mapa_cambio_hechos.connect ( this.signal_cambio_hechos );
+		this.hechos_listas.mapa_cambio_hechos.connect ( this.signal_cambio_hechos );
+		this.hechos_listas.mapa_cambio_hechos.connect ( this.signal_cambio_hechos_listas );
 	}
 
 	public void agregar_hecho_anio ( int anio, Hecho hecho ) {

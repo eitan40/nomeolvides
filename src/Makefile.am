@@ -26,31 +26,22 @@ nomeolvides_SOURCES = \
 	nomeolvides-panel.vala \
 	nomeolvides-lista-hechos.vala \
 	nomeolvides-liststore-hechos.vala \
-	nomeolvides-hechos-fuentes.vala \
-	nomeolvides-fuente.vala \
-	nomeolvides-liststore-fuentes.vala \
-	nomeolvides-treeview-fuentes.vala \
 	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
 	nomeolvides-edit-hecho-dialog.vala \
-	nomeolvides-add-fuente-dialog.vala \
-	nomeolvides-edit-fuente-dialog.vala \
 	nomeolvides-datos.vala \
 	nomeolvides-box-anios-hechos-vista.vala \
 	nomeolvides-configuracion.vala \
 	nomeolvides-box-descripcion-hecho.vala \
 	nomeolvides-archivo.vala \
-	nomeolvides-dialog-fuente.vala \
 	nomeolvides-treeview-view-anios.vala \
 	nomeolvides-treeview-view-hechos.vala \
 	nomeolvides-box-vista-hecho.vala \
 	nomeolvides-box-selector-fecha.vala \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
 	nomeolvides-application-window-ventana-principal.vala \
-	nomeolvides-dialog-borrar-fuente-dialogo.vala \
 	nomeolvides-dialog-borrar-hecho-dialogo.vala \
 	nomeolvides-dialog-dialogo-hecho.vala \
-	nomeolvides-dialog-fuentes-dialog.vala \
 	nomeolvides-tooblar-main-toolbar.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-dialog-listas-dialog.vala \
@@ -70,7 +61,16 @@ nomeolvides_SOURCES = \
 	nomeolvides-borrar-hecho-lista-dialog.vala \
 	nomeolvides-base-de-datos.vala \
 	nomeolvides-sqlite.vala \
-	nomeolvides-acciones-db.vala
+	nomeolvides-acciones-db.vala \
+	nomeolvides-mapa-hecho.vala \
+	nomeolvides-liststore-colecciones.vala \
+	nomeolvides-treeview-colecciones.vala \
+	nomeolvides-add-coleccion-dialog.vala \
+	nomeolvides-dialog-borrar-coleccion-dialogo.vala \
+	nomeolvides-edit-coleccion-dialog.vala \
+	nomeolvides-dialog-coleccion.vala \
+	nomeolvides-hechos-colecciones.vala \
+	nomeolvides-dialog-colecciones-dialog.vala
 
 
 nomeolvides_VALAFLAGS = \

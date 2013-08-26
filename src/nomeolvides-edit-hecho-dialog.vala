@@ -22,17 +22,17 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
-	private ArrayList<string> archivos_fuente;
+	private ArrayList<string> archivos_colecciones;
 	private int64 hecho_id;
 	
-	public EditHechoDialog ( VentanaPrincipal ventana, HechosFuentes fuentes ) {
-		base (ventana, fuentes.get_fuentes_activas ());
+	public EditHechoDialog ( VentanaPrincipal ventana, HechosColecciones colecciones ) {
+		base (ventana, colecciones.get_colecciones_activas ());
 		this.set_title ("Editar Hecho Histórico");				
 
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 
-		this.archivos_fuente = fuentes.get_fuentes_activas ().get_archivos ();		
+		this.archivos_colecciones = colecciones.get_colecciones_activas ().get_archivos ();		
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {
@@ -42,7 +42,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.fecha.set_mes(hecho_a_editar.fecha.get_month());
 		this.fecha.set_dia(hecho_a_editar.fecha.get_day_of_month());
 		this.fuente_entry.set_text ( hecho_a_editar.fuente );
-		set_fuente_de_hecho ( hecho_a_editar.archivo_fuente );
+		this.set_coleccion_de_hecho ( hecho_a_editar.archivo_coleccion );
 		this.hecho_id = hecho_a_editar.id;
 	}
 	
@@ -65,12 +65,12 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.respuesta.id = this.hecho_id;
 	}
 
-	protected void set_fuente_de_hecho (string archivo_fuente ) {
+	protected void set_coleccion_de_hecho (string archivo_coleccion ) {
 		int indice;
 		
-		for (indice = 0; indice < this.archivos_fuente.size; indice++ ) {
-			if ( this.archivos_fuente[indice] == archivo_fuente ) {
-				this.combo_fuentes.set_active (indice);
+		for (indice = 0; indice < this.archivos_colecciones.size; indice++ ) {
+			if ( this.archivos_colecciones[indice] == archivo_coleccion ) {
+				this.combo_colecciones.set_active (indice);
 			} 
 		}
 	}

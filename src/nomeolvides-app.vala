@@ -33,7 +33,7 @@ public class Nomeolvides.App : Gtk.Application
 		{ "create-about-dialog", about_dialog },
 		{ "exportar", exportar },
 		{ "window-destroy", salir_app },
-		{ "config-db-dialog", config_db_dialog },
+		{ "config-colecciones-dialog", config_colecciones_dialog },
 		{ "config-listas-dialog", config_listas_dialog }
 	};
 
@@ -56,7 +56,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void create_app_menu () {
 		this.application_menu = new GLib.Menu ();
 		
-		this.application_menu.append ( "Configurar Bases de Datos", "app.config-db-dialog" );
+		this.application_menu.append ( "Configurar Colecciones", "app.config-colecciones-dialog" );
 		this.application_menu.append ( "Configurar Listas Personalizadas", "app.config-listas-dialog" );
 		this.application_menu.append ( "Exportar", "app.exportar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
@@ -90,13 +90,13 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void add_hecho_dialog () {
 
-		if ( !(this.datos.hay_db_locales_activas ()) ) {
-				this.config_db_dialog ();
+		if ( !(this.datos.hay_colecciones_locales_activas ()) ) {
+				this.config_colecciones_dialog ();
 		}
 
-		if ( this.datos.hay_db_locales_activas () ) {
+		if ( this.datos.hay_colecciones_locales_activas () ) {
 
-			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
+			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.colecciones);
 		
 			add_dialog.show();
 
@@ -126,7 +126,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		this.window.get_hecho_actual ( out hecho );
 		
-		var edit_dialog = new EditHechoDialog( this.window, this.datos.fuentes );
+		var edit_dialog = new EditHechoDialog( this.window, this.datos.colecciones );
 		edit_dialog.set_datos ( hecho );
 		edit_dialog.show_all ();
 
@@ -156,15 +156,15 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.destroy ();
 	}
 
-	private void config_db_dialog () {		
-		var fuentes_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
-		fuentes_dialogo.show_all ();
-		if ( fuentes_dialogo.run () == ResponseType.OK ) {
-			if (fuentes_dialogo.cambios == true) {				
-				this.datos.actualizar_fuentes_predefinidas ( fuentes_dialogo.fuentes_view.get_model () as ListStoreFuentes );
+	private void config_colecciones_dialog () {		
+		var colecciones_dialogo = new ColeccionesDialog ( this.window, this.datos.colecciones.temp() );
+		colecciones_dialogo.show_all ();
+		if ( colecciones_dialogo.run () == ResponseType.OK ) {
+			if (colecciones_dialogo.cambios == true) {				
+				this.datos.actualizar_colecciones_predefinidas ( colecciones_dialogo.colecciones_view.get_model () as ListStoreColecciones );
 			}
 		}
-		fuentes_dialogo.destroy ();
+		colecciones_dialogo.destroy ();
 	}
 
 	private void config_listas_dialog () {		
