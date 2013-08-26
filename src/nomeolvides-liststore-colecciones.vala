@@ -21,13 +21,13 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.ListStoreColeccion : ListStore {
+public class Nomeolvides.ListStoreColecciones : ListStore {
 	private ArrayList<string> archivos;
 	private ArrayList<string> archivos_cache;
 	private ArrayList<string> nombres_colecciones;
 	private TreeIter iterador;
 	
-	public ListStoreColeccion () {
+	public ListStoreColecciones () {
 		Type[] tipos= { typeof(string), typeof(string), typeof(string), typeof(string), typeof(bool), typeof(Coleccion) };
 		this.archivos = new ArrayList<string> ();
 		this.archivos_cache = new ArrayList<string> ();
@@ -38,16 +38,16 @@ public class Nomeolvides.ListStoreColeccion : ListStore {
 	public void agregar_coleccion ( Coleccion coleccion ) {
 		if ( coleccion.verificar_coleccion () && this.coleccion_no_duplicada ( coleccion ) ) {
 			this.append ( out this.iterador );
-		ente	this.set ( this.iterador,
-		                         0,coleccion.nombre_coleccion,
-		                         1,coleccion.direccion_coleccion,
-		                         2,coleccion.nombre_archivo,
-		                         3,coleccion.tipo_coleccion.to_string (),
-		                         4,coleccion.visible,
-			      				 5,coleccion );
+			this.set ( this.iterador,
+		                0,coleccion.nombre_coleccion,
+		                1,coleccion.direccion_coleccion,
+		                2,coleccion.nombre_archivo,
+						3,coleccion.tipo_coleccion.to_string (),
+		                4,coleccion.visible,
+			      		5,coleccion );
 			this.archivos.add ( coleccion.direccion_coleccion + coleccion.nombre_archivo );
 			this.archivos_cache.add (coleccion.get_checksum());
-			this.nombres_coleccion.add (coleccion.nombre_coleccion);
+			this.nombres_colecciones.add (coleccion.nombre_coleccion);
 		}	
 	}
 
@@ -74,7 +74,7 @@ public class Nomeolvides.ListStoreColeccion : ListStore {
 	private bool coleccion_no_duplicada ( Coleccion coleccion ) {
 		bool retorno = true;
 
-		if (this.archivos_cache.contains ( coleccion.get_checksum() ) || this.nombres_coleccion.contains (coleccion.nombre_coleccion) ) {
+		if (this.archivos_cache.contains ( coleccion.get_checksum() ) || this.nombres_colecciones.contains (coleccion.nombre_coleccion) ) {
 			retorno = false;
 		}
 			
@@ -82,7 +82,7 @@ public class Nomeolvides.ListStoreColeccion : ListStore {
 	}
 
 	public void borrar_coleccion ( TreeIter iter, Coleccion a_eliminar ) {
-		this.nombres_coleccion.remove ( a_eliminar.nombre_coleccion );
+		this.nombres_colecciones.remove ( a_eliminar.nombre_coleccion );
 		this.archivos_cache.remove ( a_eliminar.get_checksum() );
 		this.remove ( iter );
 	} 

@@ -69,8 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-borrar-coleccion-dialogo.vala \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
-	nomeolvides-dialog-colecciones.vala \
-	nomeolvides-hechos-colecciones.vala
+	nomeolvides-hechos-colecciones.vala \
+	nomeolvides-dialog-colecciones-dialog.vala
 
 
 nomeolvides_VALAFLAGS = \

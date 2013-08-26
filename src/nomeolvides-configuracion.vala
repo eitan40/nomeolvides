@@ -44,27 +44,27 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
 		}
 		
-		if (!Archivo.existe_path ( Configuracion.archivo_bases () ) ) {
-			Archivo.crear ( Configuracion.archivo_bases () );
+		if (!Archivo.existe_path ( Configuracion.archivo_colecciones () ) ) {
+			Archivo.crear ( Configuracion.archivo_colecciones () );
 
-			var fuente_default = new Fuente ( "Base de datos local",
+			var coleccion_default = new Coleccion ( "Coleccion local",
 					                          "db_default.json",
-					                           Configuracion.directorio_db_local (),
+					                           Configuracion.directorio_colecciones_locales (),
 			                             	   true,
-					                           FuentesTipo.LOCAL );
-			Archivo.escribir ( Configuracion.archivo_bases (), fuente_default.a_json () );
+					                           ColeccionTipo.LOCAL );
+			Archivo.escribir ( Configuracion.archivo_colecciones (), coleccion_default.a_json () );
 		}
 
 		if (!Archivo.existe_path ( Configuracion.archivo_listas () ) ) {
 				Archivo.crear ( Configuracion.archivo_listas () );
 		}
 		
-		if (!Archivo.existe_path ( Configuracion.directorio_db_local () )) {
-			Archivo.crear_directorio ( Configuracion.directorio_db_local () );			
+		if (!Archivo.existe_path ( Configuracion.directorio_colecciones_locales () )) {
+			Archivo.crear_directorio ( Configuracion.directorio_colecciones_locales () );			
 		}
 		
-		if (!Archivo.existe_path ( Configuracion.archivo_db_local () ) ) {
-				Archivo.crear ( Configuracion.archivo_db_local () );
+		if (!Archivo.existe_path ( Configuracion.archivo_colecciones_locales () ) ) {
+				Archivo.crear ( Configuracion.archivo_colecciones_locales () );
 		}
 
 		if (!Archivo.existe_path ( Configuracion.archivo_listas_hechos () ) ) {
@@ -81,12 +81,12 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		resources._register ();
 */	}
 
-	public static void guardar_fuentes ( string fuentes ) {
-		Archivo.escribir ( Configuracion.archivo_bases (), fuentes );
+	public static void guardar_colecciones ( string colecciones ) {
+		Archivo.escribir ( Configuracion.archivo_colecciones (), colecciones );
 	}
 
-	public static string cargar_fuentes () {
-		return Archivo.leer ( Configuracion.archivo_bases () );
+	public static string cargar_colecciones () {
+		return Archivo.leer ( Configuracion.archivo_colecciones () );
 	}
 
 	public static void guardar_listas ( string listas ) {
@@ -105,7 +105,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		Archivo.escribir ( Configuracion.archivo_listas_hechos (), listas_hechos );
 	}
 
-	private static string archivo_bases () {
+	private static string archivo_colecciones () {
 		return Configuracion.directorio_configuracion () + "/db-predeterminadas.json";
 	}
 
@@ -117,15 +117,15 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		return GLib.Environment.get_user_config_dir () + "/nomeolvides/";
 	}
 
-	private static string directorio_db_local () {
+	private static string directorio_colecciones_locales () {
 		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/";
 	}
 
-	private static string archivo_db_local () {
-		return Configuracion.directorio_db_local () + "/db_default.json";
+	private static string archivo_colecciones_locales () {
+		return Configuracion.directorio_colecciones_locales () + "/db_default.json";
 	}
 
 	private static string archivo_listas_hechos () {
-		return Configuracion.directorio_db_local () + "/listas";
+		return Configuracion.directorio_colecciones_locales () + "/listas";
 	}
 }

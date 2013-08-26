@@ -51,11 +51,11 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 //		var fuente_oficial = new Fuente ( "Base de datos oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", true, FuentesTipo.HTTP );
 //		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
 
-		todo = Configuracion.cargar_coleciones ();
+		todo = Configuracion.cargar_colecciones ();
 		
 		lineas = todo.split_set ("\n");
 		for (i=0; i < lineas.length; i++) {
-        	nueva_coleccion = new Colecciones.json(lineas[i]);
+        	nueva_coleccion = new Coleccion.json(lineas[i]);
 			if ( nueva_coleccion.nombre_coleccion != "null" ) {
 				this.colecciones_liststore.agregar_coleccion ( nueva_coleccion );
 			}
@@ -64,8 +64,8 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 
 	public ListStoreColecciones temp () {
 		GLib.Value coleccion_value;
-		Colecciones coleccion;
-		ListStoreColecciones temp = new ListStoreColeccionesS ();
+		Coleccion coleccion;
+		ListStoreColecciones temp = new ListStoreColecciones ();
 		TreeIter iterador;
 		
 		if ( this.colecciones_liststore.get_iter_first ( out iterador ) ) {
@@ -109,8 +109,8 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 				if( coleccion.tipo_coleccion == ColeccionTipo.HTTP ) {
 					temp.add ( coleccion );
 				}	
-			}while ( this.coleccion_liststore.iter_next ( ref iterador) );
-		}n
+			}while ( this.colecciones_liststore.iter_next ( ref iterador) );
+		}
 		return temp;
 	}
 
@@ -136,7 +136,7 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 	public ArrayList<string> lista_de_archivos (ColeccionTipo tipo) { 
 		TreeIter iter;
 		Value value_coleccion;
-		Colecciones coleccion;
+		Coleccion coleccion;
 		ArrayList<string> retorno = new ArrayList<string> ();
 
 		if ( this.colecciones_liststore.get_iter_first(out iter) ) {
@@ -145,7 +145,7 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 				coleccion = value_coleccion as Coleccion;
 				if (coleccion.tipo_coleccion == tipo) {
 					if ( coleccion.visible == true ) {
-						retorno.add ( coleccion.direccion_coleccion + coleccion.coleccion_archivo );
+						retorno.add ( coleccion.direccion_coleccion + coleccion.nombre_archivo );
 					}
 				}
 			}while (this.colecciones_liststore.iter_next(ref iter));

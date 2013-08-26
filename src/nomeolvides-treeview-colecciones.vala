@@ -37,7 +37,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 4 );
 	}
 
-	public Fuente get_coleccion_cursor () {
+	public Coleccion get_coleccion_cursor () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
@@ -46,7 +46,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 5, out fuente);
+			this.get_model().get_value (iterador, 5, out coleccion);
 			return (Coleccion) coleccion;
 		} else { 
 			return (Coleccion) null;
@@ -65,8 +65,8 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 	}
 
 	private void signal_toggle (string path) {
-		Value colecclion_value;
-		Fuente coleccion;
+		Value coleccion_value;
+		Coleccion coleccion;
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
 		TreeIter iter;
 

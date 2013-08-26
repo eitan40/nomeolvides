@@ -62,7 +62,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 
 		this.cambios = false;
 		this.colecciones_view = new TreeViewColecciones ();
-		this.colecciones_view.set_model ( liststore_coleccion );
+		this.colecciones_view.set_model ( liststore_colecciones );
 		this.colecciones_view.cursor_changed.connect ( elegir_coleccion );
 		this.colecciones_view.coleccion_visible_toggle_change.connect ( signal_toggle_change );
 
@@ -91,7 +91,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	private void add_coleccion_dialog () {
 		ListStoreColecciones liststore;
 		
-		var add_dialog = new AddFuenteDialog ( );
+		var add_dialog = new AddColeccionDialog ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
@@ -106,7 +106,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	private void edit_coleccion_dialog () {
 		ListStoreColecciones liststore;
 		
-		var edit_dialog = new EditFuenteDialog ();
+		var edit_dialog = new EditColeccionDialog ();
 		edit_dialog.set_datos ( this.colecciones_view.get_coleccion_cursor () );
 		edit_dialog.show_all ();
 
@@ -121,7 +121,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	}
 
 	private void borrar_coleccion_dialog () {	
-		var borrar_dialog = new BorrarFuenteDialogo ( this.colecciones_view.get_coleccion_cursor () );
+		var borrar_dialog = new BorrarColeccionDialogo ( this.colecciones_view.get_coleccion_cursor () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {

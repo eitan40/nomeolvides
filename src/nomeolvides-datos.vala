@@ -26,7 +26,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	//private Hechos hechos;
 	public Deshacer deshacer;
-	public HechosFuentes fuentes;
+	public HechosColecciones colecciones;
 	//public Listas listas;
 	private AccionesDB db;
 
@@ -35,13 +35,13 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer = new Deshacer ();
 
 		//this.hechos = new Hechos ();
-		this.fuentes = new HechosFuentes ();
+		this.colecciones = new HechosColecciones ();
 		//this.listas = new Listas ();
 		this.db = new AccionesDB ( "nomeolvides.db" );
 
 		this.conectar_signals ();
 		
-		this.cargar_fuentes_predefinidas ();
+		this.cargar_colecciones_predefinidas ();
 		this.cargar_datos_listas ();
 	}
 
@@ -115,7 +115,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_editado() );
 			}
 			this.agregar_hecho ( item.get_borrado() );
-			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
+			this.guardar_un_archivo ( item.get_borrado().archivo_coleccion);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_borrado() );
 			}
 			
-			this.guardar_un_archivo ( item.get_borrado().archivo_fuente);
+			this.guardar_un_archivo ( item.get_borrado().archivo_coleccion);
 		}
 	}
 
@@ -145,7 +145,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.db.lista_de_anios ();
 	}
 
-	public void cargar_fuentes_predefinidas ( ) {		
+	public void cargar_colecciones_predefinidas ( ) {		
 /*		int indice;
 		ArrayList<string> locales = fuentes.lista_de_archivos ( FuentesTipo.LOCAL );
 		ArrayList<string> http = fuentes.lista_de_archivos ( FuentesTipo.HTTP );
@@ -160,9 +160,9 @@ public class Nomeolvides.Datos : GLib.Object {
 		}*/		
 	}
 
-	public void actualizar_fuentes_predefinidas ( ListStoreFuentes fuentes ) {
-		this.fuentes.actualizar_fuentes_liststore ( fuentes );
-		this.cargar_fuentes_predefinidas ();
+	public void actualizar_colecciones_predefinidas ( ListStoreColecciones colecciones ) {
+		this.colecciones.actualizar_colecciones_liststore ( colecciones );
+		this.cargar_colecciones_predefinidas ();
 		this.cargar_datos_listas ();
 	}
 
@@ -173,7 +173,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void save_file () {
 		int i;
-		ArrayList<string> lista_archivos = this.fuentes.lista_de_archivos ( FuentesTipo.LOCAL);
+		ArrayList<string> lista_archivos = this.colecciones.lista_de_archivos ( ColeccionTipo.LOCAL);
 	
 		for (i=0; i < lista_archivos.size; i++) {
 			guardar_un_archivo ( lista_archivos[i] );
@@ -186,7 +186,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		ArrayList<Hecho> lista = this.lista_de_hechos ();
 		int i;
 		for (i=0; i < lista.size; i++) {
-			if (lista[i].archivo_fuente == archivo) {
+			if (lista[i].archivo_coleccion == archivo) {
 				a_guardar +=lista[i].a_json() + "\n";
 			}
 		}
@@ -204,7 +204,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.listas.guardar_listas_hechos ( a_guardar );*/
 	}
 
-	public void open_file ( string nombre_archivo, FuentesTipo tipo ) {
+	public void open_file ( string nombre_archivo, ColeccionTipo tipo ) {
 		string todo;
 		string[] lineas;
 		Hecho nuevoHecho;
@@ -265,11 +265,11 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hay;
 	}
 
-	public bool hay_db_locales_activas() {
+	public bool hay_colecciones_locales_activas() {
 		TreeIter iter;
 		bool hay=false;
 
-		var liststore = this.fuentes.get_fuentes_activas();
+		var liststore = this.colecciones.get_colecciones_activas();
 
 		if ( liststore.get_iter_first ( out iter ) ) { 
 			hay = true;
