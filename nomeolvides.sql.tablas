@@ -1,6 +1,25 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE hechos(nombre TEXT NOT NULL,descripcion TEXT,anio INTEGER NOT NULL,mes INTEGER NOT NULL,dia INTEGER NOT NULL,fuente TEXT);
-CREATE TABLE listas ( nombre TEXT NOT NULL );
-CREATE TABLE listashechos ( lista INTEGER NOT NULL, hecho INTEGER NOT NULL, FOREIGN KEY (lista) REFERENCES listas(rowid), FOREIGN KEY(hecho) REFERENCES hechos(rowid) );
+CREATE TABLE colecciones ( 
+			nombre TEXT NOT NULL
+			 );
+CREATE TABLE hechos ( 
+			nombre TEXT NOT NULL,
+			descripcion TEXT,
+			anio INTEGER NOT NULL,
+			mes INTEGER NOT NULL,
+			dia INTEGER NOT NULL,
+			coleccion INTEGER NOT NULL,
+			fuente TEXT,
+			FOREIGN KEY (coleccion) REFERENCES colecciones (rowid)
+		    );
+CREATE TABLE listas ( 
+			nombre TEXT NOT NULL
+		    );
+CREATE TABLE listashechos (
+			lista INTEGER NOT NULL,
+			hecho INTEGER NOT NULL,
+			FOREIGN KEY (lista) REFERENCES listas (rowid),
+			FOREIGN KEY (hecho) REFERENCES hechos (rowid)
+ 			  );
 COMMIT;
