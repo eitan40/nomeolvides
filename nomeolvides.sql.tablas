@@ -10,8 +10,8 @@ CREATE TABLE hechos (
 			anio INTEGER NOT NULL, 
 			mes INTEGER NOT NULL, 
 			dia INTEGER NOT NULL, 
-			coleccion INTEGER NOT NULL, 
 			fuente TEXT,
+			coleccion INTEGER NOT NULL,
 			FOREIGN KEY (coleccion) REFERENCES colecciones (rowid)
 		     );
 CREATE TABLE listas ( 

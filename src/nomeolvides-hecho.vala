@@ -25,18 +25,18 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
-	public string archivo_coleccion { get; private set; }
+	public string coleccion { get; private set; }
 	public string fuente { get; private set; }
 	private string reemplazoSaltoDeLinea { get; private set; } 
 
 	// Constructor
-	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, string archivo_coleccion, string fuente = "" )
+	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, string coleccion, string fuente = "" )
 	{
 		this.nombre = nombre;
 		this.descripcion = this.ponerSaltoDeLinea ( descripcion );
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		this.calcular_checksum ();
-		this.archivo_coleccion = archivo_coleccion;
+		this.coleccion = coleccion;
 		this.fuente = fuente;
 	}
 
@@ -61,7 +61,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 		}	
 		this.calcular_checksum ();
 
-		this.archivo_coleccion = archivo_coleccion;
+		this.coleccion = coleccion;
 	}
 
 	private void calcular_checksum () {

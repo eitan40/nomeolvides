@@ -60,6 +60,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
 
+		//print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
+
 		if (rc != Sqlite.OK) { 
             stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
         }
@@ -146,7 +148,10 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		this.insert ( "hechos", hecho.to_string () );
+		var coleccion = this.select_colecciones ( "WHERE nombre=\"" + hecho.coleccion + "\"" );
+
+		var id = coleccion.get ( 0 ).id ;
+		this.insert ( "hechos", hecho.to_string () + ",\"" + id.to_string() + "\"" );
 	}
 
 	public void insert_lista ( Lista lista ) {

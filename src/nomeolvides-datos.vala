@@ -115,7 +115,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_editado() );
 			}
 			this.agregar_hecho ( item.get_borrado() );
-			this.guardar_un_archivo ( item.get_borrado().archivo_coleccion);
+			this.guardar_un_archivo ( item.get_borrado().coleccion);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_borrado() );
 			}
 			
-			this.guardar_un_archivo ( item.get_borrado().archivo_coleccion);
+			this.guardar_un_archivo ( item.get_borrado().coleccion);
 		}
 	}
 
@@ -186,7 +186,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		ArrayList<Hecho> lista = this.lista_de_hechos ();
 		int i;
 		for (i=0; i < lista.size; i++) {
-			if (lista[i].archivo_coleccion == archivo) {
+			if (lista[i].coleccion == archivo) {
 				a_guardar +=lista[i].a_json() + "\n";
 			}
 		}

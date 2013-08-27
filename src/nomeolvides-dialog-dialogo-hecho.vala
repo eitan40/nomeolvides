@@ -99,7 +99,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 										 this.fecha.get_anio (),
 			                             this.fecha.get_mes (),
 			                             this.fecha.get_dia (),
-		  								 this.get_archivo_elegido (),
+										 this.get_coleccion (),
 			                             this.fuente_entry.get_text ());
 		}
 	}
@@ -112,15 +112,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.combo_colecciones.set_model ( this.lista_colecciones );
 	}
 
-	protected string get_archivo_elegido () {		
+	protected string get_coleccion () {
 		TreeIter iter;
-		Value archivo;
-		Value direccion;
-		
-		this.combo_colecciones.get_active_iter( out iter );
-		this.lista_colecciones.get_value (iter, 1, out direccion);
-		this.lista_colecciones.get_value (iter, 2, out archivo );
+		Value nombre;
 
-		return (string) direccion + (string) archivo ;
+		this.combo_colecciones.get_active_iter( out iter );
+		this.lista_colecciones.get_value (iter, 0, out nombre);
+
+		return (string) nombre ;
 	}
 }
