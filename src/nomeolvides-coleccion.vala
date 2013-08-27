@@ -21,6 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Coleccion : GLib.Object{
+	public int64 id;
 	public string nombre { get; private set; }
 	public bool visible {get; set; }
 
@@ -45,6 +46,24 @@ public class Nomeolvides.Coleccion : GLib.Object{
 		retorno += "\"nombre\":\"" + this.nombre + "\",";
 		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
 		retorno +="}}";	
+		
+		return retorno;
+	}
+
+	public string a_sql () {
+		string retorno;
+
+		retorno  = "nombre=\"" + this.nombre + "\",";
+		retorno += "visible=\"" + this.visible.to_string() + "\"";
+		
+		return retorno;
+	}
+
+	public string to_string () {
+		string retorno;
+
+		retorno  = this.nombre + "\",\"";
+		retorno += this.visible.to_string();
 		
 		return retorno;
 	}

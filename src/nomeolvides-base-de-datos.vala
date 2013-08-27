@@ -35,14 +35,19 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract void insert_hecho ( Hecho hecho );
 	public abstract void insert_lista ( Lista lista );
 	public abstract void insert_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract void insert_coleccion ( Coleccion coleccion );
 	public abstract void delete_hecho ( Hecho hecho );
 	public abstract void delete_lista ( Lista lista );
 	public abstract void delete_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract void delete_coleccion ( Coleccion coleccion );
 	public abstract void update_hecho ( Hecho hecho );
 	public abstract void update_lista ( Lista lista );
 	public abstract void update_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract void update_coleccion ( Coleccion coleccion );
 	public abstract ArrayList<Hecho> select_hechos ( string where = "" );
 	public abstract ArrayList<Lista> select_listas ( );
 	public abstract ArrayList<Hecho> select_hechos_lista ( Lista lista );
-	public abstract Array<int> lista_de_anios ();
+	public abstract ArrayList<Coleccion> select_colecciones ( string where = "" );
+	public abstract Array<int> lista_de_anios ( string where = "" );
+	public abstract int64 ultimo_rowid ();
 }

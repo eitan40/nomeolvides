@@ -27,6 +27,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	private ToolButton borrar_coleccion_button;
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
+	private AccionesDB db;
 		
 	public ColeccionesDialog (VentanaPrincipal ventana, ListStoreColecciones liststore_colecciones) {
 		this.set_title ("Colecciones de hechos históricos");
@@ -46,6 +47,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		SeparatorToolItem separador = new SeparatorToolItem ();
 		separador.set_expand ( true );
 		separador.draw = false;
+		this.db = new AccionesDB ( "nomeolvides.db" );
 
 		editar_coleccion_button.clicked.connect ( edit_coleccion_dialog );
 		borrar_coleccion_button.clicked.connect ( borrar_coleccion_dialog );
@@ -90,13 +92,17 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 
 	private void add_coleccion_dialog () {
 		ListStoreColecciones liststore;
+		Coleccion coleccion;
 		
 		var add_dialog = new AddColeccionDialog ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
+			coleccion = add_dialog.respuesta;
+			this.db.insert_coleccion ( coleccion );
+			coleccion.id = this.db.ultimo_rowid();
 			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-			liststore.agregar_coleccion (add_dialog.respuesta);
+			liststore.agregar_coleccion (coleccion);
 			this.cambios = true;
 		}
 		

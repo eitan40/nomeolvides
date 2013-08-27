@@ -155,13 +155,13 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
 		string valores = "\"" + lista.id.to_string() + "\", \""
-			                        + hecho.id.to_string() + "\"";
+			                  + hecho.id.to_string() + "\"";
 		
 		this.insert ( "listashechos", valores );
 	}
 
 	public void insert_coleccion ( Coleccion coleccion ) {
-		this.insert ( "colecciones", "\""+ coleccion.nombre +"\"");
+		this.insert ( "colecciones", "\""+ coleccion.to_string () +"\"");
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
@@ -173,36 +173,57 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.del ( "listashechos", "WHERE lista=\"" + lista.id.to_string()
-		                                           + "\" AND hecho=\"" 
-		                                           + hecho.id.to_string() +"\"" );
+		this.del ( "listashechos",
+		           "WHERE lista=\"" + lista.id.to_string()
+		                            + "\" AND hecho=\"" 
+		                            + hecho.id.to_string() +"\"" );
+	}
+	
+	public void delete_coleccion ( Coleccion coleccion ) {
+		this.del ( "colecciones", "WHERE rowid=\"" + coleccion.id.to_string() +"\"" );
 	}
 
 	public void update_hecho ( Hecho hecho ) {
 		string valores = hecho.a_sql ();
 
-		this.update ( "hechos", valores, " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
+		this.update ( "hechos",
+		              valores,
+		              " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
 	}
  
 	public void update_lista ( Lista lista ) {
 		string valores = lista.a_sql ();
 
-		this.update ( "listas", valores, " WHERE rowid=\"" + lista.id.to_string() + "\"" );
+		this.update ( "listas",
+		              valores,
+		              " WHERE rowid=\"" + lista.id.to_string() + "\"" );
 	}
 
 	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
 		string valores = "lista=\"" + lista.id.to_string() + "\" hecho=\""
 			                        + lista.id.to_string() + "\"";
 
-		this.update ( "listashechos", valores, "WHERE lista=\"" + lista.id.to_string()
-		                                           + "\" AND hecho=\"" 
-		                                           + hecho.id.to_string() +"\"" );
+		this.update ( "listashechos",
+		              valores,
+		              "WHERE lista=\"" + lista.id.to_string()
+		                               + "\" AND hecho=\"" 
+		                               + hecho.id.to_string() +"\"" );
+	}
+
+	public void update_coleccion ( Coleccion coleccion ) {
+		string valores = coleccion.a_sql ();
+
+		this.update ( "colecciones",
+		              valores,
+		              " WHERE rowid=\"" + coleccion.id.to_string() + "\"" );
 	}
 
 	public ArrayList<Hecho> select_hechos ( string where = "" ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		
-		var stmt = this.select ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,rowid", where); 
+		var stmt = this.select ( "hechos",
+		                         "nombre,descripcion,anio,mes,dia,fuente,rowid",
+		                         where); 
 	
 		hechos = this.parse_query_hechos ( stmt );
 		
@@ -245,19 +266,56 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
-		string where = " WHERE lista=\"" + lista.id.to_string () + "\" and listashechos.hecho=hechos.rowid";
+		string where = " WHERE lista=\"" + lista.id.to_string ()
+			                             + "\" and listashechos.hecho=hechos.rowid";
 		
-		var stmt = this.select ( "hechos,listashechos", "nombre,descripcion,anio,mes,dia,fuente,hechos.rowid", where ); 
+		var stmt = this.select ( "hechos,listashechos",
+		                         "nombre,descripcion,anio,mes,dia,fuente,hechos.rowid",
+		                         where ); 
 	
 		hechos = this.parse_query_hechos ( stmt );
 		
 		return hechos;
 	}
 
-	public Array<int> lista_de_anios () {
+	public ArrayList<Coleccion> select_colecciones ( string where = "" ) {
+		ArrayList<Coleccion> colecciones = new ArrayList<Coleccion> ();
+		string[] columnas = {"","",""};
+		Coleccion coleccion;
+		
+		var stmt = this.select ( "colecciones", "nombre,visible,rowid", where ); 
+	
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+		
+		while ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					} 
+
+					coleccion = new Coleccion (columnas[0], bool.parse (columnas[1]) );
+					coleccion.id = int64.parse(columnas[2]);
+					colecciones.add( coleccion );
+					break;
+				default:
+					print ("Error!!");
+					break;
+			}
+			
+			rc = stmt.step ();		
+		}
+		
+		return colecciones;
+	}
+
+	public Array<int> lista_de_anios ( string where = "" ) {
 		Array<int> anios = new Array<int>();
 
-		var stmt = this.select_distinct ( "hechos", "anio", ""); 
+		var stmt = this.select_distinct ( "hechos", "anio", where); 
 
 		int rc = stmt.step ();
 		
@@ -278,5 +336,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			rc = stmt.step ();
 		}
 		return anios;
+	}
+
+	public int64 ultimo_rowid () {
+		return this.db.last_insert_rowid ();
 	}
 }

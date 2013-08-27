@@ -92,14 +92,17 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 
 	private void add_lista_dialog () {
 		ListStoreListas liststore;
+		Lista lista;
 		
 		var add_dialog = new AddListaDialog ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
+			lista = add_dialog.respuesta;
+			this.db.insert_lista ( lista );
+			lista.id = this.db.ultimo_rowid();
 			liststore = this.listas_view.get_model () as ListStoreListas;
-			liststore.agregar_lista (add_dialog.respuesta);
-			this.db.insert_lista ( add_dialog.respuesta );
+			liststore.agregar_lista ( lista );
 			this.cambios = true;
 		}
 		

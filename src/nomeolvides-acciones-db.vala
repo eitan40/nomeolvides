@@ -41,6 +41,10 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.insert_hecho_lista ( hecho, lista );
 	}
 
+	public void insert_coleccion ( Coleccion coleccion ) {
+		this.dbms.insert_coleccion ( coleccion );
+	}
+
 	public void delete_hecho ( Hecho hecho ) {
 		this.dbms.delete_hecho ( hecho );
 	}
@@ -51,6 +55,10 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.dbms.delete_hecho_lista ( hecho, lista );
+	}
+
+	public void delete_coleccion ( Coleccion coleccion ) {
+		this.dbms.delete_coleccion ( coleccion );
 	}
 
 	public void update_hecho ( Hecho hecho ) {
@@ -65,6 +73,10 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.update_hecho_lista ( hecho, lista );
 	}
 
+	public void update_coleccion ( Coleccion coleccion ) {
+		this.dbms.update_coleccion ( coleccion );
+	}
+
 	public ArrayList<Hecho> select_hechos ( string where = "" ) {
 		return this.dbms.select_hechos ( where ); 
 	}
@@ -77,8 +89,16 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.select_hechos_lista ( lista ); 
 	}
 
+	public ArrayList<Coleccion> select_colecciones ( string where = "" ) {
+		return this.dbms.select_colecciones ( where ); 
+	}
+
 	public Array<int> lista_de_anios () {
 		return this.dbms.lista_de_anios ( ); 
 
+	}
+
+	public int64 ultimo_rowid () {
+		return this.dbms.ultimo_rowid ();
 	}
 }
