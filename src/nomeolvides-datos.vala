@@ -26,7 +26,7 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	//private Hechos hechos;
 	public Deshacer deshacer;
-	public HechosColecciones colecciones;
+    //public HechosColecciones colecciones;
 	//public Listas listas;
 	private AccionesDB db;
 
@@ -35,7 +35,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer = new Deshacer ();
 
 		//this.hechos = new Hechos ();
-		this.colecciones = new HechosColecciones ();
+		//this.colecciones = new HechosColecciones ();
 		//this.listas = new Listas ();
 		this.db = new AccionesDB ( "nomeolvides.db" );
 
@@ -161,9 +161,9 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void actualizar_colecciones_predefinidas ( ListStoreColecciones colecciones ) {
-		this.colecciones.actualizar_colecciones_liststore ( colecciones );
+	/*	this.colecciones.actualizar_colecciones_liststore ( colecciones );
 		this.cargar_colecciones_predefinidas ();
-		this.cargar_datos_listas ();
+		this.cargar_datos_listas ();*/
 	}
 
 	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {
@@ -172,13 +172,13 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_file () {
-		int i;
+	/*	int i;
 		ArrayList<string> lista_archivos = this.colecciones.lista_de_archivos ( ColeccionTipo.LOCAL);
 	
 		for (i=0; i < lista_archivos.size; i++) {
 			guardar_un_archivo ( lista_archivos[i] );
 		}
-	
+	*/ 
 	}
 
 	public void guardar_un_archivo ( string archivo ) {
@@ -204,7 +204,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.listas.guardar_listas_hechos ( a_guardar );*/
 	}
 
-	public void open_file ( string nombre_archivo, ColeccionTipo tipo ) {
+	public void open_file ( string nombre_archivo ) {
 		string todo;
 		string[] lineas;
 		Hecho nuevoHecho;
@@ -266,14 +266,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public bool hay_colecciones_locales_activas() {
-		TreeIter iter;
+	//	TreeIter iter;
 		bool hay=false;
-
+	/*
 		var liststore = this.colecciones.get_colecciones_activas();
 
 		if ( liststore.get_iter_first ( out iter ) ) { 
 			hay = true;
-		}
+		}*/
 		return hay;
 	}
 

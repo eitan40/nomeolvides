@@ -95,8 +95,8 @@ public class Nomeolvides.App : Gtk.Application
 		}
 
 		if ( this.datos.hay_colecciones_locales_activas () ) {
-
-			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.colecciones);
+																			// Hay que pasar las colecciones o hacerlo en el dialog.
+			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, new HechosColecciones()); 
 		
 			add_dialog.show();
 
@@ -125,8 +125,8 @@ public class Nomeolvides.App : Gtk.Application
 		Hecho hecho; 
 
 		this.window.get_hecho_actual ( out hecho );
-		
-		var edit_dialog = new EditHechoDialog( this.window, this.datos.colecciones );
+															// Hay que pasar las colecciones o hacerlo en el dialog.
+		var edit_dialog = new EditHechoDialog( this.window, new HechosColecciones() );
 		edit_dialog.set_datos ( hecho );
 		edit_dialog.show_all ();
 
@@ -156,8 +156,9 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.destroy ();
 	}
 
-	private void config_colecciones_dialog () {		
-		var colecciones_dialogo = new ColeccionesDialog ( this.window, this.datos.colecciones.temp() );
+	private void config_colecciones_dialog () {
+		ListStoreColecciones colecciones = new ListStoreColecciones (); //Acá debe llamarse a la db para pedir los datos.
+		var colecciones_dialogo = new ColeccionesDialog ( this.window, colecciones );
 		colecciones_dialogo.show_all ();
 		if ( colecciones_dialogo.run () == ResponseType.OK ) {
 			if (colecciones_dialogo.cambios == true) {				

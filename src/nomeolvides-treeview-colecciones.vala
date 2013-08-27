@@ -26,15 +26,10 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 	public TreeViewColecciones () {
 		
 		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
-		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 1 );
-		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 2 );
-		this.insert_column_with_attributes ( -1, "Tipo de Coleccion", new CellRendererText(), "text", 3 );
 
 		this.toggle_visible = new CellRendererToggle();
-
 		this.toggle_visible.toggled.connect ( signal_toggle );
-
-		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 4 );
+		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 1 );
 	}
 
 	public Coleccion get_coleccion_cursor () {
@@ -46,7 +41,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 5, out coleccion);
+			this.get_model().get_value (iterador, 2, out coleccion);
 			return (Coleccion) coleccion;
 		} else { 
 			return (Coleccion) null;
@@ -73,9 +68,9 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		var liststore = this.get_model() as ListStoreColecciones;
 
 		liststore.get_iter (out iter, tree_path);
-		liststore.set_value (iter, 4, !this.toggle_visible.active);
+		liststore.set_value (iter, 1, !this.toggle_visible.active);
 
-		liststore.get_value (iter, 5, out coleccion_value);
+		liststore.get_value (iter, 2, out coleccion_value);
 		coleccion = coleccion_value as Coleccion;
 		coleccion.visible = !this.toggle_visible.active;
 

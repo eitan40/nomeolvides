@@ -22,8 +22,6 @@ using Nomeolvides;
 
 public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 	protected Entry nombre_coleccion_entry;
-	protected Entry nombre_archivo_entry;
-	protected FileChooserButton archivo_chooser;
 	public Coleccion respuesta { get; protected set; }
 	
 	public DialogColeccion ( )
@@ -36,18 +34,13 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 		this.response.connect(on_response);
 		
 		var nombre_coleccion_label = new Label.with_mnemonic ("Nombre de la coleccion: ");
-		var nombre_archivo_label = new Label.with_mnemonic ("Archivo: ");
 		
 		this.nombre_coleccion_entry = new Entry ();
-		this.nombre_archivo_entry = new Entry ();
-		this.archivo_chooser = new FileChooserButton ("Elija una coleccion", FileChooserAction.OPEN);
 
 		var grid = new Grid ();
 		
 		grid.attach (nombre_coleccion_label, 0, 0, 1, 1);
 	    grid.attach (this.nombre_coleccion_entry, 1, 0, 1, 1);
-		grid.attach (nombre_archivo_label, 0, 1, 1, 1);
-		grid.attach (this.archivo_chooser, 1, 1, 1, 1);
 	
 		var contenido = this.get_content_area() as Box;
 
@@ -70,14 +63,9 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
     }
 
 	protected void crear_respuesta() {
-		string archivo = this.archivo_chooser.get_file ().get_path ();
 		if(this.nombre_coleccion_entry.get_text_length () > 0)
 		{
-			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (),
-			                              archivo.slice(archivo.last_index_of_char ('/') +1, archivo.char_count ()),
-										  archivo.slice(0,archivo.last_index_of_char ('/') +1),
-			                              true,
-			                              ColeccionTipo.LOCAL);
+			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
 		}
 	}
 }

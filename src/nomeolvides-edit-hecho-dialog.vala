@@ -32,7 +32,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 
-		this.archivos_colecciones = colecciones.get_colecciones_activas ().get_archivos ();		
+		this.archivos_colecciones = new ArrayList<string> (); // acá hay que pedir a la db las colecciones activas	
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {

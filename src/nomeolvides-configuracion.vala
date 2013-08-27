@@ -47,12 +47,9 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		if (!Archivo.existe_path ( Configuracion.archivo_colecciones () ) ) {
 			Archivo.crear ( Configuracion.archivo_colecciones () );
 
-			var coleccion_default = new Coleccion ( "Coleccion local",
-					                          "db_default.json",
-					                           Configuracion.directorio_colecciones_locales (),
-			                             	   true,
-					                           ColeccionTipo.LOCAL );
-			Archivo.escribir ( Configuracion.archivo_colecciones (), coleccion_default.a_json () );
+			var coleccion_default = new Coleccion ( "Coleccion",
+			                             				   true
+			                                      );
 		}
 
 		if (!Archivo.existe_path ( Configuracion.archivo_listas () ) ) {

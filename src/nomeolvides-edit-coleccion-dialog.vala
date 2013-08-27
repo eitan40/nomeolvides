@@ -31,7 +31,6 @@ public class Nomeolvides.EditColeccionDialog : DialogColeccion
 	}
 
 	public void set_datos (Coleccion coleccion) {
-		this.nombre_coleccion_entry.set_text ( coleccion.nombre_coleccion );
-		this.archivo_chooser.set_filename ( coleccion.direccion_coleccion + coleccion.nombre_archivo );
+		this.nombre_coleccion_entry.set_text ( coleccion.nombre );
 	}
 }

@@ -26,21 +26,15 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		this.title = "Borrar Coleccion";
 		Label pregunta = new Label.with_mnemonic ( "" );
 		Label coleccion_nombre = new Label.with_mnemonic ( "" );
-		Label coleccion_archivo = new Label.with_mnemonic ( "" );
-		Label coleccion_direccion = new Label.with_mnemonic ( "" );
 
 		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente coleccion?</big>" );
-		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre_coleccion +"</span>");
-		coleccion_archivo.set_markup ( "del archivo <span font_style=\"italic\">"+ coleccion_a_borrar.nombre_archivo +"</span>");
-		coleccion_direccion.set_markup ( "en <span font_style=\"italic\">"+ coleccion_a_borrar.direccion_coleccion +"</span>");
+		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>");
 
 		Box box = new Box ( Orientation.VERTICAL, 0 );
 
 		box.pack_start ( pregunta, true, true, 15 );
 		box.pack_start ( coleccion_nombre, true, true, 0 );
-		box.pack_start ( coleccion_archivo, true, true, 0 );
-		box.pack_start ( coleccion_direccion, true, true, 0 );
-		
+
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(box, false, false, 0);
 		

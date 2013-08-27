@@ -37,14 +37,12 @@ public class Nomeolvides.Coleccion : GLib.Object{
 			this.nombre = "null";
 			this.visible = false;
 		}
-
-		this.calcular_checksum ();
 	}
 
 	public string a_json () {
 		string retorno = "{\"Fuente\":{";
 
-		retorno += "\"nombre\":\"" + this.nombre_coleccion + "\",";
+		retorno += "\"nombre\":\"" + this.nombre + "\",";
 		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
 		retorno +="}}";	
 		
@@ -53,41 +51,9 @@ public class Nomeolvides.Coleccion : GLib.Object{
 
 	private string sacarDatoJson(string json, string campo) {
 		int inicio,fin;
-		inicio = json.index_of(":",json.index_of(campo)) + 2;
+		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
 		fin = json.index_of ("\"", inicio);
 		return json[inicio:fin];
 	}
-}
 
-
-public enum Nomeolvides.ColeccionTipo {
-	LOCAL,
-	HTTP;
-
-	public string to_string() {
-        switch (this) {
-            case LOCAL:
-                return "Local";
-
-            case HTTP:
-                return "HTTP";
-
-			default:
-                return "";
-	}
-}
-
-	public static ColeccionTipo convertir (string cadena)
-	{
-		switch (cadena) {
-            case "Local":
-                return ColeccionTipo.LOCAL;
-
-			case "HTTP":
-                return ColeccionTipo.HTTP;
-
-			default:
-                return ColeccionTipo.LOCAL;
-		}
-	}
 }

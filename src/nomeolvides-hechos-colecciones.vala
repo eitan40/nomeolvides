@@ -25,31 +25,31 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 	public ListStoreColecciones colecciones_liststore { get; private set; }
 		
 	public HechosColecciones () {
-		this.colecciones_liststore = new ListStoreColecciones ();
+	/*	this.colecciones_liststore = new ListStoreColecciones ();
 		this.cargar_colecciones ();
 		this.verificar_colecciones_online ();
+	*/	
 	}
 
 	public void actualizar_colecciones_liststore ( ListStoreColecciones nueva_colecciones_liststore) {		
-		this.colecciones_liststore = nueva_colecciones_liststore;
+	/*	this.colecciones_liststore = nueva_colecciones_liststore;
 		this.verificar_colecciones_online ();
 		this.guardar_colecciones ();
+	*/	
 	}
 
 	private void guardar_colecciones () {
-		string guardar = this.colecciones_liststore.a_json ();
+	/*	string guardar = this.colecciones_liststore.a_json ();
 		
 		Configuracion.guardar_colecciones ( guardar );
+	*/	
 	}
 
 	private void cargar_colecciones () {
-		string todo;
+	/*	string todo;
 		string[] lineas;
 		Coleccion nueva_coleccion;
 		int i;	
-
-//		var fuente_oficial = new Fuente ( "Base de datos oficial" , "base_de_datos.json", "https://dl.dropbox.com/u/14325890/nomeolvides/", true, FuentesTipo.HTTP );
-//		this.fuentes_liststore.agregar_fuente ( fuente_oficial );
 
 		todo = Configuracion.cargar_colecciones ();
 		
@@ -59,14 +59,14 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 			if ( nueva_coleccion.nombre_coleccion != "null" ) {
 				this.colecciones_liststore.agregar_coleccion ( nueva_coleccion );
 			}
-		}
+		}*/
 	}
 
 	public ListStoreColecciones temp () {
-		GLib.Value coleccion_value;
-		Coleccion coleccion;
+	//	GLib.Value coleccion_value;
+	//	Coleccion coleccion;
 		ListStoreColecciones temp = new ListStoreColecciones ();
-		TreeIter iterador;
+	/*	TreeIter iterador;
 		
 		if ( this.colecciones_liststore.get_iter_first ( out iterador ) ) {
 			do {
@@ -74,15 +74,15 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 				coleccion = coleccion_value as Coleccion;
 				temp.agregar_coleccion( coleccion );
 			}while ( this.colecciones_liststore.iter_next ( ref iterador) );
-		}
+		}*/
 		return temp;
 	}
 
 	public ListStoreColecciones get_colecciones_locales () {
-		GLib.Value coleccion_value;
-		Coleccion coleccion;
+	//	GLib.Value coleccion_value;
+	//	Coleccion coleccion;
 		ListStoreColecciones temp = new ListStoreColecciones ();
-		TreeIter iterador;
+	/*	TreeIter iterador;
 		
 		if (this.colecciones_liststore.get_iter_first ( out iterador ) ) {
 			do {
@@ -92,15 +92,15 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 					temp.agregar_coleccion ( coleccion );
 				}	
 			}while ( this.colecciones_liststore.iter_next ( ref iterador) );
-		}
+		}*/
 		return temp;
 	}
 
 	public ArrayList<Coleccion> get_colecciones_online () {
-		GLib.Value coleccion_value;
-		Coleccion coleccion;
+	//	GLib.Value coleccion_value;
+	//	Coleccion coleccion;
 		ArrayList<Coleccion> temp = new ArrayList<Coleccion> ();
-		TreeIter iterador;
+	/*	TreeIter iterador;
 		
 		if (this.colecciones_liststore.get_iter_first ( out iterador ) ) {
 			do {
@@ -110,16 +110,16 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 					temp.add ( coleccion );
 				}	
 			}while ( this.colecciones_liststore.iter_next ( ref iterador) );
-		}
+		}*/
 		return temp;
 	}
 
 	public ListStoreColecciones get_colecciones_activas () {
-		GLib.Value coleccion_value;
-		Coleccion coleccion;
-		ListStoreColecciones temp = this.get_colecciones_locales ();
+	//	GLib.Value coleccion_value;
+	//	Coleccion coleccion;
+	//	ListStoreColecciones temp = this.get_colecciones_locales ();
 		ListStoreColecciones activas = new ListStoreColecciones ();
-		TreeIter iterador;
+	/*	TreeIter iterador;
 		
 		if (temp.get_iter_first ( out iterador ) ) {
 			do {
@@ -129,16 +129,16 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 					activas.agregar_coleccion ( coleccion );
 				}	
 			}while ( temp.iter_next ( ref iterador) );
-		}
+		}*/
 		return activas;
 	}
 	
-	public ArrayList<string> lista_de_archivos (ColeccionTipo tipo) { 
-		TreeIter iter;
+	public ArrayList<string> lista_de_archivos ( ) { 
+	/*	TreeIter iter;
 		Value value_coleccion;
-		Coleccion coleccion;
+		Coleccion coleccion;*/
 		ArrayList<string> retorno = new ArrayList<string> ();
-
+/*
 		if ( this.colecciones_liststore.get_iter_first(out iter) ) {
 			do {
 				this.colecciones_liststore.get_value(iter, 5, out value_coleccion);
@@ -150,18 +150,18 @@ public class Nomeolvides.HechosColecciones : GLib.Object {
 				}
 			}while (this.colecciones_liststore.iter_next(ref iter));
 		}
-
+*/
 		return retorno;
 	}
 
 	private void verificar_colecciones_online () {
-		ArrayList<Coleccion> colecciones_online = this.get_colecciones_online ();
+		/*ArrayList<Coleccion> colecciones_online = this.get_colecciones_online ();
 
 		foreach ( Coleccion c in colecciones_online ) {
 			if (!(Archivo.existe_uri (c.direccion_coleccion + c.nombre_archivo) )) {
 				c.visible = false;
 				print ("Se desactivó la coleccion on line " + c.nombre_coleccion + " porque no actualmente no está disponible.\n" );
 			}
-		}
+		}*/
 	}
 }
