@@ -62,10 +62,5 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
         }
     }
 
-	protected void crear_respuesta() {
-		if(this.nombre_coleccion_entry.get_text_length () > 0)
-		{
-			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
-		}
-	}
+	protected virtual void crear_respuesta() {}
 }

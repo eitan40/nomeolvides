@@ -28,4 +28,11 @@ public class Nomeolvides.AddColeccionDialog : DialogColeccion
 		this.title = "Agregar parámetos de una coleccion";
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
+
+	protected override void crear_respuesta() {
+		if(this.nombre_coleccion_entry.get_text_length () > 0)
+		{
+			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
+		}
+	}
 }

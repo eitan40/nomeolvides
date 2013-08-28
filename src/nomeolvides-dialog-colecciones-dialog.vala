@@ -119,7 +119,8 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
 			this.colecciones_view.eliminar_coleccion ( this.colecciones_view.get_coleccion_cursor () );
-			liststore.agregar_coleccion (edit_dialog.respuesta);
+			liststore.agregar_coleccion ( edit_dialog.respuesta );
+			this.db.update_coleccion ( edit_dialog.respuesta );
 			this.cambios = true;
 		}
 		

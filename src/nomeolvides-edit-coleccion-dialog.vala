@@ -23,7 +23,7 @@ using Nomeolvides;
 
 public class Nomeolvides.EditColeccionDialog : DialogColeccion
 {
-	
+	private int64 id_coleccion;
 	public EditColeccionDialog ( )
 	{
 		this.title = "Editar parámetros de la coleccion";
@@ -32,5 +32,14 @@ public class Nomeolvides.EditColeccionDialog : DialogColeccion
 
 	public void set_datos (Coleccion coleccion) {
 		this.nombre_coleccion_entry.set_text ( coleccion.nombre );
+		this.id_coleccion = coleccion.id;
 	}
+
+	protected override void crear_respuesta() {
+		if(this.nombre_coleccion_entry.get_text_length () > 0)
+		{
+			this.respuesta = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
+			this.respuesta.id = this.id_coleccion;
+		}
+	} 
 }
