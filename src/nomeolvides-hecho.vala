@@ -25,12 +25,12 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
-	public string coleccion { get; private set; }
+	public int64 coleccion { get; private set; }
 	public string fuente { get; private set; }
 	private string reemplazoSaltoDeLinea { get; private set; } 
 
 	// Constructor
-	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, string coleccion, string fuente = "" )
+	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, int64 coleccion, string fuente = "" )
 	{
 		this.nombre = nombre;
 		this.descripcion = this.ponerSaltoDeLinea ( descripcion );
@@ -80,7 +80,8 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "\"anio\":\"" + this.fecha.get_year().to_string () + "\",";
 		retorno += "\"mes\":\"" + this.fecha.get_month().to_string () + "\",";
 		retorno += "\"dia\":\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "\"fuente\":\"" + this.fuente + "\"";
+		retorno += "\"fuente\":\"" + this.fuente + "\",";
+		retorno += "\"coleccion\":\"" + this.coleccion.to_string() + "\"";
 
 		retorno +="}}";	
 		
@@ -95,8 +96,10 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "\"" + this.fecha.get_year().to_string () + "\",";
 		retorno += "\"" + this.fecha.get_month().to_string () + "\",";
 		retorno += "\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "\"" + this.fuente + "\"";
-		
+		retorno += "\"" + this.fuente + "\",";
+		retorno += "\"" + this.coleccion.to_string() + "\"";
+
+		print ( retorno + "\n");
 		return retorno;
 	}
 
@@ -108,7 +111,8 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "anio=\"" + this.fecha.get_year().to_string () + "\",";
 		retorno += "mes=\"" + this.fecha.get_month().to_string () + "\",";
 		retorno += "dia=\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "fuente=\"" + this.fuente + "\"";
+		retorno += "fuente=\"" + this.fuente + "\",";
+		retorno += "coleccion=\"" + this.coleccion.to_string() + "\",";
 		
 		return retorno;
 	}

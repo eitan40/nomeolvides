@@ -22,7 +22,7 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
-	private ArrayList<string> archivos_colecciones;
+	//private ArrayList<string> archivos_colecciones;
 	private int64 hecho_id;
 	
 	public EditHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
@@ -32,7 +32,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
 
-		this.archivos_colecciones = new ArrayList<string> (); // acá hay que pedir a la db las colecciones activas	
+	//	this.archivos_colecciones = new ArrayList<string> (); // acá hay que pedir a la db las colecciones activas	
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {
@@ -65,13 +65,14 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		this.respuesta.id = this.hecho_id;
 	}
 
-	protected void set_coleccion_de_hecho (string archivo_coleccion ) {
+	protected void set_coleccion_de_hecho ( int64 coleccion_id ) {
 		int indice;
-		
-		for (indice = 0; indice < this.archivos_colecciones.size; indice++ ) {
-			if ( this.archivos_colecciones[indice] == archivo_coleccion ) {
-				this.combo_colecciones.set_active (indice);
-			} 
-		}
+		TreeIter iter;
+		TreePath path = new TreePath.from_string ("0");
+		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
+
+		if ( liststore.get_iter (out iter, path) ) {
+			this.combo_colecciones.set_active_iter ( iter );
+		}	
 	}
 }

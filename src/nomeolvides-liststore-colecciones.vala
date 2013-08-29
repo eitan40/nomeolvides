@@ -25,7 +25,7 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 	private TreeIter iterador;
 	
 	public ListStoreColecciones () {
-		Type[] tipos= { typeof(string), typeof(bool), typeof(Coleccion) };
+		Type[] tipos= { typeof(string), typeof(bool), typeof(int64) };
 		this.set_column_types(tipos);
 	}
 
@@ -34,7 +34,7 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 		this.set ( this.iterador,
 		           0,coleccion.nombre,
 		           1,coleccion.visible,
-			       2,coleccion );
+			       2,coleccion.id );
 	}
 
 	public void borrar_coleccion ( TreeIter iter, Coleccion a_eliminar ) {

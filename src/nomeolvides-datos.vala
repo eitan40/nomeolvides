@@ -115,7 +115,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_editado() );
 			}
 			this.agregar_hecho ( item.get_borrado() );
-			this.guardar_un_archivo ( item.get_borrado().coleccion);
+			//this.guardar_un_archivo ( item.get_borrado().coleccion);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_borrado() );
 			}
 			
-			this.guardar_un_archivo ( item.get_borrado().coleccion);
+			//this.guardar_un_archivo ( item.get_borrado().coleccion);
 		}
 	}
 
@@ -182,7 +182,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void guardar_un_archivo ( string archivo ) {
-		string a_guardar = "";
+	/*	string a_guardar = "";
 		ArrayList<Hecho> lista = this.lista_de_hechos ();
 		int i;
 		for (i=0; i < lista.size; i++) {
@@ -190,7 +190,7 @@ public class Nomeolvides.Datos : GLib.Object {
 				a_guardar +=lista[i].a_json() + "\n";
 			}
 		}
-		Archivo.escribir ( archivo, a_guardar );			
+		Archivo.escribir ( archivo, a_guardar );	*/		
 	}
 
 	public void guardar_listas_hechos () {

@@ -112,13 +112,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.combo_colecciones.set_model ( this.lista_colecciones );
 	}
 
-	protected string get_coleccion () {
+	protected int64 get_coleccion () {
 		TreeIter iter;
-		Value nombre;
+		Value value_coleccion_id;
 
 		this.combo_colecciones.get_active_iter( out iter );
-		this.lista_colecciones.get_value (iter, 0, out nombre);
-
-		return (string) nombre ;
+		this.lista_colecciones.get_value ( iter, 2, out value_coleccion_id );
+		
+		return (int64) value_coleccion_id;
 	}
 }

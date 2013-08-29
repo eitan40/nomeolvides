@@ -131,9 +131,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			    		          int.parse (columnas[2]),
 			        		      int.parse (columnas[3]),
 			            		  int.parse (columnas[4]),
-								  "Base de datos local", 
-								  columnas[5]);
-					hecho.id = int64.parse(columnas[6]);
+								  int64.parse (columnas[5]), 
+								  columnas[6]);
+					hecho.id = int64.parse(columnas[7]);
 					hechos.add( hecho );
 					break;
 				default:
@@ -148,10 +148,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		var coleccion = this.select_colecciones ( "WHERE nombre=\"" + hecho.coleccion + "\"" );
-
-		var id = coleccion.get ( 0 ).id ;
-		this.insert ( "hechos", hecho.to_string () + ",\"" + id.to_string() + "\"" );
+		this.insert ( "hechos", hecho.to_string ()   );
 	}
 
 	public void insert_lista ( Lista lista ) {
@@ -227,7 +224,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		
 		var stmt = this.select ( "hechos",
-		                         "nombre,descripcion,anio,mes,dia,fuente,rowid",
+		                         "nombre,descripcion,anio,mes,dia,coleccion,fuente,rowid",
 		                         where); 
 	
 		hechos = this.parse_query_hechos ( stmt );
