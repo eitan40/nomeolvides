@@ -66,13 +66,8 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	}
 
 	protected void set_coleccion_de_hecho ( int64 coleccion_id ) {
-		int indice;
-		TreeIter iter;
-		TreePath path = new TreePath.from_string ("0");
 		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
 
-		if ( liststore.get_iter (out iter, path) ) {
-			this.combo_colecciones.set_active_iter ( iter );
-		}	
+		this.combo_colecciones.set_active ( liststore.indice_de_id ( coleccion_id ) );
 	}
 }
