@@ -314,6 +314,36 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return colecciones;
 	}
 
+	public Coleccion select_coleccion ( string where = "" ) {
+		string[] columnas = {"","",""};
+		Coleccion coleccion = null;
+
+		var stmt = this.select ( "colecciones", "nombre,visible,rowid", where );
+
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+
+		if ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					}
+
+					coleccion = new Coleccion (columnas[0], bool.parse (columnas[1]) );
+					coleccion.id = int64.parse(columnas[2]);
+					break;
+				default:
+					print ("Error!!");
+					break;
+			}
+		}
+
+		return coleccion;
+	}
+
 	public Array<int> lista_de_anios ( string where = "" ) {
 		Array<int> anios = new Array<int>();
 

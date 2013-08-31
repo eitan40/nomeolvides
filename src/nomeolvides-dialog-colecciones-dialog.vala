@@ -111,14 +111,15 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 
 	private void edit_coleccion_dialog () {
 		ListStoreColecciones liststore;
-		
+
+		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
 		var edit_dialog = new EditColeccionDialog ();
-		edit_dialog.set_datos ( this.colecciones_view.get_coleccion_cursor () );
+		edit_dialog.set_datos ( coleccion );
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-			this.colecciones_view.eliminar_coleccion ( this.colecciones_view.get_coleccion_cursor () );
+			this.colecciones_view.eliminar_coleccion ( coleccion );
 			liststore.agregar_coleccion ( edit_dialog.respuesta );
 			this.db.update_coleccion ( edit_dialog.respuesta );
 			this.cambios = true;
@@ -127,12 +128,13 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		edit_dialog.destroy ();
 	}
 
-	private void borrar_coleccion_dialog () {	
-		var borrar_dialog = new BorrarColeccionDialogo ( this.colecciones_view.get_coleccion_cursor () );
+	private void borrar_coleccion_dialog () {
+		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+		var borrar_dialog = new BorrarColeccionDialogo ( coleccion );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
-			this.colecciones_view.eliminar_coleccion ( this.colecciones_view.get_coleccion_cursor () );
+			this.colecciones_view.eliminar_coleccion ( coleccion );
 		}
 		borrar_dialog.destroy ();
 
@@ -145,7 +147,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	}
 
 	private void elegir_coleccion () {
-		if(this.colecciones_view.get_coleccion_cursor () != null) {
+		if(this.colecciones_view.get_coleccion_cursor () >-1) {
 			this.set_buttons_visible ( true );
 		} else {
 			this.set_buttons_visible ( false );		

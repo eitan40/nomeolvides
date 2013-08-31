@@ -90,7 +90,11 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public ArrayList<Coleccion> select_colecciones ( string where = "" ) {
-		return this.dbms.select_colecciones ( where ); 
+		return this.dbms.select_colecciones ( where );
+	}
+
+	public Coleccion select_coleccion ( string where = "" ) {
+		return this.dbms.select_coleccion ( where ); 
 	}
 
 	public Array<int> lista_de_anios () {

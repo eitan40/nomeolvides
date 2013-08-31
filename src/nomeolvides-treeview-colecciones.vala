@@ -32,20 +32,19 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 1 );
 	}
 
-	public Coleccion get_coleccion_cursor () {
+	public int64 get_coleccion_cursor () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value coleccion;
+		Value coleccion = -1;
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
 			this.get_model().get_value (iterador, 2, out coleccion);
-			return (Coleccion) coleccion;
-		} else { 
-			return (Coleccion) null;
-		}		
+		}
+
+		return (int64) coleccion;
 	}
 
 	public void eliminar_coleccion ( Coleccion a_eliminar ) {

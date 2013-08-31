@@ -48,6 +48,7 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract ArrayList<Lista> select_listas ( );
 	public abstract ArrayList<Hecho> select_hechos_lista ( Lista lista );
 	public abstract ArrayList<Coleccion> select_colecciones ( string where = "" );
+	public abstract Coleccion select_coleccion ( string where = "" );
 	public abstract Array<int> lista_de_anios ( string where = "" );
 	public abstract int64 ultimo_rowid ();
 }
