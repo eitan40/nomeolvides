@@ -26,7 +26,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry nombre_entry;
 	protected TextView descripcion_textview;
 	protected ScrolledWindow descripcion_scroll;
-	protected ListStoreColecciones lista_colecciones;
+	//protected ListStoreColecciones lista_colecciones;
 	protected ComboBox combo_colecciones;
 	protected SelectorFecha fecha;
 	protected Entry fuente_entry;
@@ -52,7 +52,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.combo_colecciones = new ComboBox ();
 		this.fecha = new SelectorFecha ();
 
-		this.lista_colecciones = colecciones_liststore;
+		//this.lista_colecciones = colecciones_liststore;
 
 		var descripcion_frame = new Frame( "Descripcion" );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
@@ -64,7 +64,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.descripcion_scroll.add_with_viewport ( this.descripcion_textview );
 		descripcion_frame.add ( this.descripcion_scroll );
 
-		this.set_combo_box ();
+		this.set_combo_box ( colecciones_liststore );
 		
 		Box box_hecho = new Box (Orientation.HORIZONTAL, 0);
 		Box box_labels = new Box (Orientation.VERTICAL, 0);
@@ -104,12 +104,12 @@ public class Nomeolvides.DialogoHecho : Dialog
 		}
 	}
 
-	protected void set_combo_box () {
+	protected void set_combo_box ( ListStoreColecciones liststore) {
 		CellRendererText renderer = new CellRendererText ();
 		this.combo_colecciones.pack_start (renderer, true);
 		this.combo_colecciones.add_attribute (renderer, "text", 0);
 		this.combo_colecciones.active = 0;
-		this.combo_colecciones.set_model ( this.lista_colecciones );
+		this.combo_colecciones.set_model ( liststore );
 	}
 
 	protected int64 get_coleccion () {
@@ -117,7 +117,8 @@ public class Nomeolvides.DialogoHecho : Dialog
 		Value value_coleccion_id;
 
 		this.combo_colecciones.get_active_iter( out iter );
-		this.lista_colecciones.get_value ( iter, 2, out value_coleccion_id );
+		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
+		liststore.get_value ( iter, 2, out value_coleccion_id );
 		
 		return (int64) value_coleccion_id;
 	}
