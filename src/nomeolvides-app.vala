@@ -131,7 +131,7 @@ public class Nomeolvides.App : Gtk.Application
 		edit_dialog.show_all ();
 
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
-			this.datos.edit_hecho ( hecho );
+			this.datos.edit_hecho ( edit_dialog.respuesta );
 		}
 		edit_dialog.destroy();
 	}

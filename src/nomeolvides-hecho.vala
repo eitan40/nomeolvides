@@ -112,7 +112,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "mes=\"" + this.fecha.get_month().to_string () + "\",";
 		retorno += "dia=\"" + this.fecha.get_day_of_month().to_string () + "\",";
 		retorno += "fuente=\"" + this.fuente + "\",";
-		retorno += "coleccion=\"" + this.coleccion.to_string() + "\",";
+		retorno += "coleccion=\"" + this.coleccion.to_string() + "\"";
 		
 		return retorno;
 	}
