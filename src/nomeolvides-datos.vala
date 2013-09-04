@@ -23,34 +23,17 @@ using GLib;
 using Nomeolvides;
 
 public class Nomeolvides.Datos : GLib.Object {
-
-	//private Hechos hechos;
 	public Deshacer deshacer;
-    //public HechosColecciones colecciones;
-	//public Listas listas;
 	private AccionesDB db;
 
 	public Datos () {
-
 		this.deshacer = new Deshacer ();
-
-		//this.hechos = new Hechos ();
-		//this.colecciones = new HechosColecciones ();
-		//this.listas = new Listas ();
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		this.conectar_signals ();
-		
-		this.cargar_colecciones_predefinidas ();
-		this.cargar_datos_listas ();
 	}
 
 	private void conectar_signals () {
-		//this.hechos.hechos_cambio_anios.connect ( this.signal_cambio_anios );
-		//this.listas.listas_cambio_listas.connect ( this.signal_cambio_listas );
-		//this.hechos.hechos_cambio_hechos.connect ( this.signal_cambio_hechos );
-		//this.hechos.hechos_cambio_hechos_listas.connect ( this.signal_cambio_hechos_listas );
-
 		this.deshacer.deshacer_sin_items.connect ( this.signal_no_hechos_deshacer );
 		this.deshacer.deshacer_con_items.connect ( this.signal_hechos_deshacer );
 		this.deshacer.rehacer_sin_items.connect ( this.signal_no_hechos_rehacer );
@@ -71,22 +54,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	public void quitar_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.db.delete_hecho_lista ( hecho, lista );		
 		this.datos_cambio_hechos ();
-	}
-
-	private void cargar_datos_listas () {
-	/*	int1 i;
-		string datos = Configuracion.cargar_listas_hechos ();
-		string linea_lista_hash, linea_hecho_hash;
-
-		var lineas = datos.split_set ("\n");
-
-		for (i=0; i < (lineas.length - 1); i++) {
-			var linea = lineas[i].split (",");
-			linea_lista_hash = linea[0];
-			linea_hecho_hash = linea[1];
-			this.hechos.agregar_hecho_lista ( linea_lista_hash, linea_hecho_hash );
-		}
-*/
 	}
 
 	public void eliminar_hecho ( Hecho hecho ) {
@@ -115,7 +82,6 @@ public class Nomeolvides.Datos : GLib.Object {
 				this.eliminar_hecho ( item.get_editado() );
 			}
 			this.agregar_hecho ( item.get_borrado() );
-			//this.guardar_un_archivo ( item.get_borrado().coleccion);
 		}
 	}
 
@@ -130,78 +96,12 @@ public class Nomeolvides.Datos : GLib.Object {
 			} else {
 				this.eliminar_hecho ( item.get_borrado() );
 			}
-			
-			//this.guardar_un_archivo ( item.get_borrado().coleccion);
 		}
 	}
-
-
-	public ArrayList<Hecho> lista_de_hechos () { 
-		return (ArrayList<Hecho>) null; //this.hechos.lista_de_hechos ();
-    }
 
 	public Array<int> lista_de_anios ()
 	{
 		return this.db.lista_de_anios ();
-	}
-
-	public void cargar_colecciones_predefinidas ( ) {		
-/*		int indice;
-		ArrayList<string> locales = fuentes.lista_de_archivos ( FuentesTipo.LOCAL );
-		ArrayList<string> http = fuentes.lista_de_archivos ( FuentesTipo.HTTP );
-
-		this.hechos.vaciar ();
-
-		for (indice = 0; indice < http.size; indice++ ) {
-			this.open_file (http[indice], FuentesTipo.HTTP );
-		}
-		for (indice = 0; indice < locales.size; indice++ ) {
-			this.open_file (locales[indice], FuentesTipo.LOCAL );
-		}*/		
-	}
-
-	public void actualizar_colecciones_predefinidas ( ListStoreColecciones colecciones ) {
-	/*	this.colecciones.actualizar_colecciones_liststore ( colecciones );
-		this.cargar_colecciones_predefinidas ();
-		this.cargar_datos_listas ();*/
-	}
-
-	public void actualizar_listas_personalizadas ( ListStoreListas listas ) {
-		//this.listas.actualizar_listas_liststore ( listas );
-		//this.cargar_datos_listas ();
-	}
-
-	public void save_file () {
-	/*	int i;
-		ArrayList<string> lista_archivos = this.colecciones.lista_de_archivos ( ColeccionTipo.LOCAL);
-	
-		for (i=0; i < lista_archivos.size; i++) {
-			guardar_un_archivo ( lista_archivos[i] );
-		}
-	*/ 
-	}
-
-	public void guardar_un_archivo ( string archivo ) {
-	/*	string a_guardar = "";
-		ArrayList<Hecho> lista = this.lista_de_hechos ();
-		int i;
-		for (i=0; i < lista.size; i++) {
-			if (lista[i].coleccion == archivo) {
-				a_guardar +=lista[i].a_json() + "\n";
-			}
-		}
-		Archivo.escribir ( archivo, a_guardar );	*/		
-	}
-
-	public void guardar_listas_hechos () {
-/*	string a_guardar = "";
-		var hash = this.hechos.get_hash_listas_hechos ();
-
-		foreach ( string s in hash ) {
-			a_guardar += s + "\n";
-		}
-
-		this.listas.guardar_listas_hechos ( a_guardar );*/
 	}
 
 	public void open_file ( string nombre_archivo ) {
@@ -324,7 +224,6 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void signal_cambio_hechos_listas () {
-		//this.listas.set_cantidad_hechos_listas( this.hechos.get_listas_size () );
 		this.datos_cambio_hechos ();		
 	}
 

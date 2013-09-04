@@ -160,11 +160,6 @@ public class Nomeolvides.App : Gtk.Application
 		ListStoreColecciones colecciones = this.datos.lista_de_colecciones (); 
 		var colecciones_dialogo = new ColeccionesDialog ( this.window, colecciones );
 		colecciones_dialogo.show_all ();
-		if ( colecciones_dialogo.run () == ResponseType.OK ) {
-			if (colecciones_dialogo.cambios == true) {				
-				this.datos.actualizar_colecciones_predefinidas ( colecciones_dialogo.colecciones_view.get_model () as ListStoreColecciones );
-			}
-		}
 		colecciones_dialogo.destroy ();
 	}
 
@@ -173,7 +168,6 @@ public class Nomeolvides.App : Gtk.Application
 		listas_dialogo.show_all ();
 		if ( listas_dialogo.run () == ResponseType.OK ) {
 			if (listas_dialogo.cambios == true) {				
-				//this.datos.actualizar_listas_personalizadas ( listas_dialogo.listas_view.get_model () as ListStoreListas );
 				this.cargar_listas ();
 			}
 		}
