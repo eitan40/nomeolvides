@@ -32,6 +32,7 @@ public class Nomeolvides.App : Gtk.Application
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", about_dialog },
 		{ "exportar", exportar },
+		{ "importar", importar },
 		{ "window-destroy", salir_app },
 		{ "config-colecciones-dialog", config_colecciones_dialog },
 		{ "config-listas-dialog", config_listas_dialog }
@@ -58,7 +59,8 @@ public class Nomeolvides.App : Gtk.Application
 		
 		this.application_menu.append ( "Configurar Colecciones", "app.config-colecciones-dialog" );
 		this.application_menu.append ( "Configurar Listas Personalizadas", "app.config-listas-dialog" );
-		this.application_menu.append ( "Exportar", "app.exportar" );
+		this.application_menu.append ( "Exportar hechos", "app.exportar" );
+		this.application_menu.append ( "Importar hechos", "app.importar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
 		this.application_menu.append ( "Salir", "app.window-destroy" );
 		
@@ -256,8 +258,23 @@ public class Nomeolvides.App : Gtk.Application
 		guardar_archivo.close ();
 	}
 
+	public void importar_dialog () {
+		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
+		abrir_archivo.set_transient_for ( this as Window );
+
+		if (abrir_archivo.run () == ResponseType.ACCEPT) {		
+            this.datos.open_file ( abrir_archivo.get_filename () );
+		}
+		abrir_archivo.close ();
+	}
+
+
 	private void exportar () {
 		this.save_as_file_dialog ();
+	}
+
+	private void importar () {
+		this.importar_dialog ();
 	}
 
 	public void cargar_listas () {
