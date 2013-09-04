@@ -272,7 +272,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			                             + "\" and listashechos.hecho=hechos.rowid";
 		
 		var stmt = this.select ( "hechos,listashechos",
-		                         "nombre,descripcion,anio,mes,dia,fuente,hechos.rowid",
+		                         "nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.rowid",
 		                         where ); 
 	
 		hechos = this.parse_query_hechos ( stmt );

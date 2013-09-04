@@ -99,7 +99,6 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "\"" + this.fuente + "\",";
 		retorno += "\"" + this.coleccion.to_string() + "\"";
 
-		print ( retorno + "\n");
 		return retorno;
 	}
 
