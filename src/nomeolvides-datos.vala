@@ -223,14 +223,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void save_as_file ( string archivo ) {
-		/*string a_guardar = "";
-		var array = this.hechos.lista_de_hechos ();
+		string a_guardar = "";
+		var array_hechos = this.db.select_hechos ();
 		
-		foreach (Hecho h in array ) {
+		foreach (Hecho h in array_hechos ) {
 			a_guardar += h.a_json() + "\n"; 
 		}
 
-		Archivo.escribir ( archivo, a_guardar );*/
+		Archivo.escribir ( archivo, a_guardar );
 	}
 
 	public void borrar_rehacer () {
