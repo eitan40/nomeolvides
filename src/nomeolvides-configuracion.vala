@@ -43,6 +43,21 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		if ( !Archivo.existe_path ( Configuracion.directorio_configuracion () ) ) {
 			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
 		}
+
+		if (!Archivo.existe_path ( Configuracion.base_de_datos () ) ) {
+			string dir_sql = ".";
+			string stdout;
+			string stderr;
+			int exitstatus;
+
+			try {
+				Process.spawn_command_line_sync ( "sqlite3 " +   Configuracion.base_de_datos () + " -init " +  dir_sql + "/nomeolvides.sql.tablas", out stdout, out stderr, out exitstatus);
+			} catch (SpawnError e) {
+				print ("Error: %s\n", e.message);
+				print ("Comando:\n" + "sqlite3 " +   Configuracion.base_de_datos () + " -init " +  dir_sql + "/nomeolvides.sql.tablas\n\n");
+				print ("Salida:\n\tstdout : " + stdout + "\n\tstderr : " + stderr + "\n\texitstatus : " + exitstatus.to_string () + "\n");
+			}
+		}
 		
 		if (!Archivo.existe_path ( Configuracion.archivo_colecciones () ) ) {
 			Archivo.crear ( Configuracion.archivo_colecciones () );
@@ -102,6 +117,14 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		Archivo.escribir ( Configuracion.archivo_listas_hechos (), listas_hechos );
 	}
 
+	private static string directorio_datos () {
+		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides";
+	}
+
+	public static string base_de_datos () {
+		return Configuracion.directorio_datos () + "/nomeolvides.db";
+	}
+
 	private static string archivo_colecciones () {
 		return Configuracion.directorio_configuracion () + "/db-predeterminadas.json";
 	}
@@ -111,11 +134,11 @@ public class Nomeolvides.Configuracion : GLib.Object {
 	}
 
 	private static string directorio_configuracion () {
-		return GLib.Environment.get_user_config_dir () + "/nomeolvides/";
+		return GLib.Environment.get_user_config_dir () + "/nomeolvides";
 	}
 
 	private static string directorio_colecciones_locales () {
-		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides/";
+		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides";
 	}
 
 	private static string archivo_colecciones_locales () {
