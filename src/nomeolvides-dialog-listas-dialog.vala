@@ -35,7 +35,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
-		this.db = new AccionesDB ("nomeolvides.db");
+		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		Toolbar toolbar = new Toolbar ();
 		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );

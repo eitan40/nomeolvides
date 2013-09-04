@@ -37,7 +37,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		//this.hechos = new Hechos ();
 		//this.colecciones = new HechosColecciones ();
 		//this.listas = new Listas ();
-		this.db = new AccionesDB ( "nomeolvides.db" );
+		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		this.conectar_signals ();
 		

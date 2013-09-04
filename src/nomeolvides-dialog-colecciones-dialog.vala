@@ -47,7 +47,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		SeparatorToolItem separador = new SeparatorToolItem ();
 		separador.set_expand ( true );
 		separador.draw = false;
-		this.db = new AccionesDB ( "nomeolvides.db" );
+		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		editar_coleccion_button.clicked.connect ( edit_coleccion_dialog );
 		borrar_coleccion_button.clicked.connect ( borrar_coleccion_dialog );
