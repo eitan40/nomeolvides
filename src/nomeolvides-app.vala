@@ -162,18 +162,13 @@ public class Nomeolvides.App : Gtk.Application
 		ListStoreColecciones colecciones = this.datos.lista_de_colecciones (); 
 		var colecciones_dialogo = new ColeccionesDialog ( this.window, colecciones );
 		colecciones_dialogo.show_all ();
-		colecciones_dialogo.destroy ();
+		colecciones_dialogo.run ();
 	}
 
 	private void config_listas_dialog () {		
 		var listas_dialogo = new ListasDialog ( this.window, this.datos.lista_de_listas () );
 		listas_dialogo.show_all ();
-		if ( listas_dialogo.run () == ResponseType.OK ) {
-			if (listas_dialogo.cambios == true) {				
-				this.cargar_listas ();
-			}
-		}
-		listas_dialogo.destroy ();
+		listas_dialogo.run ();
 	}
 
 	public void send_hecho () {		

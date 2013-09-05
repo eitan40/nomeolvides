@@ -59,8 +59,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		toolbar.add ( editar_lista_button );
 		toolbar.add ( borrar_lista_button );
 		
-		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
-		this.add_button ( Stock.OK , ResponseType.OK );
+		this.add_button ( Stock.CLOSE , ResponseType.CLOSE );
 		this.response.connect(on_response);
 
 		this.cambios = false;
@@ -79,15 +78,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 
 	private void on_response (Dialog source, int response_id)
 	{
-		 switch (response_id)
-		{
-    		case ResponseType.OK:
-        		this.hide ();
-       			break;
-    		case ResponseType.CANCEL:
-        		this.destroy ();
-        		break; 
-        }
+		this.destroy ();
     }
 
 	private void add_lista_dialog () {
