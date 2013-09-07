@@ -117,6 +117,10 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		Archivo.escribir ( Configuracion.archivo_listas_hechos (), listas_hechos );
 	}
 
+	public static bool hay_colecciones () {
+		return Archivo.existe_path ( Configuracion.archivo_colecciones () );
+	}
+
 	private static string directorio_datos () {
 		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides";
 	}
