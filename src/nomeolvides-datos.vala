@@ -115,7 +115,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
-        	nuevoHecho = new Hecho.json(lineas[i], nombre_archivo);
+			nuevoHecho = new Hecho.json(lineas[i], (int64) 1);
 			if ( nuevoHecho.nombre != "null" ) {
 				this.agregar_hecho(nuevoHecho);
 			}

@@ -44,7 +44,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 	}
 
-	public Hecho.json (string json, string archivo_coleccion ) {
+	public Hecho.json (string json, int64 coleccion ) {
 		
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
