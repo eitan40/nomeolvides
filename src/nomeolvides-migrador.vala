@@ -55,6 +55,7 @@ public class Nomeolvides.Migrador : GLib.Object {
 			print ( "Listo para migrar la coleccion \"" + colecciones_nombres.index (i) + "\" (" + colecciones_archivos.index (i) + ")\n");
 			var id = this.crear_coleccion_db ( colecciones_nombres.index (i) );
 			print ( "Creada la coleccion de nombre \"" + colecciones_nombres.index (i) + "\" (" + id.to_string() + ")\n" );
+			this.importar_hechos ( colecciones_archivos.index (i), id );
 		}
 	}
 
@@ -66,6 +67,25 @@ public class Nomeolvides.Migrador : GLib.Object {
 		coleccion = this.db.select_coleccion ("WHERE nombre = \"" + nombre + "\"");
 
 		return coleccion.id;
+	}
+
+	private void importar_hechos ( string archivo, int64 id_coleccion ) {
+
+		string todo;
+		string[] lineas;
+		Hecho nuevoHecho;
+		int i;
+
+		todo = Archivo.leer ( archivo );
+
+		lineas = todo.split_set ("\n");
+
+		for (i=0; i < (lineas.length - 1); i++) {
+			nuevoHecho = new Hecho.json(lineas[i], id_coleccion);
+			if ( nuevoHecho.nombre != "null" ) {
+				this.db.insert_hecho(nuevoHecho);
+			}
+		}
 	}
 
 	private string sacarDatoJson(string json, string campo) {
