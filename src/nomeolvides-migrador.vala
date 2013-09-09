@@ -20,15 +20,30 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Migrador : GLib.Object {
+public class Nomeolvides.Migrador : Gtk.Window {
 
 	private AccionesDB db;
 
-	public Migrador () {
+	public Migrador ( VentanaPrincipal ventana ) {
+
+		this.title = "Migrador de la base de hechos";
+		this.set_transient_for ( ventana as Window );
+		this.set_modal ( true );
+		this.window_position = Gtk.WindowPosition.CENTER;
+		this.set_default_size (500, 350);
+
+		this.destroy.connect (() => {
+			Gtk.main_quit ();
+		});
+
+		this.add (new Gtk.Label ("Hello, world!"));
+
+		this.show_all ();
+
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		if ( Configuracion.hay_colecciones ()  ) {
-			migrar_colecciones();
+//			migrar_colecciones();
 		}
 
 	}
@@ -36,7 +51,6 @@ public class Nomeolvides.Migrador : GLib.Object {
 	private void migrar_colecciones () {
 		string todo;
 		string[] lineas;
-		Coleccion nueva_coleccion;
 		int i;	
 		Array<string> colecciones_nombres = new Array<string>();
 		Array<string> colecciones_archivos = new Array<string>();
