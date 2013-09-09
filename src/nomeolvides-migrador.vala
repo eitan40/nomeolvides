@@ -22,10 +22,14 @@ using Nomeolvides;
 
 public class Nomeolvides.Migrador : GLib.Object {
 
-		public Migrador () {
-			if ( Configuracion.hay_colecciones ()  ) {
-				migrar_colecciones();
-			}
+	private AccionesDB db;
+
+	public Migrador () {
+		this.db = new AccionesDB ( Configuracion.base_de_datos() );
+
+		if ( Configuracion.hay_colecciones ()  ) {
+			migrar_colecciones();
+		}
 
 	}
 
@@ -49,9 +53,21 @@ public class Nomeolvides.Migrador : GLib.Object {
 
 		for (i=0; i< colecciones_nombres.length; i++) {
 			print ( "Listo para migrar la coleccion \"" + colecciones_nombres.index (i) + "\" (" + colecciones_archivos.index (i) + ")\n");
+			var id = this.crear_coleccion_db ( colecciones_nombres.index (i) );
+			print ( "Creada la coleccion de nombre \"" + colecciones_nombres.index (i) + "\" (" + id.to_string() + ")\n" );
 		}
 	}
-	
+
+	private int64 crear_coleccion_db ( string nombre ) {
+
+		var coleccion = new Coleccion ( nombre, true);
+		this.db.insert_coleccion (coleccion);
+
+		coleccion = this.db.select_coleccion ("WHERE nombre = \"" + nombre + "\"");
+
+		return coleccion.id;
+	}
+
 	private string sacarDatoJson(string json, string campo) {
 		int inicio,fin;
 		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
