@@ -24,8 +24,15 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 	private AccionesDB db;
 	private VentanaPrincipal ventana;
+	private Array<string> colecciones_nombres;
+	private	Array<string> colecciones_archivos;
+	private Array<Hecho> hechos;
 
 	public Migrador ( VentanaPrincipal ventana ) {
+
+		this.colecciones_nombres = new Array<string>();
+		this.colecciones_archivos = new Array<string>();
+		this.hechos = new Array<Hecho>();
 
 		this.ventana = ventana;
 		this.title = "Migrador de la base de hechos";
@@ -43,47 +50,36 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		if ( Configuracion.hay_colecciones ()  ) {
-//			migrar_colecciones();
+			this.cargar_colecciones();
+			this.cargar_hechos ();
 		}
 
 	}
 
-	private void migrar_colecciones () {
+	private void cargar_colecciones () {
 		string todo;
 		string[] lineas;
 		int i;	
-		Array<string> colecciones_nombres = new Array<string>();
-		Array<string> colecciones_archivos = new Array<string>();
 
 		todo = Configuracion.cargar_colecciones ();
 		
 		lineas = todo.split_set ("\n");
 		for (i=0; i < lineas.length; i++) {
 			if ( lineas[i].contains ( "\"tipo\":\"Local\"" ) ) {
-        		colecciones_nombres.append_val ( this.sacarDatoJson ( lineas[i], "nombre" ));
-        		colecciones_archivos.append_val ( this.sacarDatoJson ( lineas[i], "path") + this.sacarDatoJson ( lineas[i], "archivo" ));
+				this.colecciones_nombres.append_val ( this.sacarDatoJson ( lineas[i], "nombre" ));
+				this.colecciones_archivos.append_val ( this.sacarDatoJson ( lineas[i], "path") + this.sacarDatoJson ( lineas[i], "archivo" ));
 			}
 		}
+	}
 
-		for (i=0; i< colecciones_nombres.length; i++) {
-			print ( "Listo para migrar la coleccion \"" + colecciones_nombres.index (i) + "\" (" + colecciones_archivos.index (i) + ")\n");
-			var id = this.crear_coleccion_db ( colecciones_nombres.index (i) );
-			print ( "Creada la coleccion de nombre \"" + colecciones_nombres.index (i) + "\" (" + id.to_string() + ")\n" );
-			this.importar_hechos ( colecciones_archivos.index (i), id );
+	private void cargar_hechos () {
+
+		for (int i=0; i< colecciones_nombres.length; i++) {
+			this.cargar_hechos_coleccion ( colecciones_archivos.index (i), i );
 		}
 	}
 
-	private int64 crear_coleccion_db ( string nombre ) {
-
-		var coleccion = new Coleccion ( nombre, true);
-		this.db.insert_coleccion (coleccion);
-
-		coleccion = this.db.select_coleccion ("WHERE nombre = \"" + nombre + "\"");
-
-		return coleccion.id;
-	}
-
-	private void importar_hechos ( string archivo, int64 id_coleccion ) {
+	private void cargar_hechos_coleccion ( string archivo, int64 id_coleccion ) {
 
 		string todo;
 		string[] lineas;
@@ -97,9 +93,19 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		for (i=0; i < (lineas.length - 1); i++) {
 			nuevoHecho = new Hecho.json(lineas[i], id_coleccion);
 			if ( nuevoHecho.nombre != "null" ) {
-				this.db.insert_hecho(nuevoHecho);
+				this.hechos.append_val ( nuevoHecho );
 			}
 		}
+	}
+
+	private int64 crear_coleccion_db ( string nombre ) {
+
+		var coleccion = new Coleccion ( nombre, true);
+		this.db.insert_coleccion (coleccion);
+
+		coleccion = this.db.select_coleccion ("WHERE nombre = \"" + nombre + "\"");
+
+		return coleccion.id;
 	}
 
 	private string sacarDatoJson(string json, string campo) {

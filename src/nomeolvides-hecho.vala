@@ -154,6 +154,10 @@ public class Nomeolvides.Hecho : GLib.Object {
 		return retorno;
 	}
 
+	public void set_id ( int64 id ) {
+		this.id = id;
+	}
+
 	private string ponerSaltoDeLinea ( string inicial ) {
 
 		string saltoDeLinea = "\n";
