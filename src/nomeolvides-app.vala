@@ -51,7 +51,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public override void activate () {
 		create_window();
-		app.window.show();
+		app.window.hide();
 		var migrador = new Migrador( this.window );
 	}
 

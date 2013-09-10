@@ -23,18 +23,18 @@ using Nomeolvides;
 public class Nomeolvides.Migrador : Gtk.Window {
 
 	private AccionesDB db;
+	private VentanaPrincipal ventana;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
+		this.ventana = ventana;
 		this.title = "Migrador de la base de hechos";
-		this.set_transient_for ( ventana as Window );
+		this.set_transient_for ( this.ventana as Window );
 		this.set_modal ( true );
 		this.window_position = Gtk.WindowPosition.CENTER;
 		this.set_default_size (500, 350);
 
-		this.destroy.connect (() => {
-			Gtk.main_quit ();
-		});
+		this.destroy.connect ( terminar_migrador );
 
 		this.add (new Gtk.Label ("Hello, world!"));
 
@@ -107,6 +107,10 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
 		fin = json.index_of ("\"", inicio);
 		return json[inicio:fin];
+	}
+
+	private void terminar_migrador () {
+		this.ventana.show();
 	}
 }
 
