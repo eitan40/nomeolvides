@@ -25,16 +25,23 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private AccionesDB db;
 	private VentanaPrincipal ventana;
 	private Array<Datos_coleccion> colecciones;
-//	private Array<string> colecciones_nombres;
-	private	Array<string> colecciones_archivos;
 	private Array<Hecho> hechos;
+	private Grid grid;
+	private ProgressBar barra_sub_total;
+	private ProgressBar barra_hechos;
+	private Label label_sub_total;
+	private Label label_hechos;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
 		this.colecciones = new Array<Datos_coleccion>();
-//		this.colecciones_nombres = new Array<string>();
-		this.colecciones_archivos = new Array<string>();
 		this.hechos = new Array<Hecho>();
+		this.grid = new Grid ();
+		var fer_boton = new Button.from_stock (Stock.APPLY);
+		fer_boton.clicked.connect (this.migrar_colecciones);
+
+		this.grid.attach (new Label.with_mnemonic("Anda"),0,0,1,1);
+		this.grid.attach ( fer_boton,0,1,1,1);
 
 		this.ventana = ventana;
 		this.title = "Migrador de la base de hechos";
@@ -45,7 +52,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 		this.destroy.connect ( terminar_migrador );
 
-		this.add (new Gtk.Label ("Hello, world!"));
+		this.add (this.grid);
 
 		this.show_all ();
 
@@ -66,13 +73,13 @@ public class Nomeolvides.Migrador : Gtk.Window {
 			}
 			print ( texto );
 		}
-
 	}
 
 	private void cargar_colecciones () {
 		string todo;
 		string[] lineas;
 		int i;
+		double progreso = 0;
 		Datos_coleccion coleccion;
 
 		todo = Configuracion.cargar_colecciones ();
@@ -135,6 +142,30 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 	private void terminar_migrador () {
 		this.ventana.show();
+	}
+
+	private void migrar_colecciones ( ) {
+		this.remove (this.grid);
+
+		this.grid = new Grid ();
+		//this.grid.set_row_homogeneous ( true );
+		this.grid.set_row_spacing ( 20 );
+		this.grid.set_column_homogeneous ( true );
+		this.grid.set_column_spacing ( 4 );
+		
+		this.label_sub_total = new Label.with_mnemonic ( "Migrando Colecciones" );
+		this.barra_sub_total = new ProgressBar ();
+		this.label_hechos = new Label.with_mnemonic ( "Migrando Hechos" );
+		this.barra_hechos = new ProgressBar ();
+		this.grid.attach (this.barra_sub_total,0,2,1,1);
+		this.grid.attach (this.label_sub_total,0,1,1,1);
+		this.grid.attach (this.label_hechos,0,3,1,1);
+		this.grid.attach (this.barra_hechos,0,4,1,1);
+
+		this.add (this.grid);
+		this.show_all ();
+
+		this.cargar_colecciones ();
 	}
 }
 
