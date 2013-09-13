@@ -38,7 +38,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.hechos = new Array<Hecho>();
 		this.grid = new Grid ();
 		var fer_boton = new Button.from_stock (Stock.APPLY);
-		fer_boton.clicked.connect (this.migrar_colecciones);
+		fer_boton.clicked.connect (this.migracion);
 
 		this.grid.attach (new Label.with_mnemonic("Anda"),0,0,1,1);
 		this.grid.attach ( fer_boton,0,1,1,1);
@@ -61,17 +61,6 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		if ( Configuracion.hay_colecciones ()  ) {
 			this.cargar_colecciones();
 			this.cargar_hechos ();
-
-			string texto = "";
-
-			for (int i = 0; i < this.colecciones.length; i++ ) {
-				texto += "Coleccion: " + this.colecciones.index (i).get_nombre () + "  (" + this.colecciones.index (i).get_archivo () +")\n";
-				for (int j = 0; j < this.colecciones.index(i).cantidad_hechos(); j++ ) {
-					var hecho = this.colecciones.index(i).get_hecho ( j );
-					texto +=  "     "  +  (j+1).to_string() + ") " + hecho.nombre + "         " +  hecho.fecha_to_string () + "\n";
-				}
-			}
-			print ( texto );
 		}
 	}
 
@@ -144,11 +133,11 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.ventana.show();
 	}
 
-	private void migrar_colecciones ( ) {
+	private void migracion ( ) {
 		this.remove (this.grid);
 
 		this.grid = new Grid ();
-		//this.grid.set_row_homogeneous ( true );
+		this.grid.set_row_homogeneous ( true );
 		this.grid.set_row_spacing ( 20 );
 		this.grid.set_column_homogeneous ( true );
 		this.grid.set_column_spacing ( 4 );
@@ -157,15 +146,44 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.barra_sub_total = new ProgressBar ();
 		this.label_hechos = new Label.with_mnemonic ( "Migrando Hechos" );
 		this.barra_hechos = new ProgressBar ();
+
+		this.barra_sub_total.set_show_text ( true );
+		this.barra_hechos.set_show_text ( true );
 		this.grid.attach (this.barra_sub_total,0,2,1,1);
 		this.grid.attach (this.label_sub_total,0,1,1,1);
 		this.grid.attach (this.label_hechos,0,3,1,1);
 		this.grid.attach (this.barra_hechos,0,4,1,1);
 
 		this.add (this.grid);
+
+		this.barra_hechos.set_fraction ( (double) 0 );
+		this.barra_hechos.set_text ( "0 %" );
+
+		this.barra_sub_total.set_fraction ( (double) 0 );
+		this.barra_sub_total.set_text ( "0 %" );
+
 		this.show_all ();
 
-		this.cargar_colecciones ();
+		this.migrar_colecciones ();
+	}
+
+	private void migrar_colecciones () {
+
+		double progreso_coleccion = (double) 1 / (double) this.colecciones.length;
+		for (int i = 0; i < this.colecciones.length; i++ ) {
+			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
+			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
+
+			for (int j = 0; j < this.colecciones.index(i).cantidad_hechos(); j++ ) {
+				var hecho = this.colecciones.index(i).get_hecho ( j );
+				hecho.set_id (id_real);
+				this.db.insert_hecho ( hecho );
+				this.barra_hechos.set_fraction ( progreso_hecho * (j+1) );
+				this.barra_hechos.set_text ( (this.barra_hechos.fraction*100).to_string() + " %" );
+			}
+			this.barra_sub_total.set_fraction ( progreso_coleccion * (i+1) );
+			this.barra_sub_total.set_text ( (this.barra_sub_total.fraction*100).to_string() + " %" );
+		}
 	}
 }
 
