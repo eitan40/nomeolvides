@@ -76,7 +76,6 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		lineas = todo.split_set ("\n");
 		for (i=0; i < lineas.length; i++) {
 			if ( lineas[i].contains ( "\"tipo\":\"Local\"" ) ) {
-				print (lineas[i] + "\n");
 				coleccion = new Datos_coleccion ();
 				coleccion. set_nombre ( this.sacarDatoJson ( lineas[i], "nombre" )); 
 				coleccion. set_archivo ( this.sacarDatoJson ( lineas[i], "path") + this.sacarDatoJson ( lineas[i], "archivo" )); 
@@ -157,10 +156,10 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.add (this.grid);
 
 		this.barra_hechos.set_fraction ( (double) 0 );
-		this.barra_hechos.set_text ( "0 %" );
+		this.barra_hechos.set_text ( "0%" );
 
 		this.barra_sub_total.set_fraction ( (double) 0 );
-		this.barra_sub_total.set_text ( "0 %" );
+		this.barra_sub_total.set_text ( "0%" );
 
 		this.show_all ();
 
@@ -179,10 +178,16 @@ public class Nomeolvides.Migrador : Gtk.Window {
 				hecho.set_id (id_real);
 				this.db.insert_hecho ( hecho );
 				this.barra_hechos.set_fraction ( progreso_hecho * (j+1) );
-				this.barra_hechos.set_text ( (this.barra_hechos.fraction*100).to_string() + " %" );
+				this.barra_hechos.set_text ( ((int)(this.barra_hechos.fraction*100)).to_string () + "%" );
+				while ( Gtk.events_pending () ) {
+					Gtk.main_iteration ();
+				}
 			}
 			this.barra_sub_total.set_fraction ( progreso_coleccion * (i+1) );
-			this.barra_sub_total.set_text ( (this.barra_sub_total.fraction*100).to_string() + " %" );
+			this.barra_sub_total.set_text ( ((int)(this.barra_sub_total.fraction*100)).to_string () + "%" );
+			while ( Gtk.events_pending () ){
+				Gtk.main_iteration ();
+			}
 		}
 	}
 }
