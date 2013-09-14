@@ -32,9 +32,11 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private Label label_sub_total;
 	private Label label_hechos;
 	private int cantidad_hechos;
+	private bool hay_migrados;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
+		this.hay_migrados = false;
 		this.cantidad_hechos = 0;
 		this.colecciones = new Array<Datos_coleccion>();
 		this.hechos = new Array<Hecho>();
@@ -132,6 +134,9 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	}
 
 	private void terminar_migrador () {
+		if ( this.hay_migrados ) {
+			this.hay_migrados_signal ();
+		}
 		this.ventana.show();
 	}
 
@@ -182,6 +187,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 				this.db.insert_hecho ( hecho );
 				this.barra_hechos.set_fraction ( progreso_hecho * (j+1) );
 				this.barra_hechos.set_text ( ((int)(this.barra_hechos.fraction*100)).to_string () + "%" );
+				this.hay_migrados = true;
 				while ( Gtk.events_pending () ) {
 					Gtk.main_iteration ();
 				}
@@ -193,6 +199,8 @@ public class Nomeolvides.Migrador : Gtk.Window {
 			}
 		}
 	}
+
+	public signal void hay_migrados_signal ();
 }
 
 public class Nomeolvides.Datos_coleccion : GLib.Object {

@@ -28,6 +28,7 @@ public class Nomeolvides.App : Gtk.Application
 	public VentanaPrincipal window;
 	public Datos datos;
 	public GLib.Menu application_menu;
+	private Migrador migrador;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", about_dialog },
@@ -45,6 +46,10 @@ public class Nomeolvides.App : Gtk.Application
 		this.connect_signals ();
 
 		this.window.show_visible ();
+		this.inicializar_ventana ();
+	}
+
+	public void inicializar_ventana () {
 		this.cargar_lista_anios ();
 		this.cargar_listas ();
 	}
@@ -52,7 +57,8 @@ public class Nomeolvides.App : Gtk.Application
 	public override void activate () {
 		create_window();
 		app.window.hide();
-		var migrador = new Migrador( this.window );
+		this.migrador = new Migrador( this.window );
+		this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
 	}
 
 	public void create_app_menu () {
