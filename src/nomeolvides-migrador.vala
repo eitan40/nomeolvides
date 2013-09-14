@@ -31,9 +31,11 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private ProgressBar barra_hechos;
 	private Label label_sub_total;
 	private Label label_hechos;
+	private int cantidad_hechos;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
+		this.cantidad_hechos = 0;
 		this.colecciones = new Array<Datos_coleccion>();
 		this.hechos = new Array<Hecho>();
 		this.grid = new Grid ();
@@ -107,6 +109,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 			nuevoHecho = new Hecho.json(lineas[i], id_coleccion);
 			if ( nuevoHecho.nombre != "null" ) {
 				this.colecciones.index ( (uint) id_coleccion).agregar_hecho ( nuevoHecho );
+				this.cantidad_hechos++;
 			}
 		}
 	}
@@ -136,7 +139,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.remove (this.grid);
 
 		this.grid = new Grid ();
-		this.grid.set_row_homogeneous ( true );
+//		this.grid.set_row_homogeneous ( true );
 		this.grid.set_row_spacing ( 20 );
 		this.grid.set_column_homogeneous ( true );
 		this.grid.set_column_spacing ( 4 );
@@ -168,8 +171,8 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 	private void migrar_colecciones () {
 
-		double progreso_coleccion = (double) 1 / (double) this.colecciones.length;
 		for (int i = 0; i < this.colecciones.length; i++ ) {
+			double progreso_coleccion = (double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos;
 			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
 			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
 
