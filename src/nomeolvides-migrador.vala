@@ -177,7 +177,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private void migrar_colecciones () {
 
 		for (int i = 0; i < this.colecciones.length; i++ ) {
-			double progreso_coleccion = (double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos;
+			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos) + this.barra_sub_total.fraction;
 			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
 			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
 
@@ -192,7 +192,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 					Gtk.main_iteration ();
 				}
 			}
-			this.barra_sub_total.set_fraction ( progreso_coleccion * (i+1) );
+			this.barra_sub_total.set_fraction ( progreso_coleccion );
 			this.barra_sub_total.set_text ( ((int)(this.barra_sub_total.fraction*100)).to_string () + "%" );
 			while ( Gtk.events_pending () ){
 				Gtk.main_iteration ();
