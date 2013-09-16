@@ -144,10 +144,9 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.remove (this.grid);
 
 		this.grid = new Grid ();
-//		this.grid.set_row_homogeneous ( true );
 		this.grid.set_row_spacing ( 20 );
+		this.grid.set_border_width ( 100 );
 		this.grid.set_column_homogeneous ( true );
-		this.grid.set_column_spacing ( 4 );
 		
 		this.label_sub_total = new Label.with_mnemonic ( "Migrando Colecciones" );
 		this.barra_sub_total = new ProgressBar ();
