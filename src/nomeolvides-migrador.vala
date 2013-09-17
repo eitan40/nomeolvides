@@ -25,21 +25,22 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private AccionesDB db;
 	private VentanaPrincipal ventana;
 	private Array<Datos_coleccion> colecciones;
-	private Array<Hecho> hechos;
+	private Array<Datos_lista> listas;
 	private Grid grid;
 	private ProgressBar barra_sub_total;
 	private ProgressBar barra_hechos;
 	private Label label_sub_total;
 	private Label label_hechos;
-	private int cantidad_hechos;
+	private int cantidad_hechos_coleccion;
 	private bool hay_migrados;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
 		this.hay_migrados = false;
-		this.cantidad_hechos = 0;
+		this.cantidad_hechos_coleccion = 0;
 		this.colecciones = new Array<Datos_coleccion>();
-		this.hechos = new Array<Hecho>();
+		this.listas = new Array<Datos_lista>();
+		//this.hechos = new Array<Hecho>();
 		this.grid = new Grid ();
 		var fer_boton = new Button.from_stock (Stock.APPLY);
 		fer_boton.clicked.connect (this.migracion);
@@ -65,6 +66,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		if ( Configuracion.hay_colecciones ()  ) {
 			this.cargar_colecciones();
 			this.cargar_hechos ();
+			this.cargar_listas ();
 		}
 	}
 
@@ -72,7 +74,6 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		string todo;
 		string[] lineas;
 		int i;
-		double progreso = 0;
 		Datos_coleccion coleccion;
 
 		todo = Configuracion.cargar_colecciones ();
@@ -81,8 +82,8 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		for (i=0; i < lineas.length; i++) {
 			if ( lineas[i].contains ( "\"tipo\":\"Local\"" ) ) {
 				coleccion = new Datos_coleccion ();
-				coleccion. set_nombre ( this.sacarDatoJson ( lineas[i], "nombre" )); 
-				coleccion. set_archivo ( this.sacarDatoJson ( lineas[i], "path") + this.sacarDatoJson ( lineas[i], "archivo" )); 
+				coleccion.set_nombre ( this.sacarDatoJson ( lineas[i], "nombre" ));
+				coleccion.set_archivo ( this.sacarDatoJson ( lineas[i], "path") + this.sacarDatoJson ( lineas[i], "archivo" ));
 				this.colecciones.append_val ( coleccion );
 				coleccion = null;
 			}
@@ -110,8 +111,8 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		for (i=0; i < (lineas.length - 1); i++) {
 			nuevoHecho = new Hecho.json(lineas[i], id_coleccion);
 			if ( nuevoHecho.nombre != "null" ) {
-				this.colecciones.index ( (uint) id_coleccion).agregar_hecho ( nuevoHecho );
-				this.cantidad_hechos++;
+				this.colecciones.index((uint)id_coleccion).agregar_hecho ( nuevoHecho );
+				this.cantidad_hechos_coleccion++;
 			}
 		}
 	}
@@ -126,18 +127,24 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		return coleccion.id;
 	}
 
-	private string sacarDatoJson(string json, string campo) {
-		int inicio,fin;
-		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
-		fin = json.index_of ("\"", inicio);
-		return json[inicio:fin];
-	}
+	private void cargar_listas () {
+		string todo;
+		string[] lineas;
+		Lista nueva_lista;
+		int i;
 
-	private void terminar_migrador () {
-		if ( this.hay_migrados ) {
-			this.hay_migrados_signal ();
+		todo = Configuracion.cargar_listas ();
+
+		lineas = todo.split_set ("\n");
+		for (i=0; i < lineas.length; i++) {
+			print ( lineas[i] + "\n" );
+			if (lineas[i].contains ("{\"Lista\":{")) {
+				var lista = new Lista.json ( lineas [i] );
+				var datos_lista = new Datos_lista ();
+				datos_lista.set_lista ( lista );
+				this.listas.append_val ( datos_lista );
+			}
 		}
-		this.ventana.show();
 	}
 
 	private void migracion ( ) {
@@ -176,7 +183,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private void migrar_colecciones () {
 
 		for (int i = 0; i < this.colecciones.length; i++ ) {
-			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos) + this.barra_sub_total.fraction;
+			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos_coleccion) + this.barra_sub_total.fraction;
 			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
 			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
 
@@ -199,16 +206,49 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		}
 	}
 
+	private string sacarDatoJson(string json, string campo) {
+		int inicio,fin;
+		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
+		fin = json.index_of ("\"", inicio);
+		return json[inicio:fin];
+	}
+
+	private void terminar_migrador () {
+		if ( this.hay_migrados ) {
+			this.hay_migrados_signal ();
+		}
+		this.ventana.show();
+	}
+
 	public signal void hay_migrados_signal ();
 }
 
-public class Nomeolvides.Datos_coleccion : GLib.Object {
-	private string nombre;
-	private string archivo;
+public class Nomeolvides.Datos_migrador : GLib.Object {
 	private Array<Hecho> hechos;
 
-	public Datos_coleccion () {
+	public Datos_migrador () {
 		this.hechos = new Array<Hecho> ();
+	}
+
+	public void agregar_hecho ( Hecho hecho) {
+		this.hechos.append_val ( hecho );
+	}
+
+	public uint cantidad_hechos () {
+		return this.hechos.length;
+	}
+
+	public Hecho get_hecho ( uint indice ) {
+		return this.hechos.index ( indice );
+	}
+}
+
+public class Nomeolvides.Datos_coleccion : Nomeolvides.Datos_migrador {
+	private string nombre;
+	private string archivo;
+
+	public Datos_coleccion () {
+		base ();
 	}
 
 	public void set_nombre ( string nombre ) {
@@ -226,16 +266,20 @@ public class Nomeolvides.Datos_coleccion : GLib.Object {
 	public string get_archivo () {
 		return this.archivo;
 	}
+}
 
-	public void agregar_hecho ( Hecho hecho) {
-		this.hechos.append_val ( hecho );
+public class Nomeolvides.Datos_lista : Nomeolvides.Datos_migrador {
+	private Lista lista;
+
+	public Datos_lista () {
+		base ();
 	}
 
-	public uint cantidad_hechos () {
-		return this.hechos.length;
+	public void set_lista ( Lista lista ) {
+		this.lista = lista;
 	}
 
-	public Hecho get_hecho ( uint indice ) {
-		return this.hechos.index ( indice );
+	public Lista get_lista () {
+		return this.lista;
 	}
 }
