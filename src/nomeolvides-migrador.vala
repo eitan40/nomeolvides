@@ -42,18 +42,32 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.listas = new Array<Datos_lista>();
 		//this.hechos = new Array<Hecho>();
 		this.grid = new Grid ();
-		var fer_boton = new Button.from_stock (Stock.APPLY);
-		fer_boton.clicked.connect (this.migracion);
+		var siguiente_boton = new Button.from_stock (Stock.APPLY);
+		siguiente_boton.set_label ("Continuar la migración");
+		siguiente_boton.clicked.connect (this.migracion);
+		var label_mensaje = new Label.with_mnemonic("Estimado usuario,
+        
+        Dado que en esta versión de Nomeolvides llevamos adelanta una gran cantidad de cambios internos para mejorar la velocidad y el uso de memoria al manejar gran cantidad de datos, es necesario llevar adelante una migración de los datos cargados con lasversiones anterior.
+        
+        Le rogamos nos disculpe por esta molestia, pero este cambio es un paso fundamental para poder implementar distintas ideas que tenemos pensadas para Nomeolvides, como el trabajo en colaboración.
+        
+        El proceso de migración será automático y los archivos con los datos a migrar no serán borrados después del proceso, para evitar la pérdida de su trabajo en caso de que algo no salga como lo previsto. Le rogamos que verifique que todos sus datos se hayan migrado correctamente luego del proceso y en caso de que no sea así nos los comunique a desarrolladores@softwareperonista.com.ar
+        
+        Atentamente, el equipo de Software Peronista.");
 
-		this.grid.attach (new Label.with_mnemonic("Anda"),0,0,1,1);
-		this.grid.attach ( fer_boton,0,1,1,1);
+		label_mensaje.set_line_wrap ( true );
+		label_mensaje.set_justify ( Justification.FILL );
+
+		this.grid.attach (label_mensaje,0,0,4,1);
+		this.grid.attach ( siguiente_boton,3,1,1,1);
+		this.grid.set_border_width ( 50 );
 
 		this.ventana = ventana;
 		this.title = "Migrador de la base de hechos";
 		this.set_transient_for ( this.ventana as Window );
 		this.set_modal ( true );
 		this.window_position = Gtk.WindowPosition.CENTER;
-		this.set_default_size (500, 350);
+		this.set_default_size ( 650, 200 );
 
 		this.destroy.connect ( terminar_migrador );
 
