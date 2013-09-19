@@ -47,11 +47,11 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		siguiente_boton.clicked.connect (this.migracion);
 		var label_mensaje = new Label.with_mnemonic("Estimado usuario,
         
-        Dado que en esta versión de Nomeolvides llevamos adelanta una gran cantidad de cambios internos para mejorar la velocidad y el uso de memoria al manejar gran cantidad de datos, es necesario llevar adelante una migración de los datos cargados con lasversiones anterior.
+        Dado que esta versión de Nomeolvides tiene una gran cantidad de cambios internos para mejorar la velocidad y el uso de memoria al manejar muchos hechos, es necesario llevar adelante una migración de los datos cargados con las versiones anterior.
         
-        Le rogamos nos disculpe por esta molestia, pero este cambio es un paso fundamental para poder implementar distintas ideas que tenemos pensadas para Nomeolvides, como el trabajo en colaboración.
+        Le rogamos nos disculpe por esta molestia, pero estos cambios representan un paso fundamental para poder implementar distintas ideas que tenemos pensadas para Nomeolvides, como el trabajo en colaboración.
         
-        El proceso de migración será automático y los archivos con los datos a migrar no serán borrados después del proceso, para evitar la pérdida de su trabajo en caso de que algo no salga como lo previsto. Le rogamos que verifique que todos sus datos se hayan migrado correctamente luego del proceso y en caso de que no sea así nos los comunique a desarrolladores@softwareperonista.com.ar
+        El proceso de migración será automático y los archivos con los datos a migrar no serán borrados después del proceso, para evitar la pérdida de su trabajo en caso de que algo no salga como lo previsto. Le rogamos que verifique que todos sus datos se hayan migrado correctamente luego del proceso y en caso de que no sea así nos lo comunique a desarrolladores@softwareperonista.com.ar
         
         Atentamente, el equipo de Software Peronista.");
 
