@@ -182,7 +182,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.grid.attach (this.label_hechos,0,3,1,1);
 		this.grid.attach (this.barra_hechos,0,4,1,1);
 
-		this.grid.set_size_request ( 630, 350 );
+		this.grid.set_size_request ( 640, 363 );
 		this.add (this.grid);
 
 		this.barra_hechos.set_fraction ( (double) 0 );
