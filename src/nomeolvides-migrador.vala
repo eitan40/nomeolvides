@@ -67,8 +67,9 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.set_transient_for ( this.ventana as Window );
 		this.set_modal ( true );
 		this.window_position = Gtk.WindowPosition.CENTER;
-		this.set_default_size ( 650, 200 );
-
+		this.set_default_size ( 650, 400 );
+		this.set_resizable ( false );
+		
 		this.destroy.connect ( terminar_migrador );
 
 		this.add (this.grid);
@@ -166,7 +167,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 		this.grid = new Grid ();
 		this.grid.set_row_spacing ( 20 );
-		this.grid.set_border_width ( 100 );
+		this.grid.set_border_width ( 30 );
 		this.grid.set_column_homogeneous ( true );
 		
 		this.label_sub_total = new Label.with_mnemonic ( "Migrando Colecciones" );
@@ -181,6 +182,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.grid.attach (this.label_hechos,0,3,1,1);
 		this.grid.attach (this.barra_hechos,0,4,1,1);
 
+		this.grid.set_size_request ( 630, 350 );
 		this.add (this.grid);
 
 		this.barra_hechos.set_fraction ( (double) 0 );
