@@ -27,10 +27,14 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private Array<Datos_coleccion> colecciones;
 	private Array<Datos_lista> listas;
 	private Grid grid;
-	private ProgressBar barra_sub_total;
-	private ProgressBar barra_hechos;
-	private Label label_sub_total;
-	private Label label_hechos;
+	private ProgressBar barra_colecciones;
+	private ProgressBar barra_colecciones_hechos;
+	private Label label_colecciones;
+	private Label label_colecciones_hechos;
+	private ProgressBar barra_listas;
+	private ProgressBar barra_listas_hechos;
+	private Label label_listas;
+	private Label label_listas_hechos;
 	private int cantidad_hechos_coleccion;
 	private bool hay_migrados;
 
@@ -170,26 +174,26 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.grid.set_border_width ( 30 );
 		this.grid.set_column_homogeneous ( true );
 		
-		this.label_sub_total = new Label.with_mnemonic ( "Migrando Colecciones" );
-		this.barra_sub_total = new ProgressBar ();
-		this.label_hechos = new Label.with_mnemonic ( "Migrando Hechos" );
-		this.barra_hechos = new ProgressBar ();
+		this.label_colecciones = new Label.with_mnemonic ( "Migrando Colecciones" );
+		this.barra_colecciones = new ProgressBar ();
+		this.label_colecciones_hechos = new Label.with_mnemonic ( "Migrando Hechos" );
+		this.barra_colecciones_hechos = new ProgressBar ();
 
-		this.barra_sub_total.set_show_text ( true );
-		this.barra_hechos.set_show_text ( true );
-		this.grid.attach (this.barra_sub_total,0,2,1,1);
-		this.grid.attach (this.label_sub_total,0,1,1,1);
-		this.grid.attach (this.label_hechos,0,3,1,1);
-		this.grid.attach (this.barra_hechos,0,4,1,1);
+		this.barra_colecciones.set_show_text ( true );
+		this.barra_colecciones_hechos.set_show_text ( true );
+		this.grid.attach (this.label_colecciones,0,1,1,1);
+		this.grid.attach (this.barra_colecciones,0,2,1,1);		
+		this.grid.attach (this.label_colecciones_hechos,0,3,1,1);
+		this.grid.attach (this.barra_colecciones_hechos,0,4,1,1);
 
 		this.grid.set_size_request ( 640, 363 );
 		this.add (this.grid);
 
-		this.barra_hechos.set_fraction ( (double) 0 );
-		this.barra_hechos.set_text ( "0%" );
+		this.barra_colecciones_hechos.set_fraction ( (double) 0 );
+		this.barra_colecciones_hechos.set_text ( "0%" );
 
-		this.barra_sub_total.set_fraction ( (double) 0 );
-		this.barra_sub_total.set_text ( "0%" );
+		this.barra_colecciones.set_fraction ( (double) 0 );
+		this.barra_colecciones.set_text ( "0%" );
 
 		this.show_all ();
 
@@ -198,26 +202,26 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 	private void migrar_colecciones () {
 		for (int i = 0; i < this.colecciones.length; i++ ) {
-			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos_coleccion) + this.barra_sub_total.fraction;
+			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos_coleccion) + this.barra_colecciones.fraction;
 			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
 			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
-			this.label_sub_total.set_text_with_mnemonic ( "Migrando la coleccion " + this.colecciones.index(i).get_nombre() );
+			this.label_colecciones.set_text_with_mnemonic ( "Migrando la coleccion " + this.colecciones.index(i).get_nombre() );
 
 			for (int j = 0; j < this.colecciones.index(i).cantidad_hechos(); j++ ) {
 				var hecho = this.colecciones.index(i).get_hecho ( j );
 				hecho.set_coleccion (id_real);
 				this.db.insert_hecho ( hecho );
-				this.barra_hechos.set_fraction ( progreso_hecho * (j+1) );
-				this.barra_hechos.set_text ( ((int)(this.barra_hechos.fraction*100)).to_string () + "%" );
+				this.barra_colecciones_hechos.set_fraction ( progreso_hecho * (j+1) );
+				this.barra_colecciones_hechos.set_text ( ((int)(this.barra_colecciones_hechos.fraction*100)).to_string () + "%" );
 				this.hay_migrados = true;
-				this.label_hechos.set_text_with_mnemonic ( "Migrando hechos: " + j.to_string() + " de " + this.colecciones.index(i).cantidad_hechos().to_string() );
+				this.label_colecciones_hechos.set_text_with_mnemonic ( "Migrando hechos: " + j.to_string() + " de " + this.colecciones.index(i).cantidad_hechos().to_string() );
 				while ( Gtk.events_pending () ) {
 					Gtk.main_iteration ();
 				}
 			}
-			this.label_hechos.set_text_with_mnemonic ( "Migrando hechos");
-			this.barra_sub_total.set_fraction ( progreso_coleccion );
-			this.barra_sub_total.set_text ( ((int)(this.barra_sub_total.fraction*100)).to_string () + "%" );
+			this.label_colecciones_hechos.set_text_with_mnemonic ( "Migrando hechos");
+			this.barra_colecciones.set_fraction ( progreso_coleccion );
+			this.barra_colecciones.set_text ( ((int)(this.barra_colecciones.fraction*100)).to_string () + "%" );
 			while ( Gtk.events_pending () ){
 				Gtk.main_iteration ();
 			}
