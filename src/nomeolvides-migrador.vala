@@ -205,7 +205,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 
 			for (int j = 0; j < this.colecciones.index(i).cantidad_hechos(); j++ ) {
 				var hecho = this.colecciones.index(i).get_hecho ( j );
-				hecho.set_id (id_real);
+				hecho.set_coleccion (id_real);
 				this.db.insert_hecho ( hecho );
 				this.barra_hechos.set_fraction ( progreso_hecho * (j+1) );
 				this.barra_hechos.set_text ( ((int)(this.barra_hechos.fraction*100)).to_string () + "%" );
