@@ -37,6 +37,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private Label label_listas_hechos;
 	private int cantidad_hechos_coleccion;
 	private bool hay_migrados;
+	private Button siguiente_boton;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
@@ -46,9 +47,9 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.listas = new Array<Datos_lista>();
 		//this.hechos = new Array<Hecho>();
 		this.grid = new Grid ();
-		var siguiente_boton = new Button.from_stock (Stock.APPLY);
-		siguiente_boton.set_label ("Continuar la migración");
-		siguiente_boton.clicked.connect (this.migracion);
+		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
+		this.siguiente_boton.set_label ("Empezar la migración");
+		this.siguiente_boton.clicked.connect (this.migracion);
 		var label_mensaje = new Label.with_mnemonic("Estimado usuario,
         
         Dado que esta versión de Nomeolvides tiene una gran cantidad de cambios internos para mejorar la velocidad y el uso de memoria al manejar muchos hechos, es necesario llevar adelante una migración de los datos cargados con las versiones anterior.
@@ -63,7 +64,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		label_mensaje.set_justify ( Justification.FILL );
 
 		this.grid.attach (label_mensaje,0,0,4,1);
-		this.grid.attach ( siguiente_boton,3,1,1,1);
+		this.grid.attach ( this.siguiente_boton,3,1,1,1);
 		this.grid.set_border_width ( 50 );
 
 		this.ventana = ventana;
@@ -170,21 +171,37 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.remove (this.grid);
 
 		this.grid = new Grid ();
-		this.grid.set_row_spacing ( 20 );
+		this.grid.set_row_spacing ( 15 );
 		this.grid.set_border_width ( 30 );
 		this.grid.set_column_homogeneous ( true );
 		
-		this.label_colecciones = new Label.with_mnemonic ( "Migrando Colecciones" );
+		this.label_colecciones = new Label.with_mnemonic ( "Colecciones para migrar" );
 		this.barra_colecciones = new ProgressBar ();
-		this.label_colecciones_hechos = new Label.with_mnemonic ( "Migrando Hechos" );
+		this.label_colecciones_hechos = new Label.with_mnemonic ( "Hechos de la coleccion" );
 		this.barra_colecciones_hechos = new ProgressBar ();
+
+		this.label_listas = new Label.with_mnemonic ( "Listas para migrar" );
+		this.barra_listas = new ProgressBar ();
+		this.label_listas_hechos = new Label.with_mnemonic ( "Hechos de la lista" );
+		this.barra_listas_hechos = new ProgressBar ();
 
 		this.barra_colecciones.set_show_text ( true );
 		this.barra_colecciones_hechos.set_show_text ( true );
-		this.grid.attach (this.label_colecciones,0,1,1,1);
-		this.grid.attach (this.barra_colecciones,0,2,1,1);		
-		this.grid.attach (this.label_colecciones_hechos,0,3,1,1);
-		this.grid.attach (this.barra_colecciones_hechos,0,4,1,1);
+		this.barra_listas.set_show_text ( true );
+		this.barra_listas_hechos.set_show_text ( true );
+		
+		this.grid.attach (this.label_colecciones,0,1,4,1);
+		this.grid.attach (this.barra_colecciones,0,2,4,1);		
+		this.grid.attach (this.label_colecciones_hechos,0,3,4,1);
+		this.grid.attach (this.barra_colecciones_hechos,0,4,4,1);
+		
+		this.grid.attach (this.label_listas,0,5,4,1);
+		this.grid.attach (this.barra_listas,0,6,4,1);		
+		this.grid.attach (this.label_listas_hechos,0,7,4,1);
+		this.grid.attach (this.barra_listas_hechos,0,8,4,1);
+
+		this.siguiente_boton.set_label ( "Terminar la migración" );
+		this.grid.attach ( this.siguiente_boton,3,9,1,1);
 
 		this.grid.set_size_request ( 640, 363 );
 		this.add (this.grid);
