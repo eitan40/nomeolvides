@@ -25,7 +25,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
-	public int64 coleccion { get; private set; }
+	public int64 coleccion;
 	public string fuente { get; private set; }
 	private string reemplazoSaltoDeLinea { get; private set; } 
 
@@ -152,6 +152,26 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno = retorno.replace ("ñ", "ni");
 
 		return retorno;
+	}
+
+	public int get_anio () {
+		return this.fecha.get_year();
+	}
+
+	public int get_mes () {
+		return this.fecha.get_month();
+	}
+
+	public int get_dia () {
+		return this.fecha.get_day_of_month ();
+	}
+
+	public void set_id ( int64 id ) {
+		this.id = id;
+	}
+
+	public void set_coleccion ( int64 coleccion ) {
+		this.coleccion = coleccion;
 	}
 
 	private string ponerSaltoDeLinea ( string inicial ) {

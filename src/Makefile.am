@@ -70,7 +70,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-colecciones-dialog.vala \
-	nomeolvides-hechos-colecciones.vala
+	nomeolvides-hechos-colecciones.vala \
+	nomeolvides-migrador.vala
 
 
 nomeolvides_VALAFLAGS = \

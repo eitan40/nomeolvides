@@ -58,7 +58,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				print ("Salida:\n\tstdout : " + stdout + "\n\tstderr : " + stderr + "\n\texitstatus : " + exitstatus.to_string () + "\n");
 			}
 		}
-		
+/*
 		if (!Archivo.existe_path ( Configuracion.archivo_colecciones () ) ) {
 			Archivo.crear ( Configuracion.archivo_colecciones () );
 
@@ -82,7 +82,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		if (!Archivo.existe_path ( Configuracion.archivo_listas_hechos () ) ) {
 				Archivo.crear ( Configuracion.archivo_listas_hechos () );
 		}
-
+*/
 	/*	Resource resources;
 
 		try {
@@ -115,6 +115,10 @@ public class Nomeolvides.Configuracion : GLib.Object {
 
 	public static void guardar_listas_hechos ( string listas_hechos ) {
 		Archivo.escribir ( Configuracion.archivo_listas_hechos (), listas_hechos );
+	}
+
+	public static bool hay_colecciones () {
+		return Archivo.existe_path ( Configuracion.archivo_colecciones () );
 	}
 
 	private static string directorio_datos () {
