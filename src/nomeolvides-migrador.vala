@@ -88,6 +88,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			this.cargar_colecciones();
 			this.cargar_hechos ();
 			this.cargar_listas ();
+			this.cargar_hechos_listas ();
 		}
 	}
 
@@ -151,7 +152,6 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private void cargar_listas () {
 		string todo;
 		string[] lineas;
-		Lista nueva_lista;
 		int i;
 
 		todo = Configuracion.cargar_listas ();
@@ -166,6 +166,41 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				this.listas.append_val ( datos_lista );
 			}
 		}
+	}
+
+	private void cargar_hechos_listas () {
+		for (int i = 0; i < this.listas.length; i++) {
+			var lista = this.listas.index(i).get_lista();
+			for (int j = 0; j < this.colecciones.length; j++ ) {
+				for (int k = 0; k < this.colecciones.index(j).cantidad_hechos(); k++ ) {
+					var hecho = this.colecciones.index(j).get_hecho ( k );
+					if ( this.pertenece_a_lista ( lista, hecho ) ) {
+						this.listas.index (i).agregar_hecho ( hecho );
+					}
+				}
+			}
+		}
+	}
+
+	private bool pertenece_a_lista ( Lista lista, Hecho hecho) {
+		bool pertenece = false;
+
+		var lineas = Configuracion.cargar_listas_hechos().split_set ("\n");
+
+		for (var i=0; i < (lineas.length - 1); i++) {
+			var hecho_json = hecho.a_json();
+			var sacar_inicio = hecho_json.index_of ( "\"coleccion\":\"");
+			var sacar_fin = hecho_json.index_of ( "\"}}", sacar_inicio);
+			hecho_json = hecho_json.replace ( hecho_json[sacar_inicio-1:sacar_fin+1], "" );
+			if ( lineas[i] == lista.get_checksum() + "," + Checksum.compute_for_string(ChecksumType.MD5, hecho_json) ) {
+				print ( lineas[i] + " | " +  lista.get_checksum() + "," + Checksum.compute_for_string(ChecksumType.MD5, hecho_json) );
+				print ( " coincidencia!" );
+				print ( "\n" );
+				pertenece = true ;
+			}
+		}
+
+		return pertenece;
 	}
 
 	private void migracion ( ) {
@@ -212,9 +247,13 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 
 		this.barra_colecciones_hechos.set_fraction ( (double) 0 );
 		this.barra_colecciones_hechos.set_text ( "0%" );
-
 		this.barra_colecciones.set_fraction ( (double) 0 );
 		this.barra_colecciones.set_text ( "0%" );
+
+		this.barra_listas_hechos.set_fraction ( (double) 0 );
+		this.barra_listas_hechos.set_text ( "0%" );
+		this.barra_listas.set_fraction ( (double) 0 );
+		this.barra_listas.set_text ( "0%" );
 
 		this.show_all ();
 
