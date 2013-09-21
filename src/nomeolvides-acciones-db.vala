@@ -78,11 +78,11 @@ public class Nomeolvides.AccionesDB : Object {
 	}
 
 	public ArrayList<Hecho> select_hechos ( string where = "" ) {
-		return this.dbms.select_hechos ( where ); 
+		return this.dbms.select_hechos ( where );
 	}
 
-	public ArrayList<Lista> select_listas ( ) {
-		return this.dbms.select_listas ( ); 
+	public ArrayList<Lista> select_listas ( string where = "" ) {
+		return this.dbms.select_listas ( where );
 	}
 
 	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {

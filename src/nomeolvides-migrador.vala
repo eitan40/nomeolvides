@@ -36,6 +36,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private Label label_listas;
 	private Label label_listas_hechos;
 	private int cantidad_hechos_coleccion;
+	private int cantidad_hechos_lista;
 	private bool hay_migrados;
 	private Button siguiente_boton;
 	private Box contenido;
@@ -44,6 +45,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 
 		this.hay_migrados = false;
 		this.cantidad_hechos_coleccion = 0;
+		this.cantidad_hechos_lista = 0;
 		this.colecciones = new Array<Datos_coleccion>();
 		this.listas = new Array<Datos_lista>();
 		this.contenido = this.get_content_area() as Box;
@@ -115,6 +117,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private void cargar_hechos () {
 
 		for (int i=0; i< this.colecciones.length; i++) {
+			print ( this.colecciones.index (i).get_nombre () + "\n" );
 			this.cargar_hechos_coleccion ( this.colecciones.index (i).get_archivo (), i );
 		}
 	}
@@ -135,6 +138,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			if ( nuevoHecho.nombre != "null" ) {
 				this.colecciones.index((uint)id_coleccion).agregar_hecho ( nuevoHecho );
 				this.cantidad_hechos_coleccion++;
+				print (  "\t" + nuevoHecho.nombre + "\n" );
 			}
 		}
 	}
@@ -158,7 +162,6 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 
 		lineas = todo.split_set ("\n");
 		for (i=0; i < lineas.length; i++) {
-			print ( lineas[i] + "\n" );
 			if (lineas[i].contains ("{\"Lista\":{")) {
 				var lista = new Lista.json ( lineas [i] );
 				var datos_lista = new Datos_lista ();
@@ -175,7 +178,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				for (int k = 0; k < this.colecciones.index(j).cantidad_hechos(); k++ ) {
 					var hecho = this.colecciones.index(j).get_hecho ( k );
 					if ( this.pertenece_a_lista ( lista, hecho ) ) {
-						this.listas.index (i).agregar_hecho ( hecho );
+						this.listas.index(i).agregar_hecho ( hecho );
 					}
 				}
 			}
@@ -193,10 +196,8 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			var sacar_fin = hecho_json.index_of ( "\"}}", sacar_inicio);
 			hecho_json = hecho_json.replace ( hecho_json[sacar_inicio-1:sacar_fin+1], "" );
 			if ( lineas[i] == lista.get_checksum() + "," + Checksum.compute_for_string(ChecksumType.MD5, hecho_json) ) {
-				print ( lineas[i] + " | " +  lista.get_checksum() + "," + Checksum.compute_for_string(ChecksumType.MD5, hecho_json) );
-				print ( " coincidencia!" );
-				print ( "\n" );
 				pertenece = true ;
+				this.cantidad_hechos_lista++;
 			}
 		}
 
@@ -256,8 +257,12 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.barra_listas.set_text ( "0%" );
 
 		this.show_all ();
+			while ( Gtk.events_pending () ) {
+				Gtk.main_iteration ();
+			}
 
 		this.migrar_colecciones ();
+		this.migrar_listas ();
 
 		this.siguiente_boton.set_sensitive ( true );
 	}
@@ -276,7 +281,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				this.barra_colecciones_hechos.set_fraction ( progreso_hecho * (j+1) );
 				this.barra_colecciones_hechos.set_text ( ((int)(this.barra_colecciones_hechos.fraction*100)).to_string () + "%" );
 				this.hay_migrados = true;
-				this.label_colecciones_hechos.set_text_with_mnemonic ( "Migrando hechos: " + j.to_string() + " de " + this.colecciones.index(i).cantidad_hechos().to_string() );
+				this.label_colecciones_hechos.set_text_with_mnemonic ( "Migrando hechos: " + (j+1).to_string() + " de " + this.colecciones.index(i).cantidad_hechos().to_string() );
 				while ( Gtk.events_pending () ) {
 					Gtk.main_iteration ();
 				}
@@ -288,6 +293,40 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				Gtk.main_iteration ();
 			}
 		}
+		this.label_colecciones.set_text_with_mnemonic ( "Migrando las colecciones " );
+	}
+
+	private void migrar_listas () {
+		for (int i = 0; i < this.listas.length; i++ ) {
+			double progreso_lista = ((double) this.listas.index(i).cantidad_hechos() / (double) this.cantidad_hechos_lista) + this.barra_listas.fraction;
+			double progreso_hecho = (double)1/(double)this.listas.index(i).cantidad_hechos();
+			this.label_listas.set_text_with_mnemonic ( "Migrando la lista " + this.colecciones.index(i).get_nombre() );
+			this.db.insert_lista ( this.listas.index(i).get_lista () );
+
+			var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  )[0];
+
+			for (int j = 0; j < this.listas.index(i).cantidad_hechos(); j++ ) {
+				var hecho = this.listas.index(i).get_hecho ( j );
+				var hecho_db = (this.db.select_hechos ( "WHERE nombre=\"" + hecho.nombre + "\"  AND anio=\"" + hecho.get_anio().to_string() + "\"  AND mes=\"" + hecho.get_mes().to_string() + "\"  AND dia=\"" + hecho.get_dia().to_string() + "\"" ))[0];
+
+				this.db.insert_hecho_lista ( hecho_db, lista_db );
+
+				this.barra_listas_hechos.set_fraction ( progreso_hecho * (j+1) );
+				this.barra_listas_hechos.set_text ( ((int)(this.barra_listas_hechos.fraction*100)).to_string () + "%" );
+				this.hay_migrados = true;
+				this.label_listas_hechos.set_text_with_mnemonic ( "Migrando hechos: " + (j+1).to_string() + " de " + this.listas.index(i).cantidad_hechos().to_string() );
+				while ( Gtk.events_pending () ) {
+					Gtk.main_iteration ();
+				}
+			}
+			this.label_listas_hechos.set_text_with_mnemonic ( "Migrando hechos");
+			this.barra_listas.set_fraction ( progreso_lista );
+			this.barra_listas.set_text ( ((int)(this.barra_listas.fraction*100)).to_string () + "%" );
+			while ( Gtk.events_pending () ){
+				Gtk.main_iteration ();
+			}
+		}
+		this.label_listas.set_text_with_mnemonic ( "Migrando las listas " );
 	}
 
 	private string sacarDatoJson(string json, string campo) {

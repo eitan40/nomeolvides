@@ -154,6 +154,18 @@ public class Nomeolvides.Hecho : GLib.Object {
 		return retorno;
 	}
 
+	public int get_anio () {
+		return this.fecha.get_year();
+	}
+
+	public int get_mes () {
+		return this.fecha.get_month();
+	}
+
+	public int get_dia () {
+		return this.fecha.get_day_of_month ();
+	}
+
 	public void set_id ( int64 id ) {
 		this.id = id;
 	}

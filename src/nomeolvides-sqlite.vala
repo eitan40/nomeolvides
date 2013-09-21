@@ -232,12 +232,12 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return hechos;
 	}
 
-	public ArrayList<Lista> select_listas ( ) {
+	public ArrayList<Lista> select_listas ( string where = "" ) {
 		ArrayList<Lista> listas = new ArrayList<Lista> ();
 		string[] columnas = {"",""};
 		Lista lista;
 		
-		var stmt = this.select ( "listas", "nombre,rowid"); 
+		var stmt = this.select ( "listas", "nombre,rowid", where);
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
