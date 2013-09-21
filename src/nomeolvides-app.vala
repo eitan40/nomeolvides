@@ -56,7 +56,6 @@ public class Nomeolvides.App : Gtk.Application
 
 	public override void activate () {
 		create_window();
-		app.window.hide();
 		this.migrador = new Migrador( this.window );
 		this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
 	}

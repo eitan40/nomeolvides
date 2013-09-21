@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Migrador : Gtk.Window {
+public class Nomeolvides.Migrador : Gtk.Dialog {
 
 	private AccionesDB db;
 	private VentanaPrincipal ventana;
@@ -38,6 +38,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	private int cantidad_hechos_coleccion;
 	private bool hay_migrados;
 	private Button siguiente_boton;
+	private Box contenido;
 
 	public Migrador ( VentanaPrincipal ventana ) {
 
@@ -45,7 +46,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.cantidad_hechos_coleccion = 0;
 		this.colecciones = new Array<Datos_coleccion>();
 		this.listas = new Array<Datos_lista>();
-		//this.hechos = new Array<Hecho>();
+		this.contenido = this.get_content_area() as Box;
 		this.grid = new Grid ();
 		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
 		this.siguiente_boton.set_label ("Empezar la migración");
@@ -77,7 +78,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		
 		this.destroy.connect ( terminar_migrador );
 
-		this.add (this.grid);
+		this.contenido.pack_start ( this.grid );
 
 		this.show_all ();
 
@@ -168,7 +169,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 	}
 
 	private void migracion ( ) {
-		this.remove (this.grid);
+		this.contenido.remove ( this.grid );
 
 		this.grid = new Grid ();
 		this.grid.set_row_spacing ( 15 );
@@ -204,7 +205,7 @@ public class Nomeolvides.Migrador : Gtk.Window {
 		this.grid.attach ( this.siguiente_boton,3,9,1,1);
 
 		this.grid.set_size_request ( 640, 363 );
-		this.add (this.grid);
+		this.contenido.pack_start ( this.grid );
 
 		this.barra_colecciones_hechos.set_fraction ( (double) 0 );
 		this.barra_colecciones_hechos.set_text ( "0%" );
