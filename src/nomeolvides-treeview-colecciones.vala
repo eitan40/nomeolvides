@@ -36,7 +36,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value coleccion = -1;
+		Value coleccion = (int64)(-1);
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
@@ -45,6 +45,21 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		}
 
 		return (int64) coleccion;
+	}
+
+	public bool get_coleccion_cursor_visible () {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		Value visible = false;
+
+		this.get_cursor(out path, out columna);
+		if (path != null ) {
+			this.get_model().get_iter(out iterador, path);
+			this.get_model().get_value (iterador, 1, out visible);
+		}
+
+		return (bool) visible;
 	}
 
 	public void eliminar_coleccion ( Coleccion a_eliminar ) {
@@ -59,23 +74,24 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 	}
 
 	private void signal_toggle (string path) {
+
+		TreePath path_cursor;
+		TreeViewColumn columna;
 		Value coleccion_value;
 		Coleccion coleccion;
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
 		TreeIter iter;
 
-		var liststore = this.get_model() as ListStoreColecciones;
+		this.get_cursor(out path_cursor, out columna);
+		if ( path_cursor != null ) {
+			var liststore = this.get_model() as ListStoreColecciones;
 
-		liststore.get_iter (out iter, tree_path);
-		liststore.set_value (iter, 1, !this.toggle_visible.active);
+			liststore.get_iter (out iter, tree_path);
+			liststore.set_value (iter, 1, !this.toggle_visible.active);
 
-		liststore.get_value (iter, 2, out coleccion_value);
-		coleccion = coleccion_value as Coleccion;
-		coleccion.visible = !this.toggle_visible.active;
-
-		this.coleccion_visible_toggle_change ();
+			this.coleccion_visible_toggle_change ();
+		}
 	}
-
 	public signal void coleccion_visible_toggle_change ();
 
 }

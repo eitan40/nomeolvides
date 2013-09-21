@@ -331,7 +331,6 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					for ( int j = 0; j < cols; j++ ) {
 						columnas[j] = stmt.column_text ( j );
 					}
-
 					coleccion = new Coleccion (columnas[0], bool.parse (columnas[1]) );
 					coleccion.id = int64.parse(columnas[2]);
 					break;

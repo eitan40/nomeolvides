@@ -62,8 +62,8 @@ public class Nomeolvides.Coleccion : GLib.Object{
 	public string to_string () {
 		string retorno;
 
-		retorno  = this.nombre + "\",\"";
-		retorno += this.visible.to_string();
+		retorno  = "\"" + this.nombre + "\",\"";
+		retorno += this.visible.to_string() + "\"";
 		
 		return retorno;
 	}

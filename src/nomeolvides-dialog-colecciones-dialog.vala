@@ -138,7 +138,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	}
 
 	private void elegir_coleccion () {
-		if(this.colecciones_view.get_coleccion_cursor () >-1) {
+		if( this.colecciones_view.get_coleccion_cursor () > (int64)(-1) ) {
 			this.set_buttons_visible ( true );
 		} else {
 			this.set_buttons_visible ( false );		
@@ -146,6 +146,9 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	}
 
 	private void signal_toggle_change () {
+		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+		coleccion.visible = this.colecciones_view.get_coleccion_cursor_visible ();
+		this.db.update_coleccion ( coleccion );
 		this.cambios = true;
 	}
 }
