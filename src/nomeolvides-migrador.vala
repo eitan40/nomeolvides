@@ -201,7 +201,10 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.grid.attach (this.label_listas_hechos,0,7,4,1);
 		this.grid.attach (this.barra_listas_hechos,0,8,4,1);
 
+		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
 		this.siguiente_boton.set_label ( "Terminar la migración" );
+		this.siguiente_boton.set_sensitive ( false );
+		this.siguiente_boton.clicked.connect (  () => { this.destroy (); }  );
 		this.grid.attach ( this.siguiente_boton,3,9,1,1);
 
 		this.grid.set_size_request ( 640, 363 );
@@ -216,6 +219,8 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.show_all ();
 
 		this.migrar_colecciones ();
+
+		this.siguiente_boton.set_sensitive ( true );
 	}
 
 	private void migrar_colecciones () {
@@ -257,7 +262,6 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		if ( this.hay_migrados ) {
 			this.hay_migrados_signal ();
 		}
-		this.ventana.show();
 	}
 
 	public signal void hay_migrados_signal ();
