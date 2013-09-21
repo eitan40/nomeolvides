@@ -89,6 +89,8 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		if ( Configuracion.hay_colecciones ()  ) {
 			this.cargar_colecciones();
 			this.cargar_hechos ();
+		}
+		if ( Configuracion.hay_listas ()  ) {
 			this.cargar_listas ();
 			this.cargar_hechos_listas ();
 		}
@@ -117,7 +119,6 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private void cargar_hechos () {
 
 		for (int i=0; i< this.colecciones.length; i++) {
-			print ( this.colecciones.index (i).get_nombre () + "\n" );
 			this.cargar_hechos_coleccion ( this.colecciones.index (i).get_archivo (), i );
 		}
 	}
@@ -138,7 +139,6 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			if ( nuevoHecho.nombre != "null" ) {
 				this.colecciones.index((uint)id_coleccion).agregar_hecho ( nuevoHecho );
 				this.cantidad_hechos_coleccion++;
-				print (  "\t" + nuevoHecho.nombre + "\n" );
 			}
 		}
 	}
@@ -294,6 +294,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			}
 		}
 		this.label_colecciones.set_text_with_mnemonic ( "Migrando las colecciones " );
+		Archivo.renombrar ( Configuracion.archivo_colecciones(), Configuracion.archivo_colecciones() + ".migrado" );
 	}
 
 	private void migrar_listas () {
@@ -327,6 +328,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			}
 		}
 		this.label_listas.set_text_with_mnemonic ( "Migrando las listas " );
+		Archivo.renombrar ( Configuracion.archivo_listas(), Configuracion.archivo_listas() + ".migrado" );
 	}
 
 	private string sacarDatoJson(string json, string campo) {

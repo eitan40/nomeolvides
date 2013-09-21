@@ -56,8 +56,10 @@ public class Nomeolvides.App : Gtk.Application
 
 	public override void activate () {
 		create_window();
-		this.migrador = new Migrador( this.window );
-		this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
+		if (Configuracion.hay_colecciones ()  || Configuracion.hay_listas () ) {
+			this.migrador = new Migrador( this.window );
+			this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
+		}
 	}
 
 	public void create_app_menu () {

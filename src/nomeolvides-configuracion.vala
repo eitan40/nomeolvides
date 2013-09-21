@@ -121,6 +121,10 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		return Archivo.existe_path ( Configuracion.archivo_colecciones () );
 	}
 
+	public static bool hay_listas () {
+		return Archivo.existe_path ( Configuracion.archivo_listas () );
+	}
+
 	private static string directorio_datos () {
 		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides";
 	}
@@ -129,11 +133,11 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		return Configuracion.directorio_datos () + "/nomeolvides.db";
 	}
 
-	private static string archivo_colecciones () {
+	public static string archivo_colecciones () {
 		return Configuracion.directorio_configuracion () + "/db-predeterminadas.json";
 	}
 
-	private static string archivo_listas () {
+	public static string archivo_listas () {
 		return Configuracion.directorio_configuracion () + "/listas-personalizadas.json";
 	}
 
