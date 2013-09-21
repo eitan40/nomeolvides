@@ -1,7 +1,7 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 CREATE TABLE colecciones ( 
-			nombre TEXT NOT NULL,
+			nombre TEXT NOT NULL UNIQUE,
 			visible BOOLEAN NOT NULL
 			 );
 CREATE TABLE hechos ( 
@@ -12,15 +12,17 @@ CREATE TABLE hechos (
 			dia INTEGER NOT NULL, 
 			fuente TEXT,
 			coleccion INTEGER NOT NULL,
-			FOREIGN KEY (coleccion) REFERENCES colecciones (rowid)
+			FOREIGN KEY (coleccion) REFERENCES colecciones (rowid) ON DELETE CASCADE
 		     );
 CREATE TABLE listas ( 
-			nombre TEXT NOT NULL 
+			nombre TEXT NOT NULL UNIQUE
 		    );
 CREATE TABLE listashechos ( 
 			lista INTEGER NOT NULL, 
 			hecho INTEGER NOT NULL, 
-			FOREIGN KEY (lista) REFERENCES listas (rowid), 
-			FOREIGN KEY (hecho) REFERENCES hechos (rowid) 
+			FOREIGN KEY (lista) REFERENCES listas (rowid) ON DELETE CASCADE, 
+			FOREIGN KEY (hecho) REFERENCES hechos (rowid) ON DELETE CASCADE
 			  );
+CREATE UNIQUE INDEX indice_hechos ON hechos (nombre,anio,mes,dia);
+PRAGMA foreign_keys=ON;
 COMMIT;
