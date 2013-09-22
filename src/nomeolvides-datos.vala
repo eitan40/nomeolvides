@@ -138,7 +138,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
-		var hechos = this.db.select_hechos ( "WHERE anio=\"" + anio.to_string () +"\"" );
+		var hechos = this.db.select_hechos_visibles ( "WHERE anio=\"" + anio.to_string () +"\"" );
 		return this.armar_liststore_hechos(hechos);
 	}
 

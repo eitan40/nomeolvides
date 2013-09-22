@@ -81,6 +81,10 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.select_hechos ( where );
 	}
 
+	public ArrayList<Hecho> select_hechos_visibles ( string where = "" ) {
+		return this.dbms.select_hechos_visibles ( where );
+	}
+
 	public ArrayList<Lista> select_listas ( string where = "" ) {
 		return this.dbms.select_listas ( where );
 	}

@@ -171,6 +171,7 @@ public class Nomeolvides.App : Gtk.Application
 		var colecciones_dialogo = new ColeccionesDialog ( this.window, colecciones );
 		colecciones_dialogo.show_all ();
 		colecciones_dialogo.run ();
+		this.inicializar_ventana ();
 	}
 
 	private void config_listas_dialog () {		

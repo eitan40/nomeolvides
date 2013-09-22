@@ -45,6 +45,7 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract void update_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract void update_coleccion ( Coleccion coleccion );
 	public abstract ArrayList<Hecho> select_hechos ( string where = "" );
+	public abstract ArrayList<Hecho> select_hechos_visibles ( string where = "" );
 	public abstract ArrayList<Lista> select_listas ( string where = "" );
 	public abstract ArrayList<Hecho> select_hechos_lista ( Lista lista );
 	public abstract ArrayList<Coleccion> select_colecciones ( string where = "" );
