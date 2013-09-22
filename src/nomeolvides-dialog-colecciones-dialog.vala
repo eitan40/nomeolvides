@@ -127,6 +127,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
+			this.db.delete_coleccion ( coleccion );
 			this.colecciones_view.eliminar_coleccion ( coleccion );
 		}
 		borrar_dialog.destroy ();
