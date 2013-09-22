@@ -34,32 +34,19 @@ public class Nomeolvides.TreeViewListas : TreeView {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value lista;
+		Lista lista = null;
+		Value value_lista;
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 2, out lista);
-			return (Lista) lista;
-		} else { 
-			return (Lista) null;
-		}		
-	}
+			this.get_model().get_value (iterador, 0, out value_lista);
+			lista = new Lista ((string) value_lista);
+			this.get_model().get_value (iterador, 2, out value_lista);
+			lista.id = (int64) value_lista;
+		}
 
-	public Lista get_lista () {
-		TreePath path;
-		TreeViewColumn columna;
-		TreeIter iterador;
-		Value lista;
-		
-		this.get_cursor(out path, out columna);
-		if (path != null ) {
-			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 2, out lista);
-			return (Lista) lista;
-		} else {
-			return (Lista)null;
-		}		
+		return lista;
 	}
 
 	public void eliminar_lista ( Lista a_eliminar ) {

@@ -22,25 +22,20 @@ using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.ListStoreListas : ListStore {
-	private ArrayList<string> listas_cache;
 	private TreeIter iterador;
 	
 	public ListStoreListas () {
-		Type[] tipos= { typeof(string), typeof(int), typeof(Lista) };
+		Type[] tipos= { typeof(string), typeof(int), typeof(int64) };
 		this.set_column_types(tipos);
-		this.listas_cache = new ArrayList<string> ();
 	}
 
 	public void agregar_lista ( Lista lista ) {
 		if (lista != null ) {
-			if ( this.lista_no_duplicada (lista) ) {
-				this.append ( out this.iterador );
-				this.set ( this.iterador,
-							0,lista.nombre,
-							1,lista.cantidad_hechos,
-		    				2,lista );
-				this.listas_cache.add ( lista.get_checksum() );
-			}
+			this.append ( out this.iterador );
+			this.set ( this.iterador,
+						0,lista.nombre,
+						1,lista.cantidad_hechos,
+		    			2,lista.id );
 		}
 	}
 
@@ -60,18 +55,7 @@ public class Nomeolvides.ListStoreListas : ListStore {
 		return json;
 	}
 
-	private bool lista_no_duplicada ( Lista lista ) {
-		bool retorno = true;
-
-		if (this.listas_cache.contains ( lista.get_checksum() ) ) {
-			retorno = false;
-		}
-			
-		return retorno;
-	}
-
 	public void borrar_lista ( TreeIter iter, Lista a_eliminar ) {
 		this.remove ( iter );
-		this.listas_cache.remove ( a_eliminar.get_checksum() );
 	}
 }

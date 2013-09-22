@@ -90,8 +90,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void elegir_lista () {
-		if ( this.lista_actual != this.listas_view.get_lista () ) {
-			this.lista_actual = this.listas_view.get_lista ();
+		if ( this.lista_actual != this.listas_view.get_lista_cursor () ) {
+			this.lista_actual = this.listas_view.get_lista_cursor ();
 			this.anio_actual = 0; //ningún anio
 			this.listas_cursor_changed ();
 			this.mostrar_scroll_vista ( false );
