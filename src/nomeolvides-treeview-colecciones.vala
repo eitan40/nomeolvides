@@ -75,22 +75,15 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 
 	private void signal_toggle (string path) {
 
-		TreePath path_cursor;
-		TreeViewColumn columna;
-		Value coleccion_value;
-		Coleccion coleccion;
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
 		TreeIter iter;
 
-		this.get_cursor(out path_cursor, out columna);
-		if ( path_cursor != null ) {
-			var liststore = this.get_model() as ListStoreColecciones;
+		var liststore = this.get_model() as ListStoreColecciones;
 
-			liststore.get_iter (out iter, tree_path);
-			liststore.set_value (iter, 1, !this.toggle_visible.active);
+		liststore.get_iter (out iter, tree_path);
+		liststore.set_value (iter, 1, !this.toggle_visible.active);
 
-			this.coleccion_visible_toggle_change ();
-		}
+		this.coleccion_visible_toggle_change ();
 	}
 	public signal void coleccion_visible_toggle_change ();
 

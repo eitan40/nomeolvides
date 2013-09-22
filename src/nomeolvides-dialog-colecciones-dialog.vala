@@ -26,6 +26,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	private ToolButton editar_coleccion_button;
 	private ToolButton borrar_coleccion_button;
 	public bool cambios { get; private set; }
+	public bool cambio_toggle { get; private set; }
 	public Button boton_aniadir;
 	private AccionesDB db;
 		
@@ -62,6 +63,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		this.response.connect(on_response);
 
 		this.cambios = false;
+		this.cambio_toggle = false;
 		this.colecciones_view = new TreeViewColecciones ();
 		this.colecciones_view.set_model ( liststore_colecciones );
 		this.colecciones_view.cursor_changed.connect ( elegir_coleccion );
@@ -143,12 +145,16 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		} else {
 			this.set_buttons_visible ( false );		
 		}
+
+		if ( this.cambio_toggle ) {
+			Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+			coleccion.visible = this.colecciones_view.get_coleccion_cursor_visible ();
+			this.db.update_coleccion ( coleccion );
+			this.cambio_toggle = false;
+		}
 	}
 
 	private void signal_toggle_change () {
-		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
-		coleccion.visible = this.colecciones_view.get_coleccion_cursor_visible ();
-		this.db.update_coleccion ( coleccion );
-		this.cambios = true;
+		this.cambio_toggle = true;
 	}
 }
