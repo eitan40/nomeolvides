@@ -63,7 +63,7 @@ public class Nomeolvides.Listas : GLib.Object {
 		ListStoreListas liststore = new ListStoreListas ();
 		
 		foreach (Lista l in this.listas ) {		
-			liststore.agregar_lista ( l );			
+			liststore.agregar_lista ( l,0 );			
 		}
 		
 		return liststore;
@@ -122,7 +122,7 @@ public class Nomeolvides.Listas : GLib.Object {
 			if ( recorrer_listas.valid ) {
 				lista = this.get_lista_hash ( recorrer_listas.get_key () );
 				if ( lista != null ) {
-					lista.set_cantidad ( recorrer_listas.get_value () );
+					
 				}
 			}
 		} while ( recorrer_listas.next () );

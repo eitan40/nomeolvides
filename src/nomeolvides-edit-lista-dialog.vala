@@ -41,7 +41,6 @@ public class Nomeolvides.EditListaDialog : DialogLista
 
 	public void set_datos (Lista lista) {
 		this.nombre_entry.set_text ( lista.nombre );
-		this.cantidad_hechos = lista.cantidad_hechos;
 		this.id = lista.id;
 	}
 }

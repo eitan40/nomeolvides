@@ -116,6 +116,15 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return stmt;
 	}
 
+	protected Statement count ( string tabla, string where ) {
+		Statement stmt;
+		
+		this.open ( );
+		this.query ( "SELECT COUNT (*) FROM " + tabla + " " + where, out stmt);
+
+		return stmt;
+	} 
+
 	protected ArrayList<Hecho> parse_query_hechos ( Statement stmt ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string[] columnas = {"","","","","","",""};
@@ -367,6 +376,63 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		}
 
 		return coleccion;
+	}
+
+	public Lista select_lista ( string where = "" ) {
+		string[] columnas = {"",""};
+		Lista lista = null;
+
+		var stmt = this.select ( "listas", "nombre,id", where );
+
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+
+		if ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					}
+					lista = new Lista (columnas[0]);
+					lista.id = int64.parse(columnas[1]);
+					break;
+				default:
+					print ("Error!!");
+					break;
+			}
+		}
+
+		return lista;
+	}
+
+	public int count_hechos_coleccion ( Coleccion coleccion ) {
+		int cantidad_hechos = 0;
+
+		var stmt = this.count ("hechos", "WHERE coleccion=" + coleccion.id.to_string() );
+
+		int rc = stmt.step ();
+
+		if ( rc == Sqlite.ROW ) {
+			cantidad_hechos = int.parse (stmt.column_text (0));
+		}
+
+		return cantidad_hechos;
+	}
+	
+	public int count_hechos_lista ( Lista lista ) {
+		int cantidad_hechos = 0;
+
+		var stmt = this.count ("listashechos", "WHERE lista=" + lista.id.to_string() );
+
+		int rc = stmt.step ();
+
+		if ( rc == Sqlite.ROW ) {
+			cantidad_hechos = int.parse (stmt.column_text (0));
+		}
+
+		return cantidad_hechos;
 	}
 
 	public Array<int> lista_de_anios ( string where = "" ) {

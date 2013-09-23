@@ -46,7 +46,8 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.datos_cambio_hechos ();
 	}
 
-	public void agregar_hecho_lista ( Hecho hecho, Lista lista ) {
+	public void agregar_hecho_lista ( Hecho hecho, int64 id_lista ) {
+		var lista = this.db.select_lista ( "WHERE id=\"" + id_lista.to_string() + "\"" );
 		this.db.insert_hecho_lista ( hecho, lista );
 		this.datos_cambio_hechos ();
 	}
@@ -195,7 +196,8 @@ public class Nomeolvides.Datos : GLib.Object {
 		var liststore = new ListStoreListas ();
 
 		foreach ( Lista l in listas ) {
-			liststore.agregar_lista ( l );
+			var cantidad_hechos = this.db.count_hechos_lista ( l );
+			liststore.agregar_lista ( l, cantidad_hechos );			
 		}
 
 		return liststore;
@@ -205,7 +207,8 @@ public class Nomeolvides.Datos : GLib.Object {
 		var liststore = new ListStoreColecciones ();
 
 		foreach ( Coleccion c in colecciones ) {
-			liststore.agregar_coleccion ( c );
+			var cantidad_hechos = this.db.count_hechos_coleccion ( c );
+			liststore.agregar_coleccion ( c, cantidad_hechos );
 		}
 
 		return liststore;

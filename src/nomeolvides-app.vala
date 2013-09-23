@@ -230,7 +230,7 @@ public class Nomeolvides.App : Gtk.Application
                 dialogo.set_listas ( this.datos.lista_de_listas() );
 
 			if (dialogo.run () == ResponseType.APPLY) {
-       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
+       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_id_lista () );
 			}
 		dialogo.close ();
 		}

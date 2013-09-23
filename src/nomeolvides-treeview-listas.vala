@@ -59,4 +59,15 @@ public class Nomeolvides.TreeViewListas : TreeView {
 		var liststore = this.get_model() as ListStoreListas;
 		liststore.borrar_lista ( iterador, a_eliminar );
 	}
+
+	public int get_hechos_lista ( ) {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		
+		this.get_cursor (out path, out columna);
+		this.get_model().get_iter(out iterador, path);
+		var liststore = this.get_model() as ListStoreListas;
+		return liststore.get_hechos_lista ( iterador );
+	}
 }

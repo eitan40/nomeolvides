@@ -95,7 +95,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 			this.db.insert_coleccion ( coleccion );
 			coleccion.id = this.db.ultimo_rowid();
 			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-			liststore.agregar_coleccion (coleccion);
+			liststore.agregar_coleccion (coleccion, 0);
 			this.cambios = true;
 		}
 		
@@ -112,8 +112,9 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
+			var cantidad_hechos = this.colecciones_view.get_hechos_coleccion ();
 			this.colecciones_view.eliminar_coleccion ( coleccion );
-			liststore.agregar_coleccion ( edit_dialog.respuesta );
+			liststore.agregar_coleccion ( edit_dialog.respuesta, cantidad_hechos );
 			this.db.update_coleccion ( edit_dialog.respuesta );
 			this.cambios = true;
 		}

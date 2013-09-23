@@ -85,6 +85,17 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 
 		this.coleccion_visible_toggle_change ();
 	}
-	public signal void coleccion_visible_toggle_change ();
 
+	public int get_hechos_coleccion ( ) {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		
+		this.get_cursor (out path, out columna);
+		this.get_model().get_iter(out iterador, path);
+		var liststore = this.get_model() as ListStoreColecciones;
+		return liststore.get_hechos_coleccion ( iterador );
+	}
+	
+	public signal void coleccion_visible_toggle_change ();
 }

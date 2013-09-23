@@ -25,15 +25,16 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 	private TreeIter iterador;
 	
 	public ListStoreColecciones () {
-		Type[] tipos= { typeof(string), typeof(bool), typeof(int64) };
+		Type[] tipos= { typeof(string), typeof(bool), typeof(int),typeof(int64) };
 		this.set_column_types(tipos);
 	}
 
-	public void agregar_coleccion ( Coleccion coleccion ) {		
+	public void agregar_coleccion ( Coleccion coleccion, int cantidad_hechos ) {		
 		this.append ( out this.iterador );
 		this.set ( this.iterador,
 		           0,coleccion.nombre,
 		           1,coleccion.visible,
+		           3,cantidad_hechos,
 			       2,coleccion.id );
 	}
 
@@ -56,5 +57,16 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 			}while (this.iter_next(ref iter));
 		}
 		return i;
+	}
+
+	public int get_hechos_coleccion ( TreeIter iter ) {
+		Value value_cantidad;
+		int cantidad = 0;
+
+		this.get_value(iter, 3, out value_cantidad);
+
+		cantidad = (int) value_cantidad;
+
+		return cantidad;
 	}
 }

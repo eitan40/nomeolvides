@@ -101,9 +101,20 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.select_coleccion ( where ); 
 	}
 
+	public Lista select_lista ( string where = "" ) {
+		return this.dbms.select_lista ( where );
+	}
+
+	public int count_hechos_coleccion ( Coleccion coleccion ) {
+		return this.dbms.count_hechos_coleccion ( coleccion );
+	}
+	
+	public int count_hechos_lista ( Lista lista ) {
+		return this.dbms.count_hechos_lista ( lista );
+	}
+
 	public Array<int> lista_de_anios () {
 		return this.dbms.lista_de_anios ( ); 
-
 	}
 
 	public int64 ultimo_rowid () {

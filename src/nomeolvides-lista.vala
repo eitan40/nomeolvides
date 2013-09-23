@@ -23,12 +23,10 @@ using Nomeolvides;
 public class Nomeolvides.Lista : GLib.Object{
 	public int64 id;
 	public string nombre { get; private set; }
-	public int cantidad_hechos { get; private set; }
 	public string hash { get; private set; }
 	
 	public Lista ( string nombre ) {
 		this.nombre = nombre;
-		this.cantidad_hechos = 0;
 		this.calcular_checksum ();
 	}
 
@@ -38,8 +36,6 @@ public class Nomeolvides.Lista : GLib.Object{
 		} else {
 			this.nombre = "null";
 		}
-
-		this.cantidad_hechos = 0;
 		this.calcular_checksum ();
 	}
 
@@ -74,8 +70,5 @@ public class Nomeolvides.Lista : GLib.Object{
 	private void calcular_checksum () {
 		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
 		this.hash = this.hash.slice ( 0, 12);
-	}
-	public void set_cantidad ( int cant_hechos ) {
-		this.cantidad_hechos = cant_hechos;
 	}
 }

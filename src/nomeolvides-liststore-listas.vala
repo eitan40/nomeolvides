@@ -29,12 +29,12 @@ public class Nomeolvides.ListStoreListas : ListStore {
 		this.set_column_types(tipos);
 	}
 
-	public void agregar_lista ( Lista lista ) {
+	public void agregar_lista ( Lista lista, int cantidad_hechos ) {
 		if (lista != null ) {
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
 						0,lista.nombre,
-						1,lista.cantidad_hechos,
+						1,cantidad_hechos,
 		    			2,lista.id );
 		}
 	}
@@ -57,5 +57,16 @@ public class Nomeolvides.ListStoreListas : ListStore {
 
 	public void borrar_lista ( TreeIter iter, Lista a_eliminar ) {
 		this.remove ( iter );
+	}
+
+	public int get_hechos_lista ( TreeIter iter ) {
+		Value value_cantidad;
+		int cantidad = 0;
+
+		this.get_value(iter, 1, out value_cantidad);
+
+		cantidad = (int) value_cantidad;
+
+		return cantidad;
 	}
 }
