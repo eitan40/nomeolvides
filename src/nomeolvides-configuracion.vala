@@ -58,40 +58,6 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				print ("Salida:\n\tstdout : " + stdout + "\n\tstderr : " + stderr + "\n\texitstatus : " + exitstatus.to_string () + "\n");
 			}
 		}
-/*
-		if (!Archivo.existe_path ( Configuracion.archivo_colecciones () ) ) {
-			Archivo.crear ( Configuracion.archivo_colecciones () );
-
-			var coleccion_default = new Coleccion ( "Coleccion",
-			                             				   true
-			                                      );
-		}
-
-		if (!Archivo.existe_path ( Configuracion.archivo_listas () ) ) {
-				Archivo.crear ( Configuracion.archivo_listas () );
-		}
-		
-		if (!Archivo.existe_path ( Configuracion.directorio_colecciones_locales () )) {
-			Archivo.crear_directorio ( Configuracion.directorio_colecciones_locales () );			
-		}
-		
-		if (!Archivo.existe_path ( Configuracion.archivo_colecciones_locales () ) ) {
-				Archivo.crear ( Configuracion.archivo_colecciones_locales () );
-		}
-
-		if (!Archivo.existe_path ( Configuracion.archivo_listas_hechos () ) ) {
-				Archivo.crear ( Configuracion.archivo_listas_hechos () );
-		}
-*/
-	/*	Resource resources;
-
-		try {
-			resources = Resource.load ("src/nomeolvides.gresource");
-		} catch ( Error e ){
-			error (e.message);
-		}
-		resources._register ();
-*/	}
 
 	public static void guardar_colecciones ( string colecciones ) {
 		Archivo.escribir ( Configuracion.archivo_colecciones (), colecciones );

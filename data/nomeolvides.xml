@@ -1,5 +1,0 @@
-<gresources>
-  <gresource prefix="/org/gnome/softwareperonista/nomeolvides">
-    <file compressed="true" preprocess="xml-stripblanks">borrar-lista-dialog.ui</file>
-  </gresource>
-</gresources>
