@@ -55,10 +55,10 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	protected void insert ( string tabla, string valores ) {
+	protected void insert ( string tabla, string columnas ,string valores ) {
 		this.open ( );
 
-		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")", null, null);
+		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" (" + columnas + ") VALUES (" + valores + ")", null, null);
 
 		//print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
 
@@ -148,30 +148,30 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		this.insert ( "hechos", hecho.to_string ()   );
+		this.insert ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,coleccion" ,hecho.to_string ()   );
 	}
 
 	public void insert_lista ( Lista lista ) {
-		this.insert ( "listas", "\""+lista.nombre+"\"" );
+		this.insert ( "listas", "nombre" ,"\""+lista.nombre+"\"" );
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
 		string valores = "\"" + lista.id.to_string() + "\", \""
 			                  + hecho.id.to_string() + "\"";
 		
-		this.insert ( "listashechos", valores );
+		this.insert ( "listashechos", "lista,hecho",valores );
 	}
 
 	public void insert_coleccion ( Coleccion coleccion ) {
-		this.insert ( "colecciones", coleccion.to_string () );
+		this.insert ( "colecciones", "nombre,visible",coleccion.to_string () );
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
-		this.del ( "hechos", "WHERE rowid=\"" + hecho.id.to_string() +"\"" );
+		this.del ( "hechos", "WHERE id=\"" + hecho.id.to_string() +"\"" );
 	}
 
 	public void delete_lista ( Lista lista ) {
-		this.del ( "listas", "WHERE rowid=\"" + lista.id.to_string() +"\"" );
+		this.del ( "listas", "WHERE id=\"" + lista.id.to_string() +"\"" );
 	}
 
 	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -182,7 +182,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 	
 	public void delete_coleccion ( Coleccion coleccion ) {
-		this.del ( "colecciones", "WHERE rowid=\"" + coleccion.id.to_string() +"\"" );
+		this.del ( "colecciones", "WHERE id=\"" + coleccion.id.to_string() +"\"" );
 	}
 
 	public void update_hecho ( Hecho hecho ) {
@@ -190,7 +190,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 		this.update ( "hechos",
 		              valores,
-		              " WHERE rowid=\"" + hecho.id.to_string() + "\"" );
+		              " WHERE id=\"" + hecho.id.to_string() + "\"" );
 	}
  
 	public void update_lista ( Lista lista ) {
@@ -198,7 +198,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 		this.update ( "listas",
 		              valores,
-		              " WHERE rowid=\"" + lista.id.to_string() + "\"" );
+		              " WHERE id=\"" + lista.id.to_string() + "\"" );
 	}
 
 	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -217,14 +217,14 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 		this.update ( "colecciones",
 		              valores,
-		              " WHERE rowid=\"" + coleccion.id.to_string() + "\"" );
+		              " WHERE id=\"" + coleccion.id.to_string() + "\"" );
 	}
 
 	public ArrayList<Hecho> select_hechos ( string where = "" ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		
 		var stmt = this.select ( "hechos",
-		                         "nombre,descripcion,anio,mes,dia,coleccion,fuente,rowid",
+		                         "nombre,descripcion,anio,mes,dia,coleccion,fuente,id",
 		                         where); 
 	
 		hechos = this.parse_query_hechos ( stmt );
@@ -243,8 +243,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		}
 
 		var stmt = this.select ( "hechos,colecciones",
-		                         "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.rowid",
-		                         where_nuevo + " colecciones.visible=\"true\" AND hechos.coleccion = colecciones.rowid;");
+		                         "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.id",
+		                         where_nuevo + " colecciones.visible=\"true\" AND hechos.coleccion = colecciones.id;");
 
 		hechos = this.parse_query_hechos ( stmt );
 
@@ -256,7 +256,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		string[] columnas = {"",""};
 		Lista lista;
 		
-		var stmt = this.select ( "listas", "nombre,rowid", where);
+		var stmt = this.select ( "listas", "nombre,id", where);
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -288,10 +288,10 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
 		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
 		string where = " WHERE lista=\"" + lista.id.to_string ()
-			                             + "\" AND listashechos.hecho=hechos.rowid AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.rowid;";
+			                             + "\" AND listashechos.hecho=hechos.id AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id;";
 		
 		var stmt = this.select ( "hechos,listashechos,colecciones",
-		                         "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.rowid",
+		                         "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.id",
 		                         where ); 
 	
 		hechos = this.parse_query_hechos ( stmt );
@@ -304,7 +304,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		string[] columnas = {"","",""};
 		Coleccion coleccion;
 		
-		var stmt = this.select ( "colecciones", "nombre,visible,rowid", where ); 
+		var stmt = this.select ( "colecciones", "nombre,visible,id", where ); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -337,7 +337,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		string[] columnas = {"","",""};
 		Coleccion coleccion = null;
 
-		var stmt = this.select ( "colecciones", "nombre,visible,rowid", where );
+		var stmt = this.select ( "colecciones", "nombre,visible,id", where );
 
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -372,7 +372,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			where_nuevo = where + " AND";
 		}
 
-		var stmt = this.select_distinct ( "hechos,colecciones", "anio", where_nuevo + " colecciones.visible=\"true\" AND hechos.coleccion = colecciones.rowid;");
+		var stmt = this.select_distinct ( "hechos,colecciones", "anio", where_nuevo + " colecciones.visible=\"true\" AND hechos.coleccion = colecciones.id;");
 
 		int rc = stmt.step ();
 		

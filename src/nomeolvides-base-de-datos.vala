@@ -26,7 +26,7 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	
 	protected abstract bool open ( );
 	protected abstract bool query ( string sql_query, out Statement stmt );
-	protected abstract void insert ( string tabla, string valores );
+	protected abstract void insert ( string tabla, string columnas,string valores );
 	protected abstract void del ( string tabla, string where );
 	protected abstract void update ( string tabla, string valores, string where ); 
 	protected abstract Statement select ( string tabla, string columnas, string where = "" );
