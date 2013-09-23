@@ -1,5 +1,0 @@
-<gresources>
-  <gresource prefix="/org/gnome/nomeolvides">
-    <file compressed="true" preprocess="xml-stripblanks">nomeolvides-dialog-borrar-lista-dialog.ui</file>
-  </gresource>
-</gresources>
