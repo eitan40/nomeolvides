@@ -39,6 +39,13 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			stderr.printf ( "No se pudo abrir la base de dato: %d, %s\n", this.rc, this.db.errmsg () );
 			retorno = false;
 		}
+
+		var rc = this.db.exec ("PRAGMA foreign_keys=ON;", null, null);
+
+		if (rc != Sqlite.OK) { 
+            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+        }
+		
 		return retorno;
 	}
 
