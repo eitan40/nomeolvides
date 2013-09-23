@@ -178,6 +178,7 @@ public class Nomeolvides.App : Gtk.Application
 		var listas_dialogo = new ListasDialog ( this.window, this.datos.lista_de_listas () );
 		listas_dialogo.show_all ();
 		listas_dialogo.run ();
+		this.inicializar_ventana ();
 	}
 
 	public void send_hecho () {		
