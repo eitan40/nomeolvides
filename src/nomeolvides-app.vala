@@ -28,12 +28,14 @@ public class Nomeolvides.App : Gtk.Application
 	public VentanaPrincipal window;
 	public Datos datos;
 	public GLib.Menu application_menu;
+	private Migrador migrador;
 
 	private const GLib.ActionEntry[] actions_app_menu = {
 		{ "create-about-dialog", about_dialog },
 		{ "exportar", exportar },
+		{ "importar", importar },
 		{ "window-destroy", salir_app },
-		{ "config-db-dialog", config_db_dialog },
+		{ "config-colecciones-dialog", config_colecciones_dialog },
 		{ "config-listas-dialog", config_listas_dialog }
 	};
 
@@ -44,21 +46,29 @@ public class Nomeolvides.App : Gtk.Application
 		this.connect_signals ();
 
 		this.window.show_visible ();
+		this.inicializar_ventana ();
+	}
+
+	public void inicializar_ventana () {
 		this.cargar_lista_anios ();
 		this.cargar_listas ();
 	}
 
 	public override void activate () {
 		create_window();
-		app.window.show();
+		if (Configuracion.hay_colecciones ()  || Configuracion.hay_listas () ) {
+			this.migrador = new Migrador( this.window );
+			this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
+		}
 	}
 
 	public void create_app_menu () {
 		this.application_menu = new GLib.Menu ();
 		
-		this.application_menu.append ( "Configurar Bases de Datos", "app.config-db-dialog" );
+		this.application_menu.append ( "Configurar Colecciones", "app.config-colecciones-dialog" );
 		this.application_menu.append ( "Configurar Listas Personalizadas", "app.config-listas-dialog" );
-		this.application_menu.append ( "Exportar", "app.exportar" );
+		this.application_menu.append ( "Exportar hechos", "app.exportar" );
+		this.application_menu.append ( "Importar hechos", "app.importar" );
 		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
 		this.application_menu.append ( "Salir", "app.window-destroy" );
 		
@@ -90,20 +100,19 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void add_hecho_dialog () {
 
-		if ( !(this.datos.hay_db_locales_activas ()) ) {
-				this.config_db_dialog ();
+		if ( !(this.datos.hay_colecciones_activas ()) ) {
+				this.config_colecciones_dialog ();
 		}
 
-		if ( this.datos.hay_db_locales_activas () ) {
+		if ( this.datos.hay_colecciones_activas () ) {
 
-			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.fuentes);
+			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.lista_de_colecciones () ); 
 		
 			add_dialog.show();
-		
+
 			if ( add_dialog.run() == ResponseType.APPLY )
 			{
-				this.datos.agregar_hecho(add_dialog.respuesta);
-				this.datos.guardar_un_archivo ( add_dialog.respuesta.archivo_fuente);
+				this.datos.agregar_hecho( add_dialog.respuesta );			
 			}		
 			add_dialog.destroy();
 		}
@@ -115,26 +124,24 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void elegir_lista () {
-		string lista = this.window.get_lista_actual ();
-		this.window.cargar_hechos_view ( this.datos.get_liststore_lista ( lista ) );
+		Lista lista = this.window.get_lista_actual ();
+		
+		var lista_hechos = this.datos.get_liststore_lista ( lista );
+		
+		this.window.cargar_hechos_view ( lista_hechos );
 	}
 
 	public void edit_hecho_dialog () {
 		Hecho hecho; 
 
 		this.window.get_hecho_actual ( out hecho );
-		
-		var edit_dialog = new EditHechoDialog( this.window, this.datos.fuentes );
+
+		var edit_dialog = new EditHechoDialog( this.window, this.datos.lista_de_colecciones () );
 		edit_dialog.set_datos ( hecho );
 		edit_dialog.show_all ();
 
 		if ( edit_dialog.run() == ResponseType.APPLY ) {
-			this.datos.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
-			this.datos.deshacer.guardar_editado ( edit_dialog.respuesta );
-			this.datos.borrar_rehacer ();
-			this.datos.eliminar_hecho ( hecho );
-			this.datos.agregar_hecho ( edit_dialog.respuesta );
-			this.datos.guardar_un_archivo ( edit_dialog.respuesta.archivo_fuente );
+			this.datos.edit_hecho ( edit_dialog.respuesta );
 		}
 		edit_dialog.destroy();
 	}
@@ -146,11 +153,7 @@ public class Nomeolvides.App : Gtk.Application
 		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
-			this.datos.eliminar_hecho ( hecho_a_borrar );
-			this.datos.deshacer.guardar_borrado ( hecho_a_borrar, DeshacerTipo.BORRAR );
-			this.datos.borrar_rehacer ();
-			this.datos.guardar_un_archivo ( hecho_a_borrar.archivo_fuente);
-			this.datos.guardar_listas_hechos ();	
+			this.datos.eliminar_hecho ( hecho_a_borrar );			
 		}	
 		delete_dialog.destroy ();
 	}
@@ -163,26 +166,19 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.destroy ();
 	}
 
-	private void config_db_dialog () {		
-		var fuentes_dialogo = new FuentesDialog ( this.window, this.datos.fuentes.temp() );
-		fuentes_dialogo.show_all ();
-		if ( fuentes_dialogo.run () == ResponseType.OK ) {
-			if (fuentes_dialogo.cambios == true) {				
-				this.datos.actualizar_fuentes_predefinidas ( fuentes_dialogo.fuentes_view.get_model () as ListStoreFuentes );
-			}
-		}
-		fuentes_dialogo.destroy ();
+	private void config_colecciones_dialog () {
+		ListStoreColecciones colecciones = this.datos.lista_de_colecciones (); 
+		var colecciones_dialogo = new ColeccionesDialog ( this.window, colecciones );
+		colecciones_dialogo.show_all ();
+		colecciones_dialogo.run ();
+		this.inicializar_ventana ();
 	}
 
 	private void config_listas_dialog () {		
 		var listas_dialogo = new ListasDialog ( this.window, this.datos.lista_de_listas () );
 		listas_dialogo.show_all ();
-		if ( listas_dialogo.run () == ResponseType.OK ) {
-			if (listas_dialogo.cambios == true) {				
-				this.datos.actualizar_listas_personalizadas ( listas_dialogo.listas_view.get_model () as ListStoreListas );
-			}
-		}
-		listas_dialogo.destroy ();
+		listas_dialogo.run ();
+		this.inicializar_ventana ();
 	}
 
 	public void send_hecho () {		
@@ -229,31 +225,30 @@ public class Nomeolvides.App : Gtk.Application
 
 		if ( this.datos.hay_listas () ) { //si hay listas
 			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
-			this.window.get_hecho_actual ( out hecho );		
+			this.window.get_hecho_actual ( out hecho );
 
-			dialogo.set_hecho ( hecho );
-			dialogo.set_listas ( this.datos.lista_de_listas() );
+				dialogo.set_hecho ( hecho );
+                dialogo.set_listas ( this.datos.lista_de_listas() );
 
 			if (dialogo.run () == ResponseType.APPLY) {
-       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_lista () );
-				this.datos.guardar_listas_hechos ();
+       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_id_lista () );
 			}
-			dialogo.close ();
-		}	
+		dialogo.close ();
+		}
 	}
 
 	public void remove_hecho_lista () {
 		Hecho hecho;
 		var dialogo = new BorrarHechoListaDialog ( this.window );
-
+		var lista = this.window.get_lista_actual ();
+		
 		this.window.get_hecho_actual ( out hecho );
 		
 		dialogo.set_hecho ( hecho );
-		dialogo.set_lista ( this.window.get_lista_actual () );
+		dialogo.set_lista ( lista );
 		
 		if (dialogo.run () == ResponseType.APPLY) {
-            this.datos.quitar_hecho_lista ( hecho, this.window.get_lista_actual () );
-			this.datos.guardar_listas_hechos ();
+            this.datos.quitar_hecho_lista ( hecho, lista );
 		}
 		dialogo.close ();			
 	}
@@ -268,8 +263,23 @@ public class Nomeolvides.App : Gtk.Application
 		guardar_archivo.close ();
 	}
 
+	public void importar_dialog () {
+		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
+		abrir_archivo.set_transient_for ( this as Window );
+
+		if (abrir_archivo.run () == ResponseType.ACCEPT) {		
+            this.datos.open_file ( abrir_archivo.get_filename () );
+		}
+		abrir_archivo.close ();
+	}
+
+
 	private void exportar () {
 		this.save_as_file_dialog ();
+	}
+
+	private void importar () {
+		this.importar_dialog ();
 	}
 
 	public void cargar_listas () {

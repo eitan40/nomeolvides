@@ -21,49 +21,49 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.ListStoreListas : ListStore {
+public class Nomeolvides.ListStoreColecciones : ListStore {
 	private TreeIter iterador;
 	
-	public ListStoreListas () {
-		Type[] tipos= { typeof(string), typeof(int), typeof(int64) };
+	public ListStoreColecciones () {
+		Type[] tipos= { typeof(string), typeof(bool), typeof(int),typeof(int64) };
 		this.set_column_types(tipos);
 	}
 
-	public void agregar_lista ( Lista lista, int cantidad_hechos ) {
-		if (lista != null ) {
-			this.append ( out this.iterador );
-			this.set ( this.iterador,
-						0,lista.nombre,
-						1,cantidad_hechos,
-		    			2,lista.id );
-		}
+	public void agregar_coleccion ( Coleccion coleccion, int cantidad_hechos ) {		
+		this.append ( out this.iterador );
+		this.set ( this.iterador,
+		           0,coleccion.nombre,
+		           1,coleccion.visible,
+		           3,cantidad_hechos,
+			       2,coleccion.id );
 	}
 
-	public string a_json () {
-		string json = "";
-		Lista lista;
-		Value value_lista;
-		TreeIter iter;
-
-		if ( this.get_iter_first( out iter ) ) {
-			do {
-				this.get_value(iter, 2, out value_lista);
-				lista = value_lista as Lista;
-				json += lista.a_json ()  + "\n";
-			}while (this.iter_next(ref iter));
-		}
-		return json;
-	}
-
-	public void borrar_lista ( TreeIter iter, Lista a_eliminar ) {
+	public void borrar_coleccion ( TreeIter iter, Coleccion a_eliminar ) {
 		this.remove ( iter );
 	}
 
-	public int get_hechos_lista ( TreeIter iter ) {
+	public int indice_de_id ( int64 id ) {
+		Value coleccion;
+		TreeIter iter;
+		int i=0;
+
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 2, out coleccion);
+				if ( id == (int64) coleccion) {
+					break;
+				}
+				i++;
+			}while (this.iter_next(ref iter));
+		}
+		return i;
+	}
+
+	public int get_hechos_coleccion ( TreeIter iter ) {
 		Value value_cantidad;
 		int cantidad = 0;
 
-		this.get_value(iter, 1, out value_cantidad);
+		this.get_value(iter, 3, out value_cantidad);
 
 		cantidad = (int) value_cantidad;
 

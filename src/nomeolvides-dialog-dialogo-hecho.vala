@@ -26,13 +26,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry nombre_entry;
 	protected TextView descripcion_textview;
 	protected ScrolledWindow descripcion_scroll;
-	protected ListStoreFuentes lista_fuentes;
-	protected ComboBox combo_fuentes;
+	//protected ListStoreColecciones lista_colecciones;
+	protected ComboBox combo_colecciones;
 	protected SelectorFecha fecha;
 	protected Entry fuente_entry;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogoHecho (VentanaPrincipal ventana, ListStoreFuentes fuentes_liststore )
+	public DialogoHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
 	{
 		this.resizable = true;
 		this.modal = true;
@@ -49,10 +49,10 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
 		
-		this.combo_fuentes = new ComboBox ();
+		this.combo_colecciones = new ComboBox ();
 		this.fecha = new SelectorFecha ();
 
-		this.lista_fuentes = fuentes_liststore;
+		//this.lista_colecciones = colecciones_liststore;
 
 		var descripcion_frame = new Frame( "Descripcion" );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
@@ -64,7 +64,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.descripcion_scroll.add_with_viewport ( this.descripcion_textview );
 		descripcion_frame.add ( this.descripcion_scroll );
 
-		this.set_combo_box ();
+		this.set_combo_box ( colecciones_liststore );
 		
 		Box box_hecho = new Box (Orientation.HORIZONTAL, 0);
 		Box box_labels = new Box (Orientation.VERTICAL, 0);
@@ -76,7 +76,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		box_labels.pack_start (fuente_label, false, false, 5);
 		box_widgets.pack_start (nombre_entry, false, false, 0);
 		box_widgets.pack_start (fecha, false, false, 0);
-		box_widgets.pack_start (combo_fuentes, false, false, 0);
+		box_widgets.pack_start (combo_colecciones, false, false, 0);
 		box_widgets.pack_start (fuente_entry, false, false, 0);
 		
 		box_hecho.pack_start (box_labels, true, false, 0);
@@ -99,28 +99,27 @@ public class Nomeolvides.DialogoHecho : Dialog
 										 this.fecha.get_anio (),
 			                             this.fecha.get_mes (),
 			                             this.fecha.get_dia (),
-		  								 this.get_archivo_elegido (),
+										 this.get_coleccion (),
 			                             this.fuente_entry.get_text ());
 		}
 	}
 
-	protected void set_combo_box () {
+	protected void set_combo_box ( ListStoreColecciones liststore) {
 		CellRendererText renderer = new CellRendererText ();
-		this.combo_fuentes.pack_start (renderer, true);
-		this.combo_fuentes.add_attribute (renderer, "text", 0);
-		this.combo_fuentes.active = 0;
-		this.combo_fuentes.set_model ( this.lista_fuentes );
+		this.combo_colecciones.pack_start (renderer, true);
+		this.combo_colecciones.add_attribute (renderer, "text", 0);
+		this.combo_colecciones.active = 0;
+		this.combo_colecciones.set_model ( liststore );
 	}
 
-	protected string get_archivo_elegido () {		
+	protected int64 get_coleccion () {
 		TreeIter iter;
-		Value archivo;
-		Value direccion;
-		
-		this.combo_fuentes.get_active_iter( out iter );
-		this.lista_fuentes.get_value (iter, 1, out direccion);
-		this.lista_fuentes.get_value (iter, 2, out archivo );
+		Value value_coleccion_id;
 
-		return (string) direccion + (string) archivo ;
+		this.combo_colecciones.get_active_iter( out iter );
+		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
+		liststore.get_value ( iter, 2, out value_coleccion_id );
+		
+		return (int64) value_coleccion_id;
 	}
 }

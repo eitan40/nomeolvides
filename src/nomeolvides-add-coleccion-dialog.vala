@@ -21,11 +21,18 @@ using Gtk;
 using Gee;
 using Nomeolvides;
 
-public class Nomeolvides.AddFuenteDialog : DialogFuente
+public class Nomeolvides.AddColeccionDialog : DialogColeccion
 {	
-	public AddFuenteDialog ( )
+	public AddColeccionDialog ( )
 	{
-		this.title = "Agregar parámetos de una Base de Datos";
+		this.title = "Agregar parámetos de una coleccion";
 		this.add_button (Stock.ADD , ResponseType.APPLY);
+	}
+
+	protected override void crear_respuesta() {
+		if(this.nombre_coleccion_entry.get_text_length () > 0)
+		{
+			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
+		}
 	}
 }

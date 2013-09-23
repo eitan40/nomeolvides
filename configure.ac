@@ -20,7 +20,8 @@ dnl Check for vala
 AM_PROG_VALAC([0.20.0])
 
 
-PKG_CHECK_MODULES(NOMEOLVIDES, gee-0.8
+PKG_CHECK_MODULES(NOMEOLVIDES, sqlite3
+gee-0.8
 [gtk+-3.0 ])
 
 

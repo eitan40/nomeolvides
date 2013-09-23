@@ -19,23 +19,24 @@
 using GLib;
 
 public class Nomeolvides.Hecho : GLib.Object {
-	
+
+	public int64 id;
 	public string nombre { get; private set; }
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
-	public string archivo_fuente { get; private set; }
+	public int64 coleccion;
 	public string fuente { get; private set; }
 	private string reemplazoSaltoDeLinea { get; private set; } 
 
 	// Constructor
-	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, string archivo_fuente, string fuente = "" )
+	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, int64 coleccion, string fuente = "" )
 	{
 		this.nombre = nombre;
 		this.descripcion = this.ponerSaltoDeLinea ( descripcion );
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		this.calcular_checksum ();
-		this.archivo_fuente = archivo_fuente;
+		this.coleccion = coleccion;
 		this.fuente = fuente;
 	}
 
@@ -43,7 +44,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 	}
 
-	public Hecho.json (string json, string archivo_fuente ) {
+	public Hecho.json (string json, int64 coleccion ) {
 		
 		if (json.contains ("{\"Hecho\":{")) {
 			this.nombre = this.sacarDatoJson (json, "nombre");
@@ -60,7 +61,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 		}	
 		this.calcular_checksum ();
 
-		this.archivo_fuente = archivo_fuente;
+		this.coleccion = coleccion;
 	}
 
 	private void calcular_checksum () {
@@ -70,6 +71,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 	private void saltoDeLinea () {
 		this.reemplazoSaltoDeLinea = "|";
 	}
+	
 	public string a_json () {
 		string retorno = "{\"Hecho\":{";
 
@@ -78,9 +80,38 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno += "\"anio\":\"" + this.fecha.get_year().to_string () + "\",";
 		retorno += "\"mes\":\"" + this.fecha.get_month().to_string () + "\",";
 		retorno += "\"dia\":\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "\"fuente\":\"" + this.fuente + "\"";
+		retorno += "\"fuente\":\"" + this.fuente + "\",";
+		retorno += "\"coleccion\":\"" + this.coleccion.to_string() + "\"";
 
 		retorno +="}}";	
+		
+		return retorno;
+	}
+
+	public string to_string () {
+		string retorno;
+
+		retorno  = "\"" + this.nombre + "\",";
+		retorno += "\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
+		retorno += "\"" + this.fecha.get_year().to_string () + "\",";
+		retorno += "\"" + this.fecha.get_month().to_string () + "\",";
+		retorno += "\"" + this.fecha.get_day_of_month().to_string () + "\",";
+		retorno += "\"" + this.fuente + "\",";
+		retorno += "\"" + this.coleccion.to_string() + "\"";
+
+		return retorno;
+	}
+
+	public string a_sql () {
+		string retorno;
+
+		retorno  = "nombre=\"" + this.nombre + "\",";
+		retorno += "descripcion=\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
+		retorno += "anio=\"" + this.fecha.get_year().to_string () + "\",";
+		retorno += "mes=\"" + this.fecha.get_month().to_string () + "\",";
+		retorno += "dia=\"" + this.fecha.get_day_of_month().to_string () + "\",";
+		retorno += "fuente=\"" + this.fuente + "\",";
+		retorno += "coleccion=\"" + this.coleccion.to_string() + "\"";
 		
 		return retorno;
 	}
@@ -121,6 +152,26 @@ public class Nomeolvides.Hecho : GLib.Object {
 		retorno = retorno.replace ("ñ", "ni");
 
 		return retorno;
+	}
+
+	public int get_anio () {
+		return this.fecha.get_year();
+	}
+
+	public int get_mes () {
+		return this.fecha.get_month();
+	}
+
+	public int get_dia () {
+		return this.fecha.get_day_of_month ();
+	}
+
+	public void set_id ( int64 id ) {
+		this.id = id;
+	}
+
+	public void set_coleccion ( int64 coleccion ) {
+		this.coleccion = coleccion;
 	}
 
 	private string ponerSaltoDeLinea ( string inicial ) {

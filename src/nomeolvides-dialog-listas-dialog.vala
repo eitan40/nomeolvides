@@ -27,12 +27,15 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 	private ToolButton borrar_lista_button;
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
+	private AccionesDB db;
 		
 	public ListasDialog (VentanaPrincipal ventana, ListStoreListas liststore_lista) {
 		this.set_title ("Lista personalizadas de hechos históricos");
 		this.set_modal ( true );
 		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
+
+		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		Toolbar toolbar = new Toolbar ();
 		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );
@@ -56,8 +59,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		toolbar.add ( editar_lista_button );
 		toolbar.add ( borrar_lista_button );
 		
-		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
-		this.add_button ( Stock.OK , ResponseType.OK );
+		this.add_button ( Stock.CLOSE , ResponseType.CLOSE );
 		this.response.connect(on_response);
 
 		this.cambios = false;
@@ -76,26 +78,22 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 
 	private void on_response (Dialog source, int response_id)
 	{
-		 switch (response_id)
-		{
-    		case ResponseType.OK:
-        		this.hide ();
-       			break;
-    		case ResponseType.CANCEL:
-        		this.destroy ();
-        		break; 
-        }
+		this.destroy ();
     }
 
 	private void add_lista_dialog () {
 		ListStoreListas liststore;
+		Lista lista;
 		
 		var add_dialog = new AddListaDialog ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
+			lista = add_dialog.respuesta;
+			this.db.insert_lista ( lista );
+			lista.id = this.db.ultimo_rowid();
 			liststore = this.listas_view.get_model () as ListStoreListas;
-			liststore.agregar_lista (add_dialog.respuesta);
+			liststore.agregar_lista ( lista, 0 );
 			this.cambios = true;
 		}
 		
@@ -104,25 +102,30 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 
 	private void edit_lista_dialog () {
 		ListStoreListas liststore;
+		var lista = this.listas_view.get_lista_cursor ();
 		
 		var edit_dialog = new EditListaDialog ();
-		edit_dialog.set_datos ( this.listas_view.get_lista_cursor () );
+		edit_dialog.set_datos ( lista );
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			liststore = this.listas_view.get_model () as ListStoreListas;
-			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
-			liststore.agregar_lista (edit_dialog.respuesta);
+			var cantidad_hechos = this.listas_view.get_hechos_lista ();
+			this.listas_view.eliminar_lista ( lista );
+			liststore.agregar_lista (edit_dialog.respuesta, cantidad_hechos);
+			this.db.update_lista ( edit_dialog.respuesta );
 			this.cambios = true;
 		}	
 		edit_dialog.destroy ();
 	}
 
-	private void borrar_lista_dialog () {	
-		var borrar_dialog = new BorrarListaDialogo ( this.listas_view.get_lista_cursor () );
+	private void borrar_lista_dialog () {
+		var borrar_dialog = new BorrarListaDialogo ( this.listas_view.get_lista_cursor (),
+		                                             this.listas_view.get_hechos_lista () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
+			this.db.delete_lista ( this.listas_view.get_lista_cursor () );
 			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
 		}
 		borrar_dialog.destroy ();

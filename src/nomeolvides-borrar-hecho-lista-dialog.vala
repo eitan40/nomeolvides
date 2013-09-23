@@ -24,7 +24,7 @@ using Nomeolvides;
 public class Nomeolvides.BorrarHechoListaDialog : Dialog
 {	
 	private Hecho hecho;
-	private string lista;
+	private Lista lista;
 	private Label label_lista;
 	private Label label_hecho;
 	
@@ -65,8 +65,8 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		this.label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hecho.nombre +"</span>");
 	}
 
-	public void set_lista ( string lista ) {
-		this.label_lista.set_markup ( "<span font_weight=\"heavy\">"+ lista +"</span>?");
+	public void set_lista ( Lista lista ) {
+		this.label_lista.set_markup ( "<span font_weight=\"heavy\">"+ lista.nombre +"</span>?");
 		this.lista = lista;
 	}
 
@@ -80,7 +80,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
         }
     }
 
-	public string get_lista () {
+	public Lista get_lista () {
 		return this.lista;
 	}
 }

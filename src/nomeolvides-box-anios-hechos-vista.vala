@@ -32,7 +32,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private ScrolledWindow scroll_listas_view;
 	private Notebook anios_listas;
 	private int anio_actual;
-	private string lista_actual;
+	private Lista lista_actual;
 
 	public Anios_hechos_vista () {
 		this.anios_view = new ViewAnios ();
@@ -83,15 +83,15 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private void elegir_anio () {
 		if ( this.anio_actual != this.anios_view.get_anio () ) {
 			this.anio_actual = this.anios_view.get_anio ();
-			this.lista_actual = ""; //ningina lista
+			this.lista_actual = null; //ningina lista
 			this.anios_cursor_changed();
 			this.mostrar_scroll_vista ( false );
 		}
 	}
 
 	private void elegir_lista () {
-		if ( this.lista_actual != this.listas_view.get_lista () ) {
-			this.lista_actual = this.listas_view.get_lista ();
+		if ( this.lista_actual != this.listas_view.get_lista_cursor () ) {
+			this.lista_actual = this.listas_view.get_lista_cursor ();
 			this.anio_actual = 0; //ningún anio
 			this.listas_cursor_changed ();
 			this.mostrar_scroll_vista ( false );
@@ -132,7 +132,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		}	
 	}
 
-	public void cargar_lista_anios ( ArrayList<int> anios ) {
+	public void cargar_lista_anios ( Array<int> anios ) {
 		this.anios_view.agregar_varios ( anios );
 	}
 
@@ -148,7 +148,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		return this.anio_actual;
 	}
 
-	public string get_lista_actual () {
+	public Lista get_lista_actual () {
 		return this.lista_actual;
 	}
 

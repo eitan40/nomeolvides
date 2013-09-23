@@ -21,7 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.BorrarListaDialogo : Dialog {
-	public BorrarListaDialogo ( Lista lista_a_borrar ) {
+	public BorrarListaDialogo ( Lista lista_a_borrar, int cantidad_hechos ) {
 		this.set_modal ( true );
 		this.title = "Borrar Lista Personalizada";
 		Label pregunta = new Label.with_mnemonic ( "" );
@@ -30,7 +30,7 @@ public class Nomeolvides.BorrarListaDialogo : Dialog {
 
 		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente lista personalizada?</big>" );
 		lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
-		lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ lista_a_borrar.cantidad_hechos.to_string() +"</span> hecho");
+		lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ cantidad_hechos.to_string() +"</span> hecho");
 		
 		Box box = new Box ( Orientation.VERTICAL, 0 );
 

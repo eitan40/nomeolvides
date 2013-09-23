@@ -20,68 +20,82 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewFuentes : TreeView {
+public class Nomeolvides.TreeViewColecciones : TreeView {
 	private CellRendererToggle toggle_visible;
 	
-	public TreeViewFuentes () {
+	public TreeViewColecciones () {
 		
 		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
-		this.insert_column_with_attributes ( -1, "Dirección", new CellRendererText(), "text", 1 );
-		this.insert_column_with_attributes ( -1, "Nombre de Archivo", new CellRendererText(), "text", 2 );
-		this.insert_column_with_attributes ( -1, "Tipo de Fuente", new CellRendererText(), "text", 3 );
 
 		this.toggle_visible = new CellRendererToggle();
-
 		this.toggle_visible.toggled.connect ( signal_toggle );
-
-		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 4 );
+		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 1 );
 	}
 
-	public Fuente get_fuente_cursor () {
+	public int64 get_coleccion_cursor () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value fuente;
+		Value coleccion = (int64)(-1);
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 5, out fuente);
-			return (Fuente) fuente;
-		} else { 
-			return (Fuente) null;
-		}		
+			this.get_model().get_value (iterador, 2, out coleccion);
+		}
+
+		return (int64) coleccion;
 	}
 
-	public void eliminar_fuente ( Fuente a_eliminar ) {
+	public bool get_coleccion_cursor_visible () {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		Value visible = false;
+
+		this.get_cursor(out path, out columna);
+		if (path != null ) {
+			this.get_model().get_iter(out iterador, path);
+			this.get_model().get_value (iterador, 1, out visible);
+		}
+
+		return (bool) visible;
+	}
+
+	public void eliminar_coleccion ( Coleccion a_eliminar ) {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
 		
 		this.get_cursor (out path, out columna);
 		this.get_model().get_iter(out iterador, path);
-		var liststore = this.get_model() as ListStoreFuentes;
-		liststore.borrar_fuente ( iterador, a_eliminar );
+		var liststore = this.get_model() as ListStoreColecciones;
+		liststore.borrar_coleccion ( iterador, a_eliminar );
 	}
 
 	private void signal_toggle (string path) {
-		Value fuente_value;
-		Fuente fuente;
+
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
 		TreeIter iter;
 
-		var liststore = this.get_model() as ListStoreFuentes;
+		var liststore = this.get_model() as ListStoreColecciones;
 
 		liststore.get_iter (out iter, tree_path);
-		liststore.set_value (iter, 4, !this.toggle_visible.active);
+		liststore.set_value (iter, 1, !this.toggle_visible.active);
 
-		liststore.get_value (iter, 5, out fuente_value);
-		fuente = fuente_value as Fuente;
-		fuente.visible = !this.toggle_visible.active;
-
-		this.fuente_visible_toggle_change ();
+		this.coleccion_visible_toggle_change ();
 	}
 
-	public signal void fuente_visible_toggle_change ();
-
+	public int get_hechos_coleccion ( ) {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		
+		this.get_cursor (out path, out columna);
+		this.get_model().get_iter(out iterador, path);
+		var liststore = this.get_model() as ListStoreColecciones;
+		return liststore.get_hechos_coleccion ( iterador );
+	}
+	
+	public signal void coleccion_visible_toggle_change ();
 }

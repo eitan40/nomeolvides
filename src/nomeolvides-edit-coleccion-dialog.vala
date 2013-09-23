@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Fernando Fernandez <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -16,19 +16,30 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 using Gtk;
+using Gee;
+using Nomeolvides;
 
-
-public class Nomeolvides.Panel : Frame
+public class Nomeolvides.EditColeccionDialog : DialogColeccion
 {
-	public Grid grid;	
-
-	// Constructor
-	public Panel ()
-	{	
-		grid = new Grid();
-    	grid.set_orientation(Orientation.VERTICAL);
-    	this.add(grid);
+	private int64 id_coleccion;
+	public EditColeccionDialog ( )
+	{
+		this.title = "Editar parámetros de la coleccion";
+		this.add_button (Stock.EDIT , ResponseType.APPLY);
 	}
 
+	public void set_datos (Coleccion coleccion) {
+		this.nombre_coleccion_entry.set_text ( coleccion.nombre );
+		this.id_coleccion = coleccion.id;
+	}
+
+	protected override void crear_respuesta() {
+		if(this.nombre_coleccion_entry.get_text_length () > 0)
+		{
+			this.respuesta = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
+			this.respuesta.id = this.id_coleccion;
+		}
+	} 
 }

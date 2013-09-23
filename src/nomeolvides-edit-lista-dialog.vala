@@ -24,6 +24,7 @@ using Nomeolvides;
 public class Nomeolvides.EditListaDialog : DialogLista
 {
 	private int cantidad_hechos;
+	private int64 id;
 	
 	public EditListaDialog ( )
 	{
@@ -34,11 +35,12 @@ public class Nomeolvides.EditListaDialog : DialogLista
 	protected override void crear_respuesta () {
 		if(this.nombre_entry.get_text_length () > 0) {
 			this.respuesta  = new Lista (this.nombre_entry.get_text ());
+			this.respuesta.id = this.id;
 		}
 	}
 
 	public void set_datos (Lista lista) {
 		this.nombre_entry.set_text ( lista.nombre );
-		this.cantidad_hechos = lista.cantidad_hechos;
+		this.id = lista.id;
 	}
 }

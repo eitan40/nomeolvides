@@ -1,178 +1,78 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2013 Fernando Fernandez <fernando@softwareperonista.com.ar>
+ * Copyright (C) 2013 Andres Fernandez <andres@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * nomeolvides is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- *
+ *   bullit - 39 escalones - silent love (japonesa) 
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using GLib;
-using Gee;
+
+using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Coleccion : GLib.Object {
+public class Nomeolvides.Coleccion : GLib.Object{
+	public int64 id;
+	public string nombre { get; private set; }
+	public bool visible {get; set; }
 
-	private TreeMap<string,ArrayList<Hecho>> hechos;
-	
-	public Coleccion () {
-		this.hechos = new TreeMap<string,ArrayList<Hecho>> ();
+	public Coleccion ( string nombre, bool visible ) {
+		this.nombre = nombre;
+		this.visible = visible;
 	}
 
-	public void agregar ( string key, Hecho hecho ) {
-		ArrayList<Hecho> arraylist;
+	public Coleccion.json ( string json ) {
+		if (json.contains ("{\"Fuente\":{")) {
+			this.nombre = this.sacarDatoJson (json, "nombre");
+			this.visible = bool.parse ( this.sacarDatoJson (json, "visible") );
+		} else {
+			this.nombre = "null";
+			this.visible = false;
+		}
+	}
+
+	public string a_json () {
+		string retorno = "{\"Fuente\":{";
+
+		retorno += "\"nombre\":\"" + this.nombre + "\",";
+		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
+		retorno +="}}";	
 		
-		if (!(this.hechos.has_key ( key )) ) {
-			this.hechos.set ( key, new ArrayList<Hecho> () );
-			this.coleccion_cambio_keys ();
-		}
-
-		arraylist = this.hechos.get ( key );
-			
-		if ( !arraylist.contains ( hecho ) ) {
-			arraylist.add ( hecho );
-			this.coleccion_cambio_hechos ();
-		}
+		return retorno;
 	}
 
-	public void borrar ( Hecho hecho ) {
-		if ( !this.hechos.is_empty ) {
-			var recorrer_keys = this.hechos.map_iterator ();
-			recorrer_keys.next ();
+	public string a_sql () {
+		string retorno;
 
-			do {
-				var key = recorrer_keys.get_value ();
-				if ( key.contains (hecho) ) {
-					key.remove ( hecho );
-					if ( key.size == 0 ) {
-						recorrer_keys.unset ();
-						this.coleccion_cambio_keys ();
-					}
-				}
-			} while ( recorrer_keys.next () );
-			this.coleccion_cambio_hechos ();
-		}
-	}
-
-	public void quitar ( Hecho hecho, string key ) {
+		retorno  = "nombre=\"" + this.nombre + "\",";
+		retorno += "visible=\"" + this.visible.to_string() + "\"";
 		
-		if (this.hechos.has_key ( key ) ) {
-			this.hechos.get ( key ).remove ( hecho );
-			this.coleccion_cambio_hechos ();
-		}
+		return retorno;
 	}
 
-	public ListStoreHechos get_liststore ( string key ) {
-		var key_hechos = this.hechos.get ( key );
-		var liststore = new ListStoreHechos ();
+	public string to_string () {
+		string retorno;
 
-		if (key_hechos != null ) {
-			foreach ( Hecho h in key_hechos ) {
-				liststore.agregar ( h );
-			}
-		}	
+		retorno  = "\"" + this.nombre + "\",\"";
+		retorno += this.visible.to_string() + "\"";
 		
-		return liststore;
+		return retorno;
 	}
 
-	public bool get_hecho_hash ( string hash, out Hecho hecho ) {
-
-		hecho = null;
-
-		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.next ();
-
-		do {
-			if ( recorrer_keys.valid ) {
-				var key = recorrer_keys.get_value ();
-				foreach (Hecho h in key) {
-					if ( h.hash == hash ) {
-						hecho = h;
-						return true;
-					}
-				}
-			}
-		} while ( recorrer_keys.next () );
-		return false;
+	private string sacarDatoJson(string json, string campo) {
+		int inicio,fin;
+		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
+		fin = json.index_of ("\"", inicio);
+		return json[inicio:fin];
 	}
 
-	public ArrayList<Hecho> lista_de_hechos () {
-		var array = new ArrayList<Hecho> ();
-		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.next ();
-
-		do {
-			if ( recorrer_keys.valid ) {
-				var key = recorrer_keys.get_value ();
-				foreach (Hecho h in key) {
-					array.add (h);
-				}
-			}
-		} while ( recorrer_keys.next () );
-
-		return array;
-	}
-
-	public ArrayList<string> lista_key () {
-		var array = new ArrayList<string> ();
-		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.next ();
-
-		do {
-			if ( recorrer_keys.valid ) {
-				var key = recorrer_keys.get_key ();
-				array.add (key);
-			}
-		} while ( recorrer_keys.next () );
-		return array;
-	}
-
-	public ArrayList<string> lista_key_value () {
-		var array = new ArrayList<string> ();
-		var recorrer_keys = this.hechos.map_iterator ();
-
-		recorrer_keys.next ();
-		do {
-			if ( recorrer_keys.valid ) {
-				var key = recorrer_keys.get_key ();
-				var listado = recorrer_keys.get_value ();
-				foreach (Hecho h in listado) {
-					array.add ( key + "," + h.hash );
-				}
-			}
-		} while ( recorrer_keys.next () );
-		return array;
-	}
-
-	public ArrayList<int> get_lista_value_size () {
-		var array = new ArrayList<int> ();
-		var recorrer_keys = this.hechos.map_iterator ();
-		recorrer_keys.next ();
-
-		do {
-			if ( recorrer_keys.valid ) {
-				var valor = recorrer_keys.get_value ();
-				array.add (valor.size);
-			}
-		} while ( recorrer_keys.next () );
-		return array;
-	}
-
-	public void vaciar () {
-		this.hechos.clear ();
-		this.coleccion_cambio_keys ();
-		this.coleccion_cambio_hechos ();
-	}
-	
-	public signal void coleccion_cambio_keys ();
-	public signal void coleccion_cambio_hechos ();
 }
