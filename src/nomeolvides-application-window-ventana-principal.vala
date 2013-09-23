@@ -27,7 +27,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	private Box main_box { get; private set; }
 	private MainToolbar toolbar { get; private set; }
 	public Anios_hechos_vista anios_hechos { get; private set; }
-	public HechosColecciones Colecciones;
 	private int anio_actual;
 	private Lista lista_actual;
 	

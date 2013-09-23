@@ -20,11 +20,8 @@ bin_PROGRAMS = nomeolvides
 
 nomeolvides_SOURCES = \
 	config.vapi \
-	nomeolvides-text-view-hecho.vala \
 	nomeolvides-hecho.vala \
 	nomeolvides-main.vala \
-	nomeolvides-panel.vala \
-	nomeolvides-lista-hechos.vala \
 	nomeolvides-liststore-hechos.vala \
 	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
@@ -52,17 +49,14 @@ nomeolvides_SOURCES = \
 	nomeolvides-add-lista-dialog.vala \
 	nomeolvides-dialog-lista.vala \
 	nomeolvides-edit-lista-dialog.vala \
-	nomeolvides-listas.vala \
 	nomeolvides-deshacer.vala \
 	nomeolvides-deshacer-item.vala \
-	nomeolvides-hechos.vala \
 	nomeolvides-coleccion.vala \
 	nomeolvides-add-hecho-lista-dialog.vala \
 	nomeolvides-borrar-hecho-lista-dialog.vala \
 	nomeolvides-base-de-datos.vala \
 	nomeolvides-sqlite.vala \
 	nomeolvides-acciones-db.vala \
-	nomeolvides-mapa-hecho.vala \
 	nomeolvides-liststore-colecciones.vala \
 	nomeolvides-treeview-colecciones.vala \
 	nomeolvides-add-coleccion-dialog.vala \
@@ -70,7 +64,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-colecciones-dialog.vala \
-	nomeolvides-hechos-colecciones.vala \
 	nomeolvides-migrador.vala
 
 
