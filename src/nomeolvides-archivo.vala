@@ -95,11 +95,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 	}
 
 	public static void renombrar ( string viejo, string nuevo ) {
-		try {
-			FileUtils.rename ( viejo, nuevo );
-		} catch ( Error e ) {
-			print ("Error al renombrar: " + viejo + " -> " + nuevo + "\n");
-		}
+		FileUtils.rename ( viejo, nuevo );
 	}
 
 	private static void leer_archivo_path ( string path, out string contenido_archivo ) {

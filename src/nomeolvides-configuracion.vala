@@ -58,6 +58,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				print ("Salida:\n\tstdout : " + stdout + "\n\tstderr : " + stderr + "\n\texitstatus : " + exitstatus.to_string () + "\n");
 			}
 		}
+	}	
 
 	public static void guardar_colecciones ( string colecciones ) {
 		Archivo.escribir ( Configuracion.archivo_colecciones (), colecciones );
@@ -113,10 +114,6 @@ public class Nomeolvides.Configuracion : GLib.Object {
 
 	private static string directorio_colecciones_locales () {
 		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides";
-	}
-
-	private static string archivo_colecciones_locales () {
-		return Configuracion.directorio_colecciones_locales () + "/db_default.json";
 	}
 
 	private static string archivo_listas_hechos () {

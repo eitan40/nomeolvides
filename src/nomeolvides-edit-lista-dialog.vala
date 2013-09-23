@@ -23,7 +23,6 @@ using Nomeolvides;
 
 public class Nomeolvides.EditListaDialog : DialogLista
 {
-	private int cantidad_hechos;
 	private int64 id;
 	
 	public EditListaDialog ( )
