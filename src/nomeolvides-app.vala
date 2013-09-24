@@ -20,7 +20,6 @@
 using GLib;
 using Gtk;
 using Nomeolvides;
-using Gee;
 
 public class Nomeolvides.App : Gtk.Application 
 {

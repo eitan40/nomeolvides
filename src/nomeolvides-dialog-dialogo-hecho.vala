@@ -18,7 +18,6 @@
  */
 
 using Gtk;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.DialogoHecho : Dialog
@@ -26,7 +25,6 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry nombre_entry;
 	protected TextView descripcion_textview;
 	protected ScrolledWindow descripcion_scroll;
-	//protected ListStoreColecciones lista_colecciones;
 	protected ComboBox combo_colecciones;
 	protected SelectorFecha fecha;
 	protected Entry fuente_entry;
@@ -51,8 +49,6 @@ public class Nomeolvides.DialogoHecho : Dialog
 		
 		this.combo_colecciones = new ComboBox ();
 		this.fecha = new SelectorFecha ();
-
-		//this.lista_colecciones = colecciones_liststore;
 
 		var descripcion_frame = new Frame( "Descripcion" );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
@@ -82,7 +78,6 @@ public class Nomeolvides.DialogoHecho : Dialog
 		box_hecho.pack_start (box_labels, true, false, 0);
 		box_hecho.pack_start (box_widgets, true, true, 0);
 	
-		
 		var contenido = this.get_content_area() as Box;
 
 		contenido.pack_start(box_hecho, false, false, 0);

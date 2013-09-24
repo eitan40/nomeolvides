@@ -18,11 +18,9 @@
  */
 
 using Gtk;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.ListStoreHechos : ListStore {
-	private ArrayList<string> hechos_cache;
 	private TreeIter iterador;
 	public int anio { get; private set; }
 	
@@ -42,56 +40,29 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 
 	private void constructor () {		
 		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
-		this.hechos_cache = new ArrayList<string> ();
 		this.set_column_types(tipos);
 		this.set_sort_column_id(3, SortType.ASCENDING);
 		this.set_sort_func(3, ordenar_hechos);	
 	}
 
-	public bool agregar (Hecho nuevo) {	
-		bool retorno = false;
-		if (this.unico(nuevo)) {
-			this.append(out iterador);
-			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
-			this.hechos_cache.add(nuevo.hash);
-			retorno = true;
-		}
-		return retorno;
+	public void agregar (Hecho nuevo) {	
+		this.append(out iterador);
+		this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
 	}
 
 	public void eliminar (TreeIter iter, Hecho a_eliminar ) {
-		this.hechos_cache.remove(a_eliminar.hash);
 		this.remove (iter);
 	}
 
-	private bool unico (Hecho nuevo) {
-		int i;																									
-		bool retorno = true;
-
-		if (this.hechos_cache.size > 0) {
-			for (i=0; (i < this.hechos_cache.size) && (retorno != false); i++) {
-				if (nuevo.esIgual(this.hechos_cache[i])) {
-				retorno = false;
-				}
-			}
-		}
-		
-		return retorno;	
-	}
-
-	public int length () {
-		return this.hechos_cache.size;
-	}
-
-	public ArrayList<Hecho> lista_de_hechos () {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho>();
+	public Array<Hecho> lista_de_hechos () {
+		Array<Hecho> hechos = new Array<Hecho>();
 		Value hecho;
 		TreeIter iter;
 
 		if ( this.get_iter_first( out iter ) ) {
 			do {
 				this.get_value(iter, 3, out hecho);
-				hechos.add ((Hecho) hecho);
+				hechos.append_val ((Hecho) hecho);
 			}while (this.iter_next(ref iter));
 		}	
 		return hechos;
@@ -100,10 +71,10 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 	public string a_json () {
 		int i;
 		string hechos_json = "";
-		ArrayList<Hecho> hechos = this.lista_de_hechos();
+		Array<Hecho> hechos = this.lista_de_hechos();
 		
-		for (i=0; i < hechos.size; i++) {
-			hechos_json += hechos[i].a_json() + "\n"; 
+		for (i=0; i < hechos.length; i++) {
+			hechos_json += hechos.index(i).a_json() + "\n"; 
 		}
 
 		return hechos_json; 

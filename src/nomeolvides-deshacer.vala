@@ -18,44 +18,45 @@
  */
 
 using Gtk;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.Deshacer : Object {
-	private LinkedList<DeshacerItem> lista_deshacer;
-	private LinkedList<DeshacerItem> lista_rehacer;
+	private Array<DeshacerItem> lista_deshacer;
+	private Array<DeshacerItem> lista_rehacer;
 
 	public Deshacer () {
-		this.lista_deshacer = new LinkedList<DeshacerItem> ();
-		this.lista_rehacer = new LinkedList<DeshacerItem> ();
+		this.lista_deshacer = new Array<DeshacerItem> ();
+		this.lista_rehacer = new Array<DeshacerItem> ();
 	}
 
 	public void guardar_borrado ( Hecho borrar, DeshacerTipo tipo ) {		
-		this.lista_deshacer.offer_head ( new DeshacerItem ( borrar, tipo) );
+		this.lista_deshacer.append_val ( new DeshacerItem ( borrar, tipo) );
 		this.deshacer_con_items ();
 	}
 
 	public void guardar_rehacer ( DeshacerItem rehacer ) {		
 		if ( rehacer.get_tipo () == DeshacerTipo.BORRAR ) {
-			this.lista_rehacer.offer_head ( new DeshacerItem ( rehacer.get_borrado(), rehacer.get_tipo() ) );
+			this.lista_rehacer.append_val ( new DeshacerItem ( rehacer.get_borrado(), rehacer.get_tipo() ) );
 		} else {
-			this.lista_rehacer.offer_head ( new DeshacerItem ( rehacer.get_editado(), rehacer.get_tipo() ) );
-			this.lista_rehacer.peek_head ().set_editado ( rehacer.get_borrado () );
+			var deshacer = new DeshacerItem ( rehacer.get_editado(), rehacer.get_tipo() );
+			deshacer.set_editado ( rehacer.get_borrado () );
+			this.lista_rehacer.append_val ( deshacer );
 		}
 		this.rehacer_con_items ();
 	}
 
 	public void guardar_editado ( Hecho editado ) {
-		this.lista_deshacer.peek_head ().set_editado ( editado );
+		this.lista_deshacer.index ( this.lista_deshacer.length -1 ).set_editado ( editado );
 	}
 
 	public bool deshacer ( out DeshacerItem item ) {
 		bool retorno = false;
 		item = null;
 		
-		if ( !(this.lista_deshacer.is_empty) ) {
-			item = this.lista_deshacer.poll_head ();
-			if ( this.lista_deshacer.is_empty) {
+		if ( !(this.lista_deshacer.length == 0) ) {
+			item = this.lista_deshacer.index ( this.lista_deshacer.length -1 );
+			this.lista_deshacer.remove_index ( this.lista_deshacer.length -1 );
+			if ( this.lista_deshacer.length == 0 ) {
 				this.deshacer_sin_items ();
 			}
 			this.guardar_rehacer ( item );
@@ -69,19 +70,21 @@ public class Nomeolvides.Deshacer : Object {
 	public bool rehacer ( out DeshacerItem item ) {
 		bool retorno = false;
 		item = null;
-		
-		if ( !(this.lista_rehacer.is_empty) ) {
-			item = this.lista_rehacer.poll_head ();
-			if ( this.lista_rehacer.is_empty) {
+
+		if ( !(this.lista_rehacer.length == 0) ) {
+			item = this.lista_rehacer.index ( this.lista_rehacer.length -1 );
+			this.lista_rehacer.remove_index ( this.lista_rehacer.length -1 );
+			if ( this.lista_rehacer.length == 0 ) {
 				this.rehacer_sin_items ();
 			}
-			
+
 			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
 				this.guardar_borrado ( item.get_editado (), item.get_tipo ());
 				this.guardar_editado ( item.get_borrado ());
 			} else {
 				this.guardar_borrado ( item.get_borrado (), item.get_tipo ());
 			}
+			
 			retorno = true;
 		} else {
 			this.rehacer_sin_items ();
@@ -90,7 +93,7 @@ public class Nomeolvides.Deshacer : Object {
 	}
 
 	public void borrar_rehacer () {
-		this.lista_rehacer.clear ();
+		this.lista_rehacer = new Array<DeshacerItem> ();;
 		this.rehacer_sin_items ();
 	}
 

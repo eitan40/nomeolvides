@@ -18,7 +18,6 @@
  */
 
 using GLib;
-using Gee;
 using Sqlite;
 
 public class Nomeolvides.AccionesDB : Object {
@@ -77,23 +76,23 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.update_coleccion ( coleccion );
 	}
 
-	public ArrayList<Hecho> select_hechos ( string where = "" ) {
+	public Array<Hecho> select_hechos ( string where = "" ) {
 		return this.dbms.select_hechos ( where );
 	}
 
-	public ArrayList<Hecho> select_hechos_visibles ( string where = "" ) {
+	public Array<Hecho> select_hechos_visibles ( string where = "" ) {
 		return this.dbms.select_hechos_visibles ( where );
 	}
 
-	public ArrayList<Lista> select_listas ( string where = "" ) {
+	public Array<Lista> select_listas ( string where = "" ) {
 		return this.dbms.select_listas ( where );
 	}
 
-	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
+	public Array<Hecho> select_hechos_lista ( Lista lista ) {
 		return this.dbms.select_hechos_lista ( lista ); 
 	}
 
-	public ArrayList<Coleccion> select_colecciones ( string where = "" ) {
+	public Array<Coleccion> select_colecciones ( string where = "" ) {
 		return this.dbms.select_colecciones ( where );
 	}
 

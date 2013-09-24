@@ -18,7 +18,6 @@
  */
 
 using Gtk;
-using Gee;
 using GLib;
 using Nomeolvides;
 
@@ -125,10 +124,11 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void save_as_file ( string archivo ) {
 		string a_guardar = "";
-		var array_hechos = this.db.select_hechos ();
+		var hechos = this.db.select_hechos ();
 		
-		foreach (Hecho h in array_hechos ) {
-			a_guardar += h.a_json() + "\n"; 
+		for ( int i=0; i < hechos.length; i++ ) {
+			var hecho = hechos.index (i);
+			a_guardar += hecho.a_json () + "\n";			
 		}
 
 		Archivo.escribir ( archivo, a_guardar );
@@ -176,39 +176,42 @@ public class Nomeolvides.Datos : GLib.Object {
 
 		bool hay = false;
 		var colecciones = this.db.select_colecciones ( "WHERE visible=\"true\"" );
-		if ( colecciones.size > 0 ) {
+		if ( colecciones.length > 0 ) {
 			hay = true;
 		}
 		return hay;
 	}
 
-	private ListStoreHechos armar_liststore_hechos ( ArrayList<Hecho> hechos) {
+	private ListStoreHechos armar_liststore_hechos ( Array<Hecho> hechos) {
 		var liststore = new ListStoreHechos ();
 
-		foreach ( Hecho h in hechos ) {
-			liststore.agregar ( h );
+		for ( int i=0; i < hechos.length; i++ ) {
+			var hecho = hechos.index (i);
+			liststore.agregar ( hecho );			
 		}
 
 		return liststore;
 	}
 
-	private ListStoreListas armar_liststore_listas ( ArrayList<Lista> listas) {
+	private ListStoreListas armar_liststore_listas ( Array<Lista> listas) {
 		var liststore = new ListStoreListas ();
 
-		foreach ( Lista l in listas ) {
-			var cantidad_hechos = this.db.count_hechos_lista ( l );
-			liststore.agregar_lista ( l, cantidad_hechos );			
+		for ( int i=0; i < listas.length; i++ ) {
+			var lista = listas.index (i);
+			var cantidad_hechos = this.db.count_hechos_lista ( lista );
+			liststore.agregar_lista ( lista, cantidad_hechos );			
 		}
 
 		return liststore;
 	}
 
-	private ListStoreColecciones armar_liststore_colecciones ( ArrayList<Coleccion> colecciones ) {
+	private ListStoreColecciones armar_liststore_colecciones ( Array<Coleccion> colecciones ) {
 		var liststore = new ListStoreColecciones ();
 
-		foreach ( Coleccion c in colecciones ) {
-			var cantidad_hechos = this.db.count_hechos_coleccion ( c );
-			liststore.agregar_coleccion ( c, cantidad_hechos );
+		for ( int i=0; i < colecciones.length; i++ ) {
+			var coleccion = colecciones.index (i);
+			var cantidad_hechos = this.db.count_hechos_coleccion ( coleccion );
+			liststore.agregar_coleccion ( coleccion, cantidad_hechos );			
 		}
 
 		return liststore;

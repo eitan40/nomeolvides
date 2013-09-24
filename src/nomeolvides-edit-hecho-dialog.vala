@@ -18,11 +18,9 @@
  */
 
 using Gtk;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
-	//private ArrayList<string> archivos_colecciones;
 	private int64 hecho_id;
 	
 	public EditHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
@@ -31,8 +29,6 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);
-
-	//	this.archivos_colecciones = new ArrayList<string> (); // acá hay que pedir a la db las colecciones activas	
 	}
 
 	public void set_datos ( Hecho hecho_a_editar ) {

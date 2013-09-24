@@ -23,7 +23,6 @@ uninstall-local:
 
 
 AM_VALAFLAGS = --pkg \
-	gee-0.8 \
 	--pkg \
 	sqlite3 
 

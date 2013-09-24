@@ -18,7 +18,6 @@
  */
 
 using GLib;
-using Gee;
 using Sqlite;
 using Nomeolvides;
 
@@ -32,7 +31,7 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	protected abstract Statement select ( string tabla, string columnas, string where = "" );
 	protected abstract Statement select_distinct ( string tabla, string columnas, string where = "" );
 	protected abstract Statement count ( string tabla, string where );
-	protected abstract ArrayList<Hecho> parse_query_hechos ( Statement stmt );
+	protected abstract Array<Hecho> parse_query_hechos ( Statement stmt );
 	public abstract void insert_hecho ( Hecho hecho );
 	public abstract void insert_lista ( Lista lista );
 	public abstract void insert_hecho_lista ( Hecho hecho, Lista lista );
@@ -45,11 +44,11 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract void update_lista ( Lista lista );
 	public abstract void update_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract void update_coleccion ( Coleccion coleccion );
-	public abstract ArrayList<Hecho> select_hechos ( string where = "" );
-	public abstract ArrayList<Hecho> select_hechos_visibles ( string where = "" );	
-	public abstract ArrayList<Lista> select_listas ( string where = "" );
-	public abstract ArrayList<Hecho> select_hechos_lista ( Lista lista );
-	public abstract ArrayList<Coleccion> select_colecciones ( string where = "" );
+	public abstract Array<Hecho> select_hechos ( string where = "" );
+	public abstract Array<Hecho> select_hechos_visibles ( string where = "" );	
+	public abstract Array<Lista> select_listas ( string where = "" );
+	public abstract Array<Hecho> select_hechos_lista ( Lista lista );
+	public abstract Array<Coleccion> select_colecciones ( string where = "" );
 	public abstract Coleccion select_coleccion ( string where = "" );
 	public abstract Lista select_lista ( string where = "" );
 	public abstract int count_hechos_coleccion ( Coleccion coleccion );

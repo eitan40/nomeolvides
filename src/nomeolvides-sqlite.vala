@@ -19,7 +19,6 @@
 
 using GLib;
 using Sqlite;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
@@ -125,8 +124,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return stmt;
 	} 
 
-	protected ArrayList<Hecho> parse_query_hechos ( Statement stmt ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+	protected Array<Hecho> parse_query_hechos ( Statement stmt ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
 		string[] columnas = {"","","","","","",""};
 		Hecho hecho;
 	
@@ -150,7 +149,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 								  int64.parse (columnas[5]), 
 								  columnas[6]);
 					hecho.id = int64.parse(columnas[7]);
-					hechos.add( hecho );
+					hechos.append_val( hecho );
 					break;
 				default:
 					print ("Error al parsear hechos!!");
@@ -236,8 +235,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		              " WHERE id=\"" + coleccion.id.to_string() + "\"" );
 	}
 
-	public ArrayList<Hecho> select_hechos ( string where = "" ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+	public Array<Hecho> select_hechos ( string where = "" ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
 		
 		var stmt = this.select ( "hechos",
 		                         "nombre,descripcion,anio,mes,dia,coleccion,fuente,id",
@@ -248,8 +247,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return hechos;
 	}
 
-	public ArrayList<Hecho> select_hechos_visibles ( string where = "" ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+	public Array<Hecho> select_hechos_visibles ( string where = "" ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
 		string where_nuevo = "";
 
 		if ( where == "" ) {
@@ -267,8 +266,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return hechos;
 	}
 
-	public ArrayList<Lista> select_listas ( string where = "" ) {
-		ArrayList<Lista> listas = new ArrayList<Lista> ();
+	public Array<Lista> select_listas ( string where = "" ) {
+		Array<Lista> listas = new Array<Lista> ();
 		string[] columnas = {"",""};
 		Lista lista;
 		
@@ -288,7 +287,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 					lista = new Lista (columnas[0]);
 					lista.id = int64.parse(columnas[1]);
-					listas.add( lista );
+					listas.append_val( lista );
 					break;
 				default:
 					print ("Error!!");
@@ -301,8 +300,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return listas;
 	}
 
-	public ArrayList<Hecho> select_hechos_lista ( Lista lista ) {
-		ArrayList<Hecho> hechos = new ArrayList<Hecho> ();
+	public Array<Hecho> select_hechos_lista ( Lista lista ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
 		string where = " WHERE lista=\"" + lista.id.to_string ()
 			                             + "\" AND listashechos.hecho=hechos.id AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id;";
 		
@@ -315,8 +314,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return hechos;
 	}
 
-	public ArrayList<Coleccion> select_colecciones ( string where = "" ) {
-		ArrayList<Coleccion> colecciones = new ArrayList<Coleccion> ();
+	public Array<Coleccion> select_colecciones ( string where = "" ) {
+		Array<Coleccion> colecciones = new Array<Coleccion> ();
 		string[] columnas = {"","",""};
 		Coleccion coleccion;
 		
@@ -336,7 +335,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 					coleccion = new Coleccion (columnas[0], bool.parse (columnas[1]) );
 					coleccion.id = int64.parse(columnas[2]);
-					colecciones.add( coleccion );
+					colecciones.append_val( coleccion );
 					break;
 				default:
 					print ("Error!!");

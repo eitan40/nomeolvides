@@ -19,7 +19,6 @@
 
 using Gtk;
 using Nomeolvides;
-using Gee;
 
 public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 

@@ -304,11 +304,11 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			this.label_listas.set_text_with_mnemonic ( "Migrando la lista " + this.colecciones.index(i).get_nombre() );
 			this.db.insert_lista ( this.listas.index(i).get_lista () );
 
-			var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  )[0];
+			var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  ).index(0);
 
 			for (int j = 0; j < this.listas.index(i).cantidad_hechos(); j++ ) {
 				var hecho = this.listas.index(i).get_hecho ( j );
-				var hecho_db = (this.db.select_hechos ( "WHERE nombre=\"" + hecho.nombre + "\"  AND anio=\"" + hecho.get_anio().to_string() + "\"  AND mes=\"" + hecho.get_mes().to_string() + "\"  AND dia=\"" + hecho.get_dia().to_string() + "\"" ))[0];
+				var hecho_db = (this.db.select_hechos ( "WHERE nombre=\"" + hecho.nombre + "\"  AND anio=\"" + hecho.get_anio().to_string() + "\"  AND mes=\"" + hecho.get_mes().to_string() + "\"  AND dia=\"" + hecho.get_dia().to_string() + "\"" )).index(0);
 
 				this.db.insert_hecho_lista ( hecho_db, lista_db );
 

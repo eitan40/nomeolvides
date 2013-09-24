@@ -20,35 +20,32 @@
 using Nomeolvides;
 using GLib;
 using Gtk;
-using Gee;
 
 public class Nomeolvides.DescripcionHecho : Box {
 
-	private ArrayList<Label> parrafos;
+	private Array<Label> parrafos;
 
 	public DescripcionHecho ( ) {
 
-		this.parrafos = new ArrayList<Label> ();
+		this.parrafos = new Array<Label> ();
 		this.set_orientation ( Orientation.VERTICAL );
 		this.set_valign ( Align.START );
 		
 	}
 
 	public void agregar_texto ( string texto ) {
-
 		Label nuevo;
 		string[] separado = {};
 
 		this.eliminar_labels ();
-		this.parrafos.clear (); 
+		this.parrafos = new Array<Label> (); 
 
 		separado = texto.split("\n");
 
 		foreach ( string s in separado ) {
-
 			if ( s != "" ) {
 				nuevo = this.crear_label ( s );
-				this.parrafos.add (nuevo);
+				this.parrafos.append_val (nuevo);
 			}
 		}
 		
@@ -57,16 +54,16 @@ public class Nomeolvides.DescripcionHecho : Box {
 	}
 
 	private void mostrar () {
-
-		foreach ( Label parrafo in this.parrafos ) {
-			this.pack_start (parrafo);
+		for( int i=0; i < this.parrafos.length; i++ ) {
+			var parrafo = this.parrafos.index (i);
+			this.pack_start ( parrafo );
 		}
 		this.show_all ();
 	}
 
 	private void eliminar_labels () {
-
-		foreach ( Label parrafo in this.parrafos ) {
+		for( int i=0; i < this.parrafos.length; i++ ) {
+			var parrafo = this.parrafos.index (i);
 			parrafo.destroy();
 		}
 	}

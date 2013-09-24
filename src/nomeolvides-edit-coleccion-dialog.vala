@@ -18,7 +18,6 @@
  */
 
 using Gtk;
-using Gee;
 using Nomeolvides;
 
 public class Nomeolvides.EditColeccionDialog : DialogColeccion
