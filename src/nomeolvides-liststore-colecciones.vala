@@ -48,13 +48,15 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 
 		if ( this.get_iter_first( out iter ) ) {
 			do {
-				this.get_value(iter, 2, out coleccion);
+				this.get_value(iter, 3, out coleccion);
 				if ( id == (int64) coleccion) {
 					break;
 				}
 				i++;
 			}while (this.iter_next(ref iter));
 		}
+
+		print ("int64 id: " + id.to_string() + " int i: " + i.to_string() + "\n");
 		return i;
 	}
 

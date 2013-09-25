@@ -113,7 +113,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 		this.combo_colecciones.get_active_iter( out iter );
 		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
-		liststore.get_value ( iter, 2, out value_coleccion_id );
+		liststore.get_value ( iter, 3, out value_coleccion_id );
 		
 		return (int64) value_coleccion_id;
 	}
