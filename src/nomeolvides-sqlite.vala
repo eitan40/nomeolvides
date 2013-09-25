@@ -99,6 +99,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	protected Statement select ( string tabla, string columnas, string where = "" ) {
 		Statement stmt;
+
+		//print ("SQL: " + "SELECT " + columnas + " FROM " + tabla + " " + where + "\n");
 		
 		this.open ( );
 		this.query ( "SELECT " + columnas + " FROM " + tabla + " " + where, out stmt);

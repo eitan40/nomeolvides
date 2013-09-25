@@ -25,16 +25,16 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 	
 	public ListStoreColecciones () {
 		Type[] tipos= { typeof(string), typeof(bool), typeof(int),typeof(int64) };
-		this.set_column_types(tipos);
+		this.set_column_types( tipos );
 	}
 
 	public void agregar_coleccion ( Coleccion coleccion, int cantidad_hechos ) {		
 		this.append ( out this.iterador );
 		this.set ( this.iterador,
 		           0,coleccion.nombre,
-		           1,coleccion.visible,
-		           3,cantidad_hechos,
-			       2,coleccion.id );
+		           1,coleccion.visible,		           
+			       2,cantidad_hechos,
+		           3,coleccion.id);
 	}
 
 	public void borrar_coleccion ( TreeIter iter, Coleccion a_eliminar ) {
@@ -62,7 +62,7 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 		Value value_cantidad;
 		int cantidad = 0;
 
-		this.get_value(iter, 3, out value_cantidad);
+		this.get_value( iter, 3, out value_cantidad );
 
 		cantidad = (int) value_cantidad;
 

@@ -211,7 +211,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		for ( int i=0; i < colecciones.length; i++ ) {
 			var coleccion = colecciones.index (i);
 			var cantidad_hechos = this.db.count_hechos_coleccion ( coleccion );
-			liststore.agregar_coleccion ( coleccion, cantidad_hechos );			
+			liststore.agregar_coleccion ( coleccion, cantidad_hechos );
 		}
 
 		return liststore;

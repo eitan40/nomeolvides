@@ -41,7 +41,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 2, out coleccion);
+			this.get_model().get_value (iterador, 3, out coleccion);
 		}
 
 		return (int64) coleccion;
