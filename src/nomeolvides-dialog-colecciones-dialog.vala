@@ -31,7 +31,7 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	private AccionesDB db;
 		
 	public ColeccionesDialog (VentanaPrincipal ventana, ListStoreColecciones liststore_colecciones) {
-		this.set_title ("Colecciones de hechos históricos");
+		this.set_title (_("Historical Facts Collections"));
 		this.set_modal ( true );
 		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );

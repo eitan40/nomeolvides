@@ -24,7 +24,7 @@ public class Nomeolvides.AddColeccionDialog : DialogColeccion
 {	
 	public AddColeccionDialog ( )
 	{
-		this.title = "Agregar parámetos de una coleccion";
+		this.title = _("Add a Collection");
 		this.add_button (Stock.ADD , ResponseType.APPLY);
 	}
 

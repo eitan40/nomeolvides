@@ -30,7 +30,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	
 	public AddHechoListaDialog ( VentanaPrincipal ventana )
 	{
-		this.title = "Agregar un hecho a una lista";
+		this.title = _("Add Fact to List");
 		this.set_default_size (270,150);
 		this.set_size_request (250,125);
 		this.set_transient_for ( ventana as Window );
@@ -44,8 +44,8 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		
 		this.label_hecho = new Label ( null );
 
-		var label_pregunta = new Label ("Quiere agregar el hecho:");
-		var label_listas = new Label ( "a la lista " );
+		var label_pregunta = new Label (_("Add") + ":");
+		var label_listas = new Label ( _("to list") + " " );
 
 		var box_principal = new Box (Orientation.VERTICAL, 0 );
 		box_principal.pack_start (label_pregunta, true, true, 0 );

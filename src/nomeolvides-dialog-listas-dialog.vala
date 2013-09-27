@@ -30,7 +30,7 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 	private AccionesDB db;
 		
 	public ListasDialog (VentanaPrincipal ventana, ListStoreListas liststore_lista) {
-		this.set_title ("Lista personalizadas de hechos históricos");
+		this.set_title (_("Custom Lists"));
 		this.set_modal ( true );
 		this.set_default_size (500, 350);
 		this.set_transient_for ( ventana as Gtk.Window );

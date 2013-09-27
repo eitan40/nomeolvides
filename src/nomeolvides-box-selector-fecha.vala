@@ -52,8 +52,8 @@ public class Nomeolvides.SelectorFecha : Box {
 
 	private void set_meses_lista () {
 		TreeIter iter;
-		string[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
-			              "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+		string[] meses = {_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"),
+											_("August"), _("September"), _("October"), _("November"), _("December")};
 		
 		this.mes_lista = new ListStore ( 2, typeof(string), typeof(int) );
 

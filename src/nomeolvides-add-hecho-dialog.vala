@@ -25,7 +25,7 @@ public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
 	public AddHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
 		base (ventana, colecciones);
 
-		this.set_title ("Añadir un Hecho Histórico");
+		this.set_title (_("Add a Historical Fact"));
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);

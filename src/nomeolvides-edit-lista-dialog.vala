@@ -26,7 +26,7 @@ public class Nomeolvides.EditListaDialog : DialogLista
 	
 	public EditListaDialog ( )
 	{
-		this.title = "Editar la lista personalizada";
+		this.title = _("Edit Custom List");
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 	}
 

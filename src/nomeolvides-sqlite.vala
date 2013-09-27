@@ -35,7 +35,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		
 		this.rc = Database.open ( nombre_db, out this.db );
 		if ( this.rc != Sqlite.OK) {
-			stderr.printf ( "No se pudo abrir la base de dato: %d, %s\n", this.rc, this.db.errmsg () );
+			stderr.printf ( _("Could not open the data base") + ": %d, %s\n", this.rc, this.db.errmsg () );
 			retorno = false;
 		}
 
@@ -54,7 +54,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.rc = this.db.prepare_v2 ( sql_query, -1, out stmt, null );
 
 		if ( rc == 1 ) {
-			stderr.printf ( "No se pudo ejecutar la sentencia: %s - %d - %s", sql_query, this.rc, this.db.errmsg () );
+			stderr.printf ( _("Failed to execute the sentence") + ": %s - %d - %s", sql_query, this.rc, this.db.errmsg () );
 			retorno = false;
 		}
 
@@ -154,7 +154,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					hechos.append_val( hecho );
 					break;
 				default:
-					print ("Error al parsear hechos!!");
+					print (_("Error parsing facts"));
 					break;
 			}
 			
@@ -292,7 +292,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					listas.append_val( lista );
 					break;
 				default:
-					print ("Error!!");
+					print (_("Error"));
 					break;
 			}
 			
@@ -340,7 +340,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					colecciones.append_val( coleccion );
 					break;
 				default:
-					print ("Error!!");
+					print (_("Error"));
 					break;
 			}
 			
@@ -371,7 +371,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					coleccion.id = int64.parse(columnas[2]);
 					break;
 				default:
-					print ("Error!!");
+					print (_("Error"));
 					break;
 			}
 		}
@@ -400,7 +400,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					lista.id = int64.parse(columnas[1]);
 					break;
 				default:
-					print ("Error!!");
+					print (_("Error"));
 					break;
 			}
 		}
@@ -460,7 +460,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 					
 					break;
 				default:
-					print ("Error al obtener la lista de años!!");
+					print (_("Error parsing lists"));
 					break;
 			}
 			

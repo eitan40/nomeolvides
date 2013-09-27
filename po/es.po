@@ -1,0 +1,349 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-09-27 02:13-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
+"Language-Team: Spanish <nomeolvides@desarrolladores.com.ar>\n"
+"Language: es \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../data/nomeolvides.desktop.in.in.h:1
+msgid "historia;hechos;"
+msgstr "history;facts"
+
+#: ../data/nomeolvides.desktop.in.in.h:2
+msgid "Gestor de efemérides"
+msgstr "Ephemeride Maganger"
+
+#: ../src/nomeolvides-add-coleccion-dialog.vala:27
+msgid "Add a Collection"
+msgstr "Agregar una Coleccion"
+
+#: ../src/nomeolvides-add-hecho-dialog.vala:28
+msgid "Add a Historical Fact"
+msgstr "Agregar Hecho Histórico"
+
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:33
+msgid "Add Fact to List"
+msgstr "Agregar Hecho a la Lista"
+
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:47
+msgid "Add"
+msgstr "Agregar"
+
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:48
+msgid "to list"
+msgstr "a la lista"
+
+#: ../src/nomeolvides-add-lista-dialog.vala:27
+msgid "Add Custom List"
+msgstr "Agregar Lista Personalizada"
+
+#: ../src/nomeolvides-app.vala:67
+msgid "Configure Collections"
+msgstr "Configurar Colecciones"
+
+#: ../src/nomeolvides-app.vala:68
+msgid "Configure Lists"
+msgstr "Configurar Listas"
+
+#: ../src/nomeolvides-app.vala:69
+msgid "Export Facts"
+msgstr "Exportar Hechos"
+
+#: ../src/nomeolvides-app.vala:70
+msgid "Import Facts"
+msgstr "Importar Hechos"
+
+#: ../src/nomeolvides-app.vala:71 ../src/nomeolvides-configuracion.vala:32
+msgid "About Nomeolvides"
+msgstr "Acerca de Nomeolvides"
+
+#: ../src/nomeolvides-app.vala:72
+msgid "Quit"
+msgstr "Salir"
+
+#: ../src/nomeolvides-app.vala:294
+#: ../src/nomeolvides-box-anios-hechos-vista.vala:66
+#: ../src/nomeolvides-treeview-view-anios.vala:32
+msgid "Years"
+msgstr "Años"
+
+#: ../src/nomeolvides-archivo.vala:105 ../src/nomeolvides-archivo.vala:120
+msgid "Error while open"
+msgstr "Error al abrir"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:32
+msgid "Remove Fact from List"
+msgstr "Elimnar Hecho de la Lista"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:44
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:31
+msgid "Do you want to remove fact"
+msgstr "Desea eliminar el hecho"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:45
+msgid "from list"
+msgstr "de la lista"
+
+#: ../src/nomeolvides-box-anios-hechos-vista.vala:67
+msgid "Lists"
+msgstr "Listas"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "January"
+msgstr "Enero"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "February"
+msgstr "Febrero"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "March"
+msgstr "Marzo"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "April"
+msgstr "Abril"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "May"
+msgstr "Mayo"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "June"
+msgstr "Junio"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:55
+msgid "July"
+msgstr "Julio"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:56
+msgid "August"
+msgstr "Agosto"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:56
+msgid "September"
+msgstr "Septimbre"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:56
+msgid "October"
+msgstr "Octubre"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:56
+msgid "November"
+msgstr "Noviembre"
+
+#: ../src/nomeolvides-box-selector-fecha.vala:56
+msgid "December"
+msgstr "Diciembre"
+
+#: ../src/nomeolvides-box-vista-hecho.vala:67
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
+msgid "Source"
+msgstr "Fuente"
+
+#: ../src/nomeolvides-configuracion.vala:33
+msgid "Historical ephemeris manager"
+msgstr "Gestor de efemérides histórica"
+
+#: ../src/nomeolvides-configuracion.vala:34
+msgid "and"
+msgstr "y"
+
+#: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:26
+msgid "Delete Collection"
+msgstr "Eliminar Colección"
+
+#: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:30
+msgid "Do you want to remove collection"
+msgstr "Desea eliminar la colección"
+
+#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:26
+msgid "Delete Custom List"
+msgstr "Eliminar Lista Personalizada"
+
+#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:31
+msgid "Do you want to remove custom list"
+msgstr "Desea eliminar la lista personalizada"
+
+#: ../src/nomeolvides-dialog-coleccion.vala:36
+msgid "Colection name"
+msgstr "Nombre de la Colección"
+
+#: ../src/nomeolvides-dialog-colecciones-dialog.vala:34
+msgid "Historical Facts Collections"
+msgstr "Colección de Hechos Históricos"
+
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:41
+#: ../src/nomeolvides-treeview-colecciones.vala:28
+#: ../src/nomeolvides-treeview-listas.vala:25
+#: ../src/nomeolvides-treeview-listas.vala:30
+#: ../src/nomeolvides-treeview-view-hechos.vala:29
+msgid "Name"
+msgstr "Nombre"
+
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:42
+#: ../src/nomeolvides-treeview-view-hechos.vala:30
+msgid "Date"
+msgstr "Fecha"
+
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:43
+msgid "Save in"
+msgstr "Guardar en"
+
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:53
+msgid "Description"
+msgstr "Descripción"
+
+#: ../src/nomeolvides-dialog-lista.vala:36
+msgid "List Name"
+msgstr "Nombre de la Lista"
+
+#: ../src/nomeolvides-dialog-listas-dialog.vala:33
+msgid "Custom Lists"
+msgstr "Listas Personalizadas"
+
+#: ../src/nomeolvides-edit-coleccion-dialog.vala:28
+msgid "Edit Collection"
+msgstr "Editar Colección"
+
+#: ../src/nomeolvides-edit-hecho-dialog.vala:28
+msgid "Edit Fact"
+msgstr "Editar Hecho"
+
+#: ../src/nomeolvides-edit-lista-dialog.vala:29
+msgid "Edit Custom List"
+msgstr "Editar Lista Personalizada"
+
+#: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:28
+msgid "Choose File"
+msgstr "Elija un Archivo"
+
+#: ../src/nomeolvides-file-chooser-dialog-savefile-dialog.vala:28
+msgid "Save File"
+msgstr "Guardar Archivo"
+
+#: ../src/nomeolvides-migrador.vala:54
+msgid "Start migration"
+msgstr "Comenzar Migración"
+
+#: ../src/nomeolvides-migrador.vala:56
+msgid ""
+"Dear user,\n"
+"\n"
+"Since this version of Nomeolvides has a lot of internal changes to improve "
+"speed and memory usage to handle many facts, it is necessary to undertake a "
+"migration of data loaded with previous versions.\n"
+"\n"
+"We apologize for the inconvenience, but these changes represent a "
+"fundamental step to implement different ideas we have designed for "
+"Nomeolvides, as the collaborative work.\n"
+"\n"
+"The migration process is automatic and files migrated data will not be "
+"deleted after the process, to avoid losing your work in case something does "
+"not go as planned. Please verify that all data has been successfully "
+"migrated after the process and if is not the case notify us to "
+"desarrolladores@softwareperonista.com.ar\n"
+"\n"
+"Sincerely, Software Peronista team."
+msgstr ""
+
+#: ../src/nomeolvides-migrador.vala:66
+msgid "Database Migration"
+msgstr "Migración de la Base de Datos"
+
+#: ../src/nomeolvides-migrador.vala:207 ../src/nomeolvides-migrador.vala:288
+msgid "Migrating Collections"
+msgstr "Migrando Colecciones"
+
+#: ../src/nomeolvides-migrador.vala:209
+msgid "Facts from Collection"
+msgstr "Hechos de la Colección"
+
+#: ../src/nomeolvides-migrador.vala:212 ../src/nomeolvides-migrador.vala:322
+msgid "Migrating Lists"
+msgstr "Migrando Listas"
+
+#: ../src/nomeolvides-migrador.vala:214
+msgid "Facts from List"
+msgstr "Hechos de la Lista"
+
+#: ../src/nomeolvides-migrador.vala:233
+msgid "Finish Migration"
+msgstr "Finalizar Migración"
+
+#: ../src/nomeolvides-migrador.vala:267
+msgid "Migrating Collection"
+msgstr "Migrando Colección"
+
+#: ../src/nomeolvides-migrador.vala:276 ../src/nomeolvides-migrador.vala:281
+#: ../src/nomeolvides-migrador.vala:310 ../src/nomeolvides-migrador.vala:315
+msgid "Migrating Facts"
+msgstr "Migrando Hechos"
+
+#: ../src/nomeolvides-migrador.vala:296
+msgid "Migrating List"
+msgstr "Migrando Lista"
+
+#: ../src/nomeolvides-sqlite.vala:38
+msgid "Could not open the data base"
+msgstr "No se pudo abrir la base de datos"
+
+#: ../src/nomeolvides-sqlite.vala:57
+msgid "Failed to execute the sentence"
+msgstr "Error al ejecutar la sentencia"
+
+#: ../src/nomeolvides-sqlite.vala:157
+msgid "Error parsing facts"
+msgstr "Error parseando hechos"
+
+#: ../src/nomeolvides-sqlite.vala:295 ../src/nomeolvides-sqlite.vala:343
+#: ../src/nomeolvides-sqlite.vala:374 ../src/nomeolvides-sqlite.vala:403
+msgid "Error"
+msgstr "Error"
+
+#: ../src/nomeolvides-sqlite.vala:463
+msgid "Error parsing lists"
+msgstr "Error parseando listas"
+
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:61
+msgid "Send"
+msgstr "Enviar"
+
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:113
+msgid "Year"
+msgstr "Año"
+
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:145
+msgid "Add to list"
+msgstr "Agregar a la lista"
+
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:149
+msgid "Remove from list"
+msgstr "ELiminar de la lista"
+
+#: ../src/nomeolvides-treeview-colecciones.vala:32
+msgid "Visible"
+msgstr "Visible"
+
+#: ../src/nomeolvides-treeview-listas.vala:26
+msgid "Amount of facts"
+msgstr "Cantidad de Hechos"
+
+#~ msgid "Ephemerides Manager"
+#~ msgstr "Gestor de Efemérides"
+
+#, fuzzy
+#~ msgid "Nomeolvides"
+#~ msgstr "Nomeolvides"

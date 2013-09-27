@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(nomeolvides, 0.7.473, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
+AC_INIT(nomeolvides, 0.7.475, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
 
 
 AC_CONFIG_HEADERS([config.h])
@@ -19,13 +19,27 @@ LT_INIT
 dnl Check for vala
 AM_PROG_VALAC([0.20.0])
 
+# i18n stuff
+IT_PROG_INTLTOOL([0.40])
+
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.17])
+
+GETTEXT_PACKAGE=nomeolvides
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE], ["$GETTEXT_PACKAGE"], [Gettext Package])
+AC_SUBST(GETTEXT_PACKAGE)
+
+nomeolvideslocaledir='${prefix}/${DATADIRNAME}/locale'
+AC_SUBST(nomeolvideslocaledir)
+
 
 PKG_CHECK_MODULES(NOMEOLVIDES, sqlite3
 [gtk+-3.0 ])
 
-
 AC_OUTPUT([
 Makefile
 src/Makefile
-
+po/Makefile.in
+data/Makefile
+data/nomeolvides.desktop.in
 ])

@@ -7,10 +7,11 @@ uidir = $(pkgdatadir)/ui
 
 
 AM_CPPFLAGS = \
+	-include config.h \
+	$(NOMEOLVIDES_CFLAGS) \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
-	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
-	$(NOMEOLVIDES_CFLAGS)
+	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\"
 
 AM_CFLAGS =\
 	 -Wall\

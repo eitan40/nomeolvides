@@ -23,12 +23,12 @@ using Nomeolvides;
 public class Nomeolvides.BorrarListaDialogo : Dialog {
 	public BorrarListaDialogo ( Lista lista_a_borrar, int cantidad_hechos ) {
 		this.set_modal ( true );
-		this.title = "Borrar Lista Personalizada";
+		this.title = _("Delete Custom List");
 		Label pregunta = new Label.with_mnemonic ( "" );
 		Label lista_nombre = new Label.with_mnemonic ( "" );
 		Label lista_cantidad_hechos = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente lista personalizada?</big>" );
+		pregunta.set_markup ( "<big>" + _("Do you want to remove custom list") + "</big>" );
 		lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
 		lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ cantidad_hechos.to_string() +"</span> hecho");
 		

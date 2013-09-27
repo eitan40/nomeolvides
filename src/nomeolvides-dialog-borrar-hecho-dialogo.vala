@@ -28,7 +28,7 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 		Label hecho_nombre = new Label.with_mnemonic ( "" );
 		Label hecho_fecha = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar el siguiente hecho histórico?</big>" );
+		pregunta.set_markup ( "<big>" + _("Do you want to remove fact") + "</big>" );
 		hecho_nombre.set_markup ( "<span font_weight=\"heavy\">"+ hecho_a_borrar.nombre +"</span>");
 		hecho_fecha.set_markup ( "de <span font_style=\"italic\">"+ hecho_a_borrar.fecha_to_string() +"</span>");
 

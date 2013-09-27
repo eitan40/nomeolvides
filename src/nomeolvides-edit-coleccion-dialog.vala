@@ -25,7 +25,7 @@ public class Nomeolvides.EditColeccionDialog : DialogColeccion
 	private int64 id_coleccion;
 	public EditColeccionDialog ( )
 	{
-		this.title = "Editar parámetros de la coleccion";
+		this.title = _("Edit Collection");
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 	}
 

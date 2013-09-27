@@ -38,10 +38,10 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
 		
-		var nombre_label = new Label.with_mnemonic ("Nombre: ");
-		var fecha_label = new Label.with_mnemonic ("Fecha: ");
-		var archivo_label = new Label.with_mnemonic ("Guardar en: ");
-		var fuente_label = new Label.with_mnemonic ("Fuente: ");
+		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
+		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
+		var archivo_label = new Label.with_mnemonic (_("Save in") + ": ");
+		var fuente_label = new Label.with_mnemonic (_("Source") + ": ");
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		
 		this.nombre_entry = new Entry ();
@@ -50,7 +50,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.combo_colecciones = new ComboBox ();
 		this.fecha = new SelectorFecha ();
 
-		var descripcion_frame = new Frame( "Descripcion" );
+		var descripcion_frame = new Frame( _("Description") );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
 		this.descripcion_scroll = new ScrolledWindow ( null, null );
 		this.descripcion_scroll.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);

@@ -23,12 +23,12 @@ using Nomeolvides;
 public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 	public BorrarColeccionDialogo ( Coleccion coleccion_a_borrar ) {
 		this.set_modal ( true );
-		this.title = "Borrar Coleccion";
+		this.title = _("Delete Collection");
 		Label pregunta = new Label.with_mnemonic ( "" );
 		Label coleccion_nombre = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>¿Está seguro que desea borrar la siguiente coleccion?</big>" );
-		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>");
+		pregunta.set_markup ( "<big>" + _("Do you want to remove collection") + "</big>" );
+		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>?");
 
 		Box box = new Box ( Orientation.VERTICAL, 0 );
 

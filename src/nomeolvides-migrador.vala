@@ -51,17 +51,9 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.contenido = this.get_content_area() as Box;
 		this.grid = new Grid ();
 		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
-		this.siguiente_boton.set_label ("Empezar la migración");
+		this.siguiente_boton.set_label (_("Start migration"));
 		this.siguiente_boton.clicked.connect (this.migracion);
-		var label_mensaje = new Label.with_mnemonic("Estimado usuario,
-        
-        Dado que esta versión de Nomeolvides tiene una gran cantidad de cambios internos para mejorar la velocidad y el uso de memoria al manejar muchos hechos, es necesario llevar adelante una migración de los datos cargados con las versiones anterior.
-        
-        Le rogamos nos disculpe por esta molestia, pero estos cambios representan un paso fundamental para poder implementar distintas ideas que tenemos pensadas para Nomeolvides, como el trabajo en colaboración.
-        
-        El proceso de migración será automático y los archivos con los datos a migrar no serán borrados después del proceso, para evitar la pérdida de su trabajo en caso de que algo no salga como lo previsto. Le rogamos que verifique que todos sus datos se hayan migrado correctamente luego del proceso y en caso de que no sea así nos lo comunique a desarrolladores@softwareperonista.com.ar
-        
-        Atentamente, el equipo de Software Peronista.");
+		var label_mensaje = new Label.with_mnemonic(_("Dear user,\n\nSince this version of Nomeolvides has a lot of internal changes to improve speed and memory usage to handle many facts, it is necessary to undertake a migration of data loaded with previous versions.\n\nWe apologize for the inconvenience, but these changes represent a fundamental step to implement different ideas we have designed for Nomeolvides, as the collaborative work.\n\nThe migration process is automatic and files migrated data will not be deleted after the process, to avoid losing your work in case something does not go as planned. Please verify that all data has been successfully migrated after the process and if is not the case notify us to desarrolladores@softwareperonista.com.ar\n\nSincerely, Software Peronista team."));
 
 		label_mensaje.set_line_wrap ( true );
 		label_mensaje.set_justify ( Justification.FILL );
@@ -71,7 +63,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.grid.set_border_width ( 50 );
 
 		this.ventana = ventana;
-		this.title = "Migrador de la base de hechos";
+		this.title = _("Database Migration");
 		this.set_transient_for ( this.ventana as Window );
 		this.set_modal ( true );
 		this.window_position = Gtk.WindowPosition.CENTER;
@@ -212,14 +204,14 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.grid.set_border_width ( 30 );
 		this.grid.set_column_homogeneous ( true );
 		
-		this.label_colecciones = new Label.with_mnemonic ( "Colecciones para migrar" );
+		this.label_colecciones = new Label.with_mnemonic ( _("Migrating Collections") );
 		this.barra_colecciones = new ProgressBar ();
-		this.label_colecciones_hechos = new Label.with_mnemonic ( "Hechos de la coleccion" );
+		this.label_colecciones_hechos = new Label.with_mnemonic ( _("Facts from Collection") );
 		this.barra_colecciones_hechos = new ProgressBar ();
 
-		this.label_listas = new Label.with_mnemonic ( "Listas para migrar" );
+		this.label_listas = new Label.with_mnemonic ( _("Migrating Lists") );
 		this.barra_listas = new ProgressBar ();
-		this.label_listas_hechos = new Label.with_mnemonic ( "Hechos de la lista" );
+		this.label_listas_hechos = new Label.with_mnemonic ( _("Facts from List") );
 		this.barra_listas_hechos = new ProgressBar ();
 
 		this.barra_colecciones.set_show_text ( true );
@@ -238,7 +230,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.grid.attach (this.barra_listas_hechos,0,8,4,1);
 
 		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
-		this.siguiente_boton.set_label ( "Terminar la migración" );
+		this.siguiente_boton.set_label ( _("Finish Migration") );
 		this.siguiente_boton.set_sensitive ( false );
 		this.siguiente_boton.clicked.connect (  () => { this.destroy (); }  );
 		this.grid.attach ( this.siguiente_boton,3,9,1,1);
@@ -272,7 +264,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos_coleccion) + this.barra_colecciones.fraction;
 			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
 			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
-			this.label_colecciones.set_text_with_mnemonic ( "Migrando la coleccion " + this.colecciones.index(i).get_nombre() );
+			this.label_colecciones.set_text_with_mnemonic ( _("Migrating Collection") + " " + this.colecciones.index(i).get_nombre() );
 
 			for (int j = 0; j < this.colecciones.index(i).cantidad_hechos(); j++ ) {
 				var hecho = this.colecciones.index(i).get_hecho ( j );
@@ -281,19 +273,19 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				this.barra_colecciones_hechos.set_fraction ( progreso_hecho * (j+1) );
 				this.barra_colecciones_hechos.set_text ( ((int)(this.barra_colecciones_hechos.fraction*100)).to_string () + "%" );
 				this.hay_migrados = true;
-				this.label_colecciones_hechos.set_text_with_mnemonic ( "Migrando hechos: " + (j+1).to_string() + " de " + this.colecciones.index(i).cantidad_hechos().to_string() );
+				this.label_colecciones_hechos.set_text_with_mnemonic ( _("Migrating Facts") + ": " + (j+1).to_string() + " de " + this.colecciones.index(i).cantidad_hechos().to_string() );
 				while ( Gtk.events_pending () ) {
 					Gtk.main_iteration ();
 				}
 			}
-			this.label_colecciones_hechos.set_text_with_mnemonic ( "Migrando hechos");
+			this.label_colecciones_hechos.set_text_with_mnemonic ( _("Migrating Facts") );
 			this.barra_colecciones.set_fraction ( progreso_coleccion );
 			this.barra_colecciones.set_text ( ((int)(this.barra_colecciones.fraction*100)).to_string () + "%" );
 			while ( Gtk.events_pending () ){
 				Gtk.main_iteration ();
 			}
 		}
-		this.label_colecciones.set_text_with_mnemonic ( "Migrando las colecciones " );
+		this.label_colecciones.set_text_with_mnemonic ( _("Migrating Collections") );
 		Archivo.renombrar ( Configuracion.archivo_colecciones(), Configuracion.archivo_colecciones() + ".migrado" );
 	}
 
@@ -301,7 +293,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		for (int i = 0; i < this.listas.length; i++ ) {
 			double progreso_lista = ((double) this.listas.index(i).cantidad_hechos() / (double) this.cantidad_hechos_lista) + this.barra_listas.fraction;
 			double progreso_hecho = (double)1/(double)this.listas.index(i).cantidad_hechos();
-			this.label_listas.set_text_with_mnemonic ( "Migrando la lista " + this.colecciones.index(i).get_nombre() );
+			this.label_listas.set_text_with_mnemonic ( _("Migrating List") + " " + this.colecciones.index(i).get_nombre() );
 			this.db.insert_lista ( this.listas.index(i).get_lista () );
 
 			var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  ).index(0);
@@ -315,19 +307,19 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				this.barra_listas_hechos.set_fraction ( progreso_hecho * (j+1) );
 				this.barra_listas_hechos.set_text ( ((int)(this.barra_listas_hechos.fraction*100)).to_string () + "%" );
 				this.hay_migrados = true;
-				this.label_listas_hechos.set_text_with_mnemonic ( "Migrando hechos: " + (j+1).to_string() + " de " + this.listas.index(i).cantidad_hechos().to_string() );
+				this.label_listas_hechos.set_text_with_mnemonic ( _("Migrating Facts") + ": " + (j+1).to_string() + " de " + this.listas.index(i).cantidad_hechos().to_string() );
 				while ( Gtk.events_pending () ) {
 					Gtk.main_iteration ();
 				}
 			}
-			this.label_listas_hechos.set_text_with_mnemonic ( "Migrando hechos");
+			this.label_listas_hechos.set_text_with_mnemonic ( _("Migrating Facts") );
 			this.barra_listas.set_fraction ( progreso_lista );
 			this.barra_listas.set_text ( ((int)(this.barra_listas.fraction*100)).to_string () + "%" );
 			while ( Gtk.events_pending () ){
 				Gtk.main_iteration ();
 			}
 		}
-		this.label_listas.set_text_with_mnemonic ( "Migrando las listas " );
+		this.label_listas.set_text_with_mnemonic ( _("Migrating Lists") );
 		Archivo.renombrar ( Configuracion.archivo_listas(), Configuracion.archivo_listas() + ".migrado" );
 	}
 

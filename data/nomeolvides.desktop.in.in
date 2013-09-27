@@ -1,11 +1,11 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=0.6.1
-Keywords=historia;hechos;
+_Keywords=historia;hechos;
 Type=Application
 Terminal=false
 Categories=GTK;GNOME;Education;
 Exec=nomeolvides
 Name=Nomeolvides
-Comment=Gestor de efemérides
+_Comment=Gestor de efemérides
 Icon=nomeolvides

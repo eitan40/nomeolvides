@@ -58,7 +58,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.delete_button.set_visible_horizontal ( false );
 		this.send_button.is_important = true;
 		this.send_button.set_visible_horizontal ( false );
-		this.send_button.set_label ("Enviar");
+		this.send_button.set_label (_("Send"));
 		this.list_button.is_important = true;
 		this.list_button.set_visible_horizontal ( false );
 		this.list_button_set_agregar ();
@@ -110,7 +110,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public void set_label_anio ( string anio )
 	{
 		if ( anio != "0") {
-			this.label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> Año: " + anio + "</span>" );
+			this.label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> " + _("Year") + ": " + anio + "</span>" );
 		} else {
 			this.label.set_text ( "" );
 		}
@@ -142,10 +142,10 @@ public class Nomeolvides.MainToolbar : Toolbar
 	}
 
 	public void list_button_set_agregar ( ) {
-		this.list_button.set_label ("Agregar a lista");
+		this.list_button.set_label (_("Add to list"));
 	}
 
 	public void list_button_set_quitar ( ) {
-		this.list_button.set_label ("Quitar de lista");
+		this.list_button.set_label (_("Remove from list"));
 	}
 }

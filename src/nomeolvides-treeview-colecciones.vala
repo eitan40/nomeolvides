@@ -25,11 +25,11 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 	
 	public TreeViewColecciones () {
 		
-		this.insert_column_with_attributes ( -1, "Nombre", new CellRendererText(), "text", 0 );
+		this.insert_column_with_attributes ( -1, _("Name"), new CellRendererText(), "text", 0 );
 
 		this.toggle_visible = new CellRendererToggle();
 		this.toggle_visible.toggled.connect ( signal_toggle );
-		this.insert_column_with_attributes ( -1, "Visible", this.toggle_visible, "active", 1 );
+		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 1 );
 	}
 
 	public int64 get_coleccion_cursor () {

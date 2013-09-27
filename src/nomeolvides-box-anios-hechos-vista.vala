@@ -63,8 +63,8 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.scroll_anios_view.add ( this.anios_view );
 		this.scroll_listas_view.add ( this.listas_view );
 
-		this.anios_listas.append_page ( this.scroll_anios_view, new Label("Años") );
-		this.anios_listas.append_page ( this.scroll_listas_view, new Label ("Listas") );
+		this.anios_listas.append_page ( this.scroll_anios_view, new Label(_("Years") ));
+		this.anios_listas.append_page ( this.scroll_listas_view, new Label (_("Lists") ));
 		
 		this.pack_start (this.anios_listas, false, false, 0);
 		this.pack_start (new Separator(Orientation.VERTICAL), false, false, 2);

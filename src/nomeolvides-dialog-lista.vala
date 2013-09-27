@@ -33,7 +33,7 @@ public class Nomeolvides.DialogLista : Gtk.Dialog {
 
 		this.response.connect(on_response);
 		
-		var nombre_label = new Label.with_mnemonic ("Nombre de la lista: ");
+		var nombre_label = new Label.with_mnemonic (_("List Name") + ": ");
 		
 		this.nombre_entry = new Entry ();
 		var grid = new Grid ();

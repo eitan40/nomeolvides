@@ -25,7 +25,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 	
 	public EditHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
 		base (ventana, colecciones );
-		this.set_title ("Editar Hecho Histórico");				
+		this.set_title (_("Edit Fact"));
 
 		this.add_button (Stock.EDIT , ResponseType.APPLY);
 		this.response.connect(on_response);

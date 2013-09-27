@@ -25,7 +25,7 @@ public class Nomeolvides.SaveFileDialog : FileChooserDialog {
     private string ultimo_directorio;
 
     public SaveFileDialog (string directorio_actual) {
-        this.title = "Guardar archivo de hechos";
+        this.title = _("Save File");
         this.action = FileChooserAction.SAVE;
 		this.set_current_folder (directorio_actual);
 

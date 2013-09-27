@@ -102,7 +102,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 		try {
 			FileUtils.get_contents ( path, out contenido_archivo );
 		} catch ( Error e ) {
-			print ("Error al abrir: " + path + "\n");
+			print (_("Error while open") + ": " + path + "\n");
 			contenido_archivo = "";
 		}
 	}
@@ -117,7 +117,7 @@ public class Nomeolvides.Archivo : GLib.Object{
 			try {
 				archivo.load_contents(null ,out contenido, null);
 			}  catch (Error e) {
-				print ("Error al abrir: " + uri + "\n");
+				print (_("Error while open") + ": " + uri + "\n");
 			}
 			contenido_archivo = (string) contenido;
 		} else {

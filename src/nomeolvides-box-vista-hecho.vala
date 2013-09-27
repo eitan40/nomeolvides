@@ -60,11 +60,11 @@ public class Nomeolvides.VistaHecho : Box {
 		bool retorno = false;
 
 		if ( a_mostrar != null ) {
-			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">"+ a_mostrar.nombre +"</span>");
-			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () +"</span>");
+			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">" + a_mostrar.nombre + "</span>");
+			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () + "</span>");
 			this.descripcion.agregar_texto ( a_mostrar.descripcion );
 			if (a_mostrar.fuente != "") {
-				this.label_fuente.set_markup ("Fuente: <span font_style=\"italic\">"+ a_mostrar.fuente +"</span>");
+				this.label_fuente.set_markup (_("Source") + ": " + "<span font_style=\"italic\">" + a_mostrar.fuente + "</span>");
 				this.label_fuente.visible = true;
 			} else {
 				this.label_fuente.visible = false;

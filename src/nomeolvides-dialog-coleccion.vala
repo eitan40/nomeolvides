@@ -33,7 +33,7 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 
 		this.response.connect(on_response);
 		
-		var nombre_coleccion_label = new Label.with_mnemonic ("Nombre de la coleccion: ");
+		var nombre_coleccion_label = new Label.with_mnemonic ( _("Colection name") + ": " );
 		
 		this.nombre_coleccion_entry = new Entry ();
 

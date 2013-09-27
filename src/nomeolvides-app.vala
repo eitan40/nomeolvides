@@ -64,12 +64,12 @@ public class Nomeolvides.App : Gtk.Application
 	public void create_app_menu () {
 		this.application_menu = new GLib.Menu ();
 		
-		this.application_menu.append ( "Configurar Colecciones", "app.config-colecciones-dialog" );
-		this.application_menu.append ( "Configurar Listas Personalizadas", "app.config-listas-dialog" );
-		this.application_menu.append ( "Exportar hechos", "app.exportar" );
-		this.application_menu.append ( "Importar hechos", "app.importar" );
-		this.application_menu.append ( "Acerca de Nomeolvides", "app.create-about-dialog" );
-		this.application_menu.append ( "Salir", "app.window-destroy" );
+		this.application_menu.append ( _("Configure Collections"), "app.config-colecciones-dialog" );
+		this.application_menu.append ( _("Configure Lists"), "app.config-listas-dialog" );
+		this.application_menu.append ( _("Export Facts"), "app.exportar" );
+		this.application_menu.append ( _("Import Facts"), "app.importar" );
+		this.application_menu.append ( _("About Nomeolvides"), "app.create-about-dialog" );
+		this.application_menu.append ( _("Quit"), "app.window-destroy" );
 		
 		this.set_app_menu ( application_menu );		
 		this.add_action_entries (actions_app_menu, this);
@@ -272,7 +272,6 @@ public class Nomeolvides.App : Gtk.Application
 		abrir_archivo.close ();
 	}
 
-
 	private void exportar () {
 		this.save_as_file_dialog ();
 	}
@@ -292,7 +291,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void cargar_lista_hechos () {
 		var pestania = this.window.get_pestania ();
 
-		if ( pestania == "Años") {
+		if ( pestania == _("Years") ) {
 			this.elegir_anio ();
 		} else {
 			this.elegir_lista ();

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## Created by Anjuta
 
-SUBDIRS = src
+SUBDIRS = src po data
 PREFIX=/usr
 
 nomeolvidesdocdir = $(docdir)
@@ -13,8 +13,7 @@ nomeolvidesdoc_DATA = \
 	INSTALL\
 	NEWS
 
-
-EXTRA_DIST = $(nomeolvidesdoc_DATA)
+EXTRA_DIST = $(nomeolvidesdoc_DATA) intltool-extract.in intltool-merge.in intltool-update.in
 
 
 # Remove doc directory on uninstall
@@ -22,12 +21,5 @@ uninstall-local:
 	-rm -r $(nomeolvidesdocdir)
 
 
-AM_VALAFLAGS = --pkg \
-	--pkg \
-	sqlite3 
+AM_VALAFLAGS =--pkg sqlite3
 
-nomeolvidesdesktofiledir = $(datadir)/applications
-nomeolvidesdesktofile_DATA = data/nomeolvides.desktop
-
-nomeolvidesicondir = $(datadir)/pixmaps/
-nomeolvidesicon_DATA = data/nomeolvides.svg
