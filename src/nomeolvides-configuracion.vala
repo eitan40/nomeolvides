@@ -51,10 +51,10 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			int exitstatus;
 
 			try {
-				Process.spawn_command_line_sync ( "sqlite3 " +   Configuracion.base_de_datos () + " -init " +  dir_sql + "/nomeolvides.sql.tablas", out stdout, out stderr, out exitstatus);
+				Process.spawn_command_line_sync ( "sqlite3 " +   Configuracion.base_de_datos () + " \"" +  Configuracion.db_sql () + "\"", out stdout, out stderr, out exitstatus);
 			} catch (SpawnError e) {
 				print ("Error: %s\n", e.message);
-				print ("Comando:\n" + "sqlite3 " +   Configuracion.base_de_datos () + " -init " +  dir_sql + "/nomeolvides.sql.tablas\n\n");
+				print ("Comando:\n" + "sqlite3 " +   Configuracion.base_de_datos () + " \"" +  Configuracion.db_sql () + "\"\n\n");
 				print ("Salida:\n\tstdout : " + stdout + "\n\tstderr : " + stderr + "\n\texitstatus : " + exitstatus.to_string () + "\n");
 			}
 		}
@@ -118,5 +118,39 @@ public class Nomeolvides.Configuracion : GLib.Object {
 
 	private static string archivo_listas_hechos () {
 		return Configuracion.directorio_colecciones_locales () + "/listas";
+	}
+
+	private static string db_sql () {
+	return "PRAGMA foreign_keys=OFF;
+				BEGIN TRANSACTION;
+				CREATE TABLE colecciones (
+					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+					nombre TEXT NOT NULL UNIQUE,
+					visible BOOLEAN NOT NULL
+				);
+				CREATE TABLE hechos (
+					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+					nombre TEXT NOT NULL,
+					descripcion TEXT,
+					anio INTEGER NOT NULL,
+					mes INTEGER NOT NULL,
+					dia INTEGER NOT NULL,
+					fuente TEXT,
+					coleccion INTEGER NOT NULL,
+					FOREIGN KEY (coleccion) REFERENCES colecciones (id) ON DELETE CASCADE
+				 );
+				CREATE TABLE listas (
+					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+					nombre TEXT NOT NULL UNIQUE
+				);
+				CREATE TABLE listashechos (
+					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+					lista INTEGER NOT NULL,
+					hecho INTEGER NOT NULL,
+					FOREIGN KEY (lista) REFERENCES listas (id) ON DELETE CASCADE,
+					FOREIGN KEY (hecho) REFERENCES hechos (id) ON DELETE CASCADE
+				);
+				CREATE UNIQUE INDEX indice_hechos ON hechos (nombre,anio,mes,dia);
+				COMMIT;";
 	}
 }
