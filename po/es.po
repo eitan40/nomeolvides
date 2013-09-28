@@ -1,29 +1,31 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Nomeolvides.
+# Copyright (C) 2013 Software Peronista.
+# This file is distributed under the same license as the Nomeolvides package.
+# Fernando Fernandez <fernando@softwareperonista.com>, 2013.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 02:13-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2013-09-28 17:34-0300\n"
+"PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
-"Language-Team: Spanish <nomeolvides@desarrolladores.com.ar>\n"
+"Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
 "Language: es \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/nomeolvides.desktop.in.in.h:1
-msgid "historia;hechos;"
-msgstr "history;facts"
+#, fuzzy
+msgid "history;facts;"
+msgstr "historia;hechos"
 
 #: ../data/nomeolvides.desktop.in.in.h:2
-msgid "Gestor de efemérides"
-msgstr "Ephemeride Maganger"
+#, fuzzy
+msgid "Ephemeride Manager"
+msgstr "Gestor de Efemérides"
 
 #: ../src/nomeolvides-add-coleccion-dialog.vala:27
 msgid "Add a Collection"
@@ -258,6 +260,24 @@ msgid ""
 "\n"
 "Sincerely, Software Peronista team."
 msgstr ""
+"Estimado usuario,\n"
+"\n"
+"Dado que esta versión de Nomeolvides tiene una gran cantidad de cambios "
+"internos para mejorar la velocidad y el uso de memoria al manejar muchos "
+"hechos, es necesario llevar adelante una migración de los datos cargados con "
+"las versiones anterior.\n"
+"\n"
+"Le rogamos nos disculpe por esta molestia, pero estos cambios representan un "
+"paso fundamental para poder implementar distintas ideas que tenemos pensadas "
+"para Nomeolvides, como el trabajo en colaboración.\n"
+"\n"
+"El proceso de migración será automático y los archivos con los datos a "
+"migrar no serán borrados después del proceso, para evitar la pérdida de su "
+"trabajo en caso de que algo Le rogamos que verifique que todos sus datos se "
+"hayan migrado correctamente luego del proceso y en caso de que no sea así "
+"nos lo comunique a desarrolladores@softwareperonista.com.ar\n"
+"\n"
+"Atentamente, el equipo de Software Peronista."
 
 #: ../src/nomeolvides-migrador.vala:66
 msgid "Database Migration"
@@ -341,8 +361,8 @@ msgstr "Visible"
 msgid "Amount of facts"
 msgstr "Cantidad de Hechos"
 
-#~ msgid "Ephemerides Manager"
-#~ msgstr "Gestor de Efemérides"
+#~ msgid "Gestor de efemérides"
+#~ msgstr "Ephemeride Maganger"
 
 #, fuzzy
 #~ msgid "Nomeolvides"
