@@ -29,6 +29,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer = new Deshacer ();
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
+		this.db.borrar_deshacer ();
 		this.conectar_signals ();
 	}
 
@@ -59,13 +60,14 @@ public class Nomeolvides.Datos : GLib.Object {
 	public void eliminar_hecho ( Hecho hecho ) {
 		this.deshacer.guardar_borrado ( hecho, DeshacerTipo.BORRAR );
 		this.borrar_rehacer ();
-		this.db.delete_hecho ( hecho );
+		this.db.hecho_a_borrar ( hecho );
 		this.datos_cambio_anios ();
 		this.datos_cambio_hechos ();
 	}
 
 	public void edit_hecho ( Hecho hecho ) {
-			this.deshacer.guardar_borrado ( hecho, DeshacerTipo.EDITAR );
+			var hecho_viejo = this.db.select_hechos ("WHERE id=" + hecho.id.to_string()).index(0);
+			this.deshacer.guardar_borrado ( hecho_viejo, DeshacerTipo.EDITAR );
 			this.deshacer.guardar_editado ( hecho );
 			this.borrar_rehacer ();
 			this.db.update_hecho ( hecho );
@@ -75,13 +77,15 @@ public class Nomeolvides.Datos : GLib.Object {
 
 	public void deshacer_cambios () {
 		DeshacerItem item;
-
 		bool hay_hechos_deshacer = this.deshacer.deshacer ( out item ); 
 		if ( hay_hechos_deshacer ){
 			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
-				this.eliminar_hecho ( item.get_editado() );
+				this.db.update_hecho ( item.get_borrado() );
+			} else {
+				this.db.hecho_no_borrar ( item.get_borrado() );
 			}
-			this.agregar_hecho ( item.get_borrado() );
+			this.datos_cambio_anios ();
+			this.datos_cambio_hechos ();
 		}
 	}
 
@@ -91,16 +95,16 @@ public class Nomeolvides.Datos : GLib.Object {
 		bool hay_hechos_rehacer = this.deshacer.rehacer ( out item ); 
 		if ( hay_hechos_rehacer ){
 			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
-				this.eliminar_hecho ( item.get_editado() );
-				this.agregar_hecho ( item.get_borrado() );
+			this.db.update_hecho ( item.get_borrado() );
 			} else {
-				this.eliminar_hecho ( item.get_borrado() );
+				this.db.hecho_a_borrar ( item.get_borrado() );
 			}
+			this.datos_cambio_anios ();
+			this.datos_cambio_hechos ();
 		}
 	}
 
-	public Array<int> lista_de_anios ()
-	{
+	public Array<int> lista_de_anios () {
 		return this.db.lista_de_anios ();
 	}
 

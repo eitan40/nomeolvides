@@ -222,7 +222,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.config_listas_dialog ();
 		}
 
-		if ( this.datos.hay_listas () ) { //si hay listas
+		if ( this.datos.hay_listas () ) {
 			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
 			this.window.get_hecho_actual ( out hecho );
 
@@ -232,7 +232,7 @@ public class Nomeolvides.App : Gtk.Application
 			if (dialogo.run () == ResponseType.APPLY) {
        			this.datos.agregar_hecho_lista ( hecho, dialogo.get_id_lista () );
 			}
-		dialogo.close ();
+			dialogo.close ();
 		}
 	}
 

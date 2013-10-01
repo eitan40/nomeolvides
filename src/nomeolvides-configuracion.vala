@@ -143,6 +143,9 @@ public class Nomeolvides.Configuracion : GLib.Object {
 					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 					nombre TEXT NOT NULL UNIQUE
 				);
+				CREATE TABLE hechosborrar (
+					id INTEGER NOT NULL PRIMARY KEY
+				);
 				CREATE TABLE listashechos (
 					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 					lista INTEGER NOT NULL,
@@ -151,6 +154,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 					FOREIGN KEY (hecho) REFERENCES hechos (id) ON DELETE CASCADE
 				);
 				CREATE UNIQUE INDEX indice_hechos ON hechos (nombre,anio,mes,dia);
+				INSERT INTO hechosborrar VALUES (0);
 				COMMIT;";
 	}
 }

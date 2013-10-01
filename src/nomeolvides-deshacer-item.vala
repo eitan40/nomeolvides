@@ -28,7 +28,7 @@ public class Nomeolvides.DeshacerItem : Object {
 
 	public DeshacerItem ( Hecho borrado, DeshacerTipo tipo ) {
 		this.tipo = tipo;
-		this.borrado = borrado;		
+		this.borrado = borrado;
 	}
 
 	public void set_editado ( Hecho editado ) {

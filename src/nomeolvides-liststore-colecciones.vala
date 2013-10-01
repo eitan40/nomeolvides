@@ -56,7 +56,6 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 			}while (this.iter_next(ref iter));
 		}
 
-		print ("int64 id: " + id.to_string() + " int i: " + i.to_string() + "\n");
 		return i;
 	}
 

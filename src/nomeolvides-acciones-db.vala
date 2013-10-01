@@ -44,6 +44,10 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.insert_coleccion ( coleccion );
 	}
 
+	public void hecho_a_borrar ( Hecho hecho ) {
+		this.dbms.hecho_a_borrar ( hecho );
+	}
+
 	public void delete_hecho ( Hecho hecho ) {
 		this.dbms.delete_hecho ( hecho );
 	}
@@ -58,6 +62,14 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public void delete_coleccion ( Coleccion coleccion ) {
 		this.dbms.delete_coleccion ( coleccion );
+	}
+
+	public void hecho_no_borrar ( Hecho hecho ) {
+		this.dbms.hecho_no_borrar ( hecho );
+	}
+
+	public void borrar_deshacer ( ) {
+		this.dbms.borrar_deshacer ();
 	}
 
 	public void update_hecho ( Hecho hecho ) {
