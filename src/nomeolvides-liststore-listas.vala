@@ -22,10 +22,12 @@ using Nomeolvides;
 
 public class Nomeolvides.ListStoreListas : ListStore {
 	private TreeIter iterador;
+	public bool hay_listas { get; private set; }
 	
 	public ListStoreListas () {
 		Type[] tipos= { typeof(string), typeof(int), typeof(int64) };
 		this.set_column_types(tipos);
+		this.hay_listas = false;
 	}
 
 	public void agregar_lista ( Lista lista, int cantidad_hechos ) {
@@ -35,6 +37,7 @@ public class Nomeolvides.ListStoreListas : ListStore {
 						0,lista.nombre,
 						1,cantidad_hechos,
 		    			2,lista.id );
+			this.hay_listas = true;
 		}
 	}
 

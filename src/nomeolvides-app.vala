@@ -217,6 +217,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void add_hecho_lista () {		
 		Hecho hecho;
+		this.window.get_hecho_actual ( out hecho );
 
 		if ( !( this.datos.hay_listas ()) ) {
 			this.config_listas_dialog ();
@@ -224,7 +225,6 @@ public class Nomeolvides.App : Gtk.Application
 
 		if ( this.datos.hay_listas () ) {
 			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
-			this.window.get_hecho_actual ( out hecho );
 
 				dialogo.set_hecho ( hecho );
                 dialogo.set_listas ( this.datos.lista_de_listas() );

@@ -318,10 +318,15 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public Array<Hecho> select_hechos_lista ( Lista lista ) {
-		Array<Hecho> hechos;
-		string where = " WHERE lista=\"" + lista.id.to_string ();
-			                             
-		hechos = this.select_hechos_visibles ( where ); 
+		Array<Hecho> hechos = new Array<Hecho> ();
+		string where = " WHERE lista=\"" + lista.id.to_string ()
+                     + "\" AND listashechos.hecho=hechos.id AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id;";
+
+		var stmt = this.select ( "hechos,listashechos,colecciones",
+		                    	 "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.id",
+								 where ); 
+  
+		hechos = this.parse_query_hechos ( stmt );
 		
 		return hechos;
 	}

@@ -21,7 +21,6 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
-
 	private ViewHechos hechos_view;
 	private ViewAnios anios_view;
 	private TreeViewListas listas_view;
@@ -136,7 +135,12 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	public void cargar_listas ( ListStoreListas listas ) {
-		this.listas_view.set_model ( listas );
+		if ( listas.hay_listas ) {			
+			this.listas_view.set_model ( listas );
+			this.anios_listas.get_nth_page (1).show ();
+		} else {
+			this.anios_listas.get_nth_page (1).hide ();
+		}
 	}
 
 	public void cargar_lista_hechos ( ListStoreHechos hechos ) {
