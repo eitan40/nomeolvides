@@ -21,6 +21,7 @@ src/nomeolvides-dialog-listas-dialog.c
 src/nomeolvides-edit-coleccion-dialog.c
 src/nomeolvides-edit-hecho-dialog.c
 src/nomeolvides-edit-lista-dialog.c
+src/nomeolvides-importar-hechos.c
 src/nomeolvides-file-chooser-dialog-open-file-dialog.c
 src/nomeolvides-file-chooser-dialog-savefile-dialog.c
 src/nomeolvides-migrador.c
