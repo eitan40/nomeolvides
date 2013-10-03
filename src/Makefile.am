@@ -30,7 +30,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-datos.vala \
 	nomeolvides-box-anios-hechos-vista.vala \
 	nomeolvides-configuracion.vala \
-	nomeolvides-box-descripcion-hecho.vala \
 	nomeolvides-archivo.vala \
 	nomeolvides-treeview-view-anios.vala \
 	nomeolvides-treeview-view-hechos.vala \

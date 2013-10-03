@@ -20,7 +20,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.ImportarHechos : OpenFileDialog {
-	private Entry archivo_entry;
+
 	private ComboBox combo_colecciones;
 
 	// Constructor
