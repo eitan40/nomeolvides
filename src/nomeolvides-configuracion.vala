@@ -146,9 +146,9 @@ public class Nomeolvides.Configuracion : GLib.Object {
 					id INTEGER NOT NULL PRIMARY KEY
 				);
 				CREATE TABLE listashechos (
-					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 					lista INTEGER NOT NULL,
 					hecho INTEGER NOT NULL,
+					PRIMARY KEY (lista,hecho),
 					FOREIGN KEY (lista) REFERENCES listas (id) ON DELETE CASCADE,
 					FOREIGN KEY (hecho) REFERENCES hechos (id) ON DELETE CASCADE
 				);
