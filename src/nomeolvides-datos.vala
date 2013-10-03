@@ -66,7 +66,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void edit_hecho ( Hecho hecho ) {
-			var hecho_viejo = this.db.select_hechos ("WHERE id=" + hecho.id.to_string()).index(0);
+			var hecho_viejo = this.db.select_hechos ("WHERE hechos.id=" + hecho.id.to_string()).index(0);
 			this.deshacer.guardar_borrado ( hecho_viejo, DeshacerTipo.EDITAR );
 			this.deshacer.guardar_editado ( hecho );
 			this.borrar_rehacer ();
