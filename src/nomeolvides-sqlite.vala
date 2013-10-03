@@ -319,7 +319,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	public Array<Hecho> select_hechos_lista ( Lista lista ) {
 		Array<Hecho> hechos = new Array<Hecho> ();
-		string where = " WHERE lista=\"" + lista.id.to_string () "\"" 
+		string where = " WHERE lista=\"" + lista.id.to_string () + "\"" 
                      + "AND listashechos.hecho=hechos.id " 
 				     + "AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id "
 					 + "AND hechos.id NOT IN hechosborrar";
