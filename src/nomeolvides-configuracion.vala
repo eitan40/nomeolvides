@@ -45,7 +45,6 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		}
 
 		if (!Archivo.existe_path ( Configuracion.base_de_datos () ) ) {
-			string dir_sql = ".";
 			string stdout;
 			string stderr;
 			int exitstatus;

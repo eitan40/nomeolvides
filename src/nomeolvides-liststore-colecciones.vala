@@ -28,8 +28,12 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 		this.set_column_types( tipos );
 	}
 
-	public void agregar_coleccion ( Coleccion coleccion, int cantidad_hechos ) {		
-		this.append ( out this.iterador );
+	public void agregar_coleccion ( Coleccion coleccion, int cantidad_hechos, AgregarModo append = AgregarModo.APPEND ) {
+		if ( append == AgregarModo.APPEND ) {
+			this.append ( out this.iterador );
+		} else {
+			this.prepend ( out this.iterador );
+		}
 		this.set ( this.iterador,
 		           0,coleccion.nombre,
 		           1,coleccion.visible,		           
@@ -69,4 +73,9 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 
 		return cantidad;
 	}
+}
+
+public enum Nomeolvides.AgregarModo {
+    PREPEND,
+    APPEND;
 }

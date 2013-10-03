@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 17:34-0300\n"
+"POT-Creation-Date: 2013-10-03 13:10-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -18,12 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/nomeolvides.desktop.in.in.h:1
-#, fuzzy
 msgid "history;facts;"
 msgstr "historia;hechos"
 
 #: ../data/nomeolvides.desktop.in.in.h:2
-#, fuzzy
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
@@ -228,13 +226,25 @@ msgstr "Editar Hecho"
 msgid "Edit Custom List"
 msgstr "Editar Lista Personalizada"
 
-#: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:28
+#: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:29
 msgid "Choose File"
 msgstr "Elija un Archivo"
 
 #: ../src/nomeolvides-file-chooser-dialog-savefile-dialog.vala:28
 msgid "Save File"
 msgstr "Guardar Archivo"
+
+#: ../src/nomeolvides-importar-hechos.vala:31
+msgid "Import Facts From File"
+msgstr "Importar desde un Archivo"
+
+#: ../src/nomeolvides-importar-hechos.vala:35
+msgid "Select Colection"
+msgstr "Sleccione una Colección"
+
+#: ../src/nomeolvides-importar-hechos.vala:40
+msgid "Import to"
+msgstr "Importar a"
 
 #: ../src/nomeolvides-migrador.vala:54
 msgid "Start migration"

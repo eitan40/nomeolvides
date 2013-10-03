@@ -254,7 +254,7 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void save_as_file_dialog () {
 		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
-		guardar_archivo.set_transient_for ( this as Window );
+		guardar_archivo.set_transient_for ( this.window );
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
             this.datos.save_as_file ( guardar_archivo.get_filename () );
@@ -263,11 +263,11 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void importar_dialog () {
-		OpenFileDialog abrir_archivo = new OpenFileDialog(GLib.Environment.get_current_dir ());
-		abrir_archivo.set_transient_for ( this as Window );
+		var abrir_archivo = new ImportarHechos(GLib.Environment.get_current_dir (), this.datos.lista_de_colecciones ());
+		abrir_archivo.set_transient_for ( this.window );
 
-		if (abrir_archivo.run () == ResponseType.ACCEPT) {		
-            this.datos.open_file ( abrir_archivo.get_filename () );
+		if (abrir_archivo.run () == ResponseType.ACCEPT) {
+            this.datos.open_file ( abrir_archivo.get_filename (), abrir_archivo.get_coleccion_id () );
 		}
 		abrir_archivo.close ();
 	}

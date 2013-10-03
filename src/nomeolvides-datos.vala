@@ -108,7 +108,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.db.lista_de_anios ();
 	}
 
-	public void open_file ( string nombre_archivo ) {
+	public void open_file ( string nombre_archivo, int64 coleccion_id ) {
 		string todo;
 		string[] lineas;
 		Hecho nuevoHecho;
@@ -119,8 +119,10 @@ public class Nomeolvides.Datos : GLib.Object {
 		lineas = todo.split_set ("\n");
 
 		for (i=0; i < (lineas.length - 1); i++) {
-			nuevoHecho = new Hecho.json(lineas[i], (int64) 1);
+			print ( "hecho agregado1\n" );
+			nuevoHecho = new Hecho.json(lineas[i], coleccion_id);
 			if ( nuevoHecho.nombre != "null" ) {
+				print ( "hecho agregado2\n" );
 				this.agregar_hecho(nuevoHecho);
 			}
 		}

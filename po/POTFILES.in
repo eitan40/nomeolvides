@@ -23,6 +23,7 @@ src/nomeolvides-edit-hecho-dialog.vala
 src/nomeolvides-edit-lista-dialog.vala
 src/nomeolvides-file-chooser-dialog-open-file-dialog.vala
 src/nomeolvides-file-chooser-dialog-savefile-dialog.vala
+src/nomeolvides-importar-hechos.vala
 src/nomeolvides-migrador.vala
 src/nomeolvides-sqlite.vala
 src/nomeolvides-tooblar-main-toolbar.vala

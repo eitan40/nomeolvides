@@ -23,6 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.OpenFileDialog : FileChooserDialog {
 
     private string ultimo_directorio;
+	protected Button boton_abrir;
 
     public OpenFileDialog (string directorio_actual) {
         this.title = _("Choose File");
@@ -30,7 +31,7 @@ public class Nomeolvides.OpenFileDialog : FileChooserDialog {
 		this.set_current_folder (directorio_actual);
 
         add_button (Stock.CANCEL, ResponseType.CANCEL);
-        add_button (Stock.OPEN, ResponseType.ACCEPT);
+        this.boton_abrir = add_button (Stock.OPEN, ResponseType.ACCEPT) as Button;
         set_default_response (ResponseType.ACCEPT);
 
         if (this.ultimo_directorio != null) {

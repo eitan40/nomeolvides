@@ -65,7 +65,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-colecciones-dialog.vala \
-	nomeolvides-migrador.vala
+	nomeolvides-migrador.vala \
+	nomeolvides-importar-hechos.vala
 
 
 nomeolvides_VALAFLAGS = \
