@@ -9,15 +9,15 @@ src/nomeolvides-borrar-hecho-lista-dialog.vala
 src/nomeolvides-box-anios-hechos-vista.vala
 src/nomeolvides-box-selector-fecha.vala
 src/nomeolvides-box-vista-hecho.vala
+src/nomeolvides-box-colecciones-config.vala
+src/nomeolvides-box-listas-config.vala
 src/nomeolvides-configuracion.vala
 src/nomeolvides-dialog-borrar-coleccion-dialogo.vala
 src/nomeolvides-dialog-borrar-hecho-dialogo.vala
 src/nomeolvides-dialog-borrar-lista-dialog.vala
 src/nomeolvides-dialog-coleccion.vala
-src/nomeolvides-dialog-colecciones-dialog.vala
 src/nomeolvides-dialog-dialogo-hecho.vala
 src/nomeolvides-dialog-lista.vala
-src/nomeolvides-dialog-listas-dialog.vala
 src/nomeolvides-edit-coleccion-dialog.vala
 src/nomeolvides-edit-hecho-dialog.vala
 src/nomeolvides-edit-lista-dialog.vala

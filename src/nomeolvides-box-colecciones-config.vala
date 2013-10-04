@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
+public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public TreeViewColecciones colecciones_view { get; private set; }
 	private ToolButton aniadir_coleccion_button;
 	private ToolButton editar_coleccion_button;
@@ -30,16 +30,12 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	public Button boton_aniadir;
 	private AccionesDB db;
 		
-	public ColeccionesDialog (VentanaPrincipal ventana, ListStoreColecciones liststore_colecciones) {
-		this.set_title (_("Historical Facts Collections"));
-		this.set_modal ( true );
-		this.set_default_size (500, 350);
-		this.set_transient_for ( ventana as Gtk.Window );
-
+	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
+		this.set_orientation ( Orientation.VERTICAL );
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_coleccion_button = new ToolButton.from_stock ( Stock.ADD );
-		this.editar_coleccion_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.borrar_coleccion_button = new ToolButton.from_stock ( Stock.DELETE );
+		this.aniadir_coleccion_button = new ToolButton ( null, _("Add") );
+		this.editar_coleccion_button = new ToolButton ( null, _("Edit") );
+		this.borrar_coleccion_button = new ToolButton ( null, _("Delete") );
 		aniadir_coleccion_button.is_important = true;
 		editar_coleccion_button.is_important = true;
 		borrar_coleccion_button.is_important = true;
@@ -58,9 +54,6 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		toolbar.add ( separador );
 		toolbar.add ( editar_coleccion_button );
 		toolbar.add ( borrar_coleccion_button );
-		
-		this.add_button ( Stock.CLOSE, ResponseType.CLOSE );
-		this.response.connect(on_response);
 
 		this.cambios = false;
 		this.cambio_toggle = false;
@@ -73,15 +66,11 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 		scroll_colecciones_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		scroll_colecciones_view.add ( this.colecciones_view );
  
-		Gtk.Box contenido =  this.get_content_area () as Box;
-		contenido.add ( toolbar );
-		contenido.pack_start ( scroll_colecciones_view, true, true, 0 );
+		this.add ( toolbar );
+		this.pack_start ( scroll_colecciones_view, true, true, 0 );
+		this.show_all ();
 	}
 
-	private void on_response (Dialog source, int response_id)
-	{
-		this.destroy ();
-    }
 
 	private void add_coleccion_dialog () {
 		ListStoreColecciones liststore;
@@ -105,7 +94,8 @@ public class Nomeolvides.ColeccionesDialog : Gtk.Dialog {
 	private void edit_coleccion_dialog () {
 		ListStoreColecciones liststore;
 
-		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" 
+		                                                + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
 		var edit_dialog = new EditColeccionDialog ();
 		edit_dialog.set_datos ( coleccion );
 		edit_dialog.show_all ();

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 13:30-0300\n"
+"POT-Creation-Date: 2013-10-04 20:39-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -38,6 +38,8 @@ msgid "Add Fact to List"
 msgstr "Agregar Hecho a la Lista"
 
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:47
+#: ../src/nomeolvides-box-colecciones-config.vala:36
+#: ../src/nomeolvides-box-listas-config.vala:37
 msgid "Add"
 msgstr "Agregar"
 
@@ -49,31 +51,27 @@ msgstr "a la lista"
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
+#: ../src/nomeolvides-app.vala:66
+msgid "Preferences"
+msgstr "Preferencias"
+
 #: ../src/nomeolvides-app.vala:67
-msgid "Configure Collections"
-msgstr "Configurar Colecciones"
-
-#: ../src/nomeolvides-app.vala:68
-msgid "Configure Lists"
-msgstr "Configurar Listas"
-
-#: ../src/nomeolvides-app.vala:69
 msgid "Export Facts"
 msgstr "Exportar Hechos"
 
-#: ../src/nomeolvides-app.vala:70
+#: ../src/nomeolvides-app.vala:68
 msgid "Import Facts"
 msgstr "Importar Hechos"
 
-#: ../src/nomeolvides-app.vala:71 ../src/nomeolvides-configuracion.vala:32
+#: ../src/nomeolvides-app.vala:69 ../src/nomeolvides-configuracion.vala:32
 msgid "About Nomeolvides"
 msgstr "Acerca de Nomeolvides"
 
-#: ../src/nomeolvides-app.vala:72
+#: ../src/nomeolvides-app.vala:70
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/nomeolvides-app.vala:294
+#: ../src/nomeolvides-app.vala:293
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:65
 #: ../src/nomeolvides-treeview-view-anios.vala:32
 msgid "Years"
@@ -153,6 +151,16 @@ msgstr "Diciembre"
 msgid "Source"
 msgstr "Fuente"
 
+#: ../src/nomeolvides-box-colecciones-config.vala:37
+#: ../src/nomeolvides-box-listas-config.vala:38
+msgid "Edit"
+msgstr "Editar"
+
+#: ../src/nomeolvides-box-colecciones-config.vala:38
+#: ../src/nomeolvides-box-listas-config.vala:39
+msgid "Delete"
+msgstr "Borrar"
+
 #: ../src/nomeolvides-configuracion.vala:33
 msgid "Historical ephemeris manager"
 msgstr "Gestor de efemérides histórica"
@@ -181,10 +189,6 @@ msgstr "Desea eliminar la lista personalizada"
 msgid "Colection name"
 msgstr "Nombre de la Colección"
 
-#: ../src/nomeolvides-dialog-colecciones-dialog.vala:34
-msgid "Historical Facts Collections"
-msgstr "Colección de Hechos Históricos"
-
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:41
 #: ../src/nomeolvides-treeview-colecciones.vala:28
 #: ../src/nomeolvides-treeview-listas.vala:25
@@ -209,10 +213,6 @@ msgstr "Descripción"
 #: ../src/nomeolvides-dialog-lista.vala:36
 msgid "List Name"
 msgstr "Nombre de la Lista"
-
-#: ../src/nomeolvides-dialog-listas-dialog.vala:33
-msgid "Custom Lists"
-msgstr "Listas Personalizadas"
 
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:28
 msgid "Edit Collection"
@@ -370,6 +370,18 @@ msgstr "Visible"
 #: ../src/nomeolvides-treeview-listas.vala:26
 msgid "Amount of facts"
 msgstr "Cantidad de Hechos"
+
+#~ msgid "Configure Collections"
+#~ msgstr "Configurar Colecciones"
+
+#~ msgid "Configure Lists"
+#~ msgstr "Configurar Listas"
+
+#~ msgid "Historical Facts Collections"
+#~ msgstr "Colección de Hechos Históricos"
+
+#~ msgid "Custom Lists"
+#~ msgstr "Listas Personalizadas"
 
 #~ msgid "Gestor de efemérides"
 #~ msgstr "Ephemeride Maganger"

@@ -41,7 +41,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-dialogo-hecho.vala \
 	nomeolvides-tooblar-main-toolbar.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
-	nomeolvides-dialog-listas-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
 	nomeolvides-lista.vala \
@@ -63,9 +62,11 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-borrar-coleccion-dialogo.vala \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
-	nomeolvides-dialog-colecciones-dialog.vala \
 	nomeolvides-migrador.vala \
-	nomeolvides-importar-hechos.vala
+	nomeolvides-importar-hechos.vala \
+	nomeolvides-preferencias.vala \
+	nomeolvides-box-colecciones-config.vala \
+	nomeolvides-box-listas-config.vala
 
 
 nomeolvides_VALAFLAGS = \

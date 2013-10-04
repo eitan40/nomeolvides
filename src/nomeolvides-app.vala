@@ -34,8 +34,7 @@ public class Nomeolvides.App : Gtk.Application
 		{ "exportar", exportar },
 		{ "importar", importar },
 		{ "window-destroy", salir_app },
-		{ "config-colecciones-dialog", config_colecciones_dialog },
-		{ "config-listas-dialog", config_listas_dialog }
+		{ "preferencias-dialog", preferencias_dialog }
 	};
 
 	private void create_window () {
@@ -64,8 +63,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void create_app_menu () {
 		this.application_menu = new GLib.Menu ();
 		
-		this.application_menu.append ( _("Configure Collections"), "app.config-colecciones-dialog" );
-		this.application_menu.append ( _("Configure Lists"), "app.config-listas-dialog" );
+		this.application_menu.append ( _("Preferences"), "app.preferencias-dialog" );
 		this.application_menu.append ( _("Export Facts"), "app.exportar" );
 		this.application_menu.append ( _("Import Facts"), "app.importar" );
 		this.application_menu.append ( _("About Nomeolvides"), "app.create-about-dialog" );
@@ -100,7 +98,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void add_hecho_dialog () {
 
 		if ( !(this.datos.hay_colecciones_activas ()) ) {
-				this.config_colecciones_dialog ();
+				this.preferencias ( false );
 		}
 
 		if ( this.datos.hay_colecciones_activas () ) {
@@ -165,18 +163,19 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.destroy ();
 	}
 
-	private void config_colecciones_dialog () {
-		ListStoreColecciones colecciones = this.datos.lista_de_colecciones (); 
-		var colecciones_dialogo = new ColeccionesDialog ( this.window, colecciones );
-		colecciones_dialogo.show_all ();
-		colecciones_dialogo.run ();
-		this.inicializar_ventana ();
+	private void preferencias_dialog ( ) {
+		this.preferencias ( false );
 	}
 
-	private void config_listas_dialog () {		
-		var listas_dialogo = new ListasDialog ( this.window, this.datos.lista_de_listas () );
-		listas_dialogo.show_all ();
-		listas_dialogo.run ();
+	private void preferencias ( bool ver_listas ) {
+		var colecciones = this.datos.lista_de_colecciones ();
+		var listas = this.datos.lista_de_listas ();
+		var pref_dialogo = new Preferencias ( this.window, colecciones, listas );
+		if ( ver_listas ) {
+			pref_dialogo.set_active_listas ();
+		}
+		pref_dialogo.show_all ();
+		pref_dialogo.run ();
 		this.inicializar_ventana ();
 	}
 
@@ -220,7 +219,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.get_hecho_actual ( out hecho );
 
 		if ( !( this.datos.hay_listas ()) ) {
-			this.config_listas_dialog ();
+			this.preferencias ( true );
 		}
 
 		if ( this.datos.hay_listas () ) {

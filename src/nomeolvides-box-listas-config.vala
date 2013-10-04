@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListasDialog : Gtk.Dialog {
+public class Nomeolvides.ListasConfig: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
 	private ToolButton aniadir_lista_button;
 	private ToolButton editar_lista_button;
@@ -29,18 +29,14 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 	public Button boton_aniadir;
 	private AccionesDB db;
 		
-	public ListasDialog (VentanaPrincipal ventana, ListStoreListas liststore_lista) {
-		this.set_title (_("Custom Lists"));
-		this.set_modal ( true );
-		this.set_default_size (500, 350);
-		this.set_transient_for ( ventana as Gtk.Window );
-
+	public ListasConfig ( ListStoreListas liststore_lista ) {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
+		this.set_orientation ( Orientation.VERTICAL );
 
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );
-		this.editar_lista_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.borrar_lista_button = new ToolButton.from_stock ( Stock.DELETE );
+		this.aniadir_lista_button = new ToolButton ( null, _("Add") );
+		this.editar_lista_button = new ToolButton ( null, _("Edit") );
+		this.borrar_lista_button = new ToolButton ( null, _("Delete") );
 		aniadir_lista_button.is_important = true;
 		editar_lista_button.is_important = true;
 		borrar_lista_button.is_important = true;
@@ -58,9 +54,6 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		toolbar.add ( separador );
 		toolbar.add ( editar_lista_button );
 		toolbar.add ( borrar_lista_button );
-		
-		this.add_button ( Stock.CLOSE , ResponseType.CLOSE );
-		this.response.connect(on_response);
 
 		this.cambios = false;
 		this.listas_view = new TreeViewListas ();
@@ -71,15 +64,10 @@ public class Nomeolvides.ListasDialog : Gtk.Dialog {
 		scroll_listas_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		scroll_listas_view.add ( this.listas_view );
  
-		Gtk.Box contenido =  this.get_content_area () as Box;
-		contenido.add ( toolbar );
-		contenido.pack_start ( scroll_listas_view, true, true, 0);
+		this.add ( toolbar );
+		this.pack_start ( scroll_listas_view, true, true, 0);
+		this.show_all ();
 	}
-
-	private void on_response (Dialog source, int response_id)
-	{
-		this.destroy ();
-    }
 
 	private void add_lista_dialog () {
 		ListStoreListas liststore;
