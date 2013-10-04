@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 13:10-0300\n"
+"POT-Creation-Date: 2013-10-04 13:30-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -74,7 +74,7 @@ msgid "Quit"
 msgstr "Salir"
 
 #: ../src/nomeolvides-app.vala:294
-#: ../src/nomeolvides-box-anios-hechos-vista.vala:66
+#: ../src/nomeolvides-box-anios-hechos-vista.vala:65
 #: ../src/nomeolvides-treeview-view-anios.vala:32
 msgid "Years"
 msgstr "Años"
@@ -96,7 +96,7 @@ msgstr "Desea eliminar el hecho"
 msgid "from list"
 msgstr "de la lista"
 
-#: ../src/nomeolvides-box-anios-hechos-vista.vala:67
+#: ../src/nomeolvides-box-anios-hechos-vista.vala:66
 msgid "Lists"
 msgstr "Listas"
 
@@ -148,7 +148,7 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: ../src/nomeolvides-box-vista-hecho.vala:67
+#: ../src/nomeolvides-box-vista-hecho.vala:80
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
 msgid "Source"
 msgstr "Fuente"
@@ -293,7 +293,7 @@ msgstr ""
 msgid "Database Migration"
 msgstr "Migración de la Base de Datos"
 
-#: ../src/nomeolvides-migrador.vala:207 ../src/nomeolvides-migrador.vala:288
+#: ../src/nomeolvides-migrador.vala:207 ../src/nomeolvides-migrador.vala:304
 msgid "Migrating Collections"
 msgstr "Migrando Colecciones"
 
@@ -301,7 +301,7 @@ msgstr "Migrando Colecciones"
 msgid "Facts from Collection"
 msgstr "Hechos de la Colección"
 
-#: ../src/nomeolvides-migrador.vala:212 ../src/nomeolvides-migrador.vala:322
+#: ../src/nomeolvides-migrador.vala:212 ../src/nomeolvides-migrador.vala:355
 msgid "Migrating Lists"
 msgstr "Migrando Listas"
 
@@ -313,37 +313,37 @@ msgstr "Hechos de la Lista"
 msgid "Finish Migration"
 msgstr "Finalizar Migración"
 
-#: ../src/nomeolvides-migrador.vala:267
+#: ../src/nomeolvides-migrador.vala:279
 msgid "Migrating Collection"
 msgstr "Migrando Colección"
 
-#: ../src/nomeolvides-migrador.vala:276 ../src/nomeolvides-migrador.vala:281
-#: ../src/nomeolvides-migrador.vala:310 ../src/nomeolvides-migrador.vala:315
+#: ../src/nomeolvides-migrador.vala:292 ../src/nomeolvides-migrador.vala:297
+#: ../src/nomeolvides-migrador.vala:343 ../src/nomeolvides-migrador.vala:348
 msgid "Migrating Facts"
 msgstr "Migrando Hechos"
 
-#: ../src/nomeolvides-migrador.vala:296
+#: ../src/nomeolvides-migrador.vala:325
 msgid "Migrating List"
 msgstr "Migrando Lista"
 
-#: ../src/nomeolvides-sqlite.vala:38
+#: ../src/nomeolvides-sqlite.vala:37
 msgid "Could not open the data base"
 msgstr "No se pudo abrir la base de datos"
 
-#: ../src/nomeolvides-sqlite.vala:57
+#: ../src/nomeolvides-sqlite.vala:56
 msgid "Failed to execute the sentence"
 msgstr "Error al ejecutar la sentencia"
 
-#: ../src/nomeolvides-sqlite.vala:157
+#: ../src/nomeolvides-sqlite.vala:156
 msgid "Error parsing facts"
 msgstr "Error parseando hechos"
 
-#: ../src/nomeolvides-sqlite.vala:295 ../src/nomeolvides-sqlite.vala:343
-#: ../src/nomeolvides-sqlite.vala:374 ../src/nomeolvides-sqlite.vala:403
+#: ../src/nomeolvides-sqlite.vala:324 ../src/nomeolvides-sqlite.vala:374
+#: ../src/nomeolvides-sqlite.vala:405 ../src/nomeolvides-sqlite.vala:434
 msgid "Error"
 msgstr "Error"
 
-#: ../src/nomeolvides-sqlite.vala:463
+#: ../src/nomeolvides-sqlite.vala:495
 msgid "Error parsing lists"
 msgstr "Error parseando listas"
 

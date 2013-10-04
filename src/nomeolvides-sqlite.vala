@@ -164,11 +164,21 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		this.insert ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,coleccion" ,hecho.to_string ()   );
+		Array<Hecho> existe = select_hechos ( "WHERE hechos.nombre=\"" + hecho.nombre + "\" AND " +
+											  "anio=\"" + hecho.get_anio ().to_string () + "\" AND " +
+		                                      "mes=\"" + hecho.get_mes ().to_string () + "\" AND " +
+		                                      "dia=\"" + hecho.get_dia ().to_string () + "\"" );
+		if ( existe.length == 0 ) {
+			this.insert ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,coleccion" ,hecho.to_string ()   );
+		}
 	}
 
 	public void insert_lista ( Lista lista ) {
-		this.insert ( "listas", "nombre" ,"\""+lista.nombre+"\"" );
+		Lista existe = select_lista ( "WHERE nombre='" + lista.nombre + "'" );
+
+		if ( existe == null ) {
+			this.insert ( "listas", "nombre" ,"\"" + lista.nombre + "\"" );
+		}
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -179,7 +189,11 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_coleccion ( Coleccion coleccion ) {
-		this.insert ( "colecciones", "nombre,visible", coleccion.to_string () );
+		Coleccion existe = select_coleccion ( "WHERE nombre=\"" + coleccion.nombre + "\"" );
+
+		if ( existe == null ) {
+			this.insert ( "colecciones", "nombre,visible", coleccion.to_string () );
+		}
 	}
 
 	public void hecho_a_borrar ( Hecho hecho ) {

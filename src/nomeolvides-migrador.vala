@@ -260,12 +260,28 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	}
 
 	private void migrar_colecciones () {
+		double progreso_coleccion;
+
+		if ( this.colecciones.length == 0 ) {
+			this.barra_colecciones.fraction = (double) 1;
+			this.barra_colecciones_hechos.fraction = (double) 1;
+			this.barra_colecciones.set_text ( "100%" );
+			this.barra_colecciones_hechos.set_text ( "100%" );
+		}
 		for (int i = 0; i < this.colecciones.length; i++ ) {
-			double progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos_coleccion) + this.barra_colecciones.fraction;
+			if ( this.colecciones.length == 1 ) {
+				progreso_coleccion = 1;
+			} else {
+				progreso_coleccion = ((double) this.colecciones.index(i).cantidad_hechos() / (double) this.cantidad_hechos_coleccion) + this.barra_colecciones.fraction;
+			}
 			var id_real = this.crear_coleccion_db ( this.colecciones.index(i).get_nombre() );
 			double progreso_hecho = (double)1/(double)this.colecciones.index(i).cantidad_hechos();
 			this.label_colecciones.set_text_with_mnemonic ( _("Migrating Collection") + " " + this.colecciones.index(i).get_nombre() );
 
+			if ( this.colecciones.index(i).cantidad_hechos() == 0 ) {
+				this.barra_colecciones_hechos.fraction = (double) 1;
+				this.barra_colecciones_hechos.set_text ( "100%" );
+			}
 			for (int j = 0; j < this.colecciones.index(i).cantidad_hechos(); j++ ) {
 				var hecho = this.colecciones.index(i).get_hecho ( j );
 				hecho.set_coleccion (id_real);
@@ -290,14 +306,31 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	}
 
 	private void migrar_listas () {
+		double progreso_lista;
+
+		if ( this.listas.length == 0 ) {
+			this.barra_listas.fraction = (double) 1;
+			this.barra_listas_hechos.fraction = (double) 1;
+			this.barra_listas.set_text ( "100%" );
+			this.barra_listas_hechos.set_text ( "100%" );
+		}
 		for (int i = 0; i < this.listas.length; i++ ) {
-			double progreso_lista = ((double) this.listas.index(i).cantidad_hechos() / (double) this.cantidad_hechos_lista) + this.barra_listas.fraction;
+
+			if ( this.listas.length == 1 ) {
+				progreso_lista = 1;
+			} else {
+				progreso_lista = ((double) this.listas.index(i).cantidad_hechos() / (double) this.cantidad_hechos_lista) + this.barra_listas.fraction;
+			}
 			double progreso_hecho = (double)1/(double)this.listas.index(i).cantidad_hechos();
 			this.label_listas.set_text_with_mnemonic ( _("Migrating List") + " " + this.colecciones.index(i).get_nombre() );
 			this.db.insert_lista ( this.listas.index(i).get_lista () );
 
 			var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  ).index(0);
 
+			if ( this.listas.index(i).cantidad_hechos() == 0 ) {
+				this.barra_listas_hechos.fraction = (double) 1;
+				this.barra_listas_hechos.set_text ( "100%" );
+			}
 			for (int j = 0; j < this.listas.index(i).cantidad_hechos(); j++ ) {
 				var hecho = this.listas.index(i).get_hecho ( j );
 				var hecho_db = (this.db.select_hechos ( "WHERE nombre=\"" + hecho.nombre + "\"  AND anio=\"" + hecho.get_anio().to_string() + "\"  AND mes=\"" + hecho.get_mes().to_string() + "\"  AND dia=\"" + hecho.get_dia().to_string() + "\"" )).index(0);
