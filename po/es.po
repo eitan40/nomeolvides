@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 23:00-0300\n"
+"POT-Creation-Date: 2013-10-04 23:18-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -38,8 +38,6 @@ msgid "Add Fact to List"
 msgstr "Agregar Hecho a la Lista"
 
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:47
-#: ../src/nomeolvides-box-colecciones-config.vala:36
-#: ../src/nomeolvides-box-listas-config.vala:37
 msgid "Add"
 msgstr "Agregar"
 
@@ -73,7 +71,6 @@ msgstr "Salir"
 
 #: ../src/nomeolvides-app.vala:293
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:65
-#: ../src/nomeolvides-preferencias.vala:36
 #: ../src/nomeolvides-treeview-view-anios.vala:32
 msgid "Years"
 msgstr "Años"
@@ -99,16 +96,6 @@ msgstr "de la lista"
 #: ../src/nomeolvides-preferencias.vala:37
 msgid "Lists"
 msgstr "Listas"
-
-#: ../src/nomeolvides-box-colecciones-config.vala:37
-#: ../src/nomeolvides-box-listas-config.vala:38
-msgid "Edit"
-msgstr "Editar"
-
-#: ../src/nomeolvides-box-colecciones-config.vala:38
-#: ../src/nomeolvides-box-listas-config.vala:39
-msgid "Delete"
-msgstr "Borrar"
 
 #: ../src/nomeolvides-box-selector-fecha.vala:55
 msgid "January"
@@ -328,9 +315,9 @@ msgstr "Migrando Hechos"
 msgid "Migrating List"
 msgstr "Migrando Lista"
 
-#: ../src/nomeolvides-preferencias.vala:39
-msgid "Close"
-msgstr "Cerrar"
+#: ../src/nomeolvides-preferencias.vala:36
+msgid "Colections"
+msgstr "Colecciones"
 
 #: ../src/nomeolvides-sqlite.vala:37
 msgid "Could not open the data base"
@@ -376,12 +363,6 @@ msgstr "Visible"
 #: ../src/nomeolvides-treeview-listas.vala:26
 msgid "Amount of facts"
 msgstr "Cantidad de Hechos"
-
-#~ msgid "Configure Collections"
-#~ msgstr "Configurar Colecciones"
-
-#~ msgid "Configure Lists"
-#~ msgstr "Configurar Listas"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"

@@ -33,10 +33,10 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 		var config_listas = new ListasConfig ( listas );
 
 		this.notebook = new Notebook ();
-		this.notebook.append_page ( config_colecciones, new Label(_("Years") ));
+		this.notebook.append_page ( config_colecciones, new Label(_("Colections") ));
 		this.notebook.append_page ( config_listas, new Label (_("Lists") ));
 
-		this.add_button (_("Close") , ResponseType.CLOSE );
+		this.add_button ( Stock.CLOSE, ResponseType.CLOSE );
 		this.response.connect(on_response);
  
 		Gtk.Box contenido =  this.get_content_area () as Box;

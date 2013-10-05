@@ -34,9 +34,9 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_lista_button = new ToolButton ( null, _("Add") );
-		this.editar_lista_button = new ToolButton ( null, _("Edit") );
-		this.borrar_lista_button = new ToolButton ( null, _("Delete") );
+		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );
+		this.editar_lista_button = new ToolButton.from_stock ( Stock.EDIT );
+		this.borrar_lista_button = new ToolButton.from_stock ( Stock.DELETE );
 		aniadir_lista_button.is_important = true;
 		editar_lista_button.is_important = true;
 		borrar_lista_button.is_important = true;
