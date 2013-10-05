@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 20:39-0300\n"
+"POT-Creation-Date: 2013-10-04 23:00-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -51,7 +51,7 @@ msgstr "a la lista"
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
-#: ../src/nomeolvides-app.vala:66
+#: ../src/nomeolvides-app.vala:66 ../src/nomeolvides-preferencias.vala:27
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -73,6 +73,7 @@ msgstr "Salir"
 
 #: ../src/nomeolvides-app.vala:293
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:65
+#: ../src/nomeolvides-preferencias.vala:36
 #: ../src/nomeolvides-treeview-view-anios.vala:32
 msgid "Years"
 msgstr "Años"
@@ -95,8 +96,19 @@ msgid "from list"
 msgstr "de la lista"
 
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:66
+#: ../src/nomeolvides-preferencias.vala:37
 msgid "Lists"
 msgstr "Listas"
+
+#: ../src/nomeolvides-box-colecciones-config.vala:37
+#: ../src/nomeolvides-box-listas-config.vala:38
+msgid "Edit"
+msgstr "Editar"
+
+#: ../src/nomeolvides-box-colecciones-config.vala:38
+#: ../src/nomeolvides-box-listas-config.vala:39
+msgid "Delete"
+msgstr "Borrar"
 
 #: ../src/nomeolvides-box-selector-fecha.vala:55
 msgid "January"
@@ -150,16 +162,6 @@ msgstr "Diciembre"
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
 msgid "Source"
 msgstr "Fuente"
-
-#: ../src/nomeolvides-box-colecciones-config.vala:37
-#: ../src/nomeolvides-box-listas-config.vala:38
-msgid "Edit"
-msgstr "Editar"
-
-#: ../src/nomeolvides-box-colecciones-config.vala:38
-#: ../src/nomeolvides-box-listas-config.vala:39
-msgid "Delete"
-msgstr "Borrar"
 
 #: ../src/nomeolvides-configuracion.vala:33
 msgid "Historical ephemeris manager"
@@ -325,6 +327,10 @@ msgstr "Migrando Hechos"
 #: ../src/nomeolvides-migrador.vala:325
 msgid "Migrating List"
 msgstr "Migrando Lista"
+
+#: ../src/nomeolvides-preferencias.vala:39
+msgid "Close"
+msgstr "Cerrar"
 
 #: ../src/nomeolvides-sqlite.vala:37
 msgid "Could not open the data base"

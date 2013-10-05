@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "" > POTFILES.skip
+echo "" > POTFILES.in
+
+cd ..
+
+make distclean
+
+cd src
+
+rm *.c
+
+cd ..
+
+./autogen.sh
+
+make
+
+cd po
+
+intltool-update -m 2> ./POTFILES.temp
+cat ./POTFILES.temp | grep /n | grep -v http | grep -v .in.in > ./POTFILES.skip
+cat ./POTFILES.skip | sed 's/\.in/\.in\.in/' | sed 's/\.c/.vala/' > ./POTFILES.in
+rm ./POTFILES.temp
