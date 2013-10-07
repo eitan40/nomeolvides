@@ -15,9 +15,6 @@ AM_CFLAGS =\
 
 bin_PROGRAMS = nomeolvides
 
-nomeolvides-resources.c: nomeolvides.gresource.xml
-	glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name nomeolvides $(srcdir)/nomeolvides.gresource.xml
-
 nomeolvides_SOURCES = \
 	config.vapi \
 	nomeolvides-hecho.vala \
@@ -66,13 +63,16 @@ nomeolvides_SOURCES = \
 	nomeolvides-preferencias.vala \
 	nomeolvides-box-colecciones-config.vala \
 	nomeolvides-box-listas-config.vala \
-	nomeolvides-resources.c \
-	app-menu.ui
+	nomeolvides-resources.c
 
+
+nomeolvides-resources.c: nomeolvides.gresource.xml
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \
+	--target=$@ --sourcedir=$(srcdir) --c-name nomeolvides --generate-source
 
 nomeolvides_VALAFLAGS = \
 	--pkg sqlite3 \
-	--pkg gtk+-3.0 -g
+	--pkg gtk+-3.0 \
 	-g
 
 nomeolvides_LDFLAGS = \
@@ -81,7 +81,8 @@ nomeolvides_LDFLAGS = \
 nomeolvides_LDADD = $(NOMEOLVIDES_LIBS)
 
 
-EXTRA_DIST = $(ui_DATA)
+EXTRA_DIST = 	$(ui_DATA) \
+		app-menu.ui
 
 # Remove ui directory on uninstall
 uninstall-local:

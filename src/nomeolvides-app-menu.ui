@@ -19,7 +19,7 @@
     <section>
       <item>
 		<attribute name="action">app.about</attribute>
-		<attribute name="label" translatable="yes">_About Contacts</attribute>
+		<attribute name="label" translatable="yes">_About Nomeolvides</attribute>
       </item>
       <item>
 		<attribute name="action">app.salir-app</attribute>

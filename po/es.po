@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 15:25-0300\n"
+"POT-Creation-Date: 2013-10-07 17:30-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -352,25 +352,28 @@ msgstr "Visible"
 msgid "Amount of facts"
 msgstr "Cantidad de Hechos"
 
-#: ../src/app-menu.ui.h:1
+#: ../src/nomeolvides-app-menu.ui.h:1
 msgid "_Preferences"
 msgstr "_Preferencias"
 
-#: ../src/app-menu.ui.h:2
+#: ../src/nomeolvides-app-menu.ui.h:2
 msgid "_Export Facts..."
 msgstr "_Exportar Hechos"
 
-#: ../src/app-menu.ui.h:3
+#: ../src/nomeolvides-app-menu.ui.h:3
 msgid "_Import Facts..."
 msgstr "_Importar Hechos"
 
-#: ../src/app-menu.ui.h:4
-msgid "_About Contacts"
-msgstr "_Cantidad de Hechos"
+#: ../src/nomeolvides-app-menu.ui.h:4
+msgid "_About Nomeolvides"
+msgstr "_Acerca de Nomeolvides"
 
-#: ../src/app-menu.ui.h:5
+#: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
+
+#~ msgid "_About Contacts"
+#~ msgstr "_Cantidad de Hechos"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"

@@ -19,7 +19,10 @@ make
 
 cd po
 
-intltool-update -m 2> ./POTFILES.temp
-cat ./POTFILES.temp | grep /n | grep -v http | grep -v .in.in > ./POTFILES.skip
+intltool-update -m 2> ./POTFILES.temp2
+cat ./POTFILES.temp2 | grep /n | grep -v http | grep -v .in.in > ./POTFILES.temp
+cat ./POTFILES.temp | grep -v .ui > POTFILES.skip
 cat ./POTFILES.skip | sed 's/\.in/\.in\.in/' | sed 's/\.c/.vala/' > ./POTFILES.in
+cat ./POTFILES.temp | grep .ui | awk '{ print "[type: gettext/glade]"$1 }' >> ./POTFILES.in
 rm ./POTFILES.temp
+rm ./POTFILES.temp2

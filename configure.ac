@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(nomeolvides, 0.7.493, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
+AC_INIT(nomeolvides, 0.7.494, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
 
 
 AC_CONFIG_HEADERS([config.h])
@@ -35,6 +35,9 @@ AC_SUBST(nomeolvideslocaledir)
 
 PKG_CHECK_MODULES(NOMEOLVIDES, sqlite3
 [gtk+-3.0 ])
+
+GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
+AC_SUBST(GLIB_COMPILE_RESOURCES)
 
 AC_OUTPUT([
 Makefile

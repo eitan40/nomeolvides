@@ -7,8 +7,6 @@ src/nomeolvides-app.c
 src/nomeolvides-archivo.c
 src/nomeolvides-borrar-hecho-lista-dialog.c
 src/nomeolvides-box-anios-hechos-vista.c
-src/nomeolvides-box-colecciones-config.c
-src/nomeolvides-box-listas-config.c
 src/nomeolvides-box-selector-fecha.c
 src/nomeolvides-box-vista-hecho.c
 src/nomeolvides-configuracion.c
