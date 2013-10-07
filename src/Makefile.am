@@ -2,10 +2,6 @@
 
 ## Created by Anjuta
 
-
-uidir = $(pkgdatadir)/ui
-
-
 AM_CPPFLAGS = \
 	-include config.h \
 	$(NOMEOLVIDES_CFLAGS) \
@@ -18,6 +14,9 @@ AM_CFLAGS =\
 	 -g
 
 bin_PROGRAMS = nomeolvides
+
+nomeolvides-resources.c: nomeolvides.gresource.xml
+	glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name nomeolvides $(srcdir)/nomeolvides.gresource.xml
 
 nomeolvides_SOURCES = \
 	config.vapi \
@@ -66,7 +65,9 @@ nomeolvides_SOURCES = \
 	nomeolvides-importar-hechos.vala \
 	nomeolvides-preferencias.vala \
 	nomeolvides-box-colecciones-config.vala \
-	nomeolvides-box-listas-config.vala
+	nomeolvides-box-listas-config.vala \
+	nomeolvides-resources.c \
+	app-menu.ui
 
 
 nomeolvides_VALAFLAGS = \

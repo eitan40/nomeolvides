@@ -29,14 +29,6 @@ public class Nomeolvides.App : Gtk.Application
 	public GLib.Menu application_menu;
 	private Migrador migrador;
 
-	private const GLib.ActionEntry[] actions_app_menu = {
-		{ "create-about-dialog", about_dialog },
-		{ "exportar", exportar },
-		{ "importar", importar },
-		{ "window-destroy", salir_app },
-		{ "preferencias-dialog", preferencias_dialog }
-	};
-
 	private void create_window () {
 		this.window = new VentanaPrincipal (this);
 
@@ -61,16 +53,33 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void create_app_menu () {
-		this.application_menu = new GLib.Menu ();
-		
-		this.application_menu.append ( _("Preferences"), "app.preferencias-dialog" );
-		this.application_menu.append ( _("Export Facts"), "app.exportar" );
-		this.application_menu.append ( _("Import Facts"), "app.importar" );
-		this.application_menu.append ( _("About Nomeolvides"), "app.create-about-dialog" );
-		this.application_menu.append ( _("Quit"), "app.window-destroy" );
-		
-		this.set_app_menu ( application_menu );		
-		this.add_action_entries (actions_app_menu, this);
+		var action = new GLib.SimpleAction ("salir-app", null);
+		action.activate.connect (() => { salir_app (); });
+		this.add_action (action);
+
+		action = new GLib.SimpleAction ("about", null);
+		action.activate.connect (() => { about_dialog (); });
+		this.add_action (action);
+
+		action = new GLib.SimpleAction ("importar-hechos", null);
+		action.activate.connect (() => { importar (); });
+		this.add_action (action);
+
+		action = new GLib.SimpleAction ("exportar-hechos", null);
+		action.activate.connect (() => { exportar (); });
+		this.add_action (action);
+
+		action = new GLib.SimpleAction ("preferencias-dialog", null);
+		action.activate.connect (() => { preferencias_dialog (); });
+		this.add_action (action);
+
+		var builder = new Builder ();
+	    try {
+		    builder.add_from_resource ( "/org/softwareperonista/nomeolvides/app-menu.ui");
+  			set_app_menu ((MenuModel)builder.get_object ("app-menu"));
+		} catch (GLib.Error e ) {
+    		error ("loading ui file: %s", e.message); 
+		}
 	}
 
 	private void connect_signals () {

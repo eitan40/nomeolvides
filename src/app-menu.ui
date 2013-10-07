@@ -1,0 +1,30 @@
+<interface>
+  <menu id="app-menu">
+    <section>
+      <item>
+		<attribute name="action">app.preferencias-dialog</attribute>
+		<attribute name="label" translatable="yes">_Preferences</attribute>
+      </item>
+    </section>
+	<section>
+      <item>
+		<attribute name="action">app.exportar-hechos</attribute>
+		<attribute name="label" translatable="yes">_Export Facts...</attribute>
+      </item>
+      <item>
+		<attribute name="action">app.importar-hechos</attribute>
+		<attribute name="label" translatable="yes">_Import Facts...</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+		<attribute name="action">app.about</attribute>
+		<attribute name="label" translatable="yes">_About Contacts</attribute>
+      </item>
+      <item>
+		<attribute name="action">app.salir-app</attribute>
+		<attribute name="label" translatable="yes">_Quit</attribute>
+	  </item>
+    </section>
+  </menu>
+</interface>
