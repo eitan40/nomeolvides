@@ -32,3 +32,4 @@ src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-listas.vala
 src/nomeolvides-treeview-view-anios.vala
 src/nomeolvides-treeview-view-hechos.vala
+[type: gettext/glade] src/app-menu.ui

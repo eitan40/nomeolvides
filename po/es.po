@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 23:18-0300\n"
+"POT-Creation-Date: 2013-10-07 15:25-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -49,27 +49,7 @@ msgstr "a la lista"
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
-#: ../src/nomeolvides-app.vala:66 ../src/nomeolvides-preferencias.vala:27
-msgid "Preferences"
-msgstr "Preferencias"
-
-#: ../src/nomeolvides-app.vala:67
-msgid "Export Facts"
-msgstr "Exportar Hechos"
-
-#: ../src/nomeolvides-app.vala:68
-msgid "Import Facts"
-msgstr "Importar Hechos"
-
-#: ../src/nomeolvides-app.vala:69 ../src/nomeolvides-configuracion.vala:32
-msgid "About Nomeolvides"
-msgstr "Acerca de Nomeolvides"
-
-#: ../src/nomeolvides-app.vala:70
-msgid "Quit"
-msgstr "Salir"
-
-#: ../src/nomeolvides-app.vala:293
+#: ../src/nomeolvides-app.vala:302
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:65
 #: ../src/nomeolvides-treeview-view-anios.vala:32
 msgid "Years"
@@ -149,6 +129,10 @@ msgstr "Diciembre"
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
 msgid "Source"
 msgstr "Fuente"
+
+#: ../src/nomeolvides-configuracion.vala:32
+msgid "About Nomeolvides"
+msgstr "Acerca de Nomeolvides"
 
 #: ../src/nomeolvides-configuracion.vala:33
 msgid "Historical ephemeris manager"
@@ -315,6 +299,10 @@ msgstr "Migrando Hechos"
 msgid "Migrating List"
 msgstr "Migrando Lista"
 
+#: ../src/nomeolvides-preferencias.vala:27
+msgid "Preferences"
+msgstr "Preferencias"
+
 #: ../src/nomeolvides-preferencias.vala:36
 msgid "Colections"
 msgstr "Colecciones"
@@ -363,6 +351,26 @@ msgstr "Visible"
 #: ../src/nomeolvides-treeview-listas.vala:26
 msgid "Amount of facts"
 msgstr "Cantidad de Hechos"
+
+#: ../src/app-menu.ui.h:1
+msgid "_Preferences"
+msgstr "_Preferencias"
+
+#: ../src/app-menu.ui.h:2
+msgid "_Export Facts..."
+msgstr "_Exportar Hechos"
+
+#: ../src/app-menu.ui.h:3
+msgid "_Import Facts..."
+msgstr "_Importar Hechos"
+
+#: ../src/app-menu.ui.h:4
+msgid "_About Contacts"
+msgstr "_Cantidad de Hechos"
+
+#: ../src/app-menu.ui.h:5
+msgid "_Quit"
+msgstr "_Salir"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"
