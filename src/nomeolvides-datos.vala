@@ -143,13 +143,24 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreHechos get_liststore_anio ( int anio ) {
-		var hechos = this.db.select_hechos_visibles ( "WHERE anio=\"" + anio.to_string () +"\"" );
-		return this.armar_liststore_hechos(hechos);
+		ListStoreHechos liststorehechos = new ListStoreHechos ();
+
+		if ( anio != 0 ) {
+			var hechos = this.db.select_hechos_visibles ( "WHERE anio=\"" + anio.to_string () +"\"" );
+			liststorehechos = this.armar_liststore_hechos(hechos);
+		}
+		
+		return liststorehechos;
 	}
 
 	public ListStoreHechos get_liststore_lista ( Lista lista ) {
-		var lista_hechos = this.db.select_hechos_lista ( lista );
-		return this.armar_liststore_hechos(lista_hechos);
+		ListStoreHechos liststorehechos = new ListStoreHechos ();
+
+		if ( lista != null ) {
+			var lista_hechos = this.db.select_hechos_lista ( lista );
+			liststorehechos = this.armar_liststore_hechos(lista_hechos);
+		}
+		return liststorehechos;
 	}
 
 	public ListStoreListas lista_de_listas () {

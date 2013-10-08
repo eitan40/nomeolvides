@@ -88,15 +88,9 @@ public class Nomeolvides.MainToolbar : Toolbar
 	public void set_buttons_visible ( Hecho hecho ) {
 
 		this.list_button.set_visible_horizontal ( true );
-//		if ( Archivo.es_path ( hecho.coleccion ) ) {
 			this.edit_button.set_visible_horizontal ( true );
 			this.delete_button.set_visible_horizontal ( true );
 			this.send_button.set_visible_horizontal ( true );
-/*		} else {
-			this.edit_button.set_visible_horizontal ( false );
-			this.delete_button.set_visible_horizontal ( false );
-			this.send_button.set_visible_horizontal ( false );
-		}*/
 	}
 
 	public void set_buttons_invisible () {
@@ -107,7 +101,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		this.list_button.set_visible_horizontal ( false );
 	}
 
-	public void set_label_anio ( string anio )
+	public void set_label_anio ( string anio = "0" )
 	{
 		if ( anio != "0") {
 			this.label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> " + _("Year") + ": " + anio + "</span>" );
@@ -116,7 +110,7 @@ public class Nomeolvides.MainToolbar : Toolbar
 		}
 	}
 
-	public void set_label_lista ( string lista )
+	public void set_label_lista ( string lista = "" )
 	{
 		if ( lista != "") {
 			this.label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\">" + lista + "</span>" );

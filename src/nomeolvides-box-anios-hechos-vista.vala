@@ -132,6 +132,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	public void cargar_lista_anios ( Array<int> anios ) {
 		this.anios_view.agregar_varios ( anios );
+		this.listas_cursor_changed ();
 	}
 
 	public void cargar_listas ( ListStoreListas listas ) {
@@ -140,7 +141,9 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 			this.anios_listas.get_nth_page (1).show ();
 		} else {
 			this.anios_listas.get_nth_page (1).hide ();
+			this.elegir_anio ();
 		}
+		this.anios_cursor_changed ();
 	}
 
 	public void cargar_lista_hechos ( ListStoreHechos hechos ) {
