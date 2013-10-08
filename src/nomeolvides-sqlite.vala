@@ -60,40 +60,55 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	protected void insert ( string tabla, string columnas ,string valores ) {
-		this.open ( );
+	protected bool insert ( string tabla, string columnas ,string valores ) {
+		bool retorno = false;
+		if ( this.open ( ) ) {
+			retorno = true;
+			var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" (" + columnas + ") VALUES (" + valores + ")", null, null);
 
-		var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" (" + columnas + ") VALUES (" + valores + ")", null, null);
+			//print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
 
-		//print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
+			if (rc != Sqlite.OK) { 
+ 	          stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+			  retorno = false;
+  			}
+		}
 
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
+		return retorno;
 	}
 
-	protected void del ( string tabla, string where ) {
-		this.open ( );
+	protected bool del ( string tabla, string where ) {
+		bool retorno = false;
+		if ( this.open ( ) ) {
+			retorno = true;
+			//print ("DELETE FROM " + tabla + " " + where + "\n");
 
-		//print ("DELETE FROM " + tabla + " " + where + "\n");
+			var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
 
-		var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
+			if (rc != Sqlite.OK) { 
+  				stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+				retorno = false;
+    		}
+		}
 
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
+		return retorno;
 	}
 
-	protected void update ( string tabla, string valores, string where ) {
-		this.open ( );
-
-		//print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
+	protected bool update ( string tabla, string valores, string where ) {
+		bool retorno = false;
+		if ( this.open ( ) ) {
+			retorno = true;		
+			//print ("SQL: " + "UPDATE " + tabla + " SET " + valores + " " + where + "\n");
 		
-		var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
+			var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
 
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-        }
+			if (rc != Sqlite.OK) { 
+        		stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+				retorno = false;
+    		}
+		}
+
+		return retorno;
 	}
 
 	protected Statement select ( string tabla, string columnas, string where = "" ) {
@@ -173,12 +188,18 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		}
 	}
 
-	public void insert_lista ( Lista lista ) {
+	public bool insert_lista ( Lista lista ) {
+		bool retorno = false;
 		Lista existe = select_lista ( "WHERE nombre='" + lista.nombre + "'" );
 
 		if ( existe == null ) {
-			this.insert ( "listas", "nombre" ,"\"" + lista.nombre + "\"" );
+			retorno = true;
+			if ( !(this.insert ( "listas", "nombre" ,"\"" + lista.nombre + "\"" ))) {
+				retorno = false;
+			}
 		}
+
+		return retorno;
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -188,12 +209,18 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.insert ( "listashechos", "lista,hecho",valores );
 	}
 
-	public void insert_coleccion ( Coleccion coleccion ) {
+	public bool insert_coleccion ( Coleccion coleccion ) {
+		bool retorno = false;
 		Coleccion existe = select_coleccion ( "WHERE nombre=\"" + coleccion.nombre + "\"" );
 
 		if ( existe == null ) {
-			this.insert ( "colecciones", "nombre,visible", coleccion.to_string () );
+			retorno = true;
+			 if ( !(this.insert ( "colecciones", "nombre,visible", coleccion.to_string () ))) {
+				retorno = false;
+			 }
 		}
+
+		return retorno;
 	}
 
 	public void hecho_a_borrar ( Hecho hecho ) {
@@ -204,8 +231,14 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.del ( "hechos", "WHERE id=\"" + hecho.id.to_string() +"\"" );
 	}
 
-	public void delete_lista ( Lista lista ) {
-		this.del ( "listas", "WHERE id=\"" + lista.id.to_string() +"\"" );
+	public bool delete_lista ( Lista lista ) {
+		bool retorno = false;
+		
+		if (this.del ( "listas", "WHERE id=\"" + lista.id.to_string() +"\"" ) ) {
+			retorno = true;
+		}
+
+		return retorno;
 	}
 
 	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -213,10 +246,17 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		           "WHERE lista=\"" + lista.id.to_string()
 		                            + "\" AND hecho=\"" 
 		                            + hecho.id.to_string() +"\"" );
+	
 	}
 	
-	public void delete_coleccion ( Coleccion coleccion ) {
-		this.del ( "colecciones", "WHERE id=\"" + coleccion.id.to_string() +"\"" );
+	public bool delete_coleccion ( Coleccion coleccion ) {
+		bool retorno = false;
+		
+		if( this.del ( "colecciones", "WHERE id=\"" + coleccion.id.to_string() +"\"" )) {
+			retorno = true;
+		}
+
+		return retorno;
 	}
 
 	public void hecho_no_borrar ( Hecho hecho ) {
@@ -236,12 +276,15 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		              " WHERE id=\"" + hecho.id.to_string() + "\"" );
 	}
  
-	public void update_lista ( Lista lista ) {
+	public bool update_lista ( Lista lista ) {
+		bool retorno = false;
 		string valores = lista.a_sql ();
 
-		this.update ( "listas",
-		              valores,
-		              " WHERE id=\"" + lista.id.to_string() + "\"" );
+		if ( this.update ( "listas",valores," WHERE id=\"" + lista.id.to_string() + "\"" )) {
+			retorno = true;
+		}
+
+		return retorno;
 	}
 
 	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
@@ -255,12 +298,15 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		                               + hecho.id.to_string() +"\"" );
 	}
 
-	public void update_coleccion ( Coleccion coleccion ) {
+	public bool update_coleccion ( Coleccion coleccion ) {
+		bool retorno = false;
 		string valores = coleccion.a_sql ();
 
-		this.update ( "colecciones",
-		              valores,
-		              " WHERE id=\"" + coleccion.id.to_string() + "\"" );
+		if (this.update ( "colecciones",valores," WHERE id=\"" + coleccion.id.to_string() + "\"" )) {
+			retorno = true;
+		}
+
+		return retorno;
 	}
 
 	public Array<Hecho> select_hechos ( string where = "" ) {

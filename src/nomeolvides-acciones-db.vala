@@ -32,16 +32,16 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.insert_hecho ( hecho );
 	}
 
-	public void insert_lista ( Lista lista ) {
-		this.dbms.insert_lista ( lista );
+	public bool insert_lista ( Lista lista ) {
+		return this.dbms.insert_lista ( lista );
 	}
 
 	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.dbms.insert_hecho_lista ( hecho, lista );
 	}
 
-	public void insert_coleccion ( Coleccion coleccion ) {
-		this.dbms.insert_coleccion ( coleccion );
+	public bool insert_coleccion ( Coleccion coleccion ) {
+		return this.dbms.insert_coleccion ( coleccion );
 	}
 
 	public void hecho_a_borrar ( Hecho hecho ) {
@@ -52,16 +52,16 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.delete_hecho ( hecho );
 	}
 
-	public void delete_lista ( Lista lista ) {
-		this.dbms.delete_lista ( lista );
+	public bool delete_lista ( Lista lista ) {
+		return this.dbms.delete_lista ( lista );
 	}
 
 	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.dbms.delete_hecho_lista ( hecho, lista );
 	}
 
-	public void delete_coleccion ( Coleccion coleccion ) {
-		this.dbms.delete_coleccion ( coleccion );
+	public bool delete_coleccion ( Coleccion coleccion ) {
+		return this.dbms.delete_coleccion ( coleccion );
 	}
 
 	public void hecho_no_borrar ( Hecho hecho ) {
@@ -76,16 +76,16 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.update_hecho ( hecho );
 	}
  
-	public void update_lista ( Lista lista ) {
-		this.dbms.update_lista ( lista );
+	public bool update_lista ( Lista lista ) {
+		return this.dbms.update_lista ( lista );
 	}
 
 	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
 		this.dbms.update_hecho_lista ( hecho, lista );
 	}
 
-	public void update_coleccion ( Coleccion coleccion ) {
-		this.dbms.update_coleccion ( coleccion );
+	public bool update_coleccion ( Coleccion coleccion ) {
+		return this.dbms.update_coleccion ( coleccion );
 	}
 
 	public Array<Hecho> select_hechos ( string where = "" ) {

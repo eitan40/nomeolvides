@@ -78,11 +78,12 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 
 		if (add_dialog.run() == ResponseType.APPLY) {
 			lista = add_dialog.respuesta;
-			this.db.insert_lista ( lista );
-			lista.id = this.db.ultimo_rowid();
-			liststore = this.listas_view.get_model () as ListStoreListas;
-			liststore.agregar_lista ( lista, 0 );
-			this.cambios = true;
+			if ( this.db.insert_lista ( lista )) {
+				lista.id = this.db.ultimo_rowid();
+				liststore = this.listas_view.get_model () as ListStoreListas;
+				liststore.agregar_lista ( lista, 0 );
+				this.cambios = true;
+			}
 		}
 		
 		add_dialog.destroy ();
@@ -97,12 +98,13 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
-			liststore = this.listas_view.get_model () as ListStoreListas;
-			var cantidad_hechos = this.listas_view.get_hechos_lista ();
-			this.listas_view.eliminar_lista ( lista );
-			liststore.agregar_lista (edit_dialog.respuesta, cantidad_hechos);
-			this.db.update_lista ( edit_dialog.respuesta );
-			this.cambios = true;
+			if ( this.db.update_lista ( edit_dialog.respuesta )) {
+				liststore = this.listas_view.get_model () as ListStoreListas;
+				var cantidad_hechos = this.listas_view.get_hechos_lista ();
+				this.listas_view.eliminar_lista ( lista );
+				liststore.agregar_lista (edit_dialog.respuesta, cantidad_hechos);
+				this.cambios = true;
+			}
 		}	
 		edit_dialog.destroy ();
 	}
@@ -113,8 +115,9 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
-			this.db.delete_lista ( this.listas_view.get_lista_cursor () );
-			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
+			if (this.db.delete_lista ( this.listas_view.get_lista_cursor () )) {
+				this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
+			}
 		}
 		borrar_dialog.destroy ();
 

@@ -81,11 +81,12 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 
 		if (add_dialog.run() == ResponseType.APPLY) {
 			coleccion = add_dialog.respuesta;
-			this.db.insert_coleccion ( coleccion );
-			coleccion.id = this.db.ultimo_rowid();
-			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-			liststore.agregar_coleccion (coleccion, 0);
-			this.cambios = true;
+			if ( this.db.insert_coleccion ( coleccion ) ) {
+				coleccion.id = this.db.ultimo_rowid();
+				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
+				liststore.agregar_coleccion (coleccion, 0);
+				this.cambios = true;
+			}
 		}
 		
 		add_dialog.destroy ();
@@ -101,12 +102,13 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
-			liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-			var cantidad_hechos = this.colecciones_view.get_hechos_coleccion ();
-			this.colecciones_view.eliminar_coleccion ( coleccion );
-			liststore.agregar_coleccion ( edit_dialog.respuesta, cantidad_hechos );
-			this.db.update_coleccion ( edit_dialog.respuesta );
-			this.cambios = true;
+			if (this.db.update_coleccion ( edit_dialog.respuesta )) {
+				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
+				var cantidad_hechos = this.colecciones_view.get_hechos_coleccion ();
+				this.colecciones_view.eliminar_coleccion ( coleccion );
+				liststore.agregar_coleccion ( edit_dialog.respuesta, cantidad_hechos );
+				this.cambios = true;
+			}
 		}
 		
 		edit_dialog.destroy ();
@@ -118,8 +120,9 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
-			this.db.delete_coleccion ( coleccion );
-			this.colecciones_view.eliminar_coleccion ( coleccion );
+			if (this.db.delete_coleccion ( coleccion )) {
+				this.colecciones_view.eliminar_coleccion ( coleccion );
+			}
 		}
 		borrar_dialog.destroy ();
 
