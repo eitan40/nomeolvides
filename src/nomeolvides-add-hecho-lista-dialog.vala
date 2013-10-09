@@ -31,8 +31,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	public AddHechoListaDialog ( VentanaPrincipal ventana )
 	{
 		this.title = _("Add Fact to List");
-		this.set_default_size (270,150);
-		this.set_size_request (250,125);
+		this.set_size_request (350,-1);
 		this.set_transient_for ( ventana as Window );
 		
 		this.response.connect(on_response);
@@ -47,16 +46,23 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		var label_pregunta = new Label (_("Add") + ":");
 		var label_listas = new Label ( _("to list") + " " );
 
-		var box_principal = new Box (Orientation.VERTICAL, 0 );
-		box_principal.pack_start (label_pregunta, true, true, 0 );
-		box_principal.pack_start (this.label_hecho, true, true, 0 );
-		var box_listas = new Box ( Orientation.HORIZONTAL, 0);
-		box_listas.pack_start (label_listas, false, false, 0 );
-		box_listas.pack_start (this.listas, true, false, 0 );
-		box_principal.pack_start (box_listas, false, false, 0 );
+		var grid = new Grid ( );
+		grid.set_row_spacing ( 20 );
+		grid.set_column_spacing ( 20 );
+		grid.set_margin_right ( 30 );
+		grid.set_margin_left ( 30 );
+		grid.set_margin_top ( 30 );
+		grid.set_margin_bottom ( 30 );
+		grid.set_valign ( Align.CENTER );
+		grid.set_halign ( Align.CENTER );
+		
+		grid.attach ( label_pregunta, 0, 0, 1, 1 );
+		grid.attach ( this.label_hecho, 1, 0, 1, 1 );
+		grid.attach ( label_listas, 0, 1, 1, 1 );
+		grid.attach ( this.listas, 1, 1, 1, 1 );
 
 		var contenido = this.get_content_area () as Box;
-		contenido.pack_start (box_principal, true, true, 0 );
+		contenido.pack_start (grid, true, true, 0 );
 
 		this.show_all ();
 	}
