@@ -125,7 +125,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 	public string fecha_to_string () {
 		string texto;
-		texto = this.fecha.format("%e de %B de %Y");
+		texto = this.fecha.format(_("%B %e, %Y"));
 		return texto;
 	}
 

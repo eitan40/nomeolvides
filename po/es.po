@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:30-0300\n"
+"POT-Creation-Date: 2013-10-10 20:57-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -37,11 +37,11 @@ msgstr "Agregar Hecho Histórico"
 msgid "Add Fact to List"
 msgstr "Agregar Hecho a la Lista"
 
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:47
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:46
 msgid "Add"
 msgstr "Agregar"
 
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:48
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:47
 msgid "to list"
 msgstr "a la lista"
 
@@ -207,6 +207,10 @@ msgstr "Elija un Archivo"
 msgid "Save File"
 msgstr "Guardar Archivo"
 
+#: ../src/nomeolvides-hecho.vala:128
+msgid "%B %e, %Y"
+msgstr "%e de %B de %Y"
+
 #: ../src/nomeolvides-importar-hechos.vala:31
 msgid "Import Facts From File"
 msgstr "Importar desde un Archivo"
@@ -315,16 +319,16 @@ msgstr "No se pudo abrir la base de datos"
 msgid "Failed to execute the sentence"
 msgstr "Error al ejecutar la sentencia"
 
-#: ../src/nomeolvides-sqlite.vala:156
+#: ../src/nomeolvides-sqlite.vala:171
 msgid "Error parsing facts"
 msgstr "Error parseando hechos"
 
-#: ../src/nomeolvides-sqlite.vala:324 ../src/nomeolvides-sqlite.vala:374
-#: ../src/nomeolvides-sqlite.vala:405 ../src/nomeolvides-sqlite.vala:434
+#: ../src/nomeolvides-sqlite.vala:370 ../src/nomeolvides-sqlite.vala:420
+#: ../src/nomeolvides-sqlite.vala:451 ../src/nomeolvides-sqlite.vala:480
 msgid "Error"
 msgstr "Error"
 
-#: ../src/nomeolvides-sqlite.vala:495
+#: ../src/nomeolvides-sqlite.vala:541
 msgid "Error parsing lists"
 msgstr "Error parseando listas"
 
@@ -332,15 +336,15 @@ msgstr "Error parseando listas"
 msgid "Send"
 msgstr "Enviar"
 
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:113
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:107
 msgid "Year"
 msgstr "Año"
 
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:145
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:139
 msgid "Add to list"
 msgstr "Agregar a la lista"
 
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:149
+#: ../src/nomeolvides-tooblar-main-toolbar.vala:143
 msgid "Remove from list"
 msgstr "ELiminar de la lista"
 
