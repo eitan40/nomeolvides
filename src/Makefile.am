@@ -58,7 +58,7 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-borrar-coleccion-dialogo.vala \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
-	nomeolvides-migrador.vala \
+	nomeolvides-dialog-migrador.vala \
 	nomeolvides-importar-hechos.vala \
 	nomeolvides-preferencias.vala \
 	nomeolvides-box-colecciones-config.vala \

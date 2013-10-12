@@ -308,52 +308,54 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private void migrar_listas () {
 		double progreso_lista;
 
-		if ( this.listas.length == 0 ) {
+		if ( this.listas.length == 0  || this.cantidad_hechos_lista == 0 ) {
 			this.barra_listas.fraction = (double) 1;
 			this.barra_listas_hechos.fraction = (double) 1;
 			this.barra_listas.set_text ( "100%" );
 			this.barra_listas_hechos.set_text ( "100%" );
-		}
-		for (int i = 0; i < this.listas.length; i++ ) {
+		} else {
+			for (int i = 0; i < this.listas.length; i++ ) {
 
-			if ( this.listas.length == 1 ) {
-				progreso_lista = 1;
-			} else {
-				progreso_lista = ((double) this.listas.index(i).cantidad_hechos() / (double) this.cantidad_hechos_lista) + this.barra_listas.fraction;
-			}
-			double progreso_hecho = (double)1/(double)this.listas.index(i).cantidad_hechos();
-			this.label_listas.set_text_with_mnemonic ( _("Migrating List") + " " + this.colecciones.index(i).get_nombre() );
-			this.db.insert_lista ( this.listas.index(i).get_lista () );
+				if ( this.listas.length == 1 ) {
+					progreso_lista = 1;
+				} else {
+					progreso_lista = ((double) this.listas.index(i).cantidad_hechos() / (double) this.cantidad_hechos_lista) + this.barra_listas.fraction;
+				}
+				double progreso_hecho = (double)1/(double)this.listas.index(i).cantidad_hechos();
+				this.label_listas.set_text_with_mnemonic ( _("Migrating List") + " " + this.colecciones.index(i).get_nombre() );
+				this.db.insert_lista ( this.listas.index(i).get_lista () );
 
-			var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  ).index(0);
+				var lista_db = this.db.select_listas ( "WHERE nombre=\"" +  this.listas.index(i).get_lista().nombre +"\""  ).index(0);
 
-			if ( this.listas.index(i).cantidad_hechos() == 0 ) {
-				this.barra_listas_hechos.fraction = (double) 1;
-				this.barra_listas_hechos.set_text ( "100%" );
-			}
-			for (int j = 0; j < this.listas.index(i).cantidad_hechos(); j++ ) {
-				var hecho = this.listas.index(i).get_hecho ( j );
-				var hecho_db = (this.db.select_hechos ( "WHERE nombre=\"" + hecho.nombre + "\"  AND anio=\"" + hecho.get_anio().to_string() + "\"  AND mes=\"" + hecho.get_mes().to_string() + "\"  AND dia=\"" + hecho.get_dia().to_string() + "\"" )).index(0);
+				if ( this.listas.index(i).cantidad_hechos() == 0 ) {
+					this.barra_listas_hechos.fraction = (double) 1;
+					this.barra_listas_hechos.set_text ( "100%" );
+				}
 
-				this.db.insert_hecho_lista ( hecho_db, lista_db );
+				for (int j = 0; j < this.listas.index(i).cantidad_hechos(); j++ ) {
+					var hecho = this.listas.index(i).get_hecho ( j );
+					var hecho_db = (this.db.select_hechos ( "WHERE nombre=\"" + hecho.nombre + "\"  AND anio=\"" + hecho.get_anio().to_string() + "\"  AND mes=\"" + hecho.get_mes().to_string() + "\"  AND dia=\"" + hecho.get_dia().to_string() + "\"" )).index(0);
 
-				this.barra_listas_hechos.set_fraction ( progreso_hecho * (j+1) );
-				this.barra_listas_hechos.set_text ( ((int)(this.barra_listas_hechos.fraction*100)).to_string () + "%" );
-				this.hay_migrados = true;
-				this.label_listas_hechos.set_text_with_mnemonic ( _("Migrating Facts") + ": " + (j+1).to_string() + " de " + this.listas.index(i).cantidad_hechos().to_string() );
-				while ( Gtk.events_pending () ) {
+					this.db.insert_hecho_lista ( hecho_db, lista_db );
+
+					this.barra_listas_hechos.set_fraction ( progreso_hecho * (j+1) );
+					this.barra_listas_hechos.set_text ( ((int)(this.barra_listas_hechos.fraction*100)).to_string () + "%" );
+					this.hay_migrados = true;
+					this.label_listas_hechos.set_text_with_mnemonic ( _("Migrating Facts") + ": " + (j+1).to_string() + " de " + this.listas.index(i).cantidad_hechos().to_string() );
+					while ( Gtk.events_pending () ) {
+						Gtk.main_iteration ();
+					}
+				}
+				this.label_listas_hechos.set_text_with_mnemonic ( _("Migrating Facts") );
+				this.barra_listas.set_fraction ( progreso_lista );
+				this.barra_listas.set_text ( ((int)(this.barra_listas.fraction*100)).to_string () + "%" );
+				while ( Gtk.events_pending () ){
 					Gtk.main_iteration ();
 				}
 			}
-			this.label_listas_hechos.set_text_with_mnemonic ( _("Migrating Facts") );
-			this.barra_listas.set_fraction ( progreso_lista );
-			this.barra_listas.set_text ( ((int)(this.barra_listas.fraction*100)).to_string () + "%" );
-			while ( Gtk.events_pending () ){
-				Gtk.main_iteration ();
-			}
+			this.label_listas.set_text_with_mnemonic ( _("Migrating Lists") );
+			Archivo.renombrar ( Configuracion.archivo_listas(), Configuracion.archivo_listas() + ".migrado" );
 		}
-		this.label_listas.set_text_with_mnemonic ( _("Migrating Lists") );
-		Archivo.renombrar ( Configuracion.archivo_listas(), Configuracion.archivo_listas() + ".migrado" );
 	}
 
 	private string sacarDatoJson(string json, string campo) {
