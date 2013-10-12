@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 20:57-0300\n"
+"POT-Creation-Date: 2013-10-12 06:10-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -187,47 +187,11 @@ msgstr "Descripción"
 msgid "List Name"
 msgstr "Nombre de la Lista"
 
-#: ../src/nomeolvides-edit-coleccion-dialog.vala:28
-msgid "Edit Collection"
-msgstr "Editar Colección"
-
-#: ../src/nomeolvides-edit-hecho-dialog.vala:28
-msgid "Edit Fact"
-msgstr "Editar Hecho"
-
-#: ../src/nomeolvides-edit-lista-dialog.vala:29
-msgid "Edit Custom List"
-msgstr "Editar Lista Personalizada"
-
-#: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:29
-msgid "Choose File"
-msgstr "Elija un Archivo"
-
-#: ../src/nomeolvides-file-chooser-dialog-savefile-dialog.vala:28
-msgid "Save File"
-msgstr "Guardar Archivo"
-
-#: ../src/nomeolvides-hecho.vala:128
-msgid "%B %e, %Y"
-msgstr "%e de %B de %Y"
-
-#: ../src/nomeolvides-importar-hechos.vala:31
-msgid "Import Facts From File"
-msgstr "Importar desde un Archivo"
-
-#: ../src/nomeolvides-importar-hechos.vala:35
-msgid "Select Colection"
-msgstr "Sleccione una Colección"
-
-#: ../src/nomeolvides-importar-hechos.vala:40
-msgid "Import to"
-msgstr "Importar a"
-
-#: ../src/nomeolvides-migrador.vala:54
+#: ../src/nomeolvides-dialog-migrador.vala:54
 msgid "Start migration"
 msgstr "Comenzar Migración"
 
-#: ../src/nomeolvides-migrador.vala:56
+#: ../src/nomeolvides-dialog-migrador.vala:56
 msgid ""
 "Dear user,\n"
 "\n"
@@ -266,42 +230,82 @@ msgstr ""
 "\n"
 "Atentamente, el equipo de Software Peronista."
 
-#: ../src/nomeolvides-migrador.vala:66
+#: ../src/nomeolvides-dialog-migrador.vala:66
 msgid "Database Migration"
 msgstr "Migración de la Base de Datos"
 
-#: ../src/nomeolvides-migrador.vala:207 ../src/nomeolvides-migrador.vala:304
+#: ../src/nomeolvides-dialog-migrador.vala:207
+#: ../src/nomeolvides-dialog-migrador.vala:304
 msgid "Migrating Collections"
 msgstr "Migrando Colecciones"
 
-#: ../src/nomeolvides-migrador.vala:209
+#: ../src/nomeolvides-dialog-migrador.vala:209
 msgid "Facts from Collection"
 msgstr "Hechos de la Colección"
 
-#: ../src/nomeolvides-migrador.vala:212 ../src/nomeolvides-migrador.vala:355
+#: ../src/nomeolvides-dialog-migrador.vala:212
+#: ../src/nomeolvides-dialog-migrador.vala:356
 msgid "Migrating Lists"
 msgstr "Migrando Listas"
 
-#: ../src/nomeolvides-migrador.vala:214
+#: ../src/nomeolvides-dialog-migrador.vala:214
 msgid "Facts from List"
 msgstr "Hechos de la Lista"
 
-#: ../src/nomeolvides-migrador.vala:233
+#: ../src/nomeolvides-dialog-migrador.vala:233
 msgid "Finish Migration"
 msgstr "Finalizar Migración"
 
-#: ../src/nomeolvides-migrador.vala:279
+#: ../src/nomeolvides-dialog-migrador.vala:279
 msgid "Migrating Collection"
 msgstr "Migrando Colección"
 
-#: ../src/nomeolvides-migrador.vala:292 ../src/nomeolvides-migrador.vala:297
-#: ../src/nomeolvides-migrador.vala:343 ../src/nomeolvides-migrador.vala:348
+#: ../src/nomeolvides-dialog-migrador.vala:292
+#: ../src/nomeolvides-dialog-migrador.vala:297
+#: ../src/nomeolvides-dialog-migrador.vala:344
+#: ../src/nomeolvides-dialog-migrador.vala:349
 msgid "Migrating Facts"
 msgstr "Migrando Hechos"
 
-#: ../src/nomeolvides-migrador.vala:325
+#: ../src/nomeolvides-dialog-migrador.vala:325
 msgid "Migrating List"
 msgstr "Migrando Lista"
+
+#: ../src/nomeolvides-edit-coleccion-dialog.vala:28
+msgid "Edit Collection"
+msgstr "Editar Colección"
+
+#: ../src/nomeolvides-edit-hecho-dialog.vala:28
+msgid "Edit Fact"
+msgstr "Editar Hecho"
+
+#: ../src/nomeolvides-edit-lista-dialog.vala:29
+msgid "Edit Custom List"
+msgstr "Editar Lista Personalizada"
+
+#: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:29
+msgid "Choose File"
+msgstr "Elija un Archivo"
+
+#: ../src/nomeolvides-file-chooser-dialog-savefile-dialog.vala:28
+msgid "Save File"
+msgstr "Guardar Archivo"
+
+#: ../src/nomeolvides-hecho.vala:128
+msgid "%B %e, %Y"
+msgstr "%e de %B de %Y"
+
+#: ../src/nomeolvides-importar-hechos.vala:31
+msgid "Import Facts From File"
+msgstr "Importar desde un Archivo"
+
+#: ../src/nomeolvides-importar-hechos.vala:35
+msgid "Select Colection"
+msgstr "Sleccione una Colección"
+
+#: ../src/nomeolvides-importar-hechos.vala:40
+msgid "Import to"
+msgstr "Importar a"
 
 #: ../src/nomeolvides-preferencias.vala:27
 msgid "Preferences"

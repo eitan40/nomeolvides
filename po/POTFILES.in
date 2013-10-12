@@ -16,6 +16,7 @@ src/nomeolvides-dialog-borrar-lista-dialog.vala
 src/nomeolvides-dialog-coleccion.vala
 src/nomeolvides-dialog-dialogo-hecho.vala
 src/nomeolvides-dialog-lista.vala
+src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-edit-coleccion-dialog.vala
 src/nomeolvides-edit-hecho-dialog.vala
 src/nomeolvides-edit-lista-dialog.vala
@@ -23,7 +24,6 @@ src/nomeolvides-file-chooser-dialog-open-file-dialog.vala
 src/nomeolvides-file-chooser-dialog-savefile-dialog.vala
 src/nomeolvides-hecho.vala
 src/nomeolvides-importar-hechos.vala
-src/nomeolvides-migrador.vala
 src/nomeolvides-preferencias.vala
 src/nomeolvides-sqlite.vala
 src/nomeolvides-tooblar-main-toolbar.vala
