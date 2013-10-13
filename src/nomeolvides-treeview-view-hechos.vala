@@ -26,8 +26,18 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	private ListStoreHechos anio; 
 
 	public ViewHechos () {
-		this.insert_column_with_attributes (-1, _("Name"), new CellRendererText (), "text", 0);
-		this.insert_column_with_attributes (-1, _("Date"), new CellRendererText (), "text", 2);
+		var nombre_cell = new CellRendererText ();
+
+		nombre_cell.wrap_width = 100;
+		nombre_cell.wrap_mode = Pango.WrapMode.WORD;
+		nombre_cell.width_chars = 100;
+
+		var fecha_cell = new CellRendererText ();
+
+		nombre_cell.width_chars = 30;
+
+		this.insert_column_with_attributes (-1, _("Name"), nombre_cell, "text", 0);
+		this.insert_column_with_attributes (-1, _("Date"), fecha_cell, "text", 2);
 		this.model = new ListStoreHechos.anio_int (0);
 	}
 

@@ -47,6 +47,10 @@ public class Nomeolvides.VistaHecho : Box {
 		this.label_fecha.set_alignment ( 0, 0 );
 		this.label_fuente.set_alignment ( 0, 0 );
 
+		this.label_nombre.set_selectable ( true );
+		this.label_fecha.set_selectable ( true );
+		this.label_fuente.set_selectable ( true );
+
 		this.descripcion = new Label.with_mnemonic ("");
 		this.descripcion.set_margin_left ( 10 );
 		this.descripcion.set_margin_right ( 10 );
