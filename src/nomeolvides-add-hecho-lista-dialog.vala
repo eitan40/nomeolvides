@@ -42,6 +42,8 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		this.listas = new ComboBox ();
 		
 		this.label_hecho = new Label ( null );
+		this.label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
+		this.label_hecho.set_line_wrap ( true );
 
 		var label_pregunta = new Label (_("Add") + ":");
 		var label_listas = new Label ( _("to list") + " " );
