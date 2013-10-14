@@ -53,7 +53,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
 		this.siguiente_boton.set_label (_("Start migration"));
 		this.siguiente_boton.clicked.connect (this.migracion);
-		var label_mensaje = new Label.with_mnemonic(_("Dear user,\n\nSince this version of Nomeolvides has a lot of internal changes to improve speed and memory usage to handle many facts, it is necessary to undertake a migration of data loaded with previous versions.\n\nWe apologize for the inconvenience, but these changes represent a fundamental step to implement different ideas we have designed for Nomeolvides, as the collaborative work.\n\nThe migration process is automatic and files migrated data will not be deleted after the process, to avoid losing your work in case something does not go as planned. Please verify that all data has been successfully migrated after the process and if is not the case notify us to desarrolladores@softwareperonista.com.ar\n\nSincerely, Software Peronista team."));
+		var label_mensaje = new Label.with_mnemonic(_("Dear user,\n\nSince this version of Nomeolvides has a lot of internal changes, it is necessary to perform a migration of data loaded into earlier versions.\n\nThe migration process is automatic and the migrated data will not be deleted after the process to avoid losing your work if it fails.\n\nPlease check that all the data has been successfully migrated after completion of the process and, if not, notify us at desarrolladores@softwareperonista.com.ar\n\nSincerely, the development team."));
 
 		label_mensaje.set_line_wrap ( true );
 		label_mensaje.set_justify ( Justification.FILL );

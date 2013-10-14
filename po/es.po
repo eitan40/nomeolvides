@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-12 06:10-0300\n"
+"POT-Creation-Date: 2013-10-13 23:58-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -125,7 +125,7 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: ../src/nomeolvides-box-vista-hecho.vala:80
+#: ../src/nomeolvides-box-vista-hecho.vala:84
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
 msgid "Source"
 msgstr "Fuente"
@@ -166,12 +166,12 @@ msgstr "Nombre de la Colección"
 #: ../src/nomeolvides-treeview-colecciones.vala:28
 #: ../src/nomeolvides-treeview-listas.vala:25
 #: ../src/nomeolvides-treeview-listas.vala:30
-#: ../src/nomeolvides-treeview-view-hechos.vala:29
+#: ../src/nomeolvides-treeview-view-hechos.vala:39
 msgid "Name"
 msgstr "Nombre"
 
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:42
-#: ../src/nomeolvides-treeview-view-hechos.vala:30
+#: ../src/nomeolvides-treeview-view-hechos.vala:40
 msgid "Date"
 msgstr "Fecha"
 
@@ -195,40 +195,33 @@ msgstr "Comenzar Migración"
 msgid ""
 "Dear user,\n"
 "\n"
-"Since this version of Nomeolvides has a lot of internal changes to improve "
-"speed and memory usage to handle many facts, it is necessary to undertake a "
-"migration of data loaded with previous versions.\n"
+"Since this version of Nomeolvides has a lot of internal changes, it is "
+"necessary to perform a migration of data loaded into earlier versions.\n"
 "\n"
-"We apologize for the inconvenience, but these changes represent a "
-"fundamental step to implement different ideas we have designed for "
-"Nomeolvides, as the collaborative work.\n"
+"The migration process is automatic and the migrated data will not be deleted "
+"after the process to avoid losing your work if it fails.\n"
 "\n"
-"The migration process is automatic and files migrated data will not be "
-"deleted after the process, to avoid losing your work in case something does "
-"not go as planned. Please verify that all data has been successfully "
-"migrated after the process and if is not the case notify us to "
+"Please check that all the data has been successfully migrated after "
+"completion of the process and, if not, notify us at "
 "desarrolladores@softwareperonista.com.ar\n"
 "\n"
-"Sincerely, Software Peronista team."
+"Sincerely, the development team."
 msgstr ""
 "Estimado usuario,\n"
 "\n"
 "Dado que esta versión de Nomeolvides tiene una gran cantidad de cambios "
-"internos para mejorar la velocidad y el uso de memoria al manejar muchos "
-"hechos, es necesario llevar adelante una migración de los datos cargados con "
-"las versiones anterior.\n"
+"internos, es necesario llevar a cabo una migración de los los datos cargados "
+"en las versiones anteriores.\n"
 "\n"
-"Le rogamos nos disculpe por esta molestia, pero estos cambios representan un "
-"paso fundamental para poder implementar distintas ideas que tenemos pensadas "
-"para Nomeolvides, como el trabajo en colaboración.\n"
+"El proceso de migración es automática y los datos migrados no serán "
+"eliminados después del proceso para evitar perder su trabajo, si se produce "
+"un error.\n"
 "\n"
-"El proceso de migración será automático y los archivos con los datos a "
-"migrar no serán borrados después del proceso, para evitar la pérdida de su "
-"trabajo en caso de que algo Le rogamos que verifique que todos sus datos se "
-"hayan migrado correctamente luego del proceso y en caso de que no sea así "
-"nos lo comunique a desarrolladores@softwareperonista.com.ar\n"
+"Por favor, compruebe que todos los datos hayan sido correctamente migrados "
+"después de finalizado el proceso y, si no es así, notifíquenos a "
+"desarrolladores@softwareperonista.com.ar\n"
 "\n"
-"Atentamente, el equipo de Software Peronista."
+"Atentamente, el equipo de desarrollo."
 
 #: ../src/nomeolvides-dialog-migrador.vala:66
 msgid "Database Migration"
@@ -379,19 +372,3 @@ msgstr "_Acerca de Nomeolvides"
 #: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
-
-#~ msgid "_About Contacts"
-#~ msgstr "_Cantidad de Hechos"
-
-#~ msgid "Historical Facts Collections"
-#~ msgstr "Colección de Hechos Históricos"
-
-#~ msgid "Custom Lists"
-#~ msgstr "Listas Personalizadas"
-
-#~ msgid "Gestor de efemérides"
-#~ msgstr "Ephemeride Maganger"
-
-#, fuzzy
-#~ msgid "Nomeolvides"
-#~ msgstr "Nomeolvides"
