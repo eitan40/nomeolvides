@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-13 23:58-0300\n"
+"POT-Creation-Date: 2013-10-13 22:17-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -64,7 +64,6 @@ msgid "Remove Fact from List"
 msgstr "Elimnar Hecho de la Lista"
 
 #: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:44
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:31
 msgid "Do you want to remove fact"
 msgstr "Desea eliminar el hecho"
 
@@ -150,6 +149,22 @@ msgstr "Eliminar Colección"
 msgid "Do you want to remove collection"
 msgstr "Desea eliminar la colección"
 
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:25
+msgid "Remove Fact"
+msgstr "Elimnar Hecho"
+
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:30
+msgid "Fact"
+msgstr "Hecho"
+
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:34
+msgid "dated"
+msgstr "con fecha"
+
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:37
+msgid "Do you want to remove this fact?"
+msgstr "¿Desea eliminar este hecho?"
+
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:26
 msgid "Delete Custom List"
 msgstr "Eliminar Lista Personalizada"
@@ -187,11 +202,15 @@ msgstr "Descripción"
 msgid "List Name"
 msgstr "Nombre de la Lista"
 
-#: ../src/nomeolvides-dialog-migrador.vala:54
+#: ../src/nomeolvides-dialog-migrador.vala:46
+msgid "Database Migration"
+msgstr "Migración de la Base de Datos"
+
+#: ../src/nomeolvides-dialog-migrador.vala:61
 msgid "Start migration"
 msgstr "Comenzar Migración"
 
-#: ../src/nomeolvides-dialog-migrador.vala:56
+#: ../src/nomeolvides-dialog-migrador.vala:64
 msgid ""
 "Dear user,\n"
 "\n"
@@ -223,44 +242,40 @@ msgstr ""
 "\n"
 "Atentamente, el equipo de desarrollo."
 
-#: ../src/nomeolvides-dialog-migrador.vala:66
-msgid "Database Migration"
-msgstr "Migración de la Base de Datos"
-
-#: ../src/nomeolvides-dialog-migrador.vala:207
-#: ../src/nomeolvides-dialog-migrador.vala:304
-msgid "Migrating Collections"
-msgstr "Migrando Colecciones"
-
-#: ../src/nomeolvides-dialog-migrador.vala:209
-msgid "Facts from Collection"
-msgstr "Hechos de la Colección"
-
-#: ../src/nomeolvides-dialog-migrador.vala:212
-#: ../src/nomeolvides-dialog-migrador.vala:356
-msgid "Migrating Lists"
-msgstr "Migrando Listas"
-
-#: ../src/nomeolvides-dialog-migrador.vala:214
-msgid "Facts from List"
-msgstr "Hechos de la Lista"
-
-#: ../src/nomeolvides-dialog-migrador.vala:233
+#: ../src/nomeolvides-dialog-migrador.vala:228
 msgid "Finish Migration"
 msgstr "Finalizar Migración"
 
-#: ../src/nomeolvides-dialog-migrador.vala:279
+#: ../src/nomeolvides-dialog-migrador.vala:232
+#: ../src/nomeolvides-dialog-migrador.vala:321
+msgid "Migrating Collections"
+msgstr "Migrando Colecciones"
+
+#: ../src/nomeolvides-dialog-migrador.vala:237
+msgid "Facts from Collection"
+msgstr "Hechos de la Colección"
+
+#: ../src/nomeolvides-dialog-migrador.vala:242
+#: ../src/nomeolvides-dialog-migrador.vala:373
+msgid "Migrating Lists"
+msgstr "Migrando Listas"
+
+#: ../src/nomeolvides-dialog-migrador.vala:247
+msgid "Facts from List"
+msgstr "Hechos de la Lista"
+
+#: ../src/nomeolvides-dialog-migrador.vala:296
 msgid "Migrating Collection"
 msgstr "Migrando Colección"
 
-#: ../src/nomeolvides-dialog-migrador.vala:292
-#: ../src/nomeolvides-dialog-migrador.vala:297
-#: ../src/nomeolvides-dialog-migrador.vala:344
-#: ../src/nomeolvides-dialog-migrador.vala:349
+#: ../src/nomeolvides-dialog-migrador.vala:309
+#: ../src/nomeolvides-dialog-migrador.vala:314
+#: ../src/nomeolvides-dialog-migrador.vala:361
+#: ../src/nomeolvides-dialog-migrador.vala:366
 msgid "Migrating Facts"
 msgstr "Migrando Hechos"
 
-#: ../src/nomeolvides-dialog-migrador.vala:325
+#: ../src/nomeolvides-dialog-migrador.vala:342
 msgid "Migrating List"
 msgstr "Migrando Lista"
 
@@ -372,3 +387,16 @@ msgstr "_Acerca de Nomeolvides"
 #: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
+
+#~ msgid "Historical Facts Collections"
+#~ msgstr "Colección de Hechos Históricos"
+
+#~ msgid "Custom Lists"
+#~ msgstr "Listas Personalizadas"
+
+#~ msgid "Gestor de efemérides"
+#~ msgstr "Ephemeride Maganger"
+
+#, fuzzy
+#~ msgid "Nomeolvides"
+#~ msgstr "Nomeolvides"

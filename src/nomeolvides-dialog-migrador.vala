@@ -42,6 +42,13 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private Box contenido;
 
 	public Migrador ( VentanaPrincipal ventana ) {
+		this.ventana = ventana;
+		this.title = _("Database Migration");
+		this.set_transient_for ( this.ventana as Window );
+		this.set_modal ( true );
+		this.window_position = Gtk.WindowPosition.CENTER;
+		this.set_default_size ( 600, -1 );
+		this.set_resizable ( false );
 
 		this.hay_migrados = false;
 		this.cantidad_hechos_coleccion = 0;
@@ -50,25 +57,15 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		this.listas = new Array<Datos_lista>();
 		this.contenido = this.get_content_area() as Box;
 		this.grid = new Grid ();
-		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
-		this.siguiente_boton.set_label (_("Start migration"));
+		this.set_grid ();
+		this.siguiente_boton = this.add_button ( _("Start migration"), ResponseType.APPLY ) as Button;
 		this.siguiente_boton.clicked.connect (this.migracion);
-		var label_mensaje = new Label.with_mnemonic(_("Dear user,\n\nSince this version of Nomeolvides has a lot of internal changes, it is necessary to perform a migration of data loaded into earlier versions.\n\nThe migration process is automatic and the migrated data will not be deleted after the process to avoid losing your work if it fails.\n\nPlease check that all the data has been successfully migrated after completion of the process and, if not, notify us at desarrolladores@softwareperonista.com.ar\n\nSincerely, the development team."));
 
+		var label_mensaje = new Label.with_mnemonic(_("Dear user,\n\nSince this version of Nomeolvides has a lot of internal changes, it is necessary to perform a migration of data loaded into earlier versions.\n\nThe migration process is automatic and the migrated data will not be deleted after the process to avoid losing your work if it fails.\n\nPlease check that all the data has been successfully migrated after completion of the process and, if not, notify us at desarrolladores@softwareperonista.com.ar\n\nSincerely, the development team."));
 		label_mensaje.set_line_wrap ( true );
 		label_mensaje.set_justify ( Justification.FILL );
 
-		this.grid.attach (label_mensaje,0,0,4,1);
-		this.grid.attach ( this.siguiente_boton,3,1,1,1);
-		this.grid.set_border_width ( 50 );
-
-		this.ventana = ventana;
-		this.title = _("Database Migration");
-		this.set_transient_for ( this.ventana as Window );
-		this.set_modal ( true );
-		this.window_position = Gtk.WindowPosition.CENTER;
-		this.set_default_size ( 650, 400 );
-		this.set_resizable ( false );
+		this.grid.attach (label_mensaje,0,0,1,1);
 		
 		this.destroy.connect ( terminar_migrador );
 
@@ -86,6 +83,32 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 			this.cargar_listas ();
 			this.cargar_hechos_listas ();
 		}
+	}
+
+	private void  set_grid () {
+		this.grid.set_valign ( Align.FILL );
+		this.grid.set_halign ( Align.FILL );
+		this.grid.set_margin_right ( 50 );
+		this.grid.set_margin_left ( 50 );
+		this.grid.set_margin_top ( 30 );
+		this.grid.set_margin_bottom ( 17 );
+		this.grid.set_size_request ( 600, -1 );
+	}
+	
+	private void  set_label ( Label label ) {
+		label.set_justify ( Justification.LEFT );
+		label.set_valign ( Align.FILL );
+		label.set_halign ( Align.START );
+		label.set_margin_left ( 20 );
+	}
+	
+	private void  set_progress_bar ( ProgressBar bar ) {
+		bar.set_valign ( Align.FILL );
+		bar.set_halign ( Align.FILL );
+		bar.set_hexpand ( true );
+		bar.set_fraction ( (double) 0 );
+		bar.set_text ( "0%" );
+		bar.set_show_text ( true );
 	}
 
 	private void cargar_colecciones () {
@@ -198,55 +221,49 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 
 	private void migracion ( ) {
 		this.contenido.remove ( this.grid );
-
 		this.grid = new Grid ();
-		this.grid.set_row_spacing ( 15 );
-		this.grid.set_border_width ( 30 );
-		this.grid.set_column_homogeneous ( true );
-		
-		this.label_colecciones = new Label.with_mnemonic ( _("Migrating Collections") );
-		this.barra_colecciones = new ProgressBar ();
-		this.label_colecciones_hechos = new Label.with_mnemonic ( _("Facts from Collection") );
-		this.barra_colecciones_hechos = new ProgressBar ();
+		this.set_grid ();
 
-		this.label_listas = new Label.with_mnemonic ( _("Migrating Lists") );
-		this.barra_listas = new ProgressBar ();
-		this.label_listas_hechos = new Label.with_mnemonic ( _("Facts from List") );
-		this.barra_listas_hechos = new ProgressBar ();
-
-		this.barra_colecciones.set_show_text ( true );
-		this.barra_colecciones_hechos.set_show_text ( true );
-		this.barra_listas.set_show_text ( true );
-		this.barra_listas_hechos.set_show_text ( true );
-		
-		this.grid.attach (this.label_colecciones,0,1,4,1);
-		this.grid.attach (this.barra_colecciones,0,2,4,1);		
-		this.grid.attach (this.label_colecciones_hechos,0,3,4,1);
-		this.grid.attach (this.barra_colecciones_hechos,0,4,4,1);
-		
-		this.grid.attach (this.label_listas,0,5,4,1);
-		this.grid.attach (this.barra_listas,0,6,4,1);		
-		this.grid.attach (this.label_listas_hechos,0,7,4,1);
-		this.grid.attach (this.barra_listas_hechos,0,8,4,1);
-
-		this.siguiente_boton = new Button.from_stock (Stock.APPLY);
+		this.siguiente_boton.clicked.disconnect (this.migracion);
 		this.siguiente_boton.set_label ( _("Finish Migration") );
 		this.siguiente_boton.set_sensitive ( false );
 		this.siguiente_boton.clicked.connect (  () => { this.destroy (); }  );
-		this.grid.attach ( this.siguiente_boton,3,9,1,1);
+		
+		this.label_colecciones = new Label.with_mnemonic ( _("Migrating Collections") );
+		this.set_label ( this.label_colecciones );
+		this.barra_colecciones = new ProgressBar ();
+		this.set_progress_bar ( this.barra_colecciones );
+		
+		this.label_colecciones_hechos = new Label.with_mnemonic ( _("Facts from Collection") );
+		this.set_label ( this.label_colecciones_hechos );
+		this.barra_colecciones_hechos = new ProgressBar ();
+		this.set_progress_bar ( this.barra_colecciones_hechos );
 
-		this.grid.set_size_request ( 640, 363 );
+		this.label_listas = new Label.with_mnemonic ( _("Migrating Lists") );
+		this.set_label ( this.label_listas );
+		this.barra_listas = new ProgressBar ();
+		this.set_progress_bar ( this.barra_listas );
+		
+		this.label_listas_hechos = new Label.with_mnemonic ( _("Facts from List") );
+		this.set_label ( this.label_listas_hechos );
+		this.barra_listas_hechos = new ProgressBar ();
+		this.set_progress_bar ( this.barra_listas_hechos );
+
+		var separador = new Separator ( Orientation.HORIZONTAL );
+		separador.set_margin_top ( 14 );
+		separador.set_margin_bottom ( 6 );
+		
+		this.grid.attach (this.label_colecciones,0,0,1,1);
+		this.grid.attach (this.barra_colecciones,0,1,1,1);		
+		this.grid.attach (this.label_colecciones_hechos,0,2,1,1);
+		this.grid.attach (this.barra_colecciones_hechos,0,3,1,1);
+		this.grid.attach (separador,0,4,1,1);
+		this.grid.attach (this.label_listas,0,5,1,1);
+		this.grid.attach (this.barra_listas,0,6,1,1);		
+		this.grid.attach (this.label_listas_hechos,0,7,1,1);
+		this.grid.attach (this.barra_listas_hechos,0,8,1,1);
+
 		this.contenido.pack_start ( this.grid );
-
-		this.barra_colecciones_hechos.set_fraction ( (double) 0 );
-		this.barra_colecciones_hechos.set_text ( "0%" );
-		this.barra_colecciones.set_fraction ( (double) 0 );
-		this.barra_colecciones.set_text ( "0%" );
-
-		this.barra_listas_hechos.set_fraction ( (double) 0 );
-		this.barra_listas_hechos.set_text ( "0%" );
-		this.barra_listas.set_fraction ( (double) 0 );
-		this.barra_listas.set_text ( "0%" );
 
 		this.show_all ();
 			while ( Gtk.events_pending () ) {

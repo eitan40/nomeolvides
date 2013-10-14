@@ -22,24 +22,41 @@ using Nomeolvides;
 
 public class Nomeolvides.BorrarHechoDialogo : Dialog {
 	public BorrarHechoDialogo ( Hecho hecho_a_borrar, VentanaPrincipal ventana ) {
+		this.set_title ( _("Remove Fact") );
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
-		Label pregunta = new Label.with_mnemonic ( "" );
+		this.set_size_request ( 400, -1 );
+		Label pregunta = new Label.with_mnemonic ( "" );		
+		Label hecho = new Label.with_mnemonic ( _("Fact") + ":" );
 		Label hecho_nombre = new Label.with_mnemonic ( "" );
+		hecho_nombre.set_line_wrap_mode ( Pango.WrapMode.WORD );
+		hecho_nombre.set_line_wrap ( true );
+		Label hecho_de = new Label.with_mnemonic ( _("dated") + ":" );
 		Label hecho_fecha = new Label.with_mnemonic ( "" );
 
-		pregunta.set_markup ( "<big>" + _("Do you want to remove fact") + "</big>" );
+		pregunta.set_markup ( "<big>" + _("Do you want to remove this fact?") + "</big>" );
 		hecho_nombre.set_markup ( "<span font_weight=\"heavy\">"+ hecho_a_borrar.nombre +"</span>");
-		hecho_fecha.set_markup ( "de <span font_style=\"italic\">"+ hecho_a_borrar.fecha_to_string() +"</span>");
+		hecho_fecha.set_markup ( "<span font_weight=\"heavy\">"+ hecho_a_borrar.fecha_to_string() +"</span>");
 
-		Box box = new Box ( Orientation.VERTICAL, 0 );
+		Grid grid = new Grid ( );		
+		grid.set_row_spacing ( 20 );
+		grid.set_column_spacing ( 10 );
+		grid.set_valign ( Align.CENTER );
+		grid.set_halign ( Align.CENTER );
+		grid.set_margin_top ( 30 );
+		grid.set_margin_bottom ( 30 );
+		grid.set_margin_left ( 30 );
+		grid.set_margin_right ( 30 );
+		
 
-		box.pack_start ( pregunta, true, true, 15 );
-		box.pack_start ( hecho_nombre, true, true, 0 );
-		box.pack_start ( hecho_fecha, true, true, 0 );
+		grid.attach ( pregunta, 0, 0, 2, 1 );
+		grid.attach ( hecho, 0, 1, 1, 1 );
+		grid.attach ( hecho_nombre, 1, 1, 1, 1 );
+		grid.attach ( hecho_de, 0, 2, 1, 1 );
+		grid.attach ( hecho_fecha, 1, 2, 1, 1 );
 		
 		var contenido = this.get_content_area() as Box;
-		contenido.pack_start(box, false, false, 0);
+		contenido.pack_start(grid, false, false, 0);
 		
 		this.add_button (Stock.CANCEL, ResponseType.REJECT);
 		this.add_button (Stock.APPLY, ResponseType.APPLY);
