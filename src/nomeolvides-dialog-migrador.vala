@@ -354,8 +354,8 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 				}
 			}
 			this.label_listas.set_text_with_mnemonic ( _("Migrating Lists") );
-			Archivo.renombrar ( Configuracion.archivo_listas(), Configuracion.archivo_listas() + ".migrado" );
 		}
+		Archivo.renombrar ( Configuracion.archivo_listas(), Configuracion.archivo_listas() + ".migrado" );
 	}
 
 	private string sacarDatoJson(string json, string campo) {

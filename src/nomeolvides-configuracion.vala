@@ -40,8 +40,8 @@ public class Nomeolvides.Configuracion : GLib.Object {
 	}
 	
 	public static void set_config () {		
-		if ( !Archivo.existe_path ( Configuracion.directorio_configuracion () ) ) {
-			Archivo.crear_directorio ( Configuracion.directorio_configuracion () );
+		if ( !Archivo.existe_path ( Configuracion.directorio_datos () ) ) {
+			Archivo.crear_directorio ( Configuracion.directorio_datos () );
 		}
 
 		if (!Archivo.existe_path ( Configuracion.base_de_datos () ) ) {
@@ -111,12 +111,8 @@ public class Nomeolvides.Configuracion : GLib.Object {
 		return GLib.Environment.get_user_config_dir () + "/nomeolvides";
 	}
 
-	private static string directorio_colecciones_locales () {
-		return GLib.Environment.get_home_dir () + "/.local/share/nomeolvides";
-	}
-
 	private static string archivo_listas_hechos () {
-		return Configuracion.directorio_colecciones_locales () + "/listas";
+		return Configuracion.directorio_datos () + "/listas";
 	}
 
 	private static string db_sql () {
