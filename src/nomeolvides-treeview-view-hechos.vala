@@ -28,9 +28,7 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 	public ViewHechos () {
 		var nombre_cell = new CellRendererText ();
 
-		nombre_cell.wrap_width = 100;
-		nombre_cell.wrap_mode = Pango.WrapMode.WORD;
-		nombre_cell.width_chars = 100;
+		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
 
 		var fecha_cell = new CellRendererText ();
 
