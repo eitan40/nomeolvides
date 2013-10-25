@@ -46,7 +46,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		this.label_hecho.set_line_wrap ( true );
 
 		var label_pregunta = new Label (_("Add") + ":");
-		var label_listas = new Label ( _("to list") + " " );
+		var label_listas = new Label ( _("to list") );
 
 		var grid = new Grid ( );
 		grid.set_row_spacing ( 20 );
@@ -57,6 +57,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		grid.set_margin_bottom ( 30 );
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
+		grid.set_column_homogeneous ( true );
 		
 		grid.attach ( label_pregunta, 0, 0, 1, 1 );
 		grid.attach ( this.label_hecho, 1, 0, 1, 1 );

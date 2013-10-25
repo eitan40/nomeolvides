@@ -116,7 +116,8 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 
 	private void borrar_coleccion_dialog () {
 		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
-		var borrar_dialog = new BorrarColeccionDialogo ( coleccion );
+		int cantidad_hechos = this.db.count_hechos_coleccion ( coleccion );
+		var borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
