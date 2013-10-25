@@ -33,6 +33,15 @@ msgstr ""
 "enfocado en ofrecer una interface amigable aun manejando una gran cantidad "
 "de hechos."
 
+#: ../data/nomeolvides.appdata.xml.in.h:1
+msgid ""
+"A simple historical facts manager featuring a number of basic actions such "
+"as add historical facts in differents collections, edit and organize them in "
+"personalized lists created by the user and import/export facts for backup or "
+"sharing. It focuses on providing a simple user interface even when manage a "
+"great amount of facts."
+msgstr ""
+
 #: ../data/nomeolvides.desktop.in.in.h:1
 msgid "history;facts;"
 msgstr "historia;hechos;"
