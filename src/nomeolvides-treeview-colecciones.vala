@@ -24,7 +24,11 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 	private CellRendererToggle toggle_visible;
 	
 	public TreeViewColecciones () {
-		this.insert_column_with_attributes ( -1, _("Name"), new CellRendererText(), "text", 0 );
+		var nombre_cell = new CellRendererText ();
+
+		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
+
+		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 2 );
 
 		this.toggle_visible = new CellRendererToggle();

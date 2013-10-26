@@ -47,7 +47,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.scroll_listas_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 
 		this.anios_listas = new Notebook ();
-		
+
 		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
 		this.listas_view.cursor_changed.connect ( this.elegir_lista );

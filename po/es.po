@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 04:31-0300\n"
+"POT-Creation-Date: 2013-10-26 19:02-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -169,8 +169,8 @@ msgid "Colection"
 msgstr "Colección"
 
 #: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:30
-#: ../src/nomeolvides-treeview-colecciones.vala:28
-#: ../src/nomeolvides-treeview-listas.vala:26
+#: ../src/nomeolvides-treeview-colecciones.vala:32
+#: ../src/nomeolvides-treeview-listas.vala:32
 msgid "Amount of Facts"
 msgstr "Cantidad de Hechos"
 
@@ -203,9 +203,9 @@ msgid "Colection name"
 msgstr "Nombre de la Colección"
 
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:41
-#: ../src/nomeolvides-treeview-colecciones.vala:27
-#: ../src/nomeolvides-treeview-listas.vala:25
-#: ../src/nomeolvides-treeview-listas.vala:30
+#: ../src/nomeolvides-treeview-colecciones.vala:31
+#: ../src/nomeolvides-treeview-listas.vala:31
+#: ../src/nomeolvides-treeview-listas.vala:42
 #: ../src/nomeolvides-treeview-view-hechos.vala:37
 msgid "Name"
 msgstr "Nombre"
@@ -385,7 +385,7 @@ msgstr "Agregar a la lista"
 msgid "Remove from list"
 msgstr "ELiminar de la lista"
 
-#: ../src/nomeolvides-treeview-colecciones.vala:32
+#: ../src/nomeolvides-treeview-colecciones.vala:36
 msgid "Visible"
 msgstr "Visible"
 

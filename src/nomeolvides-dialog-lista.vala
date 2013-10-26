@@ -28,23 +28,25 @@ public class Nomeolvides.DialogLista : Gtk.Dialog {
 	{
 		this.resizable = false;
 		this.modal = true;
-		
+
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 
 		this.response.connect(on_response);
-		
+
 		var nombre_label = new Label.with_mnemonic (_("List Name") + ": ");
-		
+
 		this.nombre_entry = new Entry ();
+		this.nombre_entry.set_max_length ( 30 );
+
 		var grid = new Grid ();
-		
+
 		grid.attach (nombre_label, 0, 0, 1, 1);
 	    grid.attach (this.nombre_entry, 1, 0, 1, 1);
-	
+
 		var contenido = this.get_content_area() as Box;
 
 		contenido.pack_start(grid, true, true, 0);
-		
+
 		this.show_all ();
 	}
 

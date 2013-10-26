@@ -28,7 +28,7 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 	{
 		this.resizable = false;
 		this.modal = true;
-		
+
 		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 
 		this.response.connect(on_response);
@@ -36,6 +36,7 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 		var nombre_coleccion_label = new Label.with_mnemonic ( _("Colection name") + ": " );
 		
 		this.nombre_coleccion_entry = new Entry ();
+		this.nombre_coleccion_entry.set_max_length ( 30 );
 
 		var grid = new Grid ();
 		
