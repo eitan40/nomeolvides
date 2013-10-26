@@ -1,6 +1,5 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Version=0.6.1
 _Keywords=history;facts;
 Type=Application
 Terminal=false
