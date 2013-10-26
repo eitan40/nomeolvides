@@ -34,7 +34,7 @@ msgstr ""
 
 #: ../data/nomeolvides.desktop.in.in.h:1
 msgid "history;facts;"
-msgstr "historia;hechos"
+msgstr "historia;hechos;"
 
 #: ../data/nomeolvides.desktop.in.in.h:2
 msgid "Ephemeride Manager"
