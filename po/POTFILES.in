@@ -1,3 +1,4 @@
+data/nomeolvides.appdata.xml.in
 data/nomeolvides.desktop.in.in
 src/nomeolvides-add-coleccion-dialog.vala
 src/nomeolvides-add-hecho-dialog.vala
