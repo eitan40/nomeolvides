@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-25 23:57-0300\n"
+"POT-Creation-Date: 2013-10-26 04:31-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -26,11 +26,11 @@ msgid ""
 "a great amount of facts."
 msgstr ""
 "Un gestor de hechos históricos sencillo que implementa un conjunto básico de "
-"acciones, tales como agregar hechos históricos en diferentes "
-"colecciones, editarlos y organizarlos en listas personalizadas creadas "
-"por el usuario y importar/exportar hechos para hacer copias de seguridad "
-"o compartirlos. Está enfocado en ofrecer una interface amigable aun "
-"manejando una gran cantidad de hechos."
+"acciones, tales como agregar hechos históricos en diferentes colecciones, "
+"editarlos y organizarlos en listas personalizadas creadas por el usuario y "
+"importar/exportar hechos para hacer copias de seguridad o compartirlos. Está "
+"enfocado en ofrecer una interface amigable aun manejando una gran cantidad "
+"de hechos."
 
 #: ../data/nomeolvides.desktop.in.in.h:1
 msgid "history;facts;"
@@ -169,8 +169,9 @@ msgid "Colection"
 msgstr "Colección"
 
 #: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:30
+#: ../src/nomeolvides-treeview-colecciones.vala:28
 #: ../src/nomeolvides-treeview-listas.vala:26
-msgid "Amount of facts"
+msgid "Amount of Facts"
 msgstr "Cantidad de Hechos"
 
 #: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:25
@@ -202,7 +203,7 @@ msgid "Colection name"
 msgstr "Nombre de la Colección"
 
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:41
-#: ../src/nomeolvides-treeview-colecciones.vala:28
+#: ../src/nomeolvides-treeview-colecciones.vala:27
 #: ../src/nomeolvides-treeview-listas.vala:25
 #: ../src/nomeolvides-treeview-listas.vala:30
 #: ../src/nomeolvides-treeview-view-hechos.vala:37
@@ -407,6 +408,9 @@ msgstr "_Acerca de Nomeolvides"
 #: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
+
+#~ msgid "Amount of facts"
+#~ msgstr "Cantidad de Hechos"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"

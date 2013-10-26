@@ -27,7 +27,7 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove this collection?") );
 		Label coleccion_nombre_label = new Label.with_mnemonic ( _("Colection") + ":");
 		Label coleccion_nombre = new Label ( "" );
-		Label coleccion_hechos_label = new Label.with_mnemonic ( _("Amount of facts") + ":");
+		Label coleccion_hechos_label = new Label.with_mnemonic ( _("Amount of Facts") + ":");
 		Label coleccion_hechos = new Label ( "" );
 
 		pregunta.set_halign ( Align.CENTER );

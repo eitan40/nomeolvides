@@ -23,7 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.TreeViewListas : TreeView {
 	public TreeViewListas () {
 		this.insert_column_with_attributes ( -1, _("Name"), new CellRendererText(), "text", 0 );
-		this.insert_column_with_attributes ( -1, _("Amount of facts"), new CellRendererText(), "text", 1 );
+		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
 	}
 
 	public TreeViewListas.ventana_principal () {
