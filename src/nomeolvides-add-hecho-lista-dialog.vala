@@ -52,11 +52,6 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		grid.set_halign ( Align.CENTER );
 		
 		this.label_hecho = new Label ( null );
-		if( this.label_hecho.get_lines () > 50 ) {
-			this.label_hecho.set_size_request ( 150, -1 );
-			this.label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
-			this.label_hecho.set_line_wrap ( true );
-		}
 
 		var label_pregunta = new Label (_("Add") + ":");
 		var label_listas = new Label ( _("to list") );
@@ -75,6 +70,11 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	public void set_hecho ( Hecho hecho ) {
 		this.hecho = hecho;
 		this.label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hecho.nombre +"</span>");
+		if( this.label_hecho.get_text ().length > 50 ) {
+			this.label_hecho.set_size_request ( 600, -1 );
+			this.label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
+			this.label_hecho.set_line_wrap ( true );
+		}
 	}
 
 	public void set_listas ( ListStoreListas liststore) {
