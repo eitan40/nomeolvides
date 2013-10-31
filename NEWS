@@ -1,26 +1,33 @@
-Versión 0.4
+0.8 / 2013-11-16
+==================
 
-Está la segunda versión de prueba.
+With this release we are getting close to the whole features we thought for 1.0 version of Nomeolvides.We have 
+given some love to the user interface to make user expirience more pleasant. Now the application can be
+translated, right now it is available in english and spanish. We also use sqlite to handling data, due to this a migration
+is needed, wich is made by our shining migrator for data added in the early version. libgee is not needed any more 
+and there also a lot of bug-fixes.
 
-* Se puede gestionar bases de datos de hechos hitóricos.
-* Se muestra claramente qué año se está mostrando.
-* Se mejoró el diálogo de ingreso de datos.
-* Se puede detallar de qué fuente bibliográfica se tomó el hecho.
-* Se creó la base de datos oficial de hechos históricos de Nomeolvides(bastante vacía aún), la cual se carga al inicio de la aplicación.
-* Se permite enviar a los desarrolladores hechos nuevos para agregar a la base de datos oficial.
-* Se arrglaron algunos bugs menores.
+0.6 / 2013-05-02 
+==================
 
-Versión 0.2.1
+In this new version of Nomeolvides there are many new features. Now you can organize you facts with the new
+custom list feature. Also, right now changes are auto-saved instantly. Due to this, now if you delete or edit a fact 
+by mistake, you can undo the changes. And last, but not least, we have rewirte a lot of code and fixed various bugs.
 
-* Se agregó el application menu.
-* Se agregó el diálogo "Acerca de..."
+v0.4 / 2013-02-28 
+==================
 
-Versión 0.2
+Just in time we have released the second version of Nomeolvides. Now you can send your historical facts vie e-mail.
+There are also a Official data source via internet. And now you can add a bibliographical source to your facts.
+There are also many bug fixes, too.
 
-Esta es la primer versión de prueba. Ya cuenta con las acciones básicas para usar la aplicación:
+0.2.1 / 2013-01-25
+==================
 
-* Agregar hechos históricos
-* Modificar hechos históricos
-* Eliminar hechos históricos
-* Guardar hechos históricos en un archivo
-* Cargar hecho históricos desde un archivo
+There is a new application menu. We have also resolved some issues.
+
+0.2 / 2013-01-19 
+==================
+
+Today we have release the first version of Nomeolvides. Right now, you can add, edit, delete the historical facts.
+They will be organized by date. You can also export or import you data. There are many missing things,
