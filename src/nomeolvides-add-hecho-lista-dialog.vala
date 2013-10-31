@@ -31,7 +31,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	public AddHechoListaDialog ( VentanaPrincipal ventana )
 	{
 		this.title = _("Add Fact to List");
-		this.set_size_request (350,-1);
+		this.set_default_size ( 350,-1 );
 		this.set_transient_for ( ventana as Window );
 		
 		this.response.connect(on_response);
@@ -40,24 +40,26 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		this.add_button ( Stock.ADD , ResponseType.APPLY );
 
 		this.listas = new ComboBox ();
-		
-		this.label_hecho = new Label ( null );
-		this.label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
-		this.label_hecho.set_line_wrap ( true );
-
-		var label_pregunta = new Label (_("Add") + ":");
-		var label_listas = new Label ( _("to list") );
 
 		var grid = new Grid ( );
-		grid.set_row_spacing ( 20 );
+		grid.set_row_spacing ( 15 );
 		grid.set_column_spacing ( 20 );
 		grid.set_margin_right ( 30 );
 		grid.set_margin_left ( 30 );
-		grid.set_margin_top ( 30 );
-		grid.set_margin_bottom ( 30 );
+		grid.set_margin_top ( 15 );
+		grid.set_margin_bottom ( 15 );
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		grid.set_column_homogeneous ( true );
+		
+		this.label_hecho = new Label ( null );
+		if( this.label_hecho.get_lines () > 50 ) {
+			this.label_hecho.set_size_request ( 150, -1 );
+			this.label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
+			this.label_hecho.set_line_wrap ( true );
+		}
+
+		var label_pregunta = new Label (_("Add") + ":");
+		var label_listas = new Label ( _("to list") );
 		
 		grid.attach ( label_pregunta, 0, 0, 1, 1 );
 		grid.attach ( this.label_hecho, 1, 0, 1, 1 );

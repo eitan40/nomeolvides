@@ -24,25 +24,52 @@ public class Nomeolvides.BorrarListaDialogo : Dialog {
 	public BorrarListaDialogo ( Lista lista_a_borrar, int cantidad_hechos ) {
 		this.set_modal ( true );
 		this.title = _("Delete Custom List");
-		Label pregunta = new Label.with_mnemonic ( "" );
-		Label lista_nombre = new Label.with_mnemonic ( "" );
-		Label lista_cantidad_hechos = new Label.with_mnemonic ( "" );
+	
+		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove custom list?") );
+		Label lista_nombre_label = new Label.with_mnemonic ( _("List") + ":");
+		Label lista_nombre = new Label ( "" );
+		Label lista_hechos_label = new Label.with_mnemonic ( _("Amount of facts") + ":");
+		Label lista_hechos = new Label ( "" );
 
-		pregunta.set_markup ( "<big>" + _("Do you want to remove custom list") + "</big>" );
+		pregunta.set_halign ( Align.CENTER );
+		pregunta.set_margin_bottom ( 15 );
+		pregunta.set_hexpand ( true );
+		lista_nombre_label.set_halign ( Align.END );
+		lista_nombre_label.set_margin_right ( 20 );
+		lista_nombre_label.set_margin_bottom ( 10 );
+		lista_nombre.set_halign ( Align.START );
+		lista_nombre.set_margin_left ( 20 );
+		lista_nombre.set_margin_bottom ( 10 );
+		lista_hechos_label.set_halign ( Align.END );
+		lista_hechos_label.set_margin_right ( 20 );
+		lista_hechos.set_halign ( Align.START );
+		lista_hechos.set_margin_left ( 20 );
+
 		lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
-		lista_cantidad_hechos.set_markup ( "contiene <span font_style=\"italic\">"+ cantidad_hechos.to_string() +"</span> hecho");
-		
-		Box box = new Box ( Orientation.VERTICAL, 0 );
+		lista_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 
-		box.pack_start ( pregunta, true, true, 15 );
-		box.pack_start ( lista_nombre, true, true, 0 );
-		box.pack_start ( lista_cantidad_hechos, true, true, 0 );
-		
+		Grid grid = new Grid ( );
+
+		grid.set_valign ( Align.CENTER );
+		grid.set_halign ( Align.CENTER );
+		grid.set_margin_right ( 20 );
+		grid.set_margin_left ( 20 );
+		grid.set_margin_top ( 20 );
+		grid.set_margin_bottom ( 20 );
+		grid.set_size_request ( 400, -1 );
+		grid.set_hexpand ( true );
+
+		grid.attach ( pregunta, 0, 0, 2, 1 );
+		grid.attach ( lista_nombre_label, 0, 1, 1, 1 );
+		grid.attach ( lista_nombre, 1, 1, 1, 1 );
+		grid.attach ( lista_hechos_label, 0, 2, 1, 1 );
+		grid.attach ( lista_hechos, 1, 2, 1, 1 );
+
 		var contenido = this.get_content_area() as Box;
-		contenido.pack_start(box, false, false, 0);
-		
-		this.add_button (Stock.CANCEL, ResponseType.REJECT);
-		this.add_button (Stock.APPLY, ResponseType.APPLY);
+		contenido.pack_start ( grid, true, true, 0 );
+
+		this.add_button ( Stock.CANCEL, ResponseType.REJECT );
+		this.add_button ( Stock.APPLY, ResponseType.APPLY );
 
 		this.show_all ();
 	}

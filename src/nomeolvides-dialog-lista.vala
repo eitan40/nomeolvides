@@ -40,6 +40,13 @@ public class Nomeolvides.DialogLista : Gtk.Dialog {
 
 		var grid = new Grid ();
 
+		grid.set_margin_right ( 20 );
+		grid.set_margin_left ( 20 );
+		grid.set_margin_top ( 30 );
+		grid.set_margin_bottom ( 20 );
+		grid.set_valign ( Align.CENTER );
+		grid.set_halign ( Align.CENTER );
+
 		grid.attach (nombre_label, 0, 0, 1, 1);
 	    grid.attach (this.nombre_entry, 1, 0, 1, 1);
 

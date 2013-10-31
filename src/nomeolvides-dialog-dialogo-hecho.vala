@@ -37,12 +37,22 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.set_default_size (600,400);
 		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
+
+		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
 		
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
-		var archivo_label = new Label.with_mnemonic (_("Save in") + ": ");
+		var coleccion_label = new Label.with_mnemonic (_("Colection") + ": ");
 		var fuente_label = new Label.with_mnemonic (_("Source") + ": ");
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+
+		nombre_label.set_halign ( Align.END );
+		nombre_label.set_margin_right ( 15 );
+		fecha_label.set_halign ( Align.END );
+		fecha_label.set_margin_right ( 15 );
+		coleccion_label.set_halign ( Align.END );
+		coleccion_label.set_margin_right ( 15 );
+		fuente_label.set_halign ( Align.END );
+		fuente_label.set_margin_right ( 15 );
 		
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
@@ -68,7 +78,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 		box_labels.pack_start (nombre_label, false, false, 5);		
 		box_labels.pack_start (fecha_label, false, false, 5);
-		box_labels.pack_start (archivo_label, false, false, 5);
+		box_labels.pack_start (coleccion_label, false, false, 5);
 		box_labels.pack_start (fuente_label, false, false, 5);
 		box_widgets.pack_start (nombre_entry, false, false, 0);
 		box_widgets.pack_start (fecha, false, false, 0);

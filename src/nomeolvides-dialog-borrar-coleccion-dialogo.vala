@@ -35,8 +35,10 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		pregunta.set_hexpand ( true );
 		coleccion_nombre_label.set_halign ( Align.END );
 		coleccion_nombre_label.set_margin_right ( 20 );
+		coleccion_nombre_label.set_margin_bottom ( 10 );
 		coleccion_nombre.set_halign ( Align.START );
 		coleccion_nombre.set_margin_left ( 20 );
+		coleccion_nombre.set_margin_bottom ( 10 );
 		coleccion_hechos_label.set_halign ( Align.END );
 		coleccion_hechos_label.set_margin_right ( 20 );
 		coleccion_hechos.set_halign ( Align.START );
@@ -65,8 +67,8 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start ( grid, true, true, 0 );
 
-		this.add_button ( Stock.APPLY, ResponseType.APPLY );
 		this.add_button ( Stock.CANCEL, ResponseType.REJECT );
+		this.add_button ( Stock.APPLY, ResponseType.APPLY );
 
 		this.show_all ();
 	}

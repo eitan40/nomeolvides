@@ -26,13 +26,16 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 	public Preferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
 		this.set_title (_("Preferences"));
 		this.set_modal ( true );
-		this.set_default_size (500, 350);
+		this.set_default_size (600, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
 		var config_colecciones = new ColeccionesConfig ( colecciones );
 		var config_listas = new ListasConfig ( listas );
 
 		this.notebook = new Notebook ();
+		this.notebook.set_size_request ( 400, 270 );
+		this.notebook.set_margin_right ( 10 );
+		this.notebook.set_margin_left ( 10 );
 		this.notebook.append_page ( config_colecciones, new Label(_("Colections") ));
 		this.notebook.append_page ( config_listas, new Label (_("Lists") ));
 

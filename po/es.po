@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.7.476\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 19:02-0300\n"
+"POT-Creation-Date: 2013-10-30 20:02-0300\n"
 "PO-Revision-Date: 2013-09-28 17:34-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@desarrolladores.com.ar>\n"
@@ -52,11 +52,11 @@ msgstr "Agregar Hecho Histórico"
 msgid "Add Fact to List"
 msgstr "Agregar Hecho a la Lista"
 
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:48
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:61
 msgid "Add"
 msgstr "Agregar"
 
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:49
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:62
 msgid "to list"
 msgstr "a la lista"
 
@@ -78,16 +78,21 @@ msgstr "Error al abrir"
 msgid "Remove Fact from List"
 msgstr "Elimnar Hecho de la Lista"
 
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:44
-msgid "Do you want to remove fact"
-msgstr "Desea eliminar el hecho"
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:35
+msgid "Do you want to remove this fact from the list?"
+msgstr "¿Desea eliminar este hecho de la lista?"
 
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:45
-msgid "from list"
-msgstr "de la lista"
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:36
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:30
+msgid "Fact"
+msgstr "Hecho"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:38
+msgid "From list"
+msgstr "De la lista"
 
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:66
-#: ../src/nomeolvides-preferencias.vala:37
+#: ../src/nomeolvides-preferencias.vala:40
 msgid "Lists"
 msgstr "Listas"
 
@@ -140,7 +145,7 @@ msgid "December"
 msgstr "Diciembre"
 
 #: ../src/nomeolvides-box-vista-hecho.vala:90
-#: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:46
 msgid "Source"
 msgstr "Fuente"
 
@@ -165,6 +170,7 @@ msgid "Do you want to remove this collection?"
 msgstr "¿Desea eliminar esta colección?"
 
 #: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:28
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:45
 msgid "Colection"
 msgstr "Colección"
 
@@ -178,10 +184,6 @@ msgstr "Cantidad de Hechos"
 msgid "Remove Fact"
 msgstr "Elimnar Hecho"
 
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:30
-msgid "Fact"
-msgstr "Hecho"
-
 #: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:34
 msgid "dated"
 msgstr "con fecha"
@@ -194,15 +196,23 @@ msgstr "¿Desea eliminar este hecho?"
 msgid "Delete Custom List"
 msgstr "Eliminar Lista Personalizada"
 
+#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:28
+msgid "Do you want to remove custom list?"
+msgstr "¿Desea eliminar la lista personalizada?"
+
+#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
+msgid "List"
+msgstr "Lista"
+
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:31
-msgid "Do you want to remove custom list"
-msgstr "Desea eliminar la lista personalizada"
+msgid "Amount of facts"
+msgstr "Cantidad de Hechos"
 
 #: ../src/nomeolvides-dialog-coleccion.vala:36
 msgid "Colection name"
 msgstr "Nombre de la Colección"
 
-#: ../src/nomeolvides-dialog-dialogo-hecho.vala:41
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:43
 #: ../src/nomeolvides-treeview-colecciones.vala:31
 #: ../src/nomeolvides-treeview-listas.vala:31
 #: ../src/nomeolvides-treeview-listas.vala:42
@@ -210,16 +220,12 @@ msgstr "Nombre de la Colección"
 msgid "Name"
 msgstr "Nombre"
 
-#: ../src/nomeolvides-dialog-dialogo-hecho.vala:42
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
 #: ../src/nomeolvides-treeview-view-hechos.vala:38
 msgid "Date"
 msgstr "Fecha"
 
-#: ../src/nomeolvides-dialog-dialogo-hecho.vala:43
-msgid "Save in"
-msgstr "Guardar en"
-
-#: ../src/nomeolvides-dialog-dialogo-hecho.vala:53
+#: ../src/nomeolvides-dialog-dialogo-hecho.vala:63
 msgid "Description"
 msgstr "Descripción"
 
@@ -344,7 +350,7 @@ msgstr "Importar a"
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: ../src/nomeolvides-preferencias.vala:36
+#: ../src/nomeolvides-preferencias.vala:39
 msgid "Colections"
 msgstr "Colecciones"
 
@@ -408,9 +414,6 @@ msgstr "_Acerca de Nomeolvides"
 #: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
-
-#~ msgid "Amount of facts"
-#~ msgstr "Cantidad de Hechos"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"
