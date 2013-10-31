@@ -1,4 +1,4 @@
-** Installation Instructions for Nomeolvides **
+Installation Instructions for Nomeolvides 
 
 Dependencies
 * autotools
@@ -10,7 +10,7 @@ Dependencies
 * intltool
 
 
-* From Sources *
+From Sources
 
    * Installing dependencies in Debian/Ubuntu/Mint
 
