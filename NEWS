@@ -1,7 +1,7 @@
 0.8 / 2013-11-16
 ==================
 
-With this release we are getting close to the whole features we thought for 1.0 version of Nomeolvides.We have 
+With this release we are getting close to the whole features we thought for 1.0 version of Nomeolvides. We have 
 given some love to the user interface to make user expirience more pleasant. Now the application can be
 translated, right now it is available in english and spanish. We also use sqlite to handling data, due to this a migration
 is needed, wich is made by our shining migrator for data added in the early version. libgee is not needed any more 
