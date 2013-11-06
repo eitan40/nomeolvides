@@ -48,7 +48,7 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 
 	private void on_response (Dialog source, int response_id)
 	{
-		this.destroy ();
+		this.hide ();
     }
 
 	public void set_active_listas () {

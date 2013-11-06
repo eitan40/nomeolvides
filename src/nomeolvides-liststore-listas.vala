@@ -57,8 +57,19 @@ public class Nomeolvides.ListStoreListas : ListStore {
 		return json;
 	}
 
-	public void borrar_lista ( TreeIter iter, Lista a_eliminar ) {
-		this.remove ( iter );
+	public void borrar_lista ( Lista a_eliminar ) {
+		Value lista;
+		TreeIter iter;
+		
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 2, out lista);
+				if ( a_eliminar.id == lista ) {
+					this.remove ( iter );
+					break;
+				}
+			}while (this.iter_next(ref iter));
+		}	
 	}
 
 	public int get_hechos_lista ( TreeIter iter ) {

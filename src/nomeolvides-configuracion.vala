@@ -141,6 +141,12 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				CREATE TABLE hechosborrar (
 					id INTEGER NOT NULL PRIMARY KEY
 				);
+				CREATE TABLE coleccionesborrar (
+					id INTEGER NOT NULL PRIMARY KEY
+				);
+				CREATE TABLE listasborrar (
+					id INTEGER NOT NULL PRIMARY KEY
+				);
 				CREATE TABLE listashechos (
 					lista INTEGER NOT NULL,
 					hecho INTEGER NOT NULL,
