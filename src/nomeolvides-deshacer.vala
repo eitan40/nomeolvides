@@ -20,36 +20,36 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Deshacer<G> : Object {
-	private Array<DeshacerItem<G>> lista_deshacer;
-	private Array<DeshacerItem<G>> lista_rehacer;
+public class Nomeolvides.Deshacer : Object {
+	private Array<DeshacerItem> lista_deshacer;
+	private Array<DeshacerItem> lista_rehacer;
 
 	public Deshacer () {
-		this.lista_deshacer = new Array<DeshacerItem<G>> ();
-		this.lista_rehacer = new Array<DeshacerItem<G>> ();
+		this.lista_deshacer = new Array<DeshacerItem> ();
+		this.lista_rehacer = new Array<DeshacerItem> ();
 	}
 
-	public void guardar_borrado ( G borrar, DeshacerTipo tipo ) {		
-		this.lista_deshacer.append_val ( new DeshacerItem<G> ( borrar, tipo) );
+	public void guardar_borrado ( Hecho borrar, DeshacerTipo tipo ) {		
+		this.lista_deshacer.append_val ( new DeshacerItem ( borrar, tipo) );
 		this.deshacer_con_items ();
 	}
 
-	public void guardar_rehacer ( DeshacerItem<G> rehacer ) {		
+	public void guardar_rehacer ( DeshacerItem rehacer ) {		
 		if ( rehacer.get_tipo () == DeshacerTipo.BORRAR ) {
-			this.lista_rehacer.append_val ( new DeshacerItem<G> ( rehacer.get_borrado(), rehacer.get_tipo() ) );
+			this.lista_rehacer.append_val ( new DeshacerItem ( rehacer.get_borrado(), rehacer.get_tipo() ) );
 		} else {
-			var deshacer = new DeshacerItem<G> ( rehacer.get_editado(), rehacer.get_tipo() );
+			var deshacer = new DeshacerItem ( rehacer.get_editado(), rehacer.get_tipo() );
 			deshacer.set_editado ( rehacer.get_borrado () );
 			this.lista_rehacer.append_val ( deshacer );
 		}
 		this.rehacer_con_items ();
 	}
 
-	public void guardar_editado ( G editado ) {
+	public void guardar_editado ( Hecho editado ) {
 		this.lista_deshacer.index ( this.lista_deshacer.length -1 ).set_editado ( editado );
 	}
 
-	public bool deshacer ( out DeshacerItem<G> item ) {
+	public bool deshacer ( out DeshacerItem item ) {
 		bool retorno = false;
 		item = null;
 		
@@ -67,7 +67,7 @@ public class Nomeolvides.Deshacer<G> : Object {
 		return retorno;
 	}
 
-	public bool rehacer ( out DeshacerItem<G> item ) {
+	public bool rehacer ( out DeshacerItem item ) {
 		bool retorno = false;
 		item = null;
 
@@ -93,7 +93,7 @@ public class Nomeolvides.Deshacer<G> : Object {
 	}
 
 	public void borrar_rehacer () {
-		this.lista_rehacer = new Array<DeshacerItem<G>> ();;
+		this.lista_rehacer = new Array<DeshacerItem> ();;
 		this.rehacer_sin_items ();
 	}
 

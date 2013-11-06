@@ -22,11 +22,11 @@ using GLib;
 using Nomeolvides;
 
 public class Nomeolvides.Datos : GLib.Object {
-	public Deshacer<Hecho> deshacer;
+	public Deshacer deshacer;
 	private AccionesDB db;
 
 	public Datos () {
-		this.deshacer = new Deshacer<Hecho> ();
+		this.deshacer = new Deshacer ();
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		this.db.borrar_deshacer ();
@@ -76,7 +76,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void deshacer_cambios () {
-		DeshacerItem<Hecho> item;
+		DeshacerItem item;
 		bool hay_hechos_deshacer = this.deshacer.deshacer ( out item ); 
 		if ( hay_hechos_deshacer ){
 			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
@@ -90,7 +90,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void rehacer_cambios () {
-		DeshacerItem<Hecho> item;
+		DeshacerItem item;
 
 		bool hay_hechos_rehacer = this.deshacer.rehacer ( out item ); 
 		if ( hay_hechos_rehacer ){

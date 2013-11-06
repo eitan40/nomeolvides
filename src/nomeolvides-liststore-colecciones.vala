@@ -41,19 +41,8 @@ public class Nomeolvides.ListStoreColecciones : ListStore {
 		           3,coleccion.id);
 	}
 
-	public void borrar_coleccion ( Coleccion a_eliminar ) {
-		Value coleccion;
-		TreeIter iter;
-
-		if ( this.get_iter_first( out iter ) ) {
-			do {
-				this.get_value(iter, 3, out coleccion);
-				if ( a_eliminar.id == coleccion ) {
-					this.remove ( iter );
-					break;
-				}
-			}while (this.iter_next(ref iter));
-		}	
+	public void borrar_coleccion ( TreeIter iter, Coleccion a_eliminar ) {
+		this.remove ( iter );
 	}
 
 	public int indice_de_id ( int64 id ) {

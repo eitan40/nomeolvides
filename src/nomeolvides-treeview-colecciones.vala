@@ -67,8 +67,14 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 	}
 
 	public void eliminar_coleccion ( Coleccion a_eliminar ) {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		
+		this.get_cursor (out path, out columna);
+		this.get_model().get_iter(out iterador, path);
 		var liststore = this.get_model() as ListStoreColecciones;
-		liststore.borrar_coleccion ( a_eliminar );
+		liststore.borrar_coleccion ( iterador, a_eliminar );
 	}
 
 	private void signal_toggle (string path) {

@@ -48,14 +48,6 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.hecho_a_borrar ( hecho );
 	}
 
-	public void coleccion_a_borrar ( Coleccion coleccion ) {
-		this.dbms.coleccion_a_borrar ( coleccion );
-	}
-
-	public void lista_a_borrar ( Lista lista ) {
-		this.dbms.lista_a_borrar ( lista );
-	}
-
 	public void delete_hecho ( Hecho hecho ) {
 		this.dbms.delete_hecho ( hecho );
 	}
@@ -74,14 +66,6 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public void hecho_no_borrar ( Hecho hecho ) {
 		this.dbms.hecho_no_borrar ( hecho );
-	}
-
-	public void coleccion_no_borrar ( Coleccion coleccion ) {
-		this.dbms.coleccion_no_borrar ( coleccion );
-	}
-
-	public void lista_no_borrar ( Lista lista ) {
-		this.dbms.lista_no_borrar ( lista );
 	}
 
 	public void borrar_deshacer ( ) {

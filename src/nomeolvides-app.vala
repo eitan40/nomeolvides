@@ -28,7 +28,6 @@ public class Nomeolvides.App : Gtk.Application
 	public Datos datos;
 	public GLib.Menu application_menu;
 	private Migrador migrador;
-	private Preferencias dialogo_preferencias;
 
 	private void create_window () {
 		this.window = new VentanaPrincipal (this);
@@ -51,7 +50,6 @@ public class Nomeolvides.App : Gtk.Application
 			this.migrador = new Migrador( this.window );
 			this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
 		}
-		this.preferencias ( false );
 	}
 
 	public void create_app_menu () {
@@ -175,18 +173,19 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void preferencias_dialog ( ) {
-		this.dialogo_preferencias.show_all ();
-		this.inicializar_ventana ();
+		this.preferencias ( false );
 	}
 
 	private void preferencias ( bool ver_listas ) {
 		var colecciones = this.datos.lista_de_colecciones ();
 		var listas = this.datos.lista_de_listas ();
-		this.dialogo_preferencias = new Preferencias ( this.window, colecciones, listas );
+		var pref_dialogo = new Preferencias ( this.window, colecciones, listas );
 		if ( ver_listas ) {
-			this.dialogo_preferencias.set_active_listas ();
+			pref_dialogo.set_active_listas ();
 		}
-		this.dialogo_preferencias.hide ();
+		pref_dialogo.show_all ();
+		pref_dialogo.run ();
+		this.inicializar_ventana ();
 	}
 
 	public void send_hecho () {		

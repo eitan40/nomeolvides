@@ -77,7 +77,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	protected bool del ( string tabla, string where = "" ) {
+	protected bool del ( string tabla, string where ) {
 		bool retorno = false;
 		if ( this.open ( ) ) {
 			retorno = true;
@@ -227,14 +227,6 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.insert ( "hechosborrar", "id", hecho.id.to_string() );
 	}
 
-	public void coleccion_a_borrar ( Coleccion coleccion ) {
-		this.insert ( "coleccionesborrar", "id", coleccion.id.to_string() );
-	}
-
-	public void lista_a_borrar ( Lista lista ) {
-		this.insert ( "listasborrar", "id", lista.id.to_string() );
-	}
-
 	public void delete_hecho ( Hecho hecho ) {
 		this.del ( "hechos", "WHERE id=\"" + hecho.id.to_string() +"\"" );
 	}
@@ -271,21 +263,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.del ( "hechosborrar", "WHERE id=\"" + hecho.id.to_string () +"\"" );
 	}
 
-	public void coleccion_no_borrar ( Coleccion coleccion ) {
-		this.del ( "coleccionesborrar", "WHERE id=\"" + coleccion.id.to_string () +"\"" );
-	}
-
-	public void lista_no_borrar ( Lista lista ) {
-		this.del ( "listasborrar", "WHERE id=\"" + lista.id.to_string () +"\"" );
-	}
-
 	public void borrar_deshacer ( ) {
 		this.del ( "hechos", "WHERE hechos.id IN hechosborrar" );
-		this.del ( "hechosborrar" );
-		this.del ( "colecciones", "WHERE colecciones.id IN coleccionesborrar" );
-		this.del ( "coleccionesborrar" );
-		this.del ( "listas", "WHERE listas.id IN listasborrar" );
-		this.del ( "listasborrar" );
+		this.del ( "hechosborrar", "WHERE id != 0");
 	}
 
 	public void update_hecho ( Hecho hecho ) {
@@ -366,16 +346,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	public Array<Lista> select_listas ( string where = "" ) {
 		Array<Lista> listas = new Array<Lista> ();
 		string[] columnas = {"",""};
-		string nuevo_where;
 		Lista lista;
-
-		if ( where == "" ) {
-			nuevo_where = "WHERE listas.id NOT IN listasborrar";
-		} else {
-			nuevo_where = where + " AND listas.id NOT IN listasborrar";
-		}
 		
-		var stmt = this.select ( "listas", "nombre,id", nuevo_where );
+		var stmt = this.select ( "listas", "nombre,id", where);
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();
@@ -423,16 +396,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	public Array<Coleccion> select_colecciones ( string where = "" ) {
 		Array<Coleccion> colecciones = new Array<Coleccion> ();
 		string[] columnas = {"","",""};
-		string nuevo_where;
 		Coleccion coleccion;
-
-		if ( where == "" ) {
-			nuevo_where = "WHERE colecciones.id NOT IN coleccionesborrar";
-		} else {
-			nuevo_where = where + " AND colecciones.id NOT IN coleccionesborrar";
-		}
 		
-		var stmt = this.select ( "colecciones", "nombre,visible,id", nuevo_where ); 
+		var stmt = this.select ( "colecciones", "nombre,visible,id", where ); 
 	
 		int cols = stmt.column_count ();
 		int rc = stmt.step ();

@@ -26,7 +26,7 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	protected abstract bool open ( );
 	protected abstract bool query ( string sql_query, out Statement stmt );
 	protected abstract bool insert ( string tabla, string columnas,string valores );
-	protected abstract bool del ( string tabla, string where = "" );
+	protected abstract bool del ( string tabla, string where );
 	protected abstract bool update ( string tabla, string valores, string where ); 
 	protected abstract Statement select ( string tabla, string columnas, string where = "" );
 	protected abstract Statement select_distinct ( string tabla, string columnas, string where = "" );
@@ -37,15 +37,11 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract void insert_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract bool insert_coleccion ( Coleccion coleccion );
 	public abstract void hecho_a_borrar ( Hecho hecho );
-	public abstract void coleccion_a_borrar ( Coleccion coleccion );
-	public abstract void lista_a_borrar ( Lista lista );
 	public abstract void delete_hecho ( Hecho hecho );
 	public abstract bool delete_lista ( Lista lista );
 	public abstract void delete_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract bool delete_coleccion ( Coleccion coleccion );
 	public abstract void hecho_no_borrar ( Hecho hecho );
-	public abstract void coleccion_no_borrar ( Coleccion coleccion );
-	public abstract void lista_no_borrar ( Lista lista );
 	public abstract void borrar_deshacer ( );
 	public abstract void update_hecho ( Hecho hecho );
 	public abstract bool update_lista ( Lista lista );

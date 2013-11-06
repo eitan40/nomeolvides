@@ -20,26 +20,26 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DeshacerItem<G> : Object {
+public class Nomeolvides.DeshacerItem : Object {
 
-	private G borrado;
-	private G editado;
+	private Hecho borrado;
+	private Hecho editado;
 	private DeshacerTipo tipo;
 
-	public DeshacerItem ( G borrado, DeshacerTipo tipo ) {
+	public DeshacerItem ( Hecho borrado, DeshacerTipo tipo ) {
 		this.tipo = tipo;
 		this.borrado = borrado;
 	}
 
-	public void set_editado ( G editado ) {
+	public void set_editado ( Hecho editado ) {
 		this.editado = editado;
 	}
 
-	public G get_borrado () {
+	public Hecho get_borrado () {
 		return this.borrado;
 	}
 
-	public G get_editado () {
+	public Hecho get_editado () {
 		return this.editado;
 	}
 

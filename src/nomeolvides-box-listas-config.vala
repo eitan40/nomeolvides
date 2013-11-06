@@ -23,14 +23,11 @@ using Nomeolvides;
 public class Nomeolvides.ListasConfig: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
 	private ToolButton aniadir_lista_button;
-	private ToolButton deshacer_button;
-	private ToolButton rehacer_button;
 	private ToolButton editar_lista_button;
 	private ToolButton borrar_lista_button;
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
 	private AccionesDB db;
-	private Deshacer<Lista> deshacer;
 		
 	public ListasConfig ( ListStoreListas liststore_lista ) {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
@@ -38,39 +35,26 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 
 		Toolbar toolbar = new Toolbar ();
 		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );
-		this.deshacer_button = new ToolButton.from_stock ( Stock.UNDO );
-		this.rehacer_button = new ToolButton.from_stock ( Stock.REDO );
 		this.editar_lista_button = new ToolButton.from_stock ( Stock.EDIT );
 		this.borrar_lista_button = new ToolButton.from_stock ( Stock.DELETE );
 		aniadir_lista_button.is_important = true;
-		this.deshacer_button.is_important = true;
-		this.rehacer_button.is_important = true;
 		editar_lista_button.is_important = true;
 		borrar_lista_button.is_important = true;
 		editar_lista_button.set_visible_horizontal ( false );
 		borrar_lista_button.set_visible_horizontal ( false );
-		this.deshacer_button.set_sensitive ( false );
-		this.rehacer_button.set_sensitive ( false );
 		SeparatorToolItem separador = new SeparatorToolItem ();
 		separador.set_expand ( true );
 		separador.draw = false;
 
-		this.deshacer = new Deshacer<Lista> ();
-
 		editar_lista_button.clicked.connect ( edit_lista_dialog );
 		borrar_lista_button.clicked.connect ( borrar_lista_dialog );
 		aniadir_lista_button.clicked.connect ( add_lista_dialog );
-		this.deshacer_button.clicked.connect ( this.deshacer_cambios );
-		this.rehacer_button.clicked.connect ( this.rehacer_cambios );
 
 		toolbar.add ( aniadir_lista_button );
-		toolbar.add ( deshacer_button );
-		toolbar.add ( rehacer_button );
 		toolbar.add ( separador );
 		toolbar.add ( editar_lista_button );
 		toolbar.add ( borrar_lista_button );
-		
-		this.conectar_signals ();
+
 		this.cambios = false;
 		this.listas_view = new TreeViewListas ();
 		this.listas_view.set_model ( liststore_lista );
@@ -83,13 +67,6 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		this.add ( toolbar );
 		this.pack_start ( scroll_listas_view, true, true, 0);
 		this.show_all ();
-	}
-
-	private void conectar_signals () {
-		this.deshacer.deshacer_sin_items.connect ( this.desactivar_deshacer );
-		this.deshacer.deshacer_con_items.connect ( this.activar_deshacer );
-		this.deshacer.rehacer_sin_items.connect ( this.desactivar_rehacer );
-		this.deshacer.rehacer_con_items.connect ( this.activar_rehacer );
 	}
 
 	private void add_lista_dialog () {
@@ -133,15 +110,14 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	}
 
 	private void borrar_lista_dialog () {
-		Lista lista = this.listas_view.get_lista_cursor ();
-		var borrar_dialog = new BorrarListaDialogo ( lista, this.listas_view.get_hechos_lista () );
+		var borrar_dialog = new BorrarListaDialogo ( this.listas_view.get_lista_cursor (),
+		                                             this.listas_view.get_hechos_lista () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
-			this.db.lista_a_borrar ( lista );
-			this.deshacer.guardar_borrado ( lista, DeshacerTipo.BORRAR );
-			this.deshacer.borrar_rehacer ();
-			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
+			if (this.db.delete_lista ( this.listas_view.get_lista_cursor () )) {
+				this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
+			}
 		}
 		borrar_dialog.destroy ();
 
@@ -159,43 +135,5 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		} else {
 			this.set_buttons_visible ( false );		
 		}
-	}
-
-	public void deshacer_cambios () {
-		DeshacerItem<Lista> item;
-		bool hay_listas_deshacer = this.deshacer.deshacer ( out item ); 
-		if ( hay_listas_deshacer ){
-			this.db.lista_no_borrar ( item.get_borrado() );
-			var liststore = this.listas_view.get_model () as ListStoreListas;
-			liststore.agregar_lista ( item.get_borrado(), 0);
-			this.cambios = true;
-		}
-	}
-
-	public void rehacer_cambios () {
-		DeshacerItem<Lista> item;
-
-		bool hay_listas_rehacer = this.deshacer.rehacer ( out item ); 
-		if ( hay_listas_rehacer ){
-			this.db.lista_a_borrar ( item.get_borrado() );
-			this.listas_view.eliminar_lista ( item.get_borrado() );
-			this.cambios = true;
-		}
-	}
-
-	public void activar_deshacer () {
-		this.deshacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_deshacer () {
-		this.deshacer_button.set_sensitive ( false );
-	}
-
-	public void activar_rehacer () {
-		this.rehacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_rehacer () {
-		this.rehacer_button.set_sensitive ( false );
 	}
 }
