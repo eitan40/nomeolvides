@@ -22,11 +22,11 @@ using GLib;
 using Nomeolvides;
 
 public class Nomeolvides.Datos : GLib.Object {
-	public Deshacer deshacer;
+	public Deshacer<Hecho> deshacer;
 	private AccionesDB db;
 
 	public Datos () {
-		this.deshacer = new Deshacer ();
+		this.deshacer = new Deshacer<Hecho> ();
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 
 		this.db.borrar_deshacer ();
@@ -76,7 +76,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void deshacer_cambios () {
-		DeshacerItem item;
+		DeshacerItem<Hecho> item;
 		bool hay_hechos_deshacer = this.deshacer.deshacer ( out item ); 
 		if ( hay_hechos_deshacer ){
 			if ( item.get_tipo () == DeshacerTipo.EDITAR ) {
@@ -90,7 +90,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public void rehacer_cambios () {
-		DeshacerItem item;
+		DeshacerItem<Hecho> item;
 
 		bool hay_hechos_rehacer = this.deshacer.rehacer ( out item ); 
 		if ( hay_hechos_rehacer ){
@@ -170,7 +170,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreColecciones lista_de_colecciones () {
-		var colecciones = this.db.select_colecciones ();
+		var colecciones = this.db.select_colecciones ( "WHERE visible=\"true\" AND colecciones.id NOT IN coleccionesborrar" );
 
 		return this.armar_liststore_colecciones ( colecciones );
 	}
@@ -190,7 +190,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public bool hay_colecciones_activas() {
 
 		bool hay = false;
-		var colecciones = this.db.select_colecciones ( "WHERE visible=\"true\"" );
+		var colecciones = this.db.select_colecciones ( "WHERE visible=\"true\" AND colecciones.id NOT IN coleccionesborrar" );
 		if ( colecciones.length > 0 ) {
 			hay = true;
 		}

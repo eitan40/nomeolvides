@@ -206,6 +206,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public void desactivar_boton_rehacer () {
 		this.toolbar.desactivar_rehacer ();
 	}
+
+	public void limpiar_hechos_view () {
+		this.anios_hechos.limpiar_hechos_view ();
+	}
 	
 	public signal void toolbar_add_button_clicked ();
 	public signal void toolbar_undo_button_clicked ();

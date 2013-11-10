@@ -46,6 +46,11 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 			cambia_anio_signal ();
 	}
 
+	public void limpiar () {
+		var vacio = new ListStoreHechos();
+		this.set_model ( vacio );
+	}
+
 	public TreePath get_hecho_cursor ( out Hecho hecho ) {
 		TreePath path;
 		TreeViewColumn columna;

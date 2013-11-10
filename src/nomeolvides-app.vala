@@ -28,6 +28,7 @@ public class Nomeolvides.App : Gtk.Application
 	public Datos datos;
 	public GLib.Menu application_menu;
 	private Migrador migrador;
+	private Preferencias dialogo_preferencias;
 
 	private void create_window () {
 		this.window = new VentanaPrincipal (this);
@@ -42,6 +43,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void inicializar_ventana () {
 		this.cargar_lista_anios ();
 		this.cargar_listas ();
+		this.window.limpiar_hechos_view ();
 	}
 
 	public override void activate () {
@@ -50,6 +52,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.migrador = new Migrador( this.window );
 			this.migrador.hay_migrados_signal.connect (	this.inicializar_ventana );
 		}
+		this.preferencias ();
 	}
 
 	public void create_app_menu () {
@@ -70,7 +73,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.add_action (action);
 
 		action = new GLib.SimpleAction ("preferencias-dialog", null);
-		action.activate.connect (() => { preferencias_dialog (); });
+		action.activate.connect (() => { preferencias_dialog ( false ); });
 		this.add_action (action);
 
 		var builder = new Builder ();
@@ -107,7 +110,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void add_hecho_dialog () {
 
 		if ( !(this.datos.hay_colecciones_activas ()) ) {
-				this.preferencias ( false );
+				this.preferencias_dialog ( false );
 		}
 
 		if ( this.datos.hay_colecciones_activas () ) {
@@ -172,20 +175,20 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.destroy ();
 	}
 
-	private void preferencias_dialog ( ) {
-		this.preferencias ( false );
+	private void preferencias_dialog ( bool ver_listas ) {
+		if ( ver_listas ) {
+			this.dialogo_preferencias.set_active_listas ();
+		}
+		this.dialogo_preferencias.ejecutar ( this.datos.lista_de_colecciones (), this.datos.lista_de_listas () );
+		this.dialogo_preferencias.show_all ();			
 	}
 
-	private void preferencias ( bool ver_listas ) {
+	private void preferencias ( ) {
 		var colecciones = this.datos.lista_de_colecciones ();
 		var listas = this.datos.lista_de_listas ();
-		var pref_dialogo = new Preferencias ( this.window, colecciones, listas );
-		if ( ver_listas ) {
-			pref_dialogo.set_active_listas ();
-		}
-		pref_dialogo.show_all ();
-		pref_dialogo.run ();
-		this.inicializar_ventana ();
+		this.dialogo_preferencias = new Preferencias ( this.window, colecciones, listas );
+		this.dialogo_preferencias.hide.connect ( this.inicializar_ventana );
+		this.dialogo_preferencias.hide ();
 	}
 
 	public void send_hecho () {		
@@ -228,7 +231,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.get_hecho_actual ( out hecho );
 
 		if ( !( this.datos.hay_listas ()) ) {
-			this.preferencias ( true );
+			this.preferencias_dialog ( true );
 		}
 
 		if ( this.datos.hay_listas () ) {

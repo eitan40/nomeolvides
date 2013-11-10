@@ -22,6 +22,8 @@ using Nomeolvides;
 
 public class Nomeolvides.Preferencias : Gtk.Dialog {
 	private Notebook notebook;
+	private ColeccionesConfig config_colecciones;
+	private ListasConfig config_listas;
 	
 	public Preferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
 		this.set_title (_("Preferences"));
@@ -29,30 +31,40 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 		this.set_default_size (600, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
-		var config_colecciones = new ColeccionesConfig ( colecciones );
-		var config_listas = new ListasConfig ( listas );
+		this.config_colecciones = new ColeccionesConfig ( colecciones );
+		this.config_listas = new ListasConfig ( listas );
+		this.config_colecciones.cambio_colecciones_signal.connect ( this.config_listas.actualizar_liststore );
 
 		this.notebook = new Notebook ();
 		this.notebook.set_size_request ( 400, 270 );
 		this.notebook.set_margin_right ( 10 );
 		this.notebook.set_margin_left ( 10 );
-		this.notebook.append_page ( config_colecciones, new Label(_("Colections") ));
-		this.notebook.append_page ( config_listas, new Label (_("Lists") ));
-
+		this.notebook.append_page ( this.config_colecciones, new Label(_("Colections") ));
+		this.notebook.append_page ( this.config_listas, new Label (_("Lists") ));
+		Gtk.Box contenido =  this.get_content_area () as Box;
+		contenido.pack_start ( this.notebook, true, true, 0 );
+		
 		this.add_button ( Stock.CLOSE, ResponseType.CLOSE );
 		this.response.connect(on_response);
- 
-		Gtk.Box contenido =  this.get_content_area () as Box;
-		contenido.pack_start ( notebook, true, true, 0);
 	}
 
 	private void on_response (Dialog source, int response_id)
 	{
-		this.destroy ();
+		this.hide ();
     }
+
+	private void armar_notebook ( ListStoreColecciones colecciones, ListStoreListas listas ) {
+		
+	}
 
 	public void set_active_listas () {
 		this.notebook.set_current_page (1);
 		this.notebook.show_all ();
+	}
+
+	public void ejecutar ( ListStoreColecciones colecciones, ListStoreListas listas ) {
+		this.config_listas.actualizar_model ( listas );
+		this.config_colecciones.actualizar_model ( colecciones );
+		this.armar_notebook ( colecciones, listas );
 	}
 }

@@ -167,6 +167,10 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		                                               ( this.anios_listas.get_current_page () ) );
 	}
 
+	public void limpiar_hechos_view () {
+		this.hechos_view.limpiar ();
+	}
+
 	public signal void hechos_cursor_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();
