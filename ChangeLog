@@ -1,6 +1,7 @@
 0.8 / 2013-11-16
 ==================
 
+  * Added undo/redo colection/list related feature  
   * Dialogs and UI revamped
   * Translastions support
   * Support dbms for handling data
@@ -12,7 +13,7 @@
 0.6 / 2013-05-02 
 ==================
 
-  * Added undo/redo feature
+  * Added undo/redo fact related feature
   * Added Custom Lists feature
   * Added instant autosave
   * Masive rewrite of data handling code
