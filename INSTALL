@@ -1,33 +1,40 @@
-** Instrucciones para la Instalación de Nomeolvides **
+Installation Instructions for Nomeolvides 
 
-Las dependencias 
-* debhelper (>= 8.0.0)
-* autotools 
-* valac (>= 0.20) 
-* pkg-config 
-* libgee (>= 0.8)
+Dependencies
+* autotools
+* valac (>= 0.20)
+* pkg-config
 * libgtk-3  (>= 3.4.1)
 * libglib (>=2.0)
 * git
+* intltool
 
-  Instalar dependencias en Ubuntu/Debian/Mint (que usen apt-get)
 
-     * Instalar el ppa de Vala
+From Sources
+
+   * Installing dependencies in Debian/Ubuntu/Mint
+
+     * Install Vala PPA
 
 	# add-apt-repository ppa:vala-team/ppa
 
-     * Instalas las dependencias 
+     * Install the dependencies packages
 
-	# apt-get install git debhelper autotools-dev valac-0.20 pkg-config libgee-0.8-dev libgtk-3-dev libglib2.0-dev
+	# apt-get install git intltool autotools-dev valac-0.20 pkg-config libgtk-3-dev libglib2.0-dev
 
 
-  Instalar en Arch Linux y derivadas (que usen pacman)
+  * Installing dependencies in Arch Linux and derivatives
 
- 	# pacman -S git vala autogen libltdl libgee gtk3 xdg-utils
+	# pacman -S git intltool vala autogen libltdl libgee gtk3 xdg-utils
 
-  Compilar
+  * Compile
 
 	$ git clone https://github.com/softwareperonista/nomeolvides.git
+
+	$ git checkout v0.8
+
 	$ ./autogen.sh
-	$ make 
-	$ src/nomeolvides
+
+	$ make
+
+	$ sudo make install

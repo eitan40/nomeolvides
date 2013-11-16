@@ -1,305 +1,41 @@
+0.8 / 2013-11-16
+==================
+
+  * Added undo/redo colection/list related feature  
+  * Dialogs and UI revamped
+  * Translastions support
+  * Support dbms for handling data
+  * Sqlite default dbms
+  * Added Migration dialog for data in 0.6 format
+  * Dropped libgee dependency
+  * A lot of bug-fixes
 
 0.6 / 2013-05-02 
 ==================
 
-  * Se mejoró el contenido de los README
-  * Se mejoró el marcado de README.md
-  * Más modificaciones a los archivos README
-  * Se realizaron más modificaciones a los archivos README
-  * Se actualizaron los archivos README
-  * Ahora al editarse/borrarse/agregarse un hecho se cierra la vista detallada del hecho. No es el comportamiento ideal, pero es una solución provisoria. fixed #57
-  * Al editarse un hecho ahora sólo se listan las bases locales. fixed #73
-  * Ahora se carga primero la base de datos oficial y después las locales. fixed #74
-  * Se eliminaron algunos print pueso con fines de debug
-  * Ahora solo se se listan los hechos de las bases de datos visibles Se agregaron varias verificaciones antes de recorrer TreeMaps y ListStores
-  * Se actualizó la versión.
-  * Se implementó el diálogo para preguntar si se quierer sacar un hecho de una lista.
-  * Se agregaron signals necesarias para detectar el cambio de los toggles. rel #60
-  * Se agregó un toggle a Nomeolvides.TreeViewFuentes. rel #60
-  * Se inició la implementación del ocultamiento de bases
-  * Por eror se subió un commit de otro branch :S
-  * Se inició la implementación del ocultamiento de bases
-  * Se mejoró el diálogo para agregar hechos a una fuente.
-  * Se hizo más ancha a la ventana principal.
-  * Ahora se borran los hechos de la lista al apretar el boton
-  * Se mejoró el manejo de las señales.
-  * Ahora al elegir un hecho en una lista el botón list de la toolbar cambia a Quitar. (aun no funciona bien)+
-  * Ahora se pueden agregar a la lista los hechos de las bases de datos remotas
-  * Ahora se puede agregar hecho a una lista.
-  * Se agregó el diálogo para agregar hecho a lista y se conectó al botón de la toolbar.
-  * Por error se omitió actualizar la versión del programa en el commit anterior.
-  * Se terminó de implementar la funcionalidad deshacer/rehacer.
-  * Solucionado un bug que impedía cargar bien los hechos desde un archivo. fixes #68
-  * Ahora se puede rehacer los cambios deshechos.
-  * Ahora al exportar los hechos se agrega un salto de linea por cada hecho. fixes #69
-  * Se movieron algunas funciones de Nomeolvides.ListStoreListas a Nomeolvides.Listas, para adecuarlas al nuevo manejo de Nomeolvides.Listas.
-  * Se arreglaron dos warnings al compilar.
-  * Se agregó un scrolled window a los treeview de los dialogos de fuentes y listas y se les mejoró el tamaño inicial.
-  * Actualizada dependencia a gee-0.8
-  * Se borraron funciones print puestas con fines de debug.
-  * Solucionado un bug que evitaba contar correctamente los hechos en las listas
-  * Se dejó de usar ListStoreLista para manejar las listas. Ahora se usa ArrayList. Se implementó el aumento de la cantidad de hechos asignados a una lista. No funciona aun.
-  * Aumento de Version
-  * Solucionado un bug que impedía que se descative el boton deshacer
-  * Se cambió el tipo del Objeto que guarda las acciones a deshacer de ArrayQueue a LinkedList, para que sea compatible con API 1.0.
-  * Se mejoró la distribución de los botónes en la toolbar.
-  * Se adecuó la función Nomeolvides.Datos.guardar_listas_hechos al nuevo esquema
-  * Se solucionó un bug que impedía cargar las listas cuando se agregaba o eliminaba una lista
-  * Eliminadas algunas funciones y propiedades comentadas Se adecuó la funcion Nomeolvides.Datos.save_as_file al nuevo esquema
-  * Solucionados los warnings al no terner listas creadas
-  * Ahora al agregar/borrar/editar un hecho se actualiza el liststore de hechos que se está mostrando.
-  * Se arregló deshacer la edición de un hecho. Y se borró código que respondía al esquema anterior de manejo de datos.
-  * Se agregó el archivo omitido en los commits anteriores
-  * Agregadas las singals al agregar/eliminar anios y listas Mejorado el modo de recorrer los TreeMap
-  * Se creo la clase coleccion queinifica el modo de tratar listas y anios
-  * Ahora no crashea al borrar/editar un hecho. fixed #63
-  * Se quitaron las antiguos arraylists que no se usan más por el nuevo esquema de manejo de datos.
-  * Ahora se muestran las listas usando el nuevo esquema de hechos.
-  * Se adapto la funcion Nomeolvides.Datos.lista_de_hechos al esquema actual
-  * Se hizo una implementación del nuevo esquema de manejo de los hechos, creandose la clase hechos.
-  * Se mejoró el ícono, ahora se ve mejor en Unity
-  * Ahora se guardan los datos del hecho editado, pero aún no está funcional el deshacer cuando se edita un hecho.
-  * Se reformó el esquema inicial de la función Deshacer/rehacer.
-  * Solucionado un bug al iniciar el programa sin listas
-  * Se agregó el archivo src/nomeolvides-deshacer.vala a configure.ac que por error se había omitido.
-  * Se implementó incialmente la opción de deshacer cambios, cuando se elimina un hecho.
-  * Ahora el botón Enviar tampoco se muestra si el Hecho está en una base de datos remota.
-  * Ahora se borran los hechos de las listas cuando se los borra
-  * Se corrigió la versión de la API de Gee, que se había cambiado por error.
-  * Se borró una señal innecesaria.
-  * Ahora al elegirse una pestaña de años o listas, se cambia el contenido de el treeview de hechos.
-  * Se eliminó el botón de guarado que estaba en desuso
-  * Se modificó el style de la toolbar
-  * Ahora se ven los hechos de la lista seleccionada
-  * Se corrigió un bug que evitaba mostrar correctamente el label en la toolbar
-  * Ahora aparecen las pestañas para elegir entre mostrar años o listas. Ahora se cargan los datos de las listas.
-  * Ahora las listas se cargan desde un archivo especifico
-  * Ahora se cargan, guardan y editan las listas correctamente
-  * Ahora se cargan las listas configuradas y se cargan los hechos asignados a esas listas desde un archivo provisorio.
-  * Cambio en el versionado
-  * Cambio en el versionado
-  * Ahora solo se pueden editar o eliminar los hechos en bases de datos locales. fixes #61
-  * Se agregó una aproximación a la implementación de las listas personalizadas y los diálogos de configuración de las mismas.
-  * se aumentó la version con fines de pureba
-  * Se optimizó el guardaro automático. Ahora se guarda solo el archivo modificado. fixes #56
-  * Ahora la vista del hecho no se expande demasiado y el texto se adecua al espacio
-  * Se corrigieron mas nombres de archivos
-  * Se corrigieron varios nombres de archivos
-  * Solucionado crash al tener creado el directorio de configuracion y no tener el archivo de configuracion
-  * Se optimizó el guaraddo automático
-  * Los hechos agregados, editados o borrados se guardan autmáticamente
-  * Ahora el nombre de los hechos en la vista se divide en varios renglones si es necesario
-  * se eliminó el boton abrir archivos
-  * Ahora se oculta la vista del hecho cuando se cambia de año Se corrigió el numero de versión del archivo .desktop
-  * Se arreglaron los directorios deinstalacion en el Makefile
-  * Se quitaron sentencias puestas con fines de debug.
-  * Ahora la clase Nomeolvides.EditFuenteDialog hereda de Nomeolvides.AddFuenteDialog. Se arregló un bug introducido por la verificación de fuentes duplicadas.
-  * Se cambiaron todas las operaciones de lectura/escritura de archivos para que hagan uso de la nueva clase estática Archivo. Se borraron lineas comentadas de la clase Nomeolvides.EditFuenteDialog.
-  * Se mejoró la distribuci+on de los labels de la descripcion de la vista del hecho
-  * Ahora los labels de la descripción no tienen mas de 30 caracteres vpor renglón
-  * Ahora se eliminan los label de la descripción y no se acumulan
-  * Widget descripcion y otros cambios.
-  * Ahora se eliminan los label de la descripción y no se acumulan
-  * Widget descripcion y otros cambios.
-  * Se simpleificaron los nombres de las funciones públicas de la  clase estática Nomeolvides.Archivo. Por ejemplo escribir_archivo pasó a ser simplemente leer. Exepto crear_directorio.
-  * Se actualizó la función Nomeolvides.Datos.open_file para que haga uso de la clase estática Archivo. Se borró la función Nomeolvides.Datos.archivo_configuracion, ya que ahora eso lo hace la clase estática Configuracion.
-  * Se hizo a la clase configuracion una clase estática. Se modificó los metodos guardar_fuente y cargar_fuentes de la clase Nomeolvides.HechosFueentes para que usen las nuevas funciones cargar/guardar_fuentes de Nomeolvides.Configuracion
-  * Se creó la nueva clase que se encarga de las funciones de archivo.
-  * Ahora el diálogo editar/agregar hecho tiene un scroll en el campo Descripcion. fixed #52
-  * Ahora el scroll en la vista del hecho se hace sólo en la descripción. fixed #53
-  * Solucionado un warging
-  * Ahora el las funciones de ordenamiento son parte de la calse Nomeolvides.ListStoreHechos. fixes #45
-  * ahora Nomeolvides.ViewHechos tiene un modelo vacio al crearse. fixes #45
-  * Ahora los años se guardan como int. fixes #51
-  * Ahora los Views de anios y de hechos tienen scroll. fixed #50
-  * Ahora cuando se abre el diálogo de editar se carga el dato fuente al coreespondiente Entry. fixed #46
-  * Se hizo privada la variable Nomeolvides.ListStoreFuentes.archivos. Se creó el geter get_archivos de la misma clase. Ahora sólo se agrega una base de datos si no tiene un nombre de una base de datos ya agregada o si no referencia a un archivo al que ya referencia una base de datos agregada. fixed #49
-  * Ya no se duplica la base por defecto al agregar una nueva fuente. fixed #47
-  * Se mejoró el diálogo para agregar fuentes.
-  * Se adecuó la edicion de hechos al nuevo esquema
-  * Se adecuó la elimnación de hechos al nuevo esquema
-  * Solucionado bug que hacía que el programa se cierre con SIGABRT
-  * Se creó la clase Nomeolvides.Configuración para menjar la configuración de la App. Se movieron algunon métodos de Nomeolvides.App a Nomeolvides.Configuracion.
-  * Se adaptó la función de enviar hechos al nuevo esquema
-  * Ahora al elegir un hecho aparecen los botones correspondientes de la toolbar. Ahora al mostrarse un hecho, si se elige un nuevo hecho se muestran los datos del nuevo. Se vovlió a utilizar la función Nomeolvides.VentanaPrincipal.show_visible en Nomeolvides.App.create_window. Se borraron funciones inutiles comentadas de la clase Nomeolvides.VentanaPrincipal.
-  * Se movieron algunos algoritmos de Nomeolvides.Datos a Nomeolvides.ListStoreHechos
-  * Ahora se muestran los hechos del anio correspondiente Ahora se muestra el label con el anio actual seleccionado
-  * Se renombró la clase Nomeolvides.Ventana_principal y se la adecuó a la forma usada
-  * Ahora se carga la lista de anios
-  * Se cambio el nombre para adecuarlo al nuevo nombre de la clase
-  * Se crearon signals en la clase Nomeolvides.Ventana_principal que conectan las signals internas
-  * Se renombró la clase Window a Ventana_principal
-  * se agregó el archivo faltante en el anterior commit
-  * Se creo la clase que contiene a los treeview de hechos y años
-  * Se conectaron las signals a la toolbar principal.
-  * Ahora compila.
-  * Más cambios importantes.
-  * Nuevo diseño de la aplicación
-  * Se creó la clase Nomeolvides.Configuración para menjar la configuración de la App. Se movieron algunon métodos de Nomeolvides.App a Nomeolvides.Configuracion.
-  * Se adaptó la función de enviar hechos al nuevo esquema
-  * Ahora al elegir un hecho aparecen los botones correspondientes de la toolbar. Ahora al mostrarse un hecho, si se elige un nuevo hecho se muestran los datos del nuevo. Se vovlió a utilizar la función Nomeolvides.VentanaPrincipal.show_visible en Nomeolvides.App.create_window. Se borraron funciones inutiles comentadas de la clase Nomeolvides.VentanaPrincipal.
-  * adapatdo agregar hechos al nuevo esquema
-  * Se arregló el dialogo de las Fuentes
-  * Se movieron algunos algoritmos de Nomeolvides.Datos a Nomeolvides.ListStoreHechos
-  * Ahora se muestran los hechos del anio correspondiente Ahora se muestra el label con el anio actual seleccionado
-  * Se renombró la clase Nomeolvides.Ventana_principal y se la adecuó a la forma usada
-  * Ahora se carga la lista de anios
-  * Se cambio el nombre para adecuarlo al nuevo nombre de la clase
-  * Se crearon signals en la clase Nomeolvides.Ventana_principal que conectan las signals internas
-  * Se renombró la clase Window a Ventana_principal
-  * se agregó el archivo faltante en el anterior commit
-  * Ahora se instala una base de datos local por defecto Se modificó el diálogo de agregar fuentes para que sea más entendible.
-  * Se creo la clase que contiene a los treeview de hechos y años
-  * Se conectaron las signals a la toolbar principal.
-  * Ahora compila.
-  * Más cambios importantes.
-  * Nuevo diseño de la aplicación
-  * Se arregló un bug por el cual no se guardaban los nuevos hechos ingresados.
+  * Added undo/redo fact related feature
+  * Added Custom Lists feature
+  * Added instant autosave
+  * Masive rewrite of data handling code
+  * Various bug-fixes
+
 
 v0.4 / 2013-02-28 
 ==================
 
-  * Ahora en el diálogo de añadir hechos sólo se listan las bases de datos locales. Se actualizafon los nombre de "Fuentes" a "Bases de datos"
-  * Se agregó la Fuente Oficial por defecto
-  * Ahora se ven correctamente el tipo de fuente en el dialogo de las fuentes
-  * Ahora carga archivos remotos
-  * Ahora el archivo con el hecho a enviar se guarda en la carpeta temporal del usuario, en gral /tmp. Ahora el nombre del archivo es el nombre del hecho, pero sin espacios ni caracteres "raros".
-  * Ahora el botón para enviar aparece en la toolbar al elegir un hecho. Ahora al enviar un hecho, el mismo se envia como un archivo adjunto.
-  * Se agregó la función FuenteTipo.to_string Se agregó la función FuenteTipo.convertir Ahora se carga el tipo correctamente en Nomeolvides.Fuentes.json Ahora se guarda correctamente el tipo en Nomeolvides.Fuentes.a_json
-  * Ahora se pueden enviar hechos, de a uno, a los desarrolladores. Todo está hecho para que sea muy mejorable. fixed #39
-  * Ahora se pueden editar las fuentes agregadas. fixed #30 fixed #35 (gracias Fernando Fernandez!)
-  * Se corrigió el bug que hacía que al borrar una fuente no dejaran de mostrarse los hechos de la misma en la aplicación hasta que sse reinicie la misma
-  * Se agregó la fuente a la vista del hecho. closes #38
-  * Se agregó el campo Fuente(cita) a la clase hecho. rel #38
-  * Ahora cuando se eelimina el último Hecho de una Fuente, al guardar, esta se vacaía correctamente. fixes #43
-  * Ahora el dialogo de de gestión de fuentes tiene una toolbar para añadir, borrar o editar. Por ahora solo funciona borrar. Se hiciron cambios menores en la redacción del código en algunos archivos.
-  * Se eliminó un printf con fines de debug
-  * Se solucionó un warning en lalinea que crea el directorio de configuración
-  * Ahora hay que apretar Aplicar en el dialogo de configuracion de fuentes para confirmar las fuentes agregadas. fixes #42
-  * Se modificó el dialogo de configuracion de fuentes, ahora el boton añadir no emite respuesta en el dialogo. rel #42
-  * Se reemplazó el botón "Guardar como" de la toolbar por "exportar" en el appmenu. closes #41
-  * Se eliminario y corrigieron algunas lineas del commit anterior
-  * Se elimino la variable Nomeolvides.Window.anio_label, dado que no se usaba Se agregó una señal al cambiar el año mostrado en Nomeolvides.ViewHechos Solucionado el bug que no mostraba el año en el label de la toolbar al inciar el programa. fixes #14
-  * Se solucionó un bug con los saltos de linea en los archivos json.
-  * Ahora las fuentes predeterminadas se guardan y se cargan al inicio de la app desde un archivo en $HOME/.config/nomeolvides Se cambió el nombre de la función Hecho.aJson por Hecho.a_json. Se agregó la función Fuente.a_json
-  * Se arregló un pequeño bug al cargar una fuente sin hechos.
-  * Se rediseñó el diálogo de agregar/editar hechos para que sea más estático y funcional.
-  * Se hizo más amistosa la forma de elegir la fecha cuando se agrega/edita un hecho.
-  * Se modificó el label de la toolbar para hacerlo mas entendible. rel #14
-  * Se agregó un label con el año seleccionado a la toolbar. rel #14
-  * Se cambió en diálogo para añadir fuentes para corregir un bug si se apretaba el botón Cancelar.
-  * Se modificó el dialogo de añadir Fuentes para que se puede elegir un archivo desde un OpenFileDialog.
-  * Ahora los diálogos de editar y de agregar hechos muestran el nombre de la fuente y no la dirección.
-  * Ahora el usuario puede agregar Fuentes de Hechos históricos. Cuando se agrega una fuente de hecho histórico se actualizan los datos en Nomeolvides.Windows.
-  * Se cambió el nombre de la clase Nomeolvides.AddDialog a Nomeolvides.AddHechoDialog, y su respectivo archivo. Se cambió el nombre de la clase Nomeolvides.EditDialig a Nomeolvides.EditHechoDialog y su respectivo archivo.
-  * Se mejoró la implementación de Nomeolvides.DialogoHecho en Nomeolvides.AddDialog y Nomeolvides.editDialog usando el constructo de la clase madre: base.
-  * Ahora el AppMenu se crea dinámicamente, para evitar problemas con la ubicación del archivo .ui.
-  * Se creo la clase Nomeolvides.FuentesDialog. Nomeolvides.HechosFuentes ahora hereda de GLib.Object y ya no de Gtk.Dialog. Todo esto para separar las tareas referentes a las fuentes del dialogo de configuración.
-  * Se hicieron todos los diálogos modal y además se hizo que impidan interactuar con otra ventana de la aplicación mientras están abiertos.
-  * Se actualizaron README y README.md
-  * Se arregló un bug en Nomeolvides.Window, por el que no guardaba todos los hechos al presionar "Guardar". Se corregieron algunos errores en los hechos de prueba.
-  * Se agregó el tipo de fuente FuenteTipo y se modificaron las lineas respectivas para usarlo. Referente al issue #40
-  * Se mejoró el ícono.
-  * Ahora se puede elegir y cambiar el archivo al que pertenece un hecho desde los dialogos de edición y creación. Se agregó un archivo más con hechos, para mejor prueba.
-  * Se agregó la variable Nomeolvides.Hecho.archivo_fuente, que contiene la dirección del archivo al que pertenece ese hecho. Ahora el botón Guardar de Nomeilvides.MainToolbar guarda los Hechos en el archivo que cada Hecho diga, en forma silenciosa. Se agregó el bontón Guardar Como a Nomeolvides.Toolbar el cual hace lo que antes hacía el bontón Guardar.
-  * Se cambió el widget descripcion de los dialogos para editar y añadir hechos de Gtk.Entry a Gtk.TextView Se creó la funcion Nomeolvides.DialogoHecho.crear_respuesta Ahora Nomeolvides.AddDialog.aplicar llama a Nomeolvides.DialogoHecho.crear_respuesta Ahora Nomeolvides.EditDialog.modificar llama a Nomeolvides.DialogoHecho.crear_respuesta
-  * Ahora Nomeolvides.Fuente hereda de GLib.Object. Ahora ListStoreFuentes ahora también guarda el objeto Fuente. Se creó la clase Nomeolvides.TreeViewFuentes para mejorar la lectura y distribución del código.
-  * Se puso el path relativo para cargar el archivo del app menu, ya que esta es la rama de desarrollo.
-  * Se crearon las clases Nomeolvides.Fuente y Nomeolvides.ListStoreFuente para mejorar el manejo de las fuentes predeterminadas. Debido a un problema que no pude solucionar Nomeolvides.ListStoreFuentes no guarda el objeto Nomeolvides.Fuente, porque no reconoce el typeof, por lo que esa parte del código se comentó hasta que se encuentre una solución.
-  * Se arregló un bug en dialogo de agregar fuente predetermindas.
-  * Se agregó el dialogo que muestra la fentes predeterminadas para cargar datos al inicio de la applicación. Se agregó la entrada al menu para el dialogo de fuentes predeterminadas. Se agregó la funciones necesarias para que al inicio se cargen las fuentes predeterminadas. Se agregó información del proyecto a configure.ac y se actualizó la versión.
-  * Se dividio la función Nomeolvides.Window.open_file para separa el dialogo selección de archivo de la apertura del archivo. Ahora están las funciones Nomeolvides.open_file y Nomeolvides.open_file_dialog Se dividio la función Nomeolvides.Window.save_file para separa el dialogo selección de archivo de la apertura del archivo. Ahora están las funciones Nomeolvides.save_file y Nomeolvides.save_file_dialog
-  * Ahora la versión del programa se llama usando Config.VERSION. La clase Nomeolvides.App, ya no tiene la variable miembro version.
+  * Added support for http Data Source
+  * Added send fact via email feature
+  * Added Oficial Data Source by default
+  * Added bibliographical source field on facts
+  * Various bug-fixes
 
 0.2.1 / 2013-01-25
+==================
 
-  * Se arregló el ícono para que se vea correctamente en Unity
-  * Se agregó el Application Menu
-  * Se crearon los branches 0.2 y estable Se renombró el tag v0.2 a 0.2
+  * Added Application Menu
+  * Various bug-fixes
 
 0.2 / 2013-01-19 
 ==================
 
-  * Se modificó el archivo INSTALL
-  * Se agrego las notas de la primer versión de prueba al archivo NEWS Se mejoró el ícono de la aplicación.
-  * Se "mejoró" el ícono
-  * Se arregló el ícono, ahora se ve mas grande
-  * Ahora el prefix por defeto para make es /usr Los directorios de instalacion del desktop y el icono son relativos a PREFIX
-  * Se modificó el título de la ventama para que sea menos confuso
-  * Se separó la lista de archivos fuente de src/Makefile.am en varias líneas para que sea menos confuso
-  * Se agregó el archivo desktop Se agregó un ícono provisorio Se modificó el archivo Makefile.am para que instale el ícono y el desktop en el lugar correspondiente
-  * Ahora el botón "Guardar" se encuentra invisible, hasta que se agrega manualmente un hecho. NO está solucionado el issue #27, ya que si se borra el/los hecho/s agregado/s debería hacerse invisble otra vez el botón.
-  * Se renombró el archivo nomeolvides-toolbar.vala a nomeolvides-main-toolbar.vala. fixed #26
-  * Se mejoró sensiblemente la vista completa del hecho elegido. fixed #17 Ahora el widget que aparece y desaparece es un ScrolledWindow cuando Nomeolvide.Window.vista_hecho envía la señal row_activated. Ahora la parte de la descripción en Nomeolvides.VistaHecho es un TextView.
-  * Ahora al elegir un hecho aparece el botón en la toolbar para borrarlo, además de modificarlo. fixed #25
-  * Ahora se puede guardar los hechos. closes #15
-  * Se renombró el archivo src/nomeolvides-treeview-anios.vala a src/nomeolvides-view-anios.vala. rel #26 Se renombró el archivo src/nomeolvides-treeview.vala a src/nomeolvides-view-hechos.vala. rel #26
-  * Se mejoró sensiblemente la forma en que se muestran los datos del hecho en Nomeolvides.Window.vista_hecho.
-  * Se borró un stdout.printf que se había agregado a los fines de testeo y debug.
-  * Se creó la clase Nomeolvides.VistaHecho que hereda de Box y la cual va a mostrar en un espacio particuar todos los datos del Hecho elegido. Ahora cuando se emite la señal Nomeolvides.Window.anios_view.row_activated se muestran los datos del hecho elegido en un box vertical a la derecha de la app. Como base para cerrar el issue #17. Se creó la función Nomeolvides.Windows.show_visible para mostrar sólo aquellos widgets que queramos al inicio de la app. Ahora Nomeolvides.App.create_window utiliza la nueva función Nomeolvides.Window.show_visible en vez de show_all.
-  * Se seteo un ancho minimo para la lista de años, así queda más estético.
-  * Se agregó la funcionpara ordenar los hechos en Nomeolvides.ViewHechos por fecha. fixes #23
-  * Se ageró la función que ordena los años de Nomeolvides.ViewAnios. rel #23
-  * Agregado los datos de los desarrolladores
-  * Se actualizó README
-  * Se actualizó README.md
-  * Se actualizó README.md
-  * Se actualizó README.md
-  * En el commit anterior se omitió agregar el archivo src/Makefile.am.
-  * Se creo la clase Nomeolvides.OpenFileDialog Se modificó la función Nomeolvides.Window.open_file para que use Nomeolvide.OpenFileDialog para elegir el archivo con hechos que se quiere cargar. fixed #10 Se eliminó de la función Nomeolvide.ViewHechos.lista_de_anios un stdout.printf de testeo.
-  * Se modificó la clase Nomeolvides.DialogoHecho para que se vea más amigable la parte de la fecha.
-  * Cambiado el tipo de Nomeolvides.ViewHechos.hecho_anios y Nomeolvides.ViewHechos.cache_hechos_anios a Gee.ArrayList cambiado el nombre de la funcion Nomeolvides.ViewHechos.modificar_echo a Nomeolvides.ViewHechos.eliminar_hecho Ahora al modificar un echo, se elimina el anterio y se agrega el nuevo. fixes #21
-  * Ahora se usa int.parse() para pasar de string a int
-  * Se agregó la variable privada Nomeolvides.ViewHechos.anio_mostrado_ahora del tipo ListStoreHechos. Se modificó la función Nomeolvides.ViewHechos.mostrar_anio para que haga uso de la nueva variable Nomeolvides.ViewHechos.anio_mostrado_ahora. Se cambió el nombre de la función Nomeolvides.ViewHechos.agregarHechos por Nomeolvides.ViewHechos.agregar_hecho. Se modificó la función Nomeolvides.ViewHechos.agregar_hecho para que se muestre en Nomeolvides.Windows.view_hechos los hechos del año del último hecho agregado. Ahora Nomeolvides.ListStoreHechos.hechosCache es del tipo Gee.ArrayList y se llama Nomeolvides.ListStoreHechos.hechos_cache. En la función Nomeolvides.ListStoreHechos.modificar ahora el tercer parámentro es del tipo Hecho y ya no string. Se agregó la función Nomeolvides.Window.elegir_hecho. Se agregó la función Nomeolvides.Window.edit_hecho. Se agregó la función Nomeolvides.ViewHechos.get_hecho_cursor. Se quitó el botón Agregar de la clase madre Nomeolvides.DialogoHecho, para que sea implementado en las clases hijas. fixed #20
-  * Se agregó la clase Nomeolvides.EditDialog que hereda de Nomeolvides.DialogoHecho. Se agregó un botón editar en la toolbar. Ahora Nomeolvides.ListStoreHechos guarda el objeto Hecho, no sólo los datos sus datos. Se agregó la función Nomeolvides.ListStoreHechos.modificar, la cual modifica al hecho huardado en la posición de iter. Se cambió el nombre de la clase Nomeolvides.mainToolbar por Nomeolvides.MainToolbar. Se agregó la función Nomeolvides.MainToolbar.set_edit_button_visible.
-  * Se cambió el nombre de la Clase Nomeolvides.TreeViewSelector a Nombeolvides.ViewAnios. Se modificó Nomeolvides.Windows.elegir_anio y Nomeolvides.ViewAnios.get_anios para que verifique si habia seleccionado un elemento del TreeView cuando se ejecuta la señal Gtk.TreeView.cursor_changed.
-  * Se cambió el nombre de la clase Nomeolvides.Main_toolbar a Nomeolvides.mainToolbar. Se movió la creación de los ToolButton al constructor de Nomeolvides.mainToolbar. Se modificó la función Nomeolvides.Window.botone_toolbar() para que ahora sólo conecte las señales a la funciones correspondientes, dejando el resto del trabajo que hacía para el constructor de Nomeolvides.mainToolbar.
-  * Se actualizó README con la descripción que hay en el wiki
-  * Se quito la columna Descripción del TreeView que muestra los hechos para una mejor experiencia de uso. Ahora la clase Nomeolvides.Add_dialog se llama Nomeolvides.AddDialog y hereda de una clase recién creada que se llama Nomeolvides.DialogoHecho. Es te cambio es para hacer más sencillo la resolución de #20
-  * Ahora se listan automaticamente en en el selector de años los años de los hechos agregados. closes #12
-  * Se agregó un hehco más a hechos.json para que se vea mejor lo que se implementó en el commit 3dbf554
-  * Ahora los hechos que se ingresan se agregan a una lista de acurdo al año. Y cuando se hace click en un año de Nomeolvides.TreeViewSelector en el TreeView de los hechos aparecen los hechos del año seleccionado. fixed #13
-  * Se agregó el método Nomeolvides.TreeViewSelector.agregar() que permite agregar elementos. paso previo para cerrar #12 Se moficicó la clase Nomeolvides.Hecho, ahora la fecha es del tipo DateTime. Se agregó el método Nomeolvides.Hecho.fecha_to_string() que devuelve el texto en un formato ameno. closes #19 Se agregaron los entry's y labels correspondientes al nuevo tipo de fecha de Nomeolvides.Hechos Se modificó el archivo hechos.json para adecuarlo al nuevo tipo de fecha de Nomeolvides.Hechos
-  * Ahora apretar enter en el cuadro de dialogo equivale a apretar el boton aceptar. closes #16
-  * Se agregó el dato fecha a los hechos y se modificaron todos los archivos necesarios para que se puedan cargar, guardar y mostrar con este nuevo campo. Aun falta que sea cómo agregarlos y que se vean lindos. Pero podemos decir que: fixed #8 Se agrego padding al separador en la ventana principal, para que se vea en adwaita. fixed #9
-  * Se agregó un Gtk.Seprator entre los dos TreeViews para que sea más visible la diferencia y se quitó el gris feo a las celdas del TreeViewSelector. fixed #9 Se solucionó el floodeo de la terminal con Gtk-Warning del color desconocido. fixed #11 Se hicieron arreglos menos en la escritura del resto de los archivos.
-  * Ahora los checksums de los hechos vuelven a crearse desde la función Hechos.aJson, en los constructores Hecho.Hecho y Hecho.json.
-  * Se cambio la funcion Hecho.esIgual, por Hecho.esIgualCache. Es decir que ahora Hecho.esIgual hace lo que antes hacia Hecho.esIgualCache y ninguna hace ya lo que hacia la original Hecho.esIgual. Se agrego la variable Hecho.hash que guarda el hash del checksum que ahora se hace en el constructor Hecho.Hecho y en el constructor Hecho.json. fixed #6
-  * Se creó la clase Nomeolvides.TreeViewSelector con una constructor provisorio hasta que se implementen las fechas en los hechos Se modificó el constructor de la clase Nomeolvides.window para que muestre el nuevo selector en la ventana principal.
-  * Ahora Nomeolvides.treeview muestra correctamente los datos del model. fixed #5 Se arrgló un pequeño error en los datos de prueba del archivo src/hechos.json
-  * Se agregaron las clase Nomeolvides.ListStoreHechos y Nomeolvides.treeview las cuales se usan ahora para mostrar los hechos en la ventana principal. Se modificó el esquema de comprovación de duplicados. Ahora cuando se agrega un hecho se guarda un chache de los hash de cada hecho en la clase Nomeolvides.ListStoreHechos. Se agregó la función EsIgualCache a la clase Nomeolvides.Hecho, para adecuarlo al nuevo esquema de comprobación de iguales por medio de chaché. Se agregó un try-catch a la apertura del archivo con los hechos de prueba en la función open_file ("y por qué en ingles?") de la clase Nomeolvides.Windows (ahh... por eso...) para hacerla más robusta.
-  * Se creó la clase Nomeolvides.ListaHechos que controla que los Hechos no se repitan dentro de la lista. fixed #4
-  * Se implementó la funcion Nomeolvides.Hecho.esIgual(), que comprueba la igualdad entre dos hechos
-  * Corregida la burrada del commit anterior
-  * Ahora la clase Hechos pertenece al namespace Nomeolvides Ahora se usa el namespace Nomeolvides en todos los archivos. fixed #2 Se nombraron todos los archivos utilizando el mismo criterio. fixed #3
-  * Se mejoró el algoritmo Nomeolvides.TextViewHecho.mostrar (), ahora es mucho mas rápido para procesar grandes cantidades de hechos.
-  * Ahora la ruta al archivo hechos.json es relativa
-  * Boceto de prueba de carga de Hechos en formato json desde un archivo
-  * Se agregó el contructor Nomeolvides.Hecho.json que permite crear el objeto desde un string JSON Se agrego la funcion privada Nomeolvides.Hecho.sacarDatoJson que permite al constructor json sacar el dato de un campo
-  * Solucionado el conflicto que falto solucionar en el commit anterior
-  * conflictos solucionados
-  * Se cambió el nombre del archivo src/text-view-hecho.vala para estar acorde con el resto de los archivos  * se agregó la funcion Nomeolvides.Hecho.aJson () que traduce el objeto a un string en formato JSON
-  * LIMPIEZA DEL CÓDIGO II
-  * Se agrega un espacio para una lista en la ventana principal
-  * LIMPIEZA DEL CÓDIGO
-  * Se creo la clase Nomeolvides.TextViewHecho, para guardar y mostrar los hechos
-  * Ahora se agrega el hecho con el siguiente formato "NOMBRE: DESCRIPCION\n" al final del buffer de texto
-  * La clase hecho ahora es Hecho para que sea coherente con el resto de las clases. La clase add dialog tiene una variable miembro pública de tipo Hecho llamada respuesta. La función aplicar de add_dialog ahora crea un objeto Hecho con los valores de los entry y lo guarda en la variable miembro respuesta. La función add_hecho de la clase App ahora toma el nombre del Hecho si se creé en el dialogo para agregar y lo copia en el buffer del text_view para que se muestre en pantalla.
-  * Pruebas con el método Nomeolvides.Add_dialog.aplicar()
-  * Los botones de Nomeolvides.Add_dialog ahora se crean uitilzando el método add_button()  * se agregó una función para procesar las respuestas, y ahora se puede cerrar el diálogo con el boton cancelar
-  * Se agregó el boceto de dialogo para agregar hechos.
-  * Se agrregó la variable grid a la interface publica de Nomeolvides.Panel. Además de inició la tentativa de gui en Nomeolvides.App. Además de removieron del repositorio los archivos de ocultos anjuta, agregados por error y se añadieron a la lista de ignorados por git.
-  * Agregado panel.vala
-  * Se agregaron los archivos cultos .anjuta/* y anjuta_sym_db.db a .gitignore. Se siguen probando iu para la ventana principal de la app
-  * ruebas con gtk
-  * Se cambió la estructura de la aplicación. Separando la funcion main de la misma y manejando el uso de la aplicación desde otro archivo
-  * Se modificó la clase hecho, para que funciones correctamente
-  * Prueba 1
-  * Se agregaron archivos faltantes al repo
-  * Creacion de UI básica para pruebas
-  * Se añadio la clase hecho
-  * Proyecto inicial de anjuta
-  * Initial commit
-
-
-
+  * Alpha Release
