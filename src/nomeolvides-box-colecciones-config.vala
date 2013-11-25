@@ -196,7 +196,6 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item ); 
 		if ( hay_colecciones_rehacer ){
 			this.db.coleccion_a_borrar ( item.get_borrado() );
-			var liststore = this.colecciones_view.get_model () as ListStoreColecciones;
 			this.colecciones_view.eliminar_coleccion ( item.get_borrado() );
 			this.cambio_colecciones_signal ();
 		}

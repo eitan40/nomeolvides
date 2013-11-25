@@ -71,7 +71,7 @@ public class Nomeolvides.VistaHecho : Box {
 
 		descripcion_box.pack_start ( this.descripcion );
 		
-		scroll_descripcion.add ( descripcion_box );
+		scroll_descripcion.add_with_viewport ( descripcion_box );
 
 		this.pack_start ( this.label_nombre, false, false, 0 );
 		this.pack_start ( this.label_fecha, false, false, 0 );
