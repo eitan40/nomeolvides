@@ -27,17 +27,16 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string hash { get; private set; }
 	public int64 coleccion;
 	public string fuente { get; private set; }
-	private string reemplazoSaltoDeLinea { get; private set; } 
 
 	// Constructor
 	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, int64 coleccion, string fuente = "" )
 	{
-		this.nombre = nombre;
-		this.descripcion = this.ponerSaltoDeLinea ( descripcion );
+		this.nombre = Hecho.ponerCaracterEspecial ( nombre );
+		this.descripcion = Hecho.ponerCaracterEspecial ( descripcion );
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
-		this.calcular_checksum ();
 		this.coleccion = coleccion;
-		this.fuente = fuente;
+		this.fuente = Hecho.ponerCaracterEspecial ( fuente );
+		this.calcular_checksum ();
 	}
 
 	public Hecho.vacio () {
@@ -46,18 +45,19 @@ public class Nomeolvides.Hecho : GLib.Object {
 
 	public Hecho.json (string json, int64 coleccion ) {
 		
-		if (json.contains ("{\"Hecho\":{")) {
-			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.descripcion = this.ponerSaltoDeLinea ( this.sacarDatoJson ( json, "descripcion" ) );
-			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson(json, "anio")),
-			                               int.parse (this.sacarDatoJson(json, "mes")),
-			                               int.parse (this.sacarDatoJson(json, "dia")),
+		if ( json.contains ( "{\"Hecho\":{" ) ) {
+			this.nombre = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "nombre" ) );
+			this.descripcion = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "descripcion" ) );
+			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson( json, "anio" ) ),
+			                               int.parse (this.sacarDatoJson( json, "mes" ) ),
+			                               int.parse (this.sacarDatoJson( json, "dia") ),
 			                     		   0,0,0);
-			this.fuente = this.sacarDatoJson ( json, "fuente");
+			this.fuente = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "fuente" ) );
 		} else {
 			this.nombre = "null";
 			this.descripcion = "null";
-			this.fecha = new DateTime.utc (2013,2,20,0,0,0);
+			this.fecha = new DateTime.utc ( 2013,2,20,0,0,0 );
+			this.fuente = "null";
 		}	
 		this.calcular_checksum ();
 
@@ -65,23 +65,19 @@ public class Nomeolvides.Hecho : GLib.Object {
 	}
 
 	private void calcular_checksum () {
-		this.hash = Checksum.compute_for_string(ChecksumType.MD5, this.a_json ());
-	}
-
-	private void saltoDeLinea () {
-		this.reemplazoSaltoDeLinea = "|";
+		this.hash = Checksum.compute_for_string( ChecksumType.MD5, this.a_json () );
 	}
 	
 	public string a_json () {
 		string retorno = "{\"Hecho\":{";
 
-		retorno += "\"nombre\":\"" + this.nombre + "\",";
-		retorno += "\"descripcion\":\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
-		retorno += "\"anio\":\"" + this.fecha.get_year().to_string () + "\",";
-		retorno += "\"mes\":\"" + this.fecha.get_month().to_string () + "\",";
-		retorno += "\"dia\":\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "\"fuente\":\"" + this.fuente + "\",";
-		retorno += "\"coleccion\":\"" + this.coleccion.to_string() + "\"";
+		retorno += "\"nombre\":\"" + Hecho.sacarCaracterEspecial( this.nombre ) + "\",";
+		retorno += "\"descripcion\":\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
+		retorno += "\"anio\":\"" + this.fecha.get_year ().to_string () + "\",";
+		retorno += "\"mes\":\"" + this.fecha.get_month ().to_string () + "\",";
+		retorno += "\"dia\":\"" + this.fecha.get_day_of_month ().to_string () + "\",";
+		retorno += "\"fuente\":\"" + Hecho.sacarCaracterEspecial( this.fuente ) + "\",";
+		retorno += "\"coleccion\":\"" + this.coleccion.to_string () + "\"";
 
 		retorno +="}}";	
 		
@@ -91,13 +87,13 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string to_string () {
 		string retorno;
 
-		retorno  = "\"" + this.nombre + "\",";
-		retorno += "\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
-		retorno += "\"" + this.fecha.get_year().to_string () + "\",";
-		retorno += "\"" + this.fecha.get_month().to_string () + "\",";
-		retorno += "\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "\"" + this.fuente + "\",";
-		retorno += "\"" + this.coleccion.to_string() + "\"";
+		retorno  = "\"" + Hecho.sacarCaracterEspecial( this.nombre ) + "\",";
+		retorno += "\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
+		retorno += "\"" + this.fecha.get_year ().to_string () + "\",";
+		retorno += "\"" + this.fecha.get_month ().to_string () + "\",";
+		retorno += "\"" + this.fecha.get_day_of_month ().to_string () + "\",";
+		retorno += "\"" + Hecho.sacarCaracterEspecial( this.fuente ) + "\",";
+		retorno += "\"" + this.coleccion.to_string () + "\"";
 
 		return retorno;
 	}
@@ -105,13 +101,15 @@ public class Nomeolvides.Hecho : GLib.Object {
 	public string a_sql () {
 		string retorno;
 
-		retorno  = "nombre=\"" + this.nombre + "\",";
-		retorno += "descripcion=\"" + this.sacarSaltoDeLinea(this.descripcion) + "\",";
-		retorno += "anio=\"" + this.fecha.get_year().to_string () + "\",";
-		retorno += "mes=\"" + this.fecha.get_month().to_string () + "\",";
-		retorno += "dia=\"" + this.fecha.get_day_of_month().to_string () + "\",";
-		retorno += "fuente=\"" + this.fuente + "\",";
-		retorno += "coleccion=\"" + this.coleccion.to_string() + "\"";
+		retorno  = "nombre=\"" + Hecho.sacarCaracterEspecial( this.nombre ) + "\",";
+		retorno += "descripcion=\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
+		retorno += "anio=\"" + this.fecha.get_year ().to_string () + "\",";
+		retorno += "mes=\"" + this.fecha.get_month ().to_string () + "\",";
+		retorno += "dia=\"" + this.fecha.get_day_of_month ().to_string () + "\",";
+		retorno += "fuente=\"" + Hecho.sacarCaracterEspecial( this.fuente ) + "\",";
+		retorno += "coleccion=\"" + this.coleccion.to_string () + "\"";
+
+		print (retorno + "\n");
 		
 		return retorno;
 	}
@@ -174,20 +172,29 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.coleccion = coleccion;
 	}
 
-	private string ponerSaltoDeLinea ( string inicial ) {
+	public static string ponerCaracterEspecial ( string inicial ) {
 
 		string saltoDeLinea = "\n";
-		this.saltoDeLinea ();
-		string retorno = inicial.replace ( this.reemplazoSaltoDeLinea, saltoDeLinea );
+		string reemplazoSaltoDeLinea = "|";
+		string retorno = inicial.replace ( reemplazoSaltoDeLinea, saltoDeLinea );
 		
+		string comillas = "\"";
+		string reemplazoComillas = "_";
+		retorno = retorno.replace ( reemplazoComillas, comillas );
+
 		return retorno;
 	}
 
-	private string sacarSaltoDeLinea ( string inicial ) {
+	public static string sacarCaracterEspecial ( string inicial ) {
 
 		string saltoDeLinea = "\n";
-		string retorno = inicial.replace ( saltoDeLinea, this.reemplazoSaltoDeLinea );
+		string reemplazoSaltoDeLinea = "|";
+		string retorno = inicial.replace ( saltoDeLinea, reemplazoSaltoDeLinea );
 		
+		string comillas = "\"";
+		string reemplazoComillas = "_";
+		retorno = retorno.replace ( comillas, reemplazoComillas );
+
 		return retorno;
 	}	
 }
