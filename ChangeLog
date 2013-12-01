@@ -1,3 +1,10 @@
+0.8.1 / 2013-11-30
+==================
+  * Now you can add quotes (") to a fact.
+  * Now description of a fact is shown properly on gtk+ < 3.10
+  * Now the text view of the decription of add/edit dialog behave properly when adding long text lines.
+  * Now the add dialog of facts is shown when you add the first colection.
+
 0.8 / 2013-11-16
 ==================
 

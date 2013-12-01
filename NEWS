@@ -1,3 +1,8 @@
+0.8.1 / 2013-11-30
+==================
+
+This is a bugfixes release.
+
 0.8 / 2013-11-16
 ==================
 
@@ -14,7 +19,7 @@ In this new version of Nomeolvides there are many new features. Now you can orga
 custom list feature. Also, right now changes are auto-saved instantly. Due to this, now if you delete or edit a fact 
 by mistake, you can undo the changes. And last, but not least, we have rewrite a lot of code and fixed various bugs.
 
-v0.4 / 2013-02-28 
+0.4 / 2013-02-28 
 ==================
 
 Just in time we have released the second version of Nomeolvides. Now you can send your historical facts by e-mail.

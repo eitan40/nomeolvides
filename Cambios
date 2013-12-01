@@ -1,0 +1,47 @@
+0.8.1 / 2013-11-30
+==================
+  * Ahora se pueden agregar comillas a los hechos
+  * Ahora se muestra correctamente la decripción de los hechos en  gtk+ < 3.10
+  * Ahora al ingresar la descripción del hecho actúa correctamente cuando se ingresan lineas muy largas
+  * Ahora el diálogo de agregar hechos aparece cuando se ingresa la primer colección
+
+0.8 / 2013-11-16
+==================
+
+  * Agregada la funcionalidad de deshacer/rehacer cambios en las listas y colecciones
+  * Mejorados los díalogos y la interfaz en general
+  * Soporte para traducciones
+  * Soporte para maejo de datos con DBMS
+  * Sqlite DBMS por defecto
+  * Agregado un diálogo para la migración de datos de la versión 0.6
+  * Libgee ya no se utiliza
+  * Muchos arreglos de errores
+
+0.6 / 2013-05-02 
+==================
+
+  * Agregado la funcionalidad de deshacer/rehacer cambios en hechos
+  * Agregada la posibilidad de ordenar los hechos en listas personalizadas
+  * Los combios se guardan automáticamente en cuanto se producen
+  * Importante reescritura del código de manejo de datos
+  * Varios arreglos de errores
+
+v0.4 / 2013-02-28 
+==================
+
+  * Agregado soporte para bases de datos remotas por http
+  * Agregada la posibilidad de enviar hechos por mail
+  * Agregada base de datos oficial por defecto
+  * Agregada el campo para la fuente bibliográfica en los hechos.
+  * Varios arreglos de errores.
+
+0.2.1 / 2013-01-25
+==================
+
+  * Agregado Application Menu
+  * Varios arreglos de errores
+
+0.2 / 2013-01-19 
+==================
+
+  * Alpha Release
