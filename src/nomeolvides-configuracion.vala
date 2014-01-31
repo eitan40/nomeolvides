@@ -31,7 +31,7 @@ public class Nomeolvides.Configuracion : GLib.Object {
 			   "program-name", "Nomeolvides",
 			   "title", _("About Nomeolvides"),
 			   "comments", _("Historical ephemeris manager"),
-			   "copyright", "Copyright 2012 Fernando Fernandez " + _("and") + " Andres Fernandez",
+			   "copyright", "Copyright 2012, 2013, 2014 Fernando Fernandez " + _("and") + " Andres Fernandez",
 			   "license-type", Gtk.License.GPL_3_0,
 			   "logo-icon-name", "nomeolvides",
 			   "version", Config.VERSION,
