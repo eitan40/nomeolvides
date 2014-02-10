@@ -28,7 +28,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	// Constructor
 		public LineaDeTiempo () {
 
-//		this.hechos = new Array<Hecho> ();
+		this.hechos = new Array<Hecho> ();
 
 		this.draw.connect (dibujar);
 
@@ -41,17 +41,28 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		context.set_source_rgba (1, 0, 0, 1);
 		context.set_line_width (3);
 
-		context.move_to (0,height/2);
-		context.line_to (width,height/2);
-
-		context.stroke ();
+		int posy = height/2;
+		if ( this.hechos.length > 0 ) {
+			int intervalox = (width - 20) / (int) this.hechos.length;
 		
+			context.move_to (10,posy);
+
+			for (int i=0; i < this.hechos.length; i++) {
+				int posx = (intervalox * (i+1))+10;
+				context.line_to (posx ,posy);
+				context.arc (posx, posy, 5, 0, 2 * Math.PI);
+			}
+			context.stroke ();
+		}
+
 		return true;
 	}
 
 	public void set_hechos ( Array<Hecho> nuevos_hechos ) {
+		this.hechos = new Array<Hecho> ();
 		for (int i=0; i < nuevos_hechos.length; i++) {
 			this.hechos.append_val ( nuevos_hechos.index(i));
 		}
+		this.queue_draw ();
 	}
 }
