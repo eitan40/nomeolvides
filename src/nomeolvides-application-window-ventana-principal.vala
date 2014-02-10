@@ -185,6 +185,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 			this.toolbar.set_buttons_invisible ();		
 		}
 	}
+
+	public void cargar_linea_de_tiempo (Array<Hecho> hechos) {
+		this.linea.set_hechos ( hechos );
+	}
 	
 	public void show_visible () {
 		this.show_all ();

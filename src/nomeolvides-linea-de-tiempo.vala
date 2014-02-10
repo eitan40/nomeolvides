@@ -23,8 +23,12 @@ using Cairo;
 
 public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 
+	private Array<Hecho> hechos;
+
 	// Constructor
 		public LineaDeTiempo () {
+
+//		this.hechos = new Array<Hecho> ();
 
 		this.draw.connect (dibujar);
 
@@ -45,4 +49,9 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		return true;
 	}
 
+	public void set_hechos ( Array<Hecho> nuevos_hechos ) {
+		for (int i=0; i < nuevos_hechos.length; i++) {
+			this.hechos.append_val ( nuevos_hechos.index(i));
+		}
+	}
 }
