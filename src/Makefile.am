@@ -63,7 +63,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-preferencias.vala \
 	nomeolvides-box-colecciones-config.vala \
 	nomeolvides-box-listas-config.vala \
-	nomeolvides-resources.c
+	nomeolvides-resources.c \
+	nomeolvides-elemento.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
