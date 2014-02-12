@@ -20,30 +20,28 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Coleccion : GLib.Object{
-	public int64 id;
-	public string nombre { get; private set; }
+public class Nomeolvides.Coleccion : Nomeolvides.Elemento{
 	public bool visible {get; set; }
 
 	public Coleccion ( string nombre, bool visible ) {
-		this.nombre = nombre;
+		base ( nombre );
 		this.visible = visible;
 	}
 
 	public Coleccion.json ( string json ) {
-		if (json.contains ("{\"Fuente\":{")) {
-			this.nombre = this.sacarDatoJson (json, "nombre");
-			this.visible = bool.parse ( this.sacarDatoJson (json, "visible") );
-		} else {
-			this.nombre = "null";
+		if (!json.contains ("{\"Fuente\":{")) {
+			json = "null";
 			this.visible = false;
+		} else { 
+			this.visible = bool.parse ( this.sacarDatoJson (json, "visible") );
 		}
+
+		base.json ( json );
 	}
 
 	public string a_json () {
 		string retorno = "{\"Fuente\":{";
-
-		retorno += "\"nombre\":\"" + this.nombre + "\",";
+		retorno += base.a_json ();
 		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
 		retorno +="}}";	
 		
@@ -51,28 +49,16 @@ public class Nomeolvides.Coleccion : GLib.Object{
 	}
 
 	public string a_sql () {
-		string retorno;
-
-		retorno  = "nombre=\"" + this.nombre + "\",";
+		var retorno  = base.a_sql ();
 		retorno += "visible=\"" + this.visible.to_string() + "\"";
 		
 		return retorno;
 	}
 
 	public string to_string () {
-		string retorno;
-
-		retorno  = "\"" + this.nombre + "\",\"";
+		var retorno  = base.to_string ();
 		retorno += this.visible.to_string() + "\"";
 		
 		return retorno;
 	}
-
-	private string sacarDatoJson(string json, string campo) {
-		int inicio,fin;
-		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
-		fin = json.index_of ("\"", inicio);
-		return json[inicio:fin];
-	}
-
 }
