@@ -39,6 +39,10 @@ public class Nomeolvides.Elemento : GLib.Object{
 		this.calcular_checksum ();
 	}
 
+	public Elemento.vacio () {
+
+	}
+
 	public string a_json () {	
 		var retorno = "\"nombre\":\"" + this.nombre + "\"";
 		
