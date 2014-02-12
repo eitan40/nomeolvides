@@ -56,7 +56,7 @@ public class Nomeolvides.Elemento : GLib.Object{
 	}
 
 	public string to_string () {
-		var retorno  = "\"" + this.nombre + "\",\"";
+		var retorno  = "\"" + this.nombre + "\"";
 		
 		return retorno;
 	}

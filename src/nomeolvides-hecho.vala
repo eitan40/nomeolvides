@@ -58,7 +58,7 @@ public class Nomeolvides.Hecho : Nomeolvides.Elemento {
 
 	public string a_json () {
 		var retorno = "{\"Hecho\":{";
-		retorno += base.a_json ();
+		retorno += base.a_json () + ",";
 		retorno += "\"descripcion\":\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "\"anio\":\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "\"mes\":\"" + this.fecha.get_month ().to_string () + "\",";
@@ -72,7 +72,7 @@ public class Nomeolvides.Hecho : Nomeolvides.Elemento {
 	}
 
 	public string to_string () {
-		var retorno  = base.to_string ();
+		var retorno  = base.to_string () + ",";
 		retorno += "\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "\"" + this.fecha.get_month ().to_string () + "\",";
@@ -84,7 +84,7 @@ public class Nomeolvides.Hecho : Nomeolvides.Elemento {
 	}
 
 	public string a_sql () {
-		var retorno  = base.a_sql ();
+		var retorno  = base.a_sql () + ",";
 		retorno += "descripcion=\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "anio=\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "mes=\"" + this.fecha.get_month ().to_string () + "\",";
