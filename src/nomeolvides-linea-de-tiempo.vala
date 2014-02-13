@@ -40,7 +40,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	private bool dibujar (Context context) {
 		int width = this.get_allocated_width ();
 		int height = this.get_allocated_height ();
-		int posx;
+		int posx = 0;
 		int i;
 		int posy = height/2;
 		int corrimiento_x = width / 10;
@@ -53,18 +53,30 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 
 			this.visible = true;
 			context.move_to ( 0, posy );
+			context.set_dash ({10, 5}, 0);
 			context.line_to ( corrimiento_x, posy );
+			context.stroke ();
+
+			context.set_dash (null, 0);
+			context.move_to ( corrimiento_x, posy );
 
 			for (i=0; i < this.hechos.length; i++) {
 				posx = ( ( this.dias_hecho.index (i) * ancho_linea ) / this.total_dias ) + corrimiento_x;
 				//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
+				context.set_source_rgba (1, 0, 0, 1);
 				context.line_to (posx ,posy);
+				context.stroke ();
 				this.dibujar_hecho (context, this.hechos.index (i), posx, posy);
 			}
-			print ( "\n" );
+			//print ( "posx = %d\n", posx );
+			context.stroke ();
+
+			context.move_to (posx ,posy);
+			context.set_dash ({10, 5}, 0);
 			context.line_to (width ,posy);
 
 			context.stroke ();
+
 		} else {
 			this.visible = false;
 		}
@@ -93,17 +105,18 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	private void dibujar_hecho ( Context context, Hecho hecho, int x, int y ) {
 		TextExtents extents;
 
-		context.arc (x, y, 5, 0, 2 * Math.PI);
-
 		context.set_font_size (15);
 		context.text_extents (hecho.nombre, out extents);
 		double nombre_x = x - (extents.width/2 + extents.x_bearing);
 		context.move_to (nombre_x, y-20);
 		context.set_source_rgba (0.1, 0.1, 0.1, 1);
 		context.show_text ( hecho.nombre );
+		context.stroke ();
 
-		context.move_to (x, y);
 		context.set_source_rgba (1, 0, 0, 1);
+		context.arc (x, y, 5, 0, 2 * Math.PI);
+		context.fill ();
+		context.move_to (x, y);
 	}
 
 	private void calcular_total_dias () {
