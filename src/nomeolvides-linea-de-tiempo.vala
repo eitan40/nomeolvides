@@ -24,11 +24,14 @@ using Cairo;
 public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 
 	private Array<Hecho> hechos;
+	private Array<int> dias_hecho;
+	private int total_dias;
 
 	// Constructor
 		public LineaDeTiempo () {
 
 		this.hechos = new Array<Hecho> ();
+		this.dias_hecho = new Array<int> ();
 
 		this.draw.connect (dibujar);
 
@@ -39,26 +42,25 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		int height = this.get_allocated_height ();
 		int posx;
 		int i;
-
+		int posy = height/2;
+		int corrimiento_x = width / 10;
+		int ancho_linea = width - ( corrimiento_x * 2 );
+		
 		context.set_source_rgba (1, 0, 0, 1);
 		context.set_line_width (3);
 
-		int posy = height/2;
-		if ( this.hechos.length > 0 ) {
-			int intervalox = (width - 50) / (int) this.hechos.length+1;
-
-			posx = 25;
-			context.move_to (0,posy);
-			context.line_to (posx ,posy);
+		if ( this.hechos.length > 1 ) {
+		
+			context.move_to ( 0, posy );
+			context.line_to ( corrimiento_x, posy );
 
 			for (i=0; i < this.hechos.length; i++) {
-				if (i != 0 ) {
-					posx += intervalox;
-				}
+				posx = ( ( this.dias_hecho.index (i) * ancho_linea ) / this.total_dias ) + corrimiento_x;
+				//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
 				context.line_to (posx ,posy);
 				this.dibujar_hecho (context, this.hechos.index (i), posx, posy);
 			}
-
+			print ( "\n" );
 			context.line_to (width ,posy);
 
 			context.stroke ();
@@ -68,11 +70,18 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	}
 
 	public void set_hechos ( Array<Hecho> nuevos_hechos ) {
+		int i;
+		
 		this.hechos = new Array<Hecho> ();
-		for (int i=0; i < nuevos_hechos.length; i++) {
+		
+		for (i=0; i < nuevos_hechos.length; i++) {
 			this.hechos.append_val ( nuevos_hechos.index(i));
 		}
-		this.queue_draw ();
+		if ( i > 0 ) {  // workaround para evitar sigsev cuando recibe un array vacio
+			this.calcular_total_dias ();
+			this.calcular_dias_hechos ();
+			this.queue_draw ();
+		}
 	}
 
 	private void dibujar_hecho ( Context context, Hecho hecho, int x, int y ) {
@@ -89,5 +98,36 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 
 		context.move_to (x, y);
 		context.set_source_rgba (1, 0, 0, 1);
+	}
+
+	private void calcular_total_dias () {
+		DateTime primer_dia, ultimo_dia;
+
+		primer_dia = this.hechos.index(0).fecha;
+		ultimo_dia = this.hechos.index( this.hechos.length - 1 ).fecha;
+
+		this.total_dias = this.diferencia_dias ( primer_dia, ultimo_dia );
+		
+	}
+
+	private int diferencia_dias ( DateTime primer_dia, DateTime ultimo_dia ) {
+		TimeSpan diferencia = ultimo_dia.difference ( primer_dia );
+
+		int retorno = int.parse ( (diferencia / TimeSpan.DAY).to_string () );
+
+		return retorno;
+	}
+
+	private void calcular_dias_hechos () {
+		int diferencia;
+		DateTime primer_hecho = this.hechos.index(0).fecha;
+
+		this.dias_hecho = new Array<int> ();
+		
+		for (int i=0; i < this.hechos.length; i++) {
+			diferencia = this.diferencia_dias ( primer_hecho, this.hechos.index(i).fecha );
+			this.dias_hecho.append_val ( diferencia );
+			//print ( "Hecho %d:\n\tNombre:%s\n\tFecha:%s\n\tDiferencia con el primero:%s\n", i, this.hechos.index(i).nombre, this.hechos.index(i).fecha_to_string(), diferencia.to_string() );
+		}
 	}
 }
