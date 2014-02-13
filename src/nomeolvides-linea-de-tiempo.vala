@@ -50,7 +50,8 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		context.set_line_width (3);
 
 		if ( this.hechos.length > 1 ) {
-		
+
+			this.visible = true;
 			context.move_to ( 0, posy );
 			context.line_to ( corrimiento_x, posy );
 
@@ -64,6 +65,8 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			context.line_to (width ,posy);
 
 			context.stroke ();
+		} else {
+			this.visible = false;
 		}
 
 		return true;
@@ -78,9 +81,12 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			this.hechos.append_val ( nuevos_hechos.index(i));
 		}
 		if ( i > 0 ) {  // workaround para evitar sigsev cuando recibe un array vacio
+			this.visible = true;
 			this.calcular_total_dias ();
 			this.calcular_dias_hechos ();
 			this.queue_draw ();
+		} else {
+			this.visible = false;
 		}
 	}
 
