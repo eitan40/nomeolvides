@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Coleccion : Nomeolvides.Elemento{
+public class Nomeolvides.Coleccion : Nomeolvides.NmBase {
 	public bool visible {get; set; }
 
 	public Coleccion ( string nombre, bool visible ) {
