@@ -43,7 +43,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		int posx = 0;
 		int i;
 		int posy = height/2;
-		int corrimiento_x = width / 10;
+		int corrimiento_x = width / 20;
 		int ancho_linea = width - ( corrimiento_x * 2 );
 		
 		context.set_source_rgba (1, 0, 0, 1);
@@ -105,12 +105,20 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	private void dibujar_hecho ( Context context, Hecho hecho, int x, int y ) {
 		TextExtents extents;
 
-		context.set_font_size (15);
+		context.set_font_size (12);
 		context.text_extents (hecho.nombre, out extents);
 		double nombre_x = x - (extents.width/2 + extents.x_bearing);
 		context.move_to (nombre_x, y-20);
 		context.set_source_rgba (0.1, 0.1, 0.1, 1);
 		context.show_text ( hecho.nombre );
+		context.stroke ();
+
+		context.set_font_size (10);
+		context.text_extents (hecho.fecha_to_string(), out extents);
+		double fecha_x = x - (extents.width/2 + extents.x_bearing);
+		context.move_to (fecha_x, y+20);
+		context.set_source_rgba (0.1, 0.1, 0.1, 1);
+		context.show_text ( hecho.fecha_to_string() );
 		context.stroke ();
 
 		context.set_source_rgba (1, 0, 0, 1);
