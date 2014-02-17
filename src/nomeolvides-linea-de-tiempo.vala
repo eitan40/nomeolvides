@@ -27,6 +27,8 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	private Array<int> dias_hecho;
 	private int total_dias;
 
+	private int PX_POR_DIA = 30;
+
 	// Constructor
 		public LineaDeTiempo () {
 
@@ -41,9 +43,9 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		int width = this.get_allocated_width ();
 		int height = this.get_allocated_height ();
 		int posx = 0;
-		int i;
+		int i,j;
 		int posy = height/2;
-		int corrimiento_x = width / 20;
+		int corrimiento_x = this.PX_POR_DIA * 2;
 		int ancho_linea = width - ( corrimiento_x * 2 );
 		
 		context.set_source_rgba (1, 0, 0, 1);
@@ -60,13 +62,24 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			context.set_dash (null, 0);
 			context.move_to ( corrimiento_x, posy );
 
-			for (i=0; i < this.hechos.length; i++) {
-				posx = ( ( this.dias_hecho.index (i) * ancho_linea ) / this.total_dias ) + corrimiento_x;
-				//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
-				context.set_source_rgba (1, 0, 0, 1);
-				context.line_to (posx ,posy);
-				context.stroke ();
-				this.dibujar_hecho (context, this.hechos.index (i), posx, posy);
+			posx = ancho_linea + corrimiento_x;
+			context.line_to (posx ,posy);
+			context.stroke ();
+
+			for (i=0; i < this.total_dias+1; i++ ) {
+				posx = (i * this.PX_POR_DIA) + corrimiento_x;
+				for (j=0; j < this.hechos.length; j++) {
+					if ( i == this.dias_hecho.index (j) ) {
+						//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
+						this.dibujar_hecho (context, this.hechos.index (j), posx, posy);
+					} else {
+						context.set_source_rgba (1, 0, 0, 1);
+						context.set_line_width (1);
+						context.move_to (posx, posy - 5);
+						context.line_to (posx, posy + 5);
+						context.stroke ();
+					}
+				}
 			}
 			//print ( "posx = %d\n", posx );
 			context.stroke ();
@@ -96,6 +109,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			this.visible = true;
 			this.calcular_total_dias ();
 			this.calcular_dias_hechos ();
+			this.cambiar_width ();
 			this.queue_draw ();
 		} else {
 			this.visible = false;
@@ -156,5 +170,10 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			this.dias_hecho.append_val ( diferencia );
 			//print ( "Hecho %d:\n\tNombre:%s\n\tFecha:%s\n\tDiferencia con el primero:%s\n", i, this.hechos.index(i).nombre, this.hechos.index(i).fecha_to_string(), diferencia.to_string() );
 		}
+	}
+
+	private void cambiar_width () {
+		this.width_request = (this.total_dias + 4 ) * this.PX_POR_DIA;
+		//print ( this.total_dias.to_string() + " Dias > " + ((this.total_dias + 4 ) * this.PX_POR_DIA).to_string() + "px\n");
 	}
 }
