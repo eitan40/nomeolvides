@@ -29,6 +29,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	private int anio_actual;
 	private Lista lista_actual;
 	private LineaDeTiempo linea;
+	private ScrolledWindow scroll_linea;
 	
 	public VentanaPrincipal ( Gtk.Application app )
 	{   
@@ -51,10 +52,14 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar = new MainToolbar ();
 
 		this.linea = new LineaDeTiempo ();
+
+		this.scroll_linea = new ScrolledWindow (null,null);
+		this.scroll_linea.set_policy (PolicyType.AUTOMATIC, PolicyType.NEVER);
+		this.scroll_linea.add ( this.linea );
 	
 		this.main_box.pack_start (toolbar, false, false, 0);
 		this.main_box.pack_start (anios_hechos, true, true, 0);
-		this.main_box.pack_start (linea, true, true, 0);
+		this.main_box.pack_start (scroll_linea, true, true, 0);
 
 		this.conectar_seniales ();
 	}
