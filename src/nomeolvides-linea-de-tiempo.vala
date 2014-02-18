@@ -27,7 +27,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	private Array<int> dias_hecho;
 	private int total_dias;
 
-	private int PX_POR_DIA = 30;
+	private int PX_POR_UNIDAD = 30;
 
 	// Constructor
 		public LineaDeTiempo () {
@@ -43,16 +43,14 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		int width = this.get_allocated_width ();
 		int height = this.get_allocated_height ();
 		int posx = 0;
-		int i,j;
 		int posy = height/2;
-		int corrimiento_x = this.PX_POR_DIA * 2;
+		int corrimiento_x = this.PX_POR_UNIDAD * 2;
 		int ancho_linea = width - ( corrimiento_x * 2 );
 		
-		context.set_source_rgba (1, 0, 0, 1);
-		context.set_line_width (3);
-
 		if ( this.hechos.length > 1 ) {
 
+			context.set_source_rgba (1, 0, 0, 1);
+			context.set_line_width (3);
 			this.visible = true;
 			context.move_to ( 0, posy );
 			context.set_dash ({10, 5}, 0);
@@ -66,21 +64,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			context.line_to (posx ,posy);
 			context.stroke ();
 
-			for (i=0; i < this.total_dias+1; i++ ) {
-				posx = (i * this.PX_POR_DIA) + corrimiento_x;
-				for (j=0; j < this.hechos.length; j++) {
-					if ( i == this.dias_hecho.index (j) ) {
-						//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
-						this.dibujar_hecho (context, this.hechos.index (j), posx, posy);
-					} else {
-						context.set_source_rgba (1, 0, 0, 1);
-						context.set_line_width (1);
-						context.move_to (posx, posy - 5);
-						context.line_to (posx, posy + 5);
-						context.stroke ();
-					}
-				}
-			}
+			dibujar_dias (context, posx, posy, corrimiento_x);
 			//print ( "posx = %d\n", posx );
 			context.stroke ();
 
@@ -173,7 +157,31 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	}
 
 	private void cambiar_width () {
-		this.width_request = (this.total_dias + 4 ) * this.PX_POR_DIA;
-		//print ( this.total_dias.to_string() + " Dias > " + ((this.total_dias + 4 ) * this.PX_POR_DIA).to_string() + "px\n");
+		this.width_request = (this.total_dias + 4 ) * this.PX_POR_UNIDAD;
+		//print ( this.total_dias.to_string() + " Dias > " + ((this.total_dias + 4 ) * this.PX_POR_UNIDAD).to_string() + "px\n");
+	}
+
+	private void dibujar_referencia (Context context, int posx, int posy) {
+		context.set_source_rgba (1, 0, 0, 1);
+		context.set_line_width (1);
+		context.move_to (posx, posy - 5);
+		context.line_to (posx, posy + 5);
+		context.stroke ();
+	}
+
+	private void dibujar_dias (Context context, int posx, int posy, int corrimiento_x) {
+		int i,j;
+
+		for (i=0; i < this.total_dias+1; i++ ) {
+			posx = (i * this.PX_POR_UNIDAD) + corrimiento_x;
+			for (j=0; j < this.hechos.length; j++) {
+				if ( i == this.dias_hecho.index (j) ) {
+					//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
+					this.dibujar_hecho (context, this.hechos.index (j), posx, posy);
+				} else {
+					this.dibujar_referencia (context, posx, posy);
+				}
+			}
+		}
 	}
 }
