@@ -170,9 +170,12 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	}
 
 	private void dibujar_dias (Context context, int posx, int posy, int corrimiento_x) {
-		int i,j;
+		int i=0,j;
+		DateTime dia_a_dibujar =  this.hechos.index(0).fecha;
+		DateTime ultimo_dia = this.hechos.index( this.hechos.length - 1 ).fecha;
 
-		for (i=0; i < this.total_dias+1; i++ ) {
+		while ( dia_a_dibujar.compare (ultimo_dia) < 1 ) {
+			//print (dia_a_dibujar.to_string () + "\n");
 			posx = (i * this.PX_POR_UNIDAD) + corrimiento_x;
 			for (j=0; j < this.hechos.length; j++) {
 				if ( i == this.dias_hecho.index (j) ) {
@@ -182,6 +185,8 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 					this.dibujar_referencia (context, posx, posy);
 				}
 			}
+			i++;
+			dia_a_dibujar = dia_a_dibujar.add ( TimeSpan.DAY );
 		}
 	}
 }
