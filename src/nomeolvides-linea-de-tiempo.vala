@@ -25,15 +25,18 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 
 	private Array<Hecho> hechos;
 	private Array<int> dias_hecho;
-	private int total_dias;
+	private int unidades;
+	private Escala escala;
 
-	private int PX_POR_UNIDAD = 30;
+	private int px_por_unidad;
 
 	// Constructor
-		public LineaDeTiempo () {
+	public LineaDeTiempo () {
 
 		this.hechos = new Array<Hecho> ();
 		this.dias_hecho = new Array<int> ();
+		this.escala = Escala.DIA;
+		this.px_por_unidad = 30;
 
 		this.draw.connect (dibujar);
 
@@ -44,7 +47,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		int height = this.get_allocated_height ();
 		int posx = 0;
 		int posy = height/2;
-		int corrimiento_x = this.PX_POR_UNIDAD * 2;
+		int corrimiento_x = this.px_por_unidad * 2;
 		int ancho_linea = width - ( corrimiento_x * 2 );
 		
 		if ( this.hechos.length > 1 ) {
@@ -64,12 +67,13 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			context.line_to (posx ,posy);
 			context.stroke ();
 
-			dibujar_dias (context, posx, posy, corrimiento_x);
+			dibujar_unidad (context, posx, posy, corrimiento_x);
 			//print ( "posx = %d\n", posx );
 			context.stroke ();
 
 			context.move_to (posx ,posy);
 			context.set_dash ({10, 5}, 0);
+			context.set_line_width (3);
 			context.line_to (width ,posy);
 
 			context.stroke ();
@@ -91,7 +95,7 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		}
 		if ( i > 0 ) {  // workaround para evitar sigsev cuando recibe un array vacio
 			this.visible = true;
-			this.calcular_total_dias ();
+			this.calcular_unidades ();
 			this.calcular_dias_hechos ();
 			this.cambiar_width ();
 			this.queue_draw ();
@@ -125,13 +129,32 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		context.move_to (x, y);
 	}
 
-	private void calcular_total_dias () {
+	private void calcular_unidades () {
 		DateTime primer_dia, ultimo_dia;
+		int dias;
 
 		primer_dia = this.hechos.index(0).fecha;
 		ultimo_dia = this.hechos.index( this.hechos.length - 1 ).fecha;
 
-		this.total_dias = this.diferencia_dias ( primer_dia, ultimo_dia );
+		dias = this.diferencia_dias ( primer_dia, ultimo_dia );
+
+		if  ( dias < 60 ) {
+			this.escala = Escala.DIA;
+			this.unidades = dias;
+			this.px_por_unidad = 60;
+		} else {
+			if ( dias < 183 ) {
+				this.escala = Escala.DIA;
+				this.unidades = dias;
+				this.px_por_unidad = 30;
+			} else {
+			if ( dias < 365 ) {
+					this.escala = Escala.SEMANA;
+					this.unidades = dias/7;
+					this.px_por_unidad = 30;
+				}
+			}
+		}
 		
 	}
 
@@ -157,8 +180,8 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 	}
 
 	private void cambiar_width () {
-		this.width_request = (this.total_dias + 4 ) * this.PX_POR_UNIDAD;
-		//print ( this.total_dias.to_string() + " Dias > " + ((this.total_dias + 4 ) * this.PX_POR_UNIDAD).to_string() + "px\n");
+		this.width_request = (this.unidades + 4 ) * this.px_por_unidad;
+		//print ( this.unidades.to_string() + " Dias > " + ((this.unidades + 4 ) * this.px_por_unidad).to_string() + "px\n");
 	}
 
 	private void dibujar_referencia (Context context, int posx, int posy) {
@@ -169,6 +192,18 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 		context.stroke ();
 	}
 
+
+	private void dibujar_unidad (Context context, int posx, int posy, int corrimiento_x) {
+		switch (this.escala) {
+			case Escala.DIA:
+				dibujar_dias (context, posx, posy, corrimiento_x);
+				break;
+			case Escala.SEMANA:
+				dibujar_semanas (context, posx, posy, corrimiento_x);
+				break;
+		}
+	}
+
 	private void dibujar_dias (Context context, int posx, int posy, int corrimiento_x) {
 		int i=0,j;
 		DateTime dia_a_dibujar =  this.hechos.index(0).fecha;
@@ -176,10 +211,10 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 
 		while ( dia_a_dibujar.compare (ultimo_dia) < 1 ) {
 			//print (dia_a_dibujar.to_string () + "\n");
-			posx = (i * this.PX_POR_UNIDAD) + corrimiento_x;
+			posx = (i * this.px_por_unidad) + corrimiento_x;
 			for (j=0; j < this.hechos.length; j++) {
 				if ( i == this.dias_hecho.index (j) ) {
-					//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.total_dias, corrimiento_x, posx);
+					//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.unidades, corrimiento_x, posx);
 					this.dibujar_hecho (context, this.hechos.index (j), posx, posy);
 				} else {
 					this.dibujar_referencia (context, posx, posy);
@@ -188,5 +223,36 @@ public class Nomeolvides.LineaDeTiempo : Gtk.DrawingArea {
 			i++;
 			dia_a_dibujar = dia_a_dibujar.add ( TimeSpan.DAY );
 		}
+	}
+
+		private void dibujar_semanas (Context context, int posx, int posy, int corrimiento_x) {
+		int i=0,j;
+		DateTime dia_a_dibujar =  this.hechos.index(0).fecha;
+		DateTime ultimo_dia = this.hechos.index( this.hechos.length - 1 ).fecha;
+
+		while ( dia_a_dibujar.compare (ultimo_dia) < 1 ) {
+			//print (dia_a_dibujar.to_string () + "\n");
+
+			for (j=0; j < this.hechos.length; j++) {
+				if ( i == this.dias_hecho.index (j) ) {
+					posx = ((i * this.unidades * this.px_por_unidad) / this.dias_hecho.index ( this.hechos.length - 1 )) + corrimiento_x;
+					//print ( "((%d * %d * %d) / %d) + %d)\n", i, this.unidades, this.px_por_unidad, this.dias_hecho.index ( this.hechos.length - 1 ), corrimiento_x);
+					//print ( "hecho %d: (( %d * %d ) / %d) + %d = %d\n", i, this.dias_hecho.index (i), ancho_linea,  this.unidades, corrimiento_x, posx);
+					this.dibujar_hecho (context, this.hechos.index (j), posx, posy);
+				}
+			}
+			if ( dia_a_dibujar.get_day_of_week () == 1 ) { // 1 = Lunes
+						posx = (i/7 * this.px_por_unidad) + corrimiento_x;
+						this.dibujar_referencia (context, posx, posy);
+			}
+			i++;
+			dia_a_dibujar = dia_a_dibujar.add ( TimeSpan.DAY );
+		}
+	}
+
+	private enum Escala {
+		DIA,
+		SEMANA,
+		ANIO
 	}
 }
