@@ -24,7 +24,7 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 	private TreeIter iterador;
 	public bool vacio { get; private set; }
 	
-	public ListStoreNmBase ( Type[] tipos= { typeof(string), typeof(int), typeof(int64) } ) {
+	public ListStoreNmBase ( Type[] tipos = { typeof(string), typeof(int), typeof(int64) } ) {
 		this.set_column_types(tipos);
 		this.vacio = true;
 	}
@@ -35,7 +35,7 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 			this.set ( this.iterador,
 						0,elemento.nombre,
 						1,cantidad_hechos,
-		    			2,elemento.id );
+		     			2,elemento.id );
 			this.vacio = false;
 		}
 	}
@@ -56,7 +56,7 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 		return json;
 	}
 
-	public void borrar_elemnto ( NmBase a_eliminar ) {
+	public void borrar ( NmBase a_eliminar ) {
 		Value elemento_id;
 		TreeIter iter;
 		
