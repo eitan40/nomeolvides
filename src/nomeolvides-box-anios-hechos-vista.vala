@@ -136,7 +136,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	public void cargar_listas ( ListStoreListas listas ) {
-		if ( listas.hay_listas ) {			
+		if ( !(listas.vacio) ) {			
 			this.listas_view.set_model ( listas );
 			this.anios_listas.get_nth_page (1).show ();
 		} else {

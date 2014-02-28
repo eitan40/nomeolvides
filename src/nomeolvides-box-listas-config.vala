@@ -108,7 +108,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 			if ( this.db.insert_lista ( lista )) {
 				lista.id = this.db.ultimo_rowid();
 				liststore = this.listas_view.get_model () as ListStoreListas;
-				liststore.agregar_lista ( lista, 0 );
+				liststore.agregar ( lista, 0 );
 				this.cambios = true;
 			}
 		}
@@ -129,7 +129,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 				liststore = this.listas_view.get_model () as ListStoreListas;
 				var cantidad_hechos = this.listas_view.get_hechos_lista ();
 				this.listas_view.eliminar_lista ( lista );
-				liststore.agregar_lista (edit_dialog.respuesta, cantidad_hechos);
+				liststore.agregar (edit_dialog.respuesta, cantidad_hechos);
 				this.cambios = true;
 			}
 		}	
@@ -172,7 +172,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		for ( int i=0; i < listas.length; i++ ) {
 			var lista = listas.index (i);
 			var cantidad_hechos = this.db.count_hechos_lista ( lista );
-			liststore.agregar_lista ( lista, cantidad_hechos );			
+			liststore.agregar ( lista, cantidad_hechos );			
 		}
 
 		this.listas_view.set_model ( liststore );
@@ -185,7 +185,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 			this.db.lista_no_borrar ( item.get_borrado() );
 			var liststore = this.listas_view.get_model () as ListStoreListas;
 			var cantidad_hechos = this.db.count_hechos_lista ( item.get_borrado() );
-			liststore.agregar_lista ( item.get_borrado(), cantidad_hechos);
+			liststore.agregar ( item.get_borrado(), cantidad_hechos);
 			this.cambios = true;
 		}
 	}

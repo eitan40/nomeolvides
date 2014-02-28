@@ -63,7 +63,7 @@ public class Nomeolvides.TreeViewListas : TreeView {
 
 	public void eliminar_lista ( Lista a_eliminar ) {
 		var liststore = this.get_model() as ListStoreListas;
-		liststore.borrar_lista ( a_eliminar );
+		liststore.borrar ( a_eliminar );
 	}
 
 	public int get_hechos_lista ( ) {
