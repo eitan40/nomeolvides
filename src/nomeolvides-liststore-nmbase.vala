@@ -21,7 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.ListStoreNmBase : ListStore {
-	private TreeIter iterador;
+	protected TreeIter iterador;
 	public bool vacio { get; private set; }
 	
 	public ListStoreNmBase ( Type[] tipos = { typeof(string), typeof(int), typeof(int64) } ) {
@@ -73,5 +73,34 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 		if ( !( this.get_iter_first( out iter ) ) ) {
 			this.vacio = true;
 		}
-	}	
+	}
+
+	public int get_hechos ( TreeIter iter ) {
+		Value value_cantidad;
+		int cantidad = 0;
+
+		this.get_value( iter, 1, out value_cantidad );
+
+		cantidad = (int) value_cantidad;
+
+		return cantidad;
+	}
+
+	public int indice_de_id ( int64 id ) {
+		Value elemento;
+		TreeIter iter;
+		int i=0;
+
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 2, out elemento );
+				if ( id == (int64) elemento ) {
+					break;
+				}
+				i++;
+			}while ( this.iter_next(ref iter) );
+		}
+
+		return i;
+	}
 }

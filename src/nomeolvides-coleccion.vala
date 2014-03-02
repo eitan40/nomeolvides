@@ -50,7 +50,7 @@ public class Nomeolvides.Coleccion : Nomeolvides.NmBase {
 
 	public string a_sql () {
 		var retorno  = base.a_sql ();
-		retorno += "visible=\"" + this.visible.to_string() + "\"";
+		retorno += ",visible=\"" + this.visible.to_string() + "\"";
 		
 		return retorno;
 	}

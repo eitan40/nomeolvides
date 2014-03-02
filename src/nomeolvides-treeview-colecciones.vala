@@ -29,11 +29,11 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
 
 		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
-		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 2 );
+		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
 
 		this.toggle_visible = new CellRendererToggle();
 		this.toggle_visible.toggled.connect ( signal_toggle );
-		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 1 );
+		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 3 );
 	}
 
 	public int64 get_coleccion_cursor () {
@@ -45,7 +45,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 3, out coleccion);
+			this.get_model().get_value (iterador, 2, out coleccion);
 		}
 
 		return (int64) coleccion;
@@ -60,7 +60,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 1, out visible);
+			this.get_model().get_value (iterador, 3, out visible);
 		}
 
 		return (bool) visible;
@@ -68,7 +68,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 
 	public void eliminar_coleccion ( Coleccion a_eliminar ) {
 		var liststore = this.get_model() as ListStoreColecciones;
-		liststore.borrar_coleccion ( a_eliminar );
+		liststore.borrar ( a_eliminar );
 	}
 
 	private void signal_toggle (string path) {
@@ -79,7 +79,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		var liststore = this.get_model() as ListStoreColecciones;
 
 		liststore.get_iter (out iter, tree_path);
-		liststore.set_value (iter, 1, !this.toggle_visible.active);
+		liststore.set_value (iter, 3, !this.toggle_visible.active);
 
 		this.coleccion_visible_toggle_change ();
 	}
@@ -92,7 +92,7 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		this.get_cursor (out path, out columna);
 		this.get_model().get_iter(out iterador, path);
 		var liststore = this.get_model() as ListStoreColecciones;
-		return liststore.get_hechos_coleccion ( iterador );
+		return liststore.get_hechos ( iterador );
 	}
 	
 	public signal void coleccion_visible_toggle_change ();

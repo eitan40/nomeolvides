@@ -110,7 +110,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 			if ( this.db.insert_coleccion ( coleccion ) ) {
 				coleccion.id = this.db.ultimo_rowid();
 				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-				liststore.agregar_coleccion (coleccion, 0);
+				liststore.agregar (coleccion, 0);
 				this.cambios = true;
 			}
 		}
@@ -132,7 +132,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
 				var cantidad_hechos = this.colecciones_view.get_hechos_coleccion ();
 				this.colecciones_view.eliminar_coleccion ( coleccion );
-				liststore.agregar_coleccion ( edit_dialog.respuesta, cantidad_hechos );
+				liststore.agregar ( edit_dialog.respuesta, cantidad_hechos );
 				this.cambios = true;
 			}
 		}
@@ -185,7 +185,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 			this.db.coleccion_no_borrar ( item.get_borrado() );
 			var liststore = this.colecciones_view.get_model () as ListStoreColecciones;
 			var cantidad_hechos = this.db.count_hechos_coleccion ( item.get_borrado() );
-			liststore.agregar_coleccion ( item.get_borrado(), cantidad_hechos);
+			liststore.agregar ( item.get_borrado(), cantidad_hechos);
 			this.cambio_colecciones_signal ();
 		}
 	}

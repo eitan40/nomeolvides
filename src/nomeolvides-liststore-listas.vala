@@ -25,15 +25,4 @@ public class Nomeolvides.ListStoreListas : ListStoreNmBase {
 		Type[] tipos= { typeof(string), typeof(int), typeof(int64) };
 		base ( tipos );
 	}
-
-	public int get_hechos_lista ( TreeIter iter ) {
-		Value value_cantidad;
-		int cantidad = 0;
-
-		this.get_value(iter, 1, out value_cantidad);
-
-		cantidad = (int) value_cantidad;
-
-		return cantidad;
-	}
 }

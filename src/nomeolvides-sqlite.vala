@@ -66,7 +66,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			retorno = true;
 			var rc = this.db.exec ("INSERT INTO \""+ tabla +"\" (" + columnas + ") VALUES (" + valores + ")", null, null);
 
-			//print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
+			print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
 
 			if (rc != Sqlite.OK) { 
  	          stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
