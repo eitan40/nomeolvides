@@ -57,7 +57,7 @@ public class Nomeolvides.Coleccion : Nomeolvides.NmBase {
 
 	public string to_string () {
 		var retorno  = base.to_string ();
-		retorno += this.visible.to_string() + "\"";
+		retorno += ",\"" + this.visible.to_string() + "\"";
 		
 		return retorno;
 	}
