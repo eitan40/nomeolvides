@@ -30,4 +30,14 @@ public class Nomeolvides.ListStoreColecciones : ListStoreNmBase {
 		base.agregar ( coleccion, cantidad_hechos );
 		this.set_value ( this.iterador, 3, coleccion.visible ); 
 	}
+
+	public void agregar_al_inicio ( Coleccion coleccion, int cantidad_hechos) {
+		this.prepend ( out this.iterador );
+
+			this.set ( this.iterador,
+					0,coleccion.nombre,
+					1,coleccion.id,	
+					2,cantidad_hechos,
+			        3,coleccion.visible);
+			} 
 }
