@@ -20,44 +20,52 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewColecciones : TreeViewNmBase {
-	private CellRendererToggle toggle_visible;
-	
-	public TreeViewColecciones () {
-		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
+public class Nomeolvides.TreeViewNmBase : TreeView {
+	public TreeViewNmBase () {
+		var nombre_cell = new CellRendererText ();
 
-		this.toggle_visible = new CellRendererToggle();
-		this.toggle_visible.toggled.connect ( signal_toggle );
-		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 3 );
+		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
+
+		nombre_cell.width_chars = 30;
+
+		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 	}
 
-	public bool get_coleccion_cursor_visible () {
+	public int64 get_elemento_id () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value visible = false;
+		Value value_id;
+		int64 id = -1;
 
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 3, out visible);
+			this.get_model().get_value (iterador, 2, out value_id);
+			id = (int64) value_id;
+		}
+		
+		return id;
+	}
+
+	public void eliminar ( NmBase a_eliminar ) {
+		var liststore = this.get_model() as ListStoreNmBase;
+		liststore.borrar ( a_eliminar );
+	}
+
+	public int get_hechos ( ) {
+		TreePath path;
+		TreeViewColumn columna;
+		TreeIter iterador;
+		int hechos = 0;
+
+		this.get_cursor (out path, out columna);
+		if (path != null ) {
+			this.get_model().get_iter(out iterador, path);
+			var liststore = this.get_model() as ListStoreNmBase;
+			hechos = liststore.get_hechos ( iterador );
 		}
 
-		return (bool) visible;
+		return hechos;
 	}
-
-	private void signal_toggle (string path) {
-
-		TreePath tree_path = new Gtk.TreePath.from_string (path);
-		TreeIter iter;
-
-		var liststore = this.get_model() as ListStoreColecciones;
-
-		liststore.get_iter (out iter, tree_path);
-		liststore.set_value (iter, 3, !this.toggle_visible.active);
-
-		this.coleccion_visible_toggle_change ();
-	}
-	
-	public signal void coleccion_visible_toggle_change ();
 }

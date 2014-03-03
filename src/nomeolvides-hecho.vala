@@ -18,10 +18,7 @@
  */
 using GLib;
 
-public class Nomeolvides.Hecho : GLib.Object {
-
-	public int64 id;
-	public string nombre { get; private set; }
+public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public string hash { get; private set; }
@@ -31,7 +28,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 	// Constructor
 	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, int64 coleccion, string fuente = "" )
 	{
-		this.nombre = Hecho.ponerCaracterEspecial ( nombre );
+		base ( nombre );
 		this.descripcion = Hecho.ponerCaracterEspecial ( descripcion );
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		this.coleccion = coleccion;
@@ -39,39 +36,29 @@ public class Nomeolvides.Hecho : GLib.Object {
 		this.calcular_checksum ();
 	}
 
-	public Hecho.vacio () {
-
-	}
-
 	public Hecho.json (string json, int64 coleccion ) {
 		
-		if ( json.contains ( "{\"Hecho\":{" ) ) {
-			this.nombre = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "nombre" ) );
+		if ( !json.contains ( "{\"Hecho\":{" ) ) {
+			base.json ( nombre );
+			this.descripcion = "null";
+			this.fecha = new DateTime.utc ( 2013,2,20,0,0,0 );
+			this.fuente = "null";
+		} else {
 			this.descripcion = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "descripcion" ) );
 			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson( json, "anio" ) ),
 			                               int.parse (this.sacarDatoJson( json, "mes" ) ),
 			                               int.parse (this.sacarDatoJson( json, "dia") ),
 			                     		   0,0,0);
 			this.fuente = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "fuente" ) );
-		} else {
-			this.nombre = "null";
-			this.descripcion = "null";
-			this.fecha = new DateTime.utc ( 2013,2,20,0,0,0 );
-			this.fuente = "null";
 		}	
 		this.calcular_checksum ();
 
 		this.coleccion = coleccion;
 	}
 
-	private void calcular_checksum () {
-		this.hash = Checksum.compute_for_string( ChecksumType.MD5, this.a_json () );
-	}
-	
 	public string a_json () {
-		string retorno = "{\"Hecho\":{";
-
-		retorno += "\"nombre\":\"" + Hecho.sacarCaracterEspecial( this.nombre ) + "\",";
+		var retorno = "{\"Hecho\":{";
+		retorno += base.a_json () + ",";
 		retorno += "\"descripcion\":\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "\"anio\":\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "\"mes\":\"" + this.fecha.get_month ().to_string () + "\",";
@@ -85,9 +72,7 @@ public class Nomeolvides.Hecho : GLib.Object {
 	}
 
 	public string to_string () {
-		string retorno;
-
-		retorno  = "\"" + Hecho.sacarCaracterEspecial( this.nombre ) + "\",";
+		var retorno  = base.to_string () + ",";
 		retorno += "\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "\"" + this.fecha.get_month ().to_string () + "\",";
@@ -99,26 +84,16 @@ public class Nomeolvides.Hecho : GLib.Object {
 	}
 
 	public string a_sql () {
-		string retorno;
-
-		retorno  = "nombre=\"" + Hecho.sacarCaracterEspecial( this.nombre ) + "\",";
+		var retorno  = base.a_sql () + ",";
 		retorno += "descripcion=\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "anio=\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "mes=\"" + this.fecha.get_month ().to_string () + "\",";
 		retorno += "dia=\"" + this.fecha.get_day_of_month ().to_string () + "\",";
 		retorno += "fuente=\"" + Hecho.sacarCaracterEspecial( this.fuente ) + "\",";
 		retorno += "coleccion=\"" + this.coleccion.to_string () + "\"";
-
 		print (retorno + "\n");
 		
 		return retorno;
-	}
-
-	private string sacarDatoJson(string json, string campo) {
-		int inicio,fin;
-		inicio = json.index_of(":",json.index_of("\"" + campo + "\"")) + 2;
-		fin = json.index_of ("\"", inicio);
-		return json[inicio:fin];
 	}
 
 	public string fecha_to_string () {

@@ -20,55 +20,27 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Lista : GLib.Object{
-	public int64 id;
-	public string nombre { get; private set; }
-	public string hash { get; private set; }
+public class Nomeolvides.Lista : Nomeolvides.NmBase {
 	
 	public Lista ( string nombre ) {
-		this.nombre = nombre;
-		this.calcular_checksum ();
+		base ( nombre );
 	}
 
 	public Lista.json ( string json ) {
-		if (json.contains ("{\"Lista\":{")) {
-			this.nombre = this.sacarDatoJson (json, "nombre");
-		} else {
-			this.nombre = "null";
-		}
+		if (!json.contains ("{\"Lista\":{")) {
+			json = "null";
+		}	
+		base.json ( "null" );
+		
 		this.calcular_checksum ();
 	}
 
 	public string a_json () {
 		string retorno = "{\"Lista\":{";
 		
-		retorno += "\"nombre\":\"" + this.nombre + "\"";
+		retorno += base.a_json ();
 		retorno +="}}";	
 		
 		return retorno;
-	}
-
-	public string a_sql () {
-		string retorno;
-
-		retorno  = "nombre=\"" + this.nombre + "\"";
-		
-		return retorno;
-	}
- 
-	private string sacarDatoJson(string json, string campo) {
-		int inicio,fin;
-		inicio = json.index_of(":",json.index_of(campo)) + 2;
-		fin = json.index_of ("\"", inicio);
-		return json[inicio:fin];
-	}
-
-	public string get_checksum () {
-		return this.hash;
-	}
-
-	private void calcular_checksum () {
-		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
-		this.hash = this.hash.slice ( 0, 12);
 	}
 }

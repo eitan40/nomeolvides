@@ -34,7 +34,7 @@ public class Nomeolvides.ImportarHechos : OpenFileDialog {
 
 			var coleccion = new Coleccion ( _("Select Colection"), true );
 
-			colecciones_liststore.agregar_coleccion ( coleccion , 0, AgregarModo.PREPEND );
+			colecciones_liststore.agregar_al_inicio ( coleccion , 0 );
 
 			var coleccion_label = new Label.with_mnemonic ( "" );
 			coleccion_label.set_markup ( _("Import to") );

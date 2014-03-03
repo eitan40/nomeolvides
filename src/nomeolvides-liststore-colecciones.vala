@@ -20,73 +20,24 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListStoreColecciones : ListStore {
-	private TreeIter iterador;
-	
+public class Nomeolvides.ListStoreColecciones : ListStoreNmBase {
 	public ListStoreColecciones () {
-		Type[] tipos= { typeof(string), typeof(bool), typeof(int),typeof(int64) };
+		Type[] tipos= { typeof(string), typeof(int),typeof(int64), typeof(bool) };
 		this.set_column_types( tipos );
 	}
 
-	public void agregar_coleccion ( Coleccion coleccion, int cantidad_hechos, AgregarModo append = AgregarModo.APPEND ) {
-		if ( append == AgregarModo.APPEND ) {
-			this.append ( out this.iterador );
-		} else {
-			this.prepend ( out this.iterador );
-		}
-		this.set ( this.iterador,
-		           0,coleccion.nombre,
-		           1,coleccion.visible,		           
-			       2,cantidad_hechos,
-		           3,coleccion.id);
+	public void agregar ( Coleccion coleccion, int cantidad_hechos ) {
+		base.agregar ( coleccion, cantidad_hechos );
+		this.set_value ( this.iterador, 3, coleccion.visible ); 
 	}
 
-	public void borrar_coleccion ( Coleccion a_eliminar ) {
-		Value coleccion;
-		TreeIter iter;
+	public void agregar_al_inicio ( Coleccion coleccion, int cantidad_hechos) {
+		this.prepend ( out this.iterador );
 
-		if ( this.get_iter_first( out iter ) ) {
-			do {
-				this.get_value(iter, 3, out coleccion);
-				if ( a_eliminar.id == coleccion ) {
-					this.remove ( iter );
-					break;
-				}
-			}while (this.iter_next(ref iter));
-		}	
-	}
-
-	public int indice_de_id ( int64 id ) {
-		Value coleccion;
-		TreeIter iter;
-		int i=0;
-
-		if ( this.get_iter_first( out iter ) ) {
-			do {
-				this.get_value(iter, 3, out coleccion);
-				if ( id == (int64) coleccion) {
-					break;
-				}
-				i++;
-			}while (this.iter_next(ref iter));
-		}
-
-		return i;
-	}
-
-	public int get_hechos_coleccion ( TreeIter iter ) {
-		Value value_cantidad;
-		int cantidad = 0;
-
-		this.get_value( iter, 3, out value_cantidad );
-
-		cantidad = (int) value_cantidad;
-
-		return cantidad;
-	}
-}
-
-public enum Nomeolvides.AgregarModo {
-    PREPEND,
-    APPEND;
+			this.set ( this.iterador,
+					0,coleccion.nombre,
+					1,coleccion.id,	
+					2,cantidad_hechos,
+			        3,coleccion.visible);
+			} 
 }
