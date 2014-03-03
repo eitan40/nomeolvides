@@ -20,60 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewListas : TreeView {
+public class Nomeolvides.TreeViewListas : TreeViewNmBase {
+
 	public TreeViewListas () {
-		var nombre_cell = new CellRendererText ();
-
-		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
-
-		nombre_cell.width_chars = 30;
-
-		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
 	}
 
-	public TreeViewListas.ventana_principal () {
-		var nombre_cell = new CellRendererText ();
-
-		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
-
-		nombre_cell.width_chars = 30;
-
-		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
-	}
-
-	public Lista get_lista_cursor () {
-		TreePath path;
-		TreeViewColumn columna;
-		TreeIter iterador;
-		Lista lista = null;
-		Value value_lista;
-		
-		this.get_cursor(out path, out columna);
-		if (path != null ) {
-			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 0, out value_lista);
-			lista = new Lista ((string) value_lista);
-			this.get_model().get_value (iterador, 2, out value_lista);
-			lista.id = (int64) value_lista;
-		}
-
-		return lista;
-	}
-
-	public void eliminar_lista ( Lista a_eliminar ) {
-		var liststore = this.get_model() as ListStoreListas;
-		liststore.borrar ( a_eliminar );
-	}
-
-	public int get_hechos_lista ( ) {
-		TreePath path;
-		TreeViewColumn columna;
-		TreeIter iterador;
-		
-		this.get_cursor (out path, out columna);
-		this.get_model().get_iter(out iterador, path);
-		var liststore = this.get_model() as ListStoreListas;
-		return liststore.get_hechos ( iterador );
-	}
+	public TreeViewListas.ventana_principal () {}
 }

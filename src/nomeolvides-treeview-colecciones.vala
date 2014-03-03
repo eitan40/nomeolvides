@@ -20,35 +20,15 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewColecciones : TreeView {
+public class Nomeolvides.TreeViewColecciones : TreeViewNmBase {
 	private CellRendererToggle toggle_visible;
 	
 	public TreeViewColecciones () {
-		var nombre_cell = new CellRendererText ();
-
-		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
-
-		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
 
 		this.toggle_visible = new CellRendererToggle();
 		this.toggle_visible.toggled.connect ( signal_toggle );
 		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 3 );
-	}
-
-	public int64 get_coleccion_cursor () {
-		TreePath path;
-		TreeViewColumn columna;
-		TreeIter iterador;
-		Value coleccion = (int64)(-1);
-		
-		this.get_cursor(out path, out columna);
-		if (path != null ) {
-			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 2, out coleccion);
-		}
-
-		return (int64) coleccion;
 	}
 
 	public bool get_coleccion_cursor_visible () {
@@ -66,11 +46,6 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		return (bool) visible;
 	}
 
-	public void eliminar_coleccion ( Coleccion a_eliminar ) {
-		var liststore = this.get_model() as ListStoreColecciones;
-		liststore.borrar ( a_eliminar );
-	}
-
 	private void signal_toggle (string path) {
 
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
@@ -82,17 +57,6 @@ public class Nomeolvides.TreeViewColecciones : TreeView {
 		liststore.set_value (iter, 3, !this.toggle_visible.active);
 
 		this.coleccion_visible_toggle_change ();
-	}
-
-	public int get_hechos_coleccion ( ) {
-		TreePath path;
-		TreeViewColumn columna;
-		TreeIter iterador;
-		
-		this.get_cursor (out path, out columna);
-		this.get_model().get_iter(out iterador, path);
-		var liststore = this.get_model() as ListStoreColecciones;
-		return liststore.get_hechos ( iterador );
 	}
 	
 	public signal void coleccion_visible_toggle_change ();
