@@ -118,7 +118,8 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 
 	private void edit_lista_dialog () {
 		ListStoreListas liststore;
-		var lista = this.listas_view.get_lista_cursor ();
+		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
+		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
 		
 		var edit_dialog = new EditListaDialog ();
 		edit_dialog.set_datos ( lista );
@@ -127,8 +128,8 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			if ( this.db.update_lista ( edit_dialog.respuesta )) {
 				liststore = this.listas_view.get_model () as ListStoreListas;
-				var cantidad_hechos = this.listas_view.get_hechos_lista ();
-				this.listas_view.eliminar_lista ( lista );
+				var cantidad_hechos = this.listas_view.get_hechos ();
+				this.listas_view.eliminar( lista );
 				liststore.agregar (edit_dialog.respuesta, cantidad_hechos);
 				this.cambios = true;
 			}
@@ -137,15 +138,16 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	}
 
 	private void borrar_lista_dialog () {
-		Lista lista = this.listas_view.get_lista_cursor ();
-		var borrar_dialog = new BorrarListaDialogo ( lista, this.listas_view.get_hechos_lista () );
+		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
+		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
+		var borrar_dialog = new BorrarListaDialogo ( lista, this.listas_view.get_hechos () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
 			this.db.lista_a_borrar ( lista );
 			this.deshacer.guardar_borrado ( lista, DeshacerTipo.BORRAR );
 			this.deshacer.borrar_rehacer ();
-			this.listas_view.eliminar_lista ( this.listas_view.get_lista_cursor () );
+			this.listas_view.eliminar (lista );
 		}
 		borrar_dialog.destroy ();
 
@@ -158,7 +160,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	}
 
 	private void elegir_lista () {
-		if(this.listas_view.get_lista_cursor () != null) {
+		if( this.listas_view.get_elemento_id () != -1 ) {
 			this.set_buttons_visible ( true );
 		} else {
 			this.set_buttons_visible ( false );		
@@ -196,7 +198,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		bool hay_listas_rehacer = this.deshacer.rehacer ( out item ); 
 		if ( hay_listas_rehacer ){
 			this.db.lista_a_borrar ( item.get_borrado() );
-			this.listas_view.eliminar_lista ( item.get_borrado() );
+			this.listas_view.eliminar ( item.get_borrado() );
 			this.cambios = true;
 		}
 	}

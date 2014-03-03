@@ -122,7 +122,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		ListStoreColecciones liststore;
 
 		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" 
-		                                                + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+		                                                + this.colecciones_view.get_elemento_id ().to_string() + "\"");
 		var edit_dialog = new EditColeccionDialog ();
 		edit_dialog.set_datos ( coleccion );
 		edit_dialog.show_all ();
@@ -130,8 +130,8 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			if (this.db.update_coleccion ( edit_dialog.respuesta )) {
 				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-				var cantidad_hechos = this.colecciones_view.get_hechos_coleccion ();
-				this.colecciones_view.eliminar_coleccion ( coleccion );
+				var cantidad_hechos = this.colecciones_view.get_hechos ();
+				this.colecciones_view.eliminar ( coleccion );
 				liststore.agregar ( edit_dialog.respuesta, cantidad_hechos );
 				this.cambios = true;
 			}
@@ -141,7 +141,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	}
 
 	private void borrar_coleccion_dialog () {
-		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_elemento_id ().to_string() + "\"");
 		int cantidad_hechos = this.db.count_hechos_coleccion ( coleccion );
 		var borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
 		borrar_dialog.show_all ();
@@ -150,7 +150,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 			this.db.coleccion_a_borrar ( coleccion );
 			this.deshacer.guardar_borrado ( coleccion, DeshacerTipo.BORRAR );
 			this.deshacer.borrar_rehacer ();
-			this.colecciones_view.eliminar_coleccion ( coleccion );
+			this.colecciones_view.eliminar( coleccion );
 			this.cambio_colecciones_signal ();
 		}
 		borrar_dialog.destroy ();
@@ -164,14 +164,14 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	}
 
 	private void elegir_coleccion () {
-		if( this.colecciones_view.get_coleccion_cursor () > (int64)(-1) ) {
+		if( this.colecciones_view.get_elemento_id () > (int64)(-1) ) {
 			this.set_buttons_visible ( true );
 		} else {
 			this.set_buttons_visible ( false );		
 		}
 
 		if ( this.cambio_toggle ) {
-			Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_coleccion_cursor ().to_string() + "\"");
+			Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_elemento_id().to_string() + "\"");
 			coleccion.visible = this.colecciones_view.get_coleccion_cursor_visible ();
 			this.db.update_coleccion ( coleccion );
 			this.cambio_toggle = false;
@@ -196,7 +196,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item ); 
 		if ( hay_colecciones_rehacer ){
 			this.db.coleccion_a_borrar ( item.get_borrado() );
-			this.colecciones_view.eliminar_coleccion ( item.get_borrado() );
+			this.colecciones_view.eliminar ( item.get_borrado() );
 			this.cambio_colecciones_signal ();
 		}
 	}

@@ -31,8 +31,10 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private Notebook anios_listas;
 	private int anio_actual;
 	private Lista lista_actual;
+	private AccionesDB db;
 
 	public Anios_hechos_vista () {
+		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.anios_view = new ViewAnios ();
 		this.hechos_view = new ViewHechos ();
 		this.listas_view = new TreeViewListas.ventana_principal ();
@@ -88,8 +90,10 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void elegir_lista () {
-		if ( this.lista_actual != this.listas_view.get_lista_cursor () ) {
-			this.lista_actual = this.listas_view.get_lista_cursor ();
+			var lista = this.db.select_lista ( "WHERE rowid=\"" 
+		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
+		if ( this.lista_actual != lista ) {
+			this.lista_actual = lista;
 			this.anio_actual = 0; //ningún anio
 			this.listas_cursor_changed ();
 			this.mostrar_scroll_vista ( false );

@@ -83,6 +83,8 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 
 		cantidad = (int) value_cantidad;
 
+		print (cantidad.to_string () + "\n");
+
 		return cantidad;
 	}
 

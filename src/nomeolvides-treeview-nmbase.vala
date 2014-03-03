@@ -31,29 +31,21 @@ public class Nomeolvides.TreeViewNmBase : TreeView {
 		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 	}
 
-	public NmBase get_elemento () {
+	public int64 get_elemento_id () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		NmBase elemento = null;
-		Value value_elemento;
-		
+		Value value_id;
+		int64 id = -1;
+
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 0, out value_elemento);
-			elemento = new NmBase ((string) value_elemento);
-			this.get_model().get_value (iterador, 2, out value_elemento);
-			elemento.id = (int64) value_elemento;
+			this.get_model().get_value (iterador, 2, out value_id);
+			id = (int64) value_id;
 		}
-
-		return elemento;
-	}
-
-	public int64 get_elemento_id () {
-		var elemento = this.get_elemento ();
-
-		return elemento.id;
+		
+		return id;
 	}
 
 	public void eliminar ( NmBase a_eliminar ) {
@@ -65,10 +57,15 @@ public class Nomeolvides.TreeViewNmBase : TreeView {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		
+		int hechos = 0;
+
 		this.get_cursor (out path, out columna);
-		this.get_model().get_iter(out iterador, path);
-		var liststore = this.get_model() as ListStoreNmBase;
-		return liststore.get_hechos ( iterador );
+		if (path != null ) {
+			this.get_model().get_iter(out iterador, path);
+			var liststore = this.get_model() as ListStoreNmBase;
+			hechos = liststore.get_hechos ( iterador );
+		}
+
+		return hechos;
 	}
 }
