@@ -44,6 +44,14 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.insert_coleccion ( coleccion );
 	}
 
+	public bool insert_etiqueta ( Etiqueta etiqueta ) {
+		return this.dbms.insert_etiqueta ( etiqueta );
+	}
+
+	public void insert_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
+		this.dbms.insert_hecho_etiqueta ( hecho, etiqueta );
+	}
+
 	public void hecho_a_borrar ( Hecho hecho ) {
 		this.dbms.hecho_a_borrar ( hecho );
 	}
@@ -54,6 +62,10 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public void lista_a_borrar ( Lista lista ) {
 		this.dbms.lista_a_borrar ( lista );
+	}
+
+	public void etiqueta_a_borrar ( Etiqueta etiqueta ) {
+		this.dbms.etiqueta_a_borrar ( etiqueta );
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
@@ -72,6 +84,14 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.delete_coleccion ( coleccion );
 	}
 
+	public bool delete_etiqueta ( Etiqueta etiqueta ) {
+		return this.dbms.delete_etiqueta ( etiqueta );
+	}
+
+	public void delete_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
+		this.dbms.delete_hecho_etiqueta ( hecho, etiqueta );
+	}
+
 	public void hecho_no_borrar ( Hecho hecho ) {
 		this.dbms.hecho_no_borrar ( hecho );
 	}
@@ -82,6 +102,10 @@ public class Nomeolvides.AccionesDB : Object {
 
 	public void lista_no_borrar ( Lista lista ) {
 		this.dbms.lista_no_borrar ( lista );
+	}
+
+	public void etiqueta_no_borrar ( Etiqueta etiqueta ) {
+		this.dbms.etiqueta_no_borrar ( etiqueta );
 	}
 
 	public void borrar_deshacer ( ) {
@@ -104,6 +128,10 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.update_coleccion ( coleccion );
 	}
 
+	public bool update_etiqueta ( Etiqueta etiqueta ) {
+		return this.dbms.update_etiqueta ( etiqueta );
+	}
+
 	public Array<Hecho> select_hechos ( string where = "" ) {
 		return this.dbms.select_hechos ( where );
 	}
@@ -124,6 +152,14 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.select_colecciones ( where );
 	}
 
+	public Array<Etiqueta> select_etiquetas ( string where = "" ) {
+		return this.dbms.select_etiquetas ( where );
+	}
+
+	public Array<Hecho> select_hechos_etiqueta ( Etiqueta etiqueta ) {
+		return this.dbms.select_hechos_etiqueta ( etiqueta ); 
+	}
+
 	public Coleccion select_coleccion ( string where = "" ) {
 		return this.dbms.select_coleccion ( where ); 
 	}
@@ -132,12 +168,20 @@ public class Nomeolvides.AccionesDB : Object {
 		return this.dbms.select_lista ( where );
 	}
 
+	public Etiqueta select_etiqueta ( string where = "" ) {
+		return this.dbms.select_etiqueta ( where );
+	}
+
 	public int count_hechos_coleccion ( Coleccion coleccion ) {
 		return this.dbms.count_hechos_coleccion ( coleccion );
 	}
 	
 	public int count_hechos_lista ( Lista lista ) {
 		return this.dbms.count_hechos_lista ( lista );
+	}
+
+	public int count_hechos_etiqueta ( Etiqueta etiqueta ) {
+		return this.dbms.count_hechos_etiqueta ( etiqueta );
 	}
 
 	public Array<int> lista_de_anios () {

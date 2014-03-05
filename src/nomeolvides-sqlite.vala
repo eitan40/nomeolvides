@@ -226,6 +226,27 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
+	public bool insert_etiqueta ( Etiqueta etiqueta ) {
+		bool retorno = false;
+		Etiqueta existe = select_etiqueta ( "WHERE nombre='" + etiqueta.nombre + "'" );
+
+		if ( existe == null ) {
+			retorno = true;
+			if ( !(this.insert ( "etiquetas", "nombre" ,"\"" + etiqueta.nombre + "\"" ))) {
+				retorno = false;
+			}
+		}
+
+		return retorno;
+	}
+
+	public void insert_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
+		string valores = "\"" + etiqueta.id.to_string() + "\", \""
+			                + hecho.id.to_string() + "\"";
+		
+		this.insert ( "etiquetashechos", "etiqueta,hecho",valores );
+	}
+
 	public void hecho_a_borrar ( Hecho hecho ) {
 		this.insert ( "hechosborrar", "id", hecho.id.to_string() );
 	}
@@ -236,6 +257,10 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	public void lista_a_borrar ( Lista lista ) {
 		this.insert ( "listasborrar", "id", lista.id.to_string() );
+	}
+
+	public void etiqueta_a_borrar ( Etiqueta etiqueta ) {
+		this.insert ( "etiquetasborrar", "id", etiqueta.id.to_string() );
 	}
 
 	public void delete_hecho ( Hecho hecho ) {
@@ -270,6 +295,24 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
+	public bool delete_etiqueta ( Etiqueta etiqueta ) {
+		bool retorno = false;
+		
+		if( this.del ( "etiquetas", "WHERE id=\"" + etiqueta.id.to_string() +"\"" )) {
+			retorno = true;
+		}
+
+		return retorno;
+	}
+
+	public void delete_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
+		this.del ( "etiquetashechos",
+		           "WHERE etiqueta=\"" + etiqueta.id.to_string()
+		                            + "\" AND hecho=\"" 
+		                            + hecho.id.to_string() +"\"" );
+	
+	}
+
 	public void hecho_no_borrar ( Hecho hecho ) {
 		this.del ( "hechosborrar", "WHERE id=\"" + hecho.id.to_string () +"\"" );
 	}
@@ -282,6 +325,10 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.del ( "listasborrar", "WHERE id=\"" + lista.id.to_string () +"\"" );
 	}
 
+	public void etiqueta_no_borrar ( Etiqueta etiqueta ) {
+		this.del ( "etiquetaborrar", "WHERE id=\"" + etiqueta.id.to_string () +"\"" );
+	}
+
 	public void borrar_deshacer ( ) {
 		this.del ( "hechos", "WHERE hechos.id IN hechosborrar" );
 		this.del ( "hechosborrar" );
@@ -289,6 +336,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.del ( "coleccionesborrar" );
 		this.del ( "listas", "WHERE listas.id IN listasborrar" );
 		this.del ( "listasborrar" );
+		this.del ( "etiquetas", "WHERE etiquetas.id IN etiquetasborrar" );
+		this.del ( "etiquetasborrar" );
 	}
 
 	public void update_hecho ( Hecho hecho ) {
@@ -330,6 +379,28 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		}
 
 		return retorno;
+	}
+
+	public bool update_etiqueta ( Etiqueta etiqueta ) {
+		bool retorno = false;
+		string valores = etiqueta.a_sql ();
+
+		if ( this.update ( "etiqueta",valores," WHERE id=\"" + etiqueta.id.to_string() + "\"" )) {
+			retorno = true;
+		}
+
+		return retorno;
+	}
+
+	public void update_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
+		string valores = "etiqueta=\"" + etiqueta.id.to_string() + "\" hecho=\""
+			                         + hecho.id.to_string() + "\"";
+
+		this.update ( "listashechos",
+		              valores,
+		              "WHERE lista=\"" + etiqueta.id.to_string()
+		                               + "\" AND hecho=\"" 
+		                               + hecho.id.to_string() +"\"" );
 	}
 
 	public Array<Hecho> select_hechos ( string where = "" ) {
@@ -408,10 +479,68 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return listas;
 	}
 
+	public Array<Etiqueta> select_etiquetas ( string where = "" ) {
+		Array<Etiqueta> etiquetas = new Array<Etiqueta> ();
+		string[] columnas = {"",""};
+		string nuevo_where;
+		Etiqueta etiqueta;
+
+		if ( where == "" ) {
+			nuevo_where = "WHERE etiqueta.id NOT IN etiquetasborrar";
+		} else {
+			nuevo_where = where + " AND etiqueta.id NOT IN etiquetasborrar";
+		}
+		
+		var stmt = this.select ( "etiquetas", "nombre,id", nuevo_where );
+	
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+		
+		while ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					} 
+
+					etiqueta = new Etiqueta (columnas[0]);
+					etiqueta.id = int64.parse(columnas[1]);
+					etiquetas.append_val( etiqueta );
+					break;
+				default:
+					print (_("Error"));
+					break;
+			}
+			
+			rc = stmt.step ();		
+		}
+		
+		return etiquetas;
+	}
+
 	public Array<Hecho> select_hechos_lista ( Lista lista ) {
 		Array<Hecho> hechos = new Array<Hecho> ();
 		string where = " WHERE lista=\"" + lista.id.to_string () + "\"" 
                      + "AND listashechos.hecho=hechos.id " 
+				     + "AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id "
+					 + "AND hechos.id NOT IN hechosborrar "
+			         + "AND hechos.coleccion NOT IN coleccionesborrar";
+
+		var stmt = this.select ( "hechos,listashechos,colecciones",
+		                    	 "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.id",
+								 where ); 
+  
+		hechos = this.parse_query_hechos ( stmt );
+		
+		return hechos;
+	}
+
+	public Array<Hecho> select_hechos_etiqueta ( Etiqueta etiqueta ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
+		string where = " WHERE lista=\"" + etiqueta.id.to_string () + "\"" 
+                     + "AND etiquetashechos.hecho=hechos.id " 
 				     + "AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id "
 					 + "AND hechos.id NOT IN hechosborrar "
 			         + "AND hechos.coleccion NOT IN coleccionesborrar";
@@ -524,6 +653,35 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return lista;
 	}
 
+	public Etiqueta select_etiqueta ( string where = "" ) {
+		string[] columnas = {"",""};
+		Etiqueta etiqueta = null;
+
+		var stmt = this.select ( "etiquetas", "nombre,id", where );
+
+		int cols = stmt.column_count ();
+		int rc = stmt.step ();
+
+		if ( rc == Sqlite.ROW ) {
+			switch ( rc  ) {
+				case Sqlite.DONE:
+					break;
+				case Sqlite.ROW:
+					for ( int j = 0; j < cols; j++ ) {
+						columnas[j] = stmt.column_text ( j );
+					}
+					etiqueta = new Etiqueta (columnas[0]);
+					etiqueta.id = int64.parse(columnas[1]);
+					break;
+				default:
+					print (_("Error"));
+					break;
+			}
+		}
+
+		return etiqueta;
+	}
+
 	public int count_hechos_coleccion ( Coleccion coleccion ) {
 		int cantidad_hechos = 0;
 
@@ -555,6 +713,23 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return cantidad_hechos;
 	}
 
+	public int count_hechos_etiqueta ( Etiqueta etiqueta ) {
+		int cantidad_hechos = 0;
+
+		var stmt = this.count ("etiquetashechos,hechos", "WHERE etiqueta=" + etiqueta.id.to_string() 
+		                                                                 + " AND etiquetashechos.hecho NOT IN hechosborrar"
+		                   											     + " AND etiquetashechos.hecho = hechos.id"
+		                   											     + " AND hechos.coleccion NOT IN coleccionesborrar");
+
+		int rc = stmt.step ();
+
+		if ( rc == Sqlite.ROW ) {
+			cantidad_hechos = int.parse (stmt.column_text (0));
+		}
+
+		return cantidad_hechos;
+	}
+	
 	public Array<int> lista_de_anios ( string where = "" ) {
 		Array<int> anios = new Array<int>();
 		string where_nuevo = "";
