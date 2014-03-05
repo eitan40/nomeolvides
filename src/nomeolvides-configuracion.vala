@@ -138,6 +138,10 @@ public class Nomeolvides.Configuracion : GLib.Object {
 					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 					nombre TEXT NOT NULL UNIQUE
 				);
+				CREATE TABLE etiquetas (
+					id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+					nombre TEXT NOT NULL UNIQUE
+				);	
 				CREATE TABLE hechosborrar (
 					id INTEGER NOT NULL PRIMARY KEY
 				);
@@ -147,11 +151,21 @@ public class Nomeolvides.Configuracion : GLib.Object {
 				CREATE TABLE listasborrar (
 					id INTEGER NOT NULL PRIMARY KEY
 				);
+				CREATE TABLE etiquetasborrar (
+					id INTEGER NOT NULL PRIMARY KEY
+				);
 				CREATE TABLE listashechos (
 					lista INTEGER NOT NULL,
 					hecho INTEGER NOT NULL,
 					PRIMARY KEY (lista,hecho),
 					FOREIGN KEY (lista) REFERENCES listas (id) ON DELETE CASCADE,
+					FOREIGN KEY (hecho) REFERENCES hechos (id) ON DELETE CASCADE
+				);
+				CREATE TABLE etiquetashechos (
+					etiqueta INTEGER NOT NULL,
+					hecho INTEGER NOT NULL,
+					PRIMARY KEY (etiqueta,hecho),
+					FOREIGN KEY (etiqueta) REFERENCES etiquetas (id) ON DELETE CASCADE,
 					FOREIGN KEY (hecho) REFERENCES hechos (id) ON DELETE CASCADE
 				);
 				CREATE UNIQUE INDEX indice_hechos ON hechos (nombre,anio,mes,dia);
