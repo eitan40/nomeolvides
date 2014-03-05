@@ -72,9 +72,15 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-base.vala \
 	nomeolvides-preferencias-base.vala \
 	nomeolvides-preferencias-listas.vala \
-	nomeolvides-preferencias-colecciones.vala
-
-
+	nomeolvides-preferencias-colecciones.vala \
+	nomeolvides-etiqueta.vala \
+	nomeolvides-liststore-etiquetas.vala \
+	nomeolvides-treeview-etiquetas.vala \
+	nomeolvides-box-etiquetas-config.vala \
+	nomeolvides-dialog-etiqueta.vala \
+	nomeolvides-edit-etiqueta-dialog.vala \
+	nomeolvides-add-etiqueta-dialog.vala \
+	nomeolvides-dialogo-borrar-etiqueta-dialog.vala
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \
