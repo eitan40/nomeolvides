@@ -385,7 +385,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		bool retorno = false;
 		string valores = etiqueta.a_sql ();
 
-		if ( this.update ( "etiqueta",valores," WHERE id=\"" + etiqueta.id.to_string() + "\"" )) {
+		if ( this.update ( "etiquetas",valores," WHERE id=\"" + etiqueta.id.to_string() + "\"" )) {
 			retorno = true;
 		}
 
