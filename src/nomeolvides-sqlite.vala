@@ -326,7 +326,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void etiqueta_no_borrar ( Etiqueta etiqueta ) {
-		this.del ( "etiquetaborrar", "WHERE id=\"" + etiqueta.id.to_string () +"\"" );
+		this.del ( "etiquetasborrar", "WHERE id=\"" + etiqueta.id.to_string () +"\"" );
 	}
 
 	public void borrar_deshacer ( ) {
@@ -486,9 +486,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		Etiqueta etiqueta;
 
 		if ( where == "" ) {
-			nuevo_where = "WHERE etiqueta.id NOT IN etiquetasborrar";
+			nuevo_where = "WHERE etiquetas.id NOT IN etiquetasborrar";
 		} else {
-			nuevo_where = where + " AND etiqueta.id NOT IN etiquetasborrar";
+			nuevo_where = where + " AND etiquetas.id NOT IN etiquetasborrar";
 		}
 		
 		var stmt = this.select ( "etiquetas", "nombre,id", nuevo_where );

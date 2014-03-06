@@ -191,7 +191,9 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	private void preferencias_dialog_run () {
-		this.dialogo_preferencias.ejecutar ( this.datos.lista_de_colecciones (), this.datos.lista_de_listas () );
+		this.dialogo_preferencias.ejecutar ( this.datos.lista_de_colecciones (),
+		                                    this.datos.lista_de_listas (),
+		                                    this.datos.lista_de_etiquetas () );
 		this.dialogo_preferencias.show_all ();
 		this.dialogo_preferencias.set_toolbar_buttons_invisible ();
 		this.dialogo_preferencias.run ();
@@ -200,7 +202,8 @@ public class Nomeolvides.App : Gtk.Application
 	private void preferencias ( ) {
 		var colecciones = this.datos.lista_de_colecciones ();
 		var listas = this.datos.lista_de_listas ();
-		this.dialogo_preferencias = new DialogPreferencias ( this.window, colecciones, listas );
+		var etiquetas = this.datos.lista_de_etiquetas ();
+		this.dialogo_preferencias = new DialogPreferencias ( this.window, colecciones, listas, etiquetas );
 		this.dialogo_preferencias.hide.connect ( this.inicializar_ventana );
 		this.dialogo_preferencias.hide ();
 	}

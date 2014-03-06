@@ -23,8 +23,9 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private Notebook notebook;
 	private PreferenciasColecciones config_colecciones;
 	private PreferenciasListas config_listas;
+	private EtiquetasConfig config_etiquetas;
 	
-	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
+	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas, ListStoreEtiquetas etiquetas) {
 		this.set_title (_("Preferences"));
 		this.set_modal ( true );
 		this.set_default_size (600, 350);
@@ -32,13 +33,14 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 
 		this.config_colecciones = new PreferenciasColecciones ( colecciones );
 		this.config_listas = new PreferenciasListas ( listas );
+		this.config_etiquetas = new EtiquetasConfig ( etiquetas );
 		this.config_colecciones.cambio_colecciones_signal.connect ( this.config_listas.actualizar_liststore );
 
 		this.notebook = new Notebook ();
 		this.notebook.set_size_request ( 400, 270 );
 		this.notebook.append_page ( this.config_colecciones, new Label(_("Colections") ));
 		this.notebook.append_page ( this.config_listas, new Label (_("Lists") ));
-
+		this.notebook.append_page ( this.config_etiquetas, new Label (_("Tags") ));
 		Gtk.Box contenido =  this.get_content_area () as Box;
 		contenido.pack_start ( this.notebook, true, true, 0 );
 		
@@ -52,13 +54,19 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
     }
 
 	public void set_active_listas () {
-		this.notebook.set_current_page (1);
+		this.notebook.set_current_page ( 1 );
 		this.notebook.show_all ();
 	}
 
-	public void ejecutar ( ListStoreColecciones colecciones, ListStoreListas listas ) {
+	public void set_active_etiquetas () {
+		this.notebook.set_current_page ( 2 );
+		this.notebook.show_all ();
+	}
+
+	public void ejecutar ( ListStoreColecciones colecciones, ListStoreListas listas, ListStoreEtiquetas etiquetas ) {
 		this.config_listas.actualizar_model ( listas );
 		this.config_colecciones.actualizar_model ( colecciones );
+		this.config_etiquetas.actualizar_model ( etiquetas );
 	}
 
 	public void set_toolbar_buttons_invisible () {

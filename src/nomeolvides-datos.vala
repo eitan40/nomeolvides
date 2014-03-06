@@ -167,6 +167,12 @@ public class Nomeolvides.Datos : GLib.Object {
 		return this.armar_liststore_listas ( listas );
 	}
 
+	public ListStoreEtiquetas lista_de_etiquetas () {
+		var etiquetas = this.db.select_etiquetas (); 
+		
+		return this.armar_liststore_etiquetas ( etiquetas );
+	}
+
 	public ListStoreColecciones lista_de_colecciones () {
 		var colecciones = this.db.select_colecciones ( "WHERE colecciones.id NOT IN coleccionesborrar" );
 
@@ -178,6 +184,18 @@ public class Nomeolvides.Datos : GLib.Object {
 		bool hay=false;
 
 		var liststore = this.lista_de_listas();
+
+		if ( liststore.get_iter_first ( out iter ) ) { 
+			hay = true;
+		}
+		return hay;
+	}
+
+	public bool hay_etiquetas() {
+		TreeIter iter;
+		bool hay=false;
+
+		var liststore = this.lista_de_etiquetas();
 
 		if ( liststore.get_iter_first ( out iter ) ) { 
 			hay = true;
@@ -202,6 +220,18 @@ public class Nomeolvides.Datos : GLib.Object {
 			var lista = listas.index (i);
 			var cantidad_hechos = this.db.count_hechos_lista ( lista );
 			liststore.agregar ( lista, cantidad_hechos );			
+		}
+
+		return liststore;
+	}
+
+	private ListStoreEtiquetas armar_liststore_etiquetas ( Array<Etiqueta> etiquetas) {
+		var liststore = new ListStoreEtiquetas ();
+
+		for ( int i=0; i < etiquetas.length; i++ ) {
+			var etiqueta = etiquetas.index (i);
+			var cantidad_hechos = this.db.count_hechos_etiqueta ( etiqueta );
+			liststore.agregar ( etiqueta, cantidad_hechos );			
 		}
 
 		return liststore;
