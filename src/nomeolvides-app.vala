@@ -129,7 +129,7 @@ public class Nomeolvides.App : Gtk.Application
 	
 	private void elegir_anio () {
 		int anio = this.window.get_anio_actual ();
-		this.window.cargar_hechos_view ( this.datos.get_liststore_anio ( anio ) );
+		this.cargar_hechos ( this.datos.get_liststore_anio ( anio ) );
 	}
 
 	private void elegir_lista () {
@@ -137,7 +137,12 @@ public class Nomeolvides.App : Gtk.Application
 		
 		var lista_hechos = this.datos.get_liststore_lista ( lista );
 		
-		this.window.cargar_hechos_view ( lista_hechos );
+		this.cargar_hechos ( lista_hechos );
+	}
+
+	private void cargar_hechos ( ListStoreHechos hechos ) {
+		this.window.cargar_linea_de_tiempo ( hechos.lista_de_hechos () );
+		this.window.cargar_hechos_view ( hechos );
 	}
 
 	public void edit_hecho_dialog () {
