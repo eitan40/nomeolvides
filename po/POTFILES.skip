@@ -29,5 +29,6 @@ src/nomeolvides-sqlite.c
 src/nomeolvides-tooblar-main-toolbar.c
 src/nomeolvides-treeview-colecciones.c
 src/nomeolvides-treeview-listas.c
+src/nomeolvides-treeview-nmbase.c
 src/nomeolvides-treeview-view-anios.c
 src/nomeolvides-treeview-view-hechos.c

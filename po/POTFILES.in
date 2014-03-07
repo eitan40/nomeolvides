@@ -30,6 +30,7 @@ src/nomeolvides-sqlite.vala
 src/nomeolvides-tooblar-main-toolbar.vala
 src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-listas.vala
+src/nomeolvides-treeview-nmbase.vala
 src/nomeolvides-treeview-view-anios.vala
 src/nomeolvides-treeview-view-hechos.vala
 [type: gettext/glade]src/nomeolvides-app-menu.ui
