@@ -107,4 +107,22 @@ public class Nomeolvides.ListStoreBase : ListStore {
 
 		return i;
 	}
+
+	public bool contiene_nombre ( string nombre ) {
+		Value elemento;
+		TreeIter iter;
+		bool existe = false;
+
+		if ( this.get_iter_first( out iter ) ) {
+			do {
+				this.get_value(iter, 0, out elemento );
+				if ( nombre == (string) elemento ) {
+					existe = true;
+					break;
+				}
+			}while ( this.iter_next(ref iter) );
+		}
+
+		return existe;
+	}
 }

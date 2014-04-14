@@ -124,10 +124,9 @@ public class Nomeolvides.App : Gtk.Application
 		}
 
 		if ( this.datos.hay_colecciones_activas () ) {
-
-			var add_dialog = new DialogHechoAgregar ( this.window as VentanaPrincipal,
-			                                          this.datos.lista_de_colecciones () ); 
-		
+			var add_dialog = new DialogHechoAgregar( this.window as VentanaPrincipal,
+								this.datos.lista_de_colecciones (),
+								this.datos.lista_de_etiquetas () ); 
 			add_dialog.show();
 
 			if ( add_dialog.run() == ResponseType.APPLY )
@@ -150,10 +149,10 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void edit_hecho_dialog () {
 		Hecho hecho; 
-
 		this.window.get_hecho_actual ( out hecho );
-
-		var edit_dialog = new DialogHechoEditar( this.window, this.datos.lista_de_colecciones () );
+		var edit_dialog = new DialogHechoEditar ( this.window,
+							this.datos.lista_de_colecciones (),
+							this.datos.lista_de_etiquetas () );
 		edit_dialog.set_datos ( hecho );
 		edit_dialog.show_all ();
 

@@ -28,10 +28,13 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected ComboBox combo_colecciones;
 	protected SelectorFecha fecha;
 	protected Entry fuente_entry;
+	protected Entry etiquetas_entry;
+	protected EntryCompletion etiquetas_completion;
+	protected Array<Etiqueta> etiquetas;
+	protected Button boton_etiqueta;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
-	{
+	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore, ListStoreEtiquetas etiquetas_liststore) {
 		this.resizable = true;
 		this.modal = true;
 		this.set_default_size (600,400);
@@ -39,32 +42,45 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.set_transient_for ( ventana as Window );
 
 		this.add_button ( _("Cancel") , ResponseType.CLOSE);
-		
+
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
 		var coleccion_label = new Label.with_mnemonic (_("Colection") + ": ");
 		var fuente_label = new Label.with_mnemonic (_("Source") + ": ");
+		var etiquetas_label = new Label.with_mnemonic (_("Tags") + ": ");
 
 		nombre_label.set_halign ( Align.END );
 		fecha_label.set_halign ( Align.END );
 		coleccion_label.set_halign ( Align.END );
 		fuente_label.set_halign ( Align.END );
+		etiquetas_label.set_halign ( Align.END );
 #if DISABLE_GNOME3
 		nombre_label.set_margin_left ( 15 );
 		fecha_label.set_margin_left ( 15 );
 		coleccion_label.set_margin_left ( 15 );
 		fuente_label.set_margin_left ( 15 );
+		etiquetas_label.set_margin_right ( 15 );
 #else
 		nombre_label.set_margin_end ( 15 );
 		fecha_label.set_margin_end ( 15 );
 		coleccion_label.set_margin_end ( 15 );
 		fuente_label.set_margin_end ( 15 );
+		etiquetas_label.set_margin_end ( 15 );
 #endif
+
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
+		this.etiquetas_entry = new Entry ();
+
+		this.etiquetas_completion = new EntryCompletion ();
+		this.etiquetas_completion.set_model ( etiquetas_liststore );
+		this.etiquetas_completion.set_text_column ( 0 );
+		this.etiquetas_entry.set_completion ( this.etiquetas_completion );
 		
 		this.combo_colecciones = new ComboBox ();
 		this.fecha = new SelectorFecha ();
+		this.etiquetas = new Array<Etiqueta> ();
+		this.boton_etiqueta = new Button.with_label (_("Add tag"));
 
 		var descripcion_frame = new Frame( _("Description") );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
@@ -77,19 +93,23 @@ public class Nomeolvides.DialogHecho : Dialog
 		descripcion_frame.add ( this.descripcion_scroll );
 
 		this.set_combo_box ( colecciones_liststore );
+		this.boton_etiqueta.clicked.connect ( this.agregar_etiqueta );
 		
 		Box box_hecho = new Box (Orientation.HORIZONTAL, 0);
 		Box box_labels = new Box (Orientation.VERTICAL, 0);
 		Box box_widgets = new Box (Orientation.VERTICAL, 0);
 
-		box_labels.pack_start (nombre_label, false, false, 5);		
-		box_labels.pack_start (fecha_label, false, false, 5);
-		box_labels.pack_start (coleccion_label, false, false, 5);
-		box_labels.pack_start (fuente_label, false, false, 5);
-		box_widgets.pack_start (nombre_entry, false, false, 0);
-		box_widgets.pack_start (fecha, false, false, 0);
-		box_widgets.pack_start (combo_colecciones, false, false, 0);
-		box_widgets.pack_start (fuente_entry, false, false, 0);
+		box_labels.pack_start ( nombre_label, false, false, 5 );		
+		box_labels.pack_start ( fecha_label, false, false, 5 );
+		box_labels.pack_start ( coleccion_label, false, false, 5 );
+		box_labels.pack_start ( fuente_label, false, false, 5 );
+		box_labels.pack_start ( etiquetas_label, false, false, 5 );
+		box_widgets.pack_start ( nombre_entry, false, false, 0 );
+		box_widgets.pack_start ( fecha, false, false, 0 );
+		box_widgets.pack_start ( combo_colecciones, false, false, 0 );
+		box_widgets.pack_start ( fuente_entry, false, false, 0 );
+		box_widgets.pack_start ( etiquetas_entry, false, false, 0 );
+		box_widgets.pack_start ( boton_etiqueta, false, false, 0 );
 		
 		box_hecho.pack_start (box_labels, true, false, 0);
 		box_hecho.pack_start (box_widgets, true, true, 0);
@@ -134,5 +154,19 @@ public class Nomeolvides.DialogHecho : Dialog
 		coleccion = value_coleccion as Coleccion;
 		
 		return coleccion.id;
+	}
+
+	protected void agregar_etiqueta () {
+		var nombre = this.etiquetas_entry.get_text ();
+		ListStoreEtiquetas liststore_etiquetas = this.etiquetas_completion.get_model () as ListStoreEtiquetas;
+		var etiqueta = new Etiqueta ( nombre );
+
+		if ( liststore_etiquetas.contiene_nombre ( nombre )) {} else {
+			var db = new AccionesDB ( Configuracion.base_de_datos() );
+			db.insert_etiqueta ( etiqueta );
+		}
+
+		this.etiquetas.append_val ( etiqueta );
+		this.etiquetas_entry.set_text ( "" );
 	}
 }

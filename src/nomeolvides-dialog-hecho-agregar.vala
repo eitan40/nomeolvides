@@ -21,12 +21,9 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogHecho {
-	
-	public DialogHechoAgregar ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
-		base (ventana, colecciones);
-
+	public DialogHechoAgregar ( VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreEtiquetas etiquetas ) {
+		base (ventana, colecciones, etiquetas);
 		this.set_title (_("Add a Historical Fact"));
-		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
 		this.add_button ( _("Add") , ResponseType.APPLY);

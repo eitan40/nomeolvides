@@ -23,10 +23,9 @@ using Nomeolvides;
 public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
 	private int64 hecho_id;
 	
-	public DialogHechoEditar ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
-		base (ventana, colecciones );
+	public DialogHechoEditar ( VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreEtiquetas etiqueta ) {
+		base (ventana, colecciones, etiqueta );
 		this.set_title (_("Edit Fact"));
-
 		this.add_button ( _("Edit") , ResponseType.APPLY);
 		this.response.connect(on_response);
 	}
@@ -67,3 +66,4 @@ public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
 		this.combo_colecciones.set_active ( liststore.indice_de_id ( coleccion_id ) );
 	}
 }
+
