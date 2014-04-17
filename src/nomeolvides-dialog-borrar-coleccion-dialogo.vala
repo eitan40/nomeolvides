@@ -67,8 +67,8 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start ( grid, true, true, 0 );
 
-		this.add_button ( Stock.CANCEL, ResponseType.REJECT );
-		this.add_button ( Stock.APPLY, ResponseType.APPLY );
+		this.add_button ( _("Cancel"), ResponseType.REJECT );
+		this.add_button ( _("Apply"), ResponseType.APPLY );
 
 		this.show_all ();
 	}

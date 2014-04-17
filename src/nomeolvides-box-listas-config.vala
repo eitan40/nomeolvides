@@ -22,11 +22,11 @@ using Nomeolvides;
 
 public class Nomeolvides.ListasConfig: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
-	private ToolButton aniadir_lista_button;
-	private ToolButton deshacer_button;
-	private ToolButton rehacer_button;
-	private ToolButton editar_lista_button;
-	private ToolButton borrar_lista_button;
+	private NmToolButton aniadir_lista_button;
+	private NmToolButton deshacer_button;
+	private NmToolButton rehacer_button;
+	private NmToolButton editar_lista_button;
+	private NmToolButton borrar_lista_button;
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
 	private AccionesDB db;
@@ -37,16 +37,11 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_lista_button = new ToolButton.from_stock ( Stock.ADD );
-		this.deshacer_button = new ToolButton.from_stock ( Stock.UNDO );
-		this.rehacer_button = new ToolButton.from_stock ( Stock.REDO );
-		this.editar_lista_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.borrar_lista_button = new ToolButton.from_stock ( Stock.DELETE );
-		aniadir_lista_button.is_important = true;
-		this.deshacer_button.is_important = true;
-		this.rehacer_button.is_important = true;
-		editar_lista_button.is_important = true;
-		borrar_lista_button.is_important = true;
+		this.aniadir_lista_button = new NmToolButton ( _("Add") );
+		this.deshacer_button = new NmToolButton ( _("Undo") );
+		this.rehacer_button = new NmToolButton ( _("Redo") );
+		this.editar_lista_button = new NmToolButton ( _("Edit") );
+		this.borrar_lista_button = new NmToolButton ( _("Delete") );
 		editar_lista_button.set_visible_horizontal ( false );
 		borrar_lista_button.set_visible_horizontal ( false );
 		this.deshacer_button.set_sensitive ( false );

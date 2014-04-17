@@ -35,7 +35,7 @@ public class Nomeolvides.Lista : Nomeolvides.NmBase {
 		this.calcular_checksum ();
 	}
 
-	public string a_json () {
+	public new string a_json () {
 		string retorno = "{\"Lista\":{";
 		
 		retorno += base.a_json ();

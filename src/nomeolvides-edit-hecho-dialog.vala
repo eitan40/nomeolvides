@@ -27,7 +27,7 @@ public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
 		base (ventana, colecciones );
 		this.set_title (_("Edit Fact"));
 
-		this.add_button (Stock.EDIT , ResponseType.APPLY);
+		this.add_button ( _("Edit") , ResponseType.APPLY);
 		this.response.connect(on_response);
 	}
 

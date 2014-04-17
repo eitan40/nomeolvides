@@ -38,7 +38,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
 
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button ( _("Cancel") , ResponseType.CLOSE);
 		
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");

@@ -36,8 +36,8 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		
 		this.response.connect(on_response);
 
-		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
-		this.add_button ( Stock.ADD , ResponseType.APPLY );
+		this.add_button ( _("Cancel") , ResponseType.CANCEL );
+		this.add_button ( _("Add") , ResponseType.APPLY );
 
 		this.listas = new ComboBox ();
 

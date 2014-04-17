@@ -71,8 +71,8 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		
 		this.response.connect ( on_response );
 
-		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
-		this.add_button ( Stock.REMOVE , ResponseType.APPLY );
+		this.add_button ( _("Cancel") , ResponseType.CANCEL );
+		this.add_button ( _("Remove") , ResponseType.APPLY );
 
 		var contenido = this.get_content_area () as Box;
 		contenido.pack_start ( grid, true, true, 0 );

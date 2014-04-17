@@ -29,7 +29,7 @@ public class Nomeolvides.DialogLista : Gtk.Dialog {
 		this.resizable = false;
 		this.modal = true;
 
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button ( _("Cancel") , ResponseType.CLOSE);
 
 		this.response.connect(on_response);
 

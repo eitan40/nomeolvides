@@ -44,7 +44,7 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 		Gtk.Box contenido =  this.get_content_area () as Box;
 		contenido.pack_start ( this.notebook, true, true, 0 );
 		
-		this.add_button ( Stock.CLOSE, ResponseType.CLOSE );
+		this.add_button ( _("Close"), ResponseType.CLOSE );
 		this.response.connect(on_response);
 	}
 

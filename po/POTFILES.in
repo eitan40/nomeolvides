@@ -8,6 +8,8 @@ src/nomeolvides-app.vala
 src/nomeolvides-archivo.vala
 src/nomeolvides-borrar-hecho-lista-dialog.vala
 src/nomeolvides-box-anios-hechos-vista.vala
+src/nomeolvides-box-colecciones-config.vala
+src/nomeolvides-box-listas-config.vala
 src/nomeolvides-box-selector-fecha.vala
 src/nomeolvides-box-vista-hecho.vala
 src/nomeolvides-configuracion.vala

@@ -21,7 +21,6 @@ using GLib;
 public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
-	public string hash { get; private set; }
 	public int64 coleccion;
 	public string fuente { get; private set; }
 
@@ -56,7 +55,7 @@ public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 		this.coleccion = coleccion;
 	}
 
-	public string a_json () {
+	public new string a_json () {
 		var retorno = "{\"Hecho\":{";
 		retorno += base.a_json () + ",";
 		retorno += "\"descripcion\":\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
@@ -71,7 +70,7 @@ public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 		return retorno;
 	}
 
-	public string to_string () {
+	public new string to_string () {
 		var retorno  = base.to_string () + ",";
 		retorno += "\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "\"" + this.fecha.get_year ().to_string () + "\",";
@@ -83,7 +82,7 @@ public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 		return retorno;
 	}
 
-	public string a_sql () {
+	public new string a_sql () {
 		var retorno  = base.a_sql () + ",";
 		retorno += "descripcion=\"" + Hecho.sacarCaracterEspecial( this.descripcion ) + "\",";
 		retorno += "anio=\"" + this.fecha.get_year ().to_string () + "\",";

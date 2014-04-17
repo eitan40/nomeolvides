@@ -25,6 +25,6 @@ public class Nomeolvides.AddListaDialog : DialogLista
 	public AddListaDialog ( )
 	{
 		this.title = _("Add Custom List");
-		this.add_button (Stock.ADD , ResponseType.APPLY);
+		this.add_button ( _("Add") , ResponseType.APPLY);
 	}
 }

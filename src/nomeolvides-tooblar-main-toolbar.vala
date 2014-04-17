@@ -22,13 +22,13 @@ using Nomeolvides;
 
 public class Nomeolvides.MainToolbar : Toolbar
 {
-	public ToolButton add_button { get; private set; }
-	public ToolButton undo_button { get; private set; }
-	public ToolButton redo_button { get; private set; }
-	public ToolButton edit_button { get; private set; }
-	public ToolButton delete_button { get; private set; }
-	public ToolButton send_button { get; private set; }
-	public ToolButton list_button { get; private set; }
+	public NmToolButton add_button { get; private set; }
+	public NmToolButton undo_button { get; private set; }
+	public NmToolButton redo_button { get; private set; }
+	public NmToolButton edit_button { get; private set; }
+	public NmToolButton delete_button { get; private set; }
+	public NmToolButton send_button { get; private set; }
+	public NmToolButton list_button { get; private set; }
 	public ToolItem anio_item { get; private set; }
 	public Label label { get; private set; }
 	
@@ -36,30 +36,22 @@ public class Nomeolvides.MainToolbar : Toolbar
 	{
 		this.get_style_context().add_class (STYLE_CLASS_TOOLBAR);
 		
-		this.add_button = new ToolButton.from_stock ( Stock.ADD );
-		this.undo_button = new ToolButton.from_stock ( Stock.UNDO );
-		this.redo_button = new ToolButton.from_stock ( Stock.REDO );
-		this.edit_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.delete_button = new ToolButton.from_stock ( Stock.DELETE );
-		this.send_button = new ToolButton.from_stock ( Stock.GO_UP );
-		this.list_button = new ToolButton.from_stock ( Stock.INDEX );
+		this.add_button = new NmToolButton ( _("Add") );
+		this.undo_button = new NmToolButton ( _("Undo") );
+		this.redo_button = new NmToolButton ( _("Redo") );
+		this.edit_button = new NmToolButton ( _("Edit") );
+		this.delete_button = new NmToolButton ( _("Delete") );
+		this.send_button = new NmToolButton ( _("Send") );
+		this.list_button = new NmToolButton ( _("List") );
 		this.anio_item = new ToolItem ();
 
 		this.label = new Label ("");
 		
-		this.add_button.is_important = true;
-		this.undo_button.is_important = true;
 		this.undo_button.set_sensitive ( false );
-		this.redo_button.is_important = true;
 		this.redo_button.set_sensitive ( false );
-		this.edit_button.is_important = true;
 		this.edit_button.set_visible_horizontal ( false );
-		this.delete_button.is_important = true;
 		this.delete_button.set_visible_horizontal ( false );
-		this.send_button.is_important = true;
 		this.send_button.set_visible_horizontal ( false );
-		this.send_button.set_label (_("Send"));
-		this.list_button.is_important = true;
 		this.list_button.set_visible_horizontal ( false );
 		this.list_button_set_agregar ();
 

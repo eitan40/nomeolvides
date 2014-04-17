@@ -66,7 +66,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-resources.c \
 	nomeolvides-nmbase.vala \
 	nomeolvides-liststore-nmbase.vala \
-	nomeolvides-treeview-nmbase.vala
+	nomeolvides-treeview-nmbase.vala \
+	nomeolvides-nmtoolbutton.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

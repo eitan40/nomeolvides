@@ -22,11 +22,11 @@ using Nomeolvides;
 
 public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public TreeViewColecciones colecciones_view { get; private set; }
-	private ToolButton aniadir_coleccion_button;
-	private ToolButton deshacer_button;
-	private ToolButton rehacer_button;
-	private ToolButton editar_coleccion_button;
-	private ToolButton borrar_coleccion_button;
+	private NmToolButton aniadir_coleccion_button;
+	private NmToolButton deshacer_button;
+	private NmToolButton rehacer_button;
+	private NmToolButton editar_coleccion_button;
+	private NmToolButton borrar_coleccion_button;
 	public bool cambios { get; private set; }
 	public bool cambio_toggle { get; private set; }
 	public Button boton_aniadir;
@@ -36,16 +36,11 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
 		this.set_orientation ( Orientation.VERTICAL );
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_coleccion_button = new ToolButton.from_stock ( Stock.ADD );
-		this.deshacer_button = new ToolButton.from_stock ( Stock.UNDO );
-		this.rehacer_button = new ToolButton.from_stock ( Stock.REDO );
-		this.editar_coleccion_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.borrar_coleccion_button = new ToolButton.from_stock ( Stock.DELETE );
-		this.aniadir_coleccion_button.is_important = true;
-		this.deshacer_button.is_important = true;
-		this.rehacer_button.is_important = true;
-		this.editar_coleccion_button.is_important = true;
-		this.borrar_coleccion_button.is_important = true;
+		this.aniadir_coleccion_button = new NmToolButton ( _("Agregar") );
+		this.deshacer_button = new NmToolButton ( _("Undo") );
+		this.rehacer_button = new NmToolButton ( _("Redo") );
+		this.editar_coleccion_button = new NmToolButton ( _("Edit") );
+		this.borrar_coleccion_button = new NmToolButton ( _("Delete") );
 		this.editar_coleccion_button.set_visible_horizontal ( false );
 		this.borrar_coleccion_button.set_visible_horizontal ( false );
 		this.deshacer_button.set_sensitive ( false );
