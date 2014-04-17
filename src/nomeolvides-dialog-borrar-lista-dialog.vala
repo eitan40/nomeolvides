@@ -69,7 +69,7 @@ public class Nomeolvides.BorrarListaDialogo : Dialog {
 		contenido.pack_start ( grid, true, true, 0 );
 
 		this.add_button ( _("Cancel"), ResponseType.REJECT );
-		this.add_button ( _("Aplly"), ResponseType.APPLY );
+		this.add_button ( _("Apply"), ResponseType.APPLY );
 
 		this.show_all ();
 	}

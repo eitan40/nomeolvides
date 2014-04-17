@@ -36,7 +36,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
 		this.set_orientation ( Orientation.VERTICAL );
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_coleccion_button = new NmToolButton ( _("Agregar") );
+		this.aniadir_coleccion_button = new NmToolButton ( _("Add") );
 		this.deshacer_button = new NmToolButton ( _("Undo") );
 		this.rehacer_button = new NmToolButton ( _("Redo") );
 		this.editar_coleccion_button = new NmToolButton ( _("Edit") );
