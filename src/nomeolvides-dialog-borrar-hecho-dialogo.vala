@@ -45,8 +45,8 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 		grid.set_halign ( Align.CENTER );
 		grid.set_margin_top ( 30 );
 		grid.set_margin_bottom ( 30 );
-		grid.set_margin_left ( 30 );
-		grid.set_margin_right ( 30 );
+		grid.set_margin_start ( 30 );
+		grid.set_margin_end ( 30 );
 		
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );

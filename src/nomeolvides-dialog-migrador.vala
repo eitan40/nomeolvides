@@ -88,8 +88,8 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 	private void  set_grid () {
 		this.grid.set_valign ( Align.FILL );
 		this.grid.set_halign ( Align.FILL );
-		this.grid.set_margin_right ( 50 );
-		this.grid.set_margin_left ( 50 );
+		this.grid.set_margin_end ( 50 );
+		this.grid.set_margin_start ( 50 );
 		this.grid.set_margin_top ( 30 );
 		this.grid.set_margin_bottom ( 17 );
 		this.grid.set_size_request ( 600, -1 );
@@ -99,7 +99,7 @@ public class Nomeolvides.Migrador : Gtk.Dialog {
 		label.set_justify ( Justification.LEFT );
 		label.set_valign ( Align.FILL );
 		label.set_halign ( Align.START );
-		label.set_margin_left ( 20 );
+		label.set_margin_start ( 20 );
 	}
 	
 	private void  set_progress_bar ( ProgressBar bar ) {
