@@ -42,16 +42,16 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		//this.set_show_close_button ( true );
 		//this.set_title ( "Nomeolvides" );
 		this.set_halign ( Align.FILL );
-		var izquierda_box = new Box (Orientation.HORIZONTAL, 2);
-		var centro_box = new Box (Orientation.HORIZONTAL, 2);
-		var derecha_box = new Box (Orientation.HORIZONTAL, 2);
+		var izquierda_box = new Box (Orientation.HORIZONTAL, 6);
+		var centro_box = new Box (Orientation.HORIZONTAL, 6);
+		var derecha_box = new Box (Orientation.HORIZONTAL, 6);
 
 		izquierda_box.set_halign ( Align.START );
 		centro_box.set_halign ( Align.CENTER );
 		derecha_box.set_halign ( Align.END );
 
 		izquierda_box.set_margin_left ( 8 );
-		derecha_box.set_margin_right ( 8 );		
+		derecha_box.set_margin_right ( 8 );
 
 		this.pack_start ( izquierda_box );
 		this.pack_start ( centro_box );
