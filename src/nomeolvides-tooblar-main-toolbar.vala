@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.MainToolbar : Toolbar
+public class Nomeolvides.MainToolbar : Gtk.Toolbar
 {
 	public NmToolButton add_button { get; private set; }
 	public NmToolButton undo_button { get; private set; }
