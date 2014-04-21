@@ -22,11 +22,11 @@ using Nomeolvides;
 
 public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public TreeViewColecciones colecciones_view { get; private set; }
-	private NmToolButton aniadir_coleccion_button;
-	private NmToolButton deshacer_button;
-	private NmToolButton rehacer_button;
-	private NmToolButton editar_coleccion_button;
-	private NmToolButton borrar_coleccion_button;
+	private NmoButton aniadir_coleccion_button;
+	private NmoButton deshacer_button;
+	private NmoButton rehacer_button;
+	private NmoButton editar_coleccion_button;
+	private NmoButton borrar_coleccion_button;
 	public bool cambios { get; private set; }
 	public bool cambio_toggle { get; private set; }
 	public Button boton_aniadir;
@@ -36,13 +36,13 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
 		this.set_orientation ( Orientation.VERTICAL );
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_coleccion_button = new NmToolButton ( _("Add") );
-		this.deshacer_button = new NmToolButton ( _("Undo") );
-		this.rehacer_button = new NmToolButton ( _("Redo") );
-		this.editar_coleccion_button = new NmToolButton ( _("Edit") );
-		this.borrar_coleccion_button = new NmToolButton ( _("Delete") );
-		this.editar_coleccion_button.set_visible_horizontal ( false );
-		this.borrar_coleccion_button.set_visible_horizontal ( false );
+		this.aniadir_coleccion_button = new NmoButton ( _("Add") );
+		this.deshacer_button = new NmoButton ( _("Undo") );
+		this.rehacer_button = new NmoButton ( _("Redo") );
+		this.editar_coleccion_button = new NmoButton ( _("Edit") );
+		this.borrar_coleccion_button = new NmoButton ( _("Delete") );
+		this.editar_coleccion_button.set_visible ( false );
+		this.borrar_coleccion_button.set_visible ( false );
 		this.deshacer_button.set_sensitive ( false );
 		this.rehacer_button.set_sensitive ( false );
 		SeparatorToolItem separador = new SeparatorToolItem ();
@@ -154,8 +154,8 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	}
 
 	private void set_buttons_visible ( bool cambiar ) {
-		this.editar_coleccion_button.set_visible_horizontal ( cambiar );
-		this.borrar_coleccion_button.set_visible_horizontal ( cambiar );
+		this.editar_coleccion_button.set_visible ( cambiar );
+		this.borrar_coleccion_button.set_visible ( cambiar );
 	}
 
 	private void elegir_coleccion () {

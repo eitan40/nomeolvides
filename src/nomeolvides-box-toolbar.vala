@@ -54,16 +54,16 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.pack_start ( centro_box );
 		this.pack_start ( derecha_box );
 
-		this.add_button = new Nmobutton ( _("Add") );
-		this.undo_button = new Nmobutton ( _("Undo") );
-		this.redo_button = new Nmobutton ( _("Redo") );
-		this.edit_button = new Nmobutton ( _("Edit") );
-		this.delete_button = new Nmobutton ( _("Delete") );
-		this.send_button = new Nmobutton ( _("Send") );
-		this.list_button = new Nmobutton ( _("List") );
+		this.add_button = new NmoButton ( _("Add") );
+		this.undo_button = new NmoButton ( _("Undo") );
+		this.redo_button = new NmoButton ( _("Redo") );
+		this.edit_button = new NmoButton ( _("Edit") );
+		this.delete_button = new NmoButton ( _("Delete") );
+		this.send_button = new NmoButton ( _("Send") );
+		this.list_button = new NmoButton ( _("List") );
 		this.anio_label = new Label ("");
 
-		var boton_cerrar = new Nmobutton.icono ( "window-close-symbolic", IconSize.MENU );
+		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
 		boton_cerrar.set_relief ( ReliefStyle.NONE );
 		boton_cerrar.clicked.connect ( cerrar );
 		var separador = new Gtk.Separator ( Orientation.VERTICAL );

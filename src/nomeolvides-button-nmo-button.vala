@@ -19,15 +19,15 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Nmobutton : Gtk.Button {
+public class Nomeolvides.NmoButton : Gtk.Button {
 
 	// Constructor
-	public Nmobutton ( string label ) {
+	public NmoButton ( string label ) {
 		this.set_label ( label );
 		this.setear_propiedades ();
 	}
 
-	public Nmobutton.icono ( string icono, Gtk.IconSize tamanio ) {
+	public NmoButton.icono ( string icono, Gtk.IconSize tamanio ) {
 		var imagen = new Image.from_icon_name ( icono, tamanio );
 		this.set_image ( imagen );
 		this.setear_propiedades ();

@@ -22,11 +22,11 @@ using Nomeolvides;
 
 public class Nomeolvides.ListasConfig: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
-	private NmToolButton aniadir_lista_button;
-	private NmToolButton deshacer_button;
-	private NmToolButton rehacer_button;
-	private NmToolButton editar_lista_button;
-	private NmToolButton borrar_lista_button;
+	private NmoButton aniadir_lista_button;
+	private NmoButton deshacer_button;
+	private NmoButton rehacer_button;
+	private NmoButton editar_lista_button;
+	private NmoButton borrar_lista_button;
 	public bool cambios { get; private set; }
 	public Button boton_aniadir;
 	private AccionesDB db;
@@ -37,13 +37,13 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		Toolbar toolbar = new Toolbar ();
-		this.aniadir_lista_button = new NmToolButton ( _("Add") );
-		this.deshacer_button = new NmToolButton ( _("Undo") );
-		this.rehacer_button = new NmToolButton ( _("Redo") );
-		this.editar_lista_button = new NmToolButton ( _("Edit") );
-		this.borrar_lista_button = new NmToolButton ( _("Delete") );
-		editar_lista_button.set_visible_horizontal ( false );
-		borrar_lista_button.set_visible_horizontal ( false );
+		this.aniadir_lista_button = new NmoButton ( _("Add") );
+		this.deshacer_button = new NmoButton ( _("Undo") );
+		this.rehacer_button = new NmoButton ( _("Redo") );
+		this.editar_lista_button = new NmoButton ( _("Edit") );
+		this.borrar_lista_button = new NmoButton ( _("Delete") );
+		editar_lista_button.set_visible ( false );
+		borrar_lista_button.set_visible ( false );
 		this.deshacer_button.set_sensitive ( false );
 		this.rehacer_button.set_sensitive ( false );
 		SeparatorToolItem separador = new SeparatorToolItem ();
@@ -150,8 +150,8 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	}
 
 	private void set_buttons_visible ( bool cambiar ) {
-		this.editar_lista_button.set_visible_horizontal ( cambiar );
-		this.borrar_lista_button.set_visible_horizontal ( cambiar );
+		this.editar_lista_button.set_visible ( cambiar );
+		this.borrar_lista_button.set_visible ( cambiar );
 	}
 
 	private void elegir_lista () {
