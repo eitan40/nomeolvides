@@ -35,7 +35,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-application-window-ventana-principal.vala \
 	nomeolvides-dialog-borrar-hecho-dialogo.vala \
 	nomeolvides-dialog-dialogo-hecho.vala \
-	nomeolvides-tooblar-main-toolbar.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
@@ -67,7 +66,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-nmbase.vala \
 	nomeolvides-liststore-nmbase.vala \
 	nomeolvides-treeview-nmbase.vala \
-	nomeolvides-nmtoolbutton.vala \
 	nomeolvides-box-toolbar.vala \
 	nomeolvides-button-nmobutton.vala
 

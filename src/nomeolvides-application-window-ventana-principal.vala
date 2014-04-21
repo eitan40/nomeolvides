@@ -37,7 +37,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (1100,600);
 		this.set_size_request (500,350);
-		this.hide_titlebar_when_maximized = true;
 
 		this.anio_actual = 0;
 		
@@ -50,7 +49,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar = new Toolbar ();
 
 		this.set_titlebar ( toolbar );
-		//this.main_box.pack_start (toolbar, false, false, 0);
+
 		this.main_box.pack_start (anios_hechos, true, true, 0);
 
 		this.conectar_seniales ();

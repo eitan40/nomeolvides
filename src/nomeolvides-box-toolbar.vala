@@ -36,11 +36,8 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.orientation = Orientation.HORIZONTAL;
 		this.get_style_context().add_class ("header-bar");
 		this.get_style_context().add_class ("titlebar");
-		//this.set_homogeneous ( false );
 		this.set_size_request ( 0, 47 );
 
-		//this.set_show_close_button ( true );
-		//this.set_title ( "Nomeolvides" );
 		this.set_halign ( Align.FILL );
 		var izquierda_box = new Box (Orientation.HORIZONTAL, 6);
 		var centro_box = new Box (Orientation.HORIZONTAL, 6);
@@ -73,8 +70,6 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 
 		this.add_button.set_margin_start ( 2 );
 		this.anio_label.set_margin_end ( 2 );
-
-		//this.add_button.set_size_request ( 85, 0 );
 		
 		this.undo_button.set_sensitive ( false );
 		this.redo_button.set_sensitive ( false );
@@ -83,24 +78,16 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.send_button.set_visible ( false );
 		this.list_button.set_visible ( false );
 		this.list_button_set_agregar ();
-/*
-		var separador = new SeparatorToolItem ();
-		var expansor = new SeparatorToolItem ();
-		separador.set_expand ( true );
-		separador.draw = false;
-		expansor.set_expand ( true );
-		expansor.draw = false;
-*/		
 
 		izquierda_box.pack_start ( this.add_button );
 		izquierda_box.pack_start ( this.undo_button );
 		izquierda_box.pack_start ( this.redo_button );
-//		this.pack_start ( separador );
+
 		centro_box.pack_start ( this.edit_button );
 		centro_box.pack_start ( this.delete_button );
 		centro_box.pack_start ( this.send_button );
 		centro_box.pack_start ( this.list_button );
-//		this.add ( expansor );
+
 		derecha_box.pack_end ( boton_cerrar );
 		derecha_box.pack_end ( separador );
 		derecha_box.pack_end ( this.anio_label );
