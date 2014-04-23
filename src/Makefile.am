@@ -75,10 +75,18 @@ nomeolvides-resources.c: nomeolvides.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \
 	--target=$@ --sourcedir=$(srcdir) --c-name nomeolvides --generate-source
 
+if NO_HEADERBAR
+nomeolvides_VALAFLAGS = \
+	--pkg sqlite3 \
+	--pkg gtk+-3.0 \
+	-g \
+	-D NO_HEADERBAR
+else
 nomeolvides_VALAFLAGS = \
 	--pkg sqlite3 \
 	--pkg gtk+-3.0 \
 	-g
+endif
 
 nomeolvides_LDFLAGS = \
 	-Wl,--export-dynamic
@@ -94,3 +102,5 @@ uninstall-local:
 	-rm -r $(uidir)
 	-rm -r $(pkgdatadir)
 
+CLEANFILES = \
+	$(vala_sources:.vala=.c)

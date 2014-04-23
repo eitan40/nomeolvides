@@ -47,10 +47,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.add (main_box);
 		
 		this.toolbar = new HeaderBar ();
-
-		this.set_titlebar ( toolbar );
-
+	#if NO_HEADERBAR
 		this.main_box.pack_start ( this.toolbar, false, false, 0 );
+	#else
+		this.set_titlebar ( toolbar );
+	#endif
 		this.main_box.pack_start ( anios_hechos, true, true, 0 );
 
 		this.conectar_seniales ();

@@ -29,10 +29,12 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	// Constructor
 	public HeaderBar () {
 		this.get_style_context().remove_class ("toolbar");
+	#if NO_HEADERBAR
+	#else
 		this.get_style_context().add_class ("header-bar");
 		this.get_style_context().add_class ("titlebar");
 		this.set_size_request ( 0, 47 );
-
+	#endif
 		this.set_halign ( Align.FILL );
 		this.derecha_box = new Box (Orientation.HORIZONTAL, 6);
 
@@ -48,19 +50,22 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.list_button = new NmoButton ( _("List") );
 		this.anio_label = new Label ("");
 
-		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
-		boton_cerrar.set_relief ( ReliefStyle.NONE );
-		boton_cerrar.clicked.connect ( cerrar );
-		var separador = new Gtk.Separator ( Orientation.VERTICAL );
 
 		this.anio_label.set_margin_end ( 2 );
 		this.list_button_set_agregar ();
 
 		this.centro_box.pack_start ( this.send_button );
 		this.centro_box.pack_start ( this.list_button );
+	#if NO_HEADERBAR
+	#else
+		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
+		boton_cerrar.set_relief ( ReliefStyle.NONE );
+		boton_cerrar.clicked.connect ( cerrar );
+		var separador = new Gtk.Separator ( Orientation.VERTICAL );
 
 		this.derecha_box.pack_end ( boton_cerrar );
 		this.derecha_box.pack_end ( separador );
+	#endif
 		this.derecha_box.pack_end ( this.anio_label );
 	}
 
