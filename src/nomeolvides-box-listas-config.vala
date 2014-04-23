@@ -22,62 +22,29 @@ using Nomeolvides;
 
 public class Nomeolvides.ListasConfig: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
-	private NmoButton aniadir_lista_button;
-	private NmoButton deshacer_button;
-	private NmoButton rehacer_button;
-	private NmoButton editar_lista_button;
-	private NmoButton borrar_lista_button;
 	public bool cambios { get; private set; }
-	public Button boton_aniadir;
 	private AccionesDB db;
 	private Deshacer<Lista> deshacer;
+	private Toolbar toolbar;
 		
 	public ListasConfig ( ListStoreListas liststore_lista ) {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.set_orientation ( Orientation.VERTICAL );
-
-		Toolbar toolbar = new Toolbar ();
-		this.aniadir_lista_button = new NmoButton ( _("Add") );
-		this.deshacer_button = new NmoButton ( _("Undo") );
-		this.rehacer_button = new NmoButton ( _("Redo") );
-		this.editar_lista_button = new NmoButton ( _("Edit") );
-		this.borrar_lista_button = new NmoButton ( _("Delete") );
-		editar_lista_button.set_visible ( false );
-		borrar_lista_button.set_visible ( false );
-		this.deshacer_button.set_sensitive ( false );
-		this.rehacer_button.set_sensitive ( false );
-		SeparatorToolItem separador = new SeparatorToolItem ();
-		separador.set_expand ( true );
-		separador.draw = false;
-
 		this.deshacer = new Deshacer<Lista> ();
-
-		editar_lista_button.clicked.connect ( edit_lista_dialog );
-		borrar_lista_button.clicked.connect ( borrar_lista_dialog );
-		aniadir_lista_button.clicked.connect ( add_lista_dialog );
-		this.deshacer_button.clicked.connect ( this.deshacer_cambios );
-		this.rehacer_button.clicked.connect ( this.rehacer_cambios );
-
-		toolbar.add ( aniadir_lista_button );
-		toolbar.add ( deshacer_button );
-		toolbar.add ( rehacer_button );
-		toolbar.add ( separador );
-		toolbar.add ( editar_lista_button );
-		toolbar.add ( borrar_lista_button );
 		
-		this.conectar_signals ();
 		this.cambios = false;
 		this.listas_view = new TreeViewListas ();
 		this.listas_view.set_model ( liststore_lista );
 		this.listas_view.cursor_changed.connect ( elegir_lista );
+		this.toolbar = new Toolbar ();
+		this.conectar_signals ();
 
 		var scroll_listas_view = new ScrolledWindow (null,null);
 		scroll_listas_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		scroll_listas_view.add ( this.listas_view );
  
-		this.add ( toolbar );
+		this.pack_start ( toolbar, false, false, 0 );
 		this.pack_start ( scroll_listas_view, true, true, 0);
-		this.show_all ();
 	}
 
 	public void actualizar_model ( ListStoreListas liststore_listas ) {
@@ -85,10 +52,16 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	}
 
 	private void conectar_signals () {
-		this.deshacer.deshacer_sin_items.connect ( this.desactivar_deshacer );
-		this.deshacer.deshacer_con_items.connect ( this.activar_deshacer );
-		this.deshacer.rehacer_sin_items.connect ( this.desactivar_rehacer );
-		this.deshacer.rehacer_con_items.connect ( this.activar_rehacer );
+		this.toolbar.add_button.clicked.connect ( this.add_lista_dialog );
+		this.toolbar.delete_button.clicked.connect ( this.borrar_lista_dialog );
+		this.toolbar.edit_button.clicked.connect ( this.edit_lista_dialog );
+		this.toolbar.undo_button.clicked.connect ( this.deshacer_cambios );
+		this.toolbar.redo_button.clicked.connect ( this.rehacer_cambios );
+
+		this.deshacer.deshacer_sin_items.connect ( this.toolbar.desactivar_deshacer );
+		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
+		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
+		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
 	}
 
 	private void add_lista_dialog () {
@@ -149,16 +122,11 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		this.cambios = true;
 	}
 
-	private void set_buttons_visible ( bool cambiar ) {
-		this.editar_lista_button.set_visible ( cambiar );
-		this.borrar_lista_button.set_visible ( cambiar );
-	}
-
 	private void elegir_lista () {
 		if( this.listas_view.get_elemento_id () != -1 ) {
-			this.set_buttons_visible ( true );
+			this.toolbar.set_buttons_visible ();
 		} else {
-			this.set_buttons_visible ( false );		
+			this.toolbar.set_buttons_invisible ();
 		}
 	}
 
@@ -198,19 +166,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		}
 	}
 
-	public void activar_deshacer () {
-		this.deshacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_deshacer () {
-		this.deshacer_button.set_sensitive ( false );
-	}
-
-	public void activar_rehacer () {
-		this.rehacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_rehacer () {
-		this.rehacer_button.set_sensitive ( false );
+	public void set_buttons_invisible () {
+		this.toolbar.set_buttons_invisible ();
 	}
 }

@@ -24,7 +24,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 {
 
 	private Box main_box { get; private set; }
-	private Toolbar toolbar { get; private set; }
+	private HeaderBar toolbar { get; private set; }
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
@@ -46,11 +46,12 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		
 		this.add (main_box);
 		
-		this.toolbar = new Toolbar ();
+		this.toolbar = new HeaderBar ();
 
 		this.set_titlebar ( toolbar );
 
-		this.main_box.pack_start (anios_hechos, true, true, 0);
+		this.main_box.pack_start ( this.toolbar, false, false, 0 );
+		this.main_box.pack_start ( anios_hechos, true, true, 0 );
 
 		this.conectar_seniales ();
 	}
@@ -178,7 +179,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.get_hecho_actual ( out hecho );
 		
 		if ( hecho != null ) { 
-			this.toolbar.set_buttons_visible ( hecho );
+			this.toolbar.set_buttons_visible ();
 		} else {
 			this.toolbar.set_buttons_invisible ();		
 		}
