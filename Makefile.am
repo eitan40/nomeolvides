@@ -23,5 +23,4 @@ uninstall-local:
 	-rm -r $(nomeolvidesdocdir)
 
 
-AM_VALAFLAGS =--pkg sqlite3
-
+AM_VALAFLAGS =--pkg sqlite3 -v

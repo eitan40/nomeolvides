@@ -40,6 +40,12 @@ PKG_CHECK_MODULES(NOMEOLVIDES, sqlite3
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
 AC_SUBST(GLIB_COMPILE_RESOURCES)
 
+AC_ARG_WITH([headerbar],[AS_HELP_STRING([--without-headerbar],[disable headerbar])], [headerbar="no"], [headerbar="yes"])
+
+AS_ECHO("Checking for building with headerbar... ${headerbar}")
+
+AM_CONDITIONAL(NO_HEADERBAR, test x${headerbar} = xno)
+
 AC_OUTPUT([
 Makefile
 src/Makefile

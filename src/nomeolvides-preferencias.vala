@@ -67,4 +67,9 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 		this.config_colecciones.actualizar_model ( colecciones );
 		this.armar_notebook ( colecciones, listas );
 	}
+
+	public void set_toolbar_buttons_invisible () {
+		this.config_colecciones.set_buttons_invisible ();
+		this.config_listas.set_buttons_invisible ();
+	}
 }

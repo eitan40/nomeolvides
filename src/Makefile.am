@@ -35,7 +35,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-application-window-ventana-principal.vala \
 	nomeolvides-dialog-borrar-hecho-dialogo.vala \
 	nomeolvides-dialog-dialogo-hecho.vala \
-	nomeolvides-tooblar-main-toolbar.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
@@ -67,17 +66,27 @@ nomeolvides_SOURCES = \
 	nomeolvides-nmbase.vala \
 	nomeolvides-liststore-nmbase.vala \
 	nomeolvides-treeview-nmbase.vala \
-	nomeolvides-nmtoolbutton.vala
+	nomeolvides-box-toolbar.vala \
+	nomeolvides-button-nmo-button.vala \
+	nomeolvides-box-headerbar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \
 	--target=$@ --sourcedir=$(srcdir) --c-name nomeolvides --generate-source
 
+if NO_HEADERBAR
+nomeolvides_VALAFLAGS = \
+	--pkg sqlite3 \
+	--pkg gtk+-3.0 \
+	-g \
+	-D NO_HEADERBAR
+else
 nomeolvides_VALAFLAGS = \
 	--pkg sqlite3 \
 	--pkg gtk+-3.0 \
 	-g
+endif
 
 nomeolvides_LDFLAGS = \
 	-Wl,--export-dynamic
@@ -93,3 +102,5 @@ uninstall-local:
 	-rm -r $(uidir)
 	-rm -r $(pkgdatadir)
 
+CLEANFILES = \
+	$(vala_sources:.vala=.c)

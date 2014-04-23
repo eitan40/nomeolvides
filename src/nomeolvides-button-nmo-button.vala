@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
-/* nomeolvides
- *
- * Copyright (C) 2014 Andres Fernandez <andres@softwareperonista.com.ar>
+/*
+ * nomeolvides-button-nmobutton.vala
+ * Copyright (C) 2014 Fernando Fernandez <fernando@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -12,17 +12,31 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- *   bullit - 39 escalones - silent love (japonesa) 
+ * 
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.NmToolButton : Gtk.ToolButton {
-	public NmToolButton ( string label ) {
+public class Nomeolvides.NmoButton : Gtk.Button {
+
+	// Constructor
+	public NmoButton ( string label ) {
 		this.set_label ( label );
-		this.set_size_request ( 85, 0 );
+		this.setear_propiedades ();
+	}
+
+	public NmoButton.icono ( string icono, Gtk.IconSize tamanio ) {
+		var imagen = new Image.from_icon_name ( icono, tamanio );
+		this.set_image ( imagen );
+		this.setear_propiedades ();
+	}
+
+	private void setear_propiedades () {
+		this.set_margin_top ( 9 );
+		this.set_margin_bottom ( 9 );
+		this.set_halign ( Align.START );
 	}
 }
+

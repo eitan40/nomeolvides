@@ -24,7 +24,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 {
 
 	private Box main_box { get; private set; }
-	private MainToolbar toolbar { get; private set; }
+	private HeaderBar toolbar { get; private set; }
 	public Anios_hechos_vista anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
@@ -37,7 +37,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.set_position (WindowPosition.CENTER);
 		this.set_default_size (1100,600);
 		this.set_size_request (500,350);
-		this.hide_titlebar_when_maximized = true;
 
 		this.anio_actual = 0;
 		
@@ -47,10 +46,13 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		
 		this.add (main_box);
 		
-		this.toolbar = new MainToolbar ();
-	
-		this.main_box.pack_start (toolbar, false, false, 0);
-		this.main_box.pack_start (anios_hechos, true, true, 0);
+		this.toolbar = new HeaderBar ();
+	#if NO_HEADERBAR
+		this.main_box.pack_start ( this.toolbar, false, false, 0 );
+	#else
+		this.set_titlebar ( toolbar );
+	#endif
+		this.main_box.pack_start ( anios_hechos, true, true, 0 );
 
 		this.conectar_seniales ();
 	}
@@ -64,7 +66,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
-
+	#if NO_HEADERBAR
+	#else
+		this.toolbar.cerrar_signal.connect ( this.close );
+	#endif
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
 		this.anios_hechos.hechos_cursor_changed.connect ( this.elegir_hecho );
@@ -176,7 +181,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.get_hecho_actual ( out hecho );
 		
 		if ( hecho != null ) { 
-			this.toolbar.set_buttons_visible ( hecho );
+			this.toolbar.set_buttons_visible ();
 		} else {
 			this.toolbar.set_buttons_invisible ();		
 		}
