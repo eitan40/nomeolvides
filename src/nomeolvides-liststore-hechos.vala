@@ -22,9 +22,10 @@ using Nomeolvides;
 
 public class Nomeolvides.ListStoreHechos : ListStore {
 	private TreeIter iterador;
+	private Array<Hecho> hechos;
 	public int anio { get; private set; }
 	
-	public ListStoreHechos.anio_string ( string anio) {
+	public ListStoreHechos.anio_string ( string anio ) {
 		this.anio = int.parse ( anio );
 		this.constructor ();
 	}
@@ -42,16 +43,77 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		Type[] tipos= { typeof (string), typeof (string), typeof (string), typeof (Hecho) };
 		this.set_column_types(tipos);
 		this.set_sort_column_id(3, SortType.ASCENDING);
-		this.set_sort_func(3, ordenar_hechos);	
+		this.set_sort_func(3, ordenar_hechos);
+		this.hechos = new Array<Hecho>();
 	}
 
-	public void agregar (Hecho nuevo) {	
-		this.append(out iterador);
-		this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
+	public void agregar ( Hecho nuevo ) {
+		if ( !(this.ya_agregado ( nuevo ) )) {
+			this.append(out iterador);
+			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
+			this.hechos.append_val ( nuevo );
+		}
+	}
+
+	public void agregar_hechos ( Array<Hecho> hechos ) {
+		this.hechos = new Array<Hecho> ();
+		for ( int i = 0; i < hechos.length; i++ ) {
+			this.agregar ( hechos.index (i));
+		}
+
+		this.eliminar_sobrantes ();
+	}
+
+	public bool ya_agregado ( Hecho nuevo ) {
+		bool resultado = false;
+
+		for (int i = 0; i < this.hechos.length; i++ ) {
+			if ( this.hechos.index (i).hash == nuevo.hash ) {
+				resultado = true;
+				break;
+			}
+		}
+
+		return resultado;
+	}
+
+	public bool sobra ( Hecho sobrante ) {
+		bool de_mas = true;
+		int i = 0;
+
+		for ( i = 0; i < hechos.length; i++ ) {
+			if ( this.hechos.index (i).hash == sobrante.hash ) {
+				de_mas = false;
+				break;
+			}
+		}
+
+		return de_mas;
 	}
 
 	public void eliminar (TreeIter iter, Hecho a_eliminar ) {
 		this.remove (iter);
+	}
+
+	private void eliminar_sobrantes ( ) {
+		TreeIter iter;
+		Value value_hecho;
+		Hecho hecho;
+		bool flag = true;
+
+		this.get_iter_first ( out iter );
+
+		do {
+			this.get_value ( iter, 3, out value_hecho );
+			hecho = (Hecho) value_hecho;
+
+			if ( this.sobra ( hecho )) {
+				this.remove (iter);
+				flag = this.get_iter_first ( out iter );
+			} else {
+				flag = this.iter_next ( ref iter );
+			}
+		} while ( flag );
 	}
 
 	public Array<Hecho> lista_de_hechos () {
@@ -87,7 +149,7 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		
 		anio1 = hecho1.fecha.get_year();
 		anio2 = hecho2.fecha.get_year();
-		
+
 		mes1 = hecho1.fecha.get_month();
 		mes2 = hecho2.fecha.get_month();
 

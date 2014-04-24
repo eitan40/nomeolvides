@@ -139,16 +139,16 @@ public class Nomeolvides.App : Gtk.Application
 	
 	private void elegir_anio () {
 		int anio = this.window.get_anio_actual ();
-		this.window.cargar_hechos_view ( this.datos.get_liststore_anio ( anio ) );
+		this.window.cargar_hechos_view ( this.datos.get_lista_anio ( anio ) );
 	}
 
 	private void elegir_lista () {
-		Lista lista = this.window.get_lista_actual ();
+/*		Lista lista = this.window.get_lista_actual ();
 		
 		var lista_hechos = this.datos.get_liststore_lista ( lista );
 		
 		this.window.cargar_hechos_view ( lista_hechos );
-	}
+*/	}
 
 	public void edit_hecho_dialog () {
 		Hecho hecho; 

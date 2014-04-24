@@ -23,7 +23,6 @@ using Nomeolvides;
 public class Nomeolvides.ViewHechos : Gtk.TreeView {
 
 	public int anio_actual { get; private set; }
-	private ListStoreHechos anio; 
 
 	public ViewHechos () {
 		var nombre_cell = new CellRendererText ();
@@ -37,13 +36,13 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		this.insert_column_with_attributes (-1, _("Name"), nombre_cell, "text", 0);
 		this.insert_column_with_attributes (-1, _("Date"), fecha_cell, "text", 2);
 		this.model = new ListStoreHechos.anio_int (0);
+		this.set_model ( new ListStoreHechos () );
 	}
 
-	public void mostrar_anio ( ListStoreHechos anio ) {
-			this.anio = anio;
-			this.set_model( this.anio );
-			this.anio_actual = anio.anio;
-			cambia_anio_signal ();
+	public void mostrar_anio ( Array<Hecho> hechos ) {
+		ListStoreHechos model = this.get_model () as ListStoreHechos;
+		model.agregar_hechos ( hechos );
+		cambia_anio_signal ();
 	}
 
 	public void limpiar () {
@@ -61,8 +60,8 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
-			this.anio.get_iter(out iterador, path);
-			this.anio.get_value (iterador, 3, out hecho_value);
+			this.get_model().get_iter(out iterador, path);
+			this.get_model().get_value (iterador, 3, out hecho_value);
 			hecho = (Hecho) hecho_value;
 			return path;
 		} else { 

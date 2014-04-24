@@ -150,7 +150,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.anios_cursor_changed ();
 	}
 
-	public void cargar_lista_hechos ( ListStoreHechos hechos ) {
+	public void cargar_lista_hechos ( Array<Hecho> hechos ) {
 		this.hechos_view.mostrar_anio ( hechos );
 	}
 

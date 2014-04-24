@@ -142,15 +142,14 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer.borrar_rehacer ();
 	}
 
-	public ListStoreHechos get_liststore_anio ( int anio ) {
-		ListStoreHechos liststorehechos = new ListStoreHechos ();
+	public Array<Hecho> get_lista_anio ( int anio ) {
+		Array<Hecho> hechos = new Array<Hecho>();
 
 		if ( anio != 0 ) {
-			var hechos = this.db.select_hechos_visibles ( "WHERE anio=\"" + anio.to_string () +"\"" );
-			liststorehechos = this.armar_liststore_hechos(hechos);
+			hechos = this.db.select_hechos_visibles ( "WHERE anio=\"" + anio.to_string () +"\"" );
 		}
 		
-		return liststorehechos;
+		return hechos;
 	}
 
 	public ListStoreHechos get_liststore_lista ( Lista lista ) {
