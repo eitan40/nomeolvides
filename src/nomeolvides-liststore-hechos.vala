@@ -51,14 +51,17 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		if ( !(this.ya_agregado ( nuevo ) )) {
 			this.append(out iterador);
 			this.set(iterador, 0, nuevo.nombre, 1, nuevo.descripcion, 2, nuevo.fecha_to_string(), 3, nuevo);
-			this.hechos.append_val ( nuevo );
 		}
 	}
 
-	public void agregar_hechos ( Array<Hecho> hechos ) {
+	public void agregar_hechos ( Array<Hecho> nuevos ) {
+		for ( int i = 0; i < nuevos.length; i++ ) {
+			this.agregar ( nuevos.index (i));
+		}
+
 		this.hechos = new Array<Hecho> ();
-		for ( int i = 0; i < hechos.length; i++ ) {
-			this.agregar ( hechos.index (i));
+		for ( int i = 0; i < nuevos.length; i++ ) {
+			this.hechos.append_val ( nuevos.index (i) );
 		}
 
 		this.eliminar_sobrantes ();

@@ -22,37 +22,20 @@ using Nomeolvides;
 
 public class Nomeolvides.ViewAnios : TreeView {
 
-	private ListStore lista;
-	private TreeIter iter;
+	private ListStoreAnios lista;
 	
 	public ViewAnios () {
-		this.lista = new ListStore(1,typeof(int));
+		this.lista = new ListStoreAnios ();
 		this.set_model (this.lista);
 		var celda = new CellRendererText();
 		this.insert_column_with_attributes (-1,_("Years"), celda, "text",0);
 		this.lista.set_sort_column_id(0, SortType.ASCENDING);
 		this.lista.set_sort_func(2, ordenar_anios);
 		this.set_size_request (100, -1);
-
 	}
 
-	public void agregar (int nuevo)
-	{
-		this.lista.append (out this.iter);
-		this.lista.set(this.iter,0,nuevo);
-	}
-
-	public void agregar_varios (Array<int> nuevo)
-	{
-		int i, temp;
-		
-		this.lista.clear ();
-			
-		for (i=0; i < nuevo.length; i++)
-		{
-			temp = nuevo.index(i);
-			this.agregar ( temp );
-		}
+	public void agregar_varios ( Array<int> nuevos ) {
+		this.lista.agregar_varios ( nuevos );
 	}
 
 	public int get_anio () {
@@ -69,10 +52,6 @@ public class Nomeolvides.ViewAnios : TreeView {
 		} else { 
 			return 0; //retorna el número mágico 0. No existe el año 0, por lo tanto, no hay año elegido.
 		}
-	}
-
-	public void borrar_datos () {
-		this.lista.clear ();
 	}
 
 	private int ordenar_anios (Gtk.TreeModel model2, Gtk.TreeIter iter1, Gtk.TreeIter iter2) {
