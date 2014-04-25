@@ -25,7 +25,7 @@ public class Nomeolvides.AddColeccionDialog : DialogColeccion
 	public AddColeccionDialog ( )
 	{
 		this.title = _("Add a Collection");
-		this.add_button (Stock.ADD , ResponseType.APPLY);
+		this.add_button (_("Add") , ResponseType.APPLY);
 	}
 
 	protected override void crear_respuesta() {

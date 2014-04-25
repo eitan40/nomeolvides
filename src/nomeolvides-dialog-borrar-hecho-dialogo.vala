@@ -45,8 +45,8 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 		grid.set_halign ( Align.CENTER );
 		grid.set_margin_top ( 30 );
 		grid.set_margin_bottom ( 30 );
-		grid.set_margin_left ( 30 );
-		grid.set_margin_right ( 30 );
+		grid.set_margin_start ( 30 );
+		grid.set_margin_end ( 30 );
 		
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
@@ -58,8 +58,8 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(grid, false, false, 0);
 		
-		this.add_button (Stock.CANCEL, ResponseType.REJECT);
-		this.add_button (Stock.APPLY, ResponseType.APPLY);
+		this.add_button ( _("Cancel"), ResponseType.REJECT);
+		this.add_button ( _("Apply"), ResponseType.APPLY);
 
 		this.show_all ();
 	}

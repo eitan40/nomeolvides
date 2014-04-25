@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl Created by Anjuta application wizard.
 
-AC_INIT(nomeolvides, 0.9.553, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
+AC_INIT(nomeolvides, 0.9.567, https://github.com/softwareperonista/nomeolvides/issue, nomeolvides, https://github.com/softwareperonista/nomeolvides)
 
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -39,6 +39,12 @@ PKG_CHECK_MODULES(NOMEOLVIDES, sqlite3
 
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
 AC_SUBST(GLIB_COMPILE_RESOURCES)
+
+AC_ARG_WITH([headerbar],[AS_HELP_STRING([--without-headerbar],[disable headerbar])], [headerbar="no"], [headerbar="yes"])
+
+AS_ECHO("Checking for building with headerbar... ${headerbar}")
+
+AM_CONDITIONAL(NO_HEADERBAR, test x${headerbar} = xno)
 
 AC_OUTPUT([
 Makefile

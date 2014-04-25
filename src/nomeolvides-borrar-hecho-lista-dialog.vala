@@ -42,22 +42,22 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		pregunta.set_margin_bottom ( 15 );
 		pregunta.set_hexpand ( true );
 		hecho_label.set_halign ( Align.END );
-		hecho_label.set_margin_right ( 20 );
+		hecho_label.set_margin_end ( 20 );
 		hecho_label.set_margin_bottom ( 10 );
 		hecho_nombre.set_halign ( Align.START );
-		hecho_nombre.set_margin_left ( 20 );
+		hecho_nombre.set_margin_start ( 20 );
 		hecho_nombre.set_margin_bottom ( 10 );
 		lista_label.set_halign ( Align.END );
-		lista_label.set_margin_right ( 20 );
+		lista_label.set_margin_end ( 20 );
 		lista_nombre.set_halign ( Align.START );
-		lista_nombre.set_margin_left ( 20 );
+		lista_nombre.set_margin_start ( 20 );
 
 		Grid grid = new Grid ( );
 
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		grid.set_margin_right ( 20 );
-		grid.set_margin_left ( 20 );
+		grid.set_margin_end ( 20 );
+		grid.set_margin_start ( 20 );
 		grid.set_margin_top ( 20 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_size_request ( 400, -1 );
@@ -71,8 +71,8 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		
 		this.response.connect ( on_response );
 
-		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
-		this.add_button ( Stock.REMOVE , ResponseType.APPLY );
+		this.add_button ( _("Cancel") , ResponseType.CANCEL );
+		this.add_button ( _("Remove") , ResponseType.APPLY );
 
 		var contenido = this.get_content_area () as Box;
 		contenido.pack_start ( grid, true, true, 0 );

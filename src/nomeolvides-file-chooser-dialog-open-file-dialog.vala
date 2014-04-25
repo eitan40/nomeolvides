@@ -30,8 +30,8 @@ public class Nomeolvides.OpenFileDialog : FileChooserDialog {
         this.action = FileChooserAction.OPEN;
 		this.set_current_folder (directorio_actual);
 
-        add_button (Stock.CANCEL, ResponseType.CANCEL);
-        this.boton_abrir = add_button (Stock.OPEN, ResponseType.ACCEPT) as Button;
+        add_button ( _("Cancel"), ResponseType.CANCEL);
+        this.boton_abrir = add_button ( _("Open"), ResponseType.ACCEPT) as Button;
         set_default_response (ResponseType.ACCEPT);
 
         if (this.ultimo_directorio != null) {

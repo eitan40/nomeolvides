@@ -29,7 +29,7 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 		this.resizable = false;
 		this.modal = true;
 
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button ( _("Cancel") , ResponseType.CLOSE);
 
 		this.response.connect(on_response);
 		
@@ -40,8 +40,8 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 
 		var grid = new Grid ();
 
-		grid.set_margin_right ( 20 );
-		grid.set_margin_left ( 20 );
+		grid.set_margin_end ( 20 );
+		grid.set_margin_start ( 20 );
 		grid.set_margin_top ( 30 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_valign ( Align.CENTER );

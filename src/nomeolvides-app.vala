@@ -181,6 +181,7 @@ public class Nomeolvides.App : Gtk.Application
 		}
 		this.dialogo_preferencias.ejecutar ( this.datos.lista_de_colecciones (), this.datos.lista_de_listas () );
 		this.dialogo_preferencias.show_all ();
+		this.dialogo_preferencias.set_toolbar_buttons_invisible ();
 		this.dialogo_preferencias.run ();
 	}
 

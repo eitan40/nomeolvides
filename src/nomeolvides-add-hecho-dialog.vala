@@ -29,7 +29,7 @@ public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
-		this.add_button (Stock.ADD , ResponseType.APPLY);
+		this.add_button ( _("Add") , ResponseType.APPLY);
 	}
 
 

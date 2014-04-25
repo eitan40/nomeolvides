@@ -22,69 +22,34 @@ using Nomeolvides;
 
 public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	public TreeViewColecciones colecciones_view { get; private set; }
-	private ToolButton aniadir_coleccion_button;
-	private ToolButton deshacer_button;
-	private ToolButton rehacer_button;
-	private ToolButton editar_coleccion_button;
-	private ToolButton borrar_coleccion_button;
 	public bool cambios { get; private set; }
 	public bool cambio_toggle { get; private set; }
-	public Button boton_aniadir;
+	private Toolbar toolbar;
 	private AccionesDB db;
 	private Deshacer<Coleccion> deshacer;
 		
 	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
 		this.set_orientation ( Orientation.VERTICAL );
-		Toolbar toolbar = new Toolbar ();
-		this.aniadir_coleccion_button = new ToolButton.from_stock ( Stock.ADD );
-		this.deshacer_button = new ToolButton.from_stock ( Stock.UNDO );
-		this.rehacer_button = new ToolButton.from_stock ( Stock.REDO );
-		this.editar_coleccion_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.borrar_coleccion_button = new ToolButton.from_stock ( Stock.DELETE );
-		this.aniadir_coleccion_button.is_important = true;
-		this.deshacer_button.is_important = true;
-		this.rehacer_button.is_important = true;
-		this.editar_coleccion_button.is_important = true;
-		this.borrar_coleccion_button.is_important = true;
-		this.editar_coleccion_button.set_visible_horizontal ( false );
-		this.borrar_coleccion_button.set_visible_horizontal ( false );
-		this.deshacer_button.set_sensitive ( false );
-		this.rehacer_button.set_sensitive ( false );
-		SeparatorToolItem separador = new SeparatorToolItem ();
-		separador.set_expand ( true );
-		separador.draw = false;
+
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.deshacer = new Deshacer<Coleccion> ();
-
-		editar_coleccion_button.clicked.connect ( edit_coleccion_dialog );
-		borrar_coleccion_button.clicked.connect ( borrar_coleccion_dialog );
-		aniadir_coleccion_button.clicked.connect ( add_coleccion_dialog );
-		this.deshacer_button.clicked.connect ( this.deshacer_cambios );
-		this.rehacer_button.clicked.connect ( this.rehacer_cambios );
-
-		toolbar.add ( aniadir_coleccion_button );
-		toolbar.add ( deshacer_button );
-		toolbar.add ( rehacer_button );
-		toolbar.add ( separador );
-		toolbar.add ( editar_coleccion_button );
-		toolbar.add ( borrar_coleccion_button );
-
-		this.conectar_signals ();
 
 		this.cambios = false;
 		this.cambio_toggle = false;
 		this.colecciones_view = new TreeViewColecciones ();
+		this.colecciones_view.set_border_width ( 20 );
 		this.colecciones_view.set_model ( liststore_colecciones );
 		this.colecciones_view.cursor_changed.connect ( elegir_coleccion );
 		this.colecciones_view.coleccion_visible_toggle_change.connect ( signal_toggle_change );
+		this.toolbar = new Toolbar ();
+		this.conectar_signals ();
 
 		var scroll_colecciones_view = new ScrolledWindow (null,null);
 		scroll_colecciones_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		scroll_colecciones_view.add ( this.colecciones_view );
  
-		this.add ( toolbar );
+		this.pack_start ( toolbar, false, false, 0 );
 		this.pack_start ( scroll_colecciones_view, true, true, 0 );
-		this.show_all ();
 	}
 
 	public void actualizar_model ( ListStoreColecciones liststore_colecciones ) {
@@ -92,10 +57,16 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	}
 
 	private void conectar_signals () {
-		this.deshacer.deshacer_sin_items.connect ( this.desactivar_deshacer );
-		this.deshacer.deshacer_con_items.connect ( this.activar_deshacer );
-		this.deshacer.rehacer_sin_items.connect ( this.desactivar_rehacer );
-		this.deshacer.rehacer_con_items.connect ( this.activar_rehacer );
+		this.toolbar.add_button.clicked.connect ( this.add_coleccion_dialog );
+		this.toolbar.delete_button.clicked.connect ( this.borrar_coleccion_dialog );
+		this.toolbar.edit_button.clicked.connect ( this.edit_coleccion_dialog );
+		this.toolbar.undo_button.clicked.connect ( this.deshacer_cambios );
+		this.toolbar.redo_button.clicked.connect ( this.rehacer_cambios );
+		
+		this.deshacer.deshacer_sin_items.connect ( this.toolbar.desactivar_deshacer );
+		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
+		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
+		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
 	}
 
 	private void add_coleccion_dialog () {
@@ -158,16 +129,11 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		this.cambios = true;
 	}
 
-	private void set_buttons_visible ( bool cambiar ) {
-		this.editar_coleccion_button.set_visible_horizontal ( cambiar );
-		this.borrar_coleccion_button.set_visible_horizontal ( cambiar );
-	}
-
 	private void elegir_coleccion () {
 		if( this.colecciones_view.get_elemento_id () > (int64)(-1) ) {
-			this.set_buttons_visible ( true );
+			this.toolbar.set_buttons_visible ();
 		} else {
-			this.set_buttons_visible ( false );		
+			this.toolbar.set_buttons_invisible ();
 		}
 
 		if ( this.cambio_toggle ) {
@@ -201,24 +167,12 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		}
 	}
 
+	public void set_buttons_invisible () {
+		this.toolbar.set_buttons_invisible ();
+	}
+
 	private void signal_toggle_change () {
 		this.cambio_toggle = true;
-	}
-
-	public void activar_deshacer () {
-		this.deshacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_deshacer () {
-		this.deshacer_button.set_sensitive ( false );
-	}
-
-	public void activar_rehacer () {
-		this.rehacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_rehacer () {
-		this.rehacer_button.set_sensitive ( false );
 	}
 
 	public signal void cambio_colecciones_signal ();

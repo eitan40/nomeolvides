@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
-/* nomeolvides
- *
- * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
+/*
+ * nomeolvides-button-nmobutton.vala
+ * Copyright (C) 2014 Fernando Fernandez <fernando@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -16,29 +16,27 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditListaDialog : DialogLista
-{
-	private int64 id;
-	
-	public EditListaDialog ( )
-	{
-		this.title = _("Edit Custom List");
-		this.add_button ( _("Edit") , ResponseType.APPLY);
+public class Nomeolvides.NmoButton : Gtk.Button {
+
+	// Constructor
+	public NmoButton ( string label ) {
+		this.set_label ( label );
+		this.setear_propiedades ();
 	}
 
-	protected override void crear_respuesta () {
-		if(this.nombre_entry.get_text_length () > 0) {
-			this.respuesta  = new Lista (this.nombre_entry.get_text ());
-			this.respuesta.id = this.id;
-		}
+	public NmoButton.icono ( string icono, Gtk.IconSize tamanio ) {
+		var imagen = new Image.from_icon_name ( icono, tamanio );
+		this.set_image ( imagen );
+		this.setear_propiedades ();
 	}
 
-	public void set_datos (Lista lista) {
-		this.nombre_entry.set_text ( lista.nombre );
-		this.id = lista.id;
+	private void setear_propiedades () {
+		this.set_margin_top ( 9 );
+		this.set_margin_bottom ( 9 );
+		this.set_halign ( Align.START );
 	}
 }
+

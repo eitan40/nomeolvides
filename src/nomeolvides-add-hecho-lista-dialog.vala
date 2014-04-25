@@ -36,16 +36,16 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		
 		this.response.connect(on_response);
 
-		this.add_button ( Stock.CANCEL , ResponseType.CANCEL );
-		this.add_button ( Stock.ADD , ResponseType.APPLY );
+		this.add_button ( _("Cancel") , ResponseType.CANCEL );
+		this.add_button ( _("Add") , ResponseType.APPLY );
 
 		this.listas = new ComboBox ();
 
 		var grid = new Grid ( );
 		grid.set_row_spacing ( 15 );
 		grid.set_column_spacing ( 20 );
-		grid.set_margin_right ( 30 );
-		grid.set_margin_left ( 30 );
+		grid.set_margin_end ( 30 );
+		grid.set_margin_start ( 30 );
 		grid.set_margin_top ( 15 );
 		grid.set_margin_bottom ( 15 );
 		grid.set_valign ( Align.CENTER );

@@ -29,8 +29,8 @@ public class Nomeolvides.SaveFileDialog : FileChooserDialog {
         this.action = FileChooserAction.SAVE;
 		this.set_current_folder (directorio_actual);
 
-        add_button (Stock.CANCEL, ResponseType.CANCEL);
-        add_button (Stock.SAVE, ResponseType.ACCEPT);
+        add_button ( _("Cancel"), ResponseType.CANCEL);
+        add_button ( _("Save"), ResponseType.ACCEPT);
         set_default_response (ResponseType.ACCEPT);
 
         if (this.ultimo_directorio != null) {

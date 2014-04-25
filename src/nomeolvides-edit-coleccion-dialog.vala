@@ -26,7 +26,7 @@ public class Nomeolvides.EditColeccionDialog : DialogColeccion
 	public EditColeccionDialog ( )
 	{
 		this.title = _("Edit Collection");
-		this.add_button (Stock.EDIT , ResponseType.APPLY);
+		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
 	public void set_datos (Coleccion coleccion) {

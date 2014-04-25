@@ -34,15 +34,15 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		pregunta.set_margin_bottom ( 15 );
 		pregunta.set_hexpand ( true );
 		coleccion_nombre_label.set_halign ( Align.END );
-		coleccion_nombre_label.set_margin_right ( 20 );
+		coleccion_nombre_label.set_margin_end ( 20 );
 		coleccion_nombre_label.set_margin_bottom ( 10 );
 		coleccion_nombre.set_halign ( Align.START );
-		coleccion_nombre.set_margin_left ( 20 );
+		coleccion_nombre.set_margin_start ( 20 );
 		coleccion_nombre.set_margin_bottom ( 10 );
 		coleccion_hechos_label.set_halign ( Align.END );
-		coleccion_hechos_label.set_margin_right ( 20 );
+		coleccion_hechos_label.set_margin_end ( 20 );
 		coleccion_hechos.set_halign ( Align.START );
-		coleccion_hechos.set_margin_left ( 20 );
+		coleccion_hechos.set_margin_start ( 20 );
 
 		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>");
 		coleccion_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
@@ -51,8 +51,8 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		grid.set_margin_right ( 20 );
-		grid.set_margin_left ( 20 );
+		grid.set_margin_end ( 20 );
+		grid.set_margin_start ( 20 );
 		grid.set_margin_top ( 20 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_size_request ( 400, -1 );
@@ -67,8 +67,8 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start ( grid, true, true, 0 );
 
-		this.add_button ( Stock.CANCEL, ResponseType.REJECT );
-		this.add_button ( Stock.APPLY, ResponseType.APPLY );
+		this.add_button ( _("Cancel"), ResponseType.REJECT );
+		this.add_button ( _("Apply"), ResponseType.APPLY );
 
 		this.show_all ();
 	}

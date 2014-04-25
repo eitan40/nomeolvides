@@ -38,7 +38,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
 
-		this.add_button (Stock.CANCEL , ResponseType.CLOSE);
+		this.add_button ( _("Cancel") , ResponseType.CLOSE);
 		
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
@@ -46,13 +46,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 		var fuente_label = new Label.with_mnemonic (_("Source") + ": ");
 
 		nombre_label.set_halign ( Align.END );
-		nombre_label.set_margin_right ( 15 );
+		nombre_label.set_margin_end ( 15 );
 		fecha_label.set_halign ( Align.END );
-		fecha_label.set_margin_right ( 15 );
+		fecha_label.set_margin_end ( 15 );
 		coleccion_label.set_halign ( Align.END );
-		coleccion_label.set_margin_right ( 15 );
+		coleccion_label.set_margin_end ( 15 );
 		fuente_label.set_halign ( Align.END );
-		fuente_label.set_margin_right ( 15 );
+		fuente_label.set_margin_end ( 15 );
 		
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();

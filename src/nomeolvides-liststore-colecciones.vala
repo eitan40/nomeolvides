@@ -26,7 +26,7 @@ public class Nomeolvides.ListStoreColecciones : ListStoreNmBase {
 		this.set_column_types( tipos );
 	}
 
-	public void agregar ( Coleccion coleccion, int cantidad_hechos ) {
+	public new void agregar ( Coleccion coleccion, int cantidad_hechos ) {
 		base.agregar ( coleccion, cantidad_hechos );
 		this.set_value ( this.iterador, 3, coleccion.visible ); 
 	}

@@ -58,8 +58,8 @@ public class Nomeolvides.VistaHecho : Box {
 		this.label_fuente.set_selectable ( true );
 
 		this.descripcion = new Label.with_mnemonic ("");
-		this.descripcion.set_margin_left ( 10 );
-		this.descripcion.set_margin_right ( 10 );
+		this.descripcion.set_margin_start ( 10 );
+		this.descripcion.set_margin_end ( 10 );
 		this.descripcion.set_line_wrap ( true );
 		this.descripcion.set_justify ( Justification.FILL );
 		this.descripcion.set_halign ( Align.START );

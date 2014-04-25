@@ -39,7 +39,7 @@ public class Nomeolvides.Coleccion : Nomeolvides.NmBase {
 		base.json ( json );
 	}
 
-	public string a_json () {
+	public new string a_json () {
 		string retorno = "{\"Fuente\":{";
 		retorno += base.a_json ();
 		retorno += "\"visible\":\"" + this.visible.to_string () + "\",";
@@ -48,14 +48,14 @@ public class Nomeolvides.Coleccion : Nomeolvides.NmBase {
 		return retorno;
 	}
 
-	public string a_sql () {
+	public new string a_sql () {
 		var retorno  = base.a_sql ();
 		retorno += ",visible=\"" + this.visible.to_string() + "\"";
 		
 		return retorno;
 	}
 
-	public string to_string () {
+	public new string to_string () {
 		var retorno  = base.to_string ();
 		retorno += ",\"" + this.visible.to_string() + "\"";
 		
