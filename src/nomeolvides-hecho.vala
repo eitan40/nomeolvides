@@ -171,5 +171,10 @@ public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 		retorno = retorno.replace ( comillas, reemplazoComillas );
 
 		return retorno;
-	}	
+	}
+
+	public new void calcular_checksum () {
+		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
+		this.hash = this.hash.slice ( 0, 12);
+	}
 }
