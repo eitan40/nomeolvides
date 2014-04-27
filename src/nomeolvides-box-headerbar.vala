@@ -29,7 +29,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	// Constructor
 	public HeaderBar () {
 		this.get_style_context().remove_class ("toolbar");
-	#if NO_HEADERBAR
+	#if DISABLE_GNOME3
 	#else
 		this.get_style_context().add_class ("header-bar");
 		this.get_style_context().add_class ("titlebar");
@@ -56,7 +56,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 
 		this.centro_box.pack_start ( this.send_button );
 		this.centro_box.pack_start ( this.list_button );
-	#if NO_HEADERBAR
+	#if DISABLE_GNOME3
 	#else
 		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
 		boton_cerrar.set_relief ( ReliefStyle.NONE );

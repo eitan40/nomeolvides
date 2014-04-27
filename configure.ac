@@ -40,11 +40,11 @@ PKG_CHECK_MODULES(NOMEOLVIDES, sqlite3
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
 AC_SUBST(GLIB_COMPILE_RESOURCES)
 
-AC_ARG_WITH([headerbar],[AS_HELP_STRING([--without-headerbar],[disable headerbar])], [headerbar="no"], [headerbar="yes"])
+AC_ARG_ENABLE([gnome3_support],[AS_HELP_STRING([--disable-gnome3-support],[disable Gnome 3 support])], [gnome3_support=${enable_gnome3_support}], [gnome3_support="yes"])
 
-AS_ECHO("Checking for building with headerbar... ${headerbar}")
+AS_ECHO("checking for building with Gnome 3 support... ${gnome3_support}")
 
-AM_CONDITIONAL(NO_HEADERBAR, test x${headerbar} = xno)
+AM_CONDITIONAL(DISABLE_GNOME3, test "x${gnome3_support}" = "xno")
 
 AC_OUTPUT([
 Makefile

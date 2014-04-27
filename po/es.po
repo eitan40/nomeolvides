@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-17 20:37-0300\n"
+"POT-Creation-Date: 2014-04-27 18:05-0300\n"
 "PO-Revision-Date: 2014-04-17 20:50-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -49,9 +49,7 @@ msgstr "Agregar una Coleccion"
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:40
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:56
 #: ../src/nomeolvides-add-lista-dialog.vala:28
-#: ../src/nomeolvides-box-colecciones-config.vala:39
-#: ../src/nomeolvides-box-listas-config.vala:40
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:39
+#: ../src/nomeolvides-box-toolbar.vala:46
 msgid "Add"
 msgstr "Agregar"
 
@@ -84,7 +82,7 @@ msgstr "a la lista"
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
-#: ../src/nomeolvides-app.vala:306
+#: ../src/nomeolvides-app.vala:321
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:67
 #: ../src/nomeolvides-treeview-view-anios.vala:32
 msgid "Years"
@@ -120,32 +118,26 @@ msgstr "Elimnar"
 msgid "Lists"
 msgstr "Listas"
 
-#: ../src/nomeolvides-box-colecciones-config.vala:40
-#: ../src/nomeolvides-box-listas-config.vala:41
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:40
-msgid "Undo"
-msgstr "Deshacer"
+#: ../src/nomeolvides-box-headerbar.vala:49
+msgid "Send"
+msgstr "Enviar"
 
-#: ../src/nomeolvides-box-colecciones-config.vala:41
-#: ../src/nomeolvides-box-listas-config.vala:42
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:41
-msgid "Redo"
-msgstr "Rehacer"
+#: ../src/nomeolvides-box-headerbar.vala:50
+#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
+msgid "List"
+msgstr "Lista"
 
-#: ../src/nomeolvides-box-colecciones-config.vala:42
-#: ../src/nomeolvides-box-listas-config.vala:43
-#: ../src/nomeolvides-edit-coleccion-dialog.vala:29
-#: ../src/nomeolvides-edit-hecho-dialog.vala:30
-#: ../src/nomeolvides-edit-lista-dialog.vala:30
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:42
-msgid "Edit"
-msgstr "Editar"
+#: ../src/nomeolvides-box-headerbar.vala:74
+msgid "Year"
+msgstr "Año"
 
-#: ../src/nomeolvides-box-colecciones-config.vala:43
-#: ../src/nomeolvides-box-listas-config.vala:44
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:43
-msgid "Delete"
-msgstr "Borrar"
+#: ../src/nomeolvides-box-headerbar.vala:103
+msgid "Add to list"
+msgstr "Agregar a la lista"
+
+#: ../src/nomeolvides-box-headerbar.vala:107
+msgid "Remove from list"
+msgstr "ELiminar de la lista"
 
 #: ../src/nomeolvides-box-selector-fecha.vala:55
 msgid "January"
@@ -194,6 +186,25 @@ msgstr "Noviembre"
 #: ../src/nomeolvides-box-selector-fecha.vala:56
 msgid "December"
 msgstr "Diciembre"
+
+#: ../src/nomeolvides-box-toolbar.vala:47
+msgid "Undo"
+msgstr "Deshacer"
+
+#: ../src/nomeolvides-box-toolbar.vala:48
+msgid "Redo"
+msgstr "Rehacer"
+
+#: ../src/nomeolvides-box-toolbar.vala:49
+#: ../src/nomeolvides-edit-coleccion-dialog.vala:29
+#: ../src/nomeolvides-edit-hecho-dialog.vala:30
+#: ../src/nomeolvides-edit-lista-dialog.vala:30
+msgid "Edit"
+msgstr "Editar"
+
+#: ../src/nomeolvides-box-toolbar.vala:50
+msgid "Delete"
+msgstr "Borrar"
 
 #: ../src/nomeolvides-box-vista-hecho.vala:90
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:46
@@ -256,11 +267,6 @@ msgstr "Eliminar Lista Personalizada"
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:28
 msgid "Do you want to remove custom list?"
 msgstr "¿Desea eliminar la lista personalizada?"
-
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:45
-msgid "List"
-msgstr "Lista"
 
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:31
 msgid "Amount of facts"
@@ -442,22 +448,6 @@ msgstr "Error"
 #: ../src/nomeolvides-sqlite.vala:584
 msgid "Error parsing lists"
 msgstr "Error parseando listas"
-
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:44
-msgid "Send"
-msgstr "Enviar"
-
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:99
-msgid "Year"
-msgstr "Año"
-
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:131
-msgid "Add to list"
-msgstr "Agregar a la lista"
-
-#: ../src/nomeolvides-tooblar-main-toolbar.vala:135
-msgid "Remove from list"
-msgstr "ELiminar de la lista"
 
 #: ../src/nomeolvides-treeview-colecciones.vala:31
 msgid "Visible"
