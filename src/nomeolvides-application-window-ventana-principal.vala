@@ -65,7 +65,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		menu_importar.activate.connect ( this.menu_importar_activate_signal );
 		menu_archivo.add ( menu_importar );
 
-		var menu_salir = new Gtk.MenuItem.with_mnemonic ( _("Salir") );
+		var menu_salir = new Gtk.MenuItem.with_mnemonic ( _("Quit") );
 		menu_salir.activate.connect ( this.menu_salir_activate_signal );
 		menu_archivo.add ( menu_salir );
 

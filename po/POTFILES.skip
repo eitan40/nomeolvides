@@ -4,6 +4,7 @@ src/nomeolvides-add-hecho-dialog.c
 src/nomeolvides-add-hecho-lista-dialog.c
 src/nomeolvides-add-lista-dialog.c
 src/nomeolvides-app.c
+src/nomeolvides-application-window-ventana-principal.c
 src/nomeolvides-archivo.c
 src/nomeolvides-borrar-hecho-lista-dialog.c
 src/nomeolvides-box-anios-hechos-vista.c

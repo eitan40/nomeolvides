@@ -13,7 +13,7 @@ rm *.c
 
 cd ..
 
-./autogen.sh
+./autogen.sh $@
 
 make
 
