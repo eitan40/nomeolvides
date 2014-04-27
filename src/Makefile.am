@@ -104,3 +104,5 @@ uninstall-local:
 
 CLEANFILES = \
 	$(vala_sources:.vala=.c)
+clean-local:
+	-rm *.c

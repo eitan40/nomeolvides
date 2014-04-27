@@ -96,6 +96,10 @@ if test -z "$*"; then
   echo
 fi
 
+if [ ! -d $srcdir/M4 ]; then
+	mkdir $srcdir/M4
+fi
+
 case $CC in
 xlc )
   am_opt=--include-deps;;
