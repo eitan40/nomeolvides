@@ -96,8 +96,8 @@ if test -z "$*"; then
   echo
 fi
 
-if [ ! -d $srcdir/M4 ]; then
-	mkdir $srcdir/M4
+if [ ! -d $srcdir/m4 ]; then
+	mkdir $srcdir/m4
 fi
 
 case $CC in
