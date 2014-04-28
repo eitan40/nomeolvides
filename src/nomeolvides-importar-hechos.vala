@@ -68,13 +68,16 @@ public class Nomeolvides.ImportarHechos : OpenFileDialog {
 
 	protected int64 get_coleccion () {
 		TreeIter iter;
-		Value value_coleccion_id;
+		Value value_coleccion;
+		Coleccion coleccion;
 
 		this.combo_colecciones.get_active_iter( out iter );
 		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
-		liststore.get_value ( iter, 3, out value_coleccion_id );
+		liststore.get_value ( iter, 2, out value_coleccion );
+		coleccion = value_coleccion as Coleccion;
+		print ("Colección nombre: " + coleccion.nombre  + "\n");
 
-		return (int64) value_coleccion_id;
+		return coleccion.id;
 	}
 
 	public void cambio_coleccion () {

@@ -22,7 +22,7 @@ using Nomeolvides;
 
 public class Nomeolvides.ListStoreColecciones : ListStoreNmBase {
 	public ListStoreColecciones () {
-		Type[] tipos= { typeof(string), typeof(int),typeof(int64), typeof(bool) };
+		Type[] tipos= { typeof(string), typeof(int),typeof(NmBase), typeof(bool) };
 		this.set_column_types( tipos );
 	}
 
@@ -36,8 +36,8 @@ public class Nomeolvides.ListStoreColecciones : ListStoreNmBase {
 
 			this.set ( this.iterador,
 					0,coleccion.nombre,
-					1,coleccion.id,	
-					2,cantidad_hechos,
+					1,cantidad_hechos,
+					2,coleccion,
 			        3,coleccion.visible);
 			} 
 }

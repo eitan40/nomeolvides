@@ -104,10 +104,6 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.show_all ();
 	}
 
-	protected void prueba () {
-		print ("Andó\n");
-	}
-
 	protected void crear_respuesta() {
 		if(this.nombre_entry.get_text_length () > 0)
 		{
@@ -131,12 +127,14 @@ public class Nomeolvides.DialogoHecho : Dialog
 
 	protected int64 get_coleccion () {
 		TreeIter iter;
-		Value value_coleccion_id;
+		Value value_coleccion;
+		Coleccion coleccion;
 
 		this.combo_colecciones.get_active_iter( out iter );
 		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
-		liststore.get_value ( iter, 2, out value_coleccion_id );
+		liststore.get_value ( iter, 2, out value_coleccion );
+		coleccion = value_coleccion as Coleccion;
 		
-		return (int64) value_coleccion_id;
+		return coleccion.id;
 	}
 }

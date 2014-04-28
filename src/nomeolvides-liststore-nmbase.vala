@@ -24,7 +24,7 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 	protected TreeIter iterador;
 	public bool vacio { get; private set; }
 	
-	public ListStoreNmBase ( Type[] tipos = { typeof(string), typeof(int), typeof(int64) } ) {
+	public ListStoreNmBase ( Type[] tipos = { typeof(string), typeof(int), typeof(NmBase) } ) {
 		this.set_column_types(tipos);
 		this.vacio = true;
 	}
@@ -35,7 +35,7 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 			this.set ( this.iterador,
 						0,elemento.nombre,
 						1,cantidad_hechos,
-		     			2,elemento.id );
+						2,elemento );
 			this.vacio = false;
 		}
 	}
@@ -57,13 +57,15 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 	}
 
 	public void borrar ( NmBase a_eliminar ) {
-		Value elemento_id;
+		Value elemento_value;
+		NmBase elemento;
 		TreeIter iter;
 		
 		if ( this.get_iter_first( out iter ) ) {
 			do {
-				this.get_value(iter, 2, out elemento_id);
-				if ( a_eliminar.id == elemento_id ) {
+				this.get_value(iter, 2, out elemento_value);
+				elemento = elemento_value as NmBase;
+				if ( a_eliminar.hash == elemento.hash ) {
 					this.remove ( iter );
 					break;
 				}
@@ -89,14 +91,16 @@ public class Nomeolvides.ListStoreNmBase : ListStore {
 	}
 
 	public int indice_de_id ( int64 id ) {
-		Value elemento;
+		Value elemento_value;
+		NmBase elemento;
 		TreeIter iter;
 		int i=0;
 
 		if ( this.get_iter_first( out iter ) ) {
 			do {
-				this.get_value(iter, 2, out elemento );
-				if ( id == (int64) elemento ) {
+				this.get_value(iter, 2, out elemento_value );
+				elemento = elemento_value as NmBase;
+				if ( id ==  elemento.id ) {
 					break;
 				}
 				i++;

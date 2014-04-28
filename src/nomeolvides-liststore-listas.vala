@@ -22,7 +22,7 @@ using Nomeolvides;
 
 public class Nomeolvides.ListStoreListas : ListStoreNmBase {
 	public ListStoreListas () {
-		Type[] tipos= { typeof(string), typeof(int), typeof(int64) };
+		Type[] tipos= { typeof(string), typeof(int), typeof(NmBase) };
 		base ( tipos );
 	}
 }

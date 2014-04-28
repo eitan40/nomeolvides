@@ -36,13 +36,14 @@ public class Nomeolvides.Hecho : Nomeolvides.NmBase {
 	}
 
 	public Hecho.json (string json, int64 coleccion ) {
-		
+		base.vacio();
 		if ( !json.contains ( "{\"Hecho\":{" ) ) {
-			base.json ( nombre );
+			this.nombre = "";
 			this.descripcion = "null";
 			this.fecha = new DateTime.utc ( 2013,2,20,0,0,0 );
 			this.fuente = "null";
 		} else {
+			this.nombre = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "descripcion" ) );
 			this.descripcion = Hecho.ponerCaracterEspecial ( this.sacarDatoJson ( json, "descripcion" ) );
 			this.fecha = new DateTime.utc (int.parse (this.sacarDatoJson( json, "anio" ) ),
 			                               int.parse (this.sacarDatoJson( json, "mes" ) ),
