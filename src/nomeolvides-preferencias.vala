@@ -37,8 +37,13 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 
 		this.notebook = new Notebook ();
 		this.notebook.set_size_request ( 400, 270 );
+	#if DISABLE_GNOME3
+		this.notebook.set_margin_right ( 10 );
+		this.notebook.set_margin_left ( 10 );
+	#else
 		this.notebook.set_margin_end ( 10 );
 		this.notebook.set_margin_start ( 10 );
+	#endif
 		this.notebook.append_page ( this.config_colecciones, new Label(_("Colections") ));
 		this.notebook.append_page ( this.config_listas, new Label (_("Lists") ));
 		Gtk.Box contenido =  this.get_content_area () as Box;
