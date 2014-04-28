@@ -37,27 +37,35 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		this.hecho_nombre = new Label ( "" );
 		Label lista_label = new Label.with_mnemonic ( _("From list") + ":");
 		this.lista_nombre = new Label ( "" );
+		Grid grid = new Grid ();
 
 		pregunta.set_halign ( Align.CENTER );
 		pregunta.set_margin_bottom ( 15 );
 		pregunta.set_hexpand ( true );
 		hecho_label.set_halign ( Align.END );
-		hecho_label.set_margin_end ( 20 );
 		hecho_label.set_margin_bottom ( 10 );
 		hecho_nombre.set_halign ( Align.START );
-		hecho_nombre.set_margin_start ( 20 );
 		hecho_nombre.set_margin_bottom ( 10 );
 		lista_label.set_halign ( Align.END );
-		lista_label.set_margin_end ( 20 );
 		lista_nombre.set_halign ( Align.START );
+#if DISABLE_GNOME3
+		hecho_label.set_margin_right ( 20 );
+		hecho_nombre.set_margin_left ( 20 );
+		lista_label.set_margin_right ( 20 );
+		lista_nombre.set_margin_left ( 20 );
+		grid.set_margin_right ( 20 );
+		grid.set_margin_left ( 20 );
+#else
+		hecho_label.set_margin_end ( 20 );
+		hecho_nombre.set_margin_start ( 20 );
+		lista_label.set_margin_end ( 20 );
 		lista_nombre.set_margin_start ( 20 );
-
-		Grid grid = new Grid ( );
+		grid.set_margin_end ( 20 );
+		grid.set_margin_start ( 20 );
+#endif
 
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		grid.set_margin_end ( 20 );
-		grid.set_margin_start ( 20 );
 		grid.set_margin_top ( 20 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_size_request ( 400, -1 );

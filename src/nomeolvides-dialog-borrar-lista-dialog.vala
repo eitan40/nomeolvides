@@ -30,30 +30,37 @@ public class Nomeolvides.BorrarListaDialogo : Dialog {
 		Label lista_nombre = new Label ( "" );
 		Label lista_hechos_label = new Label.with_mnemonic ( _("Amount of facts") + ":");
 		Label lista_hechos = new Label ( "" );
+		Grid grid = new Grid ( );
 
 		pregunta.set_halign ( Align.CENTER );
 		pregunta.set_margin_bottom ( 15 );
 		pregunta.set_hexpand ( true );
 		lista_nombre_label.set_halign ( Align.END );
-		lista_nombre_label.set_margin_end ( 20 );
 		lista_nombre_label.set_margin_bottom ( 10 );
 		lista_nombre.set_halign ( Align.START );
-		lista_nombre.set_margin_start ( 20 );
 		lista_nombre.set_margin_bottom ( 10 );
 		lista_hechos_label.set_halign ( Align.END );
-		lista_hechos_label.set_margin_end ( 20 );
 		lista_hechos.set_halign ( Align.START );
+#if DISABLE_GNOME3
+		lista_nombre_label.set_margin_right ( 20 );
+		lista_nombre.set_margin_left ( 20 );
+		lista_hechos_label.set_margin_right ( 20 );
+		lista_hechos.set_margin_left ( 20 );
+		grid.set_margin_right ( 20 );
+		grid.set_margin_left ( 20 );
+#else
+		lista_nombre_label.set_margin_end ( 20 );
+		lista_nombre.set_margin_start ( 20 );
+		lista_hechos_label.set_margin_end ( 20 );
 		lista_hechos.set_margin_start ( 20 );
-
+		grid.set_margin_end ( 20 );
+		grid.set_margin_start ( 20 );
+#endif
 		lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
 		lista_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 
-		Grid grid = new Grid ( );
-
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		grid.set_margin_end ( 20 );
-		grid.set_margin_start ( 20 );
 		grid.set_margin_top ( 20 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_size_request ( 400, -1 );

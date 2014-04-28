@@ -5,6 +5,7 @@ src/nomeolvides-add-hecho-dialog.vala
 src/nomeolvides-add-hecho-lista-dialog.vala
 src/nomeolvides-add-lista-dialog.vala
 src/nomeolvides-app.vala
+src/nomeolvides-application-window-ventana-principal.vala
 src/nomeolvides-archivo.vala
 src/nomeolvides-borrar-hecho-lista-dialog.vala
 src/nomeolvides-box-anios-hechos-vista.vala

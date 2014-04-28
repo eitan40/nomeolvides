@@ -39,9 +39,13 @@ public class Nomeolvides.DialogColeccion : Gtk.Dialog {
 		this.nombre_coleccion_entry.set_max_length ( 30 );
 
 		var grid = new Grid ();
-
+	#if DISABLE_GNOME3
+		grid.set_margin_right ( 20 );
+		grid.set_margin_left ( 20 );
+	#else
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
+	#endif
 		grid.set_margin_top ( 30 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_valign ( Align.CENTER );

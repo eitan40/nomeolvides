@@ -46,14 +46,20 @@ public class Nomeolvides.DialogoHecho : Dialog
 		var fuente_label = new Label.with_mnemonic (_("Source") + ": ");
 
 		nombre_label.set_halign ( Align.END );
-		nombre_label.set_margin_end ( 15 );
 		fecha_label.set_halign ( Align.END );
-		fecha_label.set_margin_end ( 15 );
 		coleccion_label.set_halign ( Align.END );
-		coleccion_label.set_margin_end ( 15 );
 		fuente_label.set_halign ( Align.END );
+#if DISABLE_GNOME3
+		nombre_label.set_margin_left ( 15 );
+		fecha_label.set_margin_left ( 15 );
+		coleccion_label.set_margin_left ( 15 );
+		fuente_label.set_margin_left ( 15 );
+#else
+		nombre_label.set_margin_end ( 15 );
+		fecha_label.set_margin_end ( 15 );
+		coleccion_label.set_margin_end ( 15 );
 		fuente_label.set_margin_end ( 15 );
-		
+#endif
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
 		

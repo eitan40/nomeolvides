@@ -29,7 +29,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	// Constructor
 	public HeaderBar () {
 		this.get_style_context().remove_class ("toolbar");
-	#if NO_HEADERBAR
+	#if DISABLE_GNOME3
 	#else
 		this.get_style_context().add_class ("header-bar");
 		this.get_style_context().add_class ("titlebar");
@@ -37,26 +37,28 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	#endif
 		this.set_halign ( Align.FILL );
 		this.derecha_box = new Box (Orientation.HORIZONTAL, 6);
+		this.anio_label = new Label ("");
 
 		this.centro_box.set_halign ( Align.CENTER );
 		this.derecha_box.set_halign ( Align.END );
-
+	#if DISABLE_GNOME3
+		this.izquierda_box.set_margin_left ( 8 );
+		this.derecha_box.set_margin_right ( 8 );
+		this.anio_label.set_margin_right ( 2 );
+	#else
 		this.izquierda_box.set_margin_start ( 8 );
 		this.derecha_box.set_margin_end ( 8 );
-
+		this.anio_label.set_margin_end ( 2 );
+	#endif
 		this.pack_start ( derecha_box );
 
 		this.send_button = new NmoButton ( _("Send") );
 		this.list_button = new NmoButton ( _("List") );
-		this.anio_label = new Label ("");
-
-
-		this.anio_label.set_margin_end ( 2 );
 		this.list_button_set_agregar ();
 
 		this.centro_box.pack_start ( this.send_button );
 		this.centro_box.pack_start ( this.list_button );
-	#if NO_HEADERBAR
+	#if DISABLE_GNOME3
 	#else
 		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
 		boton_cerrar.set_relief ( ReliefStyle.NONE );

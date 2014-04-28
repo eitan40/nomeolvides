@@ -45,9 +45,13 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 		grid.set_halign ( Align.CENTER );
 		grid.set_margin_top ( 30 );
 		grid.set_margin_bottom ( 30 );
+	#if DISABLE_GNOME3
+		grid.set_margin_left ( 30 );
+		grid.set_margin_right ( 30 );
+	#else
 		grid.set_margin_start ( 30 );
 		grid.set_margin_end ( 30 );
-		
+	#endif
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
 		grid.attach ( hecho, 0, 1, 1, 1 );

@@ -44,8 +44,13 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		var grid = new Grid ( );
 		grid.set_row_spacing ( 15 );
 		grid.set_column_spacing ( 20 );
+	#if DISABLE_GNOME3
+		grid.set_margin_right ( 30 );
+		grid.set_margin_left ( 30 );
+	#else
 		grid.set_margin_end ( 30 );
 		grid.set_margin_start ( 30 );
+	#endif
 		grid.set_margin_top ( 15 );
 		grid.set_margin_bottom ( 15 );
 		grid.set_valign ( Align.CENTER );

@@ -29,30 +29,37 @@ public class Nomeolvides.BorrarColeccionDialogo : Dialog {
 		Label coleccion_nombre = new Label ( "" );
 		Label coleccion_hechos_label = new Label.with_mnemonic ( _("Amount of Facts") + ":");
 		Label coleccion_hechos = new Label ( "" );
+		Grid grid = new Grid ( );
 
 		pregunta.set_halign ( Align.CENTER );
 		pregunta.set_margin_bottom ( 15 );
 		pregunta.set_hexpand ( true );
 		coleccion_nombre_label.set_halign ( Align.END );
-		coleccion_nombre_label.set_margin_end ( 20 );
 		coleccion_nombre_label.set_margin_bottom ( 10 );
 		coleccion_nombre.set_halign ( Align.START );
-		coleccion_nombre.set_margin_start ( 20 );
 		coleccion_nombre.set_margin_bottom ( 10 );
 		coleccion_hechos_label.set_halign ( Align.END );
-		coleccion_hechos_label.set_margin_end ( 20 );
 		coleccion_hechos.set_halign ( Align.START );
+#if DISABLE_GNOME3
+		coleccion_nombre_label.set_margin_right ( 20 );
+		coleccion_nombre.set_margin_left ( 20 );
+		coleccion_hechos_label.set_margin_right ( 20 );
+		coleccion_hechos.set_margin_left ( 20 );
+		grid.set_margin_right ( 20 );
+		grid.set_margin_left ( 20 );
+#else
+		coleccion_nombre_label.set_margin_end ( 20 );
+		coleccion_nombre.set_margin_start ( 20 );
+		coleccion_hechos_label.set_margin_end ( 20 );
 		coleccion_hechos.set_margin_start ( 20 );
-
+		grid.set_margin_end ( 20 );
+		grid.set_margin_start ( 20 );
+#endif
 		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>");
 		coleccion_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 
-		Grid grid = new Grid ( );
-
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		grid.set_margin_end ( 20 );
-		grid.set_margin_start ( 20 );
 		grid.set_margin_top ( 20 );
 		grid.set_margin_bottom ( 20 );
 		grid.set_size_request ( 400, -1 );
