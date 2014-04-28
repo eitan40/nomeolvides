@@ -72,8 +72,6 @@ public class Nomeolvides.DialogoHecho : Dialog
 		this.descripcion_scroll.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
 		this.descripcion_textview = new TextView ();
 		this.descripcion_textview.set_wrap_mode (WrapMode.WORD);
-
-		this.descripcion_textview.check_resize.connect (this.prueba);
 		
 		this.descripcion_scroll.add_with_viewport ( this.descripcion_textview );
 		descripcion_frame.add ( this.descripcion_scroll );
