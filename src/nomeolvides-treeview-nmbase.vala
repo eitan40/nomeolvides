@@ -35,14 +35,16 @@ public class Nomeolvides.TreeViewNmBase : TreeView {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
-		Value value_id;
+		Value value_elemento;
+		NmBase elemento;
 		int64 id = -1;
 
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 2, out value_id);
-			id = (int64) value_id;
+			this.get_model().get_value (iterador, 2, out value_elemento);
+			elemento = value_elemento as NmBase;
+			id = elemento.id;
 		}
 		
 		return id;
