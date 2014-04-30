@@ -169,7 +169,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	}
 
 	public ListStoreColecciones lista_de_colecciones () {
-		var colecciones = this.db.select_colecciones ( "WHERE visible=\"true\" AND colecciones.id NOT IN coleccionesborrar" );
+		var colecciones = this.db.select_colecciones ( "WHERE colecciones.id NOT IN coleccionesborrar" );
 
 		return this.armar_liststore_colecciones ( colecciones );
 	}
