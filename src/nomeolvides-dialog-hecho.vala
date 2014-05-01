@@ -28,6 +28,7 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected ComboBox combo_colecciones;
 	protected SelectorFecha fecha;
 	protected Entry fuente_entry;
+	protected ToggleButton negrita;
 	public Hecho respuesta { get; protected set; }
 	
 	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
@@ -39,6 +40,8 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.set_transient_for ( ventana as Window );
 
 		this.add_button ( _("Cancel") , ResponseType.CLOSE);
+		this.negrita = new ToggleButton.with_label ("Negrita");
+		this.negrita.toggled.connect ( this.aplicar_estilo );
 		
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
@@ -97,6 +100,7 @@ public class Nomeolvides.DialogHecho : Dialog
 		var contenido = this.get_content_area() as Box;
 
 		contenido.pack_start(box_hecho, false, false, 0);
+		contenido.pack_start( this.negrita, false, false, 0);
 		contenido.pack_start(descripcion_frame, true, true, 0);
 		
 		this.show_all ();
@@ -113,6 +117,17 @@ public class Nomeolvides.DialogHecho : Dialog
 										  this.get_coleccion (),
 										  Utiles.sacarCaracterEspecial ( this.fuente_entry.get_text () ) );
 		}
+	}
+
+	protected void aplicar_estilo () {
+		TextIter inicio;
+		TextIter final;
+		TextTag estilo;
+
+			TextBuffer buffer = this.descripcion_textview.get_buffer ();
+			buffer.get_selection_bounds ( out inicio, out final );
+			estilo = buffer.create_tag ("negrita","weight","heavy");
+			buffer.apply_tag ( estilo, inicio, final );
 	}
 
 	protected void set_combo_box ( ListStoreColecciones liststore) {
