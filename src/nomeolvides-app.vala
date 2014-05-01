@@ -222,7 +222,7 @@ public class Nomeolvides.App : Gtk.Application
 			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
 			archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
 
-			Archivo.crear (archivo, hecho.a_json () );
+			Archivo.escribir (archivo, hecho.a_json () );
 		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
