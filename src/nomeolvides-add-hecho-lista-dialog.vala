@@ -107,9 +107,13 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	private void crear_respuesta () {
 		TreeIter iter;
 		Value lista_elegida;
+		Lista lista;
+
 		this.listas.get_active_iter( out iter );
 		this.liststore.get_value ( iter, 2, out lista_elegida );
-		this.id_lista = (int64) lista_elegida;
+		lista = lista_elegida as Lista;
+
+		this.id_lista = lista.id;
 	}
 
 	public int64 get_id_lista () {
