@@ -104,19 +104,19 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 		Hecho hecho;
 		bool flag = true;
 
-		this.get_iter_first ( out iter );
+		if ( this.get_iter_first ( out iter ) ) {
+			do {
+				this.get_value ( iter, 3, out value_hecho );
+				hecho = (Hecho) value_hecho;
 
-		do {
-			this.get_value ( iter, 3, out value_hecho );
-			hecho = (Hecho) value_hecho;
-
-			if ( this.sobra ( hecho )) {
-				this.remove (iter);
-				flag = this.get_iter_first ( out iter );
-			} else {
-				flag = this.iter_next ( ref iter );
-			}
-		} while ( flag );
+				if ( this.sobra ( hecho )) {
+					this.remove (iter);
+					flag = this.get_iter_first ( out iter );
+				} else {
+					flag = this.iter_next ( ref iter );
+				}
+			} while ( flag );
+		}
 	}
 
 	public Array<Hecho> lista_de_hechos () {

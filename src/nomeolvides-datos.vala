@@ -195,17 +195,6 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hay;
 	}
 
-	private ListStoreHechos armar_liststore_hechos ( Array<Hecho> hechos) {
-		var liststore = new ListStoreHechos ();
-
-		for ( int i=0; i < hechos.length; i++ ) {
-			var hecho = hechos.index (i);
-			liststore.agregar ( hecho );			
-		}
-
-		return liststore;
-	}
-
 	private ListStoreListas armar_liststore_listas ( Array<Lista> listas) {
 		var liststore = new ListStoreListas ();
 
