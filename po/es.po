@@ -175,7 +175,7 @@ msgstr "Agregar a la lista"
 
 #: ../src/nomeolvides-box-headerbar.vala:107
 msgid "Remove from list"
-msgstr "ELiminar de la lista"
+msgstr "Eliminar de la lista"
 
 #: ../src/nomeolvides-box-selector-fecha.vala:55
 msgid "January"
