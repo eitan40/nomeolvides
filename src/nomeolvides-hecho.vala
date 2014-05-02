@@ -18,7 +18,7 @@
  */
 using GLib;
 
-public class Nomeolvides.Hecho : Nomeolvides.NmBase {
+public class Nomeolvides.Hecho : Nomeolvides.NmoBase {
 	public string descripcion { get; private set; }
 	public DateTime fecha {get; private set; }
 	public int64 coleccion;

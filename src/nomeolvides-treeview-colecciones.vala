@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewColecciones : TreeViewNmBase {
+public class Nomeolvides.TreeViewColecciones : TreeViewNmoBase {
 	private CellRendererToggle toggle_visible;
 	
 	public TreeViewColecciones () {

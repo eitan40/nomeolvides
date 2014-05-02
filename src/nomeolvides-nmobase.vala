@@ -20,17 +20,17 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.NmBase : GLib.Object{
+public class Nomeolvides.NmoBase : GLib.Object{
 	public int64 id;
 	public string nombre { get; protected set; }
 	public string hash { get; protected set; }
 	
-	public NmBase ( string nombre ) {
+	public NmoBase ( string nombre ) {
 		this.nombre = nombre;
 		this.calcular_checksum ();
 	}
 
-	public NmBase.json ( string json ) {
+	public NmoBase.json ( string json ) {
 		if ( json != "null") {
 			this.nombre = this.sacarDatoJson (json, "nombre");
 		} else {
@@ -39,7 +39,7 @@ public class Nomeolvides.NmBase : GLib.Object{
 		this.calcular_checksum ();
 	}
 
-	public NmBase.vacio () {
+	public NmoBase.vacio () {
 
 	}
 
