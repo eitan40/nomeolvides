@@ -142,7 +142,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer.borrar_rehacer ();
 	}
 
-	public Array<Hecho> get_lista_anio ( int anio ) {
+	public Array<Hecho> get_hechos_anio ( int anio ) {
 		Array<Hecho> hechos = new Array<Hecho>();
 
 		if ( anio != 0 ) {
@@ -152,18 +152,17 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hechos;
 	}
 
-	public ListStoreHechos get_liststore_lista ( Lista lista ) {
-		ListStoreHechos liststorehechos = new ListStoreHechos ();
+	public Array<Hecho> get_hechos_lista ( Lista lista ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
 
 		if ( lista != null ) {
-			var lista_hechos = this.db.select_hechos_lista ( lista );
-			liststorehechos = this.armar_liststore_hechos(lista_hechos);
+			hechos = this.db.select_hechos_lista ( lista );
 		}
-		return liststorehechos;
+		return hechos;
 	}
 
 	public ListStoreListas lista_de_listas () {
-		var listas = this.db.select_listas (); 
+		var listas = this.db.select_listas ();
 		
 		return this.armar_liststore_listas ( listas );
 	}
@@ -194,17 +193,6 @@ public class Nomeolvides.Datos : GLib.Object {
 			hay = true;
 		}
 		return hay;
-	}
-
-	private ListStoreHechos armar_liststore_hechos ( Array<Hecho> hechos) {
-		var liststore = new ListStoreHechos ();
-
-		for ( int i=0; i < hechos.length; i++ ) {
-			var hecho = hechos.index (i);
-			liststore.agregar ( hecho );			
-		}
-
-		return liststore;
 	}
 
 	private ListStoreListas armar_liststore_listas ( Array<Lista> listas) {
