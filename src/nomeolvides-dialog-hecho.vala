@@ -28,7 +28,8 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected ComboBox combo_colecciones;
 	protected SelectorFecha fecha;
 	protected Entry fuente_entry;
-	protected ToggleButton negrita;
+	protected Button negrita_button;
+	protected Button cursiva_button;
 	public Hecho respuesta { get; protected set; }
 	
 	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
@@ -40,8 +41,10 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.set_transient_for ( ventana as Window );
 
 		this.add_button ( _("Cancel") , ResponseType.CLOSE);
-		this.negrita = new ToggleButton.with_label ("Negrita");
-		this.negrita.toggled.connect ( this.aplicar_estilo );
+		this.negrita_button = new Button.with_label ("Negrita");
+		this.cursiva_button = new Button.with_label ("Cursiva");
+		this.negrita_button.clicked.connect ( this.aplicar_negrita );
+		this.cursiva_button.clicked.connect ( this.aplicar_cursiva );
 		
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
@@ -75,6 +78,8 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.descripcion_scroll.set_policy (PolicyType.AUTOMATIC, PolicyType.AUTOMATIC);
 		this.descripcion_textview = new TextView ();
 		this.descripcion_textview.set_wrap_mode (WrapMode.WORD);
+		this.descripcion_textview.get_buffer ().create_tag ( "negrita","weight", Pango.Weight.HEAVY );
+		this.descripcion_textview.get_buffer ().create_tag ( "cursiva","style", Pango.Style.ITALIC );
 		
 		this.descripcion_scroll.add_with_viewport ( this.descripcion_textview );
 		descripcion_frame.add ( this.descripcion_scroll );
@@ -100,7 +105,8 @@ public class Nomeolvides.DialogHecho : Dialog
 		var contenido = this.get_content_area() as Box;
 
 		contenido.pack_start(box_hecho, false, false, 0);
-		contenido.pack_start( this.negrita, false, false, 0);
+		contenido.pack_start( this.negrita_button, false, false, 0);
+		contenido.pack_start( this.cursiva_button, false, false, 0);
 		contenido.pack_start(descripcion_frame, true, true, 0);
 		
 		this.show_all ();
@@ -119,15 +125,36 @@ public class Nomeolvides.DialogHecho : Dialog
 		}
 	}
 
-	protected void aplicar_estilo () {
+	protected void aplicar_negrita () {
 		TextIter inicio;
 		TextIter final;
-		TextTag estilo;
 
-			TextBuffer buffer = this.descripcion_textview.get_buffer ();
+		TextBuffer buffer = this.descripcion_textview.get_buffer ();
+		if ( buffer.get_has_selection () ) {
 			buffer.get_selection_bounds ( out inicio, out final );
-			estilo = buffer.create_tag ("negrita","weight","heavy");
-			buffer.apply_tag ( estilo, inicio, final );
+
+			if ( inicio.has_tag (buffer.get_tag_table ().lookup ("negrita")) ) {
+				buffer.remove_tag_by_name ( "negrita", inicio, final );
+			} else {
+				buffer.apply_tag_by_name ( "negrita", inicio, final );
+			}
+		}
+	}
+
+	protected void aplicar_cursiva () {
+		TextIter inicio;
+		TextIter final;
+
+		TextBuffer buffer = this.descripcion_textview.get_buffer ();
+		if ( buffer.get_has_selection () ) {
+			buffer.get_selection_bounds ( out inicio, out final );
+
+			if ( inicio.has_tag (buffer.get_tag_table ().lookup ("cursiva")) ) {
+				buffer.remove_tag_by_name ( "cursiva", inicio, final );
+			} else {
+				buffer.apply_tag_by_name ( "cursiva", inicio, final );
+			}
+		}
 	}
 
 	protected void set_combo_box ( ListStoreColecciones liststore) {
