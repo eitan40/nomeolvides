@@ -22,13 +22,8 @@ using Nomeolvides;
 
 public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 	public TreeViewEtiquetas etiquetas_view { get; private set; }
-	private ToolButton aniadir_etiqueta_button;
-	private ToolButton deshacer_button;
-	private ToolButton rehacer_button;
-	private ToolButton editar_etiqueta_button;
-	private ToolButton borrar_etiqueta_button;
+	private Toolbar toolbar;
 	public bool cambios { get; private set; }
-	public Button boton_aniadir;
 	private AccionesDB db;
 	private Deshacer<Etiqueta> deshacer;
 		
@@ -36,39 +31,9 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.set_orientation ( Orientation.VERTICAL );
 
-		Toolbar toolbar = new Toolbar ();
-		this.aniadir_etiqueta_button = new ToolButton.from_stock ( Stock.ADD );
-		this.deshacer_button = new ToolButton.from_stock ( Stock.UNDO );
-		this.rehacer_button = new ToolButton.from_stock ( Stock.REDO );
-		this.editar_etiqueta_button = new ToolButton.from_stock ( Stock.EDIT );
-		this.borrar_etiqueta_button = new ToolButton.from_stock ( Stock.DELETE );
-		aniadir_etiqueta_button.is_important = true;
-		this.deshacer_button.is_important = true;
-		this.rehacer_button.is_important = true;
-		editar_etiqueta_button.is_important = true;
-		borrar_etiqueta_button.is_important = true;
-		editar_etiqueta_button.set_visible_horizontal ( false );
-		borrar_etiqueta_button.set_visible_horizontal ( false );
-		this.deshacer_button.set_sensitive ( false );
-		this.rehacer_button.set_sensitive ( false );
-		SeparatorToolItem separador = new SeparatorToolItem ();
-		separador.set_expand ( true );
-		separador.draw = false;
+		this.toolbar = new Toolbar ();
 
 		this.deshacer = new Deshacer<Etiqueta> ();
-
-		this.editar_etiqueta_button.clicked.connect ( edit_etiqueta_dialog );
-		this.borrar_etiqueta_button.clicked.connect ( borrar_etiqueta_dialog );
-		this.aniadir_etiqueta_button.clicked.connect ( add_etiqueta_dialog );
-		this.deshacer_button.clicked.connect ( this.deshacer_cambios );
-		this.rehacer_button.clicked.connect ( this.rehacer_cambios );
-
-		toolbar.add ( aniadir_etiqueta_button );
-		toolbar.add ( deshacer_button );
-		toolbar.add ( rehacer_button );
-		toolbar.add ( separador );
-		toolbar.add ( editar_etiqueta_button );
-		toolbar.add ( borrar_etiqueta_button );
 		
 		this.conectar_signals ();
 		this.cambios = false;
@@ -90,11 +55,17 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 	}
 
 	private void conectar_signals () {
-		this.deshacer.deshacer_sin_items.connect ( this.desactivar_deshacer );
-		this.deshacer.deshacer_con_items.connect ( this.activar_deshacer );
-		this.deshacer.rehacer_sin_items.connect ( this.desactivar_rehacer );
-		this.deshacer.rehacer_con_items.connect ( this.activar_rehacer );
-	}
+		this.toolbar.add_button.clicked.connect ( this.add_etiqueta_dialog );
+		this.toolbar.delete_button.clicked.connect ( this.borrar_etiqueta_dialog );
+		this.toolbar.edit_button.clicked.connect ( this.edit_etiqueta_dialog );
+		this.toolbar.undo_button.clicked.connect ( this.deshacer_cambios );
+		this.toolbar.redo_button.clicked.connect ( this.rehacer_cambios );
+
+		this.deshacer.deshacer_sin_items.connect ( this.toolbar.desactivar_deshacer );
+		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
+		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
+		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
+}
 
 	private void add_etiqueta_dialog () {
 		ListStoreEtiquetas liststore;
@@ -154,16 +125,15 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 		this.cambios = true;
 	}
 
-	private void set_buttons_visible ( bool cambiar ) {
-		this.editar_etiqueta_button.set_visible_horizontal ( cambiar );
-		this.borrar_etiqueta_button.set_visible_horizontal ( cambiar );
+	public void set_buttons_invisible () {
+		this.toolbar.set_buttons_invisible ();
 	}
 
 	private void elegir_etiqueta () {
 		if( this.etiquetas_view.get_elemento_id () != -1 ) {
-			this.set_buttons_visible ( true );
+			this.toolbar.set_buttons_visible ();
 		} else {
-			this.set_buttons_visible ( false );		
+			this.toolbar.set_buttons_invisible ();
 		}
 	}
 
@@ -203,19 +173,5 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 		}
 	}
 
-	public void activar_deshacer () {
-		this.deshacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_deshacer () {
-		this.deshacer_button.set_sensitive ( false );
-	}
-
-	public void activar_rehacer () {
-		this.rehacer_button.set_sensitive ( true );
-	}
-
-	public void desactivar_rehacer () {
-		this.rehacer_button.set_sensitive ( false );
-	}
+	public signal void cambio_colecciones_signal ();
 }

@@ -27,7 +27,7 @@ public class Nomeolvides.EditEtiquetaDialog : DialogEtiqueta
 	public EditEtiquetaDialog ( )
 	{
 		this.title = _("Edit Tag");
-		this.add_button (Stock.EDIT , ResponseType.APPLY);
+		this.add_button (_("Edit") , ResponseType.APPLY);
 	}
 
 	protected override void crear_respuesta () {

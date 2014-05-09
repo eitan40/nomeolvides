@@ -1,5 +1,6 @@
 data/nomeolvides.appdata.xml.in
 data/nomeolvides.desktop.in.in
+src/nomeolvides-add-etiqueta-dialog.vala
 src/nomeolvides-app.vala
 src/nomeolvides-archivo.vala
 src/nomeolvides-configuracion.vala
@@ -23,6 +24,9 @@ src/nomeolvides-dialog-lista-editar.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-dialog-preferencias.vala
+src/nomeolvides-dialog-borrar-etiqueta-dialog.vala
+src/nomeolvides-dialog-etiqueta.vala
+src/nomeolvides-edit-etiqueta-dialog.vala
 src/nomeolvides-hecho.vala
 src/nomeolvides-importar-hechos.vala
 src/nomeolvides-interfaz-principal.vala
@@ -34,6 +38,7 @@ src/nomeolvides-treeview-anios.vala
 src/nomeolvides-treeview-base.vala
 src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-hechos.vala
+src/nomeolvides-treeview-etiquetas.vala
 src/nomeolvides-treeview-listas.vala
 src/nomeolvides-ventana-principal.vala
 [type: gettext/glade]src/nomeolvides-app-menu.ui

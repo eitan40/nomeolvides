@@ -80,7 +80,7 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-etiqueta.vala \
 	nomeolvides-edit-etiqueta-dialog.vala \
 	nomeolvides-add-etiqueta-dialog.vala \
-	nomeolvides-dialogo-borrar-etiqueta-dialog.vala
+	nomeolvides-dialog-borrar-etiqueta-dialog.vala
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \

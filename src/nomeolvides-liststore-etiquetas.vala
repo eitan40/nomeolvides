@@ -20,9 +20,9 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListStoreEtiquetas : ListStoreNmBase {
+public class Nomeolvides.ListStoreEtiquetas : ListStoreNmoBase {
 	public ListStoreEtiquetas () {
-		Type[] tipos= { typeof(string), typeof(int), typeof(int64) };
+		Type[] tipos= { typeof(string), typeof(int), typeof(Etiqueta) };
 		base ( tipos );
 	}
 }

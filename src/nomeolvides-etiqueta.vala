@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Etiqueta : Nomeolvides.NmBase {
+public class Nomeolvides.Etiqueta : Nomeolvides.NmoBase {
 	
 	public Etiqueta ( string nombre ) {
 		base ( nombre );
@@ -32,10 +32,10 @@ public class Nomeolvides.Etiqueta : Nomeolvides.NmBase {
 		}	
 		base.json ( "null" );
 		
-		this.calcular_checksum ();
+		this.hash = Utiles.calcular_checksum ( json );
 	}
 
-	public string a_json () {
+	public new string a_json () {
 		string retorno = "{\"Etiqueta\":{";
 		
 		retorno += base.a_json ();

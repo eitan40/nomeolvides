@@ -25,6 +25,6 @@ public class Nomeolvides.AddEtiquetaDialog : DialogEtiqueta
 	public AddEtiquetaDialog ( )
 	{
 		this.title = _("Add Tag");
-		this.add_button (Stock.ADD , ResponseType.APPLY);
+		this.add_button (_("Add") , ResponseType.APPLY);
 	}
 }
