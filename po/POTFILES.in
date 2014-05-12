@@ -5,7 +5,6 @@ src/nomeolvides-add-hecho-dialog.vala
 src/nomeolvides-add-hecho-lista-dialog.vala
 src/nomeolvides-add-lista-dialog.vala
 src/nomeolvides-app.vala
-src/nomeolvides-application-window-ventana-principal.vala
 src/nomeolvides-archivo.vala
 src/nomeolvides-borrar-hecho-lista-dialog.vala
 src/nomeolvides-box-anios-hechos-vista.vala
@@ -32,7 +31,7 @@ src/nomeolvides-preferencias.vala
 src/nomeolvides-sqlite.vala
 src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-listas.vala
-src/nomeolvides-treeview-nmbase.vala
+src/nomeolvides-treeview-nmobase.vala
 src/nomeolvides-treeview-view-anios.vala
 src/nomeolvides-treeview-view-hechos.vala
 [type: gettext/glade]src/nomeolvides-app-menu.ui

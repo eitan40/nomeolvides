@@ -4,7 +4,6 @@ src/nomeolvides-add-hecho-dialog.c
 src/nomeolvides-add-hecho-lista-dialog.c
 src/nomeolvides-add-lista-dialog.c
 src/nomeolvides-app.c
-src/nomeolvides-application-window-ventana-principal.c
 src/nomeolvides-archivo.c
 src/nomeolvides-borrar-hecho-lista-dialog.c
 src/nomeolvides-box-anios-hechos-vista.c
@@ -31,6 +30,6 @@ src/nomeolvides-preferencias.c
 src/nomeolvides-sqlite.c
 src/nomeolvides-treeview-colecciones.c
 src/nomeolvides-treeview-listas.c
-src/nomeolvides-treeview-nmbase.c
+src/nomeolvides-treeview-nmobase.c
 src/nomeolvides-treeview-view-anios.c
 src/nomeolvides-treeview-view-hechos.c
