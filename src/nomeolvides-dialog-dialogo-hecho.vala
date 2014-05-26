@@ -105,13 +105,13 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected void crear_respuesta() {
 		if(this.nombre_entry.get_text_length () > 0)
 		{
-			this.respuesta  = new Hecho ( Hecho.sacarCaracterEspecial ( this.nombre_entry.get_text () ),
-										  Hecho.sacarCaracterEspecial ( this.descripcion_textview.buffer.text ),
+			this.respuesta  = new Hecho ( Utiles.sacarCaracterEspecial ( this.nombre_entry.get_text () ),
+										  Utiles.sacarCaracterEspecial ( this.descripcion_textview.buffer.text ),
 										  this.fecha.get_anio (),
 										  this.fecha.get_mes (),
 										  this.fecha.get_dia (),
 										  this.get_coleccion (),
-										  Hecho.sacarCaracterEspecial ( this.fuente_entry.get_text () ) );
+										  Utiles.sacarCaracterEspecial ( this.fuente_entry.get_text () ) );
 		}
 	}
 

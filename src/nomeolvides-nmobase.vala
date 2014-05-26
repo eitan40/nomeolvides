@@ -17,7 +17,6 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.NmoBase : GLib.Object{
@@ -27,16 +26,16 @@ public class Nomeolvides.NmoBase : GLib.Object{
 	
 	public NmoBase ( string nombre ) {
 		this.nombre = nombre;
-		this.calcular_checksum ();
+		Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public NmoBase.json ( string json ) {
 		if ( json != "null") {
-			this.nombre = this.sacarDatoJson (json, "nombre");
+			this.nombre = Utiles.sacarDatoJson ( json, "nombre" );
 		} else {
 			this.nombre = "null";
 		}	
-		this.calcular_checksum ();
+		Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public NmoBase.vacio () {
@@ -60,20 +59,8 @@ public class Nomeolvides.NmoBase : GLib.Object{
 		
 		return retorno;
 	}
- 
-	protected string sacarDatoJson(string json, string campo) {
-		int inicio,fin;
-		inicio = json.index_of(":",json.index_of(campo)) + 2;
-		fin = json.index_of ("\"", inicio);
-		return json[inicio:fin];
-	}
 
 	public string get_checksum () {
 		return this.hash;
-	}
-
-	protected void calcular_checksum () {
-		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
-		this.hash = this.hash.slice ( 0, 12);
 	}
 }

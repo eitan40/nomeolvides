@@ -217,7 +217,7 @@ public class Nomeolvides.App : Gtk.Application
 			asunto = "Envío un hecho para contribuir con la base de datos oficial";
 			cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
 			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
-			archivo = GLib.Environment.get_tmp_dir () + "/"+ hecho.nombre_para_archivo() +".json";
+			archivo = GLib.Environment.get_tmp_dir () + "/"+ Utiles.nombre_para_archivo ( hecho.nombre ) +".json";
 
 			Archivo.escribir (archivo, hecho.a_json () );
 		

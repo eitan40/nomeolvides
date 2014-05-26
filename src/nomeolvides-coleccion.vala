@@ -33,7 +33,7 @@ public class Nomeolvides.Coleccion : Nomeolvides.NmoBase {
 			json = "null";
 			this.visible = false;
 		} else { 
-			this.visible = bool.parse ( this.sacarDatoJson (json, "visible") );
+			this.visible = bool.parse ( Utiles.sacarDatoJson (json, "visible") );
 		}
 
 		base.json ( json );

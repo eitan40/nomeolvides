@@ -182,7 +182,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	}
 
 	public void insert_hecho ( Hecho hecho ) {
-		Array<Hecho> existe = select_hechos ( "WHERE hechos.nombre=\"" + Hecho.sacarCaracterEspecial ( hecho.nombre ) + "\" AND " +
+		Array<Hecho> existe = select_hechos ( "WHERE hechos.nombre=\"" + Utiles.sacarCaracterEspecial ( hecho.nombre ) + "\" AND " +
 											  "anio=\"" + hecho.get_anio ().to_string () + "\" AND " +
 		                                      "mes=\"" + hecho.get_mes ().to_string () + "\" AND " +
 		                                      "dia=\"" + hecho.get_dia ().to_string () + "\"" );
