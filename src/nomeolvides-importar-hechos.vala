@@ -75,7 +75,6 @@ public class Nomeolvides.ImportarHechos : OpenFileDialog {
 		ListStoreColecciones liststore = this.combo_colecciones.get_model () as ListStoreColecciones;
 		liststore.get_value ( iter, 2, out value_coleccion );
 		coleccion = value_coleccion as Coleccion;
-		print ("Colección nombre: " + coleccion.nombre  + "\n");
 
 		return coleccion.id;
 	}

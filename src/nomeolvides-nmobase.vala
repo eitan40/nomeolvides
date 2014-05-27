@@ -25,7 +25,7 @@ public class Nomeolvides.NmoBase : GLib.Object{
 	public string hash { get; protected set; }
 	
 	public NmoBase ( string nombre ) {
-		this.nombre = nombre;
+		this.nombre = Utiles.ponerCaracterEspecial ( nombre );
 		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
@@ -43,19 +43,20 @@ public class Nomeolvides.NmoBase : GLib.Object{
 	}
 
 	public string a_json () {	
-		var retorno = "\"nombre\":\"" + this.nombre + "\"";
+		var retorno = "\"nombre\":\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
 		
 		return retorno;
 	}
 
 	public string a_sql () {
-		var retorno  = "nombre=\"" + this.nombre + "\"";
+		var retorno  = "nombre=\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
+		print ( retorno + "\n" );
 		
 		return retorno;
 	}
 
 	public string to_string () {
-		var retorno  = "\"" + this.nombre + "\"";
+		var retorno  = "\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
 		
 		return retorno;
 	}

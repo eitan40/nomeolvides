@@ -40,8 +40,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 		var rc = this.db.exec ("PRAGMA foreign_keys=ON;", null, null);
 
-		if (rc != Sqlite.OK) { 
-            stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+		if (rc != Sqlite.OK) {
+			stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
         }
 		
 		return retorno;
@@ -68,9 +68,9 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 			//print ("INSERT INTO \""+ tabla +"\" VALUES (" + valores + ")" + "\n");
 
-			if (rc != Sqlite.OK) { 
- 	          stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
-			  retorno = false;
+			if (rc != Sqlite.OK) {
+				stderr.printf ( "SQL error: %d, %s\n", rc, db.errmsg () );
+				retorno = false;
   			}
 		}
 
@@ -85,8 +85,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 			var rc = this.db.exec ("DELETE FROM " + tabla + " " + where, null, null);
 
-			if (rc != Sqlite.OK) { 
-  				stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+			if (rc != Sqlite.OK) {
+				stderr.printf ( "SQL error: %d, %s\n", rc, db.errmsg () );
 				retorno = false;
     		}
 		}
@@ -103,8 +103,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 			var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
 
 			if (rc != Sqlite.OK) {
-				print ("OK\n");
-        		stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
+				stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
 				retorno = false;
     		}
 		}

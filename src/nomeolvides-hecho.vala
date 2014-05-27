@@ -73,11 +73,11 @@ public class Nomeolvides.Hecho : Nomeolvides.NmoBase {
 
 	public new string to_string () {
 		var retorno  = base.to_string () + ",";
-		retorno += "\"" + Utiles.sacarCaracterEspecial( this.descripcion ) + "\",";
+		retorno += "\"" + this.descripcion + "\",";
 		retorno += "\"" + this.fecha.get_year ().to_string () + "\",";
 		retorno += "\"" + this.fecha.get_month ().to_string () + "\",";
 		retorno += "\"" + this.fecha.get_day_of_month ().to_string () + "\",";
-		retorno += "\"" + Utiles.sacarCaracterEspecial( this.fuente ) + "\",";
+		retorno += "\"" + this.fuente + "\",";
 		retorno += "\"" + this.coleccion.to_string () + "\"";
 
 		return retorno;
@@ -91,7 +91,8 @@ public class Nomeolvides.Hecho : Nomeolvides.NmoBase {
 		retorno += "dia=\"" + this.fecha.get_day_of_month ().to_string () + "\",";
 		retorno += "fuente=\"" + Utiles.sacarCaracterEspecial( this.fuente ) + "\",";
 		retorno += "coleccion=\"" + this.coleccion.to_string () + "\"";
-		print (retorno + "\n");
+
+		print ( retorno + "\n" );
 		
 		return retorno;
 	}
