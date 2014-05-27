@@ -16,10 +16,6 @@ AC_PROG_CC
 
 LT_INIT
 
-
-dnl Check for vala
-AM_PROG_VALAC([0.20.0])
-
 # i18n stuff
 IT_PROG_INTLTOOL([0.40])
 
@@ -45,6 +41,13 @@ AC_ARG_ENABLE([gnome3_support],[AS_HELP_STRING([--disable-gnome3-support],[disab
 AS_ECHO("checking for building with Gnome 3 support... ${gnome3_support}")
 
 AM_CONDITIONAL(DISABLE_GNOME3, test "x${gnome3_support}" = "xno")
+
+dnl Check for vala
+if [test "x${gnome3_support}" = "xno"]; then
+AM_PROG_VALAC([0.16.0])
+else
+AM_PROG_VALAC([0.20.0])
+fi
 
 AC_OUTPUT([
 Makefile
