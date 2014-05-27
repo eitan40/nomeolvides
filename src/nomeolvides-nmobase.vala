@@ -26,7 +26,7 @@ public class Nomeolvides.NmoBase : GLib.Object{
 	
 	public NmoBase ( string nombre ) {
 		this.nombre = nombre;
-		Utiles.calcular_checksum ( this.a_json () );
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public NmoBase.json ( string json ) {
@@ -35,7 +35,7 @@ public class Nomeolvides.NmoBase : GLib.Object{
 		} else {
 			this.nombre = "null";
 		}	
-		Utiles.calcular_checksum ( this.a_json () );
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public NmoBase.vacio () {

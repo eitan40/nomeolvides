@@ -32,7 +32,7 @@ public class Nomeolvides.Hecho : Nomeolvides.NmoBase {
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		this.coleccion = coleccion;
 		this.fuente = Utiles.ponerCaracterEspecial ( fuente );
-		Utiles.calcular_checksum ( this.a_json () );
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public Hecho.json (string json, int64 coleccion ) {
@@ -51,7 +51,7 @@ public class Nomeolvides.Hecho : Nomeolvides.NmoBase {
 			                     		   0,0,0);
 			this.fuente = Utiles.ponerCaracterEspecial ( Utiles.sacarDatoJson ( json, "fuente" ) );
 		}	
-		Utiles.calcular_checksum ( this.a_json () );
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 
 		this.coleccion = coleccion;
 	}

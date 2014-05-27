@@ -102,7 +102,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		
 			var rc = this.db.exec ("UPDATE " + tabla + " SET " + valores + " " + where, null, null);
 
-			if (rc != Sqlite.OK) { 
+			if (rc != Sqlite.OK) {
+				print ("OK\n");
         		stderr.printf ("SQL error: %d, %s\n", rc, db.errmsg ());
 				retorno = false;
     		}
