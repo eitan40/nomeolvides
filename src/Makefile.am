@@ -69,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-liststore-anios.vala \
 	nomeolvides-treeview-nmobase.vala \
 	nomeolvides-nmobase.vala \
-	nomeolvides-liststore-nmobase.vala
+	nomeolvides-liststore-nmobase.vala \
+	nomeolvides-utiles.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

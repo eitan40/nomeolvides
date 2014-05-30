@@ -47,8 +47,10 @@ public class Nomeolvides.ListStoreAnios : ListStore {
 		for ( int i = 0; i < nuevos.length; i++ ) {
 			this.anios.append_val ( nuevos.index (i) );
 		}
-		
-		this.eliminar_sobrantes ();
+
+		if ( nuevos.length > 0 ) {
+			this.eliminar_sobrantes ();
+		}
 	}
 
 	public bool ya_agregado ( int nuevo ) {

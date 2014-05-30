@@ -32,7 +32,7 @@ public class Nomeolvides.Lista : Nomeolvides.NmoBase {
 		}	
 		base.json ( "null" );
 		
-		this.calcular_checksum ();
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public new string a_json () {

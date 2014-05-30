@@ -64,7 +64,9 @@ public class Nomeolvides.ListStoreHechos : ListStore {
 			this.hechos.append_val ( nuevos.index (i) );
 		}
 
-		this.eliminar_sobrantes ();
+		if ( nuevos.length > 0 ) {
+			this.eliminar_sobrantes ();
+		}
 	}
 
 	public bool ya_agregado ( Hecho nuevo ) {

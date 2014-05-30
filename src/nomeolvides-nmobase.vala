@@ -17,7 +17,6 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.NmoBase : GLib.Object{
@@ -26,17 +25,17 @@ public class Nomeolvides.NmoBase : GLib.Object{
 	public string hash { get; protected set; }
 	
 	public NmoBase ( string nombre ) {
-		this.nombre = nombre;
-		this.calcular_checksum ();
+		this.nombre = Utiles.ponerCaracterEspecial ( nombre );
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public NmoBase.json ( string json ) {
 		if ( json != "null") {
-			this.nombre = this.sacarDatoJson (json, "nombre");
+			this.nombre = Utiles.sacarDatoJson ( json, "nombre" );
 		} else {
 			this.nombre = "null";
 		}	
-		this.calcular_checksum ();
+		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
 	public NmoBase.vacio () {
@@ -44,36 +43,25 @@ public class Nomeolvides.NmoBase : GLib.Object{
 	}
 
 	public string a_json () {	
-		var retorno = "\"nombre\":\"" + this.nombre + "\"";
+		var retorno = "\"nombre\":\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
 		
 		return retorno;
 	}
 
 	public string a_sql () {
-		var retorno  = "nombre=\"" + this.nombre + "\"";
+		var retorno  = "nombre=\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
+		print ( retorno + "\n" );
 		
 		return retorno;
 	}
 
 	public string to_string () {
-		var retorno  = "\"" + this.nombre + "\"";
+		var retorno  = "\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
 		
 		return retorno;
-	}
- 
-	protected string sacarDatoJson(string json, string campo) {
-		int inicio,fin;
-		inicio = json.index_of(":",json.index_of(campo)) + 2;
-		fin = json.index_of ("\"", inicio);
-		return json[inicio:fin];
 	}
 
 	public string get_checksum () {
 		return this.hash;
-	}
-
-	protected void calcular_checksum () {
-		this.hash = Checksum.compute_for_string(ChecksumType.SHA1, this.a_json() );
-		this.hash = this.hash.slice ( 0, 12);
 	}
 }
