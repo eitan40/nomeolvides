@@ -91,8 +91,6 @@ public class Nomeolvides.Hecho : Nomeolvides.NmoBase {
 		retorno += "dia=\"" + this.fecha.get_day_of_month ().to_string () + "\",";
 		retorno += "fuente=\"" + Utiles.sacarCaracterEspecial( this.fuente ) + "\",";
 		retorno += "coleccion=\"" + this.coleccion.to_string () + "\"";
-
-		print ( retorno + "\n" );
 		
 		return retorno;
 	}
