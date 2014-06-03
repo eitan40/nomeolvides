@@ -51,7 +51,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-acciones-db.vala \
 	nomeolvides-liststore-colecciones.vala \
 	nomeolvides-treeview-colecciones.vala \
-	nomeolvides-add-coleccion-dialog.vala \
 	nomeolvides-dialog-borrar-coleccion-dialogo.vala \
 	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-liststore-nmobase.vala \
 	nomeolvides-utiles.vala \
 	nomeolvides-treeview-hechos.vala \
-	nomeolvides-treeview-anios.vala
+	nomeolvides-treeview-anios.vala \
+	nomeolvides-dialogo-coleccion-agregar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
