@@ -28,7 +28,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-configuracion.vala \
 	nomeolvides-archivo.vala \
 	nomeolvides-treeview-view-anios.vala \
-	nomeolvides-treeview-view-hechos.vala \
 	nomeolvides-box-vista-hecho.vala \
 	nomeolvides-box-selector-fecha.vala \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-treeview-nmobase.vala \
 	nomeolvides-nmobase.vala \
 	nomeolvides-liststore-nmobase.vala \
-	nomeolvides-utiles.vala
+	nomeolvides-utiles.vala \
+	nomeolvides-treeview-hechos.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
