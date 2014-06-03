@@ -22,7 +22,7 @@ using Nomeolvides;
 
 public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	private TreeViewHechos hechos_view;
-	private ViewAnios anios_view;
+	private TreeViewAnios anios_view;
 	private TreeViewListas listas_view;
 	private VistaHecho vista_hecho;
 	private ScrolledWindow scroll_hechos_view;
@@ -35,7 +35,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	public Anios_hechos_vista () {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
-		this.anios_view = new ViewAnios ();
+		this.anios_view = new TreeViewAnios ();
 		this.hechos_view = new TreeViewHechos ();
 		this.listas_view = new TreeViewListas.ventana_principal ();
 		this.vista_hecho = new VistaHecho ();
