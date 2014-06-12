@@ -250,11 +250,13 @@ public class Nomeolvides.App : Gtk.Application
 		if ( this.datos.hay_listas () ) {
 			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
 
-				dialogo.set_hecho ( hecho );
-                dialogo.set_listas ( this.datos.lista_de_listas() );
+			dialogo.setear_hechos ( this.window.get_hechos_seleccionados () );
+            dialogo.setear_listas ( this.datos.lista_de_listas() );
 
 			if (dialogo.run () == ResponseType.APPLY) {
-       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_id_lista () );
+				for (int i = 0; i < dialogo.hechos.length; i++ ) {
+					this.datos.agregar_hecho_lista ( dialogo.hechos.index (i), dialogo.get_id_lista () );
+				}
 			}
 			dialogo.close ();
 		}

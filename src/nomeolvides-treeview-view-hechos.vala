@@ -37,9 +37,10 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		this.insert_column_with_attributes (-1, _("Date"), fecha_cell, "text", 2);
 		this.model = new ListStoreHechos.anio_int (0);
 		this.set_model ( new ListStoreHechos () );
+		this.get_selection ().set_mode ( SelectionMode.MULTIPLE );
 	}
 
-	public void mostrar_anio ( Array<Hecho> hechos ) {
+	public void mostrar_hechos ( Array<Hecho> hechos ) {
 		ListStoreHechos model = this.get_model () as ListStoreHechos;
 		model.agregar_hechos ( hechos );
 		cambia_anio_signal ();
@@ -67,6 +68,23 @@ public class Nomeolvides.ViewHechos : Gtk.TreeView {
 		} else { 
 			return (TreePath) null;
 		}		
+	}
+
+	 public Array<Hecho> get_hechos_seleccionados () {
+		TreeIter iter;
+		Value hecho_value;
+		var hechos = new Array<Hecho> ();
+		var liststore = this.get_model ();
+
+		var list_path = this.get_selection ().get_selected_rows ( out liststore );
+
+		for ( uint i = 0; i < list_path.length (); i++ ) {
+			this.get_model ().get_iter ( out iter, list_path.nth_data ( i ));
+			this.get_model().get_value (iter, 3, out hecho_value);
+			hechos.append_val ( (Hecho) hecho_value );
+		}
+
+		return hechos;
 	}
 
 	public signal void cambia_anio_signal ();

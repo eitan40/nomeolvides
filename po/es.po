@@ -47,7 +47,7 @@ msgstr "Agregar una Coleccion"
 #: ../src/nomeolvides-add-coleccion-dialog.vala:28
 #: ../src/nomeolvides-add-hecho-dialog.vala:32
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:40
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:61
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:60
 #: ../src/nomeolvides-add-lista-dialog.vala:28
 #: ../src/nomeolvides-box-toolbar.vala:46
 msgid "Add"
@@ -74,15 +74,19 @@ msgstr "Agregar Hecho a la Lista"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:62
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:61
 msgid "to list"
 msgstr "a la lista"
+
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:84
+msgid "Add Facts to List"
+msgstr "Agregar Hechos a la Lista"
 
 #: ../src/nomeolvides-add-lista-dialog.vala:27
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
-#: ../src/nomeolvides-app.vala:318
+#: ../src/nomeolvides-app.vala:320
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:67
 #: ../src/nomeolvides-treeview-view-anios.vala:31
 msgid "Years"
@@ -244,7 +248,7 @@ msgstr "Fuente"
 
 #: ../src/nomeolvides-configuracion.vala:33
 msgid "Historical ephemeris manager"
-msgstr "Gestor de efemérides histórica"
+msgstr "Gestor de efemérides históricas"
 
 #: ../src/nomeolvides-configuracion.vala:34
 msgid "and"

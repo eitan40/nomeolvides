@@ -218,6 +218,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		return this.anios_hechos.get_hecho_actual (out hecho );
 	}
 
+	public Array<Hecho> get_hechos_seleccionados () {
+		return this.anios_hechos.get_hechos_seleccionados ();
+	}
+
 	private void elegir_hecho () {
 		Hecho hecho; 
 		this.get_hecho_actual ( out hecho );
@@ -278,8 +282,8 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	public void menu_acerca_activate_signal () {
 		this.menu_acerca_activate ();
 	}
-#endif
 
+#endif
 	public signal void toolbar_add_button_clicked ();
 	public signal void toolbar_undo_button_clicked ();
 	public signal void toolbar_redo_button_clicked ();

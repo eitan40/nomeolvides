@@ -151,7 +151,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	public void cargar_lista_hechos ( Array<Hecho> hechos ) {
-		this.hechos_view.mostrar_anio ( hechos );
+		this.hechos_view.mostrar_hechos ( hechos );
 	}
 
 	public int get_anio_actual () {
@@ -166,6 +166,10 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		return this.hechos_view.get_hecho_cursor (out hecho );
 	}
 
+	public TreeSelection get_hechos_selection ( ) {
+		return this.hechos_view.get_selection ();
+	}
+
 	public string get_nombre_pestania () {
 		return this.anios_listas.get_tab_label_text ( this.anios_listas.get_nth_page
 		                                               ( this.anios_listas.get_current_page () ) );
@@ -173,6 +177,10 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	public void limpiar_hechos_view () {
 		this.hechos_view.limpiar ();
+	}
+
+	public Array<Hecho> get_hechos_seleccionados () {
+		return this.hechos_view.get_hechos_seleccionados ();
 	}
 
 	public signal void hechos_cursor_changed ();
