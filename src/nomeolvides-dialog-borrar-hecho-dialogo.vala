@@ -79,7 +79,7 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 	}
 
 	private void set_labels ( Array<Hecho> hechos_elegidos ) {
-		if ( hechos_elegidos.length < 1 ) {
+		if ( hechos_elegidos.length == 1 ) {
 			this.set_title ( _("Remove Fact") );
 			Label hecho_de = new Label.with_mnemonic ( _("dated") + ":" );
 			Label hecho_fecha = new Label.with_mnemonic ( "" );
