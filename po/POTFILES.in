@@ -20,6 +20,7 @@ src/nomeolvides-dialog-hecho.vala
 src/nomeolvides-dialog-lista-agregar.vala
 src/nomeolvides-dialog-lista-borrar.vala
 src/nomeolvides-dialog-lista-editar.vala
+src/nomeolvides-dialog-error.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-dialog-preferencias.vala

@@ -28,16 +28,19 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms = new Sqlite3 ( nombredb );
 	}
 
-	public void insert_hecho ( Hecho hecho ) {
-		this.dbms.insert_hecho ( hecho );
+	public bool insert_hecho ( Hecho hecho ) {
+		var retorno = this.dbms.insert_hecho ( hecho );
+		print ( "accionesdb.insert_hecho devuelve: " + retorno.to_string() + "\n");
+
+		return retorno;
 	}
 
 	public bool insert_lista ( Lista lista ) {
 		return this.dbms.insert_lista ( lista );
 	}
 
-	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.dbms.insert_hecho_lista ( hecho, lista );
+	public bool insert_hecho_lista ( Hecho hecho, Lista lista ) {
+		return this.dbms.insert_hecho_lista ( hecho, lista );
 	}
 
 	public bool insert_coleccion ( Coleccion coleccion ) {

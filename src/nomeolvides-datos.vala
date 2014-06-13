@@ -40,16 +40,29 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer.rehacer_con_items.connect ( this.signal_hechos_rehacer );
 	}
 
-	public void agregar_hecho (Hecho hecho) {
-		this.db.insert_hecho ( hecho );
-		this.datos_cambio_anios ();
-		this.datos_cambio_hechos ();
+	public void agregar_hecho (Hecho hecho) { 
+		if ( this.db.insert_hecho ( hecho ) ) {
+			this.datos_cambio_anios ();
+			this.datos_cambio_hechos ();
+			print ( "datos.agregar_hecho entra la afirmativo del if\n");
+		} else {
+			var error = new DialogError ( _("An error has ocurred while trying to add the fact") );
+			error.show ();
+			error.run();
+			error.destroy ();
+		}
 	}
 
 	public void agregar_hecho_lista ( Hecho hecho, int64 id_lista ) {
 		var lista = this.db.select_lista ( "WHERE id=\"" + id_lista.to_string() + "\"" );
-		this.db.insert_hecho_lista ( hecho, lista );
-		this.datos_cambio_hechos ();
+		if ( this.db.insert_hecho_lista ( hecho, lista ) ) {
+			this.datos_cambio_hechos ();
+		} else {
+			var error = new DialogError ( _("An error has ocurred while trying to add the fact to the list") );
+			error.show ();
+			error.run();
+			error.destroy ();
+		}
 	}
 
 	public void quitar_hecho_lista ( Hecho hecho, Lista lista ) {

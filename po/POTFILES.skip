@@ -19,6 +19,7 @@ src/nomeolvides-dialog-hecho.c
 src/nomeolvides-dialog-lista-agregar.c
 src/nomeolvides-dialog-lista-borrar.c
 src/nomeolvides-dialog-lista-editar.c
+src/nomeolvides-dialog-error.c
 src/nomeolvides-dialog-lista.c
 src/nomeolvides-dialog-migrador.c
 src/nomeolvides-dialog-preferencias.c

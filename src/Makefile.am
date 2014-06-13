@@ -72,8 +72,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-base.vala \
 	nomeolvides-preferencias-base.vala \
 	nomeolvides-preferencias-listas.vala \
-	nomeolvides-preferencias-colecciones.vala
-
+	nomeolvides-preferencias-colecciones.vala \
+	nomeolvides-dialog-error.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

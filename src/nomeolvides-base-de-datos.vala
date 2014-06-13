@@ -32,9 +32,9 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	protected abstract Statement select_distinct ( string tabla, string columnas, string where = "" );
 	protected abstract Statement count ( string tabla, string where );
 	protected abstract Array<Hecho> parse_query_hechos ( Statement stmt );
-	public abstract void insert_hecho ( Hecho hecho );
+	public abstract bool insert_hecho ( Hecho hecho );
 	public abstract bool insert_lista ( Lista lista );
-	public abstract void insert_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract bool insert_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract bool insert_coleccion ( Coleccion coleccion );
 	public abstract void hecho_a_borrar ( Hecho hecho );
 	public abstract void coleccion_a_borrar ( Coleccion coleccion );

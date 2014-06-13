@@ -181,14 +181,17 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return hechos;
 	}
 
-	public void insert_hecho ( Hecho hecho ) {
+	public bool insert_hecho ( Hecho hecho ) {
+		bool retorno = false;
 		Array<Hecho> existe = select_hechos ( "WHERE hechos.nombre=\"" + Utiles.sacarCaracterEspecial ( hecho.nombre ) + "\" AND " +
 											  "anio=\"" + hecho.get_anio ().to_string () + "\" AND " +
 		                                      "mes=\"" + hecho.get_mes ().to_string () + "\" AND " +
 		                                      "dia=\"" + hecho.get_dia ().to_string () + "\"" );
 		if ( existe.length == 0 ) {
-			this.insert ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,coleccion" ,hecho.to_string ()   );
+			retorno = this.insert ( "hechos", "nombre,descripcion,anio,mes,dia,fuente,coleccion" ,hecho.to_string ()   );
 		}
+		print ( "sqlite.insert_hecho devuelve: " + retorno.to_string() + "\n");
+		return retorno;
 	}
 
 	public bool insert_lista ( Lista lista ) {
@@ -205,11 +208,11 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	public void insert_hecho_lista ( Hecho hecho, Lista lista ) {
+	public bool insert_hecho_lista ( Hecho hecho, Lista lista ) {
 		string valores = "\"" + lista.id.to_string() + "\", \""
 			                  + hecho.id.to_string() + "\"";
 		
-		this.insert ( "listashechos", "lista,hecho",valores );
+		return this.insert ( "listashechos", "lista,hecho",valores );
 	}
 
 	public bool insert_coleccion ( Coleccion coleccion ) {
