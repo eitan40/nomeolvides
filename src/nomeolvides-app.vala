@@ -163,13 +163,13 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void delete_hecho_dialog () {
-		Hecho hecho_a_borrar;
-		this.window.get_hecho_actual ( out hecho_a_borrar );
-	
-		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( this.window as VentanaPrincipal);
+		delete_dialog.setear_hechos ( this.window.get_hechos_seleccionados () );
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
-			this.datos.eliminar_hecho ( hecho_a_borrar );			
+			for (int i = 0; i < delete_dialog.hechos.length; i++ ) {
+					this.datos.eliminar_hecho ( delete_dialog.hechos.index (i) );
+			}
 		}	
 		delete_dialog.destroy ();
 	}
