@@ -83,8 +83,13 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		} else {
 			this.title = _("Add Facts to List");
 			var treeview_hechos = new ViewHechos ();
+			var scroll_hechos = new ScrolledWindow ( null, null );
+			scroll_hechos.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
+			treeview_hechos.set_margin_bottom ( 10 );
 			treeview_hechos.mostrar_hechos ( hechos_elegidos );
-			this.grid.attach ( treeview_hechos, 1, 0, 1, 1 );
+			scroll_hechos.set_size_request ( 100, 110 );
+			scroll_hechos.add ( treeview_hechos );
+			this.grid.attach ( scroll_hechos, 1, 0, 1, 1 );
 		}
 
 		for ( int i = 0; i < hechos_elegidos.length; i++ ) {
