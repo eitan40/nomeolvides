@@ -22,22 +22,26 @@ using Nomeolvides;
 
 public class Nomeolvides.BorrarHechoListaDialog : Dialog
 {	
-	private Hecho hecho;
+	public Array<Hecho> hechos;
 	private Lista lista;
 	private Label hecho_nombre;
 	private Label lista_nombre;
+	private Label hecho_label;
+	private Label lista_label;
+	private Label pregunta;
+	private Grid grid;
 	
-	public BorrarHechoListaDialog ( VentanaPrincipal ventana )
-	{
+	public BorrarHechoListaDialog ( VentanaPrincipal ventana ) {
 		this.title = _("Remove Fact from List");
 		this.set_transient_for ( ventana as Window );
 
-		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove this fact from the list?") );
-		Label hecho_label = new Label.with_mnemonic ( _("Fact") + ":");
+		this.pregunta = new Label.with_mnemonic ( "" );
+		this.hecho_label = new Label.with_mnemonic ( "");
 		this.hecho_nombre = new Label ( "" );
-		Label lista_label = new Label.with_mnemonic ( _("From list") + ":");
+		this.lista_label = new Label.with_mnemonic ( _("From list") + ":" );
 		this.lista_nombre = new Label ( "" );
-		Grid grid = new Grid ();
+		this.hechos = new Array<Hecho> ();
+		this.grid = new Grid ();
 
 		pregunta.set_halign ( Align.CENTER );
 		pregunta.set_margin_bottom ( 15 );
@@ -72,8 +76,6 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		grid.set_hexpand ( true );
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
-		grid.attach ( hecho_label, 0, 1, 1, 1 );
-		grid.attach ( hecho_nombre, 1, 1, 1, 1 );
 		grid.attach ( lista_label, 0, 2, 1, 1 );
 		grid.attach ( lista_nombre, 1, 2, 1, 1 );
 		
@@ -88,9 +90,33 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 		this.show_all ();
 	}
 
-	public void set_hecho ( Hecho hecho ) {
-		this.hecho = hecho;
-		this.hecho_nombre.set_markup ( "<span font_weight=\"heavy\">"+ hecho.nombre +"</span>");
+	public void set_hechos ( Array<Hecho> hechos_elegidos ) {
+		if ( hechos_elegidos.length == 1 ) {
+			this.pregunta.set_label ( _("Do you want to remove this fact from the list?") );
+			this.hecho_label.set_label (  _("Fact") + ":" );
+			if( hecho_label.get_text ().length > 50 ) {
+				this.hecho_label.set_size_request ( 600, -1 );
+				this.hecho_label.set_line_wrap_mode ( Pango.WrapMode.WORD );
+				this.hecho_label.set_line_wrap ( true );
+			}
+			this.hecho_nombre.set_markup (  "<span font_weight=\"heavy\">"+ hechos_elegidos.index (0).nombre +"</span>" );
+			this.grid.attach ( hecho_nombre, 1, 1, 1, 1 );
+		} else {
+			this.title = _("Remove Facts from List");
+			this.pregunta.set_label ( _("Do you want to remove this facts from the list?") );
+			this.hecho_label.set_label (  _("Facts") + ":" );
+			var treeview_hechos = new ViewHechos ();
+			treeview_hechos.set_margin_bottom ( 10 );
+			treeview_hechos.mostrar_hechos ( hechos_elegidos );
+			this.grid.attach ( treeview_hechos, 1, 1, 1, 1 );
+		}
+
+		for ( int i = 0; i < hechos_elegidos.length; i++ ) {
+			this.hechos.append_val ( hechos_elegidos.index ( i ) );
+		}
+
+		grid.attach ( hecho_label, 0, 1, 1, 1 );
+		this.show_all ();
 	}
 
 	public void set_lista ( Lista lista ) {

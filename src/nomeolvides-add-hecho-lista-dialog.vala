@@ -71,7 +71,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	}
 
 	public void setear_hechos ( Array<Hecho> hechos_elegidos ) {
-		if ( hechos_elegidos.length < 2 ) {
+		if ( hechos_elegidos.length == 1 ) {
 			Label label_hecho = new Label ( "" );
 			label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hechos_elegidos.index (0).nombre +"</span>");
 			if( label_hecho.get_text ().length > 50 ) {
