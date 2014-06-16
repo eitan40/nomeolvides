@@ -1,0 +1,13 @@
+#/bin/bash
+
+VERSION_ANTERIOR=$(cat configure.ac | grep AC_INIT | cut --delimiter="," --fields=2 )
+#echo "version anterior: "${VERSION_ANTERIOR}
+COMMIT_ANTERIOR=$(echo ${VERSION_ANTERIOR} | cut --delimiter="." --fields=3 )
+#echo "commit anterior: "${COMMIT_ANTERIOR}
+
+COMMIT_ACTUAL=$(($(git rev-list HEAD --count) + 1))
+#echo "commit actual: "${COMMIT_ACTUAL}
+VERSION_ACTUAL=$(echo ${VERSION_ANTERIOR} | sed "s/${COMMIT_ANTERIOR}/${COMMIT_ACTUAL}/")
+echo "version actualizada a : "${VERSION_ACTUAL}
+
+sed -i "s/${VERSION_ANTERIOR}/ ${VERSION_ACTUAL}/" configure.ac
