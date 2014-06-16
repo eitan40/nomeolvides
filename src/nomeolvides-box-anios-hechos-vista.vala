@@ -50,7 +50,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 		this.anios_listas = new Notebook ();
 
-		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
+		this.hechos_view.get_selection ().changed.connect ( this.elegir_hecho );
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
 		this.listas_view.cursor_changed.connect ( this.elegir_lista );
 		this.hechos_view.row_activated.connect ( mostrar_vista );
@@ -75,7 +75,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void elegir_hecho () {
-		this.hechos_cursor_changed();
+		this.hechos_selection_changed();
 		if (this.vista_hecho.visible == true ) {
 			this.mostrar_hecho ();
 		}
@@ -183,7 +183,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		return this.hechos_view.get_hechos_seleccionados ();
 	}
 
-	public signal void hechos_cursor_changed ();
+	public signal void hechos_selection_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();
 }

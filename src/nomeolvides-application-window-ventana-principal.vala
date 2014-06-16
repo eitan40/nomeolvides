@@ -114,7 +114,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 	#endif
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
-		this.anios_hechos.hechos_cursor_changed.connect ( this.elegir_hecho );
+		this.anios_hechos.hechos_selection_changed.connect ( this.elegir_hecho );
 	}
 
 	private void toolbar_add_button_clicked_signal () {
@@ -226,8 +226,12 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		Hecho hecho; 
 		this.get_hecho_actual ( out hecho );
 		
-		if ( hecho != null ) { 
-			this.toolbar.set_buttons_visible ();
+		if ( hecho != null ) {
+			if ( this.get_hechos_seleccionados ().length == 1 ) {
+				this.toolbar.set_buttons_visible ();
+			} else {
+				this.toolbar.set_buttons_multiseleccion_visible ();
+			}
 		} else {
 			this.toolbar.set_buttons_invisible ();		
 		}
