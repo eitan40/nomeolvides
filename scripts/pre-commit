@@ -10,3 +10,7 @@ cd po
 ../scripts/crear-potfiles --disable-gnome3-support > /dev/null 2> /dev/null
 intltool-update es
 cd ..
+
+git add po/POTFILES.in
+git add po/POTFILES.skip
+git add po/es.po
