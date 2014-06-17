@@ -214,12 +214,17 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.get_hecho_actual ( out hecho );
 
 		if( hecho != null) {
+			string hechos_json = "";
 			asunto = "Envío un hecho para contribuir con la base de datos oficial";
 			cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
 			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
-			archivo = GLib.Environment.get_tmp_dir () + "/"+ Utiles.nombre_para_archivo ( hecho.nombre ) +".json";
+			archivo = GLib.Environment.get_tmp_dir () + "/"+ Utiles.nombre_para_archivo ( "hechos-de-nomeolvides" ) +".json";
 
-			Archivo.escribir (archivo, hecho.a_json () );
+			var hechos = this.window.get_hechos_seleccionados ();
+			for ( int i = 0; i < hechos.length; i++ ) {
+				hechos_json += hechos.index (i).a_json () + "\n";
+			}
+			Archivo.escribir (archivo, hechos_json );
 		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
