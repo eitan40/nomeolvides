@@ -76,8 +76,12 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	private void elegir_hecho () {
 		this.hechos_selection_changed();
-		if (this.vista_hecho.visible == true ) {
-			this.mostrar_hecho ();
+		if ( this.hechos_view.get_hechos_seleccionados ().length ==1 ) {
+			if (this.vista_hecho.visible == true ) {
+				this.mostrar_hecho ();
+			}
+		} else {
+			this.vista_hecho.set_visible ( false );
 		}
 	}
 	private void elegir_anio () {
@@ -109,11 +113,11 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void mostrar_vista () {
-		if (this.vista_hecho.visible == true ) {
-			this.vista_hecho.set_visible (false);
-		} else {
-			this.mostrar_hecho ();
-		}
+			if ( this.vista_hecho.visible == true ) {
+				this.vista_hecho.set_visible ( false );
+			} else {
+				this.mostrar_hecho ();
+			}
 	}
 
 	private void mostrar_hecho () {
