@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-16 19:51-0300\n"
+"POT-Creation-Date: 2014-06-17 10:49-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -62,7 +62,7 @@ msgid "Add Fact to List"
 msgstr "Agregar Hecho a la Lista"
 
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:39
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:82
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:84
 #: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:77
 #: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:59
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:78
@@ -86,7 +86,7 @@ msgstr "Agregar Hechos a la Lista"
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
-#: ../src/nomeolvides-app.vala:320
+#: ../src/nomeolvides-app.vala:324
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:67
 #: ../src/nomeolvides-treeview-view-anios.vala:31
 msgid "Years"
@@ -134,26 +134,39 @@ msgstr "Acerca de Nomeolvides"
 msgid "Error while open"
 msgstr "Error al abrir"
 
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:32
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:35
 msgid "Remove Fact from List"
 msgstr "Elimnar Hecho de la Lista"
 
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:35
-msgid "Do you want to remove this fact from the list?"
-msgstr "¿Desea eliminar este hecho de la lista?"
-
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:36
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:89
-msgid "Fact"
-msgstr "Hecho"
-
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:38
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:41
 msgid "From list"
 msgstr "De la lista"
 
-#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:83
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:85
 msgid "Remove"
 msgstr "Elimnar"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:95
+msgid "Do you want to remove this fact from the list?"
+msgstr "¿Desea eliminar este hecho de la lista?"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:96
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:94
+msgid "Fact"
+msgstr "Hecho"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:105
+msgid "Remove Facts from List"
+msgstr "Elimnar Hechos de la Lista"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:106
+msgid "Do you want to remove this facts from the list?"
+msgstr "¿Desea eliminar estos hechos de la lista?"
+
+#: ../src/nomeolvides-borrar-hecho-lista-dialog.vala:107
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:105
+msgid "Facts"
+msgstr "Hechos"
 
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:68
 #: ../src/nomeolvides-preferencias.vala:48
@@ -173,11 +186,11 @@ msgstr "Lista"
 msgid "Year"
 msgstr "Año"
 
-#: ../src/nomeolvides-box-headerbar.vala:105
+#: ../src/nomeolvides-box-headerbar.vala:111
 msgid "Add to list"
 msgstr "Agregar a la lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:109
+#: ../src/nomeolvides-box-headerbar.vala:115
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 
@@ -279,29 +292,25 @@ msgstr "Cantidad de Hechos"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:83
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:88
 msgid "Remove Fact"
 msgstr "Elimnar Hecho"
 
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:84
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:89
 msgid "dated"
 msgstr "con fecha"
 
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:90
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:95
 msgid "Do you want to remove this fact?"
 msgstr "¿Desea eliminar este hecho?"
 
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:98
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:103
 msgid "Remove Facts"
 msgstr "Elimnar Hechos"
 
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:99
+#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:104
 msgid "Do you want to remove this facts?"
 msgstr "¿Desea eliminar estos hechos?"
-
-#: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:100
-msgid "Facts"
-msgstr "Hechos"
 
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:26
 msgid "Delete Custom List"
