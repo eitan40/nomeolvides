@@ -64,7 +64,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		var contenido = this.get_content_area () as Box;
 		contenido.pack_start (grid, true, true, 0 );
 
-		this.add_button ( _("Cancel"), ResponseType.REJECT );
+		this.add_button ( _("Cancel"), ResponseType.CANCEL );
 		this.add_button ( _("Add"), ResponseType.APPLY );
 
 		this.show_all ();

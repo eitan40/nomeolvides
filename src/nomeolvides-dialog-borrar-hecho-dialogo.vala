@@ -52,12 +52,12 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
 		grid.attach ( hecho, 0, 1, 1, 1 );
+
+		this.add_button ( _("Cancel"), ResponseType.CANCEL);
+		this.add_button ( _("Apply"), ResponseType.APPLY);
 		
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(grid, false, false, 0);
-		
-		this.add_button ( _("Cancel"), ResponseType.REJECT);
-		this.add_button ( _("Apply"), ResponseType.APPLY);
 
 		this.show_all ();
 	}
