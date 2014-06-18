@@ -230,7 +230,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 			if ( this.get_hechos_seleccionados ().length == 1 ) {
 				this.toolbar.set_buttons_visible ();
 			} else {
-				this.toolbar.set_buttons_multiseleccion_visible ();
+				if ( this.get_hechos_seleccionados ().length > 0 ) {
+					this.toolbar.set_buttons_multiseleccion_visible ();
+				} else {
+					this.toolbar.set_buttons_invisible ();
+				}
 			}
 		} else {
 			this.toolbar.set_buttons_invisible ();		

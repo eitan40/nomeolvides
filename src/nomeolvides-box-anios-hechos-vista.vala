@@ -76,7 +76,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 	private void elegir_hecho () {
 		this.hechos_selection_changed();
-		if ( this.hechos_view.get_hechos_seleccionados ().length ==1 ) {
+		if ( this.hechos_view.get_hechos_seleccionados ().length == 1 ) {
 			if (this.vista_hecho.visible == true ) {
 				this.mostrar_hecho ();
 			}
