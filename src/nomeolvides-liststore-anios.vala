@@ -38,18 +38,20 @@ public class Nomeolvides.ListStoreAnios : ListStore {
 	}
 
 	public void agregar_varios ( Array<int> nuevos ) {
-		for ( int i = 0; i < nuevos.length; i++ ) {
-			this.agregar ( nuevos.index (i));
-			anios.append_val ( nuevos.index (i) );
-		}
-
-		this.anios = new Array<int> ();
-		for ( int i = 0; i < nuevos.length; i++ ) {
-			this.anios.append_val ( nuevos.index (i) );
-		}
-
 		if ( nuevos.length > 0 ) {
+			for ( int i = 0; i < nuevos.length; i++ ) {
+				this.agregar ( nuevos.index (i));
+				anios.append_val ( nuevos.index (i) );
+			}
+
+			for ( int i = 0; i < nuevos.length; i++ ) {
+				this.anios.append_val ( nuevos.index (i) );
+			}
+
 			this.eliminar_sobrantes ();
+		} else {
+			this.clear ();
+			this.anios = new Array<int> ();
 		}
 	}
 

@@ -43,7 +43,7 @@ public class Nomeolvides.App : Gtk.Application
 	public void inicializar_ventana () {
 		this.cargar_lista_anios ();
 		this.cargar_listas ();
-		this.window.limpiar_hechos_view ();
+		this.cargar_lista_hechos ();
 	}
 
 	public override void activate () {
