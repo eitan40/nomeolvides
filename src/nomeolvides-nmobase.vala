@@ -50,7 +50,6 @@ public class Nomeolvides.NmoBase : GLib.Object{
 
 	public string a_sql () {
 		var retorno  = "nombre=\"" + Utiles.sacarCaracterEspecial ( this.nombre ) + "\"";
-		print ( retorno + "\n" );
 		
 		return retorno;
 	}
