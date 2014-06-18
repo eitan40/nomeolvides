@@ -45,6 +45,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
  
 		this.pack_start ( toolbar, false, false, 0 );
 		this.pack_start ( scroll_listas_view, true, true, 0);
+		this.show_all ();
 	}
 
 	public void actualizar_model ( ListStoreListas liststore_listas ) {

@@ -50,6 +50,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
  
 		this.pack_start ( toolbar, false, false, 0 );
 		this.pack_start ( scroll_colecciones_view, true, true, 0 );
+		this.show_all ();
 	}
 
 	public void actualizar_model ( ListStoreColecciones liststore_colecciones ) {
