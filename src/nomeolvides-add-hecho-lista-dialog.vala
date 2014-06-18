@@ -24,24 +24,22 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 {	
 	private ComboBox listas;
 	private ListStoreListas liststore;
-	private Hecho hecho;
+	public Array<Hecho> hechos;
 	private int64 id_lista;
-	private Label label_hecho;
+	private Grid grid;
 	
 	public AddHechoListaDialog ( VentanaPrincipal ventana )
 	{
 		this.title = _("Add Fact to List");
-		this.set_default_size ( 350,-1 );
+		this.set_default_size ( 450, 250 );
 		this.set_transient_for ( ventana as Window );
 		
 		this.response.connect(on_response);
 
-		this.add_button ( _("Cancel") , ResponseType.CANCEL );
-		this.add_button ( _("Add") , ResponseType.APPLY );
-
 		this.listas = new ComboBox ();
+		this.hechos = new Array<Hecho> ();
 
-		var grid = new Grid ( );
+		this.grid = new Grid ( );
 		grid.set_row_spacing ( 15 );
 		grid.set_column_spacing ( 20 );
 	#if DISABLE_GNOME3
@@ -55,34 +53,53 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		grid.set_margin_bottom ( 15 );
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
-		
-		this.label_hecho = new Label ( null );
 
 		var label_pregunta = new Label (_("Add") + ":");
 		var label_listas = new Label ( _("to list") );
 		
 		grid.attach ( label_pregunta, 0, 0, 1, 1 );
-		grid.attach ( this.label_hecho, 1, 0, 1, 1 );
 		grid.attach ( label_listas, 0, 1, 1, 1 );
 		grid.attach ( this.listas, 1, 1, 1, 1 );
 
 		var contenido = this.get_content_area () as Box;
 		contenido.pack_start (grid, true, true, 0 );
 
+		this.add_button ( _("Cancel"), ResponseType.CANCEL );
+		this.add_button ( _("Add"), ResponseType.APPLY );
+
 		this.show_all ();
 	}
 
-	public void set_hecho ( Hecho hecho ) {
-		this.hecho = hecho;
-		this.label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hecho.nombre +"</span>");
-		if( this.label_hecho.get_text ().length > 50 ) {
-			this.label_hecho.set_size_request ( 600, -1 );
-			this.label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
-			this.label_hecho.set_line_wrap ( true );
+	public void setear_hechos ( Array<Hecho> hechos_elegidos ) {
+		if ( hechos_elegidos.length == 1 ) {
+			Label label_hecho = new Label ( "" );
+			label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hechos_elegidos.index (0).nombre +"</span>");
+			if( label_hecho.get_text ().length > 50 ) {
+				label_hecho.set_size_request ( 600, -1 );
+				label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
+				label_hecho.set_line_wrap ( true );
+			}
+		this.grid.attach ( label_hecho, 1, 0, 1, 1 );
+		} else {
+			this.title = _("Add Facts to List");
+			this.set_size_request ( 600, 300 );
+			var treeview_hechos = new ViewHechos ();
+			var scroll_hechos = new ScrolledWindow ( null, null );
+			scroll_hechos.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
+			treeview_hechos.set_margin_bottom ( 10 );
+			treeview_hechos.mostrar_hechos ( hechos_elegidos );
+			scroll_hechos.set_size_request ( 100, 110 );
+			scroll_hechos.add ( treeview_hechos );
+			this.grid.attach ( scroll_hechos, 1, 0, 1, 1 );
 		}
+
+		for ( int i = 0; i < hechos_elegidos.length; i++ ) {
+			this.hechos.append_val ( hechos_elegidos.index ( i ) );
+		}
+		this.show_all ();
 	}
 
-	public void set_listas ( ListStoreListas liststore) {
+	public void setear_listas ( ListStoreListas liststore) {
 		CellRendererText renderer = new CellRendererText ();
 		this.listas.pack_start (renderer, true);
 		this.listas.add_attribute (renderer, "text", 0);

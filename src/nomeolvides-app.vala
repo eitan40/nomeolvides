@@ -163,13 +163,13 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void delete_hecho_dialog () {
-		Hecho hecho_a_borrar;
-		this.window.get_hecho_actual ( out hecho_a_borrar );
-	
-		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( hecho_a_borrar, this.window as VentanaPrincipal);
+		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( this.window as VentanaPrincipal);
+		delete_dialog.setear_hechos ( this.window.get_hechos_seleccionados () );
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
-			this.datos.eliminar_hecho ( hecho_a_borrar );			
+			for (int i = 0; i < delete_dialog.hechos.length; i++ ) {
+					this.datos.eliminar_hecho ( delete_dialog.hechos.index (i) );
+			}
 		}	
 		delete_dialog.destroy ();
 	}
@@ -214,12 +214,17 @@ public class Nomeolvides.App : Gtk.Application
 		this.window.get_hecho_actual ( out hecho );
 
 		if( hecho != null) {
+			string hechos_json = "";
 			asunto = "Envío un hecho para contribuir con la base de datos oficial";
 			cuerpo = "Estimados, quisiera contribuir con este hecho a mejorar la base de datos oficial de Nomeolvides.";
 			direccion = "fernando@softwareperonista.com.ar, andres@softwareperonista.com.ar";
-			archivo = GLib.Environment.get_tmp_dir () + "/"+ Utiles.nombre_para_archivo ( hecho.nombre ) +".json";
+			archivo = GLib.Environment.get_tmp_dir () + "/"+ Utiles.nombre_para_archivo ( "hechos-de-nomeolvides" ) +".json";
 
-			Archivo.escribir (archivo, hecho.a_json () );
+			var hechos = this.window.get_hechos_seleccionados ();
+			for ( int i = 0; i < hechos.length; i++ ) {
+				hechos_json += hechos.index (i).a_json () + "\n";
+			}
+			Archivo.escribir (archivo, hechos_json );
 		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
   
@@ -250,28 +255,29 @@ public class Nomeolvides.App : Gtk.Application
 		if ( this.datos.hay_listas () ) {
 			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
 
-				dialogo.set_hecho ( hecho );
-                dialogo.set_listas ( this.datos.lista_de_listas() );
+			dialogo.setear_hechos ( this.window.get_hechos_seleccionados () );
+            dialogo.setear_listas ( this.datos.lista_de_listas() );
 
 			if (dialogo.run () == ResponseType.APPLY) {
-       			this.datos.agregar_hecho_lista ( hecho, dialogo.get_id_lista () );
+				for (int i = 0; i < dialogo.hechos.length; i++ ) {
+					this.datos.agregar_hecho_lista ( dialogo.hechos.index (i), dialogo.get_id_lista () );
+				}
 			}
 			dialogo.close ();
 		}
 	}
 
 	public void remove_hecho_lista () {
-		Hecho hecho;
 		var dialogo = new BorrarHechoListaDialog ( this.window );
 		var lista = this.window.get_lista_actual ();
 		
-		this.window.get_hecho_actual ( out hecho );
-		
-		dialogo.set_hecho ( hecho );
+		dialogo.set_hechos ( this.window.get_hechos_seleccionados () );
 		dialogo.set_lista ( lista );
 		
 		if (dialogo.run () == ResponseType.APPLY) {
-            this.datos.quitar_hecho_lista ( hecho, lista );
+			for ( int i = 0; i < dialogo.hechos.length; i++ ) {
+				this.datos.quitar_hecho_lista ( dialogo.hechos.index (i), lista );
+			}
 		}
 		dialogo.close ();			
 	}

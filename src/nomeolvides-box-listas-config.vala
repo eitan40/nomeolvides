@@ -87,7 +87,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	private void edit_lista_dialog () {
 		ListStoreListas liststore;
 		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
-		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
+											+ this.listas_view.get_elemento_id ().to_string() + "\"");
 		
 		var edit_dialog = new EditListaDialog ();
 		edit_dialog.set_datos ( lista );

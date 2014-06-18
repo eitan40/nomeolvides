@@ -88,10 +88,16 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	}
 
 	public new void set_buttons_visible () {
+		this.set_buttons_multiseleccion_visible ();
 		this.edit_button.set_visible ( true );
+	}
+
+	public void set_buttons_multiseleccion_visible () {
+		this.edit_button.set_visible ( false );
 		this.delete_button.set_visible ( true );
 		this.send_button.set_visible ( true );
 		this.list_button.set_visible ( true );
+
 	}
 
 	public new void set_buttons_invisible () {

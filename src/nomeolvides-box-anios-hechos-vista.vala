@@ -50,7 +50,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 
 		this.anios_listas = new Notebook ();
 
-		this.hechos_view.cursor_changed.connect ( this.elegir_hecho );
+		this.hechos_view.get_selection ().changed.connect ( this.elegir_hecho );
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
 		this.listas_view.cursor_changed.connect ( this.elegir_lista );
 		this.hechos_view.row_activated.connect ( mostrar_vista );
@@ -75,9 +75,13 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void elegir_hecho () {
-		this.hechos_cursor_changed();
-		if (this.vista_hecho.visible == true ) {
-			this.mostrar_hecho ();
+		this.hechos_selection_changed();
+		if ( this.hechos_view.get_hechos_seleccionados ().length == 1 ) {
+			if (this.vista_hecho.visible == true ) {
+				this.mostrar_hecho ();
+			}
+		} else {
+			this.vista_hecho.set_visible ( false );
 		}
 	}
 	private void elegir_anio () {
@@ -109,11 +113,11 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	private void mostrar_vista () {
-		if (this.vista_hecho.visible == true ) {
-			this.vista_hecho.set_visible (false);
-		} else {
-			this.mostrar_hecho ();
-		}
+			if ( this.vista_hecho.visible == true ) {
+				this.vista_hecho.set_visible ( false );
+			} else {
+				this.mostrar_hecho ();
+			}
 	}
 
 	private void mostrar_hecho () {
@@ -151,7 +155,7 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 	}
 
 	public void cargar_lista_hechos ( Array<Hecho> hechos ) {
-		this.hechos_view.mostrar_anio ( hechos );
+		this.hechos_view.mostrar_hechos ( hechos );
 	}
 
 	public int get_anio_actual () {
@@ -166,6 +170,10 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		return this.hechos_view.get_hecho_cursor (out hecho );
 	}
 
+	public TreeSelection get_hechos_selection ( ) {
+		return this.hechos_view.get_selection ();
+	}
+
 	public string get_nombre_pestania () {
 		return this.anios_listas.get_tab_label_text ( this.anios_listas.get_nth_page
 		                                               ( this.anios_listas.get_current_page () ) );
@@ -175,7 +183,11 @@ public class Nomeolvides.Anios_hechos_vista : Gtk.Box {
 		this.hechos_view.limpiar ();
 	}
 
-	public signal void hechos_cursor_changed ();
+	public Array<Hecho> get_hechos_seleccionados () {
+		return this.hechos_view.get_hechos_seleccionados ();
+	}
+
+	public signal void hechos_selection_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();
 }
