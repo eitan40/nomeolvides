@@ -58,10 +58,6 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 		this.hide ();
     }
 
-	private void armar_notebook ( ListStoreColecciones colecciones, ListStoreListas listas ) {
-		
-	}
-
 	public void set_active_listas () {
 		this.notebook.set_current_page (1);
 		this.notebook.show_all ();
@@ -70,7 +66,6 @@ public class Nomeolvides.Preferencias : Gtk.Dialog {
 	public void ejecutar ( ListStoreColecciones colecciones, ListStoreListas listas ) {
 		this.config_listas.actualizar_model ( listas );
 		this.config_colecciones.actualizar_model ( colecciones );
-		this.armar_notebook ( colecciones, listas );
 	}
 
 	public void set_toolbar_buttons_invisible () {
