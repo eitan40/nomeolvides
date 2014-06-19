@@ -69,6 +69,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.derecha_box.pack_end ( separador );
 	#endif
 		this.derecha_box.pack_end ( this.anio_label );
+		this.show.connect ( this.set_buttons_invisible );
 	}
 
 	public void set_label_anio ( string anio = "0" ) {
