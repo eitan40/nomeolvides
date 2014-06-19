@@ -31,7 +31,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	public AddHechoListaDialog ( VentanaPrincipal ventana )
 	{
 		this.title = _("Add Fact to List");
-		this.set_default_size ( 450, 250 );
+		this.set_default_size ( 450, 200 );
 		this.set_transient_for ( ventana as Window );
 		
 		this.response.connect(on_response);
@@ -82,7 +82,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 		this.grid.attach ( label_hecho, 1, 0, 1, 1 );
 		} else {
 			this.title = _("Add Facts to List");
-			this.set_size_request ( 600, 300 );
+			this.set_size_request ( 600, 200 );
 			var treeview_hechos = new ViewHechos ();
 			var scroll_hechos = new ScrolledWindow ( null, null );
 			scroll_hechos.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );

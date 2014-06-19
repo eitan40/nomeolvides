@@ -34,7 +34,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 	public BorrarHechoListaDialog ( VentanaPrincipal ventana ) {
 		this.title = _("Remove Fact from List");
 		this.set_transient_for ( ventana as Window );
-		this.set_default_size ( 450, 250 );
+		this.set_default_size ( 450, 200 );
 
 		this.pregunta = new Label.with_mnemonic ( "" );
 		this.hecho_label = new Label.with_mnemonic ( "");
@@ -104,7 +104,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 			this.grid.attach ( hecho_nombre, 1, 1, 1, 1 );
 		} else {
 			this.title = _("Remove Facts from List");
-			this.set_size_request ( 600, 300 );
+			this.set_size_request ( 600, 200 );
 			this.pregunta.set_label ( _("Do you want to remove this facts from the list?") );
 			this.hecho_label.set_label (  _("Facts") + ":" );
 			var treeview_hechos = new ViewHechos ();

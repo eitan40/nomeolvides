@@ -29,7 +29,7 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 	public BorrarHechoDialogo ( VentanaPrincipal ventana ) {
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
-		this.set_size_request ( 450, 250 );
+		this.set_size_request ( 450, 200 );
 
 		this.pregunta = new Label.with_mnemonic ( "" );
 		this.hecho = new Label.with_mnemonic ( "" );
@@ -64,7 +64,7 @@ public class Nomeolvides.BorrarHechoDialogo : Dialog {
 
 	public void setear_hechos ( Array<Hecho> hechos_elegidos ) {
 		if ( hechos_elegidos.length > 1 ) {
-			this.set_size_request ( 600, 300 );
+			this.set_size_request ( 600, 200 );
 			var treeview_hechos = new ViewHechos ();
 			var scroll_hechos = new ScrolledWindow ( null, null );
 			scroll_hechos.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
