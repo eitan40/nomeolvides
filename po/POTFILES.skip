@@ -1,5 +1,6 @@
 data/nomeolvides.desktop.in
 src/nomeolvides-app.c
+src/nomeolvides-add-etiqueta-dialog.c
 src/nomeolvides-archivo.c
 src/nomeolvides-add-etiqueta-dialog.c
 src/nomeolvides-dialog-borrar-etiqueta-dialog.c

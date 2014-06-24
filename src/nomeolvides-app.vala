@@ -324,10 +324,21 @@ public class Nomeolvides.App : Gtk.Application
 	public void cargar_lista_hechos () {
 		var pestania = this.window.get_pestania ();
 
-		if ( pestania == _("Years") ) {
-			this.elegir_anio ();
-		} else {
-			this.elegir_lista ();
+		switch ( pestania ) {
+			case 0 :{
+				this.elegir_anio ();
+				break;
+			}
+
+			case 1 :{
+				this.elegir_lista ();
+				break;
+			}
+
+			case 2 :{
+				this.elegir_etiqueta ();
+				break;
+			}
 		}
 	}
 

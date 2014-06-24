@@ -51,8 +51,14 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		this.anios_listas = new Notebook ();
 
 		this.hechos_view.get_selection ().changed.connect ( this.elegir_hecho );
+<<<<<<< HEAD
 		this.anios_view.cursor_changed.connect ( this.elegir_anio );
 		this.listas_view.cursor_changed.connect ( this.elegir_lista );
+=======
+		this.anios_view.get_selection ().changed.connect ( this.elegir_anio );
+		this.listas_view.get_selection ().changed.connect ( this.elegir_lista );
+		this.etiquetas_view.get_selection ().changed.connect ( this.elegir_etiqueta );
+>>>>>>> Se arregló el bug que impedía que se muestren los hechos de cada etiqueta correctamente.
 		this.hechos_view.row_activated.connect ( mostrar_vista );
 		this.anios_listas.switch_page.connect ( cambiar_pestania );
 
@@ -174,9 +180,8 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		return this.hechos_view.get_selection ();
 	}
 
-	public string get_nombre_pestania () {
-		return this.anios_listas.get_tab_label_text ( this.anios_listas.get_nth_page
-		                                               ( this.anios_listas.get_current_page () ) );
+	public uint get_pestania () {
+		return this.anios_listas.get_current_page ();
 	}
 
 	public void limpiar_hechos_view () {

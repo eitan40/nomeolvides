@@ -20,8 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
-{
+public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 
 	private Box main_box { get; private set; }
 	private Toolbar toolbar { get; private set; }
@@ -116,6 +115,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
+		this.anios_hechos.etiquetas_cursor_changed.connect ( this.anios_hechos_etiquetas_cursor_changed_signal );
 		this.anios_hechos.hechos_selection_changed.connect ( this.elegir_hecho );
 	}
 
@@ -168,13 +168,26 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.lista_actual = this.anios_hechos.get_lista_actual ();
 		if (this.lista_actual != null ) {
 			this.toolbar.list_button_set_quitar ();
-			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
-			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+			this.toolbar.list_button.clicked.disconnect ( this.toolbar_list_button_quitar_clicked_signal );
+			this.toolbar.list_button.clicked.disconnect ( this.toolbar_list_button_agregar_clicked_signal );
 			this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
 			this.anios_hechos_listas_cursor_changed ();
+			this.actualizar_string_label ( this.lista_actual.nombre );
 		}
 
 		this.actualizar_lista_label ();
+	}
+
+	private void anios_hechos_etiquetas_cursor_changed_signal () {
+		this.etiqueta_actual = this.anios_hechos.get_etiqueta_actual ();
+		if (this.etiqueta_actual != null ) {
+			this.toolbar.list_button_set_quitar ();
+			this.toolbar.list_button.clicked.disconnect ( this.toolbar_list_button_quitar_clicked_signal );
+			this.toolbar.list_button.clicked.disconnect ( this.toolbar_list_button_agregar_clicked_signal );
+			this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
+			this.anios_hechos_etiquetas_cursor_changed ();
+			this.actualizar_string_label ( this.etiqueta_actual.nombre );
+		}
 	}
 
 	public void cargar_anios_view ( Array<int> ventana_principal_anios ) {
@@ -200,12 +213,8 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		}
 	}
 
-	private void actualizar_lista_label () {
-		if ( this.lista_actual != null ) {
-			this.toolbar.set_label_lista ( this.lista_actual.nombre );
-		} else {
-			this.toolbar.set_label_lista ( );
-		}	
+	private void actualizar_string_label ( string label ) {
+		this.toolbar.set_label_string ( label );
 	}
 
 	public int get_anio_actual () {
@@ -248,8 +257,8 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
 
-	public string get_pestania () {
-		return this.anios_hechos.get_nombre_pestania ();
+	public uint get_pestania () {
+		return this.anios_hechos.get_pestania ();
 	}
 
 	public void activar_boton_deshacer () {
