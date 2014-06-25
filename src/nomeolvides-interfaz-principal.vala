@@ -51,14 +51,9 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		this.anios_listas = new Notebook ();
 
 		this.hechos_view.get_selection ().changed.connect ( this.elegir_hecho );
-<<<<<<< HEAD
-		this.anios_view.cursor_changed.connect ( this.elegir_anio );
-		this.listas_view.cursor_changed.connect ( this.elegir_lista );
-=======
 		this.anios_view.get_selection ().changed.connect ( this.elegir_anio );
 		this.listas_view.get_selection ().changed.connect ( this.elegir_lista );
 		this.etiquetas_view.get_selection ().changed.connect ( this.elegir_etiqueta );
->>>>>>> Se arregló el bug que impedía que se muestren los hechos de cada etiqueta correctamente.
 		this.hechos_view.row_activated.connect ( mostrar_vista );
 		this.anios_listas.switch_page.connect ( cambiar_pestania );
 
@@ -97,6 +92,7 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 			this.anios_cursor_changed();
 			this.mostrar_scroll_vista ( false );
 		}
+		this.hechos_selection_changed ();
 	}
 
 	private void elegir_lista () {
@@ -108,13 +104,46 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 			this.listas_cursor_changed ();
 			this.mostrar_scroll_vista ( false );
 		}
+		this.hechos_selection_changed ();
 	}
 
+<<<<<<< HEAD
 	private void cambiar_pestania () {
 		if ( this.anio_actual != 0 ) {
 			this.elegir_lista ();
 		} else {
 			this.elegir_anio ();
+=======
+	private void elegir_etiqueta () {
+			var etiqueta = this.db.select_etiqueta ( "WHERE rowid=\""
+		                                       + this.etiquetas_view.get_elemento_id ().to_string() + "\"");
+		if ( this.etiqueta_actual != etiqueta ) {
+			this.etiqueta_actual = etiqueta;
+			this.anio_actual = 0; //ningún anio
+			this.lista_actual = null;
+			this.etiquetas_cursor_changed ();
+			this.mostrar_scroll_vista ( false );
+		}
+		this.hechos_selection_changed ();
+	}
+
+	private void cambiar_pestania ( Widget page, uint page_num ) {
+		switch ( page_num ) {
+			case 0 :{
+				this.elegir_anio ();
+				break;
+			}
+
+			case 1 :{
+				this.elegir_lista ();
+				break;
+			}
+
+			case 2 :{
+				this.elegir_etiqueta ();
+				break;
+			}
+>>>>>>> Ahora se tira la señal hechos_selection_changed cuando se cambia de pestaña entre años, listas o etiquetas.
 		}
 	}
 
