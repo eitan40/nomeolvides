@@ -32,45 +32,40 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected EntryCompletion etiquetas_completion;
 	protected Array<Etiqueta> etiquetas;
 	protected Button boton_etiqueta;
+	protected Frame etiquetas_frame;
+	protected Label etiquetas_label;
+	protected Grid grid;
 	public Hecho respuesta { get; protected set; }
 	
 	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore, ListStoreEtiquetas etiquetas_liststore) {
 		this.resizable = true;
 		this.modal = true;
-		this.set_default_size (600,400);
+		this.set_default_size (800,400);
 		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
 
 		this.add_button ( _("Cancel") , ResponseType.CLOSE);
+		this.grid = new Grid ();
+		this.grid.set_valign ( Align.CENTER );
+		this.grid.set_halign ( Align.CENTER );
+		this.etiquetas_frame = new Frame ( _("Tags") );
+		this.etiquetas_frame.set_margin_start ( 5 );
 
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
 		var coleccion_label = new Label.with_mnemonic (_("Colection") + ": ");
 		var fuente_label = new Label.with_mnemonic (_("Source") + ": ");
-		var etiquetas_label = new Label.with_mnemonic (_("Tags") + ": ");
 
-		nombre_label.set_halign ( Align.END );
-		fecha_label.set_halign ( Align.END );
-		coleccion_label.set_halign ( Align.END );
-		fuente_label.set_halign ( Align.END );
-		etiquetas_label.set_halign ( Align.END );
-#if DISABLE_GNOME3
-		nombre_label.set_margin_left ( 15 );
-		fecha_label.set_margin_left ( 15 );
-		coleccion_label.set_margin_left ( 15 );
-		fuente_label.set_margin_left ( 15 );
-		etiquetas_label.set_margin_right ( 15 );
-#else
-		nombre_label.set_margin_end ( 15 );
-		fecha_label.set_margin_end ( 15 );
-		coleccion_label.set_margin_end ( 15 );
-		fuente_label.set_margin_end ( 15 );
-		etiquetas_label.set_margin_end ( 15 );
-#endif
+		nombre_label.set_halign ( Align.START );
+		fecha_label.set_halign ( Align.START );
+		coleccion_label.set_halign ( Align.START );
+		fuente_label.set_halign ( Align.START );
 
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
 		this.etiquetas_entry = new Entry ();
+		this.etiquetas_entry.set_valign ( Align.START );
+		this.etiquetas_entry.set_margin_start ( 5 );
 
 		this.etiquetas_completion = new EntryCompletion ();
 		this.etiquetas_completion.set_model ( etiquetas_liststore );
@@ -81,6 +76,20 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.fecha = new SelectorFecha ();
 		this.etiquetas = new Array<Etiqueta> ();
 		this.boton_etiqueta = new Button.with_label (_("Add tag"));
+		this.boton_etiqueta.set_valign ( Align.START );
+		this.boton_etiqueta.set_margin_end ( 5 );
+		this.etiquetas_label = new Label.with_mnemonic ("hola");
+		this.etiquetas_label.set_valign ( Align.FILL );
+		this.etiquetas_label.set_vexpand ( true );
+		this.etiquetas_label.set_size_request ( 50, 70 );
+		this.etiquetas_label.set_margin_start ( 5 );
+		var etiquetas_grid = new Grid ();
+		etiquetas_grid.set_valign ( Align.CENTER );
+		etiquetas_grid.set_halign ( Align.CENTER );
+		etiquetas_grid.attach ( etiquetas_entry, 0, 0, 1, 1 );
+		etiquetas_grid.attach ( boton_etiqueta, 1, 0, 1, 1 );
+		etiquetas_grid.attach ( etiquetas_label, 0, 1, 2, 1 );
+		this.etiquetas_frame.add ( etiquetas_grid );
 
 		var descripcion_frame = new Frame( _("Description") );
 		descripcion_frame.set_shadow_type(ShadowType.ETCHED_IN);
@@ -91,33 +100,25 @@ public class Nomeolvides.DialogHecho : Dialog
 		
 		this.descripcion_scroll.add_with_viewport ( this.descripcion_textview );
 		descripcion_frame.add ( this.descripcion_scroll );
+		descripcion_frame.set_size_request ( 300, 150 );
 
 		this.set_combo_box ( colecciones_liststore );
 		this.boton_etiqueta.clicked.connect ( this.agregar_etiqueta );
 		
-		Box box_hecho = new Box (Orientation.HORIZONTAL, 0);
-		Box box_labels = new Box (Orientation.VERTICAL, 0);
-		Box box_widgets = new Box (Orientation.VERTICAL, 0);
-
-		box_labels.pack_start ( nombre_label, false, false, 5 );		
-		box_labels.pack_start ( fecha_label, false, false, 5 );
-		box_labels.pack_start ( coleccion_label, false, false, 5 );
-		box_labels.pack_start ( fuente_label, false, false, 5 );
-		box_labels.pack_start ( etiquetas_label, false, false, 5 );
-		box_widgets.pack_start ( nombre_entry, false, false, 0 );
-		box_widgets.pack_start ( fecha, false, false, 0 );
-		box_widgets.pack_start ( combo_colecciones, false, false, 0 );
-		box_widgets.pack_start ( fuente_entry, false, false, 0 );
-		box_widgets.pack_start ( etiquetas_entry, false, false, 0 );
-		box_widgets.pack_start ( boton_etiqueta, false, false, 0 );
+		grid.attach ( nombre_label, 0, 0, 1, 1 );
+		grid.attach ( nombre_entry, 1, 0, 1, 1 );
+		grid.attach ( fecha_label, 0, 1, 1, 1 );
+		grid.attach ( fecha, 1, 1, 1, 1 );
+		grid.attach ( coleccion_label, 0, 2, 1, 1 );
+		grid.attach ( combo_colecciones, 1, 2, 1, 1 );
+		grid.attach ( fuente_label, 0, 3, 1, 1 );
+		grid.attach ( fuente_entry, 1, 3, 1, 1 );
+		grid.attach ( etiquetas_frame, 2, 0, 1, 4 );
+		grid.attach ( descripcion_frame, 0, 4, 3, 1 );
 		
-		box_hecho.pack_start (box_labels, true, false, 0);
-		box_hecho.pack_start (box_widgets, true, true, 0);
-	
 		var contenido = this.get_content_area() as Box;
 
-		contenido.pack_start(box_hecho, false, false, 0);
-		contenido.pack_start(descripcion_frame, true, true, 0);
+		contenido.pack_start ( this.grid, true, true, 0 );
 		
 		this.show_all ();
 	}
