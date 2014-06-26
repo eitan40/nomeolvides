@@ -78,7 +78,7 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.boton_etiqueta = new Button.with_label (_("Add tag"));
 		this.boton_etiqueta.set_valign ( Align.START );
 		this.boton_etiqueta.set_margin_end ( 5 );
-		this.etiquetas_label = new Label.with_mnemonic ("hola");
+		this.etiquetas_label = new Label.with_mnemonic ("");
 		this.etiquetas_label.set_valign ( Align.FILL );
 		this.etiquetas_label.set_vexpand ( true );
 		this.etiquetas_label.set_size_request ( 50, 70 );
@@ -162,12 +162,27 @@ public class Nomeolvides.DialogHecho : Dialog
 		ListStoreEtiquetas liststore_etiquetas = this.etiquetas_completion.get_model () as ListStoreEtiquetas;
 		var etiqueta = new Etiqueta ( nombre );
 
-		if ( liststore_etiquetas.contiene_nombre ( nombre )) {} else {
+		if ( !(liststore_etiquetas.contiene_nombre ( nombre )) )  {
 			var db = new AccionesDB ( Configuracion.base_de_datos() );
 			db.insert_etiqueta ( etiqueta );
+			this.dialogo_hecho_agregada_etiqueta ();
 		}
 
 		this.etiquetas.append_val ( etiqueta );
+		this.mostrar_etiquetas_label ();
 		this.etiquetas_entry.set_text ( "" );
 	}
+
+	private void mostrar_etiquetas_label ( ) {
+		this.etiquetas_label.set_label ( "" );
+		for ( int i = 0; i < this.etiquetas.length; i++ ) {
+			if ( this.etiquetas_label.get_text () != "" ) {
+				this.etiquetas_label.set_label ( this.etiquetas_label.get_text () + ", " + this.etiquetas.index ( i ).nombre );
+			} else {
+				this.etiquetas_label.set_label ( this.etiquetas.index ( i ).nombre );
+			}
+		}
+	}
+
+	public signal void dialogo_hecho_agregada_etiqueta ();
 }

@@ -23,6 +23,7 @@ public class Nomeolvides.Hecho : Nomeolvides.Base {
 	public DateTime fecha {get; private set; }
 	public int64 coleccion;
 	public string fuente { get; private set; }
+	public Array<Etiqueta> etiquetas;
 
 	// Constructor
 	public Hecho ( string nombre, string descripcion, int anio, int mes, int dia, int64 coleccion, string fuente = "" )
@@ -32,6 +33,7 @@ public class Nomeolvides.Hecho : Nomeolvides.Base {
 		this.fecha = new DateTime.utc (anio, mes, dia, 0,0,0);
 		this.coleccion = coleccion;
 		this.fuente = Utiles.ponerCaracterEspecial ( fuente );
+		this.etiquetas = new Array<Etiqueta> ();
 		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
@@ -54,6 +56,12 @@ public class Nomeolvides.Hecho : Nomeolvides.Base {
 		this.hash = Utiles.calcular_checksum ( this.a_json () );
 
 		this.coleccion = coleccion;
+	}
+
+	public void set_etiquetas ( Array<Etiqueta> etiquetas ) {
+		for ( int i = 0; i < etiquetas.length; i++ ) {
+			this.etiquetas.append_val ( etiquetas.index ( i ) );
+		}
 	}
 
 	public new string a_json () {
