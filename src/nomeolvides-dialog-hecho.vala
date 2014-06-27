@@ -30,10 +30,10 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected Entry fuente_entry;
 	protected Entry etiquetas_entry;
 	protected EntryCompletion etiquetas_completion;
-	protected Array<Etiqueta> etiquetas;
 	protected Button boton_etiqueta;
 	protected Frame etiquetas_frame;
 	protected Label etiquetas_label;
+	protected Array<Etiqueta> etiquetas;
 	protected Grid grid;
 	public Hecho respuesta { get; protected set; }
 	
@@ -124,8 +124,7 @@ public class Nomeolvides.DialogHecho : Dialog
 	}
 
 	protected void crear_respuesta() {
-		if(this.nombre_entry.get_text_length () > 0)
-		{
+		if(this.nombre_entry.get_text_length () > 0) {
 			this.respuesta  = new Hecho ( Utiles.sacarCaracterEspecial ( this.nombre_entry.get_text () ),
 										  Utiles.sacarCaracterEspecial ( this.descripcion_textview.buffer.text ),
 										  this.fecha.get_anio (),
@@ -133,6 +132,7 @@ public class Nomeolvides.DialogHecho : Dialog
 										  this.fecha.get_dia (),
 										  this.get_coleccion (),
 										  Utiles.sacarCaracterEspecial ( this.fuente_entry.get_text () ) );
+			this.respuesta.set_etiquetas ( this.etiquetas );
 		}
 	}
 
@@ -160,11 +160,15 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected void agregar_etiqueta () {
 		var nombre = this.etiquetas_entry.get_text ();
 		ListStoreEtiquetas liststore_etiquetas = this.etiquetas_completion.get_model () as ListStoreEtiquetas;
-		var etiqueta = new Etiqueta ( nombre );
+		Etiqueta etiqueta;
 
-		if ( !(liststore_etiquetas.contiene_nombre ( nombre )) )  {
+		if ( liststore_etiquetas.contiene_nombre ( nombre )) {
+			etiqueta = liststore_etiquetas.get_elemento_por_nombre ( nombre ) as Etiqueta;
+		} else {
 			var db = new AccionesDB ( Configuracion.base_de_datos() );
+			etiqueta = new Etiqueta ( nombre );
 			db.insert_etiqueta ( etiqueta );
+			etiqueta.id = db.ultimo_rowid ();
 			this.dialogo_hecho_agregada_etiqueta ();
 		}
 
@@ -182,6 +186,14 @@ public class Nomeolvides.DialogHecho : Dialog
 				this.etiquetas_label.set_label ( this.etiquetas.index ( i ).nombre );
 			}
 		}
+	}
+
+	public Array<Etiqueta> get_etiquetas_lista () {
+		var lista_de_etiquetas = new Array<Etiqueta> ();
+		for ( int i = 0; i < this.etiquetas.length; i++ ) {
+				lista_de_etiquetas.append_val (this.etiquetas.index (i) );
+			}
+		return lista_de_etiquetas;
 	}
 
 	public signal void dialogo_hecho_agregada_etiqueta ();

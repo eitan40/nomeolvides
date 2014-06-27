@@ -243,7 +243,6 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	public void insert_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
 		string valores = "\"" + etiqueta.id.to_string() + "\", \""
 			                + hecho.id.to_string() + "\"";
-		
 		this.insert ( "etiquetashechos", "etiqueta,hecho",valores );
 	}
 

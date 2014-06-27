@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 01:36-0300\n"
+"POT-Creation-Date: 2014-06-27 12:02-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -510,13 +510,13 @@ msgstr "Error al ejecutar la sentencia"
 msgid "Error parsing facts"
 msgstr "Error parseando hechos"
 
-#: ../src/nomeolvides-sqlite.vala:472 ../src/nomeolvides-sqlite.vala:513
-#: ../src/nomeolvides-sqlite.vala:588 ../src/nomeolvides-sqlite.vala:619
-#: ../src/nomeolvides-sqlite.vala:648 ../src/nomeolvides-sqlite.vala:677
+#: ../src/nomeolvides-sqlite.vala:471 ../src/nomeolvides-sqlite.vala:512
+#: ../src/nomeolvides-sqlite.vala:587 ../src/nomeolvides-sqlite.vala:618
+#: ../src/nomeolvides-sqlite.vala:647 ../src/nomeolvides-sqlite.vala:676
 msgid "Error"
 msgstr "Error"
 
-#: ../src/nomeolvides-sqlite.vala:759
+#: ../src/nomeolvides-sqlite.vala:758
 msgid "Error parsing lists"
 msgstr "Error parseando listas"
 

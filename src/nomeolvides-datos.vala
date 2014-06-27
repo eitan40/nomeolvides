@@ -40,15 +40,26 @@ public class Nomeolvides.Datos : GLib.Object {
 		this.deshacer.rehacer_con_items.connect ( this.signal_hechos_rehacer );
 	}
 
-	public void agregar_hecho (Hecho hecho) {
+	public void agregar_hecho ( Hecho hecho ) {
 		this.db.insert_hecho ( hecho );
+		hecho.id = this.db.ultimo_rowid ();
+
+		for ( int i = 0; i < hecho.etiquetas.length; i++ ) {
+			this.agregar_hecho_etiqueta ( hecho, hecho.etiquetas.index (i) );
+		}
 		this.datos_cambio_anios ();
 		this.datos_cambio_hechos ();
+		this.datos_cambio_etiquetas ();
 	}
 
 	public void agregar_hecho_lista ( Hecho hecho, int64 id_lista ) {
 		var lista = this.db.select_lista ( "WHERE id=\"" + id_lista.to_string() + "\"" );
 		this.db.insert_hecho_lista ( hecho, lista );
+		this.datos_cambio_hechos ();
+	}
+
+	public void agregar_hecho_etiqueta ( Hecho hecho, Etiqueta etiqueta ) {
+		this.db.insert_hecho_etiqueta ( hecho, etiqueta );
 		this.datos_cambio_hechos ();
 	}
 
@@ -121,7 +132,7 @@ public class Nomeolvides.Datos : GLib.Object {
 		for (i=0; i < (lineas.length - 1); i++) {
 			nuevoHecho = new Hecho.json(lineas[i], coleccion_id);
 			if ( nuevoHecho.nombre != "null" ) {
-				this.agregar_hecho(nuevoHecho);
+				this.agregar_hecho( nuevoHecho );
 			}
 		}
 	}
@@ -284,6 +295,7 @@ public class Nomeolvides.Datos : GLib.Object {
 	public signal void datos_cambio_anios ();
 	public signal void datos_cambio_listas ();
 	public signal void datos_cambio_hechos ();
+	public signal void datos_cambio_etiquetas ();
 	public signal void datos_hechos_deshacer ();
 	public signal void datos_no_hechos_deshacer ();
 	public signal void datos_hechos_rehacer ();

@@ -103,6 +103,7 @@ public class Nomeolvides.App : Gtk.Application
 		
 		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
 		this.datos.datos_cambio_listas.connect ( this.cargar_listas );
+		this.datos.datos_cambio_etiquetas.connect ( this.cargar_etiquetas );
 		this.datos.datos_cambio_hechos.connect ( this.cargar_lista_hechos );
 		this.datos.datos_hechos_deshacer.connect ( this.window.activar_boton_deshacer );
 		this.datos.datos_no_hechos_deshacer.connect ( this.window.desactivar_boton_deshacer  );
@@ -118,7 +119,6 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void add_hecho_dialog () {
-
 		if ( !(this.datos.hay_colecciones_activas ()) ) {
 				this.preferencias_dialog ( false );
 		}
@@ -129,10 +129,9 @@ public class Nomeolvides.App : Gtk.Application
 								this.datos.lista_de_etiquetas () ); 
 			add_dialog.show();
 
-			if ( add_dialog.run() == ResponseType.APPLY )
-			{
-				this.datos.agregar_hecho( add_dialog.respuesta );			
-			}		
+			if ( add_dialog.run() == ResponseType.APPLY ) {
+				this.datos.agregar_hecho( add_dialog.respuesta );
+			}
 			add_dialog.destroy();
 		}
 	}
