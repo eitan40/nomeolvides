@@ -19,54 +19,79 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ImportarHechos : OpenFileDialog {
-
+public class Nomeolvides.ImportarHechos : Dialog {
 	private ComboBox combo_colecciones;
+	private Label archivo_label;
+	private string directorio;
+	private string archivo;
+	
+	public ImportarHechos ( string directorio_actual, ListStoreColecciones colecciones_liststore ) {
+		this.title = _("Import Facts From File");
+		this.directorio = directorio_actual;
+		this.set_default_size ( 450, 200 );
 
-	// Constructor
-		public ImportarHechos ( string directorio_actual, ListStoreColecciones colecciones_liststore ) {
+		this.add_button ( _("Cancel"), ResponseType.CANCEL );
+		this.add_button ( _("Import"), ResponseType.ACCEPT );
+		
+		var coleccion = new Coleccion ( _("Select Colection"), true );
 
-			base ( directorio_actual );
-			this.set_modal ( true );
-			this.title = _("Import Facts From File");
+		colecciones_liststore.agregar_al_inicio ( coleccion , 0 );
 
-			this.boton_abrir.set_sensitive ( false );
+		var boton_elegir_archivo = new Button ();
+		boton_elegir_archivo.set_label (_("Choose File"));
+		boton_elegir_archivo.clicked.connect ( this.elegir_archivo );
 
-			var coleccion = new Coleccion ( _("Select Colection"), true );
+		var coleccion_label = new Label.with_mnemonic ( _("Colection") );
+		this.archivo_label = new Label.with_mnemonic ( _("File") );
+		coleccion_label.set_halign ( Align.START );
+		this.archivo_label.set_halign ( Align.START );
 
-			colecciones_liststore.agregar_al_inicio ( coleccion , 0 );
+		this.combo_colecciones = new ComboBox ();
+		this.set_combo_box ( colecciones_liststore );
+		this.combo_colecciones.changed.connect ( this.set_sensitive_import );
 
-			var coleccion_label = new Label.with_mnemonic ( "" );
-			coleccion_label.set_markup ( _("Import to") );
+		var grid = new Grid ();
+		grid.set_column_spacing ( (uint)40 );
+		grid.set_row_spacing ( (uint)10 );
+		grid.set_border_width ( (uint)20 );
+		grid.set_valign ( Align.CENTER );
+		grid.set_halign ( Align.CENTER );
 
-			this.combo_colecciones = new ComboBox ();
-			this.set_combo_box ( colecciones_liststore );
-			this.combo_colecciones.changed.connect ( cambio_coleccion );
+		grid.attach ( archivo_label, 0 , 0 , 1, 1 );
+		grid.attach ( boton_elegir_archivo, 1, 0, 1, 1 );
+		grid.attach ( coleccion_label, 0, 1, 1, 1 );
+		grid.attach ( this.combo_colecciones, 1, 1, 1, 1 );
 
-			var grid = new Grid ();
-			grid.set_column_spacing ( (uint)10 );
-			grid.set_row_spacing ( (uint)10 );
-			grid.set_border_width ( (uint)20 );
+		var contenido = this.get_content_area() as Box;
+		contenido.pack_start(grid, false, true, 0);
 
-			grid.attach (coleccion_label,0,1,1,1);
-			grid.attach (this.combo_colecciones,1,1,2,1);
-
-			var contenido = this.get_content_area() as Box;
-			contenido.pack_start(grid, false, true, 0);
-
-			this.show_all ();
-
+		this.show_all ();
 	}
 
-	protected void set_combo_box ( ListStoreColecciones liststore) {
+	private void elegir_archivo () {
+		var abrir_archivo = new FileChooserDialog ( _("Select a file"), null,
+		                                            FileChooserAction.OPEN, _("Cancel"),
+		                                            Gtk.ResponseType.CANCEL, _("Open"), 
+		                                            ResponseType.ACCEPT	);
+		abrir_archivo.set_current_folder ( this.directorio );
+
+		if (abrir_archivo.run () == ResponseType.ACCEPT) {
+			this.archivo = abrir_archivo.get_filename ();
+			this.archivo_label.set_label ( this.archivo.slice ( this.archivo.last_index_of ( "/" ) + 1, this.archivo.length ));
+		}
+		abrir_archivo.destroy ();
+	}
+
+	public void set_combo_box ( ListStoreColecciones liststore) {
 		CellRendererText renderer = new CellRendererText ();
 		this.combo_colecciones.pack_start (renderer, true);
 		this.combo_colecciones.add_attribute (renderer, "text", 0);
 		this.combo_colecciones.active = 0;
 		this.combo_colecciones.set_model ( liststore );
+		this.set_sensitive_import ();
 	}
 
-	protected int64 get_coleccion () {
+	public int64 get_coleccion () {
 		TreeIter iter;
 		Value value_coleccion;
 		Coleccion coleccion;
@@ -79,16 +104,19 @@ public class Nomeolvides.ImportarHechos : OpenFileDialog {
 		return coleccion.id;
 	}
 
-	public void cambio_coleccion () {
-		if (this.combo_colecciones.active == 0 ) {
-			this.boton_abrir.set_sensitive ( false );
+	private void set_sensitive_import () {
+		if ( this.combo_colecciones.active == 0 || this.archivo_label.get_text () == _("File") ) {
+			this.get_widget_for_response ( ResponseType.ACCEPT ).set_sensitive ( false );
 		} else {
-			this.boton_abrir.set_sensitive ( true );
+			this.get_widget_for_response ( ResponseType.ACCEPT ).set_sensitive ( true );
 		}
 	}
 
 	public int64 get_coleccion_id () {
 		return this.get_coleccion ();
 	}
-}
 
+	public string get_filename () {
+		return this.archivo;
+	}
+}
