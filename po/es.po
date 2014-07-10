@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-10 14:10-0300\n"
+"POT-Creation-Date: 2014-07-10 14:27-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -468,18 +468,16 @@ msgid "Import Facts From File"
 msgstr "Importar desde un Archivo"
 
 #: ../src/nomeolvides-importar-hechos.vala:34
-#, fuzzy
 msgid "Import"
-msgstr "Importar a"
+msgstr "Importar"
 
 #: ../src/nomeolvides-importar-hechos.vala:36
 msgid "Select Colection"
 msgstr "Sleccione una Colección"
 
 #: ../src/nomeolvides-importar-hechos.vala:72
-#, fuzzy
 msgid "Select a file"
-msgstr "Sleccione una Colección"
+msgstr "Sleccione un archivo"
 
 #: ../src/nomeolvides-preferencias.vala:47
 msgid "Colections"
