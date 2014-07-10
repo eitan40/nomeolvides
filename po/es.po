@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-08 19:52-0300\n"
+"POT-Creation-Date: 2014-07-10 14:10-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -75,8 +75,8 @@ msgstr "a la lista"
 #: ../src/nomeolvides-dialog-lista.vala:32
 #: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:33
 #: ../src/nomeolvides-file-chooser-dialog-savefile-dialog.vala:32
-#: ../src/nomeolvides-importar-hechos.vala:32
-#: ../src/nomeolvides-importar-hechos.vala:68
+#: ../src/nomeolvides-importar-hechos.vala:33
+#: ../src/nomeolvides-importar-hechos.vala:73
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -95,8 +95,8 @@ msgid "Years"
 msgstr "Años"
 
 #: ../src/nomeolvides-application-window-ventana-principal.vala:55
-#: ../src/nomeolvides-importar-hechos.vala:44
-#: ../src/nomeolvides-importar-hechos.vala:109
+#: ../src/nomeolvides-importar-hechos.vala:45
+#: ../src/nomeolvides-importar-hechos.vala:108
 msgid "File"
 msgstr "Archivo"
 
@@ -281,7 +281,7 @@ msgstr "¿Desea eliminar esta colección?"
 
 #: ../src/nomeolvides-dialog-borrar-coleccion-dialogo.vala:28
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:45
-#: ../src/nomeolvides-importar-hechos.vala:43
+#: ../src/nomeolvides-importar-hechos.vala:44
 msgid "Colection"
 msgstr "Colección"
 
@@ -442,12 +442,12 @@ msgid "Edit Custom List"
 msgstr "Editar Lista Personalizada"
 
 #: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:29
-#: ../src/nomeolvides-importar-hechos.vala:40
+#: ../src/nomeolvides-importar-hechos.vala:41
 msgid "Choose File"
 msgstr "Elija un Archivo"
 
 #: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:34
-#: ../src/nomeolvides-importar-hechos.vala:69
+#: ../src/nomeolvides-importar-hechos.vala:74
 msgid "Open"
 msgstr "Abrir"
 
@@ -467,16 +467,16 @@ msgstr "%e de %B de %Y"
 msgid "Import Facts From File"
 msgstr "Importar desde un Archivo"
 
-#: ../src/nomeolvides-importar-hechos.vala:33
+#: ../src/nomeolvides-importar-hechos.vala:34
 #, fuzzy
 msgid "Import"
 msgstr "Importar a"
 
-#: ../src/nomeolvides-importar-hechos.vala:35
+#: ../src/nomeolvides-importar-hechos.vala:36
 msgid "Select Colection"
 msgstr "Sleccione una Colección"
 
-#: ../src/nomeolvides-importar-hechos.vala:67
+#: ../src/nomeolvides-importar-hechos.vala:72
 #, fuzzy
 msgid "Select a file"
 msgstr "Sleccione una Colección"

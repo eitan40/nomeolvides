@@ -100,7 +100,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
-			if (this.db.update_coleccion ( edit_dialog.respuesta )) {
+			if ( this.db.update_coleccion ( edit_dialog.respuesta ) ) {
 				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
 				var cantidad_hechos = this.colecciones_view.get_hechos ();
 				this.colecciones_view.eliminar ( coleccion );
