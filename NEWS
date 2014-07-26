@@ -1,11 +1,13 @@
+0.10 / 2014-07-26
+=================
+In this version we focused on improve the user ecperience by fixing many annoying o distracting bugs. In the same way, we also made some changes on user interface and many dialogs. Now the user can select many fatcs at the same time y interact with them, by adding them to a list o delete them. Great part of the code was rewrited to make it simple a cleaner and many bugs were fixed.
+
 0.8.1 / 2013-11-30
 ==================
-
 This is a bugfixes release.
 
 0.8 / 2013-11-16
 ==================
-
 With this release we are getting close to the whole features we thought for 1.0 version of Nomeolvides. We have 
 given some love to the user interface to make user experience more pleasant. Now the application can be
 translated, right now it is available in english and spanish. We also use sqlite to handling data, due to this a migration
@@ -14,25 +16,21 @@ deletion of a colection or a list without lossing any data. libgee is not needed
 
 0.6 / 2013-05-02 
 ==================
-
 In this new version of Nomeolvides there are many new features. Now you can organize you facts with the new
 custom list feature. Also, right now changes are auto-saved instantly. Due to this, now if you delete or edit a fact 
 by mistake, you can undo the changes. And last, but not least, we have rewrite a lot of code and fixed various bugs.
 
 0.4 / 2013-02-28 
 ==================
-
 Just in time we have released the second version of Nomeolvides. Now you can send your historical facts by e-mail.
 There are also an Official data source via internet. And now you can add a bibliographical source to your facts.
 There are also many bugs fixes, too.
 
 0.2.1 / 2013-01-25
 ==================
-
 There is a new application menu. We have also resolved some issues.
 
 0.2 / 2013-01-19 
 ==================
-
 Today we have release the first version of Nomeolvides. Right now, you can add, edit and delete the historical facts.
 They will be organized by date. You can also export or import you data. There are many missing things yet.

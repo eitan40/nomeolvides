@@ -33,7 +33,13 @@ Desde fuentes
 
 	$ git checkout v0.8
 
-	$ ./autogen.sh
+	* Con soporte para escritorios distintos que Gnome 3
+
+		$ ./autogen.sh --disable-gnome3-support
+
+	* Con soporte para Gnome 3 (por defecto)
+
+		$ ./autogen.sh
 
 	$ make
 

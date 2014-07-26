@@ -1,3 +1,12 @@
+0.10 / 2014-07-26
+=================
+  * Now it's possible to select multiple facts
+  * Improvements on the user interface
+  * A new dialog to import facts
+  * Support on user interface for other Desktop Enviroments than Gnome 3
+  * Many changes on the code desing
+  * Many bug fixes, mainly on usability.
+
 0.8.1 / 2013-11-30
 ==================
   * Now you can add quotes (") to a fact.

@@ -1,28 +1,28 @@
+0.10 / 2014-07-26
+=================
+En esta versión nos enfocamos en mejorar la experiencia de uso del programa solucionando varios errores que hacían molesto o distraían a la hora de usar Nomeolvides. También con este fin, mejoramos sensiblemente la interfaz de usuario y muchos de los diálogos. Se agregó la posibilidad de seleccionar múltiples hechos a la vez y realizar acciones tales como agregarlos a una lista o borrarlos. Además, se reescribió gran parte del código para hacer que los cambios sean más sencillos y se corrigieron gran cantidad de errores.
+
 0.8.1 / 2013-11-30
 ==================
-
 Este es un release de arreglos de errores.
 
 0.8 / 2013-11-16
 ==================
-
-Con este relese nos acercamos bastante al conjunto de funcionalidades que pensamos para la verción 1.0 de  Nomeolvides. En esta versión le dimos un poco de cariño a la interfaz de usuario para que usarla sea más ameno. Ahora la aplicación puede ser traducida, actualemente se encuentra en inglés y castellano. También empezamos a usar sqlite para el manejo de los datos, debido a esto en necesario migrar los datos de la versión anterior a la actual, lo cual es llevado a cabo por nuestro reluciente migrador. También es posible deshacer la acción de borrar listas y colecciones sin perder ningún dato. Ya no es necesario el paquete libgee. Se corrigieron muchos errores.
+Con este release nos acercamos bastante al conjunto de funcionalidades que pensamos para la verción 1.0 de  Nomeolvides. En esta versión le dimos un poco de cariño a la interfaz de usuario para que usarla sea más ameno. Ahora la aplicación puede ser traducida, actualemente se encuentra en inglés y castellano. También empezamos a usar sqlite para el manejo de los datos, debido a esto en necesario migrar los datos de la versión anterior a la actual, lo cual es llevado a cabo por nuestro reluciente migrador. También es posible deshacer la acción de borrar listas y colecciones sin perder ningún dato. Ya no es necesario el paquete libgee. Se corrigieron muchos errores.
 
 0.6 / 2013-05-02 
 ==================
-
 En esta nueva versión de Nomeolvides hay muchas nuevas funcionalidades. Ahora se puede organizar los hechos con las nuevas listas personalizadas. También los cambios se guardan automáticamente al instante. Debido a esto si se borra un hecho por error, se oueden deshacer los cambios. Y por último, pero no por eso menos importante, hemos reescrito gran parte del código y corregimos varios errores.
+
 0.4 / 2013-02-28 
 ==================
-
 Justo a tiempo hechos hechos el release de la segunda versión de Nomeolvides. Ahora se puede enviar hechos históricos por mail. También hay una base de datos oficial a través de internet. Ahora se puede agregar la fuente bibliográfica a los hechos. Se corrigieron varios errores.
 
 0.2.1 / 2013-01-25
 ==================
-
 Se ha implementado el aplication menu. Se corrigieron varios errores.
 
 0.2 / 2013-01-19 
-==================
 
+==================
 Hoy hemos liberado la primer versión de Nomeolvides. Por el momento, se puede agregar, editar y borrar los hechos históricos. Los mismos se organizan por fecha. También se puede exportar o importar los daros. Todavía faltan muchas cosas.

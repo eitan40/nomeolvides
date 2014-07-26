@@ -1,3 +1,12 @@
+0.10 / 2014-07-26
+=================
+  * Ahora se puede seleccionar multiples hechos
+  * Mejoras en la interfaz de usuario
+  * Un nuevo diálogo para importar hechos
+  * Soporte en la interfaz de usuario para escritorios distintos que Gnome 3
+  * Muchos cambios internos en el diseño del código
+  * Muchos arreglos de errores, sobretodo de usabilidad
+
 0.8.1 / 2013-11-30
 ==================
   * Ahora se pueden agregar comillas a los hechos
