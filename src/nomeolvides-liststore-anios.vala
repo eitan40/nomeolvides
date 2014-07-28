@@ -44,6 +44,7 @@ public class Nomeolvides.ListStoreAnios : ListStore {
 				anios.append_val ( nuevos.index (i) );
 			}
 
+			this.anios = new Array<int> ();
 			for ( int i = 0; i < nuevos.length; i++ ) {
 				this.anios.append_val ( nuevos.index (i) );
 			}
