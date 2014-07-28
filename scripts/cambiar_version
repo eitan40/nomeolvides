@@ -1,13 +1,16 @@
 #/bin/bash
 
 VERSION_ANTERIOR=$(cat configure.ac | grep AC_INIT | cut --delimiter="," --fields=2 )
-#echo "version anterior: "${VERSION_ANTERIOR}
-COMMIT_ANTERIOR=$(echo ${VERSION_ANTERIOR} | cut --delimiter="." --fields=3 )
+echo "version anterior: "${VERSION_ANTERIOR}
+#COMMIT_ANTERIOR=$(echo ${VERSION_ANTERIOR} | cut --delimiter="." --fields=4 )
 #echo "commit anterior: "${COMMIT_ANTERIOR}
+VERSION_INESTABLE=$(($(echo ${VERSION_ANTERIOR} | cut --delimiter="." --fields=2) % 2))
 
-COMMIT_ACTUAL=$(($(git rev-list HEAD --count) + 1))
-#echo "commit actual: "${COMMIT_ACTUAL}
-VERSION_ACTUAL=$(echo ${VERSION_ANTERIOR} | sed "s/${COMMIT_ANTERIOR}/${COMMIT_ACTUAL}/")
-echo "version actualizada a : "${VERSION_ACTUAL}
+if [ "$VERSION_INESTABLE" != 0 ]; then
+	#COMMIT_ACTUAL=$(($(git rev-list HEAD --count) + 1))
+	#echo "commit actual: "${COMMIT_ACTUAL}
+	VERSION_ACTUAL=$(cat configure.ac | grep AC_INIT | awk -v FS=',' '{ print $2 }' | sed 's/\ //' | awk -v FS='.' '{ print $1"."$2"."$3"." }')$(($(git describe --long | awk -v FS='-' '{ print $2 }') + 1))
+	echo "version actualizada a : "${VERSION_ACTUAL}
 
-sed -i "s/${VERSION_ANTERIOR}/ ${VERSION_ACTUAL}/" configure.ac
+	sed -i "s/${VERSION_ANTERIOR}/ ${VERSION_ACTUAL}/" configure.ac
+fi
