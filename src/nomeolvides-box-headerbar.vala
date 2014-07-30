@@ -42,8 +42,6 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.centro_box.set_halign ( Align.CENTER );
 		this.derecha_box.set_halign ( Align.END );
 	#if DISABLE_GNOME3
-		this.izquierda_box.set_margin_left ( 8 );
-		this.derecha_box.set_margin_right ( 8 );
 		this.anio_label.set_margin_right ( 2 );
 	#else
 		this.izquierda_box.set_border_width ( 6 );

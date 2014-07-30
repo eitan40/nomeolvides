@@ -39,6 +39,9 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.izquierda_box.set_halign ( Align.START );
 		this.centro_box.set_halign ( Align.END );
 
+		this.izquierda_box.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+		this.centro_box.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+
 		this.pack_start ( this.izquierda_box );
 		this.pack_start ( this.centro_box );
 
@@ -48,7 +51,7 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.edit_button = new NmoButton ( _("Edit") );
 		this.delete_button = new NmoButton ( _("Delete") );
 	#if DISABLE_GNOME3
-		this.add_button.set_margin_right ( 2 );
+		this.add_button.set_margin_left ( 2 );
 	#else
 		this.add_button.set_margin_start ( 2 );
 	#endif
