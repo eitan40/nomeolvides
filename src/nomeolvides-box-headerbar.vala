@@ -28,15 +28,15 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	protected Box derecha_box;
 	// Constructor
 	public HeaderBar () {
-		this.get_style_context().remove_class ("toolbar");
 	#if DISABLE_GNOME3
+		this.get_style_context().add_class ( Gtk.STYLE_CLASS_PRIMARY_TOOLBAR );
+		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TOOLBAR );
 	#else
-		this.get_style_context().add_class ("header-bar");
-		this.get_style_context().add_class ("titlebar");
-		this.set_size_request ( 0, 47 );
+		this.get_style_context().add_class ( "header-bar" );
+		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TITLEBAR );
 	#endif
 		this.set_halign ( Align.FILL );
-		this.derecha_box = new Box (Orientation.HORIZONTAL, 6);
+		this.derecha_box = new Box (Orientation.HORIZONTAL, 0);
 		this.anio_label = new Label ("");
 
 		this.centro_box.set_halign ( Align.CENTER );
@@ -46,8 +46,10 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.derecha_box.set_margin_right ( 8 );
 		this.anio_label.set_margin_right ( 2 );
 	#else
-		this.izquierda_box.set_margin_start ( 8 );
-		this.derecha_box.set_margin_end ( 8 );
+		this.izquierda_box.set_border_width ( 6 );
+		this.derecha_box.set_border_width ( 6 );
+		this.centro_box.set_border_width ( 6 );
+
 		this.anio_label.set_margin_end ( 2 );
 	#endif
 		this.pack_start ( derecha_box );
@@ -61,7 +63,8 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	#if DISABLE_GNOME3
 	#else
 		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
-		boton_cerrar.set_relief ( ReliefStyle.NONE );
+		boton_cerrar.get_style_context().add_class ( "titlebutton" );
+		boton_cerrar.get_style_context().remove_class ( "image-button" );
 		boton_cerrar.clicked.connect ( cerrar );
 		var separador = new Gtk.Separator ( Orientation.VERTICAL );
 

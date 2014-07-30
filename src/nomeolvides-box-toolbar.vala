@@ -32,10 +32,9 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 
 	public Toolbar () {
 		this.orientation = Orientation.HORIZONTAL;
-		this.get_style_context().add_class ("toolbar");
 
-		this.izquierda_box = new Box (Orientation.HORIZONTAL, 6);
-		this.centro_box = new Box (Orientation.HORIZONTAL, 6);
+		this.izquierda_box = new Box (Orientation.HORIZONTAL, 0);
+		this.centro_box = new Box (Orientation.HORIZONTAL, 0);
 
 		this.izquierda_box.set_halign ( Align.START );
 		this.centro_box.set_halign ( Align.END );
