@@ -36,12 +36,12 @@ public interface Nomeolvides.BaseDeDatos : Object {
 	public abstract bool insert_lista ( Lista lista );
 	public abstract bool insert_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract bool insert_coleccion ( Coleccion coleccion );
-	public abstract void hecho_a_borrar ( Hecho hecho );
-	public abstract void coleccion_a_borrar ( Coleccion coleccion );
-	public abstract void lista_a_borrar ( Lista lista );
-	public abstract void delete_hecho ( Hecho hecho );
+	public abstract bool hecho_a_borrar ( Hecho hecho );
+	public abstract bool coleccion_a_borrar ( Coleccion coleccion );
+	public abstract bool lista_a_borrar ( Lista lista );
+	public abstract bool delete_hecho ( Hecho hecho );
 	public abstract bool delete_lista ( Lista lista );
-	public abstract void delete_hecho_lista ( Hecho hecho, Lista lista );
+	public abstract bool delete_hecho_lista ( Hecho hecho, Lista lista );
 	public abstract bool delete_coleccion ( Coleccion coleccion );
 	public abstract void hecho_no_borrar ( Hecho hecho );
 	public abstract void coleccion_no_borrar ( Coleccion coleccion );

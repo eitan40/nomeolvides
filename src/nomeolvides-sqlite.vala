@@ -229,20 +229,20 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	public void hecho_a_borrar ( Hecho hecho ) {
-		this.insert ( "hechosborrar", "id", hecho.id.to_string() );
+	public bool hecho_a_borrar ( Hecho hecho ) {
+		return this.insert ( "hechosborrar", "id", hecho.id.to_string() );
 	}
 
-	public void coleccion_a_borrar ( Coleccion coleccion ) {
-		this.insert ( "coleccionesborrar", "id", coleccion.id.to_string() );
+	public bool coleccion_a_borrar ( Coleccion coleccion ) {
+		return this.insert ( "coleccionesborrar", "id", coleccion.id.to_string() );
 	}
 
-	public void lista_a_borrar ( Lista lista ) {
-		this.insert ( "listasborrar", "id", lista.id.to_string() );
+	public bool lista_a_borrar ( Lista lista ) {
+		return this.insert ( "listasborrar", "id", lista.id.to_string() );
 	}
 
-	public void delete_hecho ( Hecho hecho ) {
-		this.del ( "hechos", "WHERE id=\"" + hecho.id.to_string() +"\"" );
+	public bool delete_hecho ( Hecho hecho ) {
+		return this.del ( "hechos", "WHERE id=\"" + hecho.id.to_string() +"\"" );
 	}
 
 	public bool delete_lista ( Lista lista ) {
@@ -255,8 +255,8 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	public void delete_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.del ( "listashechos",
+	public bool delete_hecho_lista ( Hecho hecho, Lista lista ) {
+		return this.del ( "listashechos",
 		           "WHERE lista=\"" + lista.id.to_string()
 		                            + "\" AND hecho=\"" 
 		                            + hecho.id.to_string() +"\"" );
