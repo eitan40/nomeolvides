@@ -91,16 +91,16 @@ public class Nomeolvides.AccionesDB : Object {
 		this.dbms.borrar_deshacer ();
 	}
 
-	public void update_hecho ( Hecho hecho ) {
-		this.dbms.update_hecho ( hecho );
+	public bool update_hecho ( Hecho hecho ) {
+		return this.dbms.update_hecho ( hecho );
 	}
  
 	public bool update_lista ( Lista lista ) {
 		return this.dbms.update_lista ( lista );
 	}
 
-	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
-		this.dbms.update_hecho_lista ( hecho, lista );
+	public bool update_hecho_lista ( Hecho hecho, Lista lista ) {
+		return this.dbms.update_hecho_lista ( hecho, lista );
 	}
 
 	public bool update_coleccion ( Coleccion coleccion ) {

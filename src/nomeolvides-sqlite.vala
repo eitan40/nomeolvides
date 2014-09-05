@@ -294,12 +294,17 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		this.del ( "listasborrar" );
 	}
 
-	public void update_hecho ( Hecho hecho ) {
+	public bool update_hecho ( Hecho hecho ) {
+		bool retorno = false;
 		string valores = hecho.a_sql ();
 
-		this.update ( "hechos",
+		if ( this.update ( "hechos",
 		              valores,
-		              " WHERE id=\"" + hecho.id.to_string() + "\"" );
+		              " WHERE id=\"" + hecho.id.to_string() + "\"" ) ) {
+			retorno = true;
+		}
+
+		return retorno;
 	}
  
 	public bool update_lista ( Lista lista ) {
@@ -313,15 +318,20 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 		return retorno;
 	}
 
-	public void update_hecho_lista ( Hecho hecho, Lista lista ) {
+	public bool update_hecho_lista ( Hecho hecho, Lista lista ) {
+		bool retorno = false;
 		string valores = "lista=\"" + lista.id.to_string() + "\" hecho=\""
 			                        + lista.id.to_string() + "\"";
 
-		this.update ( "listashechos",
-		              valores,
-		              "WHERE lista=\"" + lista.id.to_string()
-		                               + "\" AND hecho=\"" 
-		                               + hecho.id.to_string() +"\"" );
+		if ( this.update ( "listashechos",
+		           			valores,
+		            		"WHERE lista=\"" + lista.id.to_string()
+		                					 + "\" AND hecho=\"" 
+		                					 + hecho.id.to_string() +"\"" ) ) {
+			retorno = true;
+		}
+
+		return retorno;
 	}
 
 	public bool update_coleccion ( Coleccion coleccion ) {
