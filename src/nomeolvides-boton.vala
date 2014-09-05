@@ -35,8 +35,6 @@ public class Nomeolvides.Boton : Gtk.Button {
 
 	private void setear_propiedades () {
 		this.set_halign ( Align.START );
-		this.set_margin_top ( 5 );
-		this.set_margin_bottom ( 5 );
 	}
 }
 
