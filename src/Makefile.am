@@ -56,7 +56,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-migrador.vala \
 	nomeolvides-importar-hechos.vala \
-	nomeolvides-preferencias.vala \
 	nomeolvides-box-colecciones-config.vala \
 	nomeolvides-box-listas-config.vala \
 	nomeolvides-resources.c \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-utiles.vala \
 	nomeolvides-treeview-hechos.vala \
 	nomeolvides-treeview-anios.vala \
-	nomeolvides-dialogo-coleccion-agregar.vala
+	nomeolvides-dialogo-coleccion-agregar.vala \
+	nomeolvides-dialog-preferencias.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

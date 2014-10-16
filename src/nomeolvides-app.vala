@@ -28,7 +28,7 @@ public class Nomeolvides.App : Gtk.Application
 	public Datos datos;
 	public GLib.Menu application_menu;
 	private Migrador migrador;
-	private Preferencias dialogo_preferencias;
+	private DialogPreferencias dialogo_preferencias;
 
 	private void create_window () {
 		this.window = new VentanaPrincipal (this);
@@ -199,7 +199,7 @@ public class Nomeolvides.App : Gtk.Application
 	private void preferencias ( ) {
 		var colecciones = this.datos.lista_de_colecciones ();
 		var listas = this.datos.lista_de_listas ();
-		this.dialogo_preferencias = new Preferencias ( this.window, colecciones, listas );
+		this.dialogo_preferencias = new DialogPreferencias ( this.window, colecciones, listas );
 		this.dialogo_preferencias.hide.connect ( this.inicializar_ventana );
 		this.dialogo_preferencias.hide ();
 	}

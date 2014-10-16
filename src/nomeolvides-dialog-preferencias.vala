@@ -20,12 +20,12 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Preferencias : Gtk.Dialog {
+public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private Notebook notebook;
 	private ColeccionesConfig config_colecciones;
 	private ListasConfig config_listas;
 	
-	public Preferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
+	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
 		this.set_title (_("Preferences"));
 		this.set_modal ( true );
 		this.set_default_size (600, 350);
