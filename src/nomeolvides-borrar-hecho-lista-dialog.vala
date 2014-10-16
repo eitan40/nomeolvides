@@ -107,7 +107,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 			this.set_size_request ( 600, 200 );
 			this.pregunta.set_label ( _("Do you want to remove this facts from the list?") );
 			this.hecho_label.set_label (  _("Facts") + ":" );
-			var treeview_hechos = new ViewHechos ();
+			var treeview_hechos = new TreeViewHechos ();
 			var scroll_hechos = new ScrolledWindow ( null, null );
 			scroll_hechos.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
 			treeview_hechos.set_margin_bottom ( 10 );

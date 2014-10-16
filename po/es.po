@@ -40,23 +40,18 @@ msgstr "historia;hechos;"
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
-<<<<<<< HEAD
-#: ../src/nomeolvides-add-coleccion-dialog.vala:27
-msgid "Add a Collection"
-msgstr "Agregar una Coleccion"
+#: ../src/nomeolvides-add-hecho-dialog.vala:28
+msgid "Add a Historical Fact"
+msgstr "Agregar Hecho Histórico"
 
-#: ../src/nomeolvides-add-coleccion-dialog.vala:28
 #: ../src/nomeolvides-add-hecho-dialog.vala:32
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:57
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:68
 #: ../src/nomeolvides-add-lista-dialog.vala:28
-#: ../src/nomeolvides-box-toolbar.vala:48
+#: ../src/nomeolvides-box-toolbar.vala:46
+#: ../src/nomeolvides-dialogo-coleccion-agregar.vala:28
 msgid "Add"
 msgstr "Agregar"
-
-#: ../src/nomeolvides-add-hecho-dialog.vala:28
-msgid "Add a Historical Fact"
-msgstr "Agregar Hecho Histórico"
 
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:33
 msgid "Add Fact to List"
@@ -91,7 +86,7 @@ msgstr "Agregar Lista Personalizada"
 
 #: ../src/nomeolvides-app.vala:324
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:67
-#: ../src/nomeolvides-treeview-view-anios.vala:31
+#: ../src/nomeolvides-treeview-anios.vala:31
 msgid "Years"
 msgstr "Años"
 
@@ -114,7 +109,7 @@ msgid "Quit"
 msgstr "Salir"
 
 #: ../src/nomeolvides-application-window-ventana-principal.vala:73
-#: ../src/nomeolvides-box-toolbar.vala:51
+#: ../src/nomeolvides-box-toolbar.vala:49
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:29
 #: ../src/nomeolvides-edit-hecho-dialog.vala:30
 #: ../src/nomeolvides-edit-lista-dialog.vala:30
@@ -122,7 +117,7 @@ msgid "Edit"
 msgstr "Editar"
 
 #: ../src/nomeolvides-application-window-ventana-principal.vala:78
-#: ../src/nomeolvides-preferencias.vala:29
+#: ../src/nomeolvides-dialog-preferencias.vala:29
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -174,28 +169,28 @@ msgid "Facts"
 msgstr "Hechos"
 
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:68
-#: ../src/nomeolvides-preferencias.vala:41
+#: ../src/nomeolvides-dialog-preferencias.vala:48
 msgid "Lists"
 msgstr "Listas"
 
-#: ../src/nomeolvides-box-headerbar.vala:58
+#: ../src/nomeolvides-box-headerbar.vala:55
 msgid "Send"
 msgstr "Enviar"
 
-#: ../src/nomeolvides-box-headerbar.vala:59
+#: ../src/nomeolvides-box-headerbar.vala:56
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
 msgid "List"
 msgstr "Lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:83
+#: ../src/nomeolvides-box-headerbar.vala:77
 msgid "Year"
 msgstr "Año"
 
-#: ../src/nomeolvides-box-headerbar.vala:118
+#: ../src/nomeolvides-box-headerbar.vala:112
 msgid "Add to list"
 msgstr "Agregar a la lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:122
+#: ../src/nomeolvides-box-headerbar.vala:116
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 
@@ -247,15 +242,15 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: ../src/nomeolvides-box-toolbar.vala:49
+#: ../src/nomeolvides-box-toolbar.vala:47
 msgid "Undo"
 msgstr "Deshacer"
 
-#: ../src/nomeolvides-box-toolbar.vala:50
+#: ../src/nomeolvides-box-toolbar.vala:48
 msgid "Redo"
 msgstr "Rehacer"
 
-#: ../src/nomeolvides-box-toolbar.vala:52
+#: ../src/nomeolvides-box-toolbar.vala:50
 msgid "Delete"
 msgstr "Borrar"
 
@@ -335,13 +330,13 @@ msgid "Colection name"
 msgstr "Nombre de la Colección"
 
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:43
+#: ../src/nomeolvides-treeview-hechos.vala:36
 #: ../src/nomeolvides-treeview-nmobase.vala:31
-#: ../src/nomeolvides-treeview-view-hechos.vala:36
 msgid "Name"
 msgstr "Nombre"
 
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:44
-#: ../src/nomeolvides-treeview-view-hechos.vala:37
+#: ../src/nomeolvides-treeview-hechos.vala:37
 msgid "Date"
 msgstr "Fecha"
 
@@ -430,6 +425,18 @@ msgstr "Migrando Hechos"
 msgid "Migrating List"
 msgstr "Migrando Lista"
 
+#: ../src/nomeolvides-dialog-preferencias.vala:47
+msgid "Colections"
+msgstr "Colecciones"
+
+#: ../src/nomeolvides-dialog-preferencias.vala:52
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../src/nomeolvides-dialogo-coleccion-agregar.vala:27
+msgid "Add a Collection"
+msgstr "Agregar una Coleccion"
+
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:28
 msgid "Edit Collection"
 msgstr "Editar Colección"
@@ -480,14 +487,6 @@ msgstr "Sleccione una Colección"
 msgid "Select a file"
 msgstr "Sleccione un archivo"
 
-#: ../src/nomeolvides-preferencias.vala:40
-msgid "Colections"
-msgstr "Colecciones"
-
-#: ../src/nomeolvides-preferencias.vala:46
-msgid "Close"
-msgstr "Cerrar"
-
 #: ../src/nomeolvides-sqlite.vala:37
 msgid "Could not open the data base"
 msgstr "No se pudo abrir la base de datos"
@@ -532,331 +531,6 @@ msgstr "_Acerca de Nomeolvides"
 #: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
-
-#~ msgid "Add a Collection"
-#~ msgstr "Agregar una Coleccion"
-
-#~ msgid "Add"
-#~ msgstr "Agregar"
-
-#~ msgid "Add a Historical Fact"
-#~ msgstr "Agregar Hecho Histórico"
-
-#~ msgid "Add Fact to List"
-#~ msgstr "Agregar Hecho a la Lista"
-
-#~ msgid "to list"
-#~ msgstr "a la lista"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgid "Add Facts to List"
-#~ msgstr "Agregar Hechos a la Lista"
-
-#~ msgid "Add Custom List"
-#~ msgstr "Agregar Lista Personalizada"
-
-#~ msgid "Years"
-#~ msgstr "Años"
-
-#~ msgid "File"
-#~ msgstr "Archivo"
-
-#~ msgid "Export Facts"
-#~ msgstr "Exportar Hechos"
-
-#~ msgid "Import facts"
-#~ msgstr "Importar Hechos"
-
-#~ msgid "Quit"
-#~ msgstr "Salir"
-
-#~ msgid "Edit"
-#~ msgstr "Editar"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferencias"
-
-#~ msgid "Help"
-#~ msgstr "Ayuda"
-
-#~ msgid "About Nomeolvides"
-#~ msgstr "Acerca de Nomeolvides"
-
-#~ msgid "Error while open"
-#~ msgstr "Error al abrir"
-
-#~ msgid "Remove Fact from List"
-#~ msgstr "Elimnar Hecho de la Lista"
-
-#~ msgid "From list"
-#~ msgstr "De la lista"
-
-#~ msgid "Remove"
-#~ msgstr "Elimnar"
-
-#~ msgid "Do you want to remove this fact from the list?"
-#~ msgstr "¿Desea eliminar este hecho de la lista?"
-
-#~ msgid "Fact"
-#~ msgstr "Hecho"
-
-#~ msgid "Remove Facts from List"
-#~ msgstr "Elimnar Hechos de la Lista"
-
-#~ msgid "Do you want to remove this facts from the list?"
-#~ msgstr "¿Desea eliminar estos hechos de la lista?"
-
-#~ msgid "Facts"
-#~ msgstr "Hechos"
-
-#~ msgid "Lists"
-#~ msgstr "Listas"
-
-#~ msgid "Send"
-#~ msgstr "Enviar"
-
-#~ msgid "List"
-#~ msgstr "Lista"
-
-#~ msgid "Year"
-#~ msgstr "Año"
-
-#~ msgid "Add to list"
-#~ msgstr "Agregar a la lista"
-
-#~ msgid "Remove from list"
-#~ msgstr "Eliminar de la lista"
-
-#~ msgid "January"
-#~ msgstr "Enero"
-
-#~ msgid "February"
-#~ msgstr "Febrero"
-
-#~ msgid "March"
-#~ msgstr "Marzo"
-
-#~ msgid "April"
-#~ msgstr "Abril"
-
-#~ msgid "May"
-#~ msgstr "Mayo"
-
-#~ msgid "June"
-#~ msgstr "Junio"
-
-#~ msgid "July"
-#~ msgstr "Julio"
-
-#~ msgid "August"
-#~ msgstr "Agosto"
-
-#~ msgid "September"
-#~ msgstr "Septimbre"
-
-#~ msgid "October"
-#~ msgstr "Octubre"
-
-#~ msgid "November"
-#~ msgstr "Noviembre"
-
-#~ msgid "December"
-#~ msgstr "Diciembre"
-
-#~ msgid "Undo"
-#~ msgstr "Deshacer"
-
-#~ msgid "Redo"
-#~ msgstr "Rehacer"
-
-#~ msgid "Delete"
-#~ msgstr "Borrar"
-
-#~ msgid "Source"
-#~ msgstr "Fuente"
-
-#~ msgid "Historical ephemeris manager"
-#~ msgstr "Gestor de efemérides históricas"
-
-#~ msgid "and"
-#~ msgstr "y"
-
-#~ msgid "Delete Collection"
-#~ msgstr "Eliminar Colección"
-
-#~ msgid "Do you want to remove this collection?"
-#~ msgstr "¿Desea eliminar esta colección?"
-
-#~ msgid "Colection"
-#~ msgstr "Colección"
-
-#~ msgid "Amount of Facts"
-#~ msgstr "Cantidad de Hechos"
-
-#~ msgid "Apply"
-#~ msgstr "Aplicar"
-
-#~ msgid "Remove Fact"
-#~ msgstr "Elimnar Hecho"
-
-#~ msgid "dated"
-#~ msgstr "con fecha"
-
-#~ msgid "Do you want to remove this fact?"
-#~ msgstr "¿Desea eliminar este hecho?"
-
-#~ msgid "Remove Facts"
-#~ msgstr "Elimnar Hechos"
-
-#~ msgid "Do you want to remove this facts?"
-#~ msgstr "¿Desea eliminar estos hechos?"
-
-#~ msgid "Delete Custom List"
-#~ msgstr "Eliminar Lista Personalizada"
-
-#~ msgid "Do you want to remove custom list?"
-#~ msgstr "¿Desea eliminar la lista personalizada?"
-
-#~ msgid "Amount of facts"
-#~ msgstr "Cantidad de Hechos"
-
-#~ msgid "Colection name"
-#~ msgstr "Nombre de la Colección"
-
-#~ msgid "Name"
-#~ msgstr "Nombre"
-
-#~ msgid "Date"
-#~ msgstr "Fecha"
-
-#~ msgid "Description"
-#~ msgstr "Descripción"
-
-#~ msgid "List Name"
-#~ msgstr "Nombre de la Lista"
-
-#~ msgid "Database Migration"
-#~ msgstr "Migración de la Base de Datos"
-
-#~ msgid "Start migration"
-#~ msgstr "Comenzar Migración"
-
-#~ msgid ""
-#~ "Dear user,\n"
-#~ "\n"
-#~ "Since this version of Nomeolvides has a lot of internal changes, it is "
-#~ "necessary to perform a migration of data loaded into earlier versions.\n"
-#~ "\n"
-#~ "The migration process is automatic and the migrated data will not be "
-#~ "deleted after the process to avoid losing your work if it fails.\n"
-#~ "\n"
-#~ "Please check that all the data has been successfully migrated after "
-#~ "completion of the process and, if not, notify us at "
-#~ "desarrolladores@softwareperonista.com.ar\n"
-#~ "\n"
-#~ "Sincerely, the development team."
-#~ msgstr ""
-#~ "Estimado usuario,\n"
-#~ "\n"
-#~ "Dado que esta versión de Nomeolvides tiene una gran cantidad de cambios "
-#~ "internos, es necesario llevar a cabo una migración de los los datos "
-#~ "cargados en las versiones anteriores.\n"
-#~ "\n"
-#~ "El proceso de migración es automática y los datos migrados no serán "
-#~ "eliminados después del proceso para evitar perder su trabajo, si se "
-#~ "produce un error.\n"
-#~ "\n"
-#~ "Por favor, compruebe que todos los datos hayan sido correctamente "
-#~ "migrados después de finalizado el proceso y, si no es así, notifíquenos a "
-#~ "desarrolladores@softwareperonista.com.ar\n"
-#~ "\n"
-#~ "Atentamente, el equipo de desarrollo."
-
-#~ msgid "Finish Migration"
-#~ msgstr "Finalizar Migración"
-
-#~ msgid "Migrating Collections"
-#~ msgstr "Migrando Colecciones"
-
-#~ msgid "Facts from Collection"
-#~ msgstr "Hechos de la Colección"
-
-#~ msgid "Migrating Lists"
-#~ msgstr "Migrando Listas"
-
-#~ msgid "Facts from List"
-#~ msgstr "Hechos de la Lista"
-
-#~ msgid "Migrating Collection"
-#~ msgstr "Migrando Colección"
-
-#~ msgid "Migrating Facts"
-#~ msgstr "Migrando Hechos"
-
-#~ msgid "Migrating List"
-#~ msgstr "Migrando Lista"
-
-#~ msgid "Edit Collection"
-#~ msgstr "Editar Colección"
-
-#~ msgid "Edit Fact"
-#~ msgstr "Editar Hecho"
-
-#~ msgid "Edit Custom List"
-#~ msgstr "Editar Lista Personalizada"
-
-#~ msgid "Choose File"
-#~ msgstr "Elija un Archivo"
-
-#~ msgid "Open"
-#~ msgstr "Abrir"
-
-#~ msgid "Save File"
-#~ msgstr "Guardar Archivo"
-
-#~ msgid "Save"
-#~ msgstr "Guardar"
-
-#~ msgid "%B %e, %Y"
-#~ msgstr "%e de %B de %Y"
-
-#~ msgid "Import Facts From File"
-#~ msgstr "Importar desde un Archivo"
-
-#~ msgid "Import"
-#~ msgstr "Importar"
-
-#~ msgid "Select Colection"
-#~ msgstr "Sleccione una Colección"
-
-#~ msgid "Select a file"
-#~ msgstr "Sleccione un archivo"
-
-#~ msgid "Colections"
-#~ msgstr "Colecciones"
-
-#~ msgid "Close"
-#~ msgstr "Cerrar"
-
-#~ msgid "Could not open the data base"
-#~ msgstr "No se pudo abrir la base de datos"
-
-#~ msgid "Failed to execute the sentence"
-#~ msgstr "Error al ejecutar la sentencia"
-
-#~ msgid "Error parsing facts"
-#~ msgstr "Error parseando hechos"
-
-#~ msgid "Error"
-#~ msgstr "Error"
-
-#~ msgid "Error parsing lists"
-#~ msgstr "Error parseando listas"
-
-#~ msgid "Visible"
-#~ msgstr "Visible"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"
