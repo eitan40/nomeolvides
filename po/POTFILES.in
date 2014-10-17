@@ -17,8 +17,8 @@ src/nomeolvides-dialog-borrar-hecho-dialogo.vala
 src/nomeolvides-dialog-borrar-lista-dialog.vala
 src/nomeolvides-dialog-coleccion-agregar.vala
 src/nomeolvides-dialog-coleccion.vala
-src/nomeolvides-dialog-dialogo-hecho.vala
 src/nomeolvides-dialog-hecho-agregar.vala
+src/nomeolvides-dialog-hecho.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-dialog-preferencias.vala

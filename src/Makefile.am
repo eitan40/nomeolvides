@@ -31,7 +31,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
 	nomeolvides-application-window-ventana-principal.vala \
 	nomeolvides-dialog-borrar-hecho-dialogo.vala \
-	nomeolvides-dialog-dialogo-hecho.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-treeview-anios.vala \
 	nomeolvides-dialog-preferencias.vala \
 	nomeolvides-dialog-coleccion-agregar.vala \
-	nomeolvides-dialog-hecho-agregar.vala
+	nomeolvides-dialog-hecho-agregar.vala \
+	nomeolvides-dialog-hecho.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogoHecho : Dialog
+public class Nomeolvides.DialogHecho : Dialog
 {
 	protected Entry nombre_entry;
 	protected TextView descripcion_textview;
@@ -30,7 +30,7 @@ public class Nomeolvides.DialogoHecho : Dialog
 	protected Entry fuente_entry;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogoHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
+	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
 	{
 		this.resizable = true;
 		this.modal = true;

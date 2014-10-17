@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogoHecho {
+public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogHecho {
 	
 	public DialogHechoAgregar ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
 		base (ventana, colecciones);

@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
+public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogHecho {
 	private int64 hecho_id;
 	
 	public EditHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
