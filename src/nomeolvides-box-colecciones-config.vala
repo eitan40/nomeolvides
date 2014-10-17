@@ -73,7 +73,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		ListStoreColecciones liststore;
 		Coleccion coleccion;
 		
-		var add_dialog = new DialogoColeccionAgregar ( );
+		var add_dialog = new DialogColeccionAgregar ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {

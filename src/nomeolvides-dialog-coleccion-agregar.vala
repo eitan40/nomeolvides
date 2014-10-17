@@ -20,9 +20,9 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogoColeccionAgregar : DialogColeccion
+public class Nomeolvides.DialogColeccionAgregar : DialogColeccion
 {	
-	public DialogoColeccionAgregar ( )
+	public DialogColeccionAgregar ( )
 	{
 		this.title = _("Add a Collection");
 		this.add_button (_("Add") , ResponseType.APPLY);

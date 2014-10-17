@@ -69,8 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-utiles.vala \
 	nomeolvides-treeview-hechos.vala \
 	nomeolvides-treeview-anios.vala \
-	nomeolvides-dialogo-coleccion-agregar.vala \
-	nomeolvides-dialog-preferencias.vala
+	nomeolvides-dialog-preferencias.vala \
+	nomeolvides-dialog-coleccion-agregar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

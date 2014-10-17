@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-09 14:13-0300\n"
+"POT-Creation-Date: 2014-10-17 16:55-0300\n".
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -49,7 +49,7 @@ msgstr "Agregar Hecho Histórico"
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:68
 #: ../src/nomeolvides-add-lista-dialog.vala:28
 #: ../src/nomeolvides-box-toolbar.vala:46
-#: ../src/nomeolvides-dialogo-coleccion-agregar.vala:28
+#: ../src/nomeolvides-dialog-coleccion-agregar.vala:28
 msgid "Add"
 msgstr "Agregar"
 
@@ -325,6 +325,10 @@ msgstr "¿Desea eliminar la lista personalizada?"
 msgid "Amount of facts"
 msgstr "Cantidad de Hechos"
 
+#: ../src/nomeolvides-dialog-coleccion-agregar.vala:27
+msgid "Add a Collection"
+msgstr "Agregar una Coleccion"
+
 #: ../src/nomeolvides-dialog-coleccion.vala:36
 msgid "Colection name"
 msgstr "Nombre de la Colección"
@@ -432,10 +436,6 @@ msgstr "Colecciones"
 #: ../src/nomeolvides-dialog-preferencias.vala:52
 msgid "Close"
 msgstr "Cerrar"
-
-#: ../src/nomeolvides-dialogo-coleccion-agregar.vala:27
-msgid "Add a Collection"
-msgstr "Agregar una Coleccion"
 
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:28
 msgid "Edit Collection"
