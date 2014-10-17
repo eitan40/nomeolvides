@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-17 17:22-0300\n"
+"POT-Creation-Date: 2014-10-17 17:29-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -106,8 +106,8 @@ msgstr "Salir"
 
 #: ../src/nomeolvides-application-window-ventana-principal.vala:73
 #: ../src/nomeolvides-box-toolbar.vala:49
+#: ../src/nomeolvides-dialog-hecho-editar.vala:30
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:29
-#: ../src/nomeolvides-edit-hecho-dialog.vala:30
 #: ../src/nomeolvides-edit-lista-dialog.vala:30
 msgid "Edit"
 msgstr "Editar"
@@ -333,6 +333,10 @@ msgstr "Nombre de la Colección"
 msgid "Add a Historical Fact"
 msgstr "Agregar Hecho Histórico"
 
+#: ../src/nomeolvides-dialog-hecho-editar.vala:28
+msgid "Edit Fact"
+msgstr "Editar Hecho"
+
 #: ../src/nomeolvides-dialog-hecho.vala:43
 #: ../src/nomeolvides-treeview-hechos.vala:36
 #: ../src/nomeolvides-treeview-nmobase.vala:31
@@ -440,10 +444,6 @@ msgstr "Cerrar"
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:28
 msgid "Edit Collection"
 msgstr "Editar Colección"
-
-#: ../src/nomeolvides-edit-hecho-dialog.vala:28
-msgid "Edit Fact"
-msgstr "Editar Hecho"
 
 #: ../src/nomeolvides-edit-lista-dialog.vala:29
 msgid "Edit Custom List"

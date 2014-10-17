@@ -153,7 +153,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		this.window.get_hecho_actual ( out hecho );
 
-		var edit_dialog = new EditHechoDialog( this.window, this.datos.lista_de_colecciones () );
+		var edit_dialog = new DialogHechoEditar( this.window, this.datos.lista_de_colecciones () );
 		edit_dialog.set_datos ( hecho );
 		edit_dialog.show_all ();
 
