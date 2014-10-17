@@ -20,9 +20,9 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.AddHechoDialog : Nomeolvides.DialogoHecho {
+public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogoHecho {
 	
-	public AddHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
+	public DialogHechoAgregar ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
 		base (ventana, colecciones);
 
 		this.set_title (_("Add a Historical Fact"));

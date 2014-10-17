@@ -125,7 +125,8 @@ public class Nomeolvides.App : Gtk.Application
 
 		if ( this.datos.hay_colecciones_activas () ) {
 
-			var add_dialog = new AddHechoDialog( this.window as VentanaPrincipal, this.datos.lista_de_colecciones () ); 
+			var add_dialog = new DialogHechoAgregar ( this.window as VentanaPrincipal,
+			                                          this.datos.lista_de_colecciones () ); 
 		
 			add_dialog.show();
 

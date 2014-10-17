@@ -1,6 +1,5 @@
 data/nomeolvides.appdata.xml.in
 data/nomeolvides.desktop.in.in
-src/nomeolvides-add-hecho-dialog.vala
 src/nomeolvides-add-hecho-lista-dialog.vala
 src/nomeolvides-add-lista-dialog.vala
 src/nomeolvides-app.vala
@@ -19,6 +18,7 @@ src/nomeolvides-dialog-borrar-lista-dialog.vala
 src/nomeolvides-dialog-coleccion-agregar.vala
 src/nomeolvides-dialog-coleccion.vala
 src/nomeolvides-dialog-dialogo-hecho.vala
+src/nomeolvides-dialog-hecho-agregar.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-dialog-preferencias.vala

@@ -20,7 +20,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-hecho.vala \
 	nomeolvides-main.vala \
 	nomeolvides-liststore-hechos.vala \
-	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
 	nomeolvides-edit-hecho-dialog.vala \
 	nomeolvides-datos.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-treeview-hechos.vala \
 	nomeolvides-treeview-anios.vala \
 	nomeolvides-dialog-preferencias.vala \
-	nomeolvides-dialog-coleccion-agregar.vala
+	nomeolvides-dialog-coleccion-agregar.vala \
+	nomeolvides-dialog-hecho-agregar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

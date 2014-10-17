@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-17 16:55-0300\n".
+"POT-Creation-Date: 2014-10-17 17:12-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -40,22 +40,18 @@ msgstr "historia;hechos;"
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
-#: ../src/nomeolvides-add-hecho-dialog.vala:28
-msgid "Add a Historical Fact"
-msgstr "Agregar Hecho Histórico"
+#: ../src/nomeolvides-add-hecho-lista-dialog.vala:33
+msgid "Add Fact to List"
+msgstr "Agregar Hecho a la Lista"
 
-#: ../src/nomeolvides-add-hecho-dialog.vala:32
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:57
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:68
 #: ../src/nomeolvides-add-lista-dialog.vala:28
 #: ../src/nomeolvides-box-toolbar.vala:46
 #: ../src/nomeolvides-dialog-coleccion-agregar.vala:28
+#: ../src/nomeolvides-dialog-hecho-agregar.vala:32
 msgid "Add"
 msgstr "Agregar"
-
-#: ../src/nomeolvides-add-hecho-lista-dialog.vala:33
-msgid "Add Fact to List"
-msgstr "Agregar Hecho a la Lista"
 
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:58
 msgid "to list"
@@ -84,7 +80,7 @@ msgstr "Agregar Hechos a la Lista"
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
 
-#: ../src/nomeolvides-app.vala:324
+#: ../src/nomeolvides-app.vala:325
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:67
 #: ../src/nomeolvides-treeview-anios.vala:31
 msgid "Years"
@@ -347,6 +343,10 @@ msgstr "Fecha"
 #: ../src/nomeolvides-dialog-dialogo-hecho.vala:69
 msgid "Description"
 msgstr "Descripción"
+
+#: ../src/nomeolvides-dialog-hecho-agregar.vala:28
+msgid "Add a Historical Fact"
+msgstr "Agregar Hecho Histórico"
 
 #: ../src/nomeolvides-dialog-lista.vala:36
 msgid "List Name"
