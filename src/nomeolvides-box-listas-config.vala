@@ -69,7 +69,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		ListStoreListas liststore;
 		Lista lista;
 		
-		var add_dialog = new AddListaDialog ( );
+		var add_dialog = new DialogLstaAgregar ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-17 22:21-0300\n"
+"POT-Creation-Date: 2014-10-17 22:29-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -39,19 +39,6 @@ msgstr "historia;hechos;"
 #: ../data/nomeolvides.desktop.in.in.h:2
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
-
-#: ../src/nomeolvides-add-lista-dialog.vala:27
-msgid "Add Custom List"
-msgstr "Agregar Lista Personalizada"
-
-#: ../src/nomeolvides-add-lista-dialog.vala:28
-#: ../src/nomeolvides-box-toolbar.vala:46
-#: ../src/nomeolvides-dialog-coleccion-agregar.vala:28
-#: ../src/nomeolvides-dialog-hecho-agregar.vala:32
-#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:57
-#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:68
-msgid "Add"
-msgstr "Agregar"
 
 #: ../src/nomeolvides-app.vala:325
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:67
@@ -226,6 +213,15 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
+#: ../src/nomeolvides-box-toolbar.vala:46
+#: ../src/nomeolvides-dialog-coleccion-agregar.vala:28
+#: ../src/nomeolvides-dialog-hecho-agregar.vala:32
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:57
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:68
+#: ../src/nomeolvides-dialog-lista-agregar.vala:28
+msgid "Add"
+msgstr "Agregar"
+
 #: ../src/nomeolvides-box-toolbar.vala:47
 msgid "Undo"
 msgstr "Deshacer"
@@ -351,6 +347,10 @@ msgstr "Fecha"
 #: ../src/nomeolvides-dialog-hecho.vala:69
 msgid "Description"
 msgstr "Descripción"
+
+#: ../src/nomeolvides-dialog-lista-agregar.vala:27
+msgid "Add Custom List"
+msgstr "Agregar Lista Personalizada"
 
 #: ../src/nomeolvides-dialog-lista.vala:36
 msgid "List Name"

@@ -20,9 +20,9 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.AddListaDialog : DialogLista
+public class Nomeolvides.DialogLstaAgregar : DialogLista
 {	
-	public AddListaDialog ( )
+	public DialogLstaAgregar ( )
 	{
 		this.title = _("Add Custom List");
 		this.add_button ( _("Add") , ResponseType.APPLY);

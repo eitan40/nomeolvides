@@ -1,5 +1,4 @@
 data/nomeolvides.desktop.in
-src/nomeolvides-add-lista-dialog.c
 src/nomeolvides-app.c
 src/nomeolvides-application-window-ventana-principal.c
 src/nomeolvides-archivo.c
@@ -19,6 +18,7 @@ src/nomeolvides-dialog-hecho-agregar.c
 src/nomeolvides-dialog-hecho-editar.c
 src/nomeolvides-dialog-hecho-lista-agregar.c
 src/nomeolvides-dialog-hecho.c
+src/nomeolvides-dialog-lista-agregar.c
 src/nomeolvides-dialog-lista.c
 src/nomeolvides-dialog-migrador.c
 src/nomeolvides-dialog-preferencias.c
