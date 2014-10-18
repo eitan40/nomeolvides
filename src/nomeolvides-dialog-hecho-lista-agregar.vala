@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.AddHechoListaDialog : Dialog
+public class Nomeolvides.DialogHechoListaAgregar : Dialog
 {	
 	private ComboBox listas;
 	private ListStoreListas liststore;
@@ -28,7 +28,7 @@ public class Nomeolvides.AddHechoListaDialog : Dialog
 	private int64 id_lista;
 	private Grid grid;
 	
-	public AddHechoListaDialog ( VentanaPrincipal ventana )
+	public DialogHechoListaAgregar ( VentanaPrincipal ventana )
 	{
 		this.title = _("Add Fact to List");
 		this.set_default_size ( 450, 200 );

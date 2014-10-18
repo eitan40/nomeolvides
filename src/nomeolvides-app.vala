@@ -254,7 +254,7 @@ public class Nomeolvides.App : Gtk.Application
 		}
 
 		if ( this.datos.hay_listas () ) {
-			AddHechoListaDialog dialogo = new AddHechoListaDialog ( this.window );
+			DialogHechoListaAgregar dialogo = new DialogHechoListaAgregar ( this.window );
 
 			dialogo.setear_hechos ( this.window.get_hechos_seleccionados () );
             dialogo.setear_listas ( this.datos.lista_de_listas() );

@@ -41,7 +41,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-deshacer.vala \
 	nomeolvides-deshacer-item.vala \
 	nomeolvides-coleccion.vala \
-	nomeolvides-add-hecho-lista-dialog.vala \
 	nomeolvides-borrar-hecho-lista-dialog.vala \
 	nomeolvides-base-de-datos.vala \
 	nomeolvides-sqlite.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-coleccion-agregar.vala \
 	nomeolvides-dialog-hecho-agregar.vala \
 	nomeolvides-dialog-hecho.vala \
-	nomeolvides-dialog-hecho-editar.vala
+	nomeolvides-dialog-hecho-editar.vala \
+	nomeolvides-dialog-hecho-lista-agregar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
