@@ -20,8 +20,8 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarColeccionDialogo : Dialog {
-	public BorrarColeccionDialogo ( Coleccion coleccion_a_borrar, int cantidad_hechos ) {
+public class Nomeolvides.DialogColeccionBorrar : Dialog {
+	public DialogColeccionBorrar ( Coleccion coleccion_a_borrar, int cantidad_hechos ) {
 		this.set_modal ( true );
 		this.title = _("Delete Collection");
 		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove this collection?") );
