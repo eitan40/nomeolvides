@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarHechoListaDialog : Dialog
+public class Nomeolvides.DialogHechoListaBorrar : Dialog
 {	
 	public Array<Hecho> hechos;
 	private Lista lista;
@@ -31,7 +31,7 @@ public class Nomeolvides.BorrarHechoListaDialog : Dialog
 	private Label pregunta;
 	private Grid grid;
 	
-	public BorrarHechoListaDialog ( VentanaPrincipal ventana ) {
+	public DialogHechoListaBorrar ( VentanaPrincipal ventana ) {
 		this.title = _("Remove Fact from List");
 		this.set_transient_for ( ventana as Window );
 		this.set_default_size ( 450, 200 );

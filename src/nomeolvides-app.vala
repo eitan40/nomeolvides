@@ -269,7 +269,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void remove_hecho_lista () {
-		var dialogo = new BorrarHechoListaDialog ( this.window );
+		var dialogo = new DialogHechoListaBorrar ( this.window );
 		var lista = this.window.get_lista_actual ();
 		
 		dialogo.set_hechos ( this.window.get_hechos_seleccionados () );
