@@ -9,7 +9,6 @@ src/nomeolvides-box-toolbar.c
 src/nomeolvides-box-vista-hecho.c
 src/nomeolvides-configuracion.c
 src/nomeolvides-dialog-borrar-hecho-dialogo.c
-src/nomeolvides-dialog-borrar-lista-dialog.c
 src/nomeolvides-dialog-coleccion-agregar.c
 src/nomeolvides-dialog-coleccion-borrar.c
 src/nomeolvides-dialog-coleccion.c
@@ -19,6 +18,7 @@ src/nomeolvides-dialog-hecho-lista-agregar.c
 src/nomeolvides-dialog-hecho-lista-borrar.c
 src/nomeolvides-dialog-hecho.c
 src/nomeolvides-dialog-lista-agregar.c
+src/nomeolvides-dialog-lista-borrar.c
 src/nomeolvides-dialog-lista.c
 src/nomeolvides-dialog-migrador.c
 src/nomeolvides-dialog-preferencias.c

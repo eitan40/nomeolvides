@@ -20,8 +20,8 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarListaDialogo : Dialog {
-	public BorrarListaDialogo ( Lista lista_a_borrar, int cantidad_hechos ) {
+public class Nomeolvides.DialogListaBorrar : Dialog {
+	public DialogListaBorrar ( Lista lista_a_borrar, int cantidad_hechos ) {
 		this.set_modal ( true );
 		this.title = _("Delete Custom List");
 	

@@ -34,7 +34,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
 	nomeolvides-lista.vala \
-	nomeolvides-dialog-borrar-lista-dialog.vala \
 	nomeolvides-dialog-lista.vala \
 	nomeolvides-edit-lista-dialog.vala \
 	nomeolvides-deshacer.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-hecho-lista-agregar.vala \
 	nomeolvides-dialog-lista-agregar.vala \
 	nomeolvides-dialog-hecho-lista-borrar.vala \
-	nomeolvides-dialog-coleccion-borrar.vala
+	nomeolvides-dialog-coleccion-borrar.vala \
+	nomeolvides-dialog-lista-borrar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

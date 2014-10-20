@@ -10,7 +10,6 @@ src/nomeolvides-box-toolbar.vala
 src/nomeolvides-box-vista-hecho.vala
 src/nomeolvides-configuracion.vala
 src/nomeolvides-dialog-borrar-hecho-dialogo.vala
-src/nomeolvides-dialog-borrar-lista-dialog.vala
 src/nomeolvides-dialog-coleccion-agregar.vala
 src/nomeolvides-dialog-coleccion-borrar.vala
 src/nomeolvides-dialog-coleccion.vala
@@ -20,6 +19,7 @@ src/nomeolvides-dialog-hecho-lista-agregar.vala
 src/nomeolvides-dialog-hecho-lista-borrar.vala
 src/nomeolvides-dialog-hecho.vala
 src/nomeolvides-dialog-lista-agregar.vala
+src/nomeolvides-dialog-lista-borrar.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-dialog-preferencias.vala

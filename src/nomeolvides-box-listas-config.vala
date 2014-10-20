@@ -109,7 +109,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	private void borrar_lista_dialog () {
 		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
 		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
-		var borrar_dialog = new BorrarListaDialogo ( lista, this.listas_view.get_hechos () );
+		var borrar_dialog = new DialogListaBorrar ( lista, this.listas_view.get_hechos () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-19 20:08-0300\n"
+"POT-Creation-Date: 2014-10-19 22:04-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -100,7 +100,7 @@ msgid "Send"
 msgstr "Enviar"
 
 #: ../src/nomeolvides-box-headerbar.vala:56
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
+#: ../src/nomeolvides-dialog-lista-borrar.vala:29
 msgid "List"
 msgstr "Lista"
 
@@ -199,12 +199,12 @@ msgid "and"
 msgstr "y"
 
 #: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:56
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:78
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:77
 #: ../src/nomeolvides-dialog-coleccion.vala:32
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:67
 #: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:85
 #: ../src/nomeolvides-dialog-hecho.vala:41
+#: ../src/nomeolvides-dialog-lista-borrar.vala:78
 #: ../src/nomeolvides-dialog-lista.vala:32
 #: ../src/nomeolvides-file-chooser-dialog-open-file-dialog.vala:33
 #: ../src/nomeolvides-file-chooser-dialog-savefile-dialog.vala:32
@@ -214,8 +214,8 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: ../src/nomeolvides-dialog-borrar-hecho-dialogo.vala:57
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:79
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:78
+#: ../src/nomeolvides-dialog-lista-borrar.vala:79
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -248,18 +248,6 @@ msgstr "¿Desea eliminar estos hechos?"
 #: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:109
 msgid "Facts"
 msgstr "Hechos"
-
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:26
-msgid "Delete Custom List"
-msgstr "Eliminar Lista Personalizada"
-
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:28
-msgid "Do you want to remove custom list?"
-msgstr "¿Desea eliminar la lista personalizada?"
-
-#: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:31
-msgid "Amount of facts"
-msgstr "Cantidad de Hechos"
 
 #: ../src/nomeolvides-dialog-coleccion-agregar.vala:27
 msgid "Add a Collection"
@@ -351,6 +339,18 @@ msgstr "Descripción"
 #: ../src/nomeolvides-dialog-lista-agregar.vala:27
 msgid "Add Custom List"
 msgstr "Agregar Lista Personalizada"
+
+#: ../src/nomeolvides-dialog-lista-borrar.vala:26
+msgid "Delete Custom List"
+msgstr "Eliminar Lista Personalizada"
+
+#: ../src/nomeolvides-dialog-lista-borrar.vala:28
+msgid "Do you want to remove custom list?"
+msgstr "¿Desea eliminar la lista personalizada?"
+
+#: ../src/nomeolvides-dialog-lista-borrar.vala:31
+msgid "Amount of facts"
+msgstr "Cantidad de Hechos"
 
 #: ../src/nomeolvides-dialog-lista.vala:36
 msgid "List Name"
