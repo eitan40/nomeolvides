@@ -20,11 +20,10 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditColeccionDialog : DialogColeccion
-{
+public class Nomeolvides.DialogColeccionEditar : DialogColeccion {
 	private int64 id_coleccion;
-	public EditColeccionDialog ( )
-	{
+	 
+	public DialogColeccionEditar () {
 		this.title = _("Edit Collection");
 		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}

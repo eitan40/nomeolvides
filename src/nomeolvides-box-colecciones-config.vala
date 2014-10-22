@@ -94,7 +94,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 
 		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" 
 		                                                + this.colecciones_view.get_elemento_id ().to_string() + "\"");
-		var edit_dialog = new EditColeccionDialog ();
+		var edit_dialog = new DialogColeccionEditar ();
 		edit_dialog.set_datos ( coleccion );
 		edit_dialog.show_all ();
 
