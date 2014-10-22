@@ -20,12 +20,10 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditListaDialog : DialogLista
-{
+public class Nomeolvides.DialogListaEditar : DialogLista {
 	private int64 id;
 	
-	public EditListaDialog ( )
-	{
+	public DialogListaEditar () {
 		this.title = _("Edit Custom List");
 		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
