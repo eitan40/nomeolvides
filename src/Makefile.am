@@ -29,7 +29,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-box-selector-fecha.vala \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
 	nomeolvides-application-window-ventana-principal.vala \
-	nomeolvides-dialog-borrar-hecho-dialogo.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-coleccion-borrar.vala \
 	nomeolvides-dialog-lista-borrar.vala \
 	nomeolvides-dialog-coleccion-editar.vala \
-	nomeolvides-dialog-lista-editar.vala
+	nomeolvides-dialog-lista-editar.vala \
+	nomeolvides-dialog-hecho-borrar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

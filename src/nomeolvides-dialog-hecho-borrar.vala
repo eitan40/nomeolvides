@@ -20,13 +20,13 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarHechoDialogo : Dialog {
+public class Nomeolvides.DialogHechoBorrar : Dialog {
 	public Grid grid;
 	private Label pregunta;
 	private Label hecho;
 	public Array<Hecho> hechos;
 
-	public BorrarHechoDialogo ( VentanaPrincipal ventana ) {
+	public DialogHechoBorrar ( VentanaPrincipal ventana ) {
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
 		this.set_size_request ( 450, 200 );

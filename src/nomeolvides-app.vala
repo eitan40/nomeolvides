@@ -164,7 +164,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void delete_hecho_dialog () {
-		BorrarHechoDialogo delete_dialog = new BorrarHechoDialogo ( this.window as VentanaPrincipal);
+		DialogHechoBorrar delete_dialog = new DialogHechoBorrar ( this.window as VentanaPrincipal);
 		delete_dialog.setear_hechos ( this.window.get_hechos_seleccionados () );
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
