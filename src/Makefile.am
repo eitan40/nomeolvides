@@ -48,7 +48,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-box-colecciones-config.vala \
 	nomeolvides-box-listas-config.vala \
 	nomeolvides-resources.c \
-	nomeolvides-box-toolbar.vala \
 	nomeolvides-button-nmo-button.vala \
 	nomeolvides-liststore-anios.vala \
 	nomeolvides-treeview-nmobase.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-coleccion-editar.vala \
 	nomeolvides-dialog-lista-editar.vala \
 	nomeolvides-dialog-hecho-borrar.vala \
-	nomeolvides-headerbar.vala
+	nomeolvides-headerbar.vala \
+	nomeolvides-toolbar.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
