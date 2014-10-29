@@ -26,7 +26,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-configuracion.vala \
 	nomeolvides-archivo.vala \
 	nomeolvides-box-vista-hecho.vala \
-	nomeolvides-box-selector-fecha.vala \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
 	nomeolvides-application-window-ventana-principal.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-lista-editar.vala \
 	nomeolvides-dialog-hecho-borrar.vala \
 	nomeolvides-headerbar.vala \
-	nomeolvides-toolbar.vala
+	nomeolvides-toolbar.vala \
+	nomeolvides-selector-fecha.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
