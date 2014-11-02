@@ -52,8 +52,11 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.delete_button = new NmoButton ( _("Delete") );
 	#if DISABLE_GNOME3
 		this.add_button.set_margin_left ( 2 );
+		this.delete_button.set_margin_right ( 2 );
 	#else
+		this.get_style_context().add_class ("toolbar");
 		this.add_button.set_margin_start ( 2 );
+		this.delete_button.set_margin_end ( 2 );
 	#endif
 		this.undo_button.set_sensitive ( false );
 		this.redo_button.set_sensitive ( false );

@@ -37,7 +37,6 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		this.cambios = false;
 		this.cambio_toggle = false;
 		this.colecciones_view = new TreeViewColecciones ();
-		this.colecciones_view.set_border_width ( 20 );
 		this.colecciones_view.set_model ( liststore_colecciones );
 		this.colecciones_view.cursor_changed.connect ( elegir_coleccion );
 		this.colecciones_view.coleccion_visible_toggle_change.connect ( signal_toggle_change );

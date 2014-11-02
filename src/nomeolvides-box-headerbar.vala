@@ -32,6 +32,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.get_style_context().add_class ( Gtk.STYLE_CLASS_PRIMARY_TOOLBAR );
 		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TOOLBAR );
 	#else
+		this.get_style_context().remove_class ("toolbar");
 		this.get_style_context().add_class ( "header-bar" );
 		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TITLEBAR );
 	#endif
