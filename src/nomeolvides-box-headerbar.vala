@@ -65,6 +65,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		boton_cerrar.get_style_context().add_class ( "titlebutton" );
 		boton_cerrar.get_style_context().remove_class ( "image-button" );
 		boton_cerrar.clicked.connect ( cerrar );
+		boton_cerrar.set_margin_start ( 6 );
 		var separador = new Gtk.Separator ( Orientation.VERTICAL );
 
 		this.derecha_box.pack_end ( boton_cerrar );

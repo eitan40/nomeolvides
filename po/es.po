@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-29 14:11-0300\n"
+"POT-Creation-Date: 2014-11-02 02:54-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -49,7 +49,7 @@ msgstr "Agregar una Coleccion"
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:57
 #: ../src/nomeolvides-add-hecho-lista-dialog.vala:68
 #: ../src/nomeolvides-add-lista-dialog.vala:28
-#: ../src/nomeolvides-box-toolbar.vala:46
+#: ../src/nomeolvides-box-toolbar.vala:48
 msgid "Add"
 msgstr "Agregar"
 
@@ -113,7 +113,7 @@ msgid "Quit"
 msgstr "Salir"
 
 #: ../src/nomeolvides-application-window-ventana-principal.vala:73
-#: ../src/nomeolvides-box-toolbar.vala:49
+#: ../src/nomeolvides-box-toolbar.vala:51
 #: ../src/nomeolvides-edit-coleccion-dialog.vala:29
 #: ../src/nomeolvides-edit-hecho-dialog.vala:30
 #: ../src/nomeolvides-edit-lista-dialog.vala:30
@@ -173,28 +173,28 @@ msgid "Facts"
 msgstr "Hechos"
 
 #: ../src/nomeolvides-box-anios-hechos-vista.vala:68
-#: ../src/nomeolvides-preferencias.vala:48
+#: ../src/nomeolvides-preferencias.vala:41
 msgid "Lists"
 msgstr "Listas"
 
-#: ../src/nomeolvides-box-headerbar.vala:55
+#: ../src/nomeolvides-box-headerbar.vala:56
 msgid "Send"
 msgstr "Enviar"
 
-#: ../src/nomeolvides-box-headerbar.vala:56
+#: ../src/nomeolvides-box-headerbar.vala:57
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
 msgid "List"
 msgstr "Lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:77
+#: ../src/nomeolvides-box-headerbar.vala:80
 msgid "Year"
 msgstr "Año"
 
-#: ../src/nomeolvides-box-headerbar.vala:112
+#: ../src/nomeolvides-box-headerbar.vala:115
 msgid "Add to list"
 msgstr "Agregar a la lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:116
+#: ../src/nomeolvides-box-headerbar.vala:119
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 
@@ -246,15 +246,15 @@ msgstr "Noviembre"
 msgid "December"
 msgstr "Diciembre"
 
-#: ../src/nomeolvides-box-toolbar.vala:47
+#: ../src/nomeolvides-box-toolbar.vala:49
 msgid "Undo"
 msgstr "Deshacer"
 
-#: ../src/nomeolvides-box-toolbar.vala:48
+#: ../src/nomeolvides-box-toolbar.vala:50
 msgid "Redo"
 msgstr "Rehacer"
 
-#: ../src/nomeolvides-box-toolbar.vala:50
+#: ../src/nomeolvides-box-toolbar.vala:52
 msgid "Delete"
 msgstr "Borrar"
 
@@ -479,11 +479,11 @@ msgstr "Sleccione una Colección"
 msgid "Select a file"
 msgstr "Sleccione un archivo"
 
-#: ../src/nomeolvides-preferencias.vala:47
+#: ../src/nomeolvides-preferencias.vala:40
 msgid "Colections"
 msgstr "Colecciones"
 
-#: ../src/nomeolvides-preferencias.vala:52
+#: ../src/nomeolvides-preferencias.vala:46
 msgid "Close"
 msgstr "Cerrar"
 
