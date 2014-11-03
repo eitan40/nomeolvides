@@ -70,7 +70,9 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-archivo-guardar.vala \
 	nomeolvides-treeview-base.vala \
 	nomeolvides-liststore-base.vala \
-	nomeolvides-portada.vala
+	nomeolvides-portada.vala \
+	nomeolvides-panel-configuracion.vala
+
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
