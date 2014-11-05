@@ -25,9 +25,9 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	protected Toolbar toolbar;
 	protected AccionesDB db;
 	protected Deshacer<NmoBase> deshacer;
-	protected Dialog agregar_dialog;
-	protected Dialog editar_dialog;
-	protected Dialog borrar_dialog;
+	protected DialogNmoBase agregar_dialog;
+	protected DialogNmoBase editar_dialog;
+	protected DialogNmoBase borrar_dialog;
 		
 	public PanelConfiguracion ( ListStoreNmoBase liststore ) {
 		this.set_orientation ( Orientation.VERTICAL );
@@ -91,7 +91,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 
 		NmoBase objeto = this.seleccionado ( this.treeview.get_elemento_id () );
 //		this.edit_dialog = new EditColeccionDialog ();
-		this.editar_dialog.set_datos ( coleccion );
+		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
 		if (this.editar_dialog.run() == ResponseType.APPLY) {

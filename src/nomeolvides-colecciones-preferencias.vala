@@ -77,7 +77,7 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
-			coleccion = add_dialog.respuesta;
+			coleccion = add_dialog.respuesta as Coleccion;
 			if ( this.db.insert_coleccion ( coleccion ) ) {
 				coleccion.id = this.db.ultimo_rowid();
 				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
@@ -99,11 +99,11 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
-			if ( this.db.update_coleccion ( edit_dialog.respuesta ) ) {
+			if ( this.db.update_coleccion ( edit_dialog.respuesta as Coleccion ) ) {
 				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
 				var cantidad_hechos = this.colecciones_view.get_hechos ();
 				this.colecciones_view.eliminar ( coleccion );
-				liststore.agregar ( edit_dialog.respuesta, cantidad_hechos );
+				liststore.agregar ( edit_dialog.respuesta as Coleccion, cantidad_hechos );
 				this.cambios = true;
 			}
 		}

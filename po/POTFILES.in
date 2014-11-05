@@ -1,5 +1,6 @@
 data/nomeolvides.appdata.xml.in
 data/nomeolvides.desktop.in.in
+<<<<<<< HEAD
 src/nomeolvides-app.vala
 src/nomeolvides-archivo.vala
 src/nomeolvides-configuracion.vala
@@ -35,4 +36,5 @@ src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-hechos.vala
 src/nomeolvides-treeview-listas.vala
 src/nomeolvides-ventana-principal.vala
+src/nomolvides-dialog-nmobase.vala
 [type: gettext/glade]src/nomeolvides-app-menu.ui

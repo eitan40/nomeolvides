@@ -20,11 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogLstaAgregar : DialogLista
-{	
+public class Nomeolvides.DialogListaAgregar : DialogNmoBase {	
 	public DialogLstaAgregar ( )
 	{
 		this.title = _("Add Custom List");
+		this.nombre_label.set_label (_("List Name") + ": ");
 		this.add_button ( _("Add") , ResponseType.APPLY);
 	}
 }

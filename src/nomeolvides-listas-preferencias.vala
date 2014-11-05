@@ -73,7 +73,7 @@ public class Nomeolvides.ListasPreferencias: Gtk.Box {
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
-			lista = add_dialog.respuesta;
+			lista = add_dialog.respuesta as Lista;
 			if ( this.db.insert_lista ( lista )) {
 				lista.id = this.db.ultimo_rowid();
 				liststore = this.listas_view.get_model () as ListStoreListas;
@@ -95,7 +95,7 @@ public class Nomeolvides.ListasPreferencias: Gtk.Box {
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
-			if ( this.db.update_lista ( edit_dialog.respuesta )) {
+			if ( this.db.update_lista ( edit_dialog.respuesta as Lista )) {
 				liststore = this.listas_view.get_model () as ListStoreListas;
 				var cantidad_hechos = this.listas_view.get_hechos ();
 				this.listas_view.eliminar( lista );

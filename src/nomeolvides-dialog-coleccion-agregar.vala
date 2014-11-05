@@ -20,18 +20,17 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogColeccionAgregar : DialogColeccion
-{	
-	public DialogColeccionAgregar ( )
-	{
+public class Nomeolvides.DialogColeccionAgregar : DialogNmoBase {
+
+	public DialogColeccionAgregar ()
 		this.title = _("Add a Collection");
+		base.nombre_label.set_label ( _("Colection name") + ": " );
 		this.add_button (_("Add") , ResponseType.APPLY);
 	}
 
 	protected override void crear_respuesta() {
-		if(this.nombre_coleccion_entry.get_text_length () > 0)
-		{
-			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
+		if(this.nombre_entry.get_text_length () > 0) {
+			this.respuesta  = new Coleccion (this.nombre_entry.get_text (), true);
 		}
 	}
 }
