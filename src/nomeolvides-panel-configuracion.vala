@@ -7,12 +7,11 @@
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * nomeolvides is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- *   bullit - 39 escalones - silent love (japonesa) 
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -28,13 +27,13 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	protected DialogNmoBase agregar_dialog;
 	protected DialogNmoBase editar_dialog;
 	protected DialogNmoBase borrar_dialog;
-		
+
 	public PanelConfiguracion ( ListStoreNmoBase liststore ) {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.deshacer = new Deshacer<NmoBase> ();
-		
+
 		this.treeview = new TreeViewNmoBase ();
 		this.treeview.set_border_width ( 20 );
 		this.treeview.set_model ( liststore );
@@ -46,7 +45,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		var scroll_view = new ScrolledWindow (null,null);
 		scroll_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 		scroll_view.add ( this.treeview );
- 
+
 		this.pack_start ( toolbar, false, false, 0 );
 		this.pack_start ( scroll_view, true, true, 0 );
 		this.show_all ();
@@ -62,7 +61,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		this.toolbar.edit_button.clicked.connect ( this.edit_dialog );
 		this.toolbar.undo_button.clicked.connect ( this.deshacer_cambios );
 		this.toolbar.redo_button.clicked.connect ( this.rehacer_cambios );
-		
+
 		this.deshacer.deshacer_sin_items.connect ( this.toolbar.desactivar_deshacer );
 		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
 		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
@@ -72,7 +71,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	private void add_dialog () {
 		ListStoreNmoBase liststore;
 		NmoBase objeto;
-		
+
 //		this.agregar_dialog = new AddColeccionDialog ();
 		this.agregar_dialog.show_all ();
 
@@ -82,7 +81,6 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 				this.cambio_signal ();
 			}
 		}
-		
 		this.agregar_dialog.destroy ();
 	}
 
@@ -99,13 +97,12 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 				this.cambio_signal ();
 			}
 		}
-		
 		this.editar_dialog.destroy ();
 	}
 
 	private void delete_dialog () {
 		NmoBase objeto = this.seleccionado ( this.treeview.get_elemento_id () );
-//		rhis.borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
+//		this.borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
 		borrar_dialog.show_all ();
 
 		if ( borrar_dialog.run() == ResponseType.APPLY ) {
@@ -125,7 +122,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 
 	void deshacer_cambios () {
 		DeshacerItem<NmoBase> item;
-		bool hay_colecciones_deshacer = this.deshacer.deshacer ( out item ); 
+		bool hay_colecciones_deshacer = this.deshacer.deshacer ( out item );
 		if ( hay_colecciones_deshacer ){
 			this.cambio_signal ();
 		}
@@ -134,7 +131,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	public void rehacer_cambios () {
 		DeshacerItem<NmoBase> item;
 
-		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item ); 
+		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item );
 		if ( hay_colecciones_rehacer ){
 			this.cambio_signal ();
 		}
