@@ -20,63 +20,12 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogColeccionBorrar : Dialog {
+public class Nomeolvides.DialogColeccionBorrar : DialogNmoBaseBorrar {
 	public DialogColeccionBorrar ( Coleccion coleccion_a_borrar, int cantidad_hechos ) {
-		this.set_modal ( true );
+		base ( coleccion_a_borrar as NmoBase, cantidad_hechos );
 		this.title = _("Delete Collection");
-		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove this collection?") );
-		Label coleccion_nombre_label = new Label.with_mnemonic ( _("Colection") + ":");
-		Label coleccion_nombre = new Label ( "" );
-		Label coleccion_hechos_label = new Label.with_mnemonic ( _("Amount of Facts") + ":");
-		Label coleccion_hechos = new Label ( "" );
-		Grid grid = new Grid ( );
-
-		pregunta.set_halign ( Align.CENTER );
-		pregunta.set_margin_bottom ( 15 );
-		pregunta.set_hexpand ( true );
-		coleccion_nombre_label.set_halign ( Align.END );
-		coleccion_nombre_label.set_margin_bottom ( 10 );
-		coleccion_nombre.set_halign ( Align.START );
-		coleccion_nombre.set_margin_bottom ( 10 );
-		coleccion_hechos_label.set_halign ( Align.END );
-		coleccion_hechos.set_halign ( Align.START );
-#if DISABLE_GNOME3
-		coleccion_nombre_label.set_margin_right ( 20 );
-		coleccion_nombre.set_margin_left ( 20 );
-		coleccion_hechos_label.set_margin_right ( 20 );
-		coleccion_hechos.set_margin_left ( 20 );
-		grid.set_margin_right ( 20 );
-		grid.set_margin_left ( 20 );
-#else
-		coleccion_nombre_label.set_margin_end ( 20 );
-		coleccion_nombre.set_margin_start ( 20 );
-		coleccion_hechos_label.set_margin_end ( 20 );
-		coleccion_hechos.set_margin_start ( 20 );
-		grid.set_margin_end ( 20 );
-		grid.set_margin_start ( 20 );
-#endif
-		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>");
-		coleccion_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
-
-		grid.set_valign ( Align.CENTER );
-		grid.set_halign ( Align.CENTER );
-		grid.set_margin_top ( 20 );
-		grid.set_margin_bottom ( 20 );
-		grid.set_size_request ( 400, -1 );
-		grid.set_hexpand ( true );
-
-		grid.attach ( pregunta, 0, 0, 2, 1 );
-		grid.attach ( coleccion_nombre_label, 0, 1, 1, 1 );
-		grid.attach ( coleccion_nombre, 1, 1, 1, 1 );
-		grid.attach ( coleccion_hechos_label, 0, 2, 1, 1 );
-		grid.attach ( coleccion_hechos, 1, 2, 1, 1 );
-
-		var contenido = this.get_content_area() as Box;
-		contenido.pack_start ( grid, true, true, 0 );
-
-		this.add_button ( _("Cancel"), ResponseType.REJECT );
-		this.add_button ( _("Apply"), ResponseType.APPLY );
-
-		this.show_all ();
+		this.pregunta.set_label ( _("Do you want to remove this collection?") );
+		this.nombre.set_label ( _("Colection") + ":");
+		this.hechos.set_label ( _("Amount of Facts") + ":");
 	}
 }

@@ -72,7 +72,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-liststore-base.vala \
 	nomeolvides-portada.vala \
 	nomeolvides-panel-configuracion.vala \
-	nomolvides-dialog-nmobase.vala
+	nomolvides-dialog-nmobase.vala \
+	nomeolvides-dialog-nmobase-borrar.vala
 
 
 

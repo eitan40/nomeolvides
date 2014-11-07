@@ -1,6 +1,5 @@
 data/nomeolvides.appdata.xml.in
 data/nomeolvides.desktop.in.in
-<<<<<<< HEAD
 src/nomeolvides-app.vala
 src/nomeolvides-archivo.vala
 src/nomeolvides-configuracion.vala
@@ -23,6 +22,7 @@ src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
 src/nomeolvides-dialog-preferencias.vala
 src/nomeolvides-headerbar.vala
+src/nomeolvides-dialog-nmobase-borrar.vala
 src/nomeolvides-hecho.vala
 src/nomeolvides-importar-hechos.vala
 src/nomeolvides-interfaz-principal.vala
