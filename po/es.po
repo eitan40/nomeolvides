@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-02 20:46-0300\n"
+"POT-Creation-Date: 2014-11-09 14:13-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -177,24 +177,24 @@ msgstr "Hechos"
 msgid "Lists"
 msgstr "Listas"
 
-#: ../src/nomeolvides-box-headerbar.vala:56
+#: ../src/nomeolvides-box-headerbar.vala:58
 msgid "Send"
 msgstr "Enviar"
 
-#: ../src/nomeolvides-box-headerbar.vala:57
+#: ../src/nomeolvides-box-headerbar.vala:59
 #: ../src/nomeolvides-dialog-borrar-lista-dialog.vala:29
 msgid "List"
 msgstr "Lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:81
+#: ../src/nomeolvides-box-headerbar.vala:83
 msgid "Year"
 msgstr "Año"
 
-#: ../src/nomeolvides-box-headerbar.vala:116
+#: ../src/nomeolvides-box-headerbar.vala:118
 msgid "Add to list"
 msgstr "Agregar a la lista"
 
-#: ../src/nomeolvides-box-headerbar.vala:120
+#: ../src/nomeolvides-box-headerbar.vala:122
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 

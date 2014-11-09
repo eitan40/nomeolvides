@@ -44,12 +44,14 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.derecha_box.set_halign ( Align.END );
 	#if DISABLE_GNOME3
 		this.anio_label.set_margin_right ( 2 );
+		this.delete_button.set_margin_right ( 0 );
 	#else
 		this.izquierda_box.set_border_width ( 6 );
 		this.derecha_box.set_border_width ( 6 );
 		this.centro_box.set_border_width ( 6 );
 
 		this.anio_label.set_margin_end ( 2 );
+		this.delete_button.set_margin_end ( 0 );
 	#endif
 		this.pack_start ( derecha_box );
 
