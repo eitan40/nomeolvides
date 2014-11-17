@@ -55,20 +55,13 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 	protected override bool actualizar ( NmoBase objeto_viejo, NmoBase objeto_nuevo ) {
 		if ( this.db.update_coleccion ( objeto_nuevo as Coleccion ) ) {
 			var liststore = this.treeview.get_model () as ListStoreColecciones;
-			var cantidad_hechos = this.treeview.get_hechos ();
 			this.treeview.eliminar ( objeto_viejo );
-			liststore.agregar ( objeto_nuevo as Coleccion, cantidad_hechos );
+			liststore.agregar ( objeto_nuevo as Coleccion, this.treeview.get_cantidad_hechos () );
 			this.cambio_colecciones_signal ();
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-	public override void edit_dialog () {
-		Coleccion coleccion = this.treeview.get_elemento () as Coleccion;
-		this.editar_dialog.set_datos ( coleccion );
-		base.edit_dialog ();
 	}
 
 /*	private void edit_coleccion_dialog () {

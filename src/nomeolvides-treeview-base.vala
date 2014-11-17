@@ -54,7 +54,7 @@ public class Nomeolvides.TreeViewBase : TreeView {
 		liststore.borrar ( a_eliminar );
 	}
 
-	public int get_hechos ( ) {
+	public int get_cantidad_hechos ( ) {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;

@@ -74,11 +74,11 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 
 	public virtual void edit_dialog () {
 		NmoBase objeto = this.treeview.get_elemento ();
-//		this.editar_dialog.set_datos ( objeto );
+		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
 		if (this.editar_dialog.run() == ResponseType.APPLY) {
-			if ( this.actualizar ( this.editar_dialog.respuesta, objeto ) ) {
+			if ( this.actualizar ( objeto, this.editar_dialog.respuesta ) ) {
 				this.cambio_signal ();
 			}
 		}
@@ -87,7 +87,6 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 
 	private void delete_dialog () {
 		NmoBase objeto = this.treeview.get_elemento ();
-//		this.borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
 		borrar_dialog.show_all ();
 
 		if ( borrar_dialog.run() == ResponseType.APPLY ) {

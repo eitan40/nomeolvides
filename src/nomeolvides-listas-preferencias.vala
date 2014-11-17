@@ -97,7 +97,7 @@ public class Nomeolvides.ListasPreferencias: Gtk.Box {
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			if ( this.db.update_lista ( edit_dialog.respuesta as Lista )) {
 				liststore = this.listas_view.get_model () as ListStoreListas;
-				var cantidad_hechos = this.listas_view.get_hechos ();
+				var cantidad_hechos = this.listas_view.get_cantidad_hechos ();
 				this.listas_view.eliminar( lista );
 				liststore.agregar (edit_dialog.respuesta, cantidad_hechos);
 				this.cambios = true;
@@ -109,7 +109,7 @@ public class Nomeolvides.ListasPreferencias: Gtk.Box {
 	private void borrar_lista_dialog () {
 		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
 		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
-		var borrar_dialog = new DialogListaBorrar ( lista, this.listas_view.get_hechos () );
+		var borrar_dialog = new DialogListaBorrar ( lista, this.listas_view.get_cantidad_hechos () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
