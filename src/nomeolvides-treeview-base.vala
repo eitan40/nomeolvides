@@ -29,22 +29,24 @@ public class Nomeolvides.TreeViewBase : TreeView {
 	}
 
 	public int64 get_elemento_id () {
+		var elemento = this.get_elemento ();
+		return elemento.id;
+	}
+
+	public NmoBase get_elemento () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
 		Value value_elemento;
-		Base elemento;
+		Base elemento = new Base.vacio ();
 		int64 id = -1;
-
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
-			this.get_model().get_iter(out iterador, path);
-			this.get_model().get_value (iterador, 2, out value_elemento);
+			this.get_model().get_iter( out iterador, path );
+			this.get_model().get_value ( iterador, 2, out value_elemento );
 			elemento = value_elemento as Base;
-			id = elemento.id;
 		}
-		
-		return id;
+		return elemento;
 	}
 
 	public void eliminar ( Base a_eliminar ) {

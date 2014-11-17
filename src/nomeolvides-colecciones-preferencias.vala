@@ -21,75 +21,57 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
-	public TreeViewColecciones colecciones_view { get; private set; }
-	public bool cambios { get; private set; }
 	public bool cambio_toggle { get; private set; }
-	private Toolbar toolbar;
-	private AccionesDB db;
-	private Deshacer<Coleccion> deshacer;
-		
+
 	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
-		this.set_orientation ( Orientation.VERTICAL );
+		base ();
+		this.treeview = new TreeViewColecciones () as TreeViewNmoBase;
+		this.treeview.set_border_width ( 20 );
+		this.treeview.set_model ( liststore_colecciones );
+//		this.treeview.coleccion_visible_toggle_change.connect ( signal_toggle_change );
+		this.scroll_view.add ( this.treeview );
+		this.pack_start ( scroll_view, true, true, 0 );
 
-		this.db = new AccionesDB ( Configuracion.base_de_datos() );
-		this.deshacer = new Deshacer<Coleccion> ();
-
-		this.cambios = false;
-		this.cambio_toggle = false;
-		this.colecciones_view = new TreeViewColecciones ();
-		this.colecciones_view.set_model ( liststore_colecciones );
-		this.colecciones_view.cursor_changed.connect ( elegir_coleccion );
-		this.colecciones_view.coleccion_visible_toggle_change.connect ( signal_toggle_change );
-		this.toolbar = new Toolbar ();
 		this.conectar_signals ();
 
-		var scroll_colecciones_view = new ScrolledWindow (null,null);
-		scroll_colecciones_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
-		scroll_colecciones_view.add ( this.colecciones_view );
- 
-		this.pack_start ( toolbar, false, false, 0 );
-		this.pack_start ( scroll_colecciones_view, true, true, 0 );
-		this.show_all ();
+		this.agregar_dialog = new AddColeccionDialog () as DialogNmoBase;
+		this.editar_dialog = new EditColeccionDialog () as DialogNmoBase;
+//		this-borrar_dialog = new BorrarColeccionDialogo () as DialogNmoBaseBorrar;	
 	}
 
-	public void actualizar_model ( ListStoreColecciones liststore_colecciones ) {
-		this.colecciones_view.set_model ( liststore_colecciones );
-	}
-
-	private void conectar_signals () {
-		this.toolbar.add_button.clicked.connect ( this.add_coleccion_dialog );
-		this.toolbar.delete_button.clicked.connect ( this.borrar_coleccion_dialog );
-		this.toolbar.edit_button.clicked.connect ( this.edit_coleccion_dialog );
-		this.toolbar.undo_button.clicked.connect ( this.deshacer_cambios );
-		this.toolbar.redo_button.clicked.connect ( this.rehacer_cambios );
-		
-		this.deshacer.deshacer_sin_items.connect ( this.toolbar.desactivar_deshacer );
-		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
-		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
-		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
-	}
-
-	private void add_coleccion_dialog () {
+	protected override bool agregar ( NmoBase objeto ) {
 		ListStoreColecciones liststore;
-		Coleccion coleccion;
-		
-		var add_dialog = new DialogColeccionAgregar ( );
-		add_dialog.show_all ();
-
-		if (add_dialog.run() == ResponseType.APPLY) {
-			coleccion = add_dialog.respuesta as Coleccion;
-			if ( this.db.insert_coleccion ( coleccion ) ) {
-				coleccion.id = this.db.ultimo_rowid();
-				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-				liststore.agregar (coleccion, 0);
-				this.cambios = true;
-			}
+		if ( this.db.insert_coleccion ( objeto as Coleccion ) ) {
+			objeto.id = this.db.ultimo_rowid();
+			liststore = this.treeview.get_model () as ListStoreColecciones;
+			liststore.agregar (objeto as Coleccion, 0);
+			this.cambio_colecciones_signal ();
+			return true;
+		} else {
+			return false;
 		}
-		
-		add_dialog.destroy ();
 	}
 
-	private void edit_coleccion_dialog () {
+	protected override bool actualizar ( NmoBase objeto_viejo, NmoBase objeto_nuevo ) {
+		if ( this.db.update_coleccion ( objeto_nuevo as Coleccion ) ) {
+			var liststore = this.treeview.get_model () as ListStoreColecciones;
+			var cantidad_hechos = this.treeview.get_hechos ();
+			this.treeview.eliminar ( objeto_viejo );
+			liststore.agregar ( objeto_nuevo as Coleccion, cantidad_hechos );
+			this.cambio_colecciones_signal ();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public override void edit_dialog () {
+		Coleccion coleccion = this.treeview.get_elemento () as Coleccion;
+		this.editar_dialog.set_datos ( coleccion );
+		base.edit_dialog ();
+	}
+
+/*	private void edit_coleccion_dialog () {
 		ListStoreColecciones liststore;
 
 		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" 
@@ -104,7 +86,7 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 				var cantidad_hechos = this.colecciones_view.get_hechos ();
 				this.colecciones_view.eliminar ( coleccion );
 				liststore.agregar ( edit_dialog.respuesta as Coleccion, cantidad_hechos );
-				this.cambios = true;
+				this.cambio_colecciones_signal ();
 			}
 		}
 		
@@ -169,7 +151,7 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 
 	public void set_buttons_invisible () {
 		this.toolbar.set_buttons_invisible ();
-	}
+	} */
 
 	private void signal_toggle_change () {
 		this.cambio_toggle = true;

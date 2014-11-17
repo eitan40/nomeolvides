@@ -20,34 +20,27 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.PanelConfiguracion : Gtk.Box {
-	protected TreeViewNmoBase treeview { get; private set; }
+	protected TreeViewNmoBase treeview { get; protected set; }
+	protected ScrolledWindow scroll_view;
 	protected Toolbar toolbar;
 	protected AccionesDB db;
 	protected Deshacer<NmoBase> deshacer;
 	protected DialogNmoBase agregar_dialog;
 	protected DialogNmoBase editar_dialog;
-	protected DialogNmoBase borrar_dialog;
+	protected DialogNmoBaseBorrar borrar_dialog;
 
-	public PanelConfiguracion ( ListStoreNmoBase liststore ) {
+	public PanelConfiguracion () {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.deshacer = new Deshacer<NmoBase> ();
 
-		this.treeview = new TreeViewNmoBase ();
-		this.treeview.set_border_width ( 20 );
-		this.treeview.set_model ( liststore );
-		this.treeview.cursor_changed.connect ( elegir );
-//		this.treeview.coleccion_visible_toggle_change.connect ( signal_toggle_change );
 		this.toolbar = new Toolbar ();
-		this.conectar_signals ();
 
-		var scroll_view = new ScrolledWindow (null,null);
-		scroll_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
-		scroll_view.add ( this.treeview );
+		this.scroll_view = new ScrolledWindow (null,null);
+		this.scroll_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
 
 		this.pack_start ( toolbar, false, false, 0 );
-		this.pack_start ( scroll_view, true, true, 0 );
 		this.show_all ();
 	}
 
@@ -55,7 +48,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		this.treeview.set_model ( liststore );
 	}
 
-	private void conectar_signals () {
+	protected void conectar_signals () {
 		this.toolbar.add_button.clicked.connect ( this.add_dialog );
 		this.toolbar.delete_button.clicked.connect ( this.delete_dialog );
 		this.toolbar.edit_button.clicked.connect ( this.edit_dialog );
@@ -66,34 +59,26 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
 		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
 		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
+		this.treeview.cursor_changed.connect ( elegir );
 	}
 
-	private void add_dialog () {
-		ListStoreNmoBase liststore;
-		NmoBase objeto;
-
-//		this.agregar_dialog = new AddColeccionDialog ();
+	protected virtual void add_dialog () {
 		this.agregar_dialog.show_all ();
 
 		if ( agregar_dialog.run() == ResponseType.APPLY ) {
-			objeto = agregar_dialog.respuesta;
-			if ( this.agregar ( objeto ) ) {
-				this.cambio_signal ();
-			}
+			this.agregar ( agregar_dialog.respuesta );
 		}
-		this.agregar_dialog.destroy ();
+		this.treeview.show_all ();
+		this.agregar_dialog.hide ();
 	}
 
-	private void edit_dialog () {
-		ListStoreNmoBase liststore;
-
-		NmoBase objeto = this.seleccionado ( this.treeview.get_elemento_id () );
-//		this.edit_dialog = new EditColeccionDialog ();
-		this.editar_dialog.set_datos ( objeto );
+	public virtual void edit_dialog () {
+		NmoBase objeto = this.treeview.get_elemento ();
+//		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
 		if (this.editar_dialog.run() == ResponseType.APPLY) {
-			if ( this.actualizar ( this.editar_dialog.respuesta ) ) {
+			if ( this.actualizar ( this.editar_dialog.respuesta, objeto ) ) {
 				this.cambio_signal ();
 			}
 		}
@@ -101,7 +86,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	}
 
 	private void delete_dialog () {
-		NmoBase objeto = this.seleccionado ( this.treeview.get_elemento_id () );
+		NmoBase objeto = this.treeview.get_elemento ();
 //		this.borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
 		borrar_dialog.show_all ();
 
@@ -109,11 +94,11 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 			this.borrar ( objeto );
 			this.cambio_signal ();
 		}
-		borrar_dialog.destroy ();
+		borrar_dialog.hide ();
 	}
 
 	private void elegir () {
-		if( this.treeview.get_elemento_id () > (int64)(-1) ) {
+		if( this.treeview.get_selection ().count_selected_rows () > -1 ) {
 			this.toolbar.set_buttons_visible ();
 		} else {
 			this.toolbar.set_buttons_invisible ();
@@ -137,24 +122,20 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		}
 	}
 
-	protected void set_buttons_invisible () {
+	public void set_buttons_invisible () {
 		this.toolbar.set_buttons_invisible ();
 	}
 
-	protected bool agregar ( NmoBase objeto ) {
+	protected virtual bool agregar ( NmoBase objeto ) {
 		return false;
 	}
 
-	protected bool actualizar ( NmoBase objeto ) {
+	protected virtual bool actualizar ( NmoBase objeto_viejo, NmoBase objeto_nuevo ) {
 		return false;
 	}
 
-	protected bool borrar ( NmoBase objeto ) {
+	protected virtual bool borrar ( NmoBase objeto ) {
 		return false;
-	}
-
-	protected NmoBase seleccionado ( int64 id ) {
-		return new NmoBase ("fallback");
 	}
 
 	public signal void cambio_signal ();

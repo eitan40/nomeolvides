@@ -21,24 +21,17 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionEditar : DialogNmoBase {
-	private int64 id_coleccion;
-	 
 	public DialogColeccionEditar () {
 		this.title = _("Edit Collection");
 		base.nombre_label.set_label ( _("Colection name") + ": " );
 		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
-	public void set_datos (Coleccion coleccion) {
-		this.nombre_entry.set_text ( coleccion.nombre );
-		this.id_coleccion = coleccion.id;
-	}
-
 	protected override void crear_respuesta() {
-		if(this.nombre_entry.get_text_length () > 0)
-		{
-			this.respuesta = new Coleccion (this.nombre_entry.get_text (), true);
-			this.respuesta.id = this.id_coleccion;
+		if( this.nombre_entry.get_text_length () > 0 ) {
+			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
+			this.respuesta.id = this.id;
 		}
 	} 
 }
+
