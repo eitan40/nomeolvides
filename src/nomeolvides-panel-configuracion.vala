@@ -68,7 +68,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		if ( agregar_dialog.run() == ResponseType.APPLY ) {
 			this.agregar ( agregar_dialog.respuesta );
 		}
-		this.treeview.show_all ();
+		this.agregar_dialog.borrar_datos ();
 		this.agregar_dialog.hide ();
 	}
 
@@ -82,14 +82,16 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 				this.cambio_signal ();
 			}
 		}
-		this.editar_dialog.destroy ();
+		this.editar_dialog.borrar_datos ();
+		this.editar_dialog.hide ();
 	}
 
 	private void delete_dialog () {
 		NmoBase objeto = this.treeview.get_elemento ();
-		borrar_dialog.show_all ();
+		this.borrar_dialog.set_datos ( objeto, this.treeview.get_cantidad_hechos () );
+		this.borrar_dialog.show_all ();
 
-		if ( borrar_dialog.run() == ResponseType.APPLY ) {
+		if ( this.borrar_dialog.run() == ResponseType.APPLY ) {
 			this.borrar ( objeto );
 			this.cambio_signal ();
 		}
@@ -133,9 +135,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		return false;
 	}
 
-	protected virtual bool borrar ( NmoBase objeto ) {
-		return false;
-	}
+	protected virtual void borrar ( NmoBase objeto ) {}
 
 	public signal void cambio_signal ();
 }

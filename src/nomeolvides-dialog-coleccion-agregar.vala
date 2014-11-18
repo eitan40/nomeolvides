@@ -21,7 +21,6 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionAgregar : DialogNmoBase {
-
 	public DialogColeccionAgregar ()
 		this.title = _("Add a Collection");
 		base.nombre_label.set_label ( _("Colection name") + ": " );
@@ -34,3 +33,4 @@ public class Nomeolvides.DialogColeccionAgregar : DialogNmoBase {
 		}
 	}
 }
+

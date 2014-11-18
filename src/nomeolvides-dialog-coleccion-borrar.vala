@@ -21,8 +21,8 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionBorrar : DialogNmoBaseBorrar {
-	public DialogColeccionBorrar ( Coleccion coleccion_a_borrar, int cantidad_hechos ) {
-		base ( coleccion_a_borrar as NmoBase, cantidad_hechos );
+	public DialogColeccionBorrar () {
+		base ();
 		this.title = _("Delete Collection");
 		this.pregunta.set_label ( _("Do you want to remove this collection?") );
 		this.nombre.set_label ( _("Colection") + ":");

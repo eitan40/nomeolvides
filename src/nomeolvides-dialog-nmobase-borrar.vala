@@ -27,7 +27,7 @@ public class Nomeolvides.DialogNmoBaseBorrar : Dialog {
 	protected Label hechos;
 	protected Label hechos_objeto;
 
-	public DialogNmoBaseBorrar ( NmoBase objeto_a_borrar, int cantidad_hechos ) {
+	public DialogNmoBaseBorrar () {
 		this.set_modal ( true );
 
 		this.pregunta = new Label.with_mnemonic ( "" );
@@ -61,8 +61,6 @@ public class Nomeolvides.DialogNmoBaseBorrar : Dialog {
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
 #endif
-		nombre_objeto.set_markup ( "<span font_weight=\"heavy\">"+ objeto_a_borrar.nombre +"</span>");
-		hechos_objeto.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
@@ -82,7 +80,10 @@ public class Nomeolvides.DialogNmoBaseBorrar : Dialog {
 
 		this.add_button ( _("Cancel"), ResponseType.REJECT );
 		this.add_button ( _("Apply"), ResponseType.APPLY );
+	}
 
-		this.show_all ();
+	public void set_datos ( NmoBase objeto_a_borrar, int cantidad_hechos ) {
+		nombre_objeto.set_markup ( "<span font_weight=\"heavy\">"+ objeto_a_borrar.nombre +"</span>");
+		hechos_objeto.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 	}
 }

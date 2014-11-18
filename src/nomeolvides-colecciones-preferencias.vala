@@ -36,7 +36,7 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 
 		this.agregar_dialog = new AddColeccionDialog () as DialogNmoBase;
 		this.editar_dialog = new EditColeccionDialog () as DialogNmoBase;
-//		this-borrar_dialog = new BorrarColeccionDialogo () as DialogNmoBaseBorrar;	
+		this.borrar_dialog = new DialogColeccionBorrar () as DialogNmoBaseBorrar;
 	}
 
 	protected override bool agregar ( NmoBase objeto ) {
@@ -64,47 +64,16 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 		}
 	}
 
-/*	private void edit_coleccion_dialog () {
-		ListStoreColecciones liststore;
 
-		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" 
-		                                                + this.colecciones_view.get_elemento_id ().to_string() + "\"");
-		var edit_dialog = new DialogColeccionEditar ();
-		edit_dialog.set_datos ( coleccion );
-		edit_dialog.show_all ();
-
-		if (edit_dialog.run() == ResponseType.APPLY) {
-			if ( this.db.update_coleccion ( edit_dialog.respuesta as Coleccion ) ) {
-				liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-				var cantidad_hechos = this.colecciones_view.get_hechos ();
-				this.colecciones_view.eliminar ( coleccion );
-				liststore.agregar ( edit_dialog.respuesta as Coleccion, cantidad_hechos );
-				this.cambio_colecciones_signal ();
-			}
-		}
-		
-		edit_dialog.destroy ();
+	public override void borrar ( NmoBase coleccion ) {
+		this.db.coleccion_a_borrar ( coleccion as Coleccion );
+		this.deshacer.guardar_borrado ( coleccion, DeshacerTipo.BORRAR );
+		this.deshacer.borrar_rehacer ();
+		this.treeview.eliminar( coleccion );
+		this.cambio_colecciones_signal ();
 	}
 
-	private void borrar_coleccion_dialog () {
-		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_elemento_id ().to_string() + "\"");
-		int cantidad_hechos = this.db.count_hechos_coleccion ( coleccion );
-		var borrar_dialog = new DialogColeccionBorrar ( coleccion, cantidad_hechos );
-		borrar_dialog.show_all ();
-
-		if (borrar_dialog.run() == ResponseType.APPLY) {
-			this.db.coleccion_a_borrar ( coleccion );
-			this.deshacer.guardar_borrado ( coleccion, DeshacerTipo.BORRAR );
-			this.deshacer.borrar_rehacer ();
-			this.colecciones_view.eliminar( coleccion );
-			this.cambio_colecciones_signal ();
-		}
-		borrar_dialog.destroy ();
-
-		this.cambios = true;
-	}
-
-	private void elegir_coleccion () {
+	 /*	private void elegir_coleccion () {
 		if( this.colecciones_view.get_elemento_id () > (int64)(-1) ) {
 			this.toolbar.set_buttons_visible ();
 		} else {
