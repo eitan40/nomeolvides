@@ -20,15 +20,14 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
+public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 	public bool cambio_toggle { get; private set; }
 
 	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
 		base ();
-		this.treeview = new TreeViewColecciones () as TreeViewNmoBase;
+		this.treeview = new TreeViewColecciones ();
 		this.treeview.set_border_width ( 20 );
 		this.treeview.set_model ( liststore_colecciones );
-//		this.treeview.coleccion_visible_toggle_change.connect ( signal_toggle_change );
 		this.scroll_view.add ( this.treeview );
 		this.pack_start ( scroll_view, true, true, 0 );
 
@@ -38,6 +37,11 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 		this.editar_dialog = new EditColeccionDialog () as DialogNmoBase;
 		this.borrar_dialog = new DialogColeccionBorrar () as DialogNmoBaseBorrar;
 	}
+
+	/*protected new void conectar_signals () {
+		base.conectar_signals ();
+		this.treeview.coleccion_visible_toggle_change.connect ( signal_toggle_change );	
+	}*/
 
 	protected override bool agregar ( NmoBase objeto ) {
 		ListStoreColecciones liststore;
@@ -73,51 +77,33 @@ public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 		this.cambio_colecciones_signal ();
 	}
 
-	 /*	private void elegir_coleccion () {
-		if( this.colecciones_view.get_elemento_id () > (int64)(-1) ) {
-			this.toolbar.set_buttons_visible ();
-		} else {
-			this.toolbar.set_buttons_invisible ();
-		}
+	protected override void efectuar_deshacer ( NmoBase objeto ) {
+		this.db.coleccion_no_borrar ( objeto as Coleccion );
+		var liststore = this.treeview.get_model () as ListStoreColecciones;
+		var cantidad_hechos = this.db.count_hechos_coleccion ( objeto as Coleccion );
+		liststore.agregar ( objeto as Coleccion, cantidad_hechos );
+	}
+
+	protected override void efectuar_rehacer ( NmoBase objeto ) {
+		this.db.coleccion_a_borrar ( objeto as Coleccion );
+		this.treeview.eliminar ( objeto as Coleccion );
+	}
+
+/*	protected new void elegir () {
+		base.elegir ();
 
 		if ( this.cambio_toggle ) {
-			Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_elemento_id().to_string() + "\"");
-			coleccion.visible = this.colecciones_view.get_coleccion_cursor_visible ();
+			Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.treeview.get_elemento_id().to_string() + "\"");
+			coleccion.visible = this.treeview.get_coleccion_cursor_visible ();
 			this.db.update_coleccion ( coleccion );
 			this.cambio_toggle = false;
 		}
-	}
-
-	void deshacer_cambios () {
-		DeshacerItem<Coleccion> item;
-		bool hay_colecciones_deshacer = this.deshacer.deshacer ( out item ); 
-		if ( hay_colecciones_deshacer ){
-			this.db.coleccion_no_borrar ( item.get_borrado() );
-			var liststore = this.colecciones_view.get_model () as ListStoreColecciones;
-			var cantidad_hechos = this.db.count_hechos_coleccion ( item.get_borrado() );
-			liststore.agregar ( item.get_borrado(), cantidad_hechos);
-			this.cambio_colecciones_signal ();
-		}
-	}
-
-	public void rehacer_cambios () {
-		DeshacerItem<Coleccion> item;
-
-		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item ); 
-		if ( hay_colecciones_rehacer ){
-			this.db.coleccion_a_borrar ( item.get_borrado() );
-			this.colecciones_view.eliminar ( item.get_borrado() );
-			this.cambio_colecciones_signal ();
-		}
-	}
-
-	public void set_buttons_invisible () {
-		this.toolbar.set_buttons_invisible ();
-	} */
+	}*/
 
 	private void signal_toggle_change () {
 		this.cambio_toggle = true;
-	}
+	} 
 
 	public signal void cambio_colecciones_signal ();
 }
+

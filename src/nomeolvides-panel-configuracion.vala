@@ -98,7 +98,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		borrar_dialog.hide ();
 	}
 
-	private void elegir () {
+	protected void elegir () {
 		if( this.treeview.get_selection ().count_selected_rows () > -1 ) {
 			this.toolbar.set_buttons_visible ();
 		} else {
@@ -110,6 +110,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		DeshacerItem<NmoBase> item;
 		bool hay_colecciones_deshacer = this.deshacer.deshacer ( out item );
 		if ( hay_colecciones_deshacer ){
+			this.efectuar_deshacer ( item.get_borrado () );
 			this.cambio_signal ();
 		}
 	}
@@ -119,6 +120,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 
 		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item );
 		if ( hay_colecciones_rehacer ){
+			this.efectuar_rehacer ( item.get_borrado () );
 			this.cambio_signal ();
 		}
 	}
@@ -136,6 +138,10 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	}
 
 	protected virtual void borrar ( NmoBase objeto ) {}
+
+	protected virtual void efectuar_deshacer ( NmoBase objeto ) {}
+
+	protected virtual void efectuar_rehacer ( NmoBase objeto ) {}
 
 	public signal void cambio_signal ();
 }
