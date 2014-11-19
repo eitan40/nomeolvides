@@ -22,6 +22,7 @@ src/nomeolvides-dialog-migrador.c
 src/nomeolvides-dialog-preferencias.c
 src/nomeolvides-headerbar.c
 src/nomeolvides-dialog-nmobase-borrar.c
+src/nomeolvides-dialog-nmobase.c
 src/nomeolvides-hecho.c
 src/nomeolvides-importar-hechos.c
 src/nomeolvides-interfaz-principal.c
@@ -35,4 +36,3 @@ src/nomeolvides-treeview-colecciones.c
 src/nomeolvides-treeview-hechos.c
 src/nomeolvides-treeview-listas.c
 src/nomeolvides-ventana-principal.c
-src/nomolvides-dialog-nmobase.c
