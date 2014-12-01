@@ -49,14 +49,23 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 		this.redo_button.set_sensitive ( false );
 		this.set_buttons_invisible ();
 
-		this.pack_start ( this.add_button );
-		this.pack_start ( this.undo_button );
-		this.pack_start ( this.redo_button );
+		var box_izquierda = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		box_izquierda.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+		
+		box_izquierda.pack_start ( this.add_button );
+		box_izquierda.pack_start ( this.undo_button );
+		box_izquierda.pack_start ( this.redo_button );
 
-		this.pack_end ( this.edit_button );
-		this.pack_end ( this.delete_button );
-		this.pack_end ( this.send_button );
-		this.pack_end ( this.list_button );
+		var box_derecha = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		box_derecha.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+
+		box_derecha.pack_end ( this.edit_button );
+		box_derecha.pack_end ( this.delete_button );
+		box_derecha.pack_end ( this.send_button );
+		box_derecha.pack_end ( this.list_button );
+
+		this.pack_start ( box_izquierda );
+		this.pack_end ( box_derecha );
 
 		this.show.connect ( this.set_buttons_invisible );
 	}
