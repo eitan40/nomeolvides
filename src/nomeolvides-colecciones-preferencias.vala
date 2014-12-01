@@ -25,23 +25,22 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 
 	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
 		base ();
-		this.treeview = new TreeViewColecciones ();
-		this.treeview.set_border_width ( 20 );
-		this.treeview.set_model ( liststore_colecciones );
+		var treeview_colecciones = new TreeViewColecciones ();
+		treeview_colecciones.set_border_width ( 20 );
+		treeview_colecciones.set_model ( liststore_colecciones );
+		treeview_colecciones.coleccion_visible_toggle_change.connect ( signal_toggle_change );
+		this.treeview = treeview_colecciones;
 		this.scroll_view.add ( this.treeview );
 		this.pack_start ( scroll_view, true, true, 0 );
 
 		this.conectar_signals ();
 
+		this.cambio_toggle = false;
+
 		this.agregar_dialog = new AddColeccionDialog () as DialogNmoBase;
 		this.editar_dialog = new EditColeccionDialog () as DialogNmoBase;
 		this.borrar_dialog = new DialogColeccionBorrar () as DialogNmoBaseBorrar;
 	}
-
-	/*protected new void conectar_signals () {
-		base.conectar_signals ();
-		this.treeview.coleccion_visible_toggle_change.connect ( signal_toggle_change );	
-	}*/
 
 	protected override bool agregar ( NmoBase objeto ) {
 		ListStoreColecciones liststore;
@@ -89,16 +88,17 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 		this.treeview.eliminar ( objeto as Coleccion );
 	}
 
-/*	protected new void elegir () {
+	protected override void elegir () {
 		base.elegir ();
 
 		if ( this.cambio_toggle ) {
 			Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.treeview.get_elemento_id().to_string() + "\"");
-			coleccion.visible = this.treeview.get_coleccion_cursor_visible ();
+			TreeViewColecciones treeview_colecciones = this.treeview as TreeViewColecciones;
+			coleccion.visible = treeview_colecciones.get_coleccion_cursor_visible ();
 			this.db.update_coleccion ( coleccion );
 			this.cambio_toggle = false;
 		}
-	}*/
+	}
 
 	private void signal_toggle_change () {
 		this.cambio_toggle = true;

@@ -98,7 +98,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		borrar_dialog.hide ();
 	}
 
-	protected void elegir () {
+	protected virtual void elegir () {
 		if( this.treeview.get_selection ().count_selected_rows () > -1 ) {
 			this.toolbar.set_buttons_visible ();
 		} else {
