@@ -30,7 +30,6 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 	public Button send_button { get; private set; }
 	public Button list_button { get; private set; }
 
-	 // Constructor
 	public NmoHeaderBar () {
 
 		this.has_subtitle = false;
@@ -64,7 +63,7 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 
 	public void set_label_anio ( string anio = "0" ) {
 		if ( anio != "0") {
-			this.set_title ( anio );
+			this.set_title ( "Año: " + anio );
 		} else {
 			this.set_title ( "" );
 		}
@@ -123,110 +122,3 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 	}
 
 }
-/*	public Button send_button { get; private set; }
-	public Button list_button { get; private set; }
-	public Label anio_label { get; private set; }
-	protected Box derecha_box;
-
-	public HeaderBar () {
-	#if DISABLE_GNOME3
-		this.get_style_context().add_class ( Gtk.STYLE_CLASS_PRIMARY_TOOLBAR );
-		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TOOLBAR );
-	#else
-		this.get_style_context().remove_class ("toolbar");
-		this.get_style_context().add_class ( "header-bar" );
-		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TITLEBAR );
-	#endif
-		this.set_halign ( Align.FILL );
-		this.derecha_box = new Box (Orientation.HORIZONTAL, 0);
-		this.anio_label = new Label ("");
-
-		this.centro_box.set_halign ( Align.CENTER );
-		this.derecha_box.set_halign ( Align.END );
-	#if DISABLE_GNOME3
-		this.anio_label.set_margin_right ( 2 );
-		this.delete_button.set_margin_right ( 0 );
-	#else
-		this.izquierda_box.set_border_width ( 6 );
-		this.derecha_box.set_border_width ( 6 );
-		this.centro_box.set_border_width ( 6 );
-
-		this.anio_label.set_margin_end ( 2 );
-		this.delete_button.set_margin_end ( 0 );
-	#endif
-		this.pack_start ( derecha_box );
-
-		this.send_button = new Boton ( _("Send") );
-		this.list_button = new Boton ( _("List") );
-		this.list_button_set_agregar ();
-
-		this.centro_box.pack_start ( this.send_button );
-		this.centro_box.pack_start ( this.list_button );
-	#if DISABLE_GNOME3
-	#else
-		var boton_cerrar = new Boton.icono ( "window-close-symbolic", IconSize.MENU );
-		boton_cerrar.get_style_context().add_class ( "titlebutton" );
-		boton_cerrar.get_style_context().remove_class ( "image-button" );
-		boton_cerrar.clicked.connect ( cerrar );
-		boton_cerrar.set_margin_start ( 6 );
-		var separador = new Gtk.Separator ( Orientation.VERTICAL );
-		separador.set_margin_start ( 6 );
-
-		this.derecha_box.pack_end ( boton_cerrar );
-		this.derecha_box.pack_end ( separador );
-	#endif
-		this.derecha_box.pack_end ( this.anio_label );
-		this.show.connect ( this.set_buttons_invisible );
-	}
-
-	public void set_label_anio ( string anio = "0" ) {
-		if ( anio != "0") {
-			this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> " + _("Year") + ": " + anio + "</span>" );
-		} else {
-			this.anio_label.set_text ( "" );
-		}
-	}
-
-	public void set_label_lista ( string lista = "" ) {
-		if ( lista != "") {
-			this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\">" + lista + "</span>" );
-		} else {
-			this.anio_label.set_text ( "" );
-		}
-	}
-
-	public new void set_buttons_visible () {
-		this.set_buttons_multiseleccion_visible ();
-		this.edit_button.set_visible ( true );
-	}
-
-	public void set_buttons_multiseleccion_visible () {
-		this.edit_button.set_visible ( false );
-		this.delete_button.set_visible ( true );
-		this.send_button.set_visible ( true );
-		this.list_button.set_visible ( true );
-
-	}
-
-	public new void set_buttons_invisible () {
-		this.edit_button.set_visible ( false );
-		this.delete_button.set_visible ( false );
-		this.send_button.set_visible ( false );
-		this.list_button.set_visible ( false );
-	}
-
-	public void list_button_set_agregar ( ) {
-		this.list_button.set_label (_("Add to list"));
-	}
-
-	public void list_button_set_quitar ( ) {
-		this.list_button.set_label (_("Remove from list"));
-	}
-
-	public void cerrar () {
-		this.cerrar_signal ();
-	}
-
-	public signal void cerrar_signal ();
-}*/
-
