@@ -55,8 +55,8 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	#endif
 		this.pack_start ( derecha_box );
 
-		this.send_button = new NmoButton ( _("Send") );
-		this.list_button = new NmoButton ( _("List") );
+		this.send_button = new Boton ( _("Send") );
+		this.list_button = new Boton ( _("List") );
 		this.list_button_set_agregar ();
 
 		this.centro_box.pack_start ( this.send_button );

@@ -47,7 +47,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-box-colecciones-config.vala \
 	nomeolvides-box-listas-config.vala \
 	nomeolvides-resources.c \
-	nomeolvides-button-nmo-button.vala \
 	nomeolvides-liststore-anios.vala \
 	nomeolvides-treeview-nmobase.vala \
 	nomeolvides-liststore-nmobase.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-headerbar.vala \
 	nomeolvides-toolbar.vala \
 	nomeolvides-selector-fecha.vala \
-	nomeolvides-base.vala
+	nomeolvides-base.vala \
+	nomeolvides-boton.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
