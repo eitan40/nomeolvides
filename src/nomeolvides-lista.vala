@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Lista : Nomeolvides.NmoBase {
+public class Nomeolvides.Lista : Nomeolvides.Base {
 	
 	public Lista ( string nombre ) {
 		base ( nombre );

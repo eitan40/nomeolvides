@@ -24,12 +24,12 @@ public class Nomeolvides.ListStoreNmoBase : ListStore {
 	protected TreeIter iterador;
 	public bool vacio { get; private set; }
 	
-	public ListStoreNmoBase ( Type[] tipos = { typeof(string), typeof(int), typeof(NmoBase) } ) {
+	public ListStoreNmoBase ( Type[] tipos = { typeof(string), typeof(int), typeof(Base) } ) {
 		this.set_column_types(tipos);
 		this.vacio = true;
 	}
 
-	public void agregar ( NmoBase elemento, int cantidad_hechos ) {
+	public void agregar ( Base elemento, int cantidad_hechos ) {
 		if (elemento != null ) {
 			this.append ( out this.iterador );
 			this.set ( this.iterador,
@@ -42,29 +42,29 @@ public class Nomeolvides.ListStoreNmoBase : ListStore {
 
 	public string a_json () {
 		string json = "";
-		NmoBase elemento;
+		Base elemento;
 		Value value_elemento;
 		TreeIter iter;
 
 		if ( this.get_iter_first( out iter ) ) {
 			do {
 				this.get_value(iter, 2, out value_elemento);
-				elemento = value_elemento as NmoBase;
+				elemento = value_elemento as Base;
 				json += elemento.a_json ()  + "\n";
 			}while (this.iter_next(ref iter));
 		}
 		return json;
 	}
 
-	public void borrar ( NmoBase a_eliminar ) {
+	public void borrar ( Base a_eliminar ) {
 		Value elemento_value;
-		NmoBase elemento;
+		Base elemento;
 		TreeIter iter;
 		
 		if ( this.get_iter_first( out iter ) ) {
 			do {
 				this.get_value(iter, 2, out elemento_value);
-				elemento = elemento_value as NmoBase;
+				elemento = elemento_value as Base;
 				if ( a_eliminar.hash == elemento.hash ) {
 					this.remove ( iter );
 					break;
@@ -90,14 +90,14 @@ public class Nomeolvides.ListStoreNmoBase : ListStore {
 
 	public int indice_de_id ( int64 id ) {
 		Value elemento_value;
-		NmoBase elemento;
+		Base elemento;
 		TreeIter iter;
 		int i=0;
 
 		if ( this.get_iter_first( out iter ) ) {
 			do {
 				this.get_value(iter, 2, out elemento_value );
-				elemento = elemento_value as NmoBase;
+				elemento = elemento_value as Base;
 				if ( id ==  elemento.id ) {
 					break;
 				}
