@@ -284,7 +284,7 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void save_as_file_dialog () {
-		SaveFileDialog guardar_archivo = new SaveFileDialog(GLib.Environment.get_current_dir ());
+		DialogArchivoGuardar guardar_archivo = new DialogArchivoGuardar ( GLib.Environment.get_current_dir () );
 		guardar_archivo.set_transient_for ( this.window );
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		

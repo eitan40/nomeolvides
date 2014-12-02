@@ -20,11 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.SaveFileDialog : FileChooserDialog {
+public class Nomeolvides.DialogArchivoGuardar : FileChooserDialog {
 
     private string ultimo_directorio;
 
-    public SaveFileDialog (string directorio_actual) {
+    public DialogArchivoGuardar (string directorio_actual) {
         this.title = _("Save File");
         this.action = FileChooserAction.SAVE;
 		this.set_current_folder (directorio_actual);

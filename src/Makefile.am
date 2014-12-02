@@ -25,7 +25,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-configuracion.vala \
 	nomeolvides-archivo.vala \
 	nomeolvides-box-vista-hecho.vala \
-	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
 	nomeolvides-lista.vala \
