@@ -26,7 +26,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-archivo.vala \
 	nomeolvides-box-vista-hecho.vala \
 	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
-	nomeolvides-application-window-ventana-principal.vala \
 	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-boton.vala \
 	nomeolvides-interfaz-principal.vala \
 	nomeolvides-colecciones-preferencias.vala \
-	nomeolvides-listas-preferencias.vala
+	nomeolvides-listas-preferencias.vala \
+	nomeolvides-ventana-principal.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

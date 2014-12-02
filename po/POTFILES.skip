@@ -1,6 +1,5 @@
 data/nomeolvides.desktop.in
 src/nomeolvides-app.c
-src/nomeolvides-application-window-ventana-principal.c
 src/nomeolvides-archivo.c
 src/nomeolvides-box-vista-hecho.c
 src/nomeolvides-configuracion.c
@@ -34,3 +33,4 @@ src/nomeolvides-treeview-colecciones.c
 src/nomeolvides-treeview-hechos.c
 src/nomeolvides-treeview-listas.c
 src/nomeolvides-treeview-nmobase.c
+src/nomeolvides-ventana-principal.c
