@@ -26,7 +26,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 	public Button list_button { get; private set; }
 	public Label anio_label { get; private set; }
 	protected Box derecha_box;
-	// Constructor
+
 	public HeaderBar () {
 	#if DISABLE_GNOME3
 		this.get_style_context().add_class ( Gtk.STYLE_CLASS_PRIMARY_TOOLBAR );
@@ -63,7 +63,7 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.centro_box.pack_start ( this.list_button );
 	#if DISABLE_GNOME3
 	#else
-		var boton_cerrar = new NmoButton.icono ( "window-close-symbolic", IconSize.MENU );
+		var boton_cerrar = new Boton.icono ( "window-close-symbolic", IconSize.MENU );
 		boton_cerrar.get_style_context().add_class ( "titlebutton" );
 		boton_cerrar.get_style_context().remove_class ( "image-button" );
 		boton_cerrar.clicked.connect ( cerrar );
