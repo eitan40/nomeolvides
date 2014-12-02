@@ -43,7 +43,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-migrador.vala \
 	nomeolvides-importar-hechos.vala \
-	nomeolvides-box-listas-config.vala \
 	nomeolvides-resources.c \
 	nomeolvides-liststore-anios.vala \
 	nomeolvides-treeview-nmobase.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-base.vala \
 	nomeolvides-boton.vala \
 	nomeolvides-interfaz-principal.vala \
-	nomeolvides-colecciones-preferencias.vala
+	nomeolvides-colecciones-preferencias.vala \
+	nomeolvides-listas-preferencias.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

@@ -20,14 +20,14 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListasConfig: Gtk.Box {
+public class Nomeolvides.ListasPreferencias: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
 	public bool cambios { get; private set; }
 	private AccionesDB db;
 	private Deshacer<Lista> deshacer;
 	private Toolbar toolbar;
 		
-	public ListasConfig ( ListStoreListas liststore_lista ) {
+	public ListasPreferencias ( ListStoreListas liststore_lista ) {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.set_orientation ( Orientation.VERTICAL );
 		this.deshacer = new Deshacer<Lista> ();
