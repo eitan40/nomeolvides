@@ -22,7 +22,7 @@ using Nomeolvides;
 
 public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private Notebook notebook;
-	private ColeccionesConfig config_colecciones;
+	private ColeccionesPreferencias config_colecciones;
 	private ListasConfig config_listas;
 	
 	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
@@ -31,7 +31,7 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 		this.set_default_size (600, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
-		this.config_colecciones = new ColeccionesConfig ( colecciones );
+		this.config_colecciones = new ColeccionesPreferencias ( colecciones );
 		this.config_listas = new ListasConfig ( listas );
 		this.config_colecciones.cambio_colecciones_signal.connect ( this.config_listas.actualizar_liststore );
 

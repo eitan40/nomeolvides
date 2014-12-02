@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ColeccionesConfig : Gtk.Box {
+public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 	public TreeViewColecciones colecciones_view { get; private set; }
 	public bool cambios { get; private set; }
 	public bool cambio_toggle { get; private set; }
@@ -28,7 +28,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	private AccionesDB db;
 	private Deshacer<Coleccion> deshacer;
 		
-	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
+	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
