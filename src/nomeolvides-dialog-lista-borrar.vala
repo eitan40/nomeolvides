@@ -21,8 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogListaBorrar : DialogNmoBaseBorrar { {
-	public DialogListaBorrar ( Lista lista_a_borrar, int cantidad_hechos ) {
-		this.set_datos ( lista_a_borrar as Base, cantidad_hechos );
+	public DialogListaBorrar () {
 		this.title = _("Delete Custom List");
 		this.pregunta.set_label ( _("Do you want to remove custom list?") );
 		this.nombre.set_label ( _("List") + ":");

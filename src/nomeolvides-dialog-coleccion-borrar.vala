@@ -22,10 +22,10 @@ using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionBorrar : DialogNmoBaseBorrar {
 	public DialogColeccionBorrar () {
-		base ();
 		this.title = _("Delete Collection");
 		this.pregunta.set_label ( _("Do you want to remove this collection?") );
 		this.nombre.set_label ( _("Colection") + ":");
 		this.hechos.set_label ( _("Amount of Facts") + ":");
 	}
 }
+
