@@ -25,7 +25,7 @@ public class Nomeolvides.DialogArchivoAbrir : FileChooserDialog {
     private string ultimo_directorio;
 	protected Button boton_abrir;
 
-    public DialogoArchivoAbrir (string directorio_actual) {
+    public DialogArchivoAbrir (string directorio_actual) {
         this.title = _("Choose File");
         this.action = FileChooserAction.OPEN;
 		this.set_current_folder (directorio_actual);
