@@ -22,7 +22,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-liststore-hechos.vala \
 	nomeolvides-app.vala \
 	nomeolvides-datos.vala \
-	nomeolvides-box-anios-hechos-vista.vala \
 	nomeolvides-configuracion.vala \
 	nomeolvides-archivo.vala \
 	nomeolvides-box-vista-hecho.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-toolbar.vala \
 	nomeolvides-selector-fecha.vala \
 	nomeolvides-base.vala \
-	nomeolvides-boton.vala
+	nomeolvides-boton.vala \
+	nomeolvides-interfaz-principal.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

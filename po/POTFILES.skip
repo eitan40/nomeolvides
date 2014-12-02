@@ -2,7 +2,6 @@ data/nomeolvides.desktop.in
 src/nomeolvides-app.c
 src/nomeolvides-application-window-ventana-principal.c
 src/nomeolvides-archivo.c
-src/nomeolvides-box-anios-hechos-vista.c
 src/nomeolvides-box-vista-hecho.c
 src/nomeolvides-configuracion.c
 src/nomeolvides-dialog-coleccion-agregar.c
@@ -26,6 +25,7 @@ src/nomeolvides-file-chooser-dialog-savefile-dialog.c
 src/nomeolvides-headerbar.c
 src/nomeolvides-hecho.c
 src/nomeolvides-importar-hechos.c
+src/nomeolvides-interfaz-principal.c
 src/nomeolvides-selector-fecha.c
 src/nomeolvides-sqlite.c
 src/nomeolvides-toolbar.c

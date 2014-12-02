@@ -3,7 +3,6 @@ data/nomeolvides.desktop.in.in
 src/nomeolvides-app.vala
 src/nomeolvides-application-window-ventana-principal.vala
 src/nomeolvides-archivo.vala
-src/nomeolvides-box-anios-hechos-vista.vala
 src/nomeolvides-box-vista-hecho.vala
 src/nomeolvides-configuracion.vala
 src/nomeolvides-dialog-coleccion-agregar.vala
@@ -27,6 +26,7 @@ src/nomeolvides-file-chooser-dialog-savefile-dialog.vala
 src/nomeolvides-headerbar.vala
 src/nomeolvides-hecho.vala
 src/nomeolvides-importar-hechos.vala
+src/nomeolvides-interfaz-principal.vala
 src/nomeolvides-selector-fecha.vala
 src/nomeolvides-sqlite.vala
 src/nomeolvides-toolbar.vala

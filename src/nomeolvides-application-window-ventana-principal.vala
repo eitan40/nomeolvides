@@ -25,7 +25,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	private Box main_box { get; private set; }
 	private HeaderBar toolbar { get; private set; }
-	public Anios_hechos_vista anios_hechos { get; private set; }
+	public InterfazPrincipal anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
 	
@@ -40,9 +40,9 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 		this.anio_actual = 0;
 		
-		this.main_box = new Box (Orientation.VERTICAL,0);
+		this.main_box = new Box ( Orientation.VERTICAL, 0 );
 
-		this.anios_hechos = new Anios_hechos_vista ();
+		this.anios_hechos = new InterfazPrincipal ();
 		
 		this.add (main_box);
 		

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-02 13:04-0300\n"
+"POT-Creation-Date: 2014-12-02 13:28-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -41,7 +41,7 @@ msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
 #: ../src/nomeolvides-app.vala:325
-#: ../src/nomeolvides-box-anios-hechos-vista.vala:67
+#: ../src/nomeolvides-interfaz-principal.vala:67
 #: ../src/nomeolvides-treeview-anios.vala:31
 msgid "Years"
 msgstr "Años"
@@ -89,11 +89,6 @@ msgstr "Acerca de Nomeolvides"
 #: ../src/nomeolvides-archivo.vala:105 ../src/nomeolvides-archivo.vala:120
 msgid "Error while open"
 msgstr "Error al abrir"
-
-#: ../src/nomeolvides-box-anios-hechos-vista.vala:68
-#: ../src/nomeolvides-dialog-preferencias.vala:48
-msgid "Lists"
-msgstr "Listas"
 
 #: ../src/nomeolvides-box-vista-hecho.vala:95
 #: ../src/nomeolvides-dialog-hecho.vala:46
@@ -368,6 +363,11 @@ msgstr "Migrando Lista"
 #: ../src/nomeolvides-dialog-preferencias.vala:47
 msgid "Colections"
 msgstr "Colecciones"
+
+#: ../src/nomeolvides-dialog-preferencias.vala:48
+#: ../src/nomeolvides-interfaz-principal.vala:68
+msgid "Lists"
+msgstr "Listas"
 
 #: ../src/nomeolvides-dialog-preferencias.vala:52
 msgid "Close"
