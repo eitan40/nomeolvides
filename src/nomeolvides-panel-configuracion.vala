@@ -26,8 +26,8 @@ public class Nomeolvides.PanelPreferencias : Gtk.Box {
 	protected Toolbar toolbar;
 	protected AccionesDB db;
 	protected Deshacer<Base> deshacer;
-	protected DialogNmoBase agregar_dialog;
-	protected DialogNmoBase editar_dialog;
+	protected DialogBase agregar_dialog;
+	protected DialogBase editar_dialog;
 	protected DialogNmoBaseBorrar borrar_dialog;
 
 	public PanelPreferencias () {

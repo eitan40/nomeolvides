@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogListaAgregar : DialogNmoBase {	
+public class Nomeolvides.DialogListaAgregar : DialogBase {	
 	public DialogListaAgregar () {
 		this.title = _ ("Add Custom List");
 		this.nombre_label.set_label (_("List Name") + ": " );

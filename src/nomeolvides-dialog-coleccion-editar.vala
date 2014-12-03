@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogColeccionEditar : DialogNmoBase {
+public class Nomeolvides.DialogColeccionEditar : DialogBase {
 	public DialogColeccionEditar () {
 		this.title = _("Edit Collection");
 		base.nombre_label.set_label ( _("Colection name") + ": " );

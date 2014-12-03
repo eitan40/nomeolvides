@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogListaEditar : DialogNmoBase {
+public class Nomeolvides.DialogListaEditar : DialogBase {
 	public DialogListaEditar () {
 		this.title = _("Edit Custom List");
 		this.nombre_label.set_label (_("List Name") + ": ");

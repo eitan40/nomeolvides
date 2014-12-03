@@ -20,13 +20,13 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogNmoBase : Gtk.Dialog {
+public class Nomeolvides.DialogBase : Gtk.Dialog {
 	protected Entry nombre_entry;
 	protected int64 id;
 	public Base respuesta { get; protected set; }
 	protected Label nombre_label;
 
-	public DialogNmoBase ( ) {
+	public DialogBase ( ) {
 		this.resizable = false;
 		this.modal = true;
 
