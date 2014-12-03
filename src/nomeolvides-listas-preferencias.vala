@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListasPreferencias: Nomeolvides.PanelConfiguracion {
+public class Nomeolvides.ListasPreferencias: Nomeolvides.PanelPreferencias {
 	public ListasPreferencias ( ListStoreListas liststore_listas ) {
 		this.treeview = new TreeViewListas ();
 		this.treeview.set_border_width ( 20 );
