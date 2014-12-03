@@ -38,7 +38,7 @@ public class Nomeolvides.ColeccionesPreferencias : Nomeolvides.PanelPreferencias
 
 		this.agregar_dialog = new DialogColeccionAgregar () as DialogBase;
 		this.editar_dialog = new DialogColeccionEditar () as DialogBase;
-		this.borrar_dialog = new DialogColeccionBorrar () as DialogNmoBaseBorrar;
+		this.borrar_dialog = new DialogColeccionBorrar () as DialogBaseBorrar;
 	}
 
 	protected override bool agregar ( Base objeto ) {

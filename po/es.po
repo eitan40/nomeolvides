@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 02:49-0300\n"
+"POT-Creation-Date: 2014-12-03 02:54-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -71,13 +71,13 @@ msgstr "Elija un Archivo"
 
 #: ../src/nomeolvides-dialog-archivo-abrir.vala:33
 #: ../src/nomeolvides-dialog-archivo-guardar.vala:32
+#: ../src/nomeolvides-dialog-base-borrar.vala:81
 #: ../src/nomeolvides-dialog-coleccion.vala:32
 #: ../src/nomeolvides-dialog-hecho-borrar.vala:56
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:67
 #: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:85
 #: ../src/nomeolvides-dialog-hecho.vala:41
 #: ../src/nomeolvides-dialog-lista.vala:32
-#: ../src/nomeolvides-dialog-nmobase-borrar.vala:81
 #: ../src/nomeolvides-dialog-nmobase.vala:33
 #: ../src/nomeolvides-importar-hechos.vala:33
 #: ../src/nomeolvides-importar-hechos.vala:73
@@ -96,6 +96,11 @@ msgstr "Guardar Archivo"
 #: ../src/nomeolvides-dialog-archivo-guardar.vala:33
 msgid "Save"
 msgstr "Guardar"
+
+#: ../src/nomeolvides-dialog-base-borrar.vala:82
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:57
+msgid "Apply"
+msgstr "Aplicar"
 
 #: ../src/nomeolvides-dialog-coleccion-agregar.vala:25
 msgid "Add a Collection"
@@ -151,11 +156,6 @@ msgstr "Editar"
 #: ../src/nomeolvides-dialog-hecho-agregar.vala:28
 msgid "Add a Historical Fact"
 msgstr "Agregar Hecho Histórico"
-
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:57
-#: ../src/nomeolvides-dialog-nmobase-borrar.vala:82
-msgid "Apply"
-msgstr "Aplicar"
 
 #: ../src/nomeolvides-dialog-hecho-borrar.vala:89
 msgid "Remove Fact"

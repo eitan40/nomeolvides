@@ -20,14 +20,14 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogNmoBaseBorrar : Dialog {
+public class Nomeolvides.DialogBaseBorrar : Dialog {
 	protected Label pregunta;
 	protected Label nombre;
 	protected Label nombre_objeto;
 	protected Label hechos;
 	protected Label hechos_objeto;
 
-	public DialogNmoBaseBorrar () {
+	public DialogBaseBorrar () {
 		this.set_modal ( true );
 
 		this.pregunta = new Label.with_mnemonic ( "" );

@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogColeccionBorrar : DialogNmoBaseBorrar {
+public class Nomeolvides.DialogColeccionBorrar : DialogBaseBorrar {
 	public DialogColeccionBorrar () {
 		this.title = _("Delete Collection");
 		this.pregunta.set_label ( _("Do you want to remove this collection?") );

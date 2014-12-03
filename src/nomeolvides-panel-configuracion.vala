@@ -28,7 +28,7 @@ public class Nomeolvides.PanelPreferencias : Gtk.Box {
 	protected Deshacer<Base> deshacer;
 	protected DialogBase agregar_dialog;
 	protected DialogBase editar_dialog;
-	protected DialogNmoBaseBorrar borrar_dialog;
+	protected DialogBaseBorrar borrar_dialog;
 
 	public PanelPreferencias () {
 		this.set_orientation ( Orientation.VERTICAL );
