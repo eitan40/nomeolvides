@@ -2,7 +2,6 @@ data/nomeolvides.appdata.xml.in
 data/nomeolvides.desktop.in.in
 src/nomeolvides-app.vala
 src/nomeolvides-archivo.vala
-src/nomeolvides-box-vista-hecho.vala
 src/nomeolvides-configuracion.vala
 src/nomeolvides-dialog-archivo-abrir.vala
 src/nomeolvides-dialog-archivo-guardar.vala
@@ -26,6 +25,7 @@ src/nomeolvides-headerbar.vala
 src/nomeolvides-hecho.vala
 src/nomeolvides-importar-hechos.vala
 src/nomeolvides-interfaz-principal.vala
+src/nomeolvides-portada.vala
 src/nomeolvides-selector-fecha.vala
 src/nomeolvides-sqlite.vala
 src/nomeolvides-toolbar.vala

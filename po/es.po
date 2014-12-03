@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-02 22:05-0300\n"
+"POT-Creation-Date: 2014-12-02 23:57-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -49,11 +49,6 @@ msgstr "Años"
 #: ../src/nomeolvides-archivo.vala:105 ../src/nomeolvides-archivo.vala:120
 msgid "Error while open"
 msgstr "Error al abrir"
-
-#: ../src/nomeolvides-box-vista-hecho.vala:95
-#: ../src/nomeolvides-dialog-hecho.vala:46
-msgid "Source"
-msgstr "Fuente"
 
 #: ../src/nomeolvides-configuracion.vala:32
 #: ../src/nomeolvides-ventana-principal.vala:88
@@ -240,6 +235,10 @@ msgstr "Nombre"
 #: ../src/nomeolvides-treeview-hechos.vala:37
 msgid "Date"
 msgstr "Fecha"
+
+#: ../src/nomeolvides-dialog-hecho.vala:46 ../src/nomeolvides-portada.vala:95
+msgid "Source"
+msgstr "Fuente"
 
 #: ../src/nomeolvides-dialog-hecho.vala:69
 msgid "Description"

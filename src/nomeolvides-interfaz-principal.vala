@@ -24,7 +24,7 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 	private TreeViewHechos hechos_view;
 	private TreeViewAnios anios_view;
 	private TreeViewListas listas_view;
-	private VistaHecho vista_hecho;
+	private Portada vista_hecho;
 	private ScrolledWindow scroll_hechos_view;
 	private ScrolledWindow scroll_anios_view;
 	private ScrolledWindow scroll_listas_view;
@@ -38,7 +38,7 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		this.anios_view = new TreeViewAnios ();
 		this.hechos_view = new TreeViewHechos ();
 		this.listas_view = new TreeViewListas.ventana_principal ();
-		this.vista_hecho = new VistaHecho ();
+		this.vista_hecho = new Portada ();
 		this.vista_hecho.set_size_request (300,-1);
 
 		this.scroll_hechos_view = new ScrolledWindow (null,null);
