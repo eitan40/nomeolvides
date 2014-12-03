@@ -29,8 +29,8 @@ src/nomeolvides-selector-fecha.c
 src/nomeolvides-sqlite.c
 src/nomeolvides-toolbar.c
 src/nomeolvides-treeview-anios.c
+src/nomeolvides-treeview-base.c
 src/nomeolvides-treeview-colecciones.c
 src/nomeolvides-treeview-hechos.c
 src/nomeolvides-treeview-listas.c
-src/nomeolvides-treeview-nmobase.c
 src/nomeolvides-ventana-principal.c

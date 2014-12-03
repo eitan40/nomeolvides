@@ -20,14 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewNmoBase : TreeView {
-	public TreeViewNmoBase () {
+public class Nomeolvides.TreeViewBase : TreeView {
+	public TreeViewBase () {
 		var nombre_cell = new CellRendererText ();
-
 		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
-
 		nombre_cell.width_chars = 30;
-
 		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 	}
 

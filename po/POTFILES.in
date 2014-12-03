@@ -30,9 +30,9 @@ src/nomeolvides-selector-fecha.vala
 src/nomeolvides-sqlite.vala
 src/nomeolvides-toolbar.vala
 src/nomeolvides-treeview-anios.vala
+src/nomeolvides-treeview-base.vala
 src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-hechos.vala
 src/nomeolvides-treeview-listas.vala
-src/nomeolvides-treeview-nmobase.vala
 src/nomeolvides-ventana-principal.vala
 [type: gettext/glade]src/nomeolvides-app-menu.ui

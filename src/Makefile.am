@@ -42,7 +42,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-importar-hechos.vala \
 	nomeolvides-resources.c \
 	nomeolvides-liststore-anios.vala \
-	nomeolvides-treeview-nmobase.vala \
 	nomeolvides-liststore-nmobase.vala \
 	nomeolvides-utiles.vala \
 	nomeolvides-treeview-hechos.vala \
@@ -70,7 +69,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-listas-preferencias.vala \
 	nomeolvides-ventana-principal.vala \
 	nomeolvides-dialog-archivo-abrir.vala \
-	nomeolvides-dialog-archivo-guardar.vala
+	nomeolvides-dialog-archivo-guardar.vala \
+	nomeolvides-treeview-base.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
