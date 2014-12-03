@@ -20,11 +20,11 @@ using Gtk;
 using Nomeolvides;
 
 
-public class Nomeolvides.ViewHechos : Gtk.TreeView {
+public class Nomeolvides.TreeViewHechos : Gtk.TreeView {
 
 	public int anio_actual { get; private set; }
 
-	public ViewHechos () {
+	public TreeViewHechos () {
 		var nombre_cell = new CellRendererText ();
 
 		nombre_cell.ellipsize = Pango.EllipsizeMode.END;

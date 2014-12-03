@@ -19,17 +19,17 @@
 
 using Nomeolvides;
 
-public class Nomeolvides.NmoBase : GLib.Object{
+public class Nomeolvides.Base : GLib.Object{
 	public int64 id;
 	public string nombre { get; protected set; }
 	public string hash { get; protected set; }
 	
-	public NmoBase ( string nombre ) {
+	public Base ( string nombre ) {
 		this.nombre = Utiles.ponerCaracterEspecial ( nombre );
 		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
-	public NmoBase.json ( string json ) {
+	public Base.json ( string json ) {
 		if ( json != "null") {
 			this.nombre = Utiles.sacarDatoJson ( json, "nombre" );
 		} else {
@@ -38,7 +38,7 @@ public class Nomeolvides.NmoBase : GLib.Object{
 		this.hash = Utiles.calcular_checksum ( this.a_json () );
 	}
 
-	public NmoBase.vacio () {
+	public Base.vacio () {
 
 	}
 

@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ColeccionesConfig : Gtk.Box {
+public class Nomeolvides.ColeccionesPreferencias : Gtk.Box {
 	public TreeViewColecciones colecciones_view { get; private set; }
 	public bool cambios { get; private set; }
 	public bool cambio_toggle { get; private set; }
@@ -28,7 +28,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	private AccionesDB db;
 	private Deshacer<Coleccion> deshacer;
 		
-	public ColeccionesConfig ( ListStoreColecciones liststore_colecciones ) {
+	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
@@ -73,7 +73,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 		ListStoreColecciones liststore;
 		Coleccion coleccion;
 		
-		var add_dialog = new AddColeccionDialog ( );
+		var add_dialog = new DialogColeccionAgregar ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
@@ -94,7 +94,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 
 		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" 
 		                                                + this.colecciones_view.get_elemento_id ().to_string() + "\"");
-		var edit_dialog = new EditColeccionDialog ();
+		var edit_dialog = new DialogColeccionEditar ();
 		edit_dialog.set_datos ( coleccion );
 		edit_dialog.show_all ();
 
@@ -114,7 +114,7 @@ public class Nomeolvides.ColeccionesConfig : Gtk.Box {
 	private void borrar_coleccion_dialog () {
 		Coleccion coleccion = this.db.select_coleccion ( "WHERE rowid=\"" + this.colecciones_view.get_elemento_id ().to_string() + "\"");
 		int cantidad_hechos = this.db.count_hechos_coleccion ( coleccion );
-		var borrar_dialog = new BorrarColeccionDialogo ( coleccion, cantidad_hechos );
+		var borrar_dialog = new DialogColeccionBorrar ( coleccion, cantidad_hechos );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {

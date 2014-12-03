@@ -20,10 +20,10 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditHechoDialog : Nomeolvides.DialogoHecho {
+public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
 	private int64 hecho_id;
 	
-	public EditHechoDialog ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
+	public DialogHechoEditar ( VentanaPrincipal ventana, ListStoreColecciones colecciones ) {
 		base (ventana, colecciones );
 		this.set_title (_("Edit Fact"));
 

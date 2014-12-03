@@ -12,7 +12,6 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- *   bullit - 39 escalones - silent love (japonesa) 
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,19 +19,19 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Preferencias : Gtk.Dialog {
+public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private Notebook notebook;
-	private ColeccionesConfig config_colecciones;
-	private ListasConfig config_listas;
+	private ColeccionesPreferencias config_colecciones;
+	private ListasPreferencias config_listas;
 	
-	public Preferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
+	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
 		this.set_title (_("Preferences"));
 		this.set_modal ( true );
 		this.set_default_size (600, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
 
-		this.config_colecciones = new ColeccionesConfig ( colecciones );
-		this.config_listas = new ListasConfig ( listas );
+		this.config_colecciones = new ColeccionesPreferencias ( colecciones );
+		this.config_listas = new ListasPreferencias ( listas );
 		this.config_colecciones.cambio_colecciones_signal.connect ( this.config_listas.actualizar_liststore );
 
 		this.notebook = new Notebook ();

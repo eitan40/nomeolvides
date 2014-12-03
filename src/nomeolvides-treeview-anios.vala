@@ -20,11 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ViewAnios : TreeView {
+public class Nomeolvides.TreeViewAnios : TreeView {
 
 	private ListStoreAnios lista;
 	
-	public ViewAnios () {
+	public TreeViewAnios () {
 		this.lista = new ListStoreAnios ();
 		this.set_model (this.lista);
 		var celda = new CellRendererText();

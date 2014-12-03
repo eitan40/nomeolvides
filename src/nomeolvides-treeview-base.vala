@@ -20,14 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewNmoBase : TreeView {
-	public TreeViewNmoBase () {
+public class Nomeolvides.TreeViewBase : TreeView {
+	public TreeViewBase () {
 		var nombre_cell = new CellRendererText ();
-
 		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
-
 		nombre_cell.width_chars = 30;
-
 		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
 	}
 
@@ -36,22 +33,22 @@ public class Nomeolvides.TreeViewNmoBase : TreeView {
 		TreeViewColumn columna;
 		TreeIter iterador;
 		Value value_elemento;
-		NmoBase elemento;
+		Base elemento;
 		int64 id = -1;
 
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
 			this.get_model().get_value (iterador, 2, out value_elemento);
-			elemento = value_elemento as NmoBase;
+			elemento = value_elemento as Base;
 			id = elemento.id;
 		}
 		
 		return id;
 	}
 
-	public void eliminar ( NmoBase a_eliminar ) {
-		var liststore = this.get_model() as ListStoreNmoBase;
+	public void eliminar ( Base a_eliminar ) {
+		var liststore = this.get_model() as ListStoreBase;
 		liststore.borrar ( a_eliminar );
 	}
 
@@ -64,7 +61,7 @@ public class Nomeolvides.TreeViewNmoBase : TreeView {
 		this.get_cursor (out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			var liststore = this.get_model() as ListStoreNmoBase;
+			var liststore = this.get_model() as ListStoreBase;
 			hechos = liststore.get_hechos ( iterador );
 		}
 

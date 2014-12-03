@@ -20,44 +20,43 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.BorrarListaDialogo : Dialog {
-	public BorrarListaDialogo ( Lista lista_a_borrar, int cantidad_hechos ) {
+public class Nomeolvides.DialogColeccionBorrar : Dialog {
+	public DialogColeccionBorrar ( Coleccion coleccion_a_borrar, int cantidad_hechos ) {
 		this.set_modal ( true );
-		this.title = _("Delete Custom List");
-	
-		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove custom list?") );
-		Label lista_nombre_label = new Label.with_mnemonic ( _("List") + ":");
-		Label lista_nombre = new Label ( "" );
-		Label lista_hechos_label = new Label.with_mnemonic ( _("Amount of facts") + ":");
-		Label lista_hechos = new Label ( "" );
+		this.title = _("Delete Collection");
+		Label pregunta = new Label.with_mnemonic ( _("Do you want to remove this collection?") );
+		Label coleccion_nombre_label = new Label.with_mnemonic ( _("Colection") + ":");
+		Label coleccion_nombre = new Label ( "" );
+		Label coleccion_hechos_label = new Label.with_mnemonic ( _("Amount of Facts") + ":");
+		Label coleccion_hechos = new Label ( "" );
 		Grid grid = new Grid ( );
 
 		pregunta.set_halign ( Align.CENTER );
 		pregunta.set_margin_bottom ( 15 );
 		pregunta.set_hexpand ( true );
-		lista_nombre_label.set_halign ( Align.END );
-		lista_nombre_label.set_margin_bottom ( 10 );
-		lista_nombre.set_halign ( Align.START );
-		lista_nombre.set_margin_bottom ( 10 );
-		lista_hechos_label.set_halign ( Align.END );
-		lista_hechos.set_halign ( Align.START );
+		coleccion_nombre_label.set_halign ( Align.END );
+		coleccion_nombre_label.set_margin_bottom ( 10 );
+		coleccion_nombre.set_halign ( Align.START );
+		coleccion_nombre.set_margin_bottom ( 10 );
+		coleccion_hechos_label.set_halign ( Align.END );
+		coleccion_hechos.set_halign ( Align.START );
 #if DISABLE_GNOME3
-		lista_nombre_label.set_margin_right ( 20 );
-		lista_nombre.set_margin_left ( 20 );
-		lista_hechos_label.set_margin_right ( 20 );
-		lista_hechos.set_margin_left ( 20 );
+		coleccion_nombre_label.set_margin_right ( 20 );
+		coleccion_nombre.set_margin_left ( 20 );
+		coleccion_hechos_label.set_margin_right ( 20 );
+		coleccion_hechos.set_margin_left ( 20 );
 		grid.set_margin_right ( 20 );
 		grid.set_margin_left ( 20 );
 #else
-		lista_nombre_label.set_margin_end ( 20 );
-		lista_nombre.set_margin_start ( 20 );
-		lista_hechos_label.set_margin_end ( 20 );
-		lista_hechos.set_margin_start ( 20 );
+		coleccion_nombre_label.set_margin_end ( 20 );
+		coleccion_nombre.set_margin_start ( 20 );
+		coleccion_hechos_label.set_margin_end ( 20 );
+		coleccion_hechos.set_margin_start ( 20 );
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
 #endif
-		lista_nombre.set_markup ( "<span font_weight=\"heavy\">"+ lista_a_borrar.nombre +"</span>");
-		lista_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
+		coleccion_nombre.set_markup ( "<span font_weight=\"heavy\">"+ coleccion_a_borrar.nombre +"</span>");
+		coleccion_hechos.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
@@ -67,10 +66,10 @@ public class Nomeolvides.BorrarListaDialogo : Dialog {
 		grid.set_hexpand ( true );
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
-		grid.attach ( lista_nombre_label, 0, 1, 1, 1 );
-		grid.attach ( lista_nombre, 1, 1, 1, 1 );
-		grid.attach ( lista_hechos_label, 0, 2, 1, 1 );
-		grid.attach ( lista_hechos, 1, 2, 1, 1 );
+		grid.attach ( coleccion_nombre_label, 0, 1, 1, 1 );
+		grid.attach ( coleccion_nombre, 1, 1, 1, 1 );
+		grid.attach ( coleccion_hechos_label, 0, 2, 1, 1 );
+		grid.attach ( coleccion_hechos, 1, 2, 1, 1 );
 
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start ( grid, true, true, 0 );

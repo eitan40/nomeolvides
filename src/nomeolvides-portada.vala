@@ -20,13 +20,13 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.VistaHecho : Box {
+public class Nomeolvides.Portada : Box {
 	private Label label_nombre;
 	private Label label_fecha;
 	private Label descripcion;
 	private Label label_fuente;
 	
-	public VistaHecho () {
+	public Portada () {
 		this.set_orientation ( Orientation.VERTICAL );
 		this.set_spacing ( 10 );
 		this.set_homogeneous ( false );

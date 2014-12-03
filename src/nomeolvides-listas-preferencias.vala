@@ -20,14 +20,14 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListasConfig: Gtk.Box {
+public class Nomeolvides.ListasPreferencias: Gtk.Box {
 	public TreeViewListas listas_view { get; private set; }
 	public bool cambios { get; private set; }
 	private AccionesDB db;
 	private Deshacer<Lista> deshacer;
 	private Toolbar toolbar;
 		
-	public ListasConfig ( ListStoreListas liststore_lista ) {
+	public ListasPreferencias ( ListStoreListas liststore_lista ) {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.set_orientation ( Orientation.VERTICAL );
 		this.deshacer = new Deshacer<Lista> ();
@@ -69,7 +69,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		ListStoreListas liststore;
 		Lista lista;
 		
-		var add_dialog = new AddListaDialog ( );
+		var add_dialog = new DialogLstaAgregar ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
@@ -90,7 +90,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
 											+ this.listas_view.get_elemento_id ().to_string() + "\"");
 		
-		var edit_dialog = new EditListaDialog ();
+		var edit_dialog = new DialogListaEditar ();
 		edit_dialog.set_datos ( lista );
 		edit_dialog.show_all ();
 
@@ -109,7 +109,7 @@ public class Nomeolvides.ListasConfig: Gtk.Box {
 	private void borrar_lista_dialog () {
 		Lista lista = this.db.select_lista ( "WHERE rowid=\"" 
 		                                                + this.listas_view.get_elemento_id ().to_string() + "\"");
-		var borrar_dialog = new BorrarListaDialogo ( lista, this.listas_view.get_hechos () );
+		var borrar_dialog = new DialogListaBorrar ( lista, this.listas_view.get_hechos () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {

@@ -20,25 +20,23 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditColeccionDialog : DialogColeccion
-{
-	private int64 id_coleccion;
-	public EditColeccionDialog ( )
-	{
-		this.title = _("Edit Collection");
+public class Nomeolvides.DialogListaEditar : DialogLista {
+	private int64 id;
+	
+	public DialogListaEditar () {
+		this.title = _("Edit Custom List");
 		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
-	public void set_datos (Coleccion coleccion) {
-		this.nombre_coleccion_entry.set_text ( coleccion.nombre );
-		this.id_coleccion = coleccion.id;
+	protected override void crear_respuesta () {
+		if(this.nombre_entry.get_text_length () > 0) {
+			this.respuesta  = new Lista (this.nombre_entry.get_text ());
+			this.respuesta.id = this.id;
+		}
 	}
 
-	protected override void crear_respuesta() {
-		if(this.nombre_coleccion_entry.get_text_length () > 0)
-		{
-			this.respuesta = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
-			this.respuesta.id = this.id_coleccion;
-		}
-	} 
+	public void set_datos (Lista lista) {
+		this.nombre_entry.set_text ( lista.nombre );
+		this.id = lista.id;
+	}
 }

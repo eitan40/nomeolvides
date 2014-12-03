@@ -20,57 +20,57 @@ nomeolvides_SOURCES = \
 	nomeolvides-hecho.vala \
 	nomeolvides-main.vala \
 	nomeolvides-liststore-hechos.vala \
-	nomeolvides-add-hecho-dialog.vala \
 	nomeolvides-app.vala \
-	nomeolvides-edit-hecho-dialog.vala \
 	nomeolvides-datos.vala \
-	nomeolvides-box-anios-hechos-vista.vala \
 	nomeolvides-configuracion.vala \
 	nomeolvides-archivo.vala \
-	nomeolvides-treeview-view-anios.vala \
-	nomeolvides-treeview-view-hechos.vala \
-	nomeolvides-box-vista-hecho.vala \
-	nomeolvides-box-selector-fecha.vala \
-	nomeolvides-file-chooser-dialog-savefile-dialog.vala \
-	nomeolvides-application-window-ventana-principal.vala \
-	nomeolvides-dialog-borrar-hecho-dialogo.vala \
-	nomeolvides-dialog-dialogo-hecho.vala \
-	nomeolvides-file-chooser-dialog-open-file-dialog.vala \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
 	nomeolvides-lista.vala \
-	nomeolvides-dialog-borrar-lista-dialog.vala \
-	nomeolvides-add-lista-dialog.vala \
 	nomeolvides-dialog-lista.vala \
-	nomeolvides-edit-lista-dialog.vala \
 	nomeolvides-deshacer.vala \
 	nomeolvides-deshacer-item.vala \
 	nomeolvides-coleccion.vala \
-	nomeolvides-add-hecho-lista-dialog.vala \
-	nomeolvides-borrar-hecho-lista-dialog.vala \
 	nomeolvides-base-de-datos.vala \
 	nomeolvides-sqlite.vala \
 	nomeolvides-acciones-db.vala \
 	nomeolvides-liststore-colecciones.vala \
 	nomeolvides-treeview-colecciones.vala \
-	nomeolvides-add-coleccion-dialog.vala \
-	nomeolvides-dialog-borrar-coleccion-dialogo.vala \
-	nomeolvides-edit-coleccion-dialog.vala \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-migrador.vala \
 	nomeolvides-importar-hechos.vala \
-	nomeolvides-preferencias.vala \
-	nomeolvides-box-colecciones-config.vala \
-	nomeolvides-box-listas-config.vala \
 	nomeolvides-resources.c \
-	nomeolvides-box-toolbar.vala \
-	nomeolvides-button-nmo-button.vala \
-	nomeolvides-box-headerbar.vala \
 	nomeolvides-liststore-anios.vala \
-	nomeolvides-treeview-nmobase.vala \
-	nomeolvides-nmobase.vala \
-	nomeolvides-liststore-nmobase.vala \
-	nomeolvides-utiles.vala
+	nomeolvides-utiles.vala \
+	nomeolvides-treeview-hechos.vala \
+	nomeolvides-treeview-anios.vala \
+	nomeolvides-dialog-preferencias.vala \
+	nomeolvides-dialog-coleccion-agregar.vala \
+	nomeolvides-dialog-hecho-agregar.vala \
+	nomeolvides-dialog-hecho.vala \
+	nomeolvides-dialog-hecho-editar.vala \
+	nomeolvides-dialog-hecho-lista-agregar.vala \
+	nomeolvides-dialog-lista-agregar.vala \
+	nomeolvides-dialog-hecho-lista-borrar.vala \
+	nomeolvides-dialog-coleccion-borrar.vala \
+	nomeolvides-dialog-lista-borrar.vala \
+	nomeolvides-dialog-coleccion-editar.vala \
+	nomeolvides-dialog-lista-editar.vala \
+	nomeolvides-dialog-hecho-borrar.vala \
+	nomeolvides-headerbar.vala \
+	nomeolvides-toolbar.vala \
+	nomeolvides-selector-fecha.vala \
+	nomeolvides-base.vala \
+	nomeolvides-boton.vala \
+	nomeolvides-interfaz-principal.vala \
+	nomeolvides-colecciones-preferencias.vala \
+	nomeolvides-listas-preferencias.vala \
+	nomeolvides-ventana-principal.vala \
+	nomeolvides-dialog-archivo-abrir.vala \
+	nomeolvides-dialog-archivo-guardar.vala \
+	nomeolvides-treeview-base.vala \
+	nomeolvides-liststore-base.vala \
+	nomeolvides-portada.vala
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml

@@ -20,17 +20,18 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.SaveFileDialog : FileChooserDialog {
+public class Nomeolvides.DialogArchivoAbrir : FileChooserDialog {
 
     private string ultimo_directorio;
+	protected Button boton_abrir;
 
-    public SaveFileDialog (string directorio_actual) {
-        this.title = _("Save File");
-        this.action = FileChooserAction.SAVE;
+    public DialogArchivoAbrir (string directorio_actual) {
+        this.title = _("Choose File");
+        this.action = FileChooserAction.OPEN;
 		this.set_current_folder (directorio_actual);
 
         add_button ( _("Cancel"), ResponseType.CANCEL);
-        add_button ( _("Save"), ResponseType.ACCEPT);
+        this.boton_abrir = add_button ( _("Open"), ResponseType.ACCEPT) as Button;
         set_default_response (ResponseType.ACCEPT);
 
         if (this.ultimo_directorio != null) {

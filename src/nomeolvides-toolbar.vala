@@ -45,11 +45,11 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.pack_start ( this.izquierda_box );
 		this.pack_start ( this.centro_box );
 
-		this.add_button = new NmoButton ( _("Add") );
-		this.undo_button = new NmoButton ( _("Undo") );
-		this.redo_button = new NmoButton ( _("Redo") );
-		this.edit_button = new NmoButton ( _("Edit") );
-		this.delete_button = new NmoButton ( _("Delete") );
+		this.add_button = new Boton ( _("Add") );
+		this.undo_button = new Boton ( _("Undo") );
+		this.redo_button = new Boton ( _("Redo") );
+		this.edit_button = new Boton ( _("Edit") );
+		this.delete_button = new Boton ( _("Delete") );
 	#if DISABLE_GNOME3
 		this.add_button.set_margin_left ( 2 );
 		this.delete_button.set_margin_right ( 2 );

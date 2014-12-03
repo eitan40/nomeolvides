@@ -20,12 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewColecciones : TreeViewNmoBase {
+public class Nomeolvides.TreeViewColecciones : TreeViewBase {
 	private CellRendererToggle toggle_visible;
 	
 	public TreeViewColecciones () {
 		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
-
 		this.toggle_visible = new CellRendererToggle();
 		this.toggle_visible.toggled.connect ( signal_toggle );
 		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 3 );
@@ -47,10 +46,8 @@ public class Nomeolvides.TreeViewColecciones : TreeViewNmoBase {
 	}
 
 	private void signal_toggle (string path) {
-
 		TreePath tree_path = new Gtk.TreePath.from_string (path);
 		TreeIter iter;
-
 		var liststore = this.get_model() as ListStoreColecciones;
 
 		liststore.get_iter (out iter, tree_path);

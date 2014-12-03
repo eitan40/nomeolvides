@@ -20,18 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.AddColeccionDialog : DialogColeccion
+public class Nomeolvides.DialogLstaAgregar : DialogLista
 {	
-	public AddColeccionDialog ( )
+	public DialogLstaAgregar ( )
 	{
-		this.title = _("Add a Collection");
-		this.add_button (_("Add") , ResponseType.APPLY);
-	}
-
-	protected override void crear_respuesta() {
-		if(this.nombre_coleccion_entry.get_text_length () > 0)
-		{
-			this.respuesta  = new Coleccion (this.nombre_coleccion_entry.get_text (), true);
-		}
+		this.title = _("Add Custom List");
+		this.add_button ( _("Add") , ResponseType.APPLY);
 	}
 }
