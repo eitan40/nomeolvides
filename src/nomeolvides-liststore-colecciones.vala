@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListStoreColecciones : ListStoreNmoBase {
+public class Nomeolvides.ListStoreColecciones : ListStoreBase {
 	public ListStoreColecciones () {
 		Type[] tipos= { typeof(string), typeof(int),typeof(Base), typeof(bool) };
 		this.set_column_types( tipos );

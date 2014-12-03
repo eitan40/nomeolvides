@@ -20,11 +20,11 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListStoreNmoBase : ListStore {
+public class Nomeolvides.ListStoreBase : ListStore {
 	protected TreeIter iterador;
 	public bool vacio { get; private set; }
 	
-	public ListStoreNmoBase ( Type[] tipos = { typeof(string), typeof(int), typeof(Base) } ) {
+	public ListStoreBase ( Type[] tipos = { typeof(string), typeof(int), typeof(Base) } ) {
 		this.set_column_types(tipos);
 		this.vacio = true;
 	}

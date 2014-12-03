@@ -48,7 +48,7 @@ public class Nomeolvides.TreeViewBase : TreeView {
 	}
 
 	public void eliminar ( Base a_eliminar ) {
-		var liststore = this.get_model() as ListStoreNmoBase;
+		var liststore = this.get_model() as ListStoreBase;
 		liststore.borrar ( a_eliminar );
 	}
 
@@ -61,7 +61,7 @@ public class Nomeolvides.TreeViewBase : TreeView {
 		this.get_cursor (out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter(out iterador, path);
-			var liststore = this.get_model() as ListStoreNmoBase;
+			var liststore = this.get_model() as ListStoreBase;
 			hechos = liststore.get_hechos ( iterador );
 		}
 
