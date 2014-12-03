@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogListaBorrar : DialogNmoBaseBorrar { {
+public class Nomeolvides.DialogListaBorrar : DialogNmoBaseBorrar {
 	public DialogListaBorrar () {
 		this.title = _("Delete Custom List");
 		this.pregunta.set_label ( _("Do you want to remove custom list?") );

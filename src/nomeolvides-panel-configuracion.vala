@@ -21,11 +21,11 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.PanelConfiguracion : Gtk.Box {
-	protected TreeViewNmoBase treeview { get; protected set; }
+	protected TreeViewBase treeview { get; protected set; }
 	protected ScrolledWindow scroll_view;
 	protected Toolbar toolbar;
 	protected AccionesDB db;
-	protected Deshacer<NmoBase> deshacer;
+	protected Deshacer<Base> deshacer;
 	protected DialogNmoBase agregar_dialog;
 	protected DialogNmoBase editar_dialog;
 	protected DialogNmoBaseBorrar borrar_dialog;
@@ -34,7 +34,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
-		this.deshacer = new Deshacer<NmoBase> ();
+		this.deshacer = new Deshacer<Base> ();
 
 		this.toolbar = new Toolbar ();
 
@@ -45,7 +45,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		this.show_all ();
 	}
 
-	public void actualizar_model ( ListStoreNmoBase liststore ) {
+	public void actualizar_model ( ListStoreBase liststore ) {
 		this.treeview.set_model ( liststore );
 	}
 
@@ -74,7 +74,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	}
 
 	public virtual void edit_dialog () {
-		NmoBase objeto = this.treeview.get_elemento ();
+		Base objeto = this.treeview.get_elemento ();
 		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
@@ -88,7 +88,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	}
 
 	private void delete_dialog () {
-		NmoBase objeto = this.treeview.get_elemento ();
+		Base objeto = this.treeview.get_elemento ();
 		this.borrar_dialog.set_datos ( objeto, this.treeview.get_cantidad_hechos () );
 		this.borrar_dialog.show_all ();
 
@@ -108,7 +108,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	}
 
 	void deshacer_cambios () {
-		DeshacerItem<NmoBase> item;
+		DeshacerItem<Base> item;
 		bool hay_colecciones_deshacer = this.deshacer.deshacer ( out item );
 		if ( hay_colecciones_deshacer ){
 			this.efectuar_deshacer ( item.get_borrado () );
@@ -117,7 +117,7 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 	}
 
 	public void rehacer_cambios () {
-		DeshacerItem<NmoBase> item;
+		DeshacerItem<Base> item;
 
 		bool hay_colecciones_rehacer = this.deshacer.rehacer ( out item );
 		if ( hay_colecciones_rehacer ){
@@ -130,20 +130,19 @@ public class Nomeolvides.PanelConfiguracion : Gtk.Box {
 		this.toolbar.set_buttons_invisible ();
 	}
 
-	protected virtual bool agregar ( NmoBase objeto ) {
+	protected virtual bool agregar ( Base objeto ) {
 		return false;
 	}
 
-	protected virtual bool actualizar ( NmoBase objeto_viejo, NmoBase objeto_nuevo ) {
+	protected virtual bool actualizar ( Base objeto_viejo, Base objeto_nuevo ) {
 		return false;
 	}
 
-	protected virtual void borrar ( NmoBase objeto ) {}
+	protected virtual void borrar ( Base objeto ) {}
 
-	protected virtual void efectuar_deshacer ( NmoBase objeto ) {}
+	protected virtual void efectuar_deshacer ( Base objeto ) {}
 
-	protected virtual void efectuar_rehacer ( NmoBase objeto ) {}
+	protected virtual void efectuar_rehacer ( Base objeto ) {}
 
 	public signal void cambio_signal ();
 }
-

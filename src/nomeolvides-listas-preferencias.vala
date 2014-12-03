@@ -21,7 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.ListasPreferencias: Nomeolvides.PanelConfiguracion {
-	public ListasPreferencias ( ListStoreListas liststore_lista ) {
+	public ListasPreferencias ( ListStoreListas liststore_listas ) {
 		this.treeview = new TreeViewListas ();
 		this.treeview.set_border_width ( 20 );
 		this.treeview.set_model ( liststore_listas );
@@ -30,9 +30,9 @@ public class Nomeolvides.ListasPreferencias: Nomeolvides.PanelConfiguracion {
 
 		this.conectar_signals ();
 
-		this.agregar_dialog = new AddListaDialog () as DialogNmoBase;
-		this.editar_dialog = new EditListaDialog () as DialogNmoBase;
-		this.borrar_dialog = new BorrarListaDialogo () as DialogNmoBaseBorrar;
+		this.agregar_dialog = new DialogListaAgregar () as DialogNmoBase;
+		this.editar_dialog = new DialogListaEditar () as DialogNmoBase;
+		this.borrar_dialog = new DialogListaBorrar () as DialogNmoBaseBorrar;
 	}
 
 	protected override bool agregar ( Base objeto ) {

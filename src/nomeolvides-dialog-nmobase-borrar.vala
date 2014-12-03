@@ -82,7 +82,7 @@ public class Nomeolvides.DialogNmoBaseBorrar : Dialog {
 		this.add_button ( _("Apply"), ResponseType.APPLY );
 	}
 
-	public void set_datos ( NmoBase objeto_a_borrar, int cantidad_hechos ) {
+	public void set_datos ( Base objeto_a_borrar, int cantidad_hechos ) {
 		nombre_objeto.set_markup ( "<span font_weight=\"heavy\">"+ objeto_a_borrar.nombre +"</span>");
 		hechos_objeto.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
 	}

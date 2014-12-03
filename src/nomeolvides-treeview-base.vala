@@ -33,13 +33,13 @@ public class Nomeolvides.TreeViewBase : TreeView {
 		return elemento.id;
 	}
 
-	public NmoBase get_elemento () {
+	public Base get_elemento () {
 		TreePath path;
 		TreeViewColumn columna;
 		TreeIter iterador;
 		Value value_elemento;
 		Base elemento = new Base.vacio ();
-		int64 id = -1;
+
 		this.get_cursor(out path, out columna);
 		if (path != null ) {
 			this.get_model().get_iter( out iterador, path );

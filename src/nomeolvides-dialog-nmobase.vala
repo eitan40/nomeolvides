@@ -23,7 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.DialogNmoBase : Gtk.Dialog {
 	protected Entry nombre_entry;
 	protected int64 id;
-	public NmoBase respuesta { get; protected set; }
+	public Base respuesta { get; protected set; }
 	protected Label nombre_label;
 
 	public DialogNmoBase ( ) {
@@ -73,7 +73,7 @@ public class Nomeolvides.DialogNmoBase : Gtk.Dialog {
 
 	protected virtual void crear_respuesta() {}
 
-	public void set_datos ( NmoBase objeto ) {
+	public void set_datos ( Base objeto ) {
 		this.nombre_entry.set_text ( objeto.nombre );
 		this.id = objeto.id;
 	}

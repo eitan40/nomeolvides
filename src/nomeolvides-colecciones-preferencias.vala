@@ -24,7 +24,6 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 	public bool cambio_toggle { get; private set; }
 
 	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
-		base ();
 		var treeview_colecciones = new TreeViewColecciones ();
 		treeview_colecciones.set_border_width ( 20 );
 		treeview_colecciones.set_model ( liststore_colecciones );
@@ -37,12 +36,12 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 
 		this.cambio_toggle = false;
 
-		this.agregar_dialog = new AddColeccionDialog () as DialogNmoBase;
-		this.editar_dialog = new EditColeccionDialog () as DialogNmoBase;
+		this.agregar_dialog = new DialogColeccionAgregar () as DialogNmoBase;
+		this.editar_dialog = new DialogColeccionEditar () as DialogNmoBase;
 		this.borrar_dialog = new DialogColeccionBorrar () as DialogNmoBaseBorrar;
 	}
 
-	protected override bool agregar ( NmoBase objeto ) {
+	protected override bool agregar ( Base objeto ) {
 		ListStoreColecciones liststore;
 		if ( this.db.insert_coleccion ( objeto as Coleccion ) ) {
 			objeto.id = this.db.ultimo_rowid();
@@ -55,7 +54,7 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 		}
 	}
 
-	protected override bool actualizar ( NmoBase objeto_viejo, NmoBase objeto_nuevo ) {
+	protected override bool actualizar ( Base objeto_viejo, Base objeto_nuevo ) {
 		if ( this.db.update_coleccion ( objeto_nuevo as Coleccion ) ) {
 			var liststore = this.treeview.get_model () as ListStoreColecciones;
 			this.treeview.eliminar ( objeto_viejo );
@@ -68,7 +67,7 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 	}
 
 
-	public override void borrar ( NmoBase coleccion ) {
+	public override void borrar ( Base coleccion ) {
 		this.db.coleccion_a_borrar ( coleccion as Coleccion );
 		this.deshacer.guardar_borrado ( coleccion, DeshacerTipo.BORRAR );
 		this.deshacer.borrar_rehacer ();
@@ -76,14 +75,14 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 		this.cambio_colecciones_signal ();
 	}
 
-	protected override void efectuar_deshacer ( NmoBase objeto ) {
+	protected override void efectuar_deshacer ( Base objeto ) {
 		this.db.coleccion_no_borrar ( objeto as Coleccion );
 		var liststore = this.treeview.get_model () as ListStoreColecciones;
 		var cantidad_hechos = this.db.count_hechos_coleccion ( objeto as Coleccion );
 		liststore.agregar ( objeto as Coleccion, cantidad_hechos );
 	}
 
-	protected override void efectuar_rehacer ( NmoBase objeto ) {
+	protected override void efectuar_rehacer ( Base objeto ) {
 		this.db.coleccion_a_borrar ( objeto as Coleccion );
 		this.treeview.eliminar ( objeto as Coleccion );
 	}

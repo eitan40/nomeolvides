@@ -20,9 +20,10 @@ src/nomeolvides-dialog-lista-borrar.vala
 src/nomeolvides-dialog-lista-editar.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
+src/nomeolvides-dialog-nmobase-borrar.vala
+src/nomeolvides-dialog-nmobase.vala
 src/nomeolvides-dialog-preferencias.vala
 src/nomeolvides-headerbar.vala
-src/nomeolvides-dialog-nmobase-borrar.vala
 src/nomeolvides-hecho.vala
 src/nomeolvides-importar-hechos.vala
 src/nomeolvides-interfaz-principal.vala
@@ -36,5 +37,4 @@ src/nomeolvides-treeview-colecciones.vala
 src/nomeolvides-treeview-hechos.vala
 src/nomeolvides-treeview-listas.vala
 src/nomeolvides-ventana-principal.vala
-src/nomolvides-dialog-nmobase.vala
 [type: gettext/glade]src/nomeolvides-app-menu.ui

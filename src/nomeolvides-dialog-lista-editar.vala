@@ -21,6 +21,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogListaEditar : DialogNmoBase {
+	public DialogListaEditar () {
 		this.title = _("Edit Custom List");
 		this.nombre_label.set_label (_("List Name") + ": ");
 		this.add_button ( _("Edit") , ResponseType.APPLY);
