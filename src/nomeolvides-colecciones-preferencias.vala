@@ -102,7 +102,7 @@ public class Nomeolvides.ColeccionesPreferencias : PanelConfiguracion {
 
 	private void signal_toggle_change () {
 		this.cambio_toggle = true;
-	} 
+	}
 
 	public signal void cambio_colecciones_signal ();
 }
