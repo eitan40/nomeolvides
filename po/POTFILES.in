@@ -6,6 +6,7 @@ src/nomeolvides-configuracion.vala
 src/nomeolvides-dialog-archivo-abrir.vala
 src/nomeolvides-dialog-archivo-guardar.vala
 src/nomeolvides-dialog-base-borrar.vala
+src/nomeolvides-dialog-base.vala
 src/nomeolvides-dialog-coleccion-agregar.vala
 src/nomeolvides-dialog-coleccion-borrar.vala
 src/nomeolvides-dialog-coleccion-editar.vala
@@ -21,7 +22,6 @@ src/nomeolvides-dialog-lista-borrar.vala
 src/nomeolvides-dialog-lista-editar.vala
 src/nomeolvides-dialog-lista.vala
 src/nomeolvides-dialog-migrador.vala
-src/nomeolvides-dialog-nmobase.vala
 src/nomeolvides-dialog-preferencias.vala
 src/nomeolvides-headerbar.vala
 src/nomeolvides-hecho.vala
