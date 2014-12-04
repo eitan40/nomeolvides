@@ -20,10 +20,10 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ColeccionesPreferencias : Nomeolvides.PreferenciasBase {
+public class Nomeolvides.PreferenciasColecciones : Nomeolvides.PreferenciasBase {
 	public bool cambio_toggle { get; private set; }
 
-	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {
+	public PreferenciasColecciones ( ListStoreColecciones liststore_colecciones ) {
 		var treeview_colecciones = new TreeViewColecciones ();
 		treeview_colecciones.set_border_width ( 20 );
 		treeview_colecciones.set_model ( liststore_colecciones );
