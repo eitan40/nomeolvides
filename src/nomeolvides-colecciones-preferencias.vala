@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ColeccionesPreferencias : Nomeolvides.PanelPreferencias {
+public class Nomeolvides.ColeccionesPreferencias : Nomeolvides.PreferenciasBase {
 	public bool cambio_toggle { get; private set; }
 
 	public ColeccionesPreferencias ( ListStoreColecciones liststore_colecciones ) {

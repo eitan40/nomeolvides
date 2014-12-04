@@ -72,8 +72,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-liststore-base.vala \
 	nomeolvides-portada.vala \
 	nomeolvides-dialog-base-borrar.vala \
-	nomeolvides-panel-preferencias.vala \
-	nomeolvides-dialog-base.vala
+	nomeolvides-dialog-base.vala \
+	nomeolvides-preferencias-base.vala
 
 
 

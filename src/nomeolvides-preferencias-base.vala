@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.PanelPreferencias : Gtk.Box {
+public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	protected TreeViewBase treeview { get; protected set; }
 	protected ScrolledWindow scroll_view;
 	protected Toolbar toolbar;
@@ -30,7 +30,7 @@ public class Nomeolvides.PanelPreferencias : Gtk.Box {
 	protected DialogBase editar_dialog;
 	protected DialogBaseBorrar borrar_dialog;
 
-	public PanelPreferencias () {
+	public PreferenciasBase () {
 		this.set_orientation ( Orientation.VERTICAL );
 
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
