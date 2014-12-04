@@ -20,8 +20,8 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ListasPreferencias: Nomeolvides.PreferenciasBase {
-	public ListasPreferencias ( ListStoreListas liststore_listas ) {
+public class Nomeolvides.PreferenciasListas: Nomeolvides.PreferenciasBase {
+	public PreferenciasListas ( ListStoreListas liststore_listas ) {
 		this.treeview = new TreeViewListas ();
 		this.treeview.set_border_width ( 20 );
 		this.treeview.set_model ( liststore_listas );

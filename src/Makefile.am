@@ -64,7 +64,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-boton.vala \
 	nomeolvides-interfaz-principal.vala \
 	nomeolvides-colecciones-preferencias.vala \
-	nomeolvides-listas-preferencias.vala \
 	nomeolvides-ventana-principal.vala \
 	nomeolvides-dialog-archivo-abrir.vala \
 	nomeolvides-dialog-archivo-guardar.vala \
@@ -73,7 +72,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-portada.vala \
 	nomeolvides-dialog-base-borrar.vala \
 	nomeolvides-dialog-base.vala \
-	nomeolvides-preferencias-base.vala
+	nomeolvides-preferencias-base.vala \
+	nomeolvides-preferencias-listas.vala
 
 
 
