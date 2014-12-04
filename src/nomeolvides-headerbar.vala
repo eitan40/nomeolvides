@@ -20,8 +20,12 @@
 using Gtk;
 using Nomeolvides;
 
+#if DISABLE_GNOME3
+public class Nomeolvides.NmoHeaderBar : Box {
+#else
 public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
- 
+#endif
+	
 	public Button add_button { get; private set; }
 	public Button undo_button { get; private set; }
 	public Button redo_button { get; private set; }
@@ -29,12 +33,23 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 	public Button delete_button { get; private set; }
 	public Button send_button { get; private set; }
 	public Button list_button { get; private set; }
-
+#if DISABLE_GNOME3
+	public Label titulo_label {get; private set;}
+#endif
+	
 	public NmoHeaderBar () {
 
+#if DISABLE_GNOME3
+		this.spacing = 0;
+		this.orientation = Gtk.Orientation.HORIZONTAL;
+		this.set_homogeneous ( false );
+
+		this.titulo_label = new Label ( "" );
+#else
 		this.has_subtitle = false;
 		this.set_show_close_button ( true );
-			
+#endif
+		
 		this.add_button = new NmoButton ( _("Add") );
 		this.undo_button = new NmoButton ( _("Undo") );
 		this.redo_button = new NmoButton ( _("Redo") );
@@ -52,23 +67,46 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 		var box_izquierda = new Box ( Gtk.Orientation.HORIZONTAL, 0);
 		box_izquierda.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
 		
+#if DISABLE_GNOME3
+		box_izquierda.margin = 2;
+#endif
 		box_izquierda.pack_start ( this.add_button );
 		box_izquierda.pack_start ( this.undo_button );
 		box_izquierda.pack_start ( this.redo_button );
 
+#if DISABLE_GNOME3
+		var box_centro = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		box_centro.pack_start ( this.titulo_label );
+#endif
+
 		var box_derecha = new Box ( Gtk.Orientation.HORIZONTAL, 0);
 		box_derecha.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
 
+#if DISABLE_GNOME3
+		box_derecha.margin = 2;
+#endif
 		box_derecha.pack_end ( this.edit_button );
 		box_derecha.pack_end ( this.delete_button );
 		box_derecha.pack_end ( this.send_button );
 		box_derecha.pack_end ( this.list_button );
 
+#if DISABLE_GNOME3
+		this.pack_start ( box_izquierda, false, false );
+		this.pack_start ( box_centro );
+		this.pack_end ( box_derecha, false, false );
+#else
 		this.pack_start ( box_izquierda );
 		this.pack_end ( box_derecha );
+#endif		
 
 		this.show.connect ( this.set_buttons_invisible );
 	}
+
+#if DISABLE_GNOME3
+	public void set_title ( string titulo ) {
+		this.titulo_label.set_label ( titulo );
+	}
+#endif
 
 	public void set_label_anio ( string anio = "0" ) {
 		if ( anio != "0") {
