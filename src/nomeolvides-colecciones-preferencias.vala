@@ -57,8 +57,8 @@ public class Nomeolvides.ColeccionesPreferencias : Nomeolvides.PanelPreferencias
 	protected override bool actualizar ( Base objeto_viejo, Base objeto_nuevo ) {
 		if ( this.db.update_coleccion ( objeto_nuevo as Coleccion ) ) {
 			var liststore = this.treeview.get_model () as ListStoreColecciones;
-			this.treeview.eliminar ( objeto_viejo );
 			liststore.agregar ( objeto_nuevo as Coleccion, this.treeview.get_cantidad_hechos () );
+			this.treeview.eliminar ( objeto_viejo );
 			this.cambio_colecciones_signal ();
 			return true;
 		} else {
@@ -67,11 +67,11 @@ public class Nomeolvides.ColeccionesPreferencias : Nomeolvides.PanelPreferencias
 	}
 
 
-	public override void borrar ( Base coleccion ) {
-		this.db.coleccion_a_borrar ( coleccion as Coleccion );
-		this.deshacer.guardar_borrado ( coleccion, DeshacerTipo.BORRAR );
+	public override void borrar ( Base objeto ) {
+		this.db.coleccion_a_borrar ( objeto as Coleccion );
+		this.deshacer.guardar_borrado ( objeto, DeshacerTipo.BORRAR );
 		this.deshacer.borrar_rehacer ();
-		this.treeview.eliminar( coleccion );
+		this.treeview.eliminar( objeto );
 		this.cambio_colecciones_signal ();
 	}
 

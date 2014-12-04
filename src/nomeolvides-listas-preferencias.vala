@@ -51,8 +51,8 @@ public class Nomeolvides.ListasPreferencias: Nomeolvides.PanelPreferencias {
 	protected override bool actualizar ( Base objeto_viejo, Base objeto_nuevo ) {
 		if ( this.db.update_lista ( objeto_nuevo as Lista ) ) {
 			var liststore = this.treeview.get_model () as ListStoreListas;
-			this.treeview.eliminar ( objeto_viejo );
 			liststore.agregar ( objeto_nuevo as Lista, this.treeview.get_cantidad_hechos () );
+			this.treeview.eliminar ( objeto_viejo );
 			this.cambio_listas_signal ();
 			return true;
 		} else {
