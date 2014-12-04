@@ -5,6 +5,8 @@ src/nomeolvides-archivo.vala
 src/nomeolvides-configuracion.vala
 src/nomeolvides-dialog-archivo-abrir.vala
 src/nomeolvides-dialog-archivo-guardar.vala
+src/nomeolvides-dialog-base-borrar.vala
+src/nomeolvides-dialog-base.vala
 src/nomeolvides-dialog-coleccion-agregar.vala
 src/nomeolvides-dialog-coleccion-borrar.vala
 src/nomeolvides-dialog-coleccion-editar.vala

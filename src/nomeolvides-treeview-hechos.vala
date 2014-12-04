@@ -80,7 +80,7 @@ public class Nomeolvides.TreeViewHechos : Gtk.TreeView {
 
 		for ( uint i = 0; i < list_path.length (); i++ ) {
 			this.get_model ().get_iter ( out iter, list_path.nth_data ( i ));
-			this.get_model().get_value (iter, 3, out hecho_value);
+			this.get_model ().get_value (iter, 3, out hecho_value);
 			hechos.append_val ( (Hecho) hecho_value );
 		}
 

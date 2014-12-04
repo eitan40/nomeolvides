@@ -20,11 +20,10 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogListaEditar : DialogLista {
-	private int64 id;
-	
+public class Nomeolvides.DialogListaEditar : DialogBase {
 	public DialogListaEditar () {
 		this.title = _("Edit Custom List");
+		this.nombre_label.set_label (_("List Name") + ": ");
 		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
@@ -34,9 +33,5 @@ public class Nomeolvides.DialogListaEditar : DialogLista {
 			this.respuesta.id = this.id;
 		}
 	}
-
-	public void set_datos (Lista lista) {
-		this.nombre_entry.set_text ( lista.nombre );
-		this.id = lista.id;
-	}
 }
+

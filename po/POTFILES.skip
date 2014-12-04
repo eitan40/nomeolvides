@@ -4,6 +4,8 @@ src/nomeolvides-archivo.c
 src/nomeolvides-configuracion.c
 src/nomeolvides-dialog-archivo-abrir.c
 src/nomeolvides-dialog-archivo-guardar.c
+src/nomeolvides-dialog-base-borrar.c
+src/nomeolvides-dialog-base.c
 src/nomeolvides-dialog-coleccion-agregar.c
 src/nomeolvides-dialog-coleccion-borrar.c
 src/nomeolvides-dialog-coleccion-editar.c

@@ -63,14 +63,18 @@ nomeolvides_SOURCES = \
 	nomeolvides-base.vala \
 	nomeolvides-boton.vala \
 	nomeolvides-interfaz-principal.vala \
-	nomeolvides-colecciones-preferencias.vala \
-	nomeolvides-listas-preferencias.vala \
 	nomeolvides-ventana-principal.vala \
 	nomeolvides-dialog-archivo-abrir.vala \
 	nomeolvides-dialog-archivo-guardar.vala \
 	nomeolvides-treeview-base.vala \
 	nomeolvides-liststore-base.vala \
-	nomeolvides-portada.vala
+	nomeolvides-portada.vala \
+	nomeolvides-dialog-base-borrar.vala \
+	nomeolvides-dialog-base.vala \
+	nomeolvides-preferencias-base.vala \
+	nomeolvides-preferencias-listas.vala \
+	nomeolvides-preferencias-colecciones.vala
+
 
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
