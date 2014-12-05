@@ -20,7 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.TreeViewEtiquetas : TreeViewNmoBase {
+public class Nomeolvides.TreeViewEtiquetas : TreeViewBase {
 
 	public TreeViewEtiquetas () {
 		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );

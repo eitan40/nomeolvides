@@ -126,17 +126,17 @@ public class Nomeolvides.ListStoreBase : ListStore {
 		return existe;
 	}
 
-	public NmoBase get_elemento_por_nombre ( string nombre ) {
+	public Base get_elemento_por_nombre ( string nombre ) {
 		Value value_elemento;
 		TreeIter iter;
-		NmoBase elemento = null;
+		Base elemento = null;
 
 		if ( this.get_iter_first( out iter ) ) {
 			do {
 				this.get_value(iter, 0, out value_elemento );
 				if ( nombre == (string) value_elemento ) {
 					this.get_value(iter, 2, out value_elemento);
-					elemento = value_elemento as NmoBase;
+					elemento = value_elemento as Base;
 					break;
 				}
 			}while ( this.iter_next(ref iter) );

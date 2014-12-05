@@ -1,18 +1,17 @@
 data/nomeolvides.desktop.in
-src/nomeolvides-app.c
 src/nomeolvides-add-etiqueta-dialog.c
 src/nomeolvides-archivo.c
-src/nomeolvides-add-etiqueta-dialog.c
-src/nomeolvides-dialog-borrar-etiqueta-dialog.c
 src/nomeolvides-configuracion.c
 src/nomeolvides-dialog-archivo-abrir.c
 src/nomeolvides-dialog-archivo-guardar.c
 src/nomeolvides-dialog-base-borrar.c
 src/nomeolvides-dialog-base.c
+src/nomeolvides-dialog-borrar-etiqueta-dialog.c
 src/nomeolvides-dialog-coleccion-agregar.c
 src/nomeolvides-dialog-coleccion-borrar.c
 src/nomeolvides-dialog-coleccion-editar.c
 src/nomeolvides-dialog-coleccion.c
+src/nomeolvides-dialog-etiqueta.c
 src/nomeolvides-dialog-hecho-agregar.c
 src/nomeolvides-dialog-hecho-borrar.c
 src/nomeolvides-dialog-hecho-editar.c
@@ -27,6 +26,7 @@ src/nomeolvides-dialog-migrador.c
 src/nomeolvides-dialog-preferencias.c
 src/nomeolvides-dialog-etiqueta.c
 src/nomeolvides-edit-etiqueta-dialog.c
+src/nomeolvides-headerbar.c
 src/nomeolvides-hecho.c
 src/nomeolvides-importar-hechos.c
 src/nomeolvides-interfaz-principal.c
@@ -37,7 +37,7 @@ src/nomeolvides-toolbar.c
 src/nomeolvides-treeview-anios.c
 src/nomeolvides-treeview-base.c
 src/nomeolvides-treeview-colecciones.c
-src/nomeolvides-treeview-hechos.c
 src/nomeolvides-treeview-etiquetas.c
+src/nomeolvides-treeview-hechos.c
 src/nomeolvides-treeview-listas.c
 src/nomeolvides-ventana-principal.c

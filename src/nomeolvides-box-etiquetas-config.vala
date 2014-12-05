@@ -99,7 +99,7 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 		if (edit_dialog.run() == ResponseType.APPLY) {
 			if ( this.db.update_etiqueta ( edit_dialog.respuesta )) {
 				liststore = this.etiquetas_view.get_model () as ListStoreEtiquetas;
-				var cantidad_hechos = this.etiquetas_view.get_hechos ();
+				var cantidad_hechos = this.etiquetas_view.get_cantidad_hechos ();
 				this.etiquetas_view.eliminar( etiqueta );
 				liststore.agregar (edit_dialog.respuesta, cantidad_hechos);
 				this.cambios = true;
@@ -111,7 +111,7 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 	private void borrar_etiqueta_dialog () {
 		Etiqueta etiqueta = this.db.select_etiqueta ( "WHERE rowid=\"" 
 		                                                + this.etiquetas_view.get_elemento_id ().to_string() + "\"");
-		var borrar_dialog = new BorrarEtiquetaDialogo ( etiqueta, this.etiquetas_view.get_hechos () );
+		var borrar_dialog = new BorrarEtiquetaDialogo ( etiqueta, this.etiquetas_view.get_cantidad_hechos () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
