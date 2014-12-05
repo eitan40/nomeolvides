@@ -42,7 +42,8 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 #if DISABLE_GNOME3
 		this.spacing = 0;
 		this.orientation = Gtk.Orientation.HORIZONTAL;
-		this.set_homogeneous ( false );
+		this.set_homogeneous ( true );
+		this.hexpand = true;
 
 		this.titulo_label = new Label ( "" );
 #else
@@ -74,26 +75,34 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 		box_izquierda.pack_start ( this.undo_button );
 		box_izquierda.pack_start ( this.redo_button );
 
-#if DISABLE_GNOME3
-		var box_centro = new Box ( Gtk.Orientation.HORIZONTAL, 0);
-		box_centro.pack_start ( this.titulo_label );
-#endif
-
 		var box_derecha = new Box ( Gtk.Orientation.HORIZONTAL, 0);
 		box_derecha.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
 
 #if DISABLE_GNOME3
+		var box_centro = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+
+		box_izquierda.hexpand = true;
+		box_centro.hexpand = true;
+		box_derecha.hexpand = true;
+
+		box_izquierda.halign = Gtk.Align.START;
+		box_centro.halign = Gtk.Align.CENTER;
+		box_derecha.halign = Gtk.Align.END;
+
+		box_centro.pack_start ( this.titulo_label );
+
 		box_derecha.margin = 2;
 #endif
+
 		box_derecha.pack_end ( this.edit_button );
 		box_derecha.pack_end ( this.delete_button );
 		box_derecha.pack_end ( this.send_button );
 		box_derecha.pack_end ( this.list_button );
 
 #if DISABLE_GNOME3
-		this.pack_start ( box_izquierda, false, false );
+		this.pack_start ( box_izquierda );
 		this.pack_start ( box_centro );
-		this.pack_end ( box_derecha, false, false );
+		this.pack_end ( box_derecha );
 #else
 		this.pack_start ( box_izquierda );
 		this.pack_end ( box_derecha );
