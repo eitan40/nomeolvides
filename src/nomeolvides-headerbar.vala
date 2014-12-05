@@ -113,13 +113,13 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 
 #if DISABLE_GNOME3
 	public void set_title ( string titulo ) {
-		this.titulo_label.set_label ( titulo );
+		this.titulo_label.set_markup ("<span weight='bold'>" + titulo + "</span>");
 	}
 #endif
 
 	public void set_label_anio ( string anio = "0" ) {
 		if ( anio != "0") {
-			this.set_title ( "Año: " + anio );
+			this.set_title ( _("Year") + ": " + anio );
 		} else {
 			this.set_title ( "" );
 		}
