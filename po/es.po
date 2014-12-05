@@ -535,9 +535,6 @@ msgstr "_Acerca de Nomeolvides"
 msgid "_Quit"
 msgstr "_Salir"
 
-#~ msgid "Year"
-#~ msgstr "Año"
-
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"
 
