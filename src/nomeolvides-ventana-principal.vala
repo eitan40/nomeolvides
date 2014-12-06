@@ -46,7 +46,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		
 		this.add (main_box);
 		
-		this.toolbar = new NmoHeaderBar ();
+		this.toolbar = new Nomeolvides.HeaderBar ();
 	#if DISABLE_GNOME3
 		var menu_barra = new MenuBar ();
 		this.main_box.pack_start ( menu_barra, false, false, 0 );
@@ -108,10 +108,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
-	#if DISABLE_GNOME3
-	#else
-//		this.toolbar.cerrar_signal.connect ( this.close );
-	#endif
+
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
 		this.anios_hechos.hechos_selection_changed.connect ( this.elegir_hecho );

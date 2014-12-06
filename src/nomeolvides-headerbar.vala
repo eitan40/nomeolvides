@@ -21,23 +21,23 @@ using Gtk;
 using Nomeolvides;
 
 #if DISABLE_GNOME3
-public class Nomeolvides.NmoHeaderBar : Box {
+public class Nomeolvides.HeaderBar : Box {
 #else
-public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
+public class Nomeolvides.HeaderBar : Gtk.HeaderBar {
 #endif
 	
-	public Button add_button { get; private set; }
-	public Button undo_button { get; private set; }
-	public Button redo_button { get; private set; }
-	public Button edit_button { get; private set; }
-	public Button delete_button { get; private set; }
-	public Button send_button { get; private set; }
-	public Button list_button { get; private set; }
+	public Boton add_button { get; private set; }
+	public Boton undo_button { get; private set; }
+	public Boton redo_button { get; private set; }
+	public Boton edit_button { get; private set; }
+	public Boton delete_button { get; private set; }
+	public Boton send_button { get; private set; }
+	public Boton list_button { get; private set; }
 #if DISABLE_GNOME3
 	public Label titulo_label {get; private set;}
 #endif
 	
-	public NmoHeaderBar () {
+	public HeaderBar () {
 
 #if DISABLE_GNOME3
 		this.spacing = 0;
@@ -51,14 +51,14 @@ public class Nomeolvides.NmoHeaderBar : Gtk.HeaderBar {
 		this.set_show_close_button ( true );
 #endif
 		
-		this.add_button = new NmoButton ( _("Add") );
-		this.undo_button = new NmoButton ( _("Undo") );
-		this.redo_button = new NmoButton ( _("Redo") );
-		this.edit_button = new NmoButton ( _("Edit") );
-		this.delete_button = new NmoButton ( _("Delete") );
+		this.add_button = new  Boton ( _("Add") );
+		this.undo_button = new  Boton ( _("Undo") );
+		this.redo_button = new  Boton ( _("Redo") );
+		this.edit_button = new  Boton ( _("Edit") );
+		this.delete_button = new  Boton ( _("Delete") );
 
-		this.send_button = new NmoButton ( _("Send") );
-		this.list_button = new NmoButton ( _("List") );
+		this.send_button = new  Boton ( _("Send") );
+		this.list_button = new  Boton ( _("List") );
 		this.list_button_set_agregar ();
 
 		this.undo_button.set_sensitive ( false );
