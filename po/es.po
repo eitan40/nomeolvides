@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-05 17:14-0300\n"
+"POT-Creation-Date: 2014-12-06 20:11-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -41,20 +41,6 @@ msgstr "historia;hechos;"
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
-#: ../src/nomeolvides-add-etiqueta-dialog.vala:27
-msgid "Add Tag"
-msgstr "Agregar Etiqueta"
-
-#: ../src/nomeolvides-add-etiqueta-dialog.vala:28
-#: ../src/nomeolvides-dialog-coleccion-agregar.vala:27
-#: ../src/nomeolvides-dialog-hecho-agregar.vala:29
-#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:57
-#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:68
-#: ../src/nomeolvides-dialog-lista-agregar.vala:27
-#: ../src/nomeolvides-toolbar.vala:48
-msgid "Add"
-msgstr "Agregar"
-
 #: ../src/nomeolvides-archivo.vala:105 ../src/nomeolvides-archivo.vala:120
 msgid "Error while open"
 msgstr "Error al abrir"
@@ -82,9 +68,6 @@ msgstr "Elija un Archivo"
 #: ../src/nomeolvides-dialog-archivo-guardar.vala:32
 #: ../src/nomeolvides-dialog-base-borrar.vala:81
 #: ../src/nomeolvides-dialog-base.vala:33
-#: ../src/nomeolvides-dialog-borrar-etiqueta-dialog.vala:79
-#: ../src/nomeolvides-dialog-coleccion.vala:32
-#: ../src/nomeolvides-dialog-etiqueta.vala:32
 #: ../src/nomeolvides-dialog-hecho-borrar.vala:56
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:67
 #: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:85
@@ -109,7 +92,6 @@ msgid "Save"
 msgstr "Guardar"
 
 #: ../src/nomeolvides-dialog-base-borrar.vala:82
-#: ../src/nomeolvides-dialog-borrar-etiqueta-dialog.vala:80
 #: ../src/nomeolvides-dialog-hecho-borrar.vala:57
 msgid "Apply"
 msgstr "Aplicar"
@@ -124,7 +106,6 @@ msgstr "Eliminar Lista Personalizada"
 msgid "Do you want to remove custom list?"
 msgstr "¿Desea eliminar la lista personalizada?"
 
-<<<<<<< HEAD
 #: ../src/nomeolvides-dialog-coleccion-agregar.vala:27
 #: ../src/nomeolvides-dialog-hecho-agregar.vala:32
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:57
@@ -133,28 +114,16 @@ msgstr "¿Desea eliminar la lista personalizada?"
 #: ../src/nomeolvides-toolbar.vala:57
 msgid "Add"
 msgstr "Agregar"
-=======
-#: ../src/nomeolvides-dialog-borrar-etiqueta-dialog.vala:29
-#: ../src/nomeolvides-dialog-lista-borrar.vala:27
-#: ../src/nomeolvides-headerbar.vala:59
-msgid "List"
-msgstr "Lista"
 
-#: ../src/nomeolvides-dialog-borrar-etiqueta-dialog.vala:31
-#: ../src/nomeolvides-dialog-lista-borrar.vala:28
-msgid "Amount of facts"
-msgstr "Cantidad de Hechos"
-
-#: ../src/nomeolvides-dialog-coleccion-agregar.vala:25
-msgid "Add a Collection"
-msgstr "Agregar una Coleccion"
-
-#: ../src/nomeolvides-dialog-coleccion-agregar.vala:26
-#: ../src/nomeolvides-dialog-coleccion-editar.vala:26
-#: ../src/nomeolvides-dialog-coleccion.vala:36
-msgid "Colection name"
-msgstr "Nombre de la Colección"
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
+#: ../src/nomeolvides-dialog-coleccion-agregar.vala:27
+#: ../src/nomeolvides-dialog-etiqueta-agregar.vala:26
+#: ../src/nomeolvides-dialog-hecho-agregar.vala:29
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:57
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:68
+#: ../src/nomeolvides-dialog-lista-agregar.vala:27
+#: ../src/nomeolvides-toolbar.vala:48
+msgid "Add"
+msgstr "Agregar"
 
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:25
 msgid "Delete Collection"
@@ -165,13 +134,8 @@ msgid "Do you want to remove this collection?"
 msgstr "¿Desea eliminar esta colección?"
 
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:27
-<<<<<<< HEAD
 #: ../src/nomeolvides-dialog-hecho.vala:45
 #: ../src/nomeolvides-importar-hechos.vala:45
-=======
-#: ../src/nomeolvides-dialog-hecho.vala:56
-#: ../src/nomeolvides-importar-hechos.vala:44
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 msgid "Colection"
 msgstr "Colección"
 
@@ -188,22 +152,41 @@ msgid "Edit Collection"
 msgstr "Agregar una Coleccion"
 
 #: ../src/nomeolvides-dialog-coleccion-editar.vala:27
+#: ../src/nomeolvides-dialog-etiqueta-editar.vala:26
 #: ../src/nomeolvides-dialog-hecho-editar.vala:29
 #: ../src/nomeolvides-dialog-lista-editar.vala:27
-<<<<<<< HEAD
 #: ../src/nomeolvides-toolbar.vala:60
 #: ../src/nomeolvides-ventana-principal.vala:78
-=======
-#: ../src/nomeolvides-edit-etiqueta-dialog.vala:30
-#: ../src/nomeolvides-toolbar.vala:51
-#: ../src/nomeolvides-ventana-principal.vala:74
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 msgid "Edit"
 msgstr "Editar"
 
-#: ../src/nomeolvides-dialog-etiqueta.vala:36
-msgid "Tag Name"
-msgstr "Nombre de la Etiqueta"
+#: ../src/nomeolvides-dialog-etiqueta-agregar.vala:25
+msgid "Add Tag"
+msgstr "Agregar Etiqueta"
+
+#: ../src/nomeolvides-dialog-etiqueta-borrar.vala:25
+#: ../src/nomeolvides-dialog-lista-borrar.vala:25
+msgid "Delete Custom List"
+msgstr "Eliminar Lista Personalizada"
+
+#: ../src/nomeolvides-dialog-etiqueta-borrar.vala:26
+#, fuzzy
+msgid "Do you want to remove this tag?"
+msgstr "¿Desea eliminar este hecho?"
+
+#: ../src/nomeolvides-dialog-etiqueta-borrar.vala:27
+#, fuzzy
+msgid "Tag"
+msgstr "Etiquetas"
+
+#: ../src/nomeolvides-dialog-etiqueta-borrar.vala:28
+#: ../src/nomeolvides-dialog-lista-borrar.vala:28
+msgid "Amount of facts"
+msgstr "Cantidad de Hechos"
+
+#: ../src/nomeolvides-dialog-etiqueta-editar.vala:25
+msgid "Edit Tag"
+msgstr "Editar Etiqueta"
 
 #: ../src/nomeolvides-dialog-hecho-agregar.vala:26
 msgid "Add a Historical Fact"
@@ -314,30 +297,17 @@ msgstr "Agregar Lista Personalizada"
 
 #: ../src/nomeolvides-dialog-lista-agregar.vala:26
 #: ../src/nomeolvides-dialog-lista-editar.vala:26
-#: ../src/nomeolvides-dialog-lista.vala:36
 msgid "List Name"
 msgstr "Nombre de la Lista"
 
-<<<<<<< HEAD
 #: ../src/nomeolvides-dialog-lista-borrar.vala:25
 msgid "Delete Custom List"
 msgstr "Eliminar Lista Personalizada"
 
-#: ../src/nomeolvides-dialog-lista-borrar.vala:26
-msgid "Do you want to remove custom list?"
-msgstr "¿Desea eliminar la lista personalizada?"
-
-#: ../src/nomeolvides-dialog-lista-borrar.vala:27
 #: ../src/nomeolvides-toolbar.vala:116
 msgid "List"
 msgstr "Lista"
 
-#: ../src/nomeolvides-dialog-lista-borrar.vala:28
-msgid "Amount of facts"
-msgstr "Cantidad de Hechos"
-
-=======
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 #: ../src/nomeolvides-dialog-lista-editar.vala:25
 msgid "Edit Custom List"
 msgstr "Editar Lista Personalizada"
@@ -419,13 +389,8 @@ msgstr "Migrando Hechos"
 msgid "Migrating List"
 msgstr "Migrando Lista"
 
-<<<<<<< HEAD
 #: ../src/nomeolvides-dialog-preferencias.vala:28
 #: ../src/nomeolvides-ventana-principal.vala:83
-=======
-#: ../src/nomeolvides-dialog-preferencias.vala:29
-#: ../src/nomeolvides-ventana-principal.vala:79
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -442,31 +407,7 @@ msgstr "Listas"
 msgid "Close"
 msgstr "Cerrar"
 
-<<<<<<< HEAD
 #: ../src/nomeolvides-hecho.vala:100
-=======
-#: ../src/nomeolvides-edit-etiqueta-dialog.vala:29
-msgid "Edit Tag"
-msgstr "Editar Etiqueta"
-
-#: ../src/nomeolvides-headerbar.vala:58
-msgid "Send"
-msgstr "Enviar"
-
-#: ../src/nomeolvides-headerbar.vala:83
-msgid "Year"
-msgstr "Año"
-
-#: ../src/nomeolvides-headerbar.vala:118
-msgid "Add to list"
-msgstr "Agregar a la lista"
-
-#: ../src/nomeolvides-headerbar.vala:122
-msgid "Remove from list"
-msgstr "Eliminar de la lista"
-
-#: ../src/nomeolvides-hecho.vala:108
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 msgid "%B %e, %Y"
 msgstr "%e de %B de %Y"
 
@@ -482,14 +423,8 @@ msgstr "Importar"
 msgid "Select Colection"
 msgstr "Sleccione una Colección"
 
-<<<<<<< HEAD
 #: ../src/nomeolvides-importar-hechos.vala:46
 #: ../src/nomeolvides-ventana-principal.vala:60
-=======
-#: ../src/nomeolvides-importar-hechos.vala:45
-#: ../src/nomeolvides-importar-hechos.vala:108
-#: ../src/nomeolvides-ventana-principal.vala:56
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 msgid "File"
 msgstr "Archivo"
 
@@ -604,7 +539,6 @@ msgstr "Eliminar de la lista"
 msgid "Visible"
 msgstr "Visible"
 
-<<<<<<< HEAD
 #: ../src/nomeolvides-ventana-principal.vala:65
 msgid "Export Facts"
 msgstr "Exportar Hechos"
@@ -617,22 +551,6 @@ msgstr "Importar Hechos"
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/nomeolvides-ventana-principal.vala:88
-=======
-#: ../src/nomeolvides-ventana-principal.vala:61
-msgid "Export Facts"
-msgstr "Exportar Hechos"
-
-#: ../src/nomeolvides-ventana-principal.vala:65
-msgid "Import facts"
-msgstr "Importar Hechos"
-
-#: ../src/nomeolvides-ventana-principal.vala:69
-msgid "Quit"
-msgstr "Salir"
-
-#: ../src/nomeolvides-ventana-principal.vala:84
->>>>>>> Se arreglaron incosistencias introducidas en el último rebase.
 msgid "Help"
 msgstr "Ayuda"
 
@@ -655,6 +573,9 @@ msgstr "_Acerca de Nomeolvides"
 #: ../src/nomeolvides-app-menu.ui.h:5
 msgid "_Quit"
 msgstr "_Salir"
+
+#~ msgid "Tag Name"
+#~ msgstr "Nombre de la Etiqueta"
 
 #~ msgid "Historical Facts Collections"
 #~ msgstr "Colección de Hechos Históricos"

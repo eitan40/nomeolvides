@@ -20,25 +20,9 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EditEtiquetaDialog : DialogEtiqueta
-{
-	private int64 id;
-	
-	public EditEtiquetaDialog ( )
-	{
-		this.title = _("Edit Tag");
-		this.add_button (_("Edit") , ResponseType.APPLY);
-	}
-
-	protected override void crear_respuesta () {
-		if(this.nombre_entry.get_text_length () > 0) {
-			this.respuesta  = new Etiqueta (this.nombre_entry.get_text ());
-			this.respuesta.id = this.id;
-		}
-	}
-
-	public void set_datos ( Etiqueta etiqueta ) {
-		this.nombre_entry.set_text ( etiqueta.nombre );
-		this.id = etiqueta.id;
+public class Nomeolvides.DialogEtiquetaAgregar : DialogBase {
+	public DialogEtiquetaAgregar () {
+		this.title = _("Add Tag");
+		this.add_button (_("Add") , ResponseType.APPLY);
 	}
 }

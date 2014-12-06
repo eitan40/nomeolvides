@@ -27,7 +27,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-treeview-listas.vala \
 	nomeolvides-liststore-listas.vala \
 	nomeolvides-lista.vala \
-	nomeolvides-dialog-lista.vala \
 	nomeolvides-deshacer.vala \
 	nomeolvides-deshacer-item.vala \
 	nomeolvides-coleccion.vala \
@@ -36,7 +35,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-acciones-db.vala \
 	nomeolvides-liststore-colecciones.vala \
 	nomeolvides-treeview-colecciones.vala \
-	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-migrador.vala \
 	nomeolvides-importar-hechos.vala \
 	nomeolvides-resources.c \
@@ -76,11 +74,10 @@ nomeolvides_SOURCES = \
 	nomeolvides-etiqueta.vala \
 	nomeolvides-liststore-etiquetas.vala \
 	nomeolvides-treeview-etiquetas.vala \
-	nomeolvides-box-etiquetas-config.vala \
-	nomeolvides-dialog-etiqueta.vala \
-	nomeolvides-edit-etiqueta-dialog.vala \
-	nomeolvides-add-etiqueta-dialog.vala \
-	nomeolvides-dialog-borrar-etiqueta-dialog.vala
+	nomeolvides-dialog-etiqueta-agregar.vala \
+	nomeolvides-dialog-etiqueta-editar.vala \
+	nomeolvides-dialog-etiqueta-borrar.vala \
+	nomeolvides-preferencias-etiquetas.vala
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \

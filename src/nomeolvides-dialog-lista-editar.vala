@@ -28,7 +28,7 @@ public class Nomeolvides.DialogListaEditar : DialogBase {
 	}
 
 	protected override void crear_respuesta () {
-		if(this.nombre_entry.get_text_length () > 0) {
+		if( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta  = new Lista (this.nombre_entry.get_text ());
 			this.respuesta.id = this.id;
 		}

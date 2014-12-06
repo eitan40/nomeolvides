@@ -23,7 +23,7 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private Notebook notebook;
 	private PreferenciasColecciones config_colecciones;
 	private PreferenciasListas config_listas;
-	private EtiquetasConfig config_etiquetas;
+	private PreferenciasEtiquetas config_etiquetas;
 	
 	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas, ListStoreEtiquetas etiquetas) {
 		this.set_title (_("Preferences"));
@@ -33,7 +33,7 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 
 		this.config_colecciones = new PreferenciasColecciones ( colecciones );
 		this.config_listas = new PreferenciasListas ( listas );
-		this.config_etiquetas = new EtiquetasConfig ( etiquetas );
+		this.config_etiquetas = new PreferenciasEtiquetas ( etiquetas );
 		this.config_colecciones.cambio_colecciones_signal.connect ( this.config_listas.actualizar_liststore );
 
 		this.notebook = new Notebook ();

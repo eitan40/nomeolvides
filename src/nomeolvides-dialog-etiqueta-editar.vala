@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 4 -*-  */
 /* nomeolvides
  *
- * Copyright (C) 2012 Andres Fernandez <andres@softwareperonista.com.ar>
+ * Copyright (C) 2014 Andres Fernandez <andres@softwareperonista.com.ar>
  *
  * nomeolvides is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -20,18 +20,16 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogColeccionEditar : DialogBase {
-	public DialogColeccionEditar () {
-		this.title = _("Edit Collection");
-		base.nombre_label.set_label ( _("Colection name") + ": " );
-		this.add_button ( _("Edit") , ResponseType.APPLY);
+public class Nomeolvides.DialogEtiquetaEditar : DialogBase {
+	public DialogEtiquetaEditar () {
+		this.title = _("Edit Tag");
+		this.add_button (_("Edit") , ResponseType.APPLY);
 	}
 
-	protected override void crear_respuesta() {
+	protected override void crear_respuesta () {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
-			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
+			this.respuesta  = new Etiqueta ( this.nombre_entry.get_text () );
 			this.respuesta.id = this.id;
 		}
-	} 
+	}
 }
-

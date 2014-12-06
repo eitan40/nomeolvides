@@ -20,14 +20,14 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.EtiquetasConfig: Gtk.Box {
+public class Nomeolvides.PreferenciasEtiquetas: Gtk.Box {
 	public TreeViewEtiquetas etiquetas_view { get; private set; }
 	private Toolbar toolbar;
 	public bool cambios { get; private set; }
 	private AccionesDB db;
 	private Deshacer<Etiqueta> deshacer;
 		
-	public EtiquetasConfig ( ListStoreEtiquetas liststore_etiquetas ) {
+	public PreferenciasEtiquetas ( ListStoreEtiquetas liststore_etiquetas ) {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.set_orientation ( Orientation.VERTICAL );
 
@@ -71,11 +71,11 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 		ListStoreEtiquetas liststore;
 		Etiqueta etiqueta;
 		
-		var add_dialog = new AddEtiquetaDialog ( );
+		var add_dialog = new DialogEtiquetaAgregar ( );
 		add_dialog.show_all ();
 
 		if (add_dialog.run() == ResponseType.APPLY) {
-			etiqueta = add_dialog.respuesta;
+			etiqueta = add_dialog.respuesta as Etiqueta;
 			if ( this.db.insert_etiqueta ( etiqueta )) {
 				etiqueta.id = this.db.ultimo_rowid();
 				liststore = this.etiquetas_view.get_model () as ListStoreEtiquetas;
@@ -92,12 +92,12 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 		Etiqueta etiqueta = this.db.select_etiqueta ( "WHERE rowid=\"" 
 		                                                + this.etiquetas_view.get_elemento_id ().to_string() + "\"");
 		
-		var edit_dialog = new EditEtiquetaDialog ();
+		var edit_dialog = new DialogEtiquetaEditar ();
 		edit_dialog.set_datos ( etiqueta );
 		edit_dialog.show_all ();
 
 		if (edit_dialog.run() == ResponseType.APPLY) {
-			if ( this.db.update_etiqueta ( edit_dialog.respuesta )) {
+			if ( this.db.update_etiqueta ( edit_dialog.respuesta as Etiqueta )) {
 				liststore = this.etiquetas_view.get_model () as ListStoreEtiquetas;
 				var cantidad_hechos = this.etiquetas_view.get_cantidad_hechos ();
 				this.etiquetas_view.eliminar( etiqueta );
@@ -111,7 +111,8 @@ public class Nomeolvides.EtiquetasConfig: Gtk.Box {
 	private void borrar_etiqueta_dialog () {
 		Etiqueta etiqueta = this.db.select_etiqueta ( "WHERE rowid=\"" 
 		                                                + this.etiquetas_view.get_elemento_id ().to_string() + "\"");
-		var borrar_dialog = new BorrarEtiquetaDialogo ( etiqueta, this.etiquetas_view.get_cantidad_hechos () );
+		var borrar_dialog = new DialogoEtiquetaBorrar ();
+		borrar_dialog.set_datos ( etiqueta, this.etiquetas_view.get_cantidad_hechos () );
 		borrar_dialog.show_all ();
 
 		if (borrar_dialog.run() == ResponseType.APPLY) {
