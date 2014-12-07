@@ -22,11 +22,11 @@ using Nomeolvides;
 
 public class Nomeolvides.Toolbar : Gtk.Box {
 
-	public Button add_button { get; private set; }
-	public Button undo_button { get; private set; }
-	public Button redo_button { get; private set; }
-	public Button edit_button { get; private set; }
-	public Button delete_button { get; private set; }
+	public Boton add_button { get; private set; }
+	public Boton undo_button { get; private set; }
+	public Boton redo_button { get; private set; }
+	public Boton edit_button { get; private set; }
+	public Boton delete_button { get; private set; }
 	protected Box izquierda_box;
 	protected Box centro_box;
 
@@ -45,11 +45,12 @@ public class Nomeolvides.Toolbar : Gtk.Box {
 		this.pack_start ( this.izquierda_box );
 		this.pack_start ( this.centro_box );
 
-		this.add_button = new Boton ( _("Add") );
-		this.undo_button = new Boton ( _("Undo") );
-		this.redo_button = new Boton ( _("Redo") );
-		this.edit_button = new Boton ( _("Edit") );
-		this.delete_button = new Boton ( _("Delete") );
+		this.add_button = new  Boton.con_margen ( _("Add") );
+		this.undo_button = new  Boton.con_margen ( _("Undo") );
+		this.redo_button = new  Boton.con_margen ( _("Redo") );
+		this.edit_button = new  Boton.con_margen ( _("Edit") );
+		this.delete_button = new  Boton.con_margen ( _("Delete") );
+
 	#if DISABLE_GNOME3
 		this.add_button.set_margin_left ( 2 );
 		this.delete_button.set_margin_right ( 2 );

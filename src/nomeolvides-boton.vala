@@ -33,10 +33,14 @@ public class Nomeolvides.Boton : Gtk.Button {
 		this.setear_propiedades ();
 	}
 
-	private void setear_propiedades () {
-		this.set_halign ( Align.START );
+	public Boton.con_margen ( string label ) {
+		this.set_label ( label );
+		this.setear_propiedades ();
 		this.set_margin_top ( 5 );
 		this.set_margin_bottom ( 5 );
 	}
-}
 
+	private void setear_propiedades () {
+		this.set_halign ( Align.START );
+	}
+}

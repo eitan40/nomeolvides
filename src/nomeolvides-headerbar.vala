@@ -20,77 +20,116 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.HeaderBar : Toolbar {
-
-	public Button send_button { get; private set; }
-	public Button list_button { get; private set; }
-	public Label anio_label { get; private set; }
-	protected Box derecha_box;
-
+#if DISABLE_GNOME3
+public class Nomeolvides.HeaderBar : Box {
+#else
+public class Nomeolvides.HeaderBar : Gtk.HeaderBar {
+#endif
+	
+	public Boton add_button { get; private set; }
+	public Boton undo_button { get; private set; }
+	public Boton redo_button { get; private set; }
+	public Boton edit_button { get; private set; }
+	public Boton delete_button { get; private set; }
+	public Boton send_button { get; private set; }
+	public Boton list_button { get; private set; }
+#if DISABLE_GNOME3
+	public Label titulo_label {get; private set;}
+#endif
+	
 	public HeaderBar () {
-	#if DISABLE_GNOME3
-		this.get_style_context().add_class ( Gtk.STYLE_CLASS_PRIMARY_TOOLBAR );
-		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TOOLBAR );
-	#else
-		this.get_style_context().remove_class ("toolbar");
-		this.get_style_context().add_class ( "header-bar" );
-		this.get_style_context().add_class ( Gtk.STYLE_CLASS_TITLEBAR );
-	#endif
-		this.set_halign ( Align.FILL );
-		this.derecha_box = new Box (Orientation.HORIZONTAL, 0);
-		this.anio_label = new Label ("");
 
-		this.centro_box.set_halign ( Align.CENTER );
-		this.derecha_box.set_halign ( Align.END );
-	#if DISABLE_GNOME3
-		this.anio_label.set_margin_right ( 2 );
-		this.delete_button.set_margin_right ( 0 );
-	#else
-		this.izquierda_box.set_border_width ( 6 );
-		this.derecha_box.set_border_width ( 6 );
-		this.centro_box.set_border_width ( 6 );
+#if DISABLE_GNOME3
+		this.spacing = 0;
+		this.orientation = Gtk.Orientation.HORIZONTAL;
+		this.set_homogeneous ( true );
+		this.hexpand = true;
 
-		this.anio_label.set_margin_end ( 2 );
-		this.delete_button.set_margin_end ( 0 );
-	#endif
-		this.pack_start ( derecha_box );
+		this.titulo_label = new Label ( "" );
+#else
+		this.has_subtitle = false;
+		this.set_show_close_button ( true );
+#endif
+		
+		this.add_button = new  Boton ( _("Add") );
+		this.undo_button = new  Boton ( _("Undo") );
+		this.redo_button = new  Boton ( _("Redo") );
+		this.edit_button = new  Boton ( _("Edit") );
+		this.delete_button = new  Boton ( _("Delete") );
 
-		this.send_button = new Boton ( _("Send") );
-		this.list_button = new Boton ( _("List") );
+		this.send_button = new  Boton ( _("Send") );
+		this.list_button = new  Boton ( _("List") );
 		this.list_button_set_agregar ();
 
-		this.centro_box.pack_start ( this.send_button );
-		this.centro_box.pack_start ( this.list_button );
-	#if DISABLE_GNOME3
-	#else
-		var boton_cerrar = new Boton.icono ( "window-close-symbolic", IconSize.MENU );
-		boton_cerrar.get_style_context().add_class ( "titlebutton" );
-		boton_cerrar.get_style_context().remove_class ( "image-button" );
-		boton_cerrar.clicked.connect ( cerrar );
-		boton_cerrar.set_margin_start ( 6 );
-		var separador = new Gtk.Separator ( Orientation.VERTICAL );
-		separador.set_margin_start ( 6 );
+		this.undo_button.set_sensitive ( false );
+		this.redo_button.set_sensitive ( false );
+		this.set_buttons_invisible ();
 
-		this.derecha_box.pack_end ( boton_cerrar );
-		this.derecha_box.pack_end ( separador );
-	#endif
-		this.derecha_box.pack_end ( this.anio_label );
+		var box_izquierda = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		box_izquierda.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+		
+#if DISABLE_GNOME3
+		box_izquierda.margin = 2;
+#endif
+		box_izquierda.pack_start ( this.add_button );
+		box_izquierda.pack_start ( this.undo_button );
+		box_izquierda.pack_start ( this.redo_button );
+
+		var box_derecha = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		box_derecha.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+
+#if DISABLE_GNOME3
+		var box_centro = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+
+		box_izquierda.hexpand = true;
+		box_centro.hexpand = true;
+		box_derecha.hexpand = true;
+
+		box_izquierda.halign = Gtk.Align.START;
+		box_centro.halign = Gtk.Align.CENTER;
+		box_derecha.halign = Gtk.Align.END;
+
+		box_centro.pack_start ( this.titulo_label );
+
+		box_derecha.margin = 2;
+#endif
+
+		box_derecha.pack_end ( this.edit_button );
+		box_derecha.pack_end ( this.delete_button );
+		box_derecha.pack_end ( this.send_button );
+		box_derecha.pack_end ( this.list_button );
+
+#if DISABLE_GNOME3
+		this.pack_start ( box_izquierda );
+		this.pack_start ( box_centro );
+		this.pack_end ( box_derecha );
+#else
+		this.pack_start ( box_izquierda );
+		this.pack_end ( box_derecha );
+#endif		
+
 		this.show.connect ( this.set_buttons_invisible );
 	}
 
+#if DISABLE_GNOME3
+	public void set_title ( string titulo ) {
+		this.titulo_label.set_markup ("<span weight='bold'>" + titulo + "</span>");
+	}
+#endif
+
 	public void set_label_anio ( string anio = "0" ) {
 		if ( anio != "0") {
-			this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\"> " + _("Year") + ": " + anio + "</span>" );
+			this.set_title ( _("Year") + ": " + anio );
 		} else {
-			this.anio_label.set_text ( "" );
+			this.set_title ( "" );
 		}
 	}
 
 	public void set_label_lista ( string lista = "" ) {
 		if ( lista != "") {
-			this.anio_label.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\">" + lista + "</span>" );
+			this.set_title ( lista );
 		} else {
-			this.anio_label.set_text ( "" );
+			this.set_title ( "" );
 		}
 	}
 
@@ -122,10 +161,20 @@ public class Nomeolvides.HeaderBar : Toolbar {
 		this.list_button.set_label (_("Remove from list"));
 	}
 
-	public void cerrar () {
-		this.cerrar_signal ();
+	public void activar_deshacer () {
+		this.undo_button.set_sensitive ( true );
 	}
 
-	public signal void cerrar_signal ();
-}
+	public void desactivar_deshacer () {
+		this.undo_button.set_sensitive ( false );
+	}
 
+	public void activar_rehacer () {
+		this.redo_button.set_sensitive ( true );
+	}
+
+	public void desactivar_rehacer () {
+		this.redo_button.set_sensitive ( false );
+	}
+
+}
