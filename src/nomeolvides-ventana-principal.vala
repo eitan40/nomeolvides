@@ -24,7 +24,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 {
 
 	private Box main_box { get; private set; }
-	private Nomeolvides.HeaderBar toolbar { get; private set; }
+	private Toolbar toolbar { get; private set; }
 	public InterfazPrincipal anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
@@ -46,8 +46,13 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		
 		this.add (main_box);
 		
-		this.toolbar = new Nomeolvides.HeaderBar ();
+		this.toolbar = new Nomeolvides.Toolbar ();
+
+		this.toolbar.agregar_send_button ();
+		this.toolbar.agregar_list_button ();
 	#if DISABLE_GNOME3
+		this.toolbar.agregar_titulo ();
+
 		var menu_barra = new MenuBar ();
 		this.main_box.pack_start ( menu_barra, false, false, 0 );
 

@@ -57,7 +57,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-coleccion-editar.vala \
 	nomeolvides-dialog-lista-editar.vala \
 	nomeolvides-dialog-hecho-borrar.vala \
-	nomeolvides-headerbar.vala \
 	nomeolvides-toolbar.vala \
 	nomeolvides-selector-fecha.vala \
 	nomeolvides-base.vala \
