@@ -47,7 +47,12 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.add (main_box);
 		
 		this.toolbar = new Nomeolvides.HeaderBar ();
+
+		this.toolbar.agregar_send_button ();
+		this.toolbar.agregar_list_button ();
 	#if DISABLE_GNOME3
+		this.toolbar.agregar_titulo ();
+
 		var menu_barra = new MenuBar ();
 		this.main_box.pack_start ( menu_barra, false, false, 0 );
 

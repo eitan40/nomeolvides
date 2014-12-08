@@ -52,7 +52,7 @@ msgid "Error while open"
 msgstr "Error al abrir"
 
 #: ../src/nomeolvides-configuracion.vala:32
-#: ../src/nomeolvides-ventana-principal.vala:88
+#: ../src/nomeolvides-ventana-principal.vala:93
 msgid "About Nomeolvides"
 msgstr "Acerca de Nomeolvides"
 
@@ -117,7 +117,7 @@ msgstr "Nombre de la Colección"
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:57
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:68
 #: ../src/nomeolvides-dialog-lista-agregar.vala:27
-#: ../src/nomeolvides-headerbar.vala:54 ../src/nomeolvides-toolbar.vala:48
+#: ../src/nomeolvides-headerbar.vala:57 ../src/nomeolvides-toolbar.vala:48
 msgid "Add"
 msgstr "Agregar"
 
@@ -148,8 +148,8 @@ msgstr "Editar Colección"
 #: ../src/nomeolvides-dialog-coleccion-editar.vala:27
 #: ../src/nomeolvides-dialog-hecho-editar.vala:30
 #: ../src/nomeolvides-dialog-lista-editar.vala:27
-#: ../src/nomeolvides-headerbar.vala:57 ../src/nomeolvides-toolbar.vala:51
-#: ../src/nomeolvides-ventana-principal.vala:73
+#: ../src/nomeolvides-headerbar.vala:60 ../src/nomeolvides-toolbar.vala:51
+#: ../src/nomeolvides-ventana-principal.vala:78
 msgid "Edit"
 msgstr "Editar"
 
@@ -265,7 +265,7 @@ msgid "Do you want to remove custom list?"
 msgstr "¿Desea eliminar la lista personalizada?"
 
 #: ../src/nomeolvides-dialog-lista-borrar.vala:27
-#: ../src/nomeolvides-headerbar.vala:61
+#: ../src/nomeolvides-headerbar.vala:119
 msgid "List"
 msgstr "Lista"
 
@@ -355,7 +355,7 @@ msgid "Migrating List"
 msgstr "Migrando Lista"
 
 #: ../src/nomeolvides-dialog-preferencias.vala:28
-#: ../src/nomeolvides-ventana-principal.vala:78
+#: ../src/nomeolvides-ventana-principal.vala:83
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -372,31 +372,31 @@ msgstr "Listas"
 msgid "Close"
 msgstr "Cerrar"
 
-#: ../src/nomeolvides-headerbar.vala:55 ../src/nomeolvides-toolbar.vala:49
+#: ../src/nomeolvides-headerbar.vala:58 ../src/nomeolvides-toolbar.vala:49
 msgid "Undo"
 msgstr "Deshacer"
 
-#: ../src/nomeolvides-headerbar.vala:56 ../src/nomeolvides-toolbar.vala:50
+#: ../src/nomeolvides-headerbar.vala:59 ../src/nomeolvides-toolbar.vala:50
 msgid "Redo"
 msgstr "Rehacer"
 
-#: ../src/nomeolvides-headerbar.vala:58 ../src/nomeolvides-toolbar.vala:52
+#: ../src/nomeolvides-headerbar.vala:61 ../src/nomeolvides-toolbar.vala:52
 msgid "Delete"
 msgstr "Borrar"
 
-#: ../src/nomeolvides-headerbar.vala:60
+#: ../src/nomeolvides-headerbar.vala:114
 msgid "Send"
 msgstr "Enviar"
 
-#: ../src/nomeolvides-headerbar.vala:122
+#: ../src/nomeolvides-headerbar.vala:139
 msgid "Year"
 msgstr "Año"
 
-#: ../src/nomeolvides-headerbar.vala:157
+#: ../src/nomeolvides-headerbar.vala:182
 msgid "Add to list"
 msgstr "Agregar a la lista"
 
-#: ../src/nomeolvides-headerbar.vala:161
+#: ../src/nomeolvides-headerbar.vala:186
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 
@@ -418,7 +418,7 @@ msgstr "Sleccione una Colección"
 
 #: ../src/nomeolvides-importar-hechos.vala:45
 #: ../src/nomeolvides-importar-hechos.vala:108
-#: ../src/nomeolvides-ventana-principal.vala:55
+#: ../src/nomeolvides-ventana-principal.vala:60
 msgid "File"
 msgstr "Archivo"
 
@@ -499,19 +499,19 @@ msgstr "Error parseando listas"
 msgid "Visible"
 msgstr "Visible"
 
-#: ../src/nomeolvides-ventana-principal.vala:60
+#: ../src/nomeolvides-ventana-principal.vala:65
 msgid "Export Facts"
 msgstr "Exportar Hechos"
 
-#: ../src/nomeolvides-ventana-principal.vala:64
+#: ../src/nomeolvides-ventana-principal.vala:69
 msgid "Import facts"
 msgstr "Importar Hechos"
 
-#: ../src/nomeolvides-ventana-principal.vala:68
+#: ../src/nomeolvides-ventana-principal.vala:73
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/nomeolvides-ventana-principal.vala:83
+#: ../src/nomeolvides-ventana-principal.vala:88
 msgid "Help"
 msgstr "Ayuda"
 

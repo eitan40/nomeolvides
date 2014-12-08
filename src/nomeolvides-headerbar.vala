@@ -33,6 +33,10 @@ public class Nomeolvides.HeaderBar : Gtk.HeaderBar {
 	public Boton delete_button { get; private set; }
 	public Boton send_button { get; private set; }
 	public Boton list_button { get; private set; }
+
+	public Box box_izquierda { get; private set; }
+	public Box box_derecha { get; private set; }
+	public Box box_centro { get; private set; }
 #if DISABLE_GNOME3
 	public Label titulo_label {get; private set;}
 #endif
@@ -45,7 +49,6 @@ public class Nomeolvides.HeaderBar : Gtk.HeaderBar {
 		this.set_homogeneous ( true );
 		this.hexpand = true;
 
-		this.titulo_label = new Label ( "" );
 #else
 		this.has_subtitle = false;
 		this.set_show_close_button ( true );
@@ -57,63 +60,77 @@ public class Nomeolvides.HeaderBar : Gtk.HeaderBar {
 		this.edit_button = new  Boton ( _("Edit") );
 		this.delete_button = new  Boton ( _("Delete") );
 
-		this.send_button = new  Boton ( _("Send") );
-		this.list_button = new  Boton ( _("List") );
-		this.list_button_set_agregar ();
+		this.send_button = null;
 
 		this.undo_button.set_sensitive ( false );
 		this.redo_button.set_sensitive ( false );
 		this.set_buttons_invisible ();
 
-		var box_izquierda = new Box ( Gtk.Orientation.HORIZONTAL, 0);
-		box_izquierda.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+		this.box_izquierda = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		this.box_izquierda.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
 		
 #if DISABLE_GNOME3
-		box_izquierda.margin = 2;
+		this.box_izquierda.margin = 2;
 #endif
-		box_izquierda.pack_start ( this.add_button );
-		box_izquierda.pack_start ( this.undo_button );
-		box_izquierda.pack_start ( this.redo_button );
+		this.box_izquierda.pack_start ( this.add_button );
+		this.box_izquierda.pack_start ( this.undo_button );
+		this.box_izquierda.pack_start ( this.redo_button );
 
-		var box_derecha = new Box ( Gtk.Orientation.HORIZONTAL, 0);
-		box_derecha.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
+		this.box_derecha = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		this.box_derecha.get_style_context().add_class ( Gtk.STYLE_CLASS_LINKED );
 
 #if DISABLE_GNOME3
-		var box_centro = new Box ( Gtk.Orientation.HORIZONTAL, 0);
+		this.box_centro = new Box ( Gtk.Orientation.HORIZONTAL, 0);
 
-		box_izquierda.hexpand = true;
-		box_centro.hexpand = true;
-		box_derecha.hexpand = true;
+		this.box_izquierda.hexpand = true;
+		this.box_centro.hexpand = true;
+		this.box_derecha.hexpand = true;
 
-		box_izquierda.halign = Gtk.Align.START;
-		box_centro.halign = Gtk.Align.CENTER;
-		box_derecha.halign = Gtk.Align.END;
+		this.box_izquierda.halign = Gtk.Align.START;
+		this.box_centro.halign = Gtk.Align.CENTER;
+		this.box_derecha.halign = Gtk.Align.END;
 
-		box_centro.pack_start ( this.titulo_label );
+		this.titulo_label = null;
 
-		box_derecha.margin = 2;
+		this.box_derecha.margin = 2;
 #endif
 
-		box_derecha.pack_end ( this.edit_button );
-		box_derecha.pack_end ( this.delete_button );
-		box_derecha.pack_end ( this.send_button );
-		box_derecha.pack_end ( this.list_button );
+		this.box_derecha.pack_end ( this.edit_button );
+		this.box_derecha.pack_end ( this.delete_button );
 
 #if DISABLE_GNOME3
-		this.pack_start ( box_izquierda );
-		this.pack_start ( box_centro );
-		this.pack_end ( box_derecha );
+		this.pack_start ( this.box_izquierda );
+		this.pack_start ( this.box_centro );
+		this.pack_end ( this.box_derecha );
 #else
-		this.pack_start ( box_izquierda );
-		this.pack_end ( box_derecha );
+		this.pack_start ( this.box_izquierda );
+		this.pack_end ( this.box_derecha );
 #endif		
 
 		this.show.connect ( this.set_buttons_invisible );
 	}
 
+	public void agregar_send_button () {
+		this.send_button = new  Boton ( _("Send") );
+		this.box_derecha.pack_end ( this.send_button );
+	}
+
+	public void agregar_list_button () {
+		this.list_button = new  Boton ( _("List") );
+		this.list_button_set_agregar ();
+		this.box_derecha.pack_end ( this.list_button );
+	}
+
 #if DISABLE_GNOME3
+	public void agregar_titulo () {
+		this.titulo_label = new Label ( "" );
+		this.box_centro.pack_start ( this.titulo_label );
+	}
+
 	public void set_title ( string titulo ) {
-		this.titulo_label.set_markup ("<span weight='bold'>" + titulo + "</span>");
+		if ( this.titulo_label != null ) {
+			this.titulo_label.set_markup ("<span weight='bold'>" + titulo + "</span>");
+		}
 	}
 #endif
 
@@ -141,16 +158,24 @@ public class Nomeolvides.HeaderBar : Gtk.HeaderBar {
 	public void set_buttons_multiseleccion_visible () {
 		this.edit_button.set_visible ( false );
 		this.delete_button.set_visible ( true );
-		this.send_button.set_visible ( true );
-		this.list_button.set_visible ( true );
+		if ( this.send_button != null ) {
+			this.send_button.set_visible ( true );
+		}
+		if ( this.list_button != null ) {
+			this.list_button.set_visible ( true );
+		}
 
 	}
 
 	public new void set_buttons_invisible () {
 		this.edit_button.set_visible ( false );
 		this.delete_button.set_visible ( false );
-		this.send_button.set_visible ( false );
-		this.list_button.set_visible ( false );
+		if ( this.send_button != null ) {
+			this.send_button.set_visible ( false );
+		}
+		if ( this.list_button != null ) {
+			this.list_button.set_visible ( false );
+		}
 	}
 
 	public void list_button_set_agregar ( ) {
