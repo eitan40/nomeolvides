@@ -37,9 +37,11 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.deshacer = new Deshacer<Base> ();
 
 		this.toolbar = new Toolbar ();
+		this.toolbar.set_border_width ( 1 );
 
 		this.scroll_view = new ScrolledWindow (null,null);
 		this.scroll_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_view.set_border_width ( 1 );
 
 		this.pack_start ( toolbar, false, false, 0 );
 		this.show_all ();
