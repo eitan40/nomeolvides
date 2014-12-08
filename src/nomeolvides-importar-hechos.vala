@@ -20,6 +20,7 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.ImportarHechos : Dialog {
+	private Button boton_elegir_archivo;
 	private ComboBox combo_colecciones;
 	private Label archivo_label;
 	private string directorio;
@@ -37,9 +38,9 @@ public class Nomeolvides.ImportarHechos : Dialog {
 
 		colecciones_liststore.agregar_al_inicio ( coleccion , 0 );
 
-		var boton_elegir_archivo = new Button ();
-		boton_elegir_archivo.set_label (_("Choose File"));
-		boton_elegir_archivo.clicked.connect ( this.elegir_archivo );
+		this.boton_elegir_archivo = new Button ();
+		this.boton_elegir_archivo.set_label (_("Choose File"));
+		this.boton_elegir_archivo.clicked.connect ( this.elegir_archivo );
 
 		var coleccion_label = new Label.with_mnemonic ( _("Colection") );
 		this.archivo_label = new Label.with_mnemonic ( _("File") );
@@ -55,6 +56,7 @@ public class Nomeolvides.ImportarHechos : Dialog {
 		grid.set_row_spacing ( (uint)10 );
 		grid.set_border_width ( (uint)20 );
 		grid.set_valign ( Align.CENTER );
+		grid.set_vexpand ( true );
 		grid.set_halign ( Align.CENTER );
 
 		grid.attach ( archivo_label, 0 , 0 , 1, 1 );
@@ -77,7 +79,7 @@ public class Nomeolvides.ImportarHechos : Dialog {
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
 			this.archivo = abrir_archivo.get_filename ();
-			this.archivo_label.set_label ( this.archivo.slice ( this.archivo.last_index_of ( "/" ) + 1, this.archivo.length ));
+			this.boton_elegir_archivo.set_label ( this.archivo.slice ( this.archivo.last_index_of ( "/" ) + 1, this.archivo.length ));
 		}
 		abrir_archivo.destroy ();
 	}
