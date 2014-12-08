@@ -64,3 +64,16 @@ nomeolvides_vala.stamp
 *~
 .anjuta/*
 .anjuta_sym_db.db
+
+compile
+data/nomeolvides.appdata.xml
+data/nomeolvides.desktop
+data/nomeolvides.desktop.in
+m4/
+po/.intltool-merge-cache
+po/POTFILES
+po/es.gmo
+po/nomeolvides.pot
+po/stamp-it
+src/.deps/
+
