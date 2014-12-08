@@ -23,7 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	protected TreeViewBase treeview { get; protected set; }
 	protected ScrolledWindow scroll_view;
-	protected Nomeolvides.HeaderBar toolbar;
+	protected Nomeolvides.Toolbar toolbar;
 	protected AccionesDB db;
 	protected Deshacer<Base> deshacer;
 	protected DialogBase agregar_dialog;
@@ -36,9 +36,9 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.db = new AccionesDB ( Configuracion.base_de_datos() );
 		this.deshacer = new Deshacer<Base> ();
 
-		this.toolbar = new Nomeolvides.HeaderBar ();
+		this.toolbar = new Nomeolvides.Toolbar ();
 		this.toolbar.set_border_width ( 1 );
-		
+
 #if DISABLE_GNOME3
 #else
 		this.toolbar.set_show_close_button ( false );
