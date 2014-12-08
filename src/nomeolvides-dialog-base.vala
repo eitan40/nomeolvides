@@ -66,7 +66,7 @@ public class Nomeolvides.DialogBase : Gtk.Dialog {
 				this.crear_respuesta ();
 				break;
 			case ResponseType.CLOSE:
-				this.destroy();
+				this.hide();
 				break;
         }
     }
