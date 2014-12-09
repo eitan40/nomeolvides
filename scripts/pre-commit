@@ -1,16 +1,20 @@
 #!/bin/sh
 
-echo "Actualizando version en configure.ac"
-scripts/cambiar_version
-git add configure.ac
+if [ $(git branch | grep "*" | cut -c 3-) == "master" ]
+then
+	echo "Actualizando version en configure.ac"
+	scripts/cambiar_version
+	git add configure.ac
 
-echo "Actualizando POTFILES"
-cd po
-../scripts/crear-potfiles > /dev/null 2> /dev/null
-../scripts/crear-potfiles --disable-gnome3-support > /dev/null 2> /dev/null
-intltool-update es
-cd ..
+	echo "Actualizando POTFILES"
+	cd po
+	../scripts/crear-potfiles > /dev/null 2> /dev/null
+	../scripts/crear-potfiles --disable-gnome3-support > /dev/null 2> /dev/null
+	intltool-update es
+	cd ..
 
-git add po/POTFILES.in
-git add po/POTFILES.skip
-git add po/es.po
+	git add po/POTFILES.in
+	git add po/POTFILES.skip
+	git add po/es.po
+fi
+
