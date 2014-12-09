@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 15:50-0300\n"
+"POT-Creation-Date: 2014-12-08 22:47-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -66,6 +66,7 @@ msgstr "y"
 
 #: ../src/nomeolvides-dialog-archivo-abrir.vala:29
 #: ../src/nomeolvides-importar-hechos.vala:42
+#: ../src/nomeolvides-importar-hechos.vala:110
 msgid "Choose File"
 msgstr "Elija un Archivo"
 
@@ -389,7 +390,6 @@ msgid "Select Colection"
 msgstr "Sleccione una Colección"
 
 #: ../src/nomeolvides-importar-hechos.vala:46
-#: ../src/nomeolvides-importar-hechos.vala:110
 #: ../src/nomeolvides-ventana-principal.vala:60
 msgid "File"
 msgstr "Archivo"

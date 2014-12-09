@@ -107,7 +107,7 @@ public class Nomeolvides.ImportarHechos : Dialog {
 	}
 
 	private void set_sensitive_import () {
-		if ( this.combo_colecciones.active == 0 || this.archivo_label.get_text () == _("File") ) {
+		if ( this.combo_colecciones.active == 0 || this.boton_elegir_archivo.get_label () == _("Choose File") ) {
 			this.get_widget_for_response ( ResponseType.ACCEPT ).set_sensitive ( false );
 		} else {
 			this.get_widget_for_response ( ResponseType.ACCEPT ).set_sensitive ( true );
