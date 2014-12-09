@@ -77,7 +77,6 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 			this.agregar ( agregar_dialog.respuesta );
 		}
 		this.agregar_dialog.borrar_datos ();
-		this.agregar_dialog.hide ();
 	}
 
 	public virtual void edit_dialog () {
@@ -91,7 +90,6 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 			}
 		}
 		this.editar_dialog.borrar_datos ();
-		this.editar_dialog.hide ();
 	}
 
 	private void delete_dialog () {
@@ -103,7 +101,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 			this.borrar ( objeto );
 			this.cambio_signal ();
 		}
-		borrar_dialog.hide ();
+		this.borrar_dialog.hide();
 	}
 
 	protected virtual void elegir () {
