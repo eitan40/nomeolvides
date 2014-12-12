@@ -13,9 +13,9 @@ AM_CFLAGS =\
 	 -Wall\
 	 -g
 
-bin_PROGRAMS = nomeolvides
+bin_PROGRAMS = nomeolvides-beta
 
-nomeolvides_SOURCES = \
+nomeolvides_beta_SOURCES = \
 	config.vapi \
 	nomeolvides-hecho.vala \
 	nomeolvides-main.vala \
@@ -77,25 +77,25 @@ nomeolvides_SOURCES = \
 
 nomeolvides-resources.c: nomeolvides.gresource.xml
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) $(srcdir)/nomeolvides.gresource.xml \
-	--target=$@ --sourcedir=$(srcdir) --c-name nomeolvides --generate-source
+	--target=$@ --sourcedir=$(srcdir) --c-name nomeolvides_beta --generate-source
 
 if DISABLE_GNOME3
-nomeolvides_VALAFLAGS = \
+nomeolvides_beta_VALAFLAGS = \
 	--pkg sqlite3 \
 	--pkg gtk+-3.0 \
 	-g \
 	-D DISABLE_GNOME3
 else
-nomeolvides_VALAFLAGS = \
+nomeolvides_beta_VALAFLAGS = \
 	--pkg sqlite3 \
 	--pkg gtk+-3.0 \
 	-g
 endif
 
-nomeolvides_LDFLAGS = \
+nomeolvides_beta_LDFLAGS = \
 	-Wl,--export-dynamic
 
-nomeolvides_LDADD = $(NOMEOLVIDES_LIBS)
+nomeolvides_beta_LDADD = $(NOMEOLVIDES_LIBS)
 
 
 EXTRA_DIST = 	$(ui_DATA) \

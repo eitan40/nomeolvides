@@ -14,8 +14,8 @@
    width="571"
    height="571"
    id="svg2"
-   inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="nomeolvides.svg">
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="nomeolvides-beta.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -25,15 +25,15 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1535"
-     inkscape:window-height="876"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
      id="namedview129"
      showgrid="false"
-     inkscape:zoom="1.1690172"
-     inkscape:cx="-168.1564"
-     inkscape:cy="302.26923"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:zoom="0.82661999"
+     inkscape:cx="113.61269"
+     inkscape:cy="101.59802"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2"
      showguides="true"
@@ -2801,4 +2801,30 @@
      d="m 336.73739,371.17558 c 19.97264,42.3553 40.41505,27.31656 40.41505,27.31656"
      id="path3017-2-7-6-7-5-0-0-1"
      style="opacity:0.57307691;fill:url(#radialGradient4566-4-6-2);fill-opacity:1;stroke:#000000;stroke-width:0.39239642px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0" />
+  <g
+     id="g3395"
+     transform="matrix(0.74957332,-0.49928284,0.4962108,0.75421392,-454.09726,475.69463)">
+    <text
+       sodipodi:linespacing="125%"
+       id="text3349-2"
+       y="480.0704"
+       x="626.00391"
+       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Biolinum;-inkscape-font-specification:Sans Bold"
+       xml:space="preserve"><tspan
+         y="480.0704"
+         x="626.00391"
+         id="tspan3351-5"
+         sodipodi:role="line">BETA</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3349"
+       y="477.75931"
+       x="623.60077"
+       style="font-size:144px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ff2a2a;fill-opacity:1;stroke:none;font-family:Linux Biolinum;-inkscape-font-specification:Sans Bold"
+       xml:space="preserve"><tspan
+         y="477.75931"
+         x="623.60077"
+         id="tspan3351"
+         sodipodi:role="line">BETA</tspan></text>
+  </g>
 </svg>
