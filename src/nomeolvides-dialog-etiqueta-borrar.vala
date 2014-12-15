@@ -20,8 +20,8 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogoEtiquetaBorrar : DialogBaseBorrar {
-	public DialogoEtiquetaBorrar () {
+public class Nomeolvides.DialogEtiquetaBorrar : DialogBaseBorrar {
+	public DialogEtiquetaBorrar () {
 		this.title = _("Delete Custom List");
 		this.pregunta.set_label ( _("Do you want to remove this tag?") );
 		this.nombre.set_label ( _("Tag") + ":");

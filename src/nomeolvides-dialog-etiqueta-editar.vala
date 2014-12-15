@@ -23,6 +23,7 @@ using Nomeolvides;
 public class Nomeolvides.DialogEtiquetaEditar : DialogBase {
 	public DialogEtiquetaEditar () {
 		this.title = _("Edit Tag");
+		base.nombre_label.set_label ( _("Tag name") + ": " );
 		this.add_button (_("Edit") , ResponseType.APPLY);
 	}
 

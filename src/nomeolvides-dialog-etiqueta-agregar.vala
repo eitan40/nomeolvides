@@ -23,6 +23,13 @@ using Nomeolvides;
 public class Nomeolvides.DialogEtiquetaAgregar : DialogBase {
 	public DialogEtiquetaAgregar () {
 		this.title = _("Add Tag");
-		this.add_button (_("Add") , ResponseType.APPLY);
+		base.nombre_label.set_label ( _("Tag name") + ": " );
+		this.add_button ( _("Add") , ResponseType.APPLY );
+	}
+
+	protected override void crear_respuesta() {
+		if ( this.nombre_entry.get_text_length () > 0 ) {
+			this.respuesta = new Etiqueta ( this.nombre_entry.get_text () );
+		}
 	}
 }
