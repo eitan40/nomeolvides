@@ -23,14 +23,14 @@ using Nomeolvides;
 public class Nomeolvides.DialogColeccionAgregar : DialogBase {
 	public DialogColeccionAgregar ( Gtk.Widget relative_to ) {
 		base ( relative_to );
-//		this.title = _("Add a Collection");
 		base.nombre_label.set_label ( _("Colection name") + ": " );
-//		this.add_button ( _("Add") , ResponseType.APPLY );
 	}
 
-	protected override void crear_respuesta() {
+	protected override void aplicar () {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
+			this.signal_aplicar ( this.respuesta );
+			this.hide ();
 		}
 	}
 }

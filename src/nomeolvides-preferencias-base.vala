@@ -45,7 +45,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 #endif
 
 		this.scroll_view = new ScrolledWindow (null,null);
-		this.scroll_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_view.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
 		this.scroll_view.set_border_width ( 1 );
 
 		this.pack_start ( toolbar, false, false, 0 );
@@ -67,15 +67,13 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
 		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
 		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
-		this.treeview.cursor_changed.connect ( elegir );
+		this.treeview.cursor_changed.connect ( this.elegir );
+
+		this.agregar_dialog.signal_aplicar.connect ( this.agregar );
 	}
 
 	protected virtual void add_dialog () {
 		this.agregar_dialog.show_all ();
-
-//		if ( agregar_dialog.run() == ResponseType.APPLY ) {
-			this.agregar ( agregar_dialog.respuesta );
-//		}
 		this.agregar_dialog.borrar_datos ();
 	}
 

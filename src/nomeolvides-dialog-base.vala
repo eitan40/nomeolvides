@@ -25,15 +25,21 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 	protected int64 id;
 	public Base respuesta { get; protected set; }
 	protected Label nombre_label;
+	protected Button aplicar_button;
+	protected Button cancelar_button;
 
 	public DialogBase ( Gtk.Widget relative_to ) {
-	//	this.resizable = false;
 		GLib.Object ( relative_to: relative_to);
 		this.modal = true;
 		
-		var cancel_button = new Button.with_mnemonic ( _("Cancel") );
+		this.cancelar_button = new Button.with_mnemonic ( _("Cancel") );
+		this.aplicar_button = new Button.with_mnemonic ( _("Apply") );
 
-//		this.response.connect(on_response);
+		this.cancelar_button.set_border_width ( 5 );
+		this.aplicar_button.set_border_width ( 5 );
+
+		this.aplicar_button.clicked.connect ( this.aplicar );
+		this.cancelar_button.clicked.connect ( this.ocultar );
 
 		this.nombre_label = new Label.with_mnemonic ( _("") + ": " );
 
@@ -53,25 +59,13 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
 
-		grid.attach ( this.nombre_label, 0, 0, 1, 2 );
-	    grid.attach ( this.nombre_entry, 1, 0, 2, 2 );
-		grid.attach ( cancel_button, 2, 2, 1, 1 );
-
-//		var contenido = this.get_content_area() as Box;
+		grid.attach ( this.nombre_label, 0, 0, 1, 1 );
+	    grid.attach ( this.nombre_entry, 1, 0, 3, 1 );
+		grid.attach ( this.cancelar_button, 2, 1, 1, 1 );
+		grid.attach ( this.aplicar_button, 3, 1, 1, 1 );		
 
 		this.add ( grid );
 	}
-
-/*	protected void on_response (Dialog source, int response_id) {
-		switch (response_id) {
-			case ResponseType.APPLY:
-				this.crear_respuesta ();
-				break;
-			case ResponseType.CLOSE:
-				this.hide();
-				break;
-        }
-    }*/
 
 	protected virtual void crear_respuesta() {}
 
@@ -83,4 +77,12 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 	public void borrar_datos () {
 		this.nombre_entry.set_text ("");
 	}
+
+	protected void ocultar (){
+		this.hide ();
+	}
+
+	public virtual void aplicar () {}
+
+	public signal bool signal_aplicar ( Base objeto );
 }
