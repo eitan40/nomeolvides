@@ -49,7 +49,6 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.grid.set_valign ( Align.CENTER );
 		this.grid.set_halign ( Align.CENTER );
 		this.etiquetas_frame = new Frame ( _("Tags") );
-		this.etiquetas_frame.set_margin_start ( 5 );
 
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
@@ -65,7 +64,6 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.fuente_entry = new Entry ();
 		this.etiquetas_entry = new Entry ();
 		this.etiquetas_entry.set_valign ( Align.START );
-		this.etiquetas_entry.set_margin_start ( 5 );
 
 		this.etiquetas_completion = new EntryCompletion ();
 		this.etiquetas_completion.set_model ( etiquetas_liststore );
@@ -77,12 +75,22 @@ public class Nomeolvides.DialogHecho : Dialog
 		this.etiquetas = new Array<Etiqueta> ();
 		this.boton_etiqueta = new Button.with_label (_("Add tag"));
 		this.boton_etiqueta.set_valign ( Align.START );
-		this.boton_etiqueta.set_margin_end ( 5 );
+		
 		this.etiquetas_label = new Label.with_mnemonic ("");
 		this.etiquetas_label.set_valign ( Align.FILL );
 		this.etiquetas_label.set_vexpand ( true );
 		this.etiquetas_label.set_size_request ( 50, 70 );
+	#if DISABLE_GNOME3
+		this.boton_etiqueta.set_margin_end ( 5 );
 		this.etiquetas_label.set_margin_start ( 5 );
+		this.etiquetas_entry.set_margin_start ( 5 );
+		this.etiquetas_frame.set_margin_start ( 5 );
+	#else
+		this.boton_etiqueta.set_margin_right ( 5 );
+		this.etiquetas_label.set_margin_left ( 5 );
+		this.etiquetas_entry.set_margin_left ( 5 );
+		this.etiquetas_frame.set_margin_left ( 5 );
+	#endif 
 		var etiquetas_grid = new Grid ();
 		etiquetas_grid.set_valign ( Align.CENTER );
 		etiquetas_grid.set_halign ( Align.CENTER );
