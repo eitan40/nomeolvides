@@ -73,9 +73,9 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	protected virtual void add_dialog () {
 		this.agregar_dialog.show_all ();
 
-		if ( agregar_dialog.run() == ResponseType.APPLY ) {
+//		if ( agregar_dialog.run() == ResponseType.APPLY ) {
 			this.agregar ( agregar_dialog.respuesta );
-		}
+//		}
 		this.agregar_dialog.borrar_datos ();
 	}
 
@@ -84,10 +84,10 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
-		if (this.editar_dialog.run() == ResponseType.APPLY) {
+//		if (this.editar_dialog.run() == ResponseType.APPLY) {
 			if ( this.actualizar ( objeto, this.editar_dialog.respuesta ) ) {
 				this.cambio_signal ();
-			}
+//			}
 		}
 		this.editar_dialog.borrar_datos ();
 	}

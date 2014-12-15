@@ -21,10 +21,11 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogListaEditar : DialogBase {
-	public DialogListaEditar () {
-		this.title = _("Edit Custom List");
+	public DialogListaEditar ( Widget relative_to ) {
+		base ( relative_to );
+//		this.title = _("Edit Custom List");
 		this.nombre_label.set_label (_("List Name") + ": ");
-		this.add_button ( _("Edit") , ResponseType.APPLY);
+//		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
 	protected override void crear_respuesta () {

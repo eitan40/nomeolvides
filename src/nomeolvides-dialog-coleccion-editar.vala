@@ -21,10 +21,11 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionEditar : DialogBase {
-	public DialogColeccionEditar () {
-		this.title = _("Edit Collection");
+	public DialogColeccionEditar ( Widget relative_to ) {
+		base ( relative_to );
+//		this.title = _("Edit Collection");
 		base.nombre_label.set_label ( _("Colection name") + ": " );
-		this.add_button ( _("Edit") , ResponseType.APPLY);
+//		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
 	protected override void crear_respuesta() {

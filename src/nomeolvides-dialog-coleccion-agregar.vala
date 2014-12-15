@@ -21,10 +21,11 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionAgregar : DialogBase {
-	public DialogColeccionAgregar () {
-		this.title = _("Add a Collection");
+	public DialogColeccionAgregar ( Gtk.Widget relative_to ) {
+		base ( relative_to );
+//		this.title = _("Add a Collection");
 		base.nombre_label.set_label ( _("Colection name") + ": " );
-		this.add_button ( _("Add") , ResponseType.APPLY );
+//		this.add_button ( _("Add") , ResponseType.APPLY );
 	}
 
 	protected override void crear_respuesta() {

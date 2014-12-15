@@ -20,19 +20,20 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogBase : Gtk.Dialog {
+public class Nomeolvides.DialogBase : Gtk.Popover {
 	protected Entry nombre_entry;
 	protected int64 id;
 	public Base respuesta { get; protected set; }
 	protected Label nombre_label;
 
-	public DialogBase ( ) {
-		this.resizable = false;
+	public DialogBase ( Gtk.Widget relative_to ) {
+	//	this.resizable = false;
+		GLib.Object ( relative_to: relative_to);
 		this.modal = true;
+		
+		var cancel_button = new Button.with_mnemonic ( _("Cancel") );
 
-		this.add_button ( _("Cancel") , ResponseType.CLOSE );
-
-		this.response.connect(on_response);
+//		this.response.connect(on_response);
 
 		this.nombre_label = new Label.with_mnemonic ( _("") + ": " );
 
@@ -52,15 +53,16 @@ public class Nomeolvides.DialogBase : Gtk.Dialog {
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
 
-		grid.attach ( this.nombre_label, 0, 0, 1, 1 );
-	    grid.attach ( this.nombre_entry, 1, 0, 1, 1 );
+		grid.attach ( this.nombre_label, 0, 0, 1, 2 );
+	    grid.attach ( this.nombre_entry, 1, 0, 2, 2 );
+		grid.attach ( cancel_button, 2, 2, 1, 1 );
 
-		var contenido = this.get_content_area() as Box;
+//		var contenido = this.get_content_area() as Box;
 
-		contenido.pack_start( grid, true, true, 0 );
+		this.add ( grid );
 	}
 
-	protected void on_response (Dialog source, int response_id) {
+/*	protected void on_response (Dialog source, int response_id) {
 		switch (response_id) {
 			case ResponseType.APPLY:
 				this.crear_respuesta ();
@@ -69,7 +71,7 @@ public class Nomeolvides.DialogBase : Gtk.Dialog {
 				this.hide();
 				break;
         }
-    }
+    }*/
 
 	protected virtual void crear_respuesta() {}
 
