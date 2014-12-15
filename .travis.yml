@@ -2,12 +2,13 @@ language: c
 compiler: gcc
 before_install:
   - sudo add-apt-repository ppa:vala-team/ppa -y
+  - sed -i 's/precise/utopic/' /etc/apt/sources.list.d/gnome3-team-gnome3-staging-precise.list
   - sudo apt-get update -qq
   - sudo apt-get install -qq gnome-common libglib2.0-dev libgtk-3-dev
          libsqlite3-dev libvala-0.26-dev valac-0.26 gobject-introspection
 
 before_script:
-  - ./autogen.sh --disable-gnome3-support
+  - ./autogen.sh
 
 script:
   - make
