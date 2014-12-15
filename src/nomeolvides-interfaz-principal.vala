@@ -24,13 +24,16 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 	private TreeViewHechos hechos_view;
 	private TreeViewAnios anios_view;
 	private TreeViewListas listas_view;
+	private TreeViewEtiquetas etiquetas_view;
 	private Portada vista_hecho;
 	private ScrolledWindow scroll_hechos_view;
 	private ScrolledWindow scroll_anios_view;
 	private ScrolledWindow scroll_listas_view;
+	private ScrolledWindow scroll_etiquetas_view;
 	private Notebook anios_listas;
 	private int anio_actual;
 	private Lista lista_actual;
+	private Etiqueta etiqueta_actual;
 	private AccionesDB db;
 
 	public InterfazPrincipal () {
@@ -38,15 +41,18 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		this.anios_view = new TreeViewAnios ();
 		this.hechos_view = new TreeViewHechos ();
 		this.listas_view = new TreeViewListas.ventana_principal ();
+		this.etiquetas_view = new TreeViewEtiquetas.ventana_principal ();
 		this.vista_hecho = new Portada ();
 		this.vista_hecho.set_size_request (300,-1);
 
-		this.scroll_hechos_view = new ScrolledWindow (null,null);
-		this.scroll_anios_view = new ScrolledWindow (null,null);
-		this.scroll_listas_view = new ScrolledWindow (null,null);
-		this.scroll_hechos_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
-		this.scroll_anios_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
-		this.scroll_listas_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_hechos_view = new ScrolledWindow ( null, null );
+		this.scroll_anios_view = new ScrolledWindow ( null, null );
+		this.scroll_listas_view = new ScrolledWindow ( null, null );
+		this.scroll_etiquetas_view = new ScrolledWindow ( null, null );
+		this.scroll_hechos_view.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
+		this.scroll_anios_view.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
+		this.scroll_listas_view.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
+		this.scroll_etiquetas_view.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
 
 		this.anios_listas = new Notebook ();
 
@@ -64,9 +70,11 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		this.scroll_hechos_view.add ( this.hechos_view );
 		this.scroll_anios_view.add ( this.anios_view );
 		this.scroll_listas_view.add ( this.listas_view );
+		this.scroll_etiquetas_view.add ( this.etiquetas_view );
 
 		this.anios_listas.append_page ( this.scroll_anios_view, new Label(_("Years") ));
 		this.anios_listas.append_page ( this.scroll_listas_view, new Label (_("Lists") ));
+		this.anios_listas.append_page ( this.scroll_etiquetas_view, new Label (_("Tags")) );
 		
 		this.pack_start (this.anios_listas, false, false, 0);
 		this.pack_start (new Separator(Orientation.VERTICAL), false, false, 2);
@@ -88,7 +96,8 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 	private void elegir_anio () {
 		if ( this.anio_actual != this.anios_view.get_anio () ) {
 			this.anio_actual = this.anios_view.get_anio ();
-			this.lista_actual = null; //ningina lista
+			this.lista_actual = null; //ninguna lista
+			this.etiqueta_actual = null; //ninguna etiqueta
 			this.anios_cursor_changed();
 			this.mostrar_scroll_vista ( false );
 		}
@@ -101,19 +110,13 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 		if ( this.lista_actual != lista ) {
 			this.lista_actual = lista;
 			this.anio_actual = 0; //ningún anio
+			this.etiqueta_actual = null; //ninguna etiqueta
 			this.listas_cursor_changed ();
 			this.mostrar_scroll_vista ( false );
 		}
 		this.hechos_selection_changed ();
 	}
 
-<<<<<<< HEAD
-	private void cambiar_pestania () {
-		if ( this.anio_actual != 0 ) {
-			this.elegir_lista ();
-		} else {
-			this.elegir_anio ();
-=======
 	private void elegir_etiqueta () {
 			var etiqueta = this.db.select_etiqueta ( "WHERE rowid=\""
 		                                       + this.etiquetas_view.get_elemento_id ().to_string() + "\"");
@@ -143,7 +146,6 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 				this.elegir_etiqueta ();
 				break;
 			}
->>>>>>> Ahora se tira la señal hechos_selection_changed cuando se cambia de pestaña entre años, listas o etiquetas.
 		}
 	}
 
@@ -176,6 +178,7 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 	public void cargar_lista_anios ( Array<int> anios ) {
 		this.anios_view.agregar_varios ( anios );
 		this.listas_cursor_changed ();
+		this.etiquetas_cursor_changed ();
 	}
 
 	public void cargar_listas ( ListStoreListas listas ) {
@@ -187,7 +190,20 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 			this.elegir_anio ();
 		}
 		this.anios_cursor_changed ();
+		this.etiquetas_cursor_changed ();
 	}
+
+	public void cargar_etiquetas ( ListStoreEtiquetas etiquetas ) {
+		if ( !( etiquetas.vacio ) ) {
+			this.etiquetas_view.set_model ( etiquetas );
+			this.anios_listas.get_nth_page (2).show ();
+		} else {
+			this.anios_listas.get_nth_page (2).hide ();
+			this.elegir_anio ();
+		}
+		this.anios_cursor_changed ();
+		this.listas_cursor_changed ();
+ 	}
 
 	public void cargar_lista_hechos ( Array<Hecho> hechos ) {
 		this.hechos_view.mostrar_hechos ( hechos );
@@ -199,6 +215,10 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 
 	public Lista get_lista_actual () {
 		return this.lista_actual;
+	}
+
+	public Etiqueta get_etiqueta_actual () {
+		return this.etiqueta_actual;
 	}
 
 	public TreePath get_hecho_actual ( out Hecho hecho ) {
@@ -224,4 +244,5 @@ public class Nomeolvides.InterfazPrincipal : Gtk.Box {
 	public signal void hechos_selection_changed ();
 	public signal void anios_cursor_changed ();
 	public signal void listas_cursor_changed ();
+	public signal void etiquetas_cursor_changed ();
 }

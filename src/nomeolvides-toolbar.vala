@@ -139,9 +139,9 @@ public class Nomeolvides.Toolbar : Gtk.HeaderBar {
 		}
 	}
 
-	public void set_label_lista ( string lista = "" ) {
-		if ( lista != "") {
-			this.set_title ( lista );
+	public void set_label_string ( string str = "" ) {
+		if ( str != "") {
+			this.set_title ( str );
 		} else {
 			this.set_title ( "" );
 		}

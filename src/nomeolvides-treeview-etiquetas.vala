@@ -24,6 +24,7 @@ public class Nomeolvides.TreeViewEtiquetas : TreeViewBase {
 
 	public TreeViewEtiquetas () {
 		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
+		this.show_all ();
 	}
 
 	public TreeViewEtiquetas.ventana_principal () {}

@@ -27,6 +27,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 	public InterfazPrincipal anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
+	private Etiqueta etiqueta_actual;
 	
 	public VentanaPrincipal ( Gtk.Application app )
 	{   
@@ -174,8 +175,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 			this.anios_hechos_listas_cursor_changed ();
 			this.actualizar_string_label ( this.lista_actual.nombre );
 		}
-
-		this.actualizar_lista_label ();
+		this.actualizar_string_label ();
 	}
 
 	private void anios_hechos_etiquetas_cursor_changed_signal () {
@@ -188,6 +188,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 			this.anios_hechos_etiquetas_cursor_changed ();
 			this.actualizar_string_label ( this.etiqueta_actual.nombre );
 		}
+		this.actualizar_string_label ();
 	}
 
 	public void cargar_anios_view ( Array<int> ventana_principal_anios ) {
@@ -196,6 +197,11 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 
 	public void cargar_listas_view ( ListStoreListas listas ) {
 		this.anios_hechos.cargar_listas ( listas );
+		this.anios_hechos.mostrar_scroll_vista ( false );
+	}
+
+	public void cargar_etiquetas_view ( ListStoreEtiquetas etiquetas ) {
+		this.anios_hechos.cargar_etiquetas ( etiquetas );
 		this.anios_hechos.mostrar_scroll_vista ( false );
 	}
 
@@ -213,8 +219,16 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 		}
 	}
 
-	private void actualizar_string_label ( string label ) {
-		this.toolbar.set_label_string ( label );
+	private void actualizar_string_label ( string label = "" ) {
+		if ( this.lista_actual != null ) {
+			this.toolbar.set_label_string ( this.lista_actual.nombre );
+ 		} else {
+			if ( this.etiqueta_actual != null ) {
+				this.toolbar.set_label_string ( this.etiqueta_actual.nombre );
+			} else {
+				this.toolbar.set_label_string ();
+			}
+ 		}	
 	}
 
 	public int get_anio_actual () {
@@ -223,6 +237,10 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 
 	public Lista get_lista_actual () {
 		return this.lista_actual;
+	}
+
+	public Etiqueta get_etiqueta_actual () {
+		return this.etiqueta_actual;
 	}
 
 	public TreePath get_hecho_actual ( out Hecho hecho ) {
@@ -313,6 +331,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 	public signal void toolbar_list_agregar_button_clicked ();
 	public signal void anios_hechos_anios_cursor_changed ();
 	public signal void anios_hechos_listas_cursor_changed ();
+	public signal void anios_hechos_etiquetas_cursor_changed ();
 #if DISABLE_GNOME3
 	public signal void menu_exportar_activate ();
 	public signal void menu_importar_activate ();

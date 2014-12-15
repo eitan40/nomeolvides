@@ -44,6 +44,8 @@ public class Nomeolvides.App : Gtk.Application
 		this.cargar_lista_anios ();
 		this.cargar_listas ();
 		this.cargar_lista_hechos ();
+		this.cargar_etiquetas ();
+		this.window.limpiar_hechos_view ();
 	}
 
 	public override void activate () {
@@ -100,6 +102,7 @@ public class Nomeolvides.App : Gtk.Application
 
 		this.window.anios_hechos_anios_cursor_changed.connect ( this.elegir_anio );
 		this.window.anios_hechos_listas_cursor_changed.connect ( this.elegir_lista );
+		this.window.anios_hechos_etiquetas_cursor_changed.connect ( this.elegir_etiqueta );
 		
 		this.datos.datos_cambio_anios.connect ( this.cargar_lista_anios );
 		this.datos.datos_cambio_listas.connect ( this.cargar_listas );
@@ -144,6 +147,11 @@ public class Nomeolvides.App : Gtk.Application
 	private void elegir_lista () {
 		Lista lista = this.window.get_lista_actual ();
 		this.window.cargar_hechos_view ( this.datos.get_hechos_lista ( lista ));
+	}
+
+	private void elegir_etiqueta () {
+		Etiqueta etiqueta = this.window.get_etiqueta_actual ();
+		this.window.cargar_hechos_view ( this.datos.get_hechos_etiqueta ( etiqueta ));
 	}
 
 	public void edit_hecho_dialog () {
@@ -314,6 +322,10 @@ public class Nomeolvides.App : Gtk.Application
 
 	public void cargar_listas () {
 		this.window.cargar_listas_view ( this.datos.lista_de_listas () );
+	}
+
+	public void cargar_etiquetas() {
+		this.window.cargar_etiquetas_view ( this.datos.lista_de_etiquetas () );
 	}
 
 	public void cargar_lista_anios () {

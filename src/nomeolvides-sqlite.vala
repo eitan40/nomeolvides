@@ -521,7 +521,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	public Array<Hecho> select_hechos_lista ( Lista lista ) {
 		Array<Hecho> hechos = new Array<Hecho> ();
-		string where = " WHERE lista=\"" + lista.id.to_string () + "\"" 
+		string where = " WHERE lista=\"" + lista.id.to_string () + "\""
                      + "AND listashechos.hecho=hechos.id " 
 				     + "AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id "
 					 + "AND hechos.id NOT IN hechosborrar "
@@ -538,13 +538,13 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 
 	public Array<Hecho> select_hechos_etiqueta ( Etiqueta etiqueta ) {
 		Array<Hecho> hechos = new Array<Hecho> ();
-		string where = " WHERE lista=\"" + etiqueta.id.to_string () + "\"" 
+		string where = " WHERE etiqueta =\"" + etiqueta.id.to_string () + "\"" 
                      + "AND etiquetashechos.hecho=hechos.id " 
 				     + "AND colecciones.visible=\"true\" AND hechos.coleccion=colecciones.id "
 					 + "AND hechos.id NOT IN hechosborrar "
 			         + "AND hechos.coleccion NOT IN coleccionesborrar";
 
-		var stmt = this.select ( "hechos,listashechos,colecciones",
+		var stmt = this.select ( "hechos,etiquetashechos,colecciones",
 		                    	 "hechos.nombre,descripcion,anio,mes,dia,coleccion,fuente,hechos.id",
 								 where ); 
   
@@ -698,7 +698,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	public int count_hechos_lista ( Lista lista ) {
 		int cantidad_hechos = 0;
 
-		var stmt = this.count ("listashechos,hechos", "WHERE lista=" + lista.id.to_string() 
+		var stmt = this.count ("listashechos,hechos", "WHERE lista=" + lista.id.to_string()
 		                                                              + " AND listashechos.hecho NOT IN hechosborrar"
 		                   											  + " AND listashechos.hecho = hechos.id"
 		                   											  + " AND hechos.coleccion NOT IN coleccionesborrar");
@@ -715,7 +715,7 @@ public class Nomeolvides.Sqlite3 : Nomeolvides.BaseDeDatos, Object {
 	public int count_hechos_etiqueta ( Etiqueta etiqueta ) {
 		int cantidad_hechos = 0;
 
-		var stmt = this.count ("etiquetashechos,hechos", "WHERE etiqueta=" + etiqueta.id.to_string() 
+		var stmt = this.count ("etiquetashechos,hechos", "WHERE etiqueta=" + etiqueta.id.to_string()
 		                                                                 + " AND etiquetashechos.hecho NOT IN hechosborrar"
 		                   											     + " AND etiquetashechos.hecho = hechos.id"
 		                   											     + " AND hechos.coleccion NOT IN coleccionesborrar");

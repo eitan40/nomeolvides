@@ -172,6 +172,15 @@ public class Nomeolvides.Datos : GLib.Object {
 		return hechos;
 	}
 
+	public Array<Hecho> get_hechos_etiqueta ( Etiqueta etiqueta ) {
+		Array<Hecho> hechos = new Array<Hecho> ();
+
+		if ( etiqueta != null ) {
+			hechos = this.db.select_hechos_etiqueta ( etiqueta );
+		}
+		return hechos;
+	}
+
 	public ListStoreListas lista_de_listas () {
 		var listas = this.db.select_listas ();
 		
