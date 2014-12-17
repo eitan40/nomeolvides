@@ -68,12 +68,19 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
 		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
 		this.treeview.cursor_changed.connect ( this.elegir );
-
+	#if DISABLE_GNOME3
+	#else
 		this.agregar_dialog.signal_aplicar.connect ( this.agregar );
+	#endif
 	}
 
 	protected virtual void add_dialog () {
 		this.agregar_dialog.show_all ();
+	#if DISABLE_GNOME3
+		if ( agregar_dialog.run() == ResponseType.APPLY ) {
+ 			this.agregar ( agregar_dialog.respuesta );
+		}
+	#endif
 		this.agregar_dialog.borrar_datos ();
 	}
 
@@ -82,11 +89,13 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
-//		if (this.editar_dialog.run() == ResponseType.APPLY) {
+	#if DISABLE_GNOME3
+		if (this.editar_dialog.run() == ResponseType.APPLY) {
 			if ( this.actualizar ( objeto, this.editar_dialog.respuesta ) ) {
 				this.cambio_signal ();
-//			}
+			}
 		}
+	#endif
 		this.editar_dialog.borrar_datos ();
 	}
 

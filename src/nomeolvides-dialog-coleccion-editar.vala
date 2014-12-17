@@ -21,18 +21,24 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionEditar : DialogBase {
-	public DialogColeccionEditar ( Widget relative_to ) {
+#if DISABLE_GNOME3
+	 public DialogColeccionEditar () {
+		this.title = _("Edit Collection");
+		this.add_button ( _("Edit") , ResponseType.APPLY);
+#else	 
+	 public DialogColeccionEditar ( Widget relative_to ) {
 		base ( relative_to );
-//		this.title = _("Edit Collection");
+#endif		 
 		base.nombre_label.set_label ( _("Colection name") + ": " );
-//		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
 
+#if DISABLE_GNOME3
 	protected override void crear_respuesta() {
 		if( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
 			this.respuesta.id = this.id;
 		}
-	} 
+	}
+#endif
 }
 

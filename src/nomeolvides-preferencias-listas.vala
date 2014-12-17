@@ -29,9 +29,13 @@ public class Nomeolvides.PreferenciasListas: Nomeolvides.PreferenciasBase {
 		this.pack_start ( scroll_view, true, true, 0 );
 
 		this.conectar_signals ();
-
+	#if DISABLE_GNOME3
+		this.agregar_dialog = new DialogListaAgregar () as DialogBase;
+		this.editar_dialog = new DialogListaEditar () as DialogBase;
+	#else
 		this.agregar_dialog = new DialogListaAgregar ( this.toolbar.add_button ) as DialogBase;
 		this.editar_dialog = new DialogListaEditar ( this.toolbar.edit_button ) as DialogBase;
+	#endif
 		this.borrar_dialog = new DialogListaBorrar () as DialogBaseBorrar;
 	}
 

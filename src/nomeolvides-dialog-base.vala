@@ -20,27 +20,33 @@
 using Gtk;
 using Nomeolvides;
 
+#if DISABLE_GNOME3
+public class Nomeolvides.DialogBase : Gtk.Dialog {
+#else
 public class Nomeolvides.DialogBase : Gtk.Popover {
+	protected Button aplicar_button;
+	protected Button cancelar_button;
+#endif
 	protected Entry nombre_entry;
 	protected int64 id;
 	public Base respuesta { get; protected set; }
 	protected Label nombre_label;
-	protected Button aplicar_button;
-	protected Button cancelar_button;
-
+#if DISABLE_GNOME3
+	public DialogBase () {
+		this.resizable = false;
+		this.add_button ( _("Cancel") , ResponseType.CLOSE );
+		this.response.connect(on_response);
+#else
 	public DialogBase ( Gtk.Widget relative_to ) {
 		GLib.Object ( relative_to: relative_to);
-		this.modal = true;
-		
 		this.cancelar_button = new Button.with_mnemonic ( _("Cancel") );
-		this.aplicar_button = new Button.with_mnemonic ( _("Apply") );
-
+		this.aplicar_button = new Button.with_mnemonic ( _("Apply") );	
 		this.cancelar_button.set_border_width ( 5 );
 		this.aplicar_button.set_border_width ( 5 );
-
 		this.aplicar_button.clicked.connect ( this.aplicar );
 		this.cancelar_button.clicked.connect ( this.ocultar );
-
+#endif
+		this.modal = true;	
 		this.nombre_label = new Label.with_mnemonic ( _("") + ": " );
 
 		this.nombre_entry = new Entry ( );
@@ -61,13 +67,29 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 
 		grid.attach ( this.nombre_label, 0, 0, 1, 1 );
 	    grid.attach ( this.nombre_entry, 1, 0, 3, 1 );
+	#if DISABLE_GNOME3
+		var contenido = this.get_content_area() as Box;
+		contenido.pack_start( grid, true, true, 0 );
+	#else
 		grid.attach ( this.cancelar_button, 2, 1, 1, 1 );
-		grid.attach ( this.aplicar_button, 3, 1, 1, 1 );		
-
+		grid.attach ( this.aplicar_button, 3, 1, 1, 1 );
 		this.add ( grid );
+	#endif
 	}
+#if DISABLE_GNOME3
+	protected void on_response (Dialog source, int response_id) {
+		switch (response_id) {
+			case ResponseType.APPLY:
+				this.crear_respuesta ();
+				break;
+			case ResponseType.CLOSE:
+				this.hide();
+				break;
+        }
+    }
 
 	protected virtual void crear_respuesta() {}
+#endif
 
 	public void set_datos ( Base objeto ) {
 		this.nombre_entry.set_text ( objeto.nombre );
@@ -77,7 +99,8 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 	public void borrar_datos () {
 		this.nombre_entry.set_text ("");
 	}
-
+#if DISABLE_GNOME3
+#else
 	protected void ocultar (){
 		this.hide ();
 	}
@@ -85,4 +108,5 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 	public virtual void aplicar () {}
 
 	public signal bool signal_aplicar ( Base objeto );
+#endif
 }

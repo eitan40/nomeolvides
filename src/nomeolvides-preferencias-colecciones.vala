@@ -33,8 +33,13 @@ public class Nomeolvides.PreferenciasColecciones : Nomeolvides.PreferenciasBase 
 		this.pack_start ( scroll_view, true, true, 0 );
 		this.cambio_toggle = false;
 
+	#if DISABLE_GNOME3
+		this.agregar_dialog = new DialogColeccionAgregar () as DialogBase;
+		this.editar_dialog = new DialogColeccionEditar () as DialogBase;
+	#else
 		this.agregar_dialog = new DialogColeccionAgregar ( this.toolbar.add_button ) as DialogBase;
 		this.editar_dialog = new DialogColeccionEditar ( this.toolbar.edit_button ) as DialogBase;
+	#endif	
 		this.borrar_dialog = new DialogColeccionBorrar () as DialogBaseBorrar;
 
 		this.conectar_signals ();

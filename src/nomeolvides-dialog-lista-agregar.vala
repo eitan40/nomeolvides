@@ -21,16 +21,21 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogListaAgregar : DialogBase {
+#if DISABLE_GNOME3
+	public DialogListaAgregar () {
+		this.title = _ ("Add Custom List");
+		this.add_button ( _("Add") , ResponseType.APPLY );
+#else
 	public DialogListaAgregar ( Widget relative_to ) {
 		base ( relative_to );
-//		this.title = _ ("Add Custom List");
+#endif
 		this.nombre_label.set_label (_("List Name") + ": " );
-//		this.add_button ( _("Add") , ResponseType.APPLY );
 	}
-
+#if DISABLE_GNOME3
 	protected override void crear_respuesta() {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Lista ( this.nombre_entry.get_text () );
 		}
 	}
+#endif
 }

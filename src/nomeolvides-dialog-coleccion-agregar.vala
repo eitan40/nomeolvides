@@ -21,11 +21,22 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionAgregar : DialogBase {
+#if DISABLE_GNOME3
+	public DialogColeccionAgregar () {
+		this.title = _("Add a Collection");
+#else
 	public DialogColeccionAgregar ( Gtk.Widget relative_to ) {
 		base ( relative_to );
+#endif
 		base.nombre_label.set_label ( _("Colection name") + ": " );
 	}
-
+#if DISABLE_GNOME3
+	protected override void crear_respuesta () {
+		if ( this.nombre_entry.get_text_length () > 0 ) {
+			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
+		}
+	}
+#else
 	protected override void aplicar () {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
@@ -33,5 +44,5 @@ public class Nomeolvides.DialogColeccionAgregar : DialogBase {
 			this.hide ();
 		}
 	}
+#endif
 }
-

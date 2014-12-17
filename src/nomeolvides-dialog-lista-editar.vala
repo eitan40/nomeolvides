@@ -21,18 +21,23 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogListaEditar : DialogBase {
+#if DISABLE_GNOME3
+	public DialogListaEditar () {
+		this.title = _("Edit Custom List");
+		this.add_button ( _("Edit") , ResponseType.APPLY);
+#else
 	public DialogListaEditar ( Widget relative_to ) {
 		base ( relative_to );
-//		this.title = _("Edit Custom List");
+#endif
 		this.nombre_label.set_label (_("List Name") + ": ");
-//		this.add_button ( _("Edit") , ResponseType.APPLY);
 	}
-
+#if DISABLE_GNOME3
 	protected override void crear_respuesta () {
 		if(this.nombre_entry.get_text_length () > 0) {
 			this.respuesta  = new Lista (this.nombre_entry.get_text ());
 			this.respuesta.id = this.id;
 		}
 	}
+#endif
 }
 
