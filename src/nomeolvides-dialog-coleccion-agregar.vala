@@ -29,6 +29,7 @@ public class Nomeolvides.DialogColeccionAgregar : DialogBase {
 		base ( relative_to );
 #endif
 		base.nombre_label.set_label ( _("Colection name") + ": " );
+		base.aplicar_button.set_label ( _("Add") );
 	}
 #if DISABLE_GNOME3
 	protected override void crear_respuesta () {
@@ -40,7 +41,8 @@ public class Nomeolvides.DialogColeccionAgregar : DialogBase {
 	protected override void aplicar () {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
-			this.signal_aplicar ( this.respuesta );
+			this.signal_agregar ( this.respuesta );
+			this.borrar_datos ();
 			this.hide ();
 		}
 	}

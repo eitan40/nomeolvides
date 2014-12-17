@@ -91,7 +91,7 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 	protected virtual void crear_respuesta() {}
 #endif
 
-	public void set_datos ( Base objeto ) {
+	public virtual void set_datos ( Base objeto ) {
 		this.nombre_entry.set_text ( objeto.nombre );
 		this.id = objeto.id;
 	}
@@ -107,6 +107,7 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 
 	public virtual void aplicar () {}
 
-	public signal bool signal_aplicar ( Base objeto );
+	public signal bool signal_agregar ( Base objeto );
+	public signal bool signal_actualizar ( Base objeto_viejo, Base objeto_nuevo );
 #endif
 }

@@ -70,7 +70,8 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.treeview.cursor_changed.connect ( this.elegir );
 	#if DISABLE_GNOME3
 	#else
-		this.agregar_dialog.signal_aplicar.connect ( this.agregar );
+		this.agregar_dialog.signal_agregar.connect ( this.agregar );
+		this.editar_dialog.signal_actualizar.connect ( this.actualizar );
 	#endif
 	}
 
@@ -96,7 +97,6 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 			}
 		}
 	#endif
-		this.editar_dialog.borrar_datos ();
 	}
 
 	private void delete_dialog () {
@@ -151,9 +151,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	}
 
 	protected virtual void borrar ( Base objeto ) {}
-
 	protected virtual void efectuar_deshacer ( Base objeto ) {}
-
 	protected virtual void efectuar_rehacer ( Base objeto ) {}
 
 	public signal void cambio_signal ();
