@@ -22,10 +22,28 @@ using Nomeolvides;
 
 public class Nomeolvides.TreeViewBase : TreeView {
 	public TreeViewBase () {
+		this.ventana_principal ();
+		const float CENTRADO = (float)0.5;
+
+		var cantidad_cell = new CellRendererText ();
+		cantidad_cell.xalign = CENTRADO;
+
+		this.insert_column_with_attributes ( -1, _("Amount of Facts"), cantidad_cell, "text", 1 );
+
+	}
+
+	public TreeViewBase.ventana_principal () {
+
 		var nombre_cell = new CellRendererText ();
 		nombre_cell.ellipsize = Pango.EllipsizeMode.END;
 		nombre_cell.width_chars = 30;
-		this.insert_column_with_attributes ( -1, _("Name"), nombre_cell, "text", 0 );
+
+		var nombre_columna = new TreeViewColumn.with_attributes ( _("Name"), nombre_cell, "text", 0 );
+
+		nombre_columna.set_expand ( true );
+
+		this.insert_column ( nombre_columna, -1 );
+
 	}
 
 	public int64 get_elemento_id () {

@@ -33,7 +33,11 @@ public class Nomeolvides.TreeViewHechos : Gtk.TreeView {
 
 		nombre_cell.width_chars = 30;
 
-		this.insert_column_with_attributes (-1, _("Name"), nombre_cell, "text", 0);
+		var nombre_columna = new TreeViewColumn.with_attributes ( _("Name"), nombre_cell, "text", 0 );
+
+		nombre_columna.set_expand ( true );
+
+		this.insert_column ( nombre_columna, -1 );
 		this.insert_column_with_attributes (-1, _("Date"), fecha_cell, "text", 2);
 		this.model = new ListStoreHechos.anio_int (0);
 		this.set_model ( new ListStoreHechos () );
