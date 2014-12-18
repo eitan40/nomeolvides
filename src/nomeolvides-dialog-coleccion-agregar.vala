@@ -27,9 +27,9 @@ public class Nomeolvides.DialogColeccionAgregar : DialogBase {
 #else
 	public DialogColeccionAgregar ( Gtk.Widget relative_to ) {
 		base ( relative_to );
+		base.aplicar_button.set_label ( _("Add") );
 #endif
 		base.nombre_label.set_label ( _("Colection name") + ": " );
-		base.aplicar_button.set_label ( _("Add") );
 	}
 #if DISABLE_GNOME3
 	protected override void crear_respuesta () {
