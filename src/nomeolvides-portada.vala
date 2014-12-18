@@ -41,11 +41,11 @@ public class Nomeolvides.Portada : Box {
 
 		this.label_nombre.set_width_chars ( 30 );
 		this.label_fecha.set_width_chars ( 30 );
-		this.label_fuente.set_width_chars ( 60 );
+		this.label_fuente.set_width_chars ( 30 );
 
 		this.label_nombre.set_max_width_chars ( 30 );
 		this.label_fecha.set_max_width_chars ( 30 );
-		this.label_fuente.set_max_width_chars ( 60 );
+		this.label_fuente.set_max_width_chars ( 30 );
 
 		this.label_nombre.set_line_wrap ( true );
 		this.label_fuente.set_line_wrap ( true );
@@ -56,6 +56,8 @@ public class Nomeolvides.Portada : Box {
 		this.label_nombre.set_selectable ( true );
 		this.label_fecha.set_selectable ( true );
 		this.label_fuente.set_selectable ( true );
+
+		this.label_fuente.wrap_mode = Pango.WrapMode.WORD_CHAR;
 
 		this.descripcion = new Label.with_mnemonic ("");
 	#if DISABLE_GNOME3
@@ -88,14 +90,13 @@ public class Nomeolvides.Portada : Box {
 		bool retorno = false;
 
 		if ( a_mostrar != null ) {
-			this.label_nombre.set_markup ("<span font_size=\"x-large\" font_weight=\"heavy\">" + a_mostrar.nombre + "</span>");
-			this.label_fecha.set_markup ("<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () + "</span>");
+			this.label_nombre.set_markup ( "<span font_size=\"x-large\" font_weight=\"heavy\">" + a_mostrar.nombre + "</span>" );
+			this.label_fecha.set_markup ( "<span font_style=\"italic\">"+ a_mostrar.fecha_to_string () + "</span>" );
 			this.descripcion.set_markup ( "<span>" + a_mostrar.descripcion + "</span>" );
-			if (a_mostrar.fuente != "") {
-				this.label_fuente.set_markup (_("Source") + ": " + "<span font_style=\"italic\">" + a_mostrar.fuente + "</span>");
-				this.label_fuente.visible = true;
+			if ( a_mostrar.fuente != "" ) {
+				this.label_fuente.set_markup ( _("Source") + ": " + "<span font_style=\"italic\">" + a_mostrar.fuente + "</span>" );
 			} else {
-				this.label_fuente.visible = false;
+				this.label_fuente.set_markup ( "" );
 			}
 
 			retorno = true;
