@@ -106,7 +106,10 @@ public class Nomeolvides.DialogBaseBorrar : Popover {
 	public void set_datos ( Base objeto_a_borrar, int cantidad_hechos ) {
 		nombre_objeto.set_markup ( "<span font_weight=\"heavy\">"+ objeto_a_borrar.nombre +"</span>");
 		hechos_objeto.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
+	#if DISABLE_GNOME3
+	#else
 		this.objeto = objeto_a_borrar;
+	#endif
 	}
 #if DISABLE_GNOME3
 #else

@@ -82,6 +82,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		if ( agregar_dialog.run() == ResponseType.APPLY ) {
  			this.agregar ( agregar_dialog.respuesta );
 		}
+		this.agregar_dialog.hide ();
 	#endif
 		this.agregar_dialog.borrar_datos ();
 	}
@@ -97,6 +98,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 				this.cambio_signal ();
 			}
 		}
+		this.editar_dialog.hide ();
 	#endif
 	}
 
@@ -109,6 +111,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 			this.borrar ( objeto );
 			this.cambio_signal ();
 		}
+		this.borrar_dialog.hide ();
 	#endif
 	}
 
