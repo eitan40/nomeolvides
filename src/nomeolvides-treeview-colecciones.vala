@@ -24,7 +24,6 @@ public class Nomeolvides.TreeViewColecciones : TreeViewBase {
 	private CellRendererToggle toggle_visible;
 	
 	public TreeViewColecciones () {
-		this.insert_column_with_attributes ( -1, _("Amount of Facts"), new CellRendererText(), "text", 1 );
 		this.toggle_visible = new CellRendererToggle();
 		this.toggle_visible.toggled.connect ( signal_toggle );
 		this.insert_column_with_attributes ( -1, _("Visible"), this.toggle_visible, "active", 3 );

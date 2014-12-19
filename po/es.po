@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-09 19:38-0300\n"
+"POT-Creation-Date: 2014-12-19 17:49-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -137,8 +137,7 @@ msgid "Colection"
 msgstr "Colección"
 
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:28
-#: ../src/nomeolvides-treeview-colecciones.vala:27
-#: ../src/nomeolvides-treeview-listas.vala:26
+#: ../src/nomeolvides-treeview-base.vala:31
 msgid "Amount of Facts"
 msgstr "Cantidad de Hechos"
 
@@ -229,17 +228,17 @@ msgid "Do you want to remove this facts from the list?"
 msgstr "¿Desea eliminar estos hechos de la lista?"
 
 #: ../src/nomeolvides-dialog-hecho.vala:43
-#: ../src/nomeolvides-treeview-base.vala:28
+#: ../src/nomeolvides-treeview-base.vala:41
 #: ../src/nomeolvides-treeview-hechos.vala:36
 msgid "Name"
 msgstr "Nombre"
 
 #: ../src/nomeolvides-dialog-hecho.vala:44
-#: ../src/nomeolvides-treeview-hechos.vala:37
+#: ../src/nomeolvides-treeview-hechos.vala:41
 msgid "Date"
 msgstr "Fecha"
 
-#: ../src/nomeolvides-dialog-hecho.vala:46 ../src/nomeolvides-portada.vala:95
+#: ../src/nomeolvides-dialog-hecho.vala:46 ../src/nomeolvides-portada.vala:97
 msgid "Source"
 msgstr "Fuente"
 
@@ -495,7 +494,7 @@ msgstr "Agregar a la lista"
 msgid "Remove from list"
 msgstr "Eliminar de la lista"
 
-#: ../src/nomeolvides-treeview-colecciones.vala:30
+#: ../src/nomeolvides-treeview-colecciones.vala:29
 msgid "Visible"
 msgstr "Visible"
 

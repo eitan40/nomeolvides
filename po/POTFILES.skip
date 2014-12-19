@@ -33,5 +33,4 @@ src/nomeolvides-treeview-anios.c
 src/nomeolvides-treeview-base.c
 src/nomeolvides-treeview-colecciones.c
 src/nomeolvides-treeview-hechos.c
-src/nomeolvides-treeview-listas.c
 src/nomeolvides-ventana-principal.c

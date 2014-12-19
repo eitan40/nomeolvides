@@ -22,7 +22,7 @@ using Nomeolvides;
 
 public class Nomeolvides.PreferenciasListas: Nomeolvides.PreferenciasBase {
 	public PreferenciasListas ( ListStoreListas liststore_listas ) {
-		this.treeview = new TreeViewListas ();
+		this.treeview = new TreeViewBase ();
 		this.treeview.set_border_width ( 20 );
 		this.treeview.set_model ( liststore_listas );
 		this.scroll_view.add ( this.treeview );
