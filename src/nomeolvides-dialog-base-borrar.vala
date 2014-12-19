@@ -67,6 +67,7 @@ public class Nomeolvides.DialogBaseBorrar : Popover {
 		nombre_objeto.set_margin_start ( 20 );
 		hechos.set_margin_end ( 20 );
 		hechos_objeto.set_margin_start ( 20 );
+		hechos_objeto.set_margin_bottom ( 20 );
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
 		this.cancelar_button = new Button.with_mnemonic ( _("Cancel") );

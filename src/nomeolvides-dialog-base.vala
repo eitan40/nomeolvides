@@ -57,6 +57,7 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 		grid.set_margin_right ( 20 );
 		grid.set_margin_left ( 20 );
 	#else
+		this.nombre_entry.set_margin_bottom ( 10 );
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
 	#endif
@@ -66,13 +67,13 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 		grid.set_halign ( Align.CENTER );
 
 		grid.attach ( this.nombre_label, 0, 0, 1, 1 );
-	    grid.attach ( this.nombre_entry, 1, 0, 3, 1 );
+	    grid.attach ( this.nombre_entry, 1, 0, 1, 1 );
 	#if DISABLE_GNOME3
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start( grid, true, true, 0 );
 	#else
-		grid.attach ( this.cancelar_button, 2, 1, 1, 1 );
-		grid.attach ( this.aplicar_button, 3, 1, 1, 1 );
+		grid.attach ( this.cancelar_button, 0, 1, 1, 1 );
+		grid.attach ( this.aplicar_button, 1, 1, 1, 1 );
 		this.add ( grid );
 	#endif
 	}
