@@ -28,6 +28,7 @@ public class Nomeolvides.DialogListaAgregar : DialogBase {
 #else
 	public DialogListaAgregar ( Widget relative_to ) {
 		base ( relative_to );
+		base.aplicar_button.set_label ( _("Add") );
 #endif
 		this.nombre_label.set_label (_("List Name") + ": " );
 	}
@@ -35,6 +36,15 @@ public class Nomeolvides.DialogListaAgregar : DialogBase {
 	protected override void crear_respuesta() {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Lista ( this.nombre_entry.get_text () );
+		}
+	}
+#else
+	protected override void aplicar () {
+		if ( this.nombre_entry.get_text_length () > 0 ) {
+			this.respuesta = new Lista ( this.nombre_entry.get_text () );
+			this.signal_agregar ( this.respuesta );
+			this.borrar_datos ();
+			this.hide ();
 		}
 	}
 #endif

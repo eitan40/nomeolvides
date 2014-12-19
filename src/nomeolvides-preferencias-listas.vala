@@ -28,7 +28,6 @@ public class Nomeolvides.PreferenciasListas: Nomeolvides.PreferenciasBase {
 		this.scroll_view.add ( this.treeview );
 		this.pack_start ( scroll_view, true, true, 0 );
 
-		this.conectar_signals ();
 	#if DISABLE_GNOME3
 		this.agregar_dialog = new DialogListaAgregar () as DialogBase;
 		this.editar_dialog = new DialogListaEditar () as DialogBase;
@@ -37,6 +36,7 @@ public class Nomeolvides.PreferenciasListas: Nomeolvides.PreferenciasBase {
 		this.editar_dialog = new DialogListaEditar ( this.toolbar.edit_button ) as DialogBase;
 	#endif
 		this.borrar_dialog = new DialogListaBorrar () as DialogBaseBorrar;
+		this.conectar_signals ();
 	}
 
 	protected override bool agregar ( Base objeto ) {
