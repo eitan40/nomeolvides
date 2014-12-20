@@ -9,7 +9,7 @@ VERSION_INESTABLE=$(($(echo ${VERSION_ANTERIOR} | cut --delimiter="." --fields=2
 if [ "$VERSION_INESTABLE" != 0 ]; then
 	#COMMIT_ACTUAL=$(($(git rev-list HEAD --count) + 1))
 	#echo "commit actual: "${COMMIT_ACTUAL}
-	VERSION_ACTUAL=$(cat configure.ac | grep AC_INIT | awk -v FS=',' '{ print $2 }' | sed 's/\ //' | awk -v FS='.' '{ print $1"."$2"."$3"." }')$(($(git describe --long | awk -v FS='-' '{ print $2 }') + 1))
+	VERSION_ACTUAL=$(cat configure.ac | grep AC_INIT | awk -v FS=',' '{ print $2 }' | sed 's/\ //' | awk -v FS='.' '{ print $1"."$2"."$3"." }')$(expr $(git describe --long | awk -v FS='-' '{ print $2 }') + 1)
 	echo "version actualizada a : "${VERSION_ACTUAL}
 
 	sed -i "s/${VERSION_ANTERIOR}/ ${VERSION_ACTUAL}/" configure.ac
