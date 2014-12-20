@@ -19,17 +19,26 @@
 
 using Gtk;
 using Nomeolvides;
-
+#if DISABLE_GNOME3
 public class Nomeolvides.DialogBaseBorrar : Dialog {
+#else
+public class Nomeolvides.DialogBaseBorrar : Popover {
+	protected Button aplicar_button;
+	protected Button cancelar_button;
+	protected Base objeto;
+#endif
 	protected Label pregunta;
 	protected Label nombre;
 	protected Label nombre_objeto;
 	protected Label hechos;
 	protected Label hechos_objeto;
-
+#if DISABLE_GNOME3
 	public DialogBaseBorrar () {
 		this.set_modal ( true );
-
+#else
+	public DialogBaseBorrar ( Widget relative_to ) {
+		GLib.Object ( relative_to: relative_to);
+#endif
 		this.pregunta = new Label.with_mnemonic ( "" );
 		this.nombre = new Label.with_mnemonic ( "" );
 		this.nombre_objeto = new Label ( "" );
@@ -58,8 +67,15 @@ public class Nomeolvides.DialogBaseBorrar : Dialog {
 		nombre_objeto.set_margin_start ( 20 );
 		hechos.set_margin_end ( 20 );
 		hechos_objeto.set_margin_start ( 20 );
+		hechos_objeto.set_margin_bottom ( 20 );
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
+		this.cancelar_button = new Button.with_mnemonic ( _("Cancel") );
+		this.aplicar_button = new Button.with_mnemonic ( _("Apply") );	
+		this.cancelar_button.set_border_width ( 5 );
+		this.aplicar_button.set_border_width ( 5 );
+		this.aplicar_button.clicked.connect ( this.aplicar );
+		this.cancelar_button.clicked.connect ( this.ocultar );
 #endif
 
 		grid.set_valign ( Align.CENTER );
@@ -74,16 +90,38 @@ public class Nomeolvides.DialogBaseBorrar : Dialog {
 		grid.attach ( nombre_objeto, 1, 1, 1, 1 );
 		grid.attach ( hechos, 0, 2, 1, 1 );
 		grid.attach ( hechos_objeto, 1, 2, 1, 1 );
-
+#if DISABLE_GNOME3
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start ( grid, true, true, 0 );
 
 		this.add_button ( _("Cancel"), ResponseType.REJECT );
 		this.add_button ( _("Apply"), ResponseType.APPLY );
+#else
+		grid.attach ( cancelar_button, 0, 3, 1, 1 );
+		grid.attach ( aplicar_button, 1, 3, 1, 1 );
+		this.add ( grid );
+#endif
 	}
 
 	public void set_datos ( Base objeto_a_borrar, int cantidad_hechos ) {
 		nombre_objeto.set_markup ( "<span font_weight=\"heavy\">"+ objeto_a_borrar.nombre +"</span>");
 		hechos_objeto.set_markup ( "<span font_weight=\"heavy\">"+ cantidad_hechos.to_string () +"</span>");
+	#if DISABLE_GNOME3
+	#else
+		this.objeto = objeto_a_borrar;
+	#endif
 	}
+#if DISABLE_GNOME3
+#else
+	protected void ocultar (){
+		this.hide ();
+	}
+
+	protected void aplicar () {
+		this.signal_borrar ( this.objeto );
+		this.hide ();
+	}
+
+	public signal void signal_borrar ( Base objeto );
+#endif
 }

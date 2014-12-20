@@ -21,17 +21,41 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionEditar : DialogBase {
-	public DialogColeccionEditar () {
+#if DISABLE_GNOME3
+	 public DialogColeccionEditar () {
 		this.title = _("Edit Collection");
-		base.nombre_label.set_label ( _("Colection name") + ": " );
 		this.add_button ( _("Edit") , ResponseType.APPLY);
+#else
+		public Base objeto_viejo;
+	 public DialogColeccionEditar ( Widget relative_to ) {
+		base ( relative_to );
+		base.aplicar_button.set_label ( _("Edit") );
+#endif		 
+		base.nombre_label.set_label ( _("Colection name") + ": " );
 	}
 
+#if DISABLE_GNOME3
 	protected override void crear_respuesta() {
-		if( this.nombre_entry.get_text_length () > 0 ) {
+		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
 			this.respuesta.id = this.id;
 		}
-	} 
+	}
+#else
+	protected override void aplicar () {
+		if ( this.nombre_entry.get_text_length () > 0 ) {
+			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
+			this.respuesta.id = this.id;
+			this.signal_actualizar( this.objeto_viejo, this.respuesta );
+			this.borrar_datos ();
+			this.hide ();
+		}
+	}
+
+	public override void set_datos ( Base objeto ) {
+		base.set_datos ( objeto );
+		this.objeto_viejo = objeto;
+	}
+#endif
 }
 

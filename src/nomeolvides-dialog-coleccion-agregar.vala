@@ -21,16 +21,31 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.DialogColeccionAgregar : DialogBase {
+#if DISABLE_GNOME3
 	public DialogColeccionAgregar () {
 		this.title = _("Add a Collection");
+		this.add_button ( _("Add"), ResponseType.APPLY );
+#else
+	public DialogColeccionAgregar ( Gtk.Widget relative_to ) {
+		base ( relative_to );
+		base.aplicar_button.set_label ( _("Add") );
+#endif
 		base.nombre_label.set_label ( _("Colection name") + ": " );
-		this.add_button ( _("Add") , ResponseType.APPLY );
 	}
-
-	protected override void crear_respuesta() {
+#if DISABLE_GNOME3
+	protected override void crear_respuesta () {
 		if ( this.nombre_entry.get_text_length () > 0 ) {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
 		}
 	}
+#else
+	protected override void aplicar () {
+		if ( this.nombre_entry.get_text_length () > 0 ) {
+			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
+			this.signal_agregar ( this.respuesta );
+			this.borrar_datos ();
+			this.hide ();
+		}
+	}
+#endif
 }
-

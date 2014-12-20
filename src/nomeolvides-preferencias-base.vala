@@ -45,7 +45,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 #endif
 
 		this.scroll_view = new ScrolledWindow (null,null);
-		this.scroll_view.set_policy (PolicyType.NEVER, PolicyType.AUTOMATIC);
+		this.scroll_view.set_policy ( PolicyType.NEVER, PolicyType.AUTOMATIC );
 		this.scroll_view.set_border_width ( 1 );
 
 		this.pack_start ( toolbar, false, false, 0 );
@@ -67,15 +67,23 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
 		this.deshacer.rehacer_sin_items.connect ( this.toolbar.desactivar_rehacer );
 		this.deshacer.rehacer_con_items.connect ( this.toolbar.activar_rehacer );
-		this.treeview.cursor_changed.connect ( elegir );
+		this.treeview.cursor_changed.connect ( this.elegir );
+	#if DISABLE_GNOME3
+	#else
+		this.agregar_dialog.signal_agregar.connect ( this.agregar );
+		this.editar_dialog.signal_actualizar.connect ( this.actualizar );
+		this.borrar_dialog.signal_borrar.connect ( this.borrar );
+	#endif
 	}
 
 	protected virtual void add_dialog () {
 		this.agregar_dialog.show_all ();
-
+	#if DISABLE_GNOME3
 		if ( agregar_dialog.run() == ResponseType.APPLY ) {
-			this.agregar ( agregar_dialog.respuesta );
+ 			this.agregar ( agregar_dialog.respuesta );
 		}
+		this.agregar_dialog.hide ();
+	#endif
 		this.agregar_dialog.borrar_datos ();
 	}
 
@@ -84,24 +92,27 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.editar_dialog.set_datos ( objeto );
 		this.editar_dialog.show_all ();
 
+	#if DISABLE_GNOME3
 		if (this.editar_dialog.run() == ResponseType.APPLY) {
 			if ( this.actualizar ( objeto, this.editar_dialog.respuesta ) ) {
 				this.cambio_signal ();
 			}
 		}
-		this.editar_dialog.borrar_datos ();
+		this.editar_dialog.hide ();
+	#endif
 	}
 
 	private void delete_dialog () {
 		Base objeto = this.treeview.get_elemento ();
 		this.borrar_dialog.set_datos ( objeto, this.treeview.get_cantidad_hechos () );
 		this.borrar_dialog.show_all ();
-
+	#if DISABLE_GNOME3
 		if ( this.borrar_dialog.run() == ResponseType.APPLY ) {
 			this.borrar ( objeto );
 			this.cambio_signal ();
 		}
-		this.borrar_dialog.hide();
+		this.borrar_dialog.hide ();
+	#endif
 	}
 
 	protected virtual void elegir () {
@@ -144,9 +155,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	}
 
 	protected virtual void borrar ( Base objeto ) {}
-
 	protected virtual void efectuar_deshacer ( Base objeto ) {}
-
 	protected virtual void efectuar_rehacer ( Base objeto ) {}
 
 	public signal void cambio_signal ();
