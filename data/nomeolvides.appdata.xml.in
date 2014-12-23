@@ -16,7 +16,14 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot type="default" width="1280" height="720">https://dl.dropboxusercontent.com/u/14325890/nomeolvides/nomeolvides.png</screenshot>
+    <screenshot type="default">
+      <image>https://softwareperonista.com.ar/screenshots/nomeolvides.png</image>
+      <_caption>The default interface</_caption>
+    </screenshot>
+    <screenshot>
+      <image>https://softwareperonista.com.ar/screenshots/nomeolvides-legacy.png</image>
+      <_caption>The classic interface</_caption>
+    </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/softwareperonista/nomeolvides</url>
   <updatecontact>desarrolladores_at_softwareperonista.com.ar</updatecontact>
