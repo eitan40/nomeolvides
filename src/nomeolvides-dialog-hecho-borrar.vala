@@ -48,6 +48,8 @@ public class Nomeolvides.DialogHechoBorrar : Dialog {
 	#else
 		grid.set_margin_start ( 30 );
 		grid.set_margin_end ( 30 );
+		var headerbar = new HeaderBar ();
+		this.set_titlebar ( headerbar );
 	#endif
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );

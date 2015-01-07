@@ -28,9 +28,7 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 	private int64 id_lista;
 	private Grid grid;
 	
-	public DialogHechoListaAgregar ( VentanaPrincipal ventana )
-	{
-		this.title = _("Add Fact to List");
+	public DialogHechoListaAgregar ( VentanaPrincipal ventana ) {
 		this.set_default_size ( 450, 200 );
 		this.set_transient_for ( ventana as Window );
 		
@@ -48,6 +46,8 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 	#else
 		grid.set_margin_end ( 30 );
 		grid.set_margin_start ( 30 );
+		var headerbar = new HeaderBar ();
+		this.set_titlebar ( headerbar );
 	#endif
 		grid.set_margin_top ( 15 );
 		grid.set_margin_bottom ( 15 );
@@ -56,6 +56,7 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 
 		var label_pregunta = new Label (_("Add") + ":");
 		var label_listas = new Label ( _("to list") );
+		this.set_title (_("Add Fact to List"));
 		
 		grid.attach ( label_pregunta, 0, 0, 1, 1 );
 		grid.attach ( label_listas, 0, 1, 1, 1 );

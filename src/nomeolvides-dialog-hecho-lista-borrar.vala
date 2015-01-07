@@ -32,7 +32,6 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 	private Grid grid;
 	
 	public DialogHechoListaBorrar ( VentanaPrincipal ventana ) {
-		this.title = _("Remove Fact from List");
 		this.set_transient_for ( ventana as Window );
 		this.set_default_size ( 450, 200 );
 
@@ -67,6 +66,8 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 		lista_nombre.set_margin_start ( 20 );
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
+		var headerbar = new HeaderBar ();
+		this.set_titlebar ( headerbar );
 #endif
 
 		grid.set_valign ( Align.CENTER );
@@ -79,6 +80,8 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 		grid.attach ( pregunta, 0, 0, 2, 1 );
 		grid.attach ( lista_label, 0, 2, 1, 1 );
 		grid.attach ( lista_nombre, 1, 2, 1, 1 );
+
+		this.set_title ( _("Remove Fact from List") );
 		
 		this.response.connect ( on_response );
 

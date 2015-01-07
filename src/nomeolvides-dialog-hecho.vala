@@ -59,6 +59,8 @@ public class Nomeolvides.DialogHecho : Dialog
 		fecha_label.set_margin_end ( 15 );
 		coleccion_label.set_margin_end ( 15 );
 		fuente_label.set_margin_end ( 15 );
+		var headerbar = new HeaderBar ();
+		this.set_titlebar ( headerbar );
 #endif
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
