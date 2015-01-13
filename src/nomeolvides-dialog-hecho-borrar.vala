@@ -27,6 +27,10 @@ public class Nomeolvides.DialogHechoBorrar : Dialog {
 	public Array<Hecho> hechos;
 
 	public DialogHechoBorrar ( VentanaPrincipal ventana ) {
+#if DISABLE_GNOME3
+#else
+		Object (use_header_bar: 1);
+#endif
 		this.set_modal ( true );
 		this.set_transient_for ( ventana as Gtk.Window );
 		this.set_size_request ( 450, 200 );
@@ -48,16 +52,19 @@ public class Nomeolvides.DialogHechoBorrar : Dialog {
 	#else
 		grid.set_margin_start ( 30 );
 		grid.set_margin_end ( 30 );
-		var headerbar = new HeaderBar ();
-		this.set_titlebar ( headerbar );
 	#endif
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
 		grid.attach ( hecho, 0, 1, 1, 1 );
 
-		this.add_button ( _("Cancel"), ResponseType.CANCEL);
+		var boton = this.add_button ( _("Cancel"), ResponseType.CANCEL);
 		this.add_button ( _("Apply"), ResponseType.APPLY);
-		
+
+#if DISABLE_GNOME3
+#else
+		boton.get_style_context ().add_class ( "suggested-action" );
+#endif
+
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(grid, false, false, 0);
 

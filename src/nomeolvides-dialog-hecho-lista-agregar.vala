@@ -29,6 +29,10 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 	private Grid grid;
 	
 	public DialogHechoListaAgregar ( VentanaPrincipal ventana ) {
+#if DISABLE_GNOME3
+#else
+		Object (use_header_bar: 1);
+#endif
 		this.set_default_size ( 450, 200 );
 		this.set_transient_for ( ventana as Window );
 		
@@ -46,8 +50,6 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 	#else
 		grid.set_margin_end ( 30 );
 		grid.set_margin_start ( 30 );
-		var headerbar = new HeaderBar ();
-		this.set_titlebar ( headerbar );
 	#endif
 		grid.set_margin_top ( 15 );
 		grid.set_margin_bottom ( 15 );
@@ -66,7 +68,11 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 		contenido.pack_start (grid, true, true, 0 );
 
 		this.add_button ( _("Cancel"), ResponseType.CANCEL );
-		this.add_button ( _("Add"), ResponseType.APPLY );
+		var boton = this.add_button ( _("Add"), ResponseType.APPLY );
+#if DISABLE_GNOME3
+#else
+		boton.get_style_context ().add_class ( "suggested-action" );
+#endif
 
 		this.show_all ();
 	}

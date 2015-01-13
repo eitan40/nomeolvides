@@ -42,11 +42,11 @@ public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogHecho {
         switch (response_id)
 		{
 			case ResponseType.APPLY:
-        		aplicar();
-       			break;
+				aplicar();
+				break;
 			case ResponseType.CANCEL:
-        		destroy();
-        		break;
+				destroy();
+				break;
         }
     }
 

@@ -51,11 +51,11 @@ public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
         switch (response_id)
 		{
 			case ResponseType.APPLY:
-        		modificar();
-       			break;
+				modificar();
+				break;
 			case ResponseType.CANCEL:
-        		destroy();
-        		break;
+				destroy();
+				break;
         }
     }
 		
