@@ -32,13 +32,17 @@ public class Nomeolvides.DialogHecho : Dialog
 	
 	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
 	{
+#if DISABLE_GNOME3
+#else
+		Object (use_header_bar: 1);
+#endif
 		this.resizable = true;
 		this.modal = true;
 		this.set_default_size (600,400);
 		this.set_size_request (400,250);
 		this.set_transient_for ( ventana as Window );
 
-		this.add_button ( _("Cancel") , ResponseType.CLOSE);
+		this.add_button ( _("Cancel") , ResponseType.CANCEL);
 		
 		var nombre_label = new Label.with_mnemonic (_("Name") + ": ");
 		var fecha_label = new Label.with_mnemonic (_("Date") + ": ");
@@ -59,8 +63,6 @@ public class Nomeolvides.DialogHecho : Dialog
 		fecha_label.set_margin_end ( 15 );
 		coleccion_label.set_margin_end ( 15 );
 		fuente_label.set_margin_end ( 15 );
-		var headerbar = new HeaderBar ();
-		this.set_titlebar ( headerbar );
 #endif
 		this.nombre_entry = new Entry ();
 		this.fuente_entry = new Entry ();
