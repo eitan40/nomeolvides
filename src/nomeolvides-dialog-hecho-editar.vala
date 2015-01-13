@@ -27,10 +27,10 @@ public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
 		base (ventana, colecciones );
 		this.set_title (_("Edit Fact"));
 
-		var boton = this.add_button ( _("Edit") , ResponseType.APPLY);
+		this.add_button ( _("Edit") , ResponseType.APPLY);
 #if DISABLE_GNOME3
 #else
-		boton.get_style_context ().add_class ( "suggested-action" );
+		this.get_widget_for_response ( ResponseType.CANCEL ).get_style_context ().add_class ( "suggested-action" );
 #endif
 		this.response.connect(on_response);
 	}
@@ -46,8 +46,7 @@ public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
 		this.hecho_id = hecho_a_editar.id;
 	}
 	
-	private void on_response (Dialog source, int response_id)
-	{
+	private void on_response (Dialog source, int response_id) {
         switch (response_id)
 		{
 			case ResponseType.APPLY:
@@ -59,8 +58,7 @@ public class Nomeolvides.DialogHechoEditar : Nomeolvides.DialogHecho {
         }
     }
 		
-	private void modificar ()
-	{
+	private void modificar () {
 		this.crear_respuesta ();
 		this.respuesta.id = this.hecho_id;
 	}

@@ -58,7 +58,7 @@ public class Nomeolvides.DialogHechoBorrar : Dialog {
 		grid.attach ( hecho, 0, 1, 1, 1 );
 
 		var boton = this.add_button ( _("Cancel"), ResponseType.CANCEL);
-		this.add_button ( _("Apply"), ResponseType.APPLY);
+		this.add_button ( _("Delete"), ResponseType.APPLY);
 
 #if DISABLE_GNOME3
 #else
