@@ -20,8 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogHecho : Dialog
-{
+public class Nomeolvides.DialogHecho : Dialog {
 	protected Entry nombre_entry;
 	protected TextView descripcion_textview;
 	protected ScrolledWindow descripcion_scroll;
@@ -30,8 +29,7 @@ public class Nomeolvides.DialogHecho : Dialog
 	protected Entry fuente_entry;
 	public Hecho respuesta { get; protected set; }
 	
-	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore )
-	{
+	public DialogHecho (VentanaPrincipal ventana, ListStoreColecciones colecciones_liststore ) {
 #if DISABLE_GNOME3
 #else
 		Object (use_header_bar: 1);
@@ -107,8 +105,7 @@ public class Nomeolvides.DialogHecho : Dialog
 	}
 
 	protected void crear_respuesta() {
-		if(this.nombre_entry.get_text_length () > 0)
-		{
+		if(this.nombre_entry.get_text_length () > 0) {
 			this.respuesta  = new Hecho ( Utiles.sacarCaracterEspecial ( this.nombre_entry.get_text () ),
 										  Utiles.sacarCaracterEspecial ( this.descripcion_textview.buffer.text ),
 										  this.fecha.get_anio (),

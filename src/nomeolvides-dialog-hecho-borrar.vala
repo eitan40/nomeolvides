@@ -76,7 +76,6 @@ public class Nomeolvides.DialogHechoBorrar : Dialog {
 			scroll_hechos.add ( treeview_hechos );;
 			this.grid.attach ( scroll_hechos, 1, 1, 1, 1 );
 		}
-
 		this.set_labels ( hechos_elegidos );
 
 		for ( int i = 0; i < hechos_elegidos.length; i++ ) {

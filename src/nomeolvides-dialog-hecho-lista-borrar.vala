@@ -20,8 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogHechoListaBorrar : Dialog
-{	
+public class Nomeolvides.DialogHechoListaBorrar : Dialog {
 	public Array<Hecho> hechos;
 	private Lista lista;
 	private Label hecho_nombre;
@@ -133,10 +132,8 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 		this.lista = lista;
 	}
 
-	private void on_response (Dialog source, int response_id)
-	{
-        switch (response_id)
-		{
+	private void on_response (Dialog source, int response_id) {
+        switch (response_id) {
     		case ResponseType.CANCEL:
         		this.hide ();
         		break;

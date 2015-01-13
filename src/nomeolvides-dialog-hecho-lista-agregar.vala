@@ -20,8 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogHechoListaAgregar : Dialog
-{	
+public class Nomeolvides.DialogHechoListaAgregar : Dialog {
 	private ComboBox listas;
 	private ListStoreListas liststore;
 	public Array<Hecho> hechos;
@@ -75,7 +74,7 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 		if ( hechos_elegidos.length == 1 ) {
 			Label label_hecho = new Label ( "" );
 			label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hechos_elegidos.index (0).nombre +"</span>");
-			if( label_hecho.get_text ().length > 50 ) {
+			if ( label_hecho.get_text ().length > 50 ) {
 				label_hecho.set_size_request ( 600, -1 );
 				label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
 				label_hecho.set_line_wrap ( true );
@@ -109,10 +108,8 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 		this.listas.set_model ( liststore );
 	}
 
-	private void on_response (Dialog source, int response_id)
-	{
-        switch (response_id)
-		{
+	private void on_response (Dialog source, int response_id) {
+        switch (response_id) {
     		case ResponseType.APPLY:
         		this.crear_respuesta ();
 				break;
