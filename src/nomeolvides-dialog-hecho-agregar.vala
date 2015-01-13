@@ -29,7 +29,11 @@ public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogHecho {
 		
 		this.response.connect(on_response);
 		this.nombre_entry.activate.connect(on_activate);
-		this.add_button ( _("Add") , ResponseType.APPLY);
+		var boton = this.add_button ( _("Add") , ResponseType.APPLY);
+#if DISABLE_GNOME3
+#else
+		boton.get_style_context ().add_class ( "suggested-action" );
+#endif
 	}
 
 
@@ -37,12 +41,12 @@ public class Nomeolvides.DialogHechoAgregar : Nomeolvides.DialogHecho {
 	{
         switch (response_id)
 		{
-    		case ResponseType.APPLY:
-        		aplicar();
-       			break;
-    		case ResponseType.CLOSE:
-        		destroy();
-        		break;
+			case ResponseType.APPLY:
+				aplicar();
+				break;
+			case ResponseType.CANCEL:
+				destroy();
+				break;
         }
     }
 

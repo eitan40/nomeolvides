@@ -20,17 +20,18 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogHechoListaAgregar : Dialog
-{	
+public class Nomeolvides.DialogHechoListaAgregar : Dialog {
 	private ComboBox listas;
 	private ListStoreListas liststore;
 	public Array<Hecho> hechos;
 	private int64 id_lista;
 	private Grid grid;
 	
-	public DialogHechoListaAgregar ( VentanaPrincipal ventana )
-	{
-		this.title = _("Add Fact to List");
+	public DialogHechoListaAgregar ( VentanaPrincipal ventana ) {
+#if DISABLE_GNOME3
+#else
+		Object (use_header_bar: 1);
+#endif
 		this.set_default_size ( 450, 200 );
 		this.set_transient_for ( ventana as Window );
 		
@@ -56,6 +57,7 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 
 		var label_pregunta = new Label (_("Add") + ":");
 		var label_listas = new Label ( _("to list") );
+		this.set_title (_("Add Fact to List"));
 		
 		grid.attach ( label_pregunta, 0, 0, 1, 1 );
 		grid.attach ( label_listas, 0, 1, 1, 1 );
@@ -65,7 +67,11 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 		contenido.pack_start (grid, true, true, 0 );
 
 		this.add_button ( _("Cancel"), ResponseType.CANCEL );
-		this.add_button ( _("Add"), ResponseType.APPLY );
+		var boton = this.add_button ( _("Add"), ResponseType.APPLY );
+#if DISABLE_GNOME3
+#else
+		boton.get_style_context ().add_class ( "suggested-action" );
+#endif
 
 		this.show_all ();
 	}
@@ -74,7 +80,7 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 		if ( hechos_elegidos.length == 1 ) {
 			Label label_hecho = new Label ( "" );
 			label_hecho.set_markup ( "<span font_weight=\"heavy\">"+ hechos_elegidos.index (0).nombre +"</span>");
-			if( label_hecho.get_text ().length > 50 ) {
+			if ( label_hecho.get_text ().length > 50 ) {
 				label_hecho.set_size_request ( 600, -1 );
 				label_hecho.set_line_wrap_mode ( Pango.WrapMode.WORD );
 				label_hecho.set_line_wrap ( true );
@@ -108,10 +114,8 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog
 		this.listas.set_model ( liststore );
 	}
 
-	private void on_response (Dialog source, int response_id)
-	{
-        switch (response_id)
-		{
+	private void on_response (Dialog source, int response_id) {
+        switch (response_id) {
     		case ResponseType.APPLY:
         		this.crear_respuesta ();
 				break;

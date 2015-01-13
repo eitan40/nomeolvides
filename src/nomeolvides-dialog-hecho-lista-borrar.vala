@@ -20,8 +20,7 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.DialogHechoListaBorrar : Dialog
-{	
+public class Nomeolvides.DialogHechoListaBorrar : Dialog {
 	public Array<Hecho> hechos;
 	private Lista lista;
 	private Label hecho_nombre;
@@ -32,7 +31,10 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 	private Grid grid;
 	
 	public DialogHechoListaBorrar ( VentanaPrincipal ventana ) {
-		this.title = _("Remove Fact from List");
+#if DISABLE_GNOME3
+#else
+		Object (use_header_bar: 1);
+#endif
 		this.set_transient_for ( ventana as Window );
 		this.set_default_size ( 450, 200 );
 
@@ -79,11 +81,18 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 		grid.attach ( pregunta, 0, 0, 2, 1 );
 		grid.attach ( lista_label, 0, 2, 1, 1 );
 		grid.attach ( lista_nombre, 1, 2, 1, 1 );
+
+		this.set_title ( _("Remove Fact from List") );
 		
 		this.response.connect ( on_response );
 
-		this.add_button ( _("Cancel") , ResponseType.CANCEL );
+		var boton = this.add_button ( _("Cancel") , ResponseType.CANCEL );
 		this.add_button ( _("Remove") , ResponseType.APPLY );
+
+#if DISABLE_GNOME3
+#else
+		boton.get_style_context ().add_class ( "suggested-action" );
+#endif
 
 		var contenido = this.get_content_area () as Box;
 		contenido.pack_start ( grid, true, true, 0 );
@@ -130,10 +139,8 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog
 		this.lista = lista;
 	}
 
-	private void on_response (Dialog source, int response_id)
-	{
-        switch (response_id)
-		{
+	private void on_response (Dialog source, int response_id) {
+        switch (response_id) {
     		case ResponseType.CANCEL:
         		this.hide ();
         		break;

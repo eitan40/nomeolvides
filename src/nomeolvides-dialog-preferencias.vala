@@ -25,10 +25,16 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private PreferenciasListas config_listas;
 	
 	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
-		this.set_title (_("Preferences"));
 		this.set_modal ( true );
 		this.set_default_size (600, 350);
 		this.set_transient_for ( ventana as Gtk.Window );
+
+#if DISABLE_GNOME3
+#else
+		var headerbar = new HeaderBar ();
+		this.set_titlebar ( headerbar );
+#endif
+		this.set_title (_("Preferences"));
 
 		this.config_colecciones = new PreferenciasColecciones ( colecciones );
 		this.config_listas = new PreferenciasListas ( listas );
@@ -41,8 +47,12 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 
 		Gtk.Box contenido =  this.get_content_area () as Box;
 		contenido.pack_start ( this.notebook, true, true, 0 );
-		
+
+#if DISABLE_GNOME3
 		this.add_button ( _("Close"), ResponseType.CLOSE );
+#else
+		headerbar.set_show_close_button ( true );
+#endif
 		this.response.connect(on_response);
 	}
 
