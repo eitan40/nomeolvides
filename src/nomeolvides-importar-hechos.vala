@@ -19,21 +19,29 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.ImportarHechos : Dialog {
+public class Nomeolvides.DialogHechosImportar : Dialog {
 	private Button boton_elegir_archivo;
 	private ComboBox combo_colecciones;
 	private Label archivo_label;
 	private string directorio;
 	private string archivo;
 	
-	public ImportarHechos ( string directorio_actual, ListStoreColecciones colecciones_liststore ) {
+	public DialogHechosImportar ( string directorio_actual, ListStoreColecciones colecciones_liststore ) {
+#if DISABLE_GNOME3
+#else
+		Object (use_header_bar: 1);
+#endif
 		this.title = _("Import Facts From File");
 		this.directorio = directorio_actual;
-		this.set_default_size ( 450, 200 );
+		this.set_default_size ( 512, 250 );
 
-		this.add_button ( _("Cancel"), ResponseType.CANCEL );
+		var boton_cancel = this.add_button ( _("Cancel"), ResponseType.CANCEL );
 		this.add_button ( _("Import"), ResponseType.ACCEPT );
-		
+
+#if DISABLE_GNOME3
+#else
+		boton_cancel.get_style_context ().add_class ( "suggested-action" );
+#endif
 		var coleccion = new Coleccion ( _("Select Colection"), true );
 
 		colecciones_liststore.agregar_al_inicio ( coleccion , 0 );

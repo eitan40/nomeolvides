@@ -21,8 +21,7 @@ using GLib;
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.App : Gtk.Application 
-{
+public class Nomeolvides.App : Gtk.Application  {
 	public static App app;
 	public VentanaPrincipal window;
 	public Datos datos;
@@ -208,7 +207,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.dialogo_preferencias.hide ();
 	}
 
-	public void send_hecho () {		
+	public void send_hecho () {
 		Hecho hecho; 
 		string asunto;
 		string cuerpo;
@@ -281,7 +280,7 @@ public class Nomeolvides.App : Gtk.Application
 		
 		dialogo.set_hechos ( this.window.get_hechos_seleccionados () );
 		dialogo.set_lista ( lista );
-		
+
 		if (dialogo.run () == ResponseType.APPLY) {
 			for ( int i = 0; i < dialogo.hechos.length; i++ ) {
 				this.datos.quitar_hecho_lista ( dialogo.hechos.index (i), lista );
@@ -289,6 +288,7 @@ public class Nomeolvides.App : Gtk.Application
 		}
 		dialogo.close ();
 		this.window.toolbar.list_button.set_active ( false );
+
 	}
 
 	public void save_as_file_dialog () {
@@ -302,11 +302,11 @@ public class Nomeolvides.App : Gtk.Application
 	}
 
 	public void importar_dialog () {
-		var abrir_archivo = new ImportarHechos(GLib.Environment.get_current_dir (), this.datos.lista_de_colecciones ());
+		var abrir_archivo = new DialogHechosImportar (GLib.Environment.get_current_dir (), this.datos.lista_de_colecciones ());
 		abrir_archivo.set_transient_for ( this.window );
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
-            this.datos.open_file ( abrir_archivo.get_filename (), abrir_archivo.get_coleccion_id () );
+			this.datos.open_file ( abrir_archivo.get_filename (), abrir_archivo.get_coleccion_id () );
 		}
 		abrir_archivo.close ();
 	}
