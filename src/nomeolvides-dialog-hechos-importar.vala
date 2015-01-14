@@ -26,7 +26,7 @@ public class Nomeolvides.DialogHechosImportar : Dialog {
 	private string directorio;
 	private string archivo;
 	
-	public DialogHechosImportar ( string directorio_actual, ListStoreColecciones colecciones_liststore ) {
+	public DialogHechosImportar (VentanaPrincipal ventana, string directorio_actual, ListStoreColecciones colecciones_liststore ) {
 #if DISABLE_GNOME3
 #else
 		Object (use_header_bar: 1);
@@ -34,6 +34,7 @@ public class Nomeolvides.DialogHechosImportar : Dialog {
 		this.title = _("Import Facts From File");
 		this.directorio = directorio_actual;
 		this.set_default_size ( 512, 250 );
+		this.set_transient_for ( ventana as Window );
 
 		var boton_cancel = this.add_button ( _("Cancel"), ResponseType.CANCEL );
 		this.add_button ( _("Import"), ResponseType.ACCEPT );

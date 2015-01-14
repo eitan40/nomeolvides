@@ -302,7 +302,7 @@ public class Nomeolvides.App : Gtk.Application  {
 	}
 
 	public void importar_dialog () {
-		var abrir_archivo = new DialogHechosImportar (GLib.Environment.get_current_dir (), this.datos.lista_de_colecciones ());
+		var abrir_archivo = new DialogHechosImportar (this.window, GLib.Environment.get_current_dir (), this.datos.lista_de_colecciones ());
 		abrir_archivo.set_transient_for ( this.window );
 
 		if (abrir_archivo.run () == ResponseType.ACCEPT) {
