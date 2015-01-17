@@ -7,12 +7,12 @@
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * nomeolvides is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- *   bullit - 39 escalones - silent love (japonesa) 
+ * 
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,13 +21,12 @@ using Gtk;
 using Nomeolvides;
 
 public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
-
 	private Box main_box { get; private set; }
 	public Toolbar toolbar { get; private set; }
 	public InterfazPrincipal anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
-	
+
 	public VentanaPrincipal ( Gtk.Application app ) {
 		Object (application: app);
 		this.set_application (app);
@@ -71,7 +70,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 		menu_salir.activate.connect ( this.menu_salir_activate_signal );
 		menu_archivo.add ( menu_salir );
 
-
 		var menu_editar_item = new Gtk.MenuItem.with_mnemonic ( _("Edit") );
 		menu_barra.add( menu_editar_item );
 		var menu_editar = new Gtk.Menu ();
@@ -106,7 +104,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 		this.toolbar.edit_button.activado.connect ( this.toolbar_edit_button_clicked_signal );
 		this.toolbar.delete_button.activado.connect ( this.toolbar_delete_button_clicked_signal );
 		this.toolbar.send_button.activado.connect ( this.toolbar_send_button_clicked_signal );
-
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
 		this.anios_hechos.hechos_selection_changed.connect ( this.elegir_hecho );
@@ -235,7 +232,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow {
 			this.toolbar.set_buttons_invisible ();		
 		}
 	}
-	
+
 	public void show_visible () {
 		this.show_all ();
 		this.anios_hechos.mostrar_scroll_vista ( false );
