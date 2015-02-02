@@ -57,11 +57,11 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	}
 
 	protected void conectar_signals () {
-		this.toolbar.add_button.clicked.connect ( this.add_dialog );
-		this.toolbar.delete_button.clicked.connect ( this.delete_dialog );
-		this.toolbar.edit_button.clicked.connect ( this.edit_dialog );
-		this.toolbar.undo_button.clicked.connect ( this.deshacer_cambios );
-		this.toolbar.redo_button.clicked.connect ( this.rehacer_cambios );
+		this.toolbar.add_button.activado.connect ( this.add_dialog );
+		this.toolbar.delete_button.activado.connect ( this.delete_dialog );
+		this.toolbar.edit_button.activado.connect ( this.edit_dialog );
+		this.toolbar.undo_button.activado.connect ( this.deshacer_cambios );
+		this.toolbar.redo_button.activado.connect ( this.rehacer_cambios );
 
 		this.deshacer.deshacer_sin_items.connect ( this.toolbar.desactivar_deshacer );
 		this.deshacer.deshacer_con_items.connect ( this.toolbar.activar_deshacer );
@@ -70,6 +70,9 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 		this.treeview.cursor_changed.connect ( this.elegir );
 	#if DISABLE_GNOME3
 	#else
+		this.agregar_dialog.signal_cerrado.connect ( this.desactivar_boton );
+		this.borrar_dialog.signal_cerrado.connect ( this.desactivar_boton );
+		this.editar_dialog.signal_cerrado.connect ( this.desactivar_boton );
 		this.agregar_dialog.signal_agregar.connect ( this.agregar );
 		this.editar_dialog.signal_actualizar.connect ( this.actualizar );
 		this.borrar_dialog.signal_borrar.connect ( this.borrar );
@@ -83,7 +86,9 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
  			this.agregar ( agregar_dialog.respuesta );
 		}
 		this.agregar_dialog.hide ();
+		this.toolbar.add_button.set_active ( false );
 	#endif
+
 		this.agregar_dialog.borrar_datos ();
 	}
 
@@ -98,6 +103,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 				this.cambio_signal ();
 			}
 		}
+		this.toolbar.edit_button.set_active ( false );
 		this.editar_dialog.hide ();
 	#endif
 	}
@@ -112,6 +118,7 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 			this.cambio_signal ();
 		}
 		this.borrar_dialog.hide ();
+		this.toolbar.delete_button.set_active ( false );
 	#endif
 	}
 
@@ -145,6 +152,13 @@ public class Nomeolvides.PreferenciasBase : Gtk.Box {
 	public void set_buttons_invisible () {
 		this.toolbar.set_buttons_invisible ();
 	}
+#if DISABLE_GNOME3
+#else
+	protected void desactivar_boton ( Widget relative_to ) {
+		var boton = relative_to as ToggleButton;
+		boton.set_active ( false );
+	}
+#endif
 
 	protected virtual bool agregar ( Base objeto ) {
 		return false;

@@ -57,6 +57,7 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 		grid.set_margin_right ( 20 );
 		grid.set_margin_left ( 20 );
 	#else
+		this.closed.connect ( this.ocultar );
 		this.nombre_entry.set_margin_bottom ( 10 );
 		grid.set_margin_end ( 20 );
 		grid.set_margin_start ( 20 );
@@ -67,7 +68,7 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 		grid.set_halign ( Align.CENTER );
 
 		grid.attach ( this.nombre_label, 0, 0, 1, 1 );
-	    grid.attach ( this.nombre_entry, 1, 0, 1, 1 );
+		grid.attach ( this.nombre_entry, 1, 0, 1, 1 );
 	#if DISABLE_GNOME3
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start( grid, true, true, 0 );
@@ -84,10 +85,10 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 				this.crear_respuesta ();
 				break;
 			case ResponseType.CLOSE:
-				this.hide();
+				this.hide ();
 				break;
-        }
-    }
+		}
+	}
 
 	protected virtual void crear_respuesta() {}
 #endif
@@ -102,7 +103,8 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 	}
 #if DISABLE_GNOME3
 #else
-	protected void ocultar (){
+	protected void ocultar () {
+		this.signal_cerrado ( this.get_relative_to () );
 		this.hide ();
 	}
 
@@ -110,5 +112,6 @@ public class Nomeolvides.DialogBase : Gtk.Popover {
 
 	public signal bool signal_agregar ( Base objeto );
 	public signal bool signal_actualizar ( Base objeto_viejo, Base objeto_nuevo );
+	public signal void signal_cerrado ( Widget relative_to );
 #endif
 }

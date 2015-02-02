@@ -85,12 +85,10 @@ public class Nomeolvides.DialogHechoListaBorrar : Dialog {
 		this.set_title ( _("Remove Fact from List") );
 		
 		this.response.connect ( on_response );
-
-		var boton = this.add_button ( _("Cancel") , ResponseType.CANCEL );
-		this.add_button ( _("Remove") , ResponseType.APPLY );
-
 #if DISABLE_GNOME3
+		this.add_button ( _("Remove") , ResponseType.APPLY );
 #else
+		var boton = this.add_button ( _("Remove") , ResponseType.APPLY );
 		boton.get_style_context ().add_class ( "suggested-action" );
 #endif
 

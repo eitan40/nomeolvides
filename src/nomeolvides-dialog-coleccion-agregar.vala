@@ -44,7 +44,7 @@ public class Nomeolvides.DialogColeccionAgregar : DialogBase {
 			this.respuesta = new Coleccion ( this.nombre_entry.get_text (), true );
 			this.signal_agregar ( this.respuesta );
 			this.borrar_datos ();
-			this.hide ();
+			this.ocultar ();
 		}
 	}
 #endif

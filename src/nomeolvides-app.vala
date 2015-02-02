@@ -126,14 +126,14 @@ public class Nomeolvides.App : Gtk.Application
 		if ( this.datos.hay_colecciones_activas () ) {
 
 			var add_dialog = new DialogHechoAgregar ( this.window as VentanaPrincipal,
-			                                          this.datos.lista_de_colecciones () ); 
-		
+													this.datos.lista_de_colecciones () );
+
 			add_dialog.show();
 
 			if ( add_dialog.run() == ResponseType.APPLY )
 			{
-				this.datos.agregar_hecho( add_dialog.respuesta );			
-			}		
+				this.datos.agregar_hecho( add_dialog.respuesta );
+			}
 			add_dialog.destroy();
 		}
 	}
@@ -228,7 +228,6 @@ public class Nomeolvides.App : Gtk.Application
 			Archivo.escribir (archivo, hechos_json );
 		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
-  
 			try {
 				Process.spawn_command_line_async( commando );
 			} catch(SpawnError err) {
@@ -245,7 +244,7 @@ public class Nomeolvides.App : Gtk.Application
 		this.datos.rehacer_cambios ();
 	}
 
-	public void add_hecho_lista () {		
+	public void add_hecho_lista () {
 		Hecho hecho;
 		this.window.get_hecho_actual ( out hecho );
 
@@ -257,7 +256,7 @@ public class Nomeolvides.App : Gtk.Application
 			DialogHechoListaAgregar dialogo = new DialogHechoListaAgregar ( this.window );
 
 			dialogo.setear_hechos ( this.window.get_hechos_seleccionados () );
-            dialogo.setear_listas ( this.datos.lista_de_listas() );
+			dialogo.setear_listas ( this.datos.lista_de_listas() );
 
 			if (dialogo.run () == ResponseType.APPLY) {
 				for (int i = 0; i < dialogo.hechos.length; i++ ) {
@@ -266,6 +265,7 @@ public class Nomeolvides.App : Gtk.Application
 			}
 			dialogo.close ();
 		}
+		this.window.toolbar.list_button.active = false;
 	}
 
 	public void remove_hecho_lista () {
@@ -280,7 +280,7 @@ public class Nomeolvides.App : Gtk.Application
 				this.datos.quitar_hecho_lista ( dialogo.hechos.index (i), lista );
 			}
 		}
-		dialogo.close ();			
+		dialogo.close ();
 	}
 
 	public void save_as_file_dialog () {
@@ -288,7 +288,7 @@ public class Nomeolvides.App : Gtk.Application
 		guardar_archivo.set_transient_for ( this.window );
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
-            this.datos.save_as_file ( guardar_archivo.get_filename () );
+			this.datos.save_as_file ( guardar_archivo.get_filename () );
 		}
 		guardar_archivo.close ();
 	}

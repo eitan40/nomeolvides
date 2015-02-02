@@ -67,9 +67,10 @@ public class Nomeolvides.DialogHechoListaAgregar : Dialog {
 		contenido.pack_start (grid, true, true, 0 );
 
 		this.add_button ( _("Cancel"), ResponseType.CANCEL );
-		var boton = this.add_button ( _("Add"), ResponseType.APPLY );
 #if DISABLE_GNOME3
+		this.add_button ( _("Add"), ResponseType.APPLY );
 #else
+		var boton = this.add_button ( _("Add"), ResponseType.APPLY );
 		boton.get_style_context ().add_class ( "suggested-action" );
 #endif
 

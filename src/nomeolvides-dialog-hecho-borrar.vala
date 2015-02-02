@@ -56,15 +56,13 @@ public class Nomeolvides.DialogHechoBorrar : Dialog {
 
 		grid.attach ( pregunta, 0, 0, 2, 1 );
 		grid.attach ( hecho, 0, 1, 1, 1 );
-
-		var boton = this.add_button ( _("Cancel"), ResponseType.CANCEL);
-		this.add_button ( _("Delete"), ResponseType.APPLY);
-
 #if DISABLE_GNOME3
+		this.add_button ( _("Cancel"), ResponseType.CANCEL);
 #else
+		var boton = this.add_button ( _("Cancel"), ResponseType.CANCEL);
 		boton.get_style_context ().add_class ( "suggested-action" );
 #endif
-
+		this.add_button ( _("Delete"), ResponseType.APPLY);
 		var contenido = this.get_content_area() as Box;
 		contenido.pack_start(grid, false, false, 0);
 

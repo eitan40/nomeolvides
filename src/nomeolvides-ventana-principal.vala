@@ -24,7 +24,7 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 {
 
 	private Box main_box { get; private set; }
-	private Toolbar toolbar { get; private set; }
+	public Toolbar toolbar { get; private set; }
 	public InterfazPrincipal anios_hechos { get; private set; }
 	private int anio_actual;
 	private Lista lista_actual;
@@ -55,7 +55,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 		var menu_barra = new MenuBar ();
 		this.main_box.pack_start ( menu_barra, false, false, 0 );
-
 
 		var menu_archivo_item = new Gtk.MenuItem.with_mnemonic ( _("File"));
 		menu_barra.add( menu_archivo_item );
@@ -94,7 +93,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		menu_acerca.activate.connect ( this.menu_acerca_activate_signal );
 		menu_ayuda.add ( menu_acerca );
 
-
 		this.main_box.pack_start ( this.toolbar, false, false, 0 );
 	#else
 		this.set_titlebar ( toolbar );
@@ -103,7 +101,6 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 		this.conectar_seniales ();
 	}
-
 
 	private void conectar_seniales () {
 
