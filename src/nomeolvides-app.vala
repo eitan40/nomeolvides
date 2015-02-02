@@ -135,6 +135,7 @@ public class Nomeolvides.App : Gtk.Application
 				this.datos.agregar_hecho( add_dialog.respuesta );
 			}
 			add_dialog.destroy();
+			this.window.toolbar.add_button.set_active ( false );
 		}
 	}
 	
@@ -161,6 +162,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.edit_hecho ( edit_dialog.respuesta );
 		}
 		edit_dialog.destroy();
+		this.window.toolbar.edit_button.set_active ( false );
 	}
 
 	public void delete_hecho_dialog () {
@@ -169,10 +171,11 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			for (int i = 0; i < delete_dialog.hechos.length; i++ ) {
-					this.datos.eliminar_hecho ( delete_dialog.hechos.index (i) );
+				this.datos.eliminar_hecho ( delete_dialog.hechos.index (i) );
 			}
 		}	
 		delete_dialog.destroy ();
+		this.window.toolbar.delete_button.set_active ( false );
 	}
 
 	public void about_dialog () {
@@ -234,14 +237,17 @@ public class Nomeolvides.App : Gtk.Application
 				stdout.printf(err.message+"\n");
 			}
 		}
+		this.window.toolbar.send_button.set_active ( false );
 	}
 
 	public void undo_hecho () {
 		this.datos.deshacer_cambios ();
+		this.window.toolbar.undo_button.set_active ( false );
 	}
 
 	public void redo_hecho () {
 		this.datos.rehacer_cambios ();
+		this.window.toolbar.redo_button.set_active ( false );
 	}
 
 	public void add_hecho_lista () {
@@ -266,6 +272,7 @@ public class Nomeolvides.App : Gtk.Application
 			dialogo.close ();
 		}
 		this.window.toolbar.list_button.active = false;
+		this.window.toolbar.list_button.set_active ( false );
 	}
 
 	public void remove_hecho_lista () {
@@ -281,6 +288,7 @@ public class Nomeolvides.App : Gtk.Application
 			}
 		}
 		dialogo.close ();
+		this.window.toolbar.list_button.set_active ( false );
 	}
 
 	public void save_as_file_dialog () {

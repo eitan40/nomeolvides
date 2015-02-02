@@ -104,12 +104,12 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 
 	private void conectar_seniales () {
 
-		this.toolbar.add_button.clicked.connect ( this.toolbar_add_button_clicked_signal );
-		this.toolbar.undo_button.clicked.connect ( this.toolbar_undo_button_clicked_signal );
-		this.toolbar.redo_button.clicked.connect ( this.toolbar_redo_button_clicked_signal );
-		this.toolbar.edit_button.clicked.connect ( this.toolbar_edit_button_clicked_signal );
-		this.toolbar.delete_button.clicked.connect ( this.toolbar_delete_button_clicked_signal );
-		this.toolbar.send_button.clicked.connect ( this.toolbar_send_button_clicked_signal );
+		this.toolbar.add_button.activado.connect ( this.toolbar_add_button_clicked_signal );
+		this.toolbar.undo_button.activado.connect ( this.toolbar_undo_button_clicked_signal );
+		this.toolbar.redo_button.activado.connect ( this.toolbar_redo_button_clicked_signal );
+		this.toolbar.edit_button.activado.connect ( this.toolbar_edit_button_clicked_signal );
+		this.toolbar.delete_button.activado.connect ( this.toolbar_delete_button_clicked_signal );
+		this.toolbar.send_button.activado.connect ( this.toolbar_send_button_clicked_signal );
 
 		this.anios_hechos.anios_cursor_changed.connect ( this.anios_hechos_anios_cursor_changed_signal );
 		this.anios_hechos.listas_cursor_changed.connect ( this.anios_hechos_listas_cursor_changed_signal );
@@ -152,9 +152,9 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.anio_actual = this.anios_hechos.get_anio_actual ();
 		if ( this.anio_actual != 0 ) {
 			this.toolbar.list_button_set_agregar ();
-			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
-			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
-			this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_agregar_clicked_signal );
+			this.toolbar.list_button.activado.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+			this.toolbar.list_button.activado.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+			this.toolbar.list_button.activado.connect ( this.toolbar_list_button_agregar_clicked_signal );
 			this.anios_hechos_anios_cursor_changed ();
 		}
 		
@@ -165,9 +165,9 @@ public class Nomeolvides.VentanaPrincipal : Gtk.ApplicationWindow
 		this.lista_actual = this.anios_hechos.get_lista_actual ();
 		if (this.lista_actual != null ) {
 			this.toolbar.list_button_set_quitar ();
-			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_quitar_clicked_signal);
-			this.toolbar.list_button.clicked.disconnect (this.toolbar_list_button_agregar_clicked_signal);
-			this.toolbar.list_button.clicked.connect ( this.toolbar_list_button_quitar_clicked_signal );
+			this.toolbar.list_button.activado.disconnect (this.toolbar_list_button_quitar_clicked_signal);
+			this.toolbar.list_button.activado.disconnect (this.toolbar_list_button_agregar_clicked_signal);
+			this.toolbar.list_button.activado.connect ( this.toolbar_list_button_quitar_clicked_signal );
 			this.anios_hechos_listas_cursor_changed ();
 		}
 
