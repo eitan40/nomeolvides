@@ -24,7 +24,7 @@ public class Nomeolvides.DialogPreferencias : Gtk.Dialog {
 	private PreferenciasColecciones config_colecciones;
 	private PreferenciasListas config_listas;
 	
-	public DialogPreferencias (VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
+	public DialogPreferencias ( VentanaPrincipal ventana, ListStoreColecciones colecciones, ListStoreListas listas ) {
 		this.set_modal ( true );
 		this.set_default_size (600, 350);
 		this.set_transient_for ( ventana as Gtk.Window );

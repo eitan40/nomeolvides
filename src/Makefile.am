@@ -37,7 +37,6 @@ nomeolvides_SOURCES = \
 	nomeolvides-treeview-colecciones.vala \
 	nomeolvides-dialog-coleccion.vala \
 	nomeolvides-dialog-migrador.vala \
-	nomeolvides-importar-hechos.vala \
 	nomeolvides-resources.c \
 	nomeolvides-liststore-anios.vala \
 	nomeolvides-utiles.vala \
@@ -71,7 +70,8 @@ nomeolvides_SOURCES = \
 	nomeolvides-dialog-base.vala \
 	nomeolvides-preferencias-base.vala \
 	nomeolvides-preferencias-listas.vala \
-	nomeolvides-preferencias-colecciones.vala
+	nomeolvides-preferencias-colecciones.vala \
+	nomeolvides-dialog-hechos-importar.vala
 
 
 
