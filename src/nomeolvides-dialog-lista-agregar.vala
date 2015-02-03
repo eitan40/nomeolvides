@@ -44,7 +44,7 @@ public class Nomeolvides.DialogListaAgregar : DialogBase {
 			this.respuesta = new Lista ( this.nombre_entry.get_text () );
 			this.signal_agregar ( this.respuesta );
 			this.borrar_datos ();
-			this.hide ();
+			this.ocultar ();
 		}
 	}
 #endif

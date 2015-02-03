@@ -97,6 +97,7 @@ public class Nomeolvides.DialogBaseBorrar : Popover {
 		this.add_button ( _("Cancel"), ResponseType.REJECT );
 		this.add_button ( _("Apply"), ResponseType.APPLY );
 #else
+		this.closed.connect ( this.ocultar );
 		grid.attach ( cancelar_button, 0, 3, 1, 1 );
 		grid.attach ( aplicar_button, 1, 3, 1, 1 );
 		this.add ( grid );
@@ -114,14 +115,16 @@ public class Nomeolvides.DialogBaseBorrar : Popover {
 #if DISABLE_GNOME3
 #else
 	protected void ocultar (){
+		this.signal_cerrado ( this.get_relative_to () );
 		this.hide ();
 	}
 
 	protected void aplicar () {
 		this.signal_borrar ( this.objeto );
-		this.hide ();
+		this.ocultar ();
 	}
 
 	public signal void signal_borrar ( Base objeto );
+	public signal void signal_cerrado ( Widget relative_to );
 #endif
 }

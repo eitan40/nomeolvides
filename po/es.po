@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-13 15:16-0300\n"
+"POT-Creation-Date: 2015-02-03 10:57-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -41,7 +41,7 @@ msgstr "historia;hechos;"
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
-#: ../src/nomeolvides-app.vala:325
+#: ../src/nomeolvides-app.vala:333
 #: ../src/nomeolvides-interfaz-principal.vala:67
 #: ../src/nomeolvides-treeview-anios.vala:31
 msgid "Years"
@@ -52,7 +52,7 @@ msgid "Error while open"
 msgstr "Error al abrir"
 
 #: ../src/nomeolvides-configuracion.vala:32
-#: ../src/nomeolvides-ventana-principal.vala:93
+#: ../src/nomeolvides-ventana-principal.vala:89
 msgid "About Nomeolvides"
 msgstr "Acerca de Nomeolvides"
 
@@ -78,8 +78,8 @@ msgstr "Elija un Archivo"
 #: ../src/nomeolvides-dialog-base.vala:42
 #: ../src/nomeolvides-dialog-coleccion.vala:32
 #: ../src/nomeolvides-dialog-hecho-borrar.vala:60
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:62
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:69
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:89
 #: ../src/nomeolvides-dialog-hecho.vala:43
 #: ../src/nomeolvides-dialog-lista.vala:32
 #: ../src/nomeolvides-importar-hechos.vala:34
@@ -112,9 +112,11 @@ msgstr "Agregar una Coleccion"
 
 #: ../src/nomeolvides-dialog-coleccion-agregar.vala:27
 #: ../src/nomeolvides-dialog-coleccion-agregar.vala:31
-#: ../src/nomeolvides-dialog-hecho-agregar.vala:32
+#: ../src/nomeolvides-dialog-hecho-agregar.vala:34
+#: ../src/nomeolvides-dialog-hecho-agregar.vala:36
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:58
-#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:70
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:71
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:73
 #: ../src/nomeolvides-dialog-lista-agregar.vala:27
 #: ../src/nomeolvides-dialog-lista-agregar.vala:31
 #: ../src/nomeolvides-toolbar.vala:57
@@ -132,7 +134,7 @@ msgid "Delete Collection"
 msgstr "Eliminar Colección"
 
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:30
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:61
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:65
 #: ../src/nomeolvides-dialog-lista-borrar.vala:30
 #: ../src/nomeolvides-toolbar.vala:61
 msgid "Delete"
@@ -163,7 +165,7 @@ msgstr "Editar Colección"
 #: ../src/nomeolvides-dialog-lista-editar.vala:27
 #: ../src/nomeolvides-dialog-lista-editar.vala:32
 #: ../src/nomeolvides-toolbar.vala:60
-#: ../src/nomeolvides-ventana-principal.vala:78
+#: ../src/nomeolvides-ventana-principal.vala:75
 msgid "Edit"
 msgstr "Editar"
 
@@ -171,33 +173,33 @@ msgstr "Editar"
 msgid "Add a Historical Fact"
 msgstr "Agregar Hecho Histórico"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:97
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:95
 msgid "Remove Fact"
 msgstr "Elimnar Hecho"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:98
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:96
 msgid "dated"
 msgstr "con fecha"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:103
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:106
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:101
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:104
 msgid "Fact"
 msgstr "Hecho"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:104
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:102
 msgid "Do you want to remove this fact?"
 msgstr "¿Desea eliminar este hecho?"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:112
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:110
 msgid "Remove Facts"
 msgstr "Elimnar Hechos"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:113
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:111
 msgid "Do you want to remove this facts?"
 msgstr "¿Desea eliminar estos hechos?"
 
-#: ../src/nomeolvides-dialog-hecho-borrar.vala:114
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:118
+#: ../src/nomeolvides-dialog-hecho-borrar.vala:112
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:116
 msgid "Facts"
 msgstr "Hechos"
 
@@ -213,7 +215,7 @@ msgstr "a la lista"
 msgid "Add Fact to List"
 msgstr "Agregar Hecho a la Lista"
 
-#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:90
+#: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:91
 msgid "Add Facts to List"
 msgstr "Agregar Hechos a la Lista"
 
@@ -225,19 +227,20 @@ msgstr "De la lista"
 msgid "Remove Fact from List"
 msgstr "Elimnar Hecho de la Lista"
 
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:90
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:89
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:91
 msgid "Remove"
 msgstr "Elimnar"
 
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:105
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:103
 msgid "Do you want to remove this fact from the list?"
 msgstr "¿Desea eliminar este hecho de la lista?"
 
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:115
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:113
 msgid "Remove Facts from List"
 msgstr "Elimnar Hechos de la Lista"
 
-#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:117
+#: ../src/nomeolvides-dialog-hecho-lista-borrar.vala:115
 msgid "Do you want to remove this facts from the list?"
 msgstr "¿Desea eliminar estos hechos de la lista?"
 
@@ -369,7 +372,7 @@ msgid "Migrating List"
 msgstr "Migrando Lista"
 
 #: ../src/nomeolvides-dialog-preferencias.vala:37
-#: ../src/nomeolvides-ventana-principal.vala:83
+#: ../src/nomeolvides-ventana-principal.vala:80
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -403,7 +406,7 @@ msgid "Select Colection"
 msgstr "Sleccione una Colección"
 
 #: ../src/nomeolvides-importar-hechos.vala:46
-#: ../src/nomeolvides-ventana-principal.vala:60
+#: ../src/nomeolvides-ventana-principal.vala:57
 msgid "File"
 msgstr "Archivo"
 
@@ -508,19 +511,19 @@ msgstr "Eliminar de la lista"
 msgid "Visible"
 msgstr "Visible"
 
-#: ../src/nomeolvides-ventana-principal.vala:65
+#: ../src/nomeolvides-ventana-principal.vala:62
 msgid "Export Facts"
 msgstr "Exportar Hechos"
 
-#: ../src/nomeolvides-ventana-principal.vala:69
+#: ../src/nomeolvides-ventana-principal.vala:66
 msgid "Import facts"
 msgstr "Importar Hechos"
 
-#: ../src/nomeolvides-ventana-principal.vala:73
+#: ../src/nomeolvides-ventana-principal.vala:70
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/nomeolvides-ventana-principal.vala:88
+#: ../src/nomeolvides-ventana-principal.vala:84
 msgid "Help"
 msgstr "Ayuda"
 

@@ -126,15 +126,16 @@ public class Nomeolvides.App : Gtk.Application
 		if ( this.datos.hay_colecciones_activas () ) {
 
 			var add_dialog = new DialogHechoAgregar ( this.window as VentanaPrincipal,
-			                                          this.datos.lista_de_colecciones () ); 
-		
+													this.datos.lista_de_colecciones () );
+
 			add_dialog.show();
 
 			if ( add_dialog.run() == ResponseType.APPLY )
 			{
-				this.datos.agregar_hecho( add_dialog.respuesta );			
-			}		
+				this.datos.agregar_hecho( add_dialog.respuesta );
+			}
 			add_dialog.destroy();
+			this.window.toolbar.add_button.set_active ( false );
 		}
 	}
 	
@@ -161,6 +162,7 @@ public class Nomeolvides.App : Gtk.Application
 			this.datos.edit_hecho ( edit_dialog.respuesta );
 		}
 		edit_dialog.destroy();
+		this.window.toolbar.edit_button.set_active ( false );
 	}
 
 	public void delete_hecho_dialog () {
@@ -169,10 +171,11 @@ public class Nomeolvides.App : Gtk.Application
 
 		if (delete_dialog.run() == ResponseType.APPLY) {
 			for (int i = 0; i < delete_dialog.hechos.length; i++ ) {
-					this.datos.eliminar_hecho ( delete_dialog.hechos.index (i) );
+				this.datos.eliminar_hecho ( delete_dialog.hechos.index (i) );
 			}
 		}	
 		delete_dialog.destroy ();
+		this.window.toolbar.delete_button.set_active ( false );
 	}
 
 	public void about_dialog () {
@@ -228,24 +231,26 @@ public class Nomeolvides.App : Gtk.Application
 			Archivo.escribir (archivo, hechos_json );
 		
 			string commando = @"xdg-email --subject '$asunto' --body '$cuerpo' --attach '$archivo' $direccion";
-  
 			try {
 				Process.spawn_command_line_async( commando );
 			} catch(SpawnError err) {
 				stdout.printf(err.message+"\n");
 			}
 		}
+		this.window.toolbar.send_button.set_active ( false );
 	}
 
 	public void undo_hecho () {
 		this.datos.deshacer_cambios ();
+		this.window.toolbar.undo_button.set_active ( false );
 	}
 
 	public void redo_hecho () {
 		this.datos.rehacer_cambios ();
+		this.window.toolbar.redo_button.set_active ( false );
 	}
 
-	public void add_hecho_lista () {		
+	public void add_hecho_lista () {
 		Hecho hecho;
 		this.window.get_hecho_actual ( out hecho );
 
@@ -257,7 +262,7 @@ public class Nomeolvides.App : Gtk.Application
 			DialogHechoListaAgregar dialogo = new DialogHechoListaAgregar ( this.window );
 
 			dialogo.setear_hechos ( this.window.get_hechos_seleccionados () );
-            dialogo.setear_listas ( this.datos.lista_de_listas() );
+			dialogo.setear_listas ( this.datos.lista_de_listas() );
 
 			if (dialogo.run () == ResponseType.APPLY) {
 				for (int i = 0; i < dialogo.hechos.length; i++ ) {
@@ -266,6 +271,8 @@ public class Nomeolvides.App : Gtk.Application
 			}
 			dialogo.close ();
 		}
+		this.window.toolbar.list_button.active = false;
+		this.window.toolbar.list_button.set_active ( false );
 	}
 
 	public void remove_hecho_lista () {
@@ -280,7 +287,8 @@ public class Nomeolvides.App : Gtk.Application
 				this.datos.quitar_hecho_lista ( dialogo.hechos.index (i), lista );
 			}
 		}
-		dialogo.close ();			
+		dialogo.close ();
+		this.window.toolbar.list_button.set_active ( false );
 	}
 
 	public void save_as_file_dialog () {
@@ -288,7 +296,7 @@ public class Nomeolvides.App : Gtk.Application
 		guardar_archivo.set_transient_for ( this.window );
 
 		if (guardar_archivo.run () == ResponseType.ACCEPT) {		
-            this.datos.save_as_file ( guardar_archivo.get_filename () );
+			this.datos.save_as_file ( guardar_archivo.get_filename () );
 		}
 		guardar_archivo.close ();
 	}

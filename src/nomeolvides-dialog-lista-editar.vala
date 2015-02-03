@@ -47,7 +47,7 @@ public class Nomeolvides.DialogListaEditar : DialogBase {
 			this.respuesta.id = this.id;
 			this.signal_actualizar( this.objeto_viejo, this.respuesta );
 			this.borrar_datos ();
-			this.hide ();
+			this.ocultar ();
 		}
 	}
 

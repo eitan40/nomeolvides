@@ -19,12 +19,12 @@
 using Gtk;
 using Nomeolvides;
 
-public class Nomeolvides.Boton : Gtk.Button {
-
+public class Nomeolvides.Boton : Gtk.ToggleButton {
 	// Constructor
 	public Boton ( string label ) {
 		this.set_label ( label );
 		this.setear_propiedades ();
+		this.toggled.connect (apretar);
 	}
 
 	public Boton.icono ( string icono, Gtk.IconSize tamanio ) {
@@ -43,4 +43,12 @@ public class Nomeolvides.Boton : Gtk.Button {
 	private void setear_propiedades () {
 		this.set_halign ( Align.START );
 	}
+
+	public void apretar () {
+		if ( this.get_active () ) {
+			this.activado ();
+		}
+	}
+
+	public signal void activado ();
 }
