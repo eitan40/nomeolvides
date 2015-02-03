@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.9.556\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-03 10:57-0300\n"
+"POT-Creation-Date: 2015-02-03 11:28-0300\n"
 "PO-Revision-Date: 2014-04-27 18:32-0300\n"
 "Last-Translator: Fernando Fernandez <fernando@softwareperonista.com.ar>\n"
 "Language-Team: Español <nomeolvides@softwareperonista.com.ar>\n"
@@ -41,7 +41,7 @@ msgstr "historia;hechos;"
 msgid "Ephemeride Manager"
 msgstr "Gestor de Efemérides"
 
-#: ../src/nomeolvides-app.vala:333
+#: ../src/nomeolvides-app.vala:332
 #: ../src/nomeolvides-interfaz-principal.vala:67
 #: ../src/nomeolvides-treeview-anios.vala:31
 msgid "Years"
@@ -52,7 +52,7 @@ msgid "Error while open"
 msgstr "Error al abrir"
 
 #: ../src/nomeolvides-configuracion.vala:32
-#: ../src/nomeolvides-ventana-principal.vala:89
+#: ../src/nomeolvides-ventana-principal.vala:87
 msgid "About Nomeolvides"
 msgstr "Acerca de Nomeolvides"
 
@@ -65,8 +65,8 @@ msgid "and"
 msgstr "y"
 
 #: ../src/nomeolvides-dialog-archivo-abrir.vala:29
-#: ../src/nomeolvides-importar-hechos.vala:42
-#: ../src/nomeolvides-importar-hechos.vala:110
+#: ../src/nomeolvides-dialog-hechos-importar.vala:51
+#: ../src/nomeolvides-dialog-hechos-importar.vala:119
 msgid "Choose File"
 msgstr "Elija un Archivo"
 
@@ -81,14 +81,14 @@ msgstr "Elija un Archivo"
 #: ../src/nomeolvides-dialog-hecho-borrar.vala:62
 #: ../src/nomeolvides-dialog-hecho-lista-agregar.vala:69
 #: ../src/nomeolvides-dialog-hecho.vala:43
+#: ../src/nomeolvides-dialog-hechos-importar.vala:39
+#: ../src/nomeolvides-dialog-hechos-importar.vala:84
 #: ../src/nomeolvides-dialog-lista.vala:32
-#: ../src/nomeolvides-importar-hechos.vala:34
-#: ../src/nomeolvides-importar-hechos.vala:75
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: ../src/nomeolvides-dialog-archivo-abrir.vala:34
-#: ../src/nomeolvides-importar-hechos.vala:76
+#: ../src/nomeolvides-dialog-hechos-importar.vala:85
 msgid "Open"
 msgstr "Abrir"
 
@@ -146,7 +146,7 @@ msgstr "¿Desea eliminar esta colección?"
 
 #: ../src/nomeolvides-dialog-coleccion-borrar.vala:33
 #: ../src/nomeolvides-dialog-hecho.vala:47
-#: ../src/nomeolvides-importar-hechos.vala:45
+#: ../src/nomeolvides-dialog-hechos-importar.vala:54
 msgid "Colection"
 msgstr "Colección"
 
@@ -165,7 +165,7 @@ msgstr "Editar Colección"
 #: ../src/nomeolvides-dialog-lista-editar.vala:27
 #: ../src/nomeolvides-dialog-lista-editar.vala:32
 #: ../src/nomeolvides-toolbar.vala:60
-#: ../src/nomeolvides-ventana-principal.vala:75
+#: ../src/nomeolvides-ventana-principal.vala:73
 msgid "Edit"
 msgstr "Editar"
 
@@ -262,6 +262,27 @@ msgstr "Fuente"
 #: ../src/nomeolvides-dialog-hecho.vala:71
 msgid "Description"
 msgstr "Descripción"
+
+#: ../src/nomeolvides-dialog-hechos-importar.vala:34
+msgid "Import Facts From File"
+msgstr "Importar desde un Archivo"
+
+#: ../src/nomeolvides-dialog-hechos-importar.vala:40
+msgid "Import"
+msgstr "Importar"
+
+#: ../src/nomeolvides-dialog-hechos-importar.vala:46
+msgid "Select Colection"
+msgstr "Sleccione una Colección"
+
+#: ../src/nomeolvides-dialog-hechos-importar.vala:55
+#: ../src/nomeolvides-ventana-principal.vala:56
+msgid "File"
+msgstr "Archivo"
+
+#: ../src/nomeolvides-dialog-hechos-importar.vala:83
+msgid "Select a file"
+msgstr "Sleccione un archivo"
 
 #: ../src/nomeolvides-dialog-lista-agregar.vala:26
 msgid "Add Custom List"
@@ -372,7 +393,7 @@ msgid "Migrating List"
 msgstr "Migrando Lista"
 
 #: ../src/nomeolvides-dialog-preferencias.vala:37
-#: ../src/nomeolvides-ventana-principal.vala:80
+#: ../src/nomeolvides-ventana-principal.vala:78
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -392,27 +413,6 @@ msgstr "Cerrar"
 #: ../src/nomeolvides-hecho.vala:100
 msgid "%B %e, %Y"
 msgstr "%e de %B de %Y"
-
-#: ../src/nomeolvides-importar-hechos.vala:30
-msgid "Import Facts From File"
-msgstr "Importar desde un Archivo"
-
-#: ../src/nomeolvides-importar-hechos.vala:35
-msgid "Import"
-msgstr "Importar"
-
-#: ../src/nomeolvides-importar-hechos.vala:37
-msgid "Select Colection"
-msgstr "Sleccione una Colección"
-
-#: ../src/nomeolvides-importar-hechos.vala:46
-#: ../src/nomeolvides-ventana-principal.vala:57
-msgid "File"
-msgstr "Archivo"
-
-#: ../src/nomeolvides-importar-hechos.vala:74
-msgid "Select a file"
-msgstr "Sleccione un archivo"
 
 #: ../src/nomeolvides-selector-fecha.vala:55
 msgid "January"
@@ -511,19 +511,19 @@ msgstr "Eliminar de la lista"
 msgid "Visible"
 msgstr "Visible"
 
-#: ../src/nomeolvides-ventana-principal.vala:62
+#: ../src/nomeolvides-ventana-principal.vala:61
 msgid "Export Facts"
 msgstr "Exportar Hechos"
 
-#: ../src/nomeolvides-ventana-principal.vala:66
+#: ../src/nomeolvides-ventana-principal.vala:65
 msgid "Import facts"
 msgstr "Importar Hechos"
 
-#: ../src/nomeolvides-ventana-principal.vala:70
+#: ../src/nomeolvides-ventana-principal.vala:69
 msgid "Quit"
 msgstr "Salir"
 
-#: ../src/nomeolvides-ventana-principal.vala:84
+#: ../src/nomeolvides-ventana-principal.vala:82
 msgid "Help"
 msgstr "Ayuda"
 

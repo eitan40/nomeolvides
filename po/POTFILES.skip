@@ -16,6 +16,7 @@ src/nomeolvides-dialog-hecho-editar.c
 src/nomeolvides-dialog-hecho-lista-agregar.c
 src/nomeolvides-dialog-hecho-lista-borrar.c
 src/nomeolvides-dialog-hecho.c
+src/nomeolvides-dialog-hechos-importar.c
 src/nomeolvides-dialog-lista-agregar.c
 src/nomeolvides-dialog-lista-borrar.c
 src/nomeolvides-dialog-lista-editar.c
@@ -23,7 +24,6 @@ src/nomeolvides-dialog-lista.c
 src/nomeolvides-dialog-migrador.c
 src/nomeolvides-dialog-preferencias.c
 src/nomeolvides-hecho.c
-src/nomeolvides-importar-hechos.c
 src/nomeolvides-interfaz-principal.c
 src/nomeolvides-portada.c
 src/nomeolvides-selector-fecha.c
