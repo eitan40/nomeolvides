@@ -77,7 +77,7 @@ public class Nomeolvides.DialogBaseBorrar : Popover {
 		this.aplicar_button.clicked.connect ( this.aplicar );
 		this.cancelar_button.clicked.connect ( this.ocultar );
 #endif
-
+		grid.set_column_homogeneous ( true );
 		grid.set_valign ( Align.CENTER );
 		grid.set_halign ( Align.CENTER );
 		grid.set_margin_top ( 20 );
